@@ -46,13 +46,13 @@ Canvas engine: 960x540 logical screen, 32px tile contacts, source game inputs vi
 |---|---:|---:|---:|---:|---:|---:|
 | BIRTHDAY REVEAL / CAKE / SHAKES | 14 | 0 | 8 | 6 | 7 | 1 |
 | CAMPUS BACKGROUNDS / QUAD | 6 | 0 | 3 | 3 | 3 | 0 |
-| BOSS ATTACK READABILITY | 12 | 0 | 11 | 7 | 4 | 1 |
-| CINNAMON SOURCE SPRITES / REFINEMENTS | 33 | 26 | 7 | 1 | 6 | 0 |
+| BOSS ATTACK READABILITY | 12 | 0 | 9 | 7 | 4 | 1 |
+| CINNAMON SOURCE SPRITES / REFINEMENTS | 33 | 26 | 6 | 1 | 6 | 0 |
 | COLLECTIBLES | 4 | 0 | 3 | 3 | 1 | 0 |
 | DOME PARALLAX / VIEWPORTS | 8 | 0 | 5 | 3 | 3 | 2 |
 | DOME MECHANICS | 10 | 0 | 10 | 7 | 3 | 0 |
 | DOME ARCHITECTURE / PROPS | 10 | 0 | 10 | 3 | 5 | 2 |
-| DOME STONE / GOLDEN TILES | 16 | 0 | 16 | 6 | 9 | 1 |
+| DOME STONE / GOLDEN TILES | 16 | 0 | 10 | 6 | 9 | 1 |
 | CAMPUS ENEMY STATES | 7 | 0 | 7 | 4 | 3 | 0 |
 | ADDITIONAL EFFECTS | 8 | 0 | 8 | 0 | 5 | 3 |
 | THE FOX / INTRO AND BOSS | 16 | 0 | 15 | 9 | 5 | 2 |
@@ -65,7 +65,7 @@ Canvas engine: 960x540 logical screen, 32px tile contacts, source game inputs vi
 | ADDITIONAL UI / TOUCH | 14 | 0 | 13 | 1 | 10 | 3 |
 | CAMPUS VISUAL EFFECTS | 10 | 0 | 10 | 1 | 9 | 0 |
 
-TOTAL VISUAL CONTRACT: **220** individually specified logical IDs; **26** source-verified Cinnamon frames; **17** generated, byte-verified and normalized production images; **176** still missing final production images.
+TOTAL VISUAL CONTRACT: **220** individually specified logical IDs; **26** source-verified Cinnamon frames; **26** generated, byte-verified and normalized production images; **167** still missing final production images.
 
 ## LM ARENA UNIVERSAL EXECUTION ORDER
 
@@ -81,7 +81,7 @@ TOTAL VISUAL CONTRACT: **220** individually specified logical IDs; **26** source
 33 individual asset contracts. Process P0 first, P1 next, P2 last. Reference sheets and complete per-asset instructions are repeated in every prompt.
 
 #### CIN-N06 — Final birthday cheers
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** finale · **Target:** 240×160 px · **Source:** 480×320 px · **Output:** `assets/production/cinnamon/birthday_celebrate.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** finale · **Target:** 240×160 px · **Source:** 480×320 px · **Output:** `assets/production/cinnamon/birthday_celebrate.png`
 **Anchor:** face=(145,147 feet) · **Collision:** player physics stays 38x60, art-only extension · **Animation:** one PNG frame; do not pack with adjacent frames
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** All 26 verified Cinnamon cutouts + source sheets
 
@@ -4883,7 +4883,7 @@ DO NOT BAKE LIVE TEXT: all headings, counters, accessibility instructions, and b
 16 individual asset contracts. Process P0 first, P1 next, P2 last. Reference sheets and complete per-asset instructions are repeated in every prompt.
 
 #### DM-TL01 — Limestone walkable cap
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** dome · **Target:** 32×32 px · **Source:** 64×64 px · **Output:** `assets/production/dome/tiles/dm_tl01.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** dome · **Target:** 32×32 px · **Source:** 64×64 px · **Output:** `assets/production/dome/tiles/dm_tl01.png`
 **Anchor:** tile top-left · **Collision:** tile AABB · **Animation:** static tile, edge seams must align
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** 32px world tile grid and existing platforms geometry
 
@@ -4920,7 +4920,7 @@ TILE EDGE REQUIREMENT: art edges must meet exactly with adjacent tile copies; pr
 **Integration:** Verify file bytes exist at assets/production/dome/tiles/dm_tl01.png; measure intrinsic 32x32 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID DM-TL01 in runtime manifest. At runtime map ID to Dome authored collision art or decoration; place in dome with anchor tile top-left; use the engine auth collider "tile AABB" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### DM-TL02 — Limestone side brick
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** dome · **Target:** 32×32 px · **Source:** 64×64 px · **Output:** `assets/production/dome/tiles/dm_tl02.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** dome · **Target:** 32×32 px · **Source:** 64×64 px · **Output:** `assets/production/dome/tiles/dm_tl02.png`
 **Anchor:** tile top-left · **Collision:** fill only · **Animation:** static tile, edge seams must align
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** 32px world tile grid and existing platforms geometry
 
@@ -4957,7 +4957,7 @@ TILE EDGE REQUIREMENT: art edges must meet exactly with adjacent tile copies; pr
 **Integration:** Verify file bytes exist at assets/production/dome/tiles/dm_tl02.png; measure intrinsic 32x32 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID DM-TL02 in runtime manifest. At runtime map ID to Dome authored collision art or decoration; place in dome with anchor tile top-left; use the engine auth collider "fill only" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### DM-TL03 — Gold roof tile
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** dome · **Target:** 32×32 px · **Source:** 64×64 px · **Output:** `assets/production/dome/tiles/dm_tl03.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** dome · **Target:** 32×32 px · **Source:** 64×64 px · **Output:** `assets/production/dome/tiles/dm_tl03.png`
 **Anchor:** tile top-left · **Collision:** tile AABB · **Animation:** static tile, edge seams must align
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** 32px world tile grid and existing platforms geometry
 
@@ -4994,7 +4994,7 @@ TILE EDGE REQUIREMENT: art edges must meet exactly with adjacent tile copies; pr
 **Integration:** Verify file bytes exist at assets/production/dome/tiles/dm_tl03.png; measure intrinsic 32x32 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID DM-TL03 in runtime manifest. At runtime map ID to Dome authored collision art or decoration; place in dome with anchor tile top-left; use the engine auth collider "tile AABB" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### DM-TL06 — Cornice center
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** dome · **Target:** 32×32 px · **Source:** 64×64 px · **Output:** `assets/production/dome/tiles/dm_tl06.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** dome · **Target:** 32×32 px · **Source:** 64×64 px · **Output:** `assets/production/dome/tiles/dm_tl06.png`
 **Anchor:** tile top-left · **Collision:** one-way AABB top · **Animation:** static tile, edge seams must align
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** 32px world tile grid and existing platforms geometry
 
@@ -5031,7 +5031,7 @@ TILE EDGE REQUIREMENT: art edges must meet exactly with adjacent tile copies; pr
 **Integration:** Verify file bytes exist at assets/production/dome/tiles/dm_tl06.png; measure intrinsic 32x32 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID DM-TL06 in runtime manifest. At runtime map ID to Dome authored collision art or decoration; place in dome with anchor tile top-left; use the engine auth collider "one-way AABB top" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### DM-TL09 — Scaffold deck center
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** dome · **Target:** 32×32 px · **Source:** 64×64 px · **Output:** `assets/production/dome/tiles/dm_tl09.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** dome · **Target:** 32×32 px · **Source:** 64×64 px · **Output:** `assets/production/dome/tiles/dm_tl09.png`
 **Anchor:** tile top-left · **Collision:** one-way AABB top · **Animation:** static tile, edge seams must align
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** 32px world tile grid and existing platforms geometry
 
@@ -5068,7 +5068,7 @@ TILE EDGE REQUIREMENT: art edges must meet exactly with adjacent tile copies; pr
 **Integration:** Verify file bytes exist at assets/production/dome/tiles/dm_tl09.png; measure intrinsic 32x32 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID DM-TL09 in runtime manifest. At runtime map ID to Dome authored collision art or decoration; place in dome with anchor tile top-left; use the engine auth collider "one-way AABB top" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### DM-TL16 — Summit parapet block
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** dome · **Target:** 64×64 px · **Source:** 128×128 px · **Output:** `assets/production/dome/tiles/dm_tl16.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** dome · **Target:** 64×64 px · **Source:** 128×128 px · **Output:** `assets/production/dome/tiles/dm_tl16.png`
 **Anchor:** tile top-left · **Collision:** one-way AABB top · **Animation:** static tile, edge seams must align
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** 32px world tile grid and existing platforms geometry
 
@@ -6219,7 +6219,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/boss/effects/bs_vf01.png; measure intrinsic 256x256 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID BS-VF01 in runtime manifest. At runtime map ID to Boss readability, counterplay and feedback; place in boss with anchor center; use the engine auth collider "FX only, separate from hitboxes" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### BS-VF02 — Charge direction streak
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** boss · **Target:** 256×96 px · **Source:** 512×192 px · **Output:** `assets/production/boss/effects/bs_vf02.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** boss · **Target:** 256×96 px · **Source:** 512×192 px · **Output:** `assets/production/boss/effects/bs_vf02.png`
 **Anchor:** center · **Collision:** FX only, separate from hitboxes · **Animation:** single state, no spritesheet unless intentional sequence is later verified
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Fox art approved by human + boss state machine
 
@@ -6324,7 +6324,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/boss/effects/bs_vf05.png; measure intrinsic 192x96 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID BS-VF05 in runtime manifest. At runtime map ID to Boss readability, counterplay and feedback; place in boss with anchor center; use the engine auth collider "FX only, separate from hitboxes" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### BS-VF06 — Fox stagger stars
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** boss · **Target:** 96×96 px · **Source:** 192×192 px · **Output:** `assets/production/boss/effects/bs_vf06.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** boss · **Target:** 96×96 px · **Source:** 192×192 px · **Output:** `assets/production/boss/effects/bs_vf06.png`
 **Anchor:** center · **Collision:** FX only, separate from hitboxes · **Animation:** single state, no spritesheet unless intentional sequence is later verified
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Fox art approved by human + boss state machine
 

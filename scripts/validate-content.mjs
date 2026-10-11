@@ -28,9 +28,14 @@ const generatedRows=rows.filter(x=>GENERATED.includes(x.status));
 const sourceRows=rows.filter(x=>x.status==='VERIFIED_IN_REPO_LOCAL_BROWSER');
 assert.equal(sourceRows.length,26,'Source-derived Cinnamon frame count changed');
 const manifest=JSON.parse(readFileSync('assets/production/manifest.json','utf8')).assets;
-assert.equal(Object.keys(manifest).length,generatedRows.length,'Manifest and contract disagree on generated-asset count');
 for(const r of generatedRows)assert.ok(manifest[r.id],'Generated asset missing from manifest '+r.id);
 for(const [id,rec] of Object.entries(manifest))assert.ok(rows.some(x=>x.id===id),'Manifest holds unknown asset '+id);
+// Candidates that have real bytes but are deliberately withheld from promotion
+// (Fox identity pending human signoff) must be declared as such.
+const withheld=rows.filter(x=>manifest[x.id]&&!GENERATED.includes(x.status));
+for(const r of withheld)assert.equal(r.status,'PROVISIONAL_MISSING_APPROVAL','Asset with bytes must be promoted or explicitly withheld '+r.id);
+const approved=rows.filter(x=>x.status==='APPROVED');
+for(const r of approved)assert.ok(manifest[r.id],'Approved asset without measured bytes '+r.id);
 for(const x of rows){
  assert.ok(x.prompt.includes(x.id) && x.prompt.includes(x.path),'Incomplete self-contained asset prompt '+x.id);
  assert.ok(x.acceptance&&x.rejection&&x.integration&&x.references.length>=1,'Missing production QA contract '+x.id);
@@ -42,6 +47,13 @@ for(const x of rows){
   assert.equal(createHash('sha256').update(readFileSync(x.path)).digest('hex'),rec.sha256,'Promoted asset bytes drifted from manifest '+x.id);
   assert.deepEqual(rec.actual_px,x.target_px,'Promoted asset size differs from contract target '+x.id);
   if(x.transparent)assert.equal(rec.alpha.mode,'straight RGBA','Transparent asset lacks real alpha '+x.id);
+ }
+ else if(manifest[x.id]){
+  // Withheld candidate: bytes exist and are measured, but identity approval is
+  // still open, so it must not be reported as generated-verified.
+  assert.equal(x.status,'PROVISIONAL_MISSING_APPROVAL','Asset with bytes must be promoted or explicitly withheld '+x.id);
+  assert.ok(existsSync(x.path),'Withheld candidate has no file '+x.id);
+  assert.equal(createHash('sha256').update(readFileSync(x.path)).digest('hex'),manifest[x.id].sha256,'Withheld candidate bytes drifted '+x.id);
  }
  else assert.ok(!existsSync(x.path),'Generation-only asset unexpectedly present without manifest promotion '+x.id);
 }

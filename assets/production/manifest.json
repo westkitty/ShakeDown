@@ -1,8 +1,8 @@
 {
  "schema_version": 1,
- "generated_utc": "2026-10-11T19:17:13Z",
+ "generated_utc": "2026-10-11T19:20:52Z",
  "note": "Byte-level truth for generated production art. Every sha256 and pixel dimension here was measured from the file actually written to disk. Human visual review is a separate, still-open gate.",
- "count": 18,
+ "count": 27,
  "assets": {
   "BD-01": {
    "id": "BD-01",
@@ -495,6 +495,165 @@
    "sha256": "8772fab5dc054407a0f38878849376b1326340240373d965eeff036caab05f2b",
    "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
   },
+  "BS-VF02": {
+   "id": "BS-VF02",
+   "name": "Charge direction streak",
+   "group": "BS-VF",
+   "priority": "P0",
+   "path": "assets/production/boss/effects/bs_vf02.png",
+   "target_px": [
+    256,
+    96
+   ],
+   "pivot": "center",
+   "raw_source": ".artifact-cache/raw/bs_vf02.png",
+   "raw_sha256": "bd26163a94177285f9a8dac399adec284d03f32eced91a244b0d6f4721c24eb3",
+   "raw_px": [
+    1408,
+    768
+   ],
+   "generated_utc": "2026-10-11T19:20:52Z",
+   "generator": "arena-agent-mode image generation",
+   "alpha": {
+    "required": true,
+    "mode": "straight RGBA",
+    "transparent_px_fraction": 0.5489,
+    "opaque_px_fraction": 0.3546,
+    "partial_edge_px": 2371,
+    "border_all_transparent": false,
+    "matte_rgb": [
+     255,
+     0,
+     255
+    ],
+    "transparent_fraction": 0.7561,
+    "partial_fraction": 0.0,
+    "matte_residual_opaque_px": 0,
+    "source_keyed_px": [
+     1408,
+     768
+    ]
+   },
+   "format": "PNG RGBA",
+   "trim_bbox_in_keyed_source": [
+    59,
+    194,
+    1350,
+    575
+   ],
+   "actual_px": [
+    256,
+    96
+   ],
+   "sha256": "283ce08fd5d7f01773e106112ed53769993d2b2d987691c741bc8cf052027ea4",
+   "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+  },
+  "BS-VF06": {
+   "id": "BS-VF06",
+   "name": "Fox stagger stars",
+   "group": "BS-VF",
+   "priority": "P0",
+   "path": "assets/production/boss/effects/bs_vf06.png",
+   "target_px": [
+    96,
+    96
+   ],
+   "pivot": "center",
+   "raw_source": ".artifact-cache/raw/bs_vf06.png",
+   "raw_sha256": "62846189e3efd5e1ea3993d32c2b6e9970774e20be83c1c8be63dda690c44d0c",
+   "raw_px": [
+    1408,
+    768
+   ],
+   "generated_utc": "2026-10-11T19:20:52Z",
+   "generator": "arena-agent-mode image generation",
+   "alpha": {
+    "required": true,
+    "mode": "straight RGBA",
+    "transparent_px_fraction": 0.614,
+    "opaque_px_fraction": 0.2235,
+    "partial_edge_px": 1497,
+    "border_all_transparent": false,
+    "matte_rgb": [
+     255,
+     0,
+     255
+    ],
+    "transparent_fraction": 0.9164,
+    "partial_fraction": 0.0,
+    "matte_residual_opaque_px": 0,
+    "source_keyed_px": [
+     1408,
+     768
+    ]
+   },
+   "format": "PNG RGBA",
+   "trim_bbox_in_keyed_source": [
+    446,
+    176,
+    968,
+    575
+   ],
+   "actual_px": [
+    96,
+    96
+   ],
+   "sha256": "edf24659ec8aa11edf2139529566d473706f79db2932c5e48aef199b53091307",
+   "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+  },
+  "CIN-N06": {
+   "id": "CIN-N06",
+   "name": "Final birthday cheers",
+   "group": "CIN",
+   "priority": "P0",
+   "path": "assets/production/cinnamon/birthday_celebrate.png",
+   "target_px": [
+    240,
+    160
+   ],
+   "pivot": "face=(145,147 feet)",
+   "raw_source": ".artifact-cache/raw/cin_n06.png",
+   "raw_sha256": "ae5e3da18120b52b85d05e7a00a0ad84d89bea74a6ca7c9711efc37b221671f0",
+   "raw_px": [
+    1408,
+    768
+   ],
+   "generated_utc": "2026-10-11T19:20:52Z",
+   "generator": "arena-agent-mode image generation",
+   "alpha": {
+    "required": true,
+    "mode": "straight RGBA",
+    "transparent_px_fraction": 0.6209,
+    "opaque_px_fraction": 0.3288,
+    "partial_edge_px": 1930,
+    "border_all_transparent": false,
+    "matte_rgb": [
+     255,
+     0,
+     255
+    ],
+    "transparent_fraction": 0.7884,
+    "partial_fraction": 0.0,
+    "matte_residual_opaque_px": 0,
+    "source_keyed_px": [
+     1408,
+     768
+    ]
+   },
+   "format": "PNG RGBA",
+   "trim_bbox_in_keyed_source": [
+    346,
+    64,
+    939,
+    709
+   ],
+   "actual_px": [
+    240,
+    160
+   ],
+   "sha256": "9d3fd62bcff3c3da53341643dab1fb35c3dd2d50e86a2c7bbb31b40e61eeb507",
+   "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+  },
   "CO-03": {
    "id": "CO-03",
    "name": "Shamrock Shake cup",
@@ -663,6 +822,239 @@
    "sha256": "4d7e3bbeb8db3cf912cfec79bc2ebf1da39a79e657960e34b75eaf668a08aab1",
    "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
   },
+  "DM-TL01": {
+   "id": "DM-TL01",
+   "name": "Limestone walkable cap",
+   "group": "DM-TL",
+   "priority": "P0",
+   "path": "assets/production/dome/tiles/dm_tl01.png",
+   "target_px": [
+    32,
+    32
+   ],
+   "pivot": "tile top-left",
+   "raw_source": ".artifact-cache/raw/dm_tl01.png",
+   "raw_sha256": "678e1b4c78b7b5d8cdcae107a5133b18ef5a04d903e09ca38b48d5b18b0f3f22",
+   "raw_px": [
+    1024,
+    1024
+   ],
+   "generated_utc": "2026-10-11T19:20:52Z",
+   "generator": "arena-agent-mode image generation",
+   "alpha": {
+    "required": true,
+    "mode": "straight RGBA",
+    "transparent_px_fraction": 0.0,
+    "opaque_px_fraction": 1.0,
+    "partial_edge_px": 0,
+    "full_bleed": true,
+    "border_all_transparent": false
+   },
+   "format": "PNG RGBA",
+   "actual_px": [
+    32,
+    32
+   ],
+   "sha256": "f6e4208e8e2c6851ec1e98e7cf43f323569a34722be792b01b9c6cc287c44d59",
+   "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+  },
+  "DM-TL02": {
+   "id": "DM-TL02",
+   "name": "Limestone side brick",
+   "group": "DM-TL",
+   "priority": "P0",
+   "path": "assets/production/dome/tiles/dm_tl02.png",
+   "target_px": [
+    32,
+    32
+   ],
+   "pivot": "tile top-left",
+   "raw_source": ".artifact-cache/raw/dm_tl02.png",
+   "raw_sha256": "bd23db17787e4b831e02c613fb3ba6dab1a564b808fd22b33ae10988ed94f5be",
+   "raw_px": [
+    1024,
+    1024
+   ],
+   "generated_utc": "2026-10-11T19:20:52Z",
+   "generator": "arena-agent-mode image generation",
+   "alpha": {
+    "required": true,
+    "mode": "straight RGBA",
+    "transparent_px_fraction": 0.0,
+    "opaque_px_fraction": 1.0,
+    "partial_edge_px": 0,
+    "full_bleed": true,
+    "border_all_transparent": false
+   },
+   "format": "PNG RGBA",
+   "actual_px": [
+    32,
+    32
+   ],
+   "sha256": "cadca7712a4adc4dd9dd02e8c0240f3fa8c2475381c2e6fdfe75afa2b9b1d086",
+   "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+  },
+  "DM-TL03": {
+   "id": "DM-TL03",
+   "name": "Gold roof tile",
+   "group": "DM-TL",
+   "priority": "P0",
+   "path": "assets/production/dome/tiles/dm_tl03.png",
+   "target_px": [
+    32,
+    32
+   ],
+   "pivot": "tile top-left",
+   "raw_source": ".artifact-cache/raw/dm_tl03.png",
+   "raw_sha256": "b670dc86288345d5c29139a79018ddfe839b788a2d37741829879ca8473cc41b",
+   "raw_px": [
+    1024,
+    1024
+   ],
+   "generated_utc": "2026-10-11T19:20:52Z",
+   "generator": "arena-agent-mode image generation",
+   "alpha": {
+    "required": true,
+    "mode": "straight RGBA",
+    "transparent_px_fraction": 0.0,
+    "opaque_px_fraction": 1.0,
+    "partial_edge_px": 0,
+    "full_bleed": true,
+    "border_all_transparent": false
+   },
+   "format": "PNG RGBA",
+   "actual_px": [
+    32,
+    32
+   ],
+   "sha256": "9d1fa300ae3302e3d65728ee8f2a520d441ebc9a5b80edc01e5fa04b201569ef",
+   "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+  },
+  "DM-TL06": {
+   "id": "DM-TL06",
+   "name": "Cornice center",
+   "group": "DM-TL",
+   "priority": "P0",
+   "path": "assets/production/dome/tiles/dm_tl06.png",
+   "target_px": [
+    32,
+    32
+   ],
+   "pivot": "tile top-left",
+   "raw_source": ".artifact-cache/raw/dm_tl06.png",
+   "raw_sha256": "8361f4be0756f36e0f561b40e5de2197ecfaacffaa43d45e5f0e888557cf56ee",
+   "raw_px": [
+    1024,
+    1024
+   ],
+   "generated_utc": "2026-10-11T19:20:52Z",
+   "generator": "arena-agent-mode image generation",
+   "alpha": {
+    "required": true,
+    "mode": "straight RGBA",
+    "transparent_px_fraction": 0.0,
+    "opaque_px_fraction": 1.0,
+    "partial_edge_px": 0,
+    "full_bleed": true,
+    "border_all_transparent": false
+   },
+   "format": "PNG RGBA",
+   "actual_px": [
+    32,
+    32
+   ],
+   "sha256": "609f570a94646e8e6f6351a7b3a4e6a4603726e9722156a6e4d32a3659d97458",
+   "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+  },
+  "DM-TL09": {
+   "id": "DM-TL09",
+   "name": "Scaffold deck center",
+   "group": "DM-TL",
+   "priority": "P0",
+   "path": "assets/production/dome/tiles/dm_tl09.png",
+   "target_px": [
+    32,
+    32
+   ],
+   "pivot": "tile top-left",
+   "raw_source": ".artifact-cache/raw/dm_tl09.png",
+   "raw_sha256": "42e2614059849a1967132944a0f9b1419af5771d591cc52a14af334c7537ab63",
+   "raw_px": [
+    1024,
+    1024
+   ],
+   "generated_utc": "2026-10-11T19:20:52Z",
+   "generator": "arena-agent-mode image generation",
+   "alpha": {
+    "required": true,
+    "mode": "straight RGBA",
+    "transparent_px_fraction": 0.0,
+    "opaque_px_fraction": 1.0,
+    "partial_edge_px": 0,
+    "full_bleed": true,
+    "border_all_transparent": false
+   },
+   "format": "PNG RGBA",
+   "actual_px": [
+    32,
+    32
+   ],
+   "sha256": "8d177741472827e83c9daf61a475ad2cb22064d88e2ff4c63387fcf9532eb611",
+   "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+  },
+  "DM-TL16": {
+   "id": "DM-TL16",
+   "name": "Summit parapet block",
+   "group": "DM-TL",
+   "priority": "P0",
+   "path": "assets/production/dome/tiles/dm_tl16.png",
+   "target_px": [
+    64,
+    64
+   ],
+   "pivot": "tile top-left",
+   "raw_source": ".artifact-cache/raw/dm_tl16.png",
+   "raw_sha256": "993d7764909b4af49b77259b5cfbd19e0a5dfc758ebaf926e099abf5ee0cf548",
+   "raw_px": [
+    1408,
+    768
+   ],
+   "generated_utc": "2026-10-11T19:20:52Z",
+   "generator": "arena-agent-mode image generation",
+   "alpha": {
+    "required": true,
+    "mode": "straight RGBA",
+    "transparent_px_fraction": 0.6443,
+    "opaque_px_fraction": 0.2996,
+    "partial_edge_px": 230,
+    "border_all_transparent": false,
+    "matte_rgb": [
+     255,
+     0,
+     255
+    ],
+    "transparent_fraction": 0.5796,
+    "partial_fraction": 0.0,
+    "matte_residual_opaque_px": 0,
+    "source_keyed_px": [
+     1408,
+     768
+    ]
+   },
+   "format": "PNG RGBA",
+   "trim_bbox_in_keyed_source": [
+    141,
+    141,
+    1279,
+    593
+   ],
+   "actual_px": [
+    64,
+    64
+   ],
+   "sha256": "33e040bf01bf09c6ec323493f35d1bc0e1c7c1e6899e1a4a9378c6ea9e7299af",
+   "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+  },
   "FOX-01": {
    "id": "FOX-01",
    "name": "Fox identity approval turnaround",
@@ -675,12 +1067,12 @@
    ],
    "pivot": "center",
    "raw_source": ".artifact-cache/raw/fox_01.png",
-   "raw_sha256": "e6ad731b697df1f99273f1f2550ffa38174122c42011a90f644fe236d4850261",
+   "raw_sha256": "dadc45dbd8a585d8e435f66c7695c719fa7f7c203a743bb8463b1223c874cacf",
    "raw_px": [
-    1408,
-    768
+    1195,
+    896
    ],
-   "generated_utc": "2026-10-11T19:17:13Z",
+   "generated_utc": "2026-10-11T19:20:52Z",
    "generator": "arena-agent-mode image generation",
    "alpha": {
     "required": false,
@@ -691,7 +1083,7 @@
     1024,
     768
    ],
-   "sha256": "bf41bdf36294aad552d1eb7aa6a9521e09652abc1774bf1d6cb55d9ce4842651",
+   "sha256": "272af860542fe8a75ac7205c9406b6c4401ac8f050c9bfaa5b4b47e95b93a351",
    "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
   },
   "PR-01": {
