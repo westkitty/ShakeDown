@@ -1,8 +1,8 @@
 {
  "schema_version": 1,
- "generated_utc": "2026-10-11T19:51:50Z",
+ "generated_utc": "2026-10-11T19:53:05Z",
  "note": "Byte-level truth for generated production art. Every sha256 and pixel dimension here was measured from the file actually written to disk. Human visual review is a separate, still-open gate.",
- "count": 130,
+ "count": 140,
  "assets": {
   "BD-01": {
    "id": "BD-01",
@@ -214,6 +214,59 @@
     384
    ],
    "sha256": "a471dfae9d364a9db0f123c774b8d399428cde8912959e9dad114d301029c3bd",
+   "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+  },
+  "BD-09": {
+   "id": "BD-09",
+   "name": "Birthday sparkle burst A",
+   "group": "BD",
+   "priority": "P1",
+   "path": "assets/production/birthday/bd_09.png",
+   "target_px": [
+    256,
+    256
+   ],
+   "pivot": "bottom-center",
+   "raw_source": ".artifact-cache/raw/bd_09.png",
+   "raw_sha256": "9c3fb482dc35fdb532ed9cec70aa78f2d1d635b41cfe2288aaae871b960bc2f1",
+   "raw_px": [
+    1408,
+    768
+   ],
+   "generated_utc": "2026-10-11T19:53:05Z",
+   "generator": "arena-agent-mode image generation",
+   "alpha": {
+    "required": true,
+    "mode": "straight RGBA",
+    "transparent_px_fraction": 0.6916,
+    "opaque_px_fraction": 0.2352,
+    "partial_edge_px": 4796,
+    "border_all_transparent": false,
+    "matte_rgb": [
+     255,
+     0,
+     255
+    ],
+    "transparent_fraction": 0.9495,
+    "partial_fraction": 0.0,
+    "matte_residual_opaque_px": 0,
+    "source_keyed_px": [
+     1408,
+     768
+    ]
+   },
+   "format": "PNG RGBA",
+   "trim_bbox_in_keyed_source": [
+    540,
+    164,
+    856,
+    598
+   ],
+   "actual_px": [
+    256,
+    256
+   ],
+   "sha256": "a23fea22096d8d98ca8ae2a7e76d4fbf5a507ea66dccc6874ace826b1094ad8b",
    "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
   },
   "BD-11": {
@@ -1025,6 +1078,59 @@
     32
    ],
    "sha256": "08647e0464a7721d41c0ff80b98ce07af1f43d6566fc99ccd8a6c70360c3ee91",
+   "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+  },
+  "CO-02": {
+   "id": "CO-02",
+   "name": "Gold shake token",
+   "group": "CO",
+   "priority": "P1",
+   "path": "assets/level1/collectibles/co_02_gold_shake_token.png",
+   "target_px": [
+    32,
+    32
+   ],
+   "pivot": "center",
+   "raw_source": ".artifact-cache/raw/co_02.png",
+   "raw_sha256": "b76a20eac9c0e69b7df3089fc89055b29b337d61a713a40c9ec302f4a72644e4",
+   "raw_px": [
+    1408,
+    768
+   ],
+   "generated_utc": "2026-10-11T19:53:05Z",
+   "generator": "arena-agent-mode image generation",
+   "alpha": {
+    "required": true,
+    "mode": "straight RGBA",
+    "transparent_px_fraction": 0.1641,
+    "opaque_px_fraction": 0.6582,
+    "partial_edge_px": 182,
+    "border_all_transparent": false,
+    "matte_rgb": [
+     255,
+     0,
+     255
+    ],
+    "transparent_fraction": 0.6852,
+    "partial_fraction": 0.0,
+    "matte_residual_opaque_px": 0,
+    "source_keyed_px": [
+     1408,
+     768
+    ]
+   },
+   "format": "PNG RGBA",
+   "trim_bbox_in_keyed_source": [
+    375,
+    58,
+    1032,
+    716
+   ],
+   "actual_px": [
+    32,
+    32
+   ],
+   "sha256": "7b4e4ccda7caea8eb89414f390007cb3d8d47eb73c9ee47f4d8b4799d4777fc1",
    "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
   },
   "CO-03": {
@@ -1913,6 +2019,165 @@
     96
    ],
    "sha256": "454abe116ab706de7fcc73b8d66f47a9d45f6f50ff41428ec586587dd4e02199",
+   "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+  },
+  "DM-PR06": {
+   "id": "DM-PR06",
+   "name": "Blue-and-gold heraldic pennant",
+   "group": "DM-PR",
+   "priority": "P1",
+   "path": "assets/production/dome/props/dm_pr06.png",
+   "target_px": [
+    128,
+    192
+   ],
+   "pivot": "base-center",
+   "raw_source": ".artifact-cache/raw/dm_pr06.png",
+   "raw_sha256": "7c08baf3691a542e83f62f83131edcfa7d0951f048660ad6fd8199b2ad65288e",
+   "raw_px": [
+    1408,
+    768
+   ],
+   "generated_utc": "2026-10-11T19:53:05Z",
+   "generator": "arena-agent-mode image generation",
+   "alpha": {
+    "required": true,
+    "mode": "straight RGBA",
+    "transparent_px_fraction": 0.7748,
+    "opaque_px_fraction": 0.1967,
+    "partial_edge_px": 701,
+    "border_all_transparent": false,
+    "matte_rgb": [
+     255,
+     0,
+     255
+    ],
+    "transparent_fraction": 0.8743,
+    "partial_fraction": 0.0,
+    "matte_residual_opaque_px": 0,
+    "source_keyed_px": [
+     1408,
+     768
+    ]
+   },
+   "format": "PNG RGBA",
+   "trim_bbox_in_keyed_source": [
+    399,
+    129,
+    1044,
+    768
+   ],
+   "actual_px": [
+    128,
+    192
+   ],
+   "sha256": "f717543478cca6243919038369f39c5e8b3dfc60027344c14cf5d251f051ee34",
+   "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+  },
+  "DM-PR09": {
+   "id": "DM-PR09",
+   "name": "Sunlit cornice column",
+   "group": "DM-PR",
+   "priority": "P1",
+   "path": "assets/production/dome/props/dm_pr09.png",
+   "target_px": [
+    128,
+    256
+   ],
+   "pivot": "base-center",
+   "raw_source": ".artifact-cache/raw/dm_pr09.png",
+   "raw_sha256": "96cae2efe1468fd9bc7011944ecc94ab977aede77908686e2012e2f89817af39",
+   "raw_px": [
+    1408,
+    768
+   ],
+   "generated_utc": "2026-10-11T19:53:05Z",
+   "generator": "arena-agent-mode image generation",
+   "alpha": {
+    "required": true,
+    "mode": "straight RGBA",
+    "transparent_px_fraction": 0.3405,
+    "opaque_px_fraction": 0.6164,
+    "partial_edge_px": 1413,
+    "border_all_transparent": false,
+    "matte_rgb": [
+     255,
+     0,
+     255
+    ],
+    "transparent_fraction": 0.8866,
+    "partial_fraction": 0.0,
+    "matte_residual_opaque_px": 0,
+    "source_keyed_px": [
+     1408,
+     768
+    ]
+   },
+   "format": "PNG RGBA",
+   "trim_bbox_in_keyed_source": [
+    586,
+    76,
+    822,
+    692
+   ],
+   "actual_px": [
+    128,
+    256
+   ],
+   "sha256": "a063cdc9850cc46fc67bd495787a1fe080aa5dbcfa36c700122d4cb70bbe6434",
+   "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+  },
+  "DM-PR10": {
+   "id": "DM-PR10",
+   "name": "Final summit flag",
+   "group": "DM-PR",
+   "priority": "P1",
+   "path": "assets/production/dome/props/dm_pr10.png",
+   "target_px": [
+    160,
+    256
+   ],
+   "pivot": "base-center",
+   "raw_source": ".artifact-cache/raw/dm_pr10.png",
+   "raw_sha256": "10fc99f4f7b7a879594785818ddc92f38b99e4e231213ba019c74aa1fed82d35",
+   "raw_px": [
+    1408,
+    768
+   ],
+   "generated_utc": "2026-10-11T19:53:05Z",
+   "generator": "arena-agent-mode image generation",
+   "alpha": {
+    "required": true,
+    "mode": "straight RGBA",
+    "transparent_px_fraction": 0.5195,
+    "opaque_px_fraction": 0.4465,
+    "partial_edge_px": 1395,
+    "border_all_transparent": false,
+    "matte_rgb": [
+     255,
+     0,
+     255
+    ],
+    "transparent_fraction": 0.7316,
+    "partial_fraction": 0.0,
+    "matte_residual_opaque_px": 0,
+    "source_keyed_px": [
+     1408,
+     768
+    ]
+   },
+   "format": "PNG RGBA",
+   "trim_bbox_in_keyed_source": [
+    393,
+    35,
+    1015,
+    768
+   ],
+   "actual_px": [
+    160,
+    256
+   ],
+   "sha256": "b3dd9ae7730595e1250e907c7f07a673e6eb24af25ef0b3e80d2a6972bec220f",
    "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
   },
   "DM-TL01": {
@@ -3928,6 +4193,59 @@
    "sha256": "66ac01e931192bbb70b8a1a8245404f3357f26e1f7136afc9d67303e3752b479",
    "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
   },
+  "FX-04": {
+   "id": "FX-04",
+   "name": "Cardboard fox decoy",
+   "group": "FX",
+   "priority": "P1",
+   "path": "assets/level1/fox/fx_04_cardboard_fox_decoy.png",
+   "target_px": [
+    96,
+    112
+   ],
+   "pivot": "bottom-center",
+   "raw_source": ".artifact-cache/raw/fx_04.png",
+   "raw_sha256": "11b20ce3439c18ec14fe3e0b7a9d41add820e588e042e5824cb484fb669e356f",
+   "raw_px": [
+    1408,
+    768
+   ],
+   "generated_utc": "2026-10-11T19:53:05Z",
+   "generator": "arena-agent-mode image generation",
+   "alpha": {
+    "required": true,
+    "mode": "straight RGBA",
+    "transparent_px_fraction": 0.6621,
+    "opaque_px_fraction": 0.2573,
+    "partial_edge_px": 867,
+    "border_all_transparent": false,
+    "matte_rgb": [
+     255,
+     0,
+     255
+    ],
+    "transparent_fraction": 0.9128,
+    "partial_fraction": 0.0,
+    "matte_residual_opaque_px": 0,
+    "source_keyed_px": [
+     1408,
+     768
+    ]
+   },
+   "format": "PNG RGBA",
+   "trim_bbox_in_keyed_source": [
+    517,
+    106,
+    833,
+    692
+   ],
+   "actual_px": [
+    96,
+    112
+   ],
+   "sha256": "3e879de706074536c156938af0bf3e6e3751d906e88e6afce7456714d76d5c26",
+   "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+  },
   "MC-01": {
    "id": "MC-01",
    "name": "Banner bridge retracted",
@@ -4403,6 +4721,112 @@
     128
    ],
    "sha256": "b98ecbd907d8c477c94fd41b832053826d77f44ec73390b3fc5590b5264a72b5",
+   "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+  },
+  "PK-01": {
+   "id": "PK-01",
+   "name": "Shake cup flip frame A",
+   "group": "PK",
+   "priority": "P1",
+   "path": "assets/production/pickups/pk_01.png",
+   "target_px": [
+    64,
+    64
+   ],
+   "pivot": "center",
+   "raw_source": ".artifact-cache/raw/pk_01.png",
+   "raw_sha256": "e34e475a838cc1d41f567ed7d193b7d59f4e294b100c54aa4b8c5ad28441bec4",
+   "raw_px": [
+    1408,
+    768
+   ],
+   "generated_utc": "2026-10-11T19:53:05Z",
+   "generator": "arena-agent-mode image generation",
+   "alpha": {
+    "required": true,
+    "mode": "straight RGBA",
+    "transparent_px_fraction": 0.6567,
+    "opaque_px_fraction": 0.261,
+    "partial_edge_px": 337,
+    "border_all_transparent": false,
+    "matte_rgb": [
+     255,
+     0,
+     255
+    ],
+    "transparent_fraction": 0.8724,
+    "partial_fraction": 0.0,
+    "matte_residual_opaque_px": 0,
+    "source_keyed_px": [
+     1408,
+     768
+    ]
+   },
+   "format": "PNG RGBA",
+   "trim_bbox_in_keyed_source": [
+    540,
+    58,
+    868,
+    710
+   ],
+   "actual_px": [
+    64,
+    64
+   ],
+   "sha256": "4b3fd3c1cf39a85bb5d2e9f9ef71e6747017804aec9a426042d502bc198af7a6",
+   "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+  },
+  "PK-04": {
+   "id": "PK-04",
+   "name": "Golden shake secret pulse",
+   "group": "PK",
+   "priority": "P1",
+   "path": "assets/production/pickups/pk_04.png",
+   "target_px": [
+    64,
+    64
+   ],
+   "pivot": "center",
+   "raw_source": ".artifact-cache/raw/pk_04.png",
+   "raw_sha256": "339d9a9975bff4b73304871873d77229db305c01db7f2b87988deb746d254db2",
+   "raw_px": [
+    1408,
+    768
+   ],
+   "generated_utc": "2026-10-11T19:53:05Z",
+   "generator": "arena-agent-mode image generation",
+   "alpha": {
+    "required": true,
+    "mode": "straight RGBA",
+    "transparent_px_fraction": 0.5398,
+    "opaque_px_fraction": 0.345,
+    "partial_edge_px": 472,
+    "border_all_transparent": false,
+    "matte_rgb": [
+     255,
+     0,
+     255
+    ],
+    "transparent_fraction": 0.8847,
+    "partial_fraction": 0.0,
+    "matte_residual_opaque_px": 0,
+    "source_keyed_px": [
+     1408,
+     768
+    ]
+   },
+   "format": "PNG RGBA",
+   "trim_bbox_in_keyed_source": [
+    551,
+    106,
+    962,
+    645
+   ],
+   "actual_px": [
+    64,
+    64
+   ],
+   "sha256": "c244906ad50ca020a4f8c5f86fbd8a465efb211b2002de943aea8d5a67cc030c",
    "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
   },
   "PR-01": {
@@ -5963,6 +6387,112 @@
     384
    ],
    "sha256": "6d26afedf3e31769b5f103acbb431e5c34f4590210fe14689925a6be0636043f",
+   "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+  },
+  "UX-06": {
+   "id": "UX-06",
+   "name": "Pause button icon",
+   "group": "UIX",
+   "priority": "P1",
+   "path": "assets/production/ui/ux_06.png",
+   "target_px": [
+    64,
+    64
+   ],
+   "pivot": "center",
+   "raw_source": ".artifact-cache/raw/ux_06.png",
+   "raw_sha256": "586a77e28bf44afabf97c653f2ba9c9e0acb8c96732575d4d5491da34dff5251",
+   "raw_px": [
+    1024,
+    1024
+   ],
+   "generated_utc": "2026-10-11T19:53:05Z",
+   "generator": "arena-agent-mode image generation",
+   "alpha": {
+    "required": true,
+    "mode": "straight RGBA",
+    "transparent_px_fraction": 0.7749,
+    "opaque_px_fraction": 0.1421,
+    "partial_edge_px": 340,
+    "border_all_transparent": false,
+    "matte_rgb": [
+     255,
+     0,
+     255
+    ],
+    "transparent_fraction": 0.8905,
+    "partial_fraction": 0.0,
+    "matte_residual_opaque_px": 0,
+    "source_keyed_px": [
+     1024,
+     1024
+    ]
+   },
+   "format": "PNG RGBA",
+   "trim_bbox_in_keyed_source": [
+    133,
+    358,
+    891,
+    666
+   ],
+   "actual_px": [
+    64,
+    64
+   ],
+   "sha256": "40525e1c13b6ccb3c615311e269807b6788c24ef8d870a85c885780a080ed214",
+   "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+  },
+  "UX-08": {
+   "id": "UX-08",
+   "name": "Touch jump glyph",
+   "group": "UIX",
+   "priority": "P1",
+   "path": "assets/production/ui/ux_08.png",
+   "target_px": [
+    64,
+    64
+   ],
+   "pivot": "center",
+   "raw_source": ".artifact-cache/raw/ux_08.png",
+   "raw_sha256": "ee5bcfe18c3d1fe27b99a2ac5fccfef7c58a8e0483c5331a14d262c5a4afbb88",
+   "raw_px": [
+    1408,
+    768
+   ],
+   "generated_utc": "2026-10-11T19:53:05Z",
+   "generator": "arena-agent-mode image generation",
+   "alpha": {
+    "required": true,
+    "mode": "straight RGBA",
+    "transparent_px_fraction": 0.2183,
+    "opaque_px_fraction": 0.6899,
+    "partial_edge_px": 376,
+    "border_all_transparent": false,
+    "matte_rgb": [
+     255,
+     0,
+     255
+    ],
+    "transparent_fraction": 0.8604,
+    "partial_fraction": 0.0,
+    "matte_residual_opaque_px": 0,
+    "source_keyed_px": [
+     1408,
+     768
+    ]
+   },
+   "format": "PNG RGBA",
+   "trim_bbox_in_keyed_source": [
+    493,
+    165,
+    915,
+    611
+   ],
+   "actual_px": [
+    64,
+    64
+   ],
+   "sha256": "37b86819340c34d179b48005a2d7b26246cf5026a80378aae964f6d40c23e7f8",
    "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
   },
   "VF-01": {
