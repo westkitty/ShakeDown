@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "generated_utc": "2026-10-11T20:13:57Z",
+  "generated_utc": "2026-10-11T20:16:35Z",
   "note": "Byte-level truth for generated production art. Every sha256 and pixel dimension here was measured from the file actually written to disk. Human visual review is a separate, still-open gate.",
-  "count": 157,
+  "count": 165,
   "assets": {
     "BD-01": {
       "id": "BD-01",
@@ -216,6 +216,59 @@
       "sha256": "a471dfae9d364a9db0f123c774b8d399428cde8912959e9dad114d301029c3bd",
       "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
     },
+    "BD-07": {
+      "id": "BD-07",
+      "name": "Birthday bunting arc",
+      "group": "BD",
+      "priority": "P1",
+      "path": "assets/production/birthday/bd_07.png",
+      "target_px": [
+        960,
+        192
+      ],
+      "pivot": "top-left",
+      "raw_source": ".artifact-cache/raw/bd_07.png",
+      "raw_sha256": "ea3484b8a899cbc063c2d57dd724d2fc69407308efee4d2de9d7afbb21d6325c",
+      "raw_px": [
+        1408,
+        768
+      ],
+      "generated_utc": "2026-10-11T20:16:21Z",
+      "generator": "arena-agent-mode image generation",
+      "alpha": {
+        "required": true,
+        "mode": "straight RGBA",
+        "transparent_px_fraction": 0.7799,
+        "opaque_px_fraction": 0.1722,
+        "partial_edge_px": 8820,
+        "border_all_transparent": false,
+        "matte_rgb": [
+          255,
+          0,
+          255
+        ],
+        "transparent_fraction": 0.779,
+        "partial_fraction": 0.0,
+        "matte_residual_opaque_px": 0,
+        "source_keyed_px": [
+          1408,
+          768
+        ]
+      },
+      "format": "PNG RGBA",
+      "trim_bbox_in_keyed_source": [
+        0,
+        135,
+        1408,
+        616
+      ],
+      "actual_px": [
+        960,
+        192
+      ],
+      "sha256": "b2c2682e83e9d05f8b44cddcaf85d7d25b6062823cbe8526cb8b3fb5e2ce66a3",
+      "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+    },
     "BD-09": {
       "id": "BD-09",
       "name": "Birthday sparkle burst A",
@@ -267,6 +320,59 @@
         256
       ],
       "sha256": "a23fea22096d8d98ca8ae2a7e76d4fbf5a507ea66dccc6874ace826b1094ad8b",
+      "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+    },
+    "BD-10": {
+      "id": "BD-10",
+      "name": "Birthday sparkle burst B",
+      "group": "BD",
+      "priority": "P1",
+      "path": "assets/production/birthday/bd_10.png",
+      "target_px": [
+        256,
+        256
+      ],
+      "pivot": "bottom-center",
+      "raw_source": ".artifact-cache/raw/bd_10.png",
+      "raw_sha256": "e5419288375e2604f985b1bc14d6b3210be47d902ad94b4870264e60d8f4383a",
+      "raw_px": [
+        1408,
+        768
+      ],
+      "generated_utc": "2026-10-11T20:16:21Z",
+      "generator": "arena-agent-mode image generation",
+      "alpha": {
+        "required": true,
+        "mode": "straight RGBA",
+        "transparent_px_fraction": 0.5986,
+        "opaque_px_fraction": 0.3031,
+        "partial_edge_px": 6440,
+        "border_all_transparent": false,
+        "matte_rgb": [
+          255,
+          0,
+          255
+        ],
+        "transparent_fraction": 0.945,
+        "partial_fraction": 0.0,
+        "matte_residual_opaque_px": 0,
+        "source_keyed_px": [
+          1408,
+          768
+        ]
+      },
+      "format": "PNG RGBA",
+      "trim_bbox_in_keyed_source": [
+        522,
+        188,
+        880,
+        586
+      ],
+      "actual_px": [
+        256,
+        256
+      ],
+      "sha256": "c941a7669f5929a8f9cc4f048aac8ee1d125b786f0879b10bf06a809a5bd3041",
       "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
     },
     "BD-11": {
@@ -3685,6 +3791,59 @@
       "sha256": "fbc6be78a1d5293e012af9af4406640dbdb6d1a0c03567cfc8b47842228a7d68",
       "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
     },
+    "EX-VF03": {
+      "id": "EX-VF03",
+      "name": "Pulse bridge warning tick",
+      "group": "EX-VF",
+      "priority": "P1",
+      "path": "assets/production/effects/ex_vf03.png",
+      "target_px": [
+        256,
+        32
+      ],
+      "pivot": "center",
+      "raw_source": ".artifact-cache/raw/ex_vf03.png",
+      "raw_sha256": "8f77ec2ac7c9d64520efaa2a11933d5a2cb4f46e6ac81d92c650ded45e9cfc51",
+      "raw_px": [
+        1408,
+        768
+      ],
+      "generated_utc": "2026-10-11T20:16:21Z",
+      "generator": "arena-agent-mode image generation",
+      "alpha": {
+        "required": true,
+        "mode": "straight RGBA",
+        "transparent_px_fraction": 0.9812,
+        "opaque_px_fraction": 0.0072,
+        "partial_edge_px": 95,
+        "border_all_transparent": false,
+        "matte_rgb": [
+          255,
+          0,
+          255
+        ],
+        "transparent_fraction": 0.9926,
+        "partial_fraction": 0.0,
+        "matte_residual_opaque_px": 0,
+        "source_keyed_px": [
+          1408,
+          768
+        ]
+      },
+      "format": "PNG RGBA",
+      "trim_bbox_in_keyed_source": [
+        572,
+        252,
+        836,
+        516
+      ],
+      "actual_px": [
+        256,
+        32
+      ],
+      "sha256": "198288eb18795b7df12b98fb47a01e5b833fb224e840d1a11bc5437048bd6f71",
+      "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+    },
     "FOX-01": {
       "id": "FOX-01",
       "name": "Fox identity approval turnaround",
@@ -6972,6 +7131,201 @@
       "sha256": "2b859f9354f79cb2a52671721ee05dfde6e1996bc3942555c2ea5b527aec990e",
       "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
     },
+    "UX-01": {
+      "id": "UX-01",
+      "name": "Main title backdrop",
+      "group": "UIX",
+      "priority": "P1",
+      "path": "assets/production/ui/ux_01.png",
+      "target_px": [
+        960,
+        540
+      ],
+      "pivot": "top-left",
+      "raw_source": ".artifact-cache/raw/ux_01.png",
+      "raw_sha256": "6f43f97381624a7c95004e788d988cbdff5a5571aa71cb6f61425df4214b1431",
+      "raw_px": [
+        1376,
+        768
+      ],
+      "generated_utc": "2026-10-11T20:16:35Z",
+      "generator": "arena-agent-mode image generation",
+      "alpha": {
+        "required": true,
+        "mode": "straight RGBA",
+        "transparent_px_fraction": 0.0,
+        "opaque_px_fraction": 1.0,
+        "partial_edge_px": 0,
+        "full_bleed": true,
+        "border_all_transparent": false
+      },
+      "format": "PNG RGBA",
+      "actual_px": [
+        960,
+        540
+      ],
+      "sha256": "c7a1845a7b18874333e061863f144dfd4face31dee0bea2aeecc0bf096729240",
+      "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+    },
+    "UX-02": {
+      "id": "UX-02",
+      "name": "Title panel border",
+      "group": "UIX",
+      "priority": "P1",
+      "path": "assets/production/ui/ux_02.png",
+      "target_px": [
+        480,
+        256
+      ],
+      "pivot": "top-left",
+      "raw_source": ".artifact-cache/raw/ux_02.png",
+      "raw_sha256": "a91590aee128df232cab2e6f468550750e186ef6a473b3ae40277c8cd27a2c50",
+      "raw_px": [
+        1408,
+        768
+      ],
+      "generated_utc": "2026-10-11T20:16:21Z",
+      "generator": "arena-agent-mode image generation",
+      "alpha": {
+        "required": true,
+        "mode": "straight RGBA",
+        "transparent_px_fraction": 0.5161,
+        "opaque_px_fraction": 0.4641,
+        "partial_edge_px": 2433,
+        "border_all_transparent": false,
+        "matte_rgb": [
+          255,
+          0,
+          255
+        ],
+        "transparent_fraction": 0.6882,
+        "partial_fraction": 0.0,
+        "matte_residual_opaque_px": 0,
+        "source_keyed_px": [
+          1408,
+          768
+        ]
+      },
+      "format": "PNG RGBA",
+      "trim_bbox_in_keyed_source": [
+        129,
+        106,
+        1279,
+        668
+      ],
+      "actual_px": [
+        480,
+        256
+      ],
+      "sha256": "f3c4f7b80877ed64b2f6c147a732fdc198cdeca0bf73c7dae7b287782c6d5666",
+      "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+    },
+    "UX-03": {
+      "id": "UX-03",
+      "name": "Pause window frame",
+      "group": "UIX",
+      "priority": "P1",
+      "path": "assets/production/ui/ux_03.png",
+      "target_px": [
+        512,
+        384
+      ],
+      "pivot": "top-left",
+      "raw_source": ".artifact-cache/raw/ux_03.png",
+      "raw_sha256": "419dc07fd9e23fc1b741eeb49539d927e821b2f7fcaaa9fa9a0330805ea1016d",
+      "raw_px": [
+        1408,
+        768
+      ],
+      "generated_utc": "2026-10-11T20:16:21Z",
+      "generator": "arena-agent-mode image generation",
+      "alpha": {
+        "required": true,
+        "mode": "straight RGBA",
+        "transparent_px_fraction": 0.3388,
+        "opaque_px_fraction": 0.6609,
+        "partial_edge_px": 64,
+        "border_all_transparent": false,
+        "matte_rgb": [
+          255,
+          0,
+          255
+        ],
+        "transparent_fraction": 0.264,
+        "partial_fraction": 0.0,
+        "matte_residual_opaque_px": 0,
+        "source_keyed_px": [
+          1408,
+          768
+        ]
+      },
+      "format": "PNG RGBA",
+      "trim_bbox_in_keyed_source": [
+        70,
+        70,
+        1338,
+        698
+      ],
+      "actual_px": [
+        512,
+        384
+      ],
+      "sha256": "a79e896f0125cf3088569289f836ea2a3c0b6256b837842c1190902b4120e50f",
+      "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+    },
+    "UX-04": {
+      "id": "UX-04",
+      "name": "Death/retry panel frame",
+      "group": "UIX",
+      "priority": "P1",
+      "path": "assets/production/ui/ux_04.png",
+      "target_px": [
+        512,
+        384
+      ],
+      "pivot": "top-left",
+      "raw_source": ".artifact-cache/raw/ux_04.png",
+      "raw_sha256": "8835d52fdb07cb511a9f94b2bc0997c8420e0e0f670e1d4dec805a9153799d9b",
+      "raw_px": [
+        1408,
+        768
+      ],
+      "generated_utc": "2026-10-11T20:16:21Z",
+      "generator": "arena-agent-mode image generation",
+      "alpha": {
+        "required": true,
+        "mode": "straight RGBA",
+        "transparent_px_fraction": 0.1751,
+        "opaque_px_fraction": 0.8243,
+        "partial_edge_px": 110,
+        "border_all_transparent": false,
+        "matte_rgb": [
+          255,
+          0,
+          255
+        ],
+        "transparent_fraction": 0.593,
+        "partial_fraction": 0.0,
+        "matte_residual_opaque_px": 0,
+        "source_keyed_px": [
+          1408,
+          768
+        ]
+      },
+      "format": "PNG RGBA",
+      "trim_bbox_in_keyed_source": [
+        282,
+        123,
+        1126,
+        645
+      ],
+      "actual_px": [
+        512,
+        384
+      ],
+      "sha256": "e3b2ed2fde09565c2ec8138e639dbc972861752df9d49f9847f8fba504564876",
+      "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+    },
     "UX-05": {
       "id": "UX-05",
       "name": "Victory UI frame",
@@ -7182,6 +7536,59 @@
         64
       ],
       "sha256": "37b86819340c34d179b48005a2d7b26246cf5026a80378aae964f6d40c23e7f8",
+      "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+    },
+    "UX-09": {
+      "id": "UX-09",
+      "name": "Touch swish glyph",
+      "group": "UIX",
+      "priority": "P1",
+      "path": "assets/production/ui/ux_09.png",
+      "target_px": [
+        64,
+        64
+      ],
+      "pivot": "center",
+      "raw_source": ".artifact-cache/raw/ux_09.png",
+      "raw_sha256": "d1615bb6ab906b1cf6e8f5a33987d3d34000b0925c5fab54a7a0d60a89ecba3d",
+      "raw_px": [
+        1408,
+        768
+      ],
+      "generated_utc": "2026-10-11T20:16:21Z",
+      "generator": "arena-agent-mode image generation",
+      "alpha": {
+        "required": true,
+        "mode": "straight RGBA",
+        "transparent_px_fraction": 0.458,
+        "opaque_px_fraction": 0.2961,
+        "partial_edge_px": 1007,
+        "border_all_transparent": false,
+        "matte_rgb": [
+          255,
+          0,
+          255
+        ],
+        "transparent_fraction": 0.7915,
+        "partial_fraction": 0.0,
+        "matte_residual_opaque_px": 0,
+        "source_keyed_px": [
+          1408,
+          768
+        ]
+      },
+      "format": "PNG RGBA",
+      "trim_bbox_in_keyed_source": [
+        364,
+        47,
+        1044,
+        721
+      ],
+      "actual_px": [
+        64,
+        64
+      ],
+      "sha256": "2d2191ef125fb2976d74a6f4e0fbbde2ba1af6d96659c90ea0a2953b88ea521e",
       "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
     },
     "UX-10": {
