@@ -76,3 +76,12 @@ Do not merge this preparation branch until npm run validate and all browser test
 ## Explicit remaining limits
 
 The final LM Arena artwork is still missing. Run_03 remains clipped on disk, deliberately skipped at runtime. Headless browser/device emulation does not equal real touchscreen QA. Complete unassisted route, audible sound quality and actual-phone performance are not automatically established by this preparation sprint.
+
+
+## Round 2: continuous route and client-only review bench (2026-10-11)
+
+- Asset Control Room: tools/asset-review.html. Fetches canonical JSON and actual runtime approvals, filters the 220 image/21 audio contracts, previews existing source/approved files, checks local candidate PNG alpha/dimensions/hash and WAV PCM/OGG headers. It never uploads or approves bytes. Source art and LM Arena prompt contracts are unchanged.
+- tests/full-route.test.mjs drives normal game-input updates from spawn with assist mode; all 23 Dome steps, real hazards, one checkpoint reset, 31 shakes, three Fox recovery hits and victory. No warp or direct state assignment.
+- tests/browser/route.spec.mjs sends DOM keyboard events and uses visible pause/assist/retry/replay buttons while the actual Canvas loop runs under a fast test-only virtual requestAnimationFrame schedule. No direct physics update or mutating QA helper is called.
+- tests/browser/studio.spec.mjs exercises real contract totals, image byte/pixel and audio header checks, rejected malformed candidates, ID deep links and desktop/mobile layouts. These do not prove actual art fidelity or ownership.
+- Still needed: human-paced normal difficulty, physical phone audio/touch, generated Fox/art review, live deployed-SHA playthrough and real-world performance.

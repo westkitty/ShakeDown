@@ -45,9 +45,15 @@ The game remains playable without final outside artwork. The preparation branch 
 
 See docs/PRODUCTION_READINESS.md and docs/RELEASE_CHECKLIST.md. No final LM Arena images were imported in this preparation sprint.
 
+## Asset Control Room
+
+Open http://localhost:8765/tools/asset-review.html after starting the local server. The standalone review bench reads the 220-visual / 21-audio master and the actual approved manifest. Search/filter by ID, priority, category and state; inspect local candidate PNG geometry/alpha/hash, WAV PCM chunks and OGG headers, then copy a staging command template. Nothing is uploaded or approved by the page. Human visual/audio review remains mandatory.
+
 ## Validation
 
-`npm test` runs deterministic movement/interaction/boss tests, including all 23 consecutive Dome-platform reachability transitions. `npm run validate` also checks asset manifest entries and planning invariants. Visual playback has been exercised in headless Chromium using an injected bundle because this container forbids browser URL navigation; that **does not** constitute live-site proof. See `docs/VALIDATION.md` for precise evidence boundaries.
+Node tests include a continuous no-warp assist-mode game-input route from the actual spawn across campus and all 23 Dome stages to Fox victory. Browser tests replay the same input decisions using existing keyboard and UI handlers, with a test-only virtualized requestAnimationFrame scheduler. They validate the real Canvas/DOM path but do not prove ordinary human pacing or sustained physical-device FPS. Real-phone touch/audio, human normal-difficulty play, approved generated files and same-SHA hosted-site proof remain release gates.
+
+See docs/PRODUCTION_READINESS.md and docs/VALIDATION.md for exact evidence.
 
 ## Project and authority
 

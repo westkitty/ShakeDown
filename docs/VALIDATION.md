@@ -35,3 +35,12 @@ Project: westkitty/ShakeDown; branch: prep/asset-ready-20261011; baseline: main@
 - git diff --check and node --check performed on edited JS; do not claim CI or release status until exact branch is pushed and independently passes.
 
 **Unverified:** natural player completion of every section in one continuous, no-warp browser session; physical iPhone/Android touch, audible audio quality, animation and level visual approval; long-session representative frame-budget data; live deployed new code; external generated final art. Tests using QA warps are specifically **not** full-route skill-playthrough evidence. Generated assets require actual source-file inspection and reviewer approval before source-to-runtime promotion.
+
+
+## 2026-10-11: Round 2 proof boundary (unmerged candidate)
+
+- Starting preparation PR #1 SHA 553be7d56cf7a61466fb146b378a6eac8830caf5 passed both contract and browser GitHub workflows. This is not CI evidence for subsequent local modifications.
+- Node scripted assisted route: initial spawn; all 23 actual Dome steps; normal hazards; one checkpoint retry; 31 Shamrock Shakes; three natural Fox hits; birthday victory. No teleport, direct position mutation or disabled collisions.
+- Actual-browser scripted assisted route: DOM keyboard events through real game listeners, visible pause/assist/retry/replay UI, Canvas rendering; 2,238 virtualized requestAnimationFrame callbacks, 23 steps, 31 shakes, one retry, natural Fox defeat and victory. Simulated elapsed time about 37.3 seconds. The QA query parameter supplies read-only state; mutating helpers were not called.
+- Browser Asset Control Room: canonical 220 image + 21 audio contracts, 26 source-derived frames, 0 approved outputs, 215 pending visual/audio requests; local valid/invalid PNG alpha/dimension/hash, WAV truncated vs synthetic PCM, desktop/mobile and deep links. No upload or runtime manifest mutation.
+- Limitation: virtualized browser frame scheduling is not ordinary pacing, a human-played route or hardware FPS measurement. Normal-difficulty route, physical mobile/speakers, final external art approvals and hosted exact-SHA proof remain open.

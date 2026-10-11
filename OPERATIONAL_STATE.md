@@ -7,8 +7,8 @@
   "project_name": "ShakeDown",
   "project_root": "westkitty/ShakeDown",
   "artifact_path": "",
-  "state_revision": 3,
-  "last_updated": "2026-10-11T19:40:00Z",
+  "state_revision": 4,
+  "last_updated": "2026-10-11T19:52:50Z",
   "current_baseline": {
     "identity": "main@80d388828bfcad0cf454fe0b2b166e6528ac5e6d (pre-preparation production baseline)",
     "state": "current-baseline",
@@ -71,7 +71,7 @@ Modern Pixel Candidate B selected. Do not overwrite Cloud Chaser. Do not claim a
 | VER-001 | ZIP hash / normalized frame integrity | Tested local file bytes | Verify remote binaries after upload |
 | BRK-001 | run_03 source edge crop | Inspected raster alpha boundary | Regenerate/repair source |
 | PND-001 | Gameplay animation | 26 real source cutouts browser loaded | Full live-site playthrough and more complete animations |
-| PND-002 | Full birthday route | Unit tests + sampled browser scenes | Unassisted run and device tests |
+| PND-002 | Full birthday route | Complete scripted assist-mode Node route + real browser DOM-input route under virtual rAF, no warps | Human normal-difficulty, physical device remain unverified |
 | PND-003 | Production art library | 220 standalone specs, 26 source-existing | 194 missing generated visuals and Fox approval |
 
 ## 12. Current Change Scope and Impact Radius
@@ -105,3 +105,21 @@ The candidate adds image/audio acceptance, SHA256-based staging, reviewer attest
 
 ### Revision log addition
 - Revision 3: reconciled current deployed baseline, documented asset intake and playable clip exclusion; tracked preparation browser evidence and remaining approvals/device/route gates.
+
+
+## 15. Preparation Round 2 — revision 4
+
+<!-- operational-state:entry
+{"id":"VER-004","title":"Continuous assist-mode route browser proof","state":"partially-verified","scope":"Round 2 on prep/asset-ready-20261011","evidence":"Node input route and browser DOM/Canvas route with virtual rAF: 23/23 Dome steps, 31 shakes, 1 checkpoint retry, 3 natural Fox hits, birthday/replay","last_verified":"2026-10-11"}
+-->
+### VER-004
+Verified continuous scripted assisted gameplay from initial spawn through full Dome to victory in Node and browser DOM/Canvas. Browser input uses test-driven keys and a virtual rAF schedule; no warp, direct physics call or authoritatively mutable QA aid. Human-paced/default-difficulty/real hardware not verified.
+
+<!-- operational-state:entry
+{"id":"VER-005","title":"Client-side asset review UI","state":"partially-verified","scope":"tools/asset-review.html","evidence":"Browser desktop/mobile emulation checks 220 visual +21 audio,26 source frames,0 approved outputs, PNG alpha/dimension/hash, WAV validity, rejected corrupt files","last_verified":"2026-10-11"}
+-->
+### VER-005
+Browser-local intake/review UI reads canonical source contracts and approval manifest and examines candidates without upload or art approval. Original generated-art truth unchanged: zero newly approved final output files.
+
+### Revision 4 release boundaries
+PR #1 SHA 553be7d passed GitHub CI; Round 2 changes need independent tests and CI. Human-paced normal-difficulty route, real mobile/audio, generated art approval and deployed live-SHA playthrough remain open. Preserve all existing Cinnamon source frames and unchanged LM Arena instructions.

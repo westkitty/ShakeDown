@@ -47,3 +47,13 @@
 Keep the last accepted commit and asset record immutable. On failure, repair via a new candidate PR; if a specific approved-art candidate regresses fidelity/gameplay, revert only its manifest promotion and generated file. Never force-push main, delete unrelated images, change the original 220 prompts during in-progress LM Arena generation, or replace the working Canvas engine.
 
 **Evidence discipline:** Node pass ≠ browser pass. Playwright pass ≠ physical phone pass. GitHub Pages build pass ≠ complete hosted gameplay pass. Asset hash ≠ visual fidelity. A 60Hz simulation interval ≠ 60fps performance measurement.
+
+
+## Round 2 additional proof
+
+- [x] Continuous automated no-warp assist-mode route through all 23 Dome steps and natural Fox victory in Node.
+- [x] Browser Canvas + real DOM-input route with synthetic frame timing, visible assist toggle, checkpoint retry and replay.
+- [x] Local-only Asset Control Room with true master-manifest inventory and corrupt-file rejection on desktop/mobile emulation.
+- [ ] Human-paced and normal-difficulty full route.
+- [ ] Physical phone touch/audio, final art identity approval and representative performance.
+- [ ] After any merge, exact SHA Pages deployment and full hosted URL player journey.
