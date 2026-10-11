@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "generated_utc": "2026-10-11T20:20:37Z",
+  "generated_utc": "2026-10-11T20:26:55Z",
   "note": "Byte-level truth for generated production art. Every sha256 and pixel dimension here was measured from the file actually written to disk. Human visual review is a separate, still-open gate.",
-  "count": 174,
+  "count": 178,
   "assets": {
     "BD-01": {
       "id": "BD-01",
@@ -1867,6 +1867,42 @@
       "sha256": "8b2a6252ee2263d900ad853e3ac1245e2b7b1aad9a287b7f6fcb1d4583cf301c",
       "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
     },
+    "DM-BG06": {
+      "id": "DM-BG06",
+      "name": "Bell Gallery shadow layer",
+      "group": "DM-BG",
+      "priority": "P2",
+      "path": "assets/production/dome/backgrounds/dm_bg06.png",
+      "target_px": [
+        960,
+        540
+      ],
+      "pivot": "top-left",
+      "raw_source": ".artifact-cache/raw/dm_bg06.png",
+      "raw_sha256": "a12a615bd8bbb4b7d4da77fd5c4e2cb033080a02d5aef36705f6a75f9236a166",
+      "raw_px": [
+        1376,
+        768
+      ],
+      "generated_utc": "2026-10-11T20:26:55Z",
+      "generator": "arena-agent-mode image generation",
+      "alpha": {
+        "required": true,
+        "mode": "straight RGBA",
+        "transparent_px_fraction": 0.0,
+        "opaque_px_fraction": 1.0,
+        "partial_edge_px": 0,
+        "full_bleed": true,
+        "border_all_transparent": false
+      },
+      "format": "PNG RGBA",
+      "actual_px": [
+        960,
+        540
+      ],
+      "sha256": "a1aec2524b30d5acc6e6b81627136d7cfa0c100881d3fee9e8209253da835639",
+      "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+    },
     "DM-BG07": {
       "id": "DM-BG07",
       "name": "Summit sky panorama",
@@ -3509,6 +3545,42 @@
       "sha256": "62a533c04c449a651b22053b8dca5347e716f4759ab70f3bbf08b39f9072ea7c",
       "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
     },
+    "DM-TL14": {
+      "id": "DM-TL14",
+      "name": "Cracked landing platform",
+      "group": "DM-TL",
+      "priority": "P2",
+      "path": "assets/production/dome/tiles/dm_tl14.png",
+      "target_px": [
+        32,
+        32
+      ],
+      "pivot": "tile top-left",
+      "raw_source": ".artifact-cache/raw/dm_tl14.png",
+      "raw_sha256": "119ed2088d5c6f61a1befc6a906dfd62fb64abf22ddbda0d9dc6d5dd7fe2cb0a",
+      "raw_px": [
+        1024,
+        1024
+      ],
+      "generated_utc": "2026-10-11T20:26:55Z",
+      "generator": "arena-agent-mode image generation",
+      "alpha": {
+        "required": true,
+        "mode": "straight RGBA",
+        "transparent_px_fraction": 0.0,
+        "opaque_px_fraction": 1.0,
+        "partial_edge_px": 0,
+        "full_bleed": true,
+        "border_all_transparent": false
+      },
+      "format": "PNG RGBA",
+      "actual_px": [
+        32,
+        32
+      ],
+      "sha256": "2d199235b7d90ac8322ee0ed41344d0e41093aa6e3e2c8635fecc00e8001bce0",
+      "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+    },
     "DM-TL15": {
       "id": "DM-TL15",
       "name": "Gold dome rib vertical",
@@ -3986,6 +4058,59 @@
       "sha256": "fbc6be78a1d5293e012af9af4406640dbdb6d1a0c03567cfc8b47842228a7d68",
       "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
     },
+    "EX-VF01": {
+      "id": "EX-VF01",
+      "name": "Dome jump burst",
+      "group": "EX-VF",
+      "priority": "P1",
+      "path": "assets/production/effects/ex_vf01.png",
+      "target_px": [
+        128,
+        96
+      ],
+      "pivot": "center",
+      "raw_source": ".artifact-cache/raw/ex_vf01.png",
+      "raw_sha256": "d772ba4414cd04c60980a4ce1bd6d7874ac63a402a5e27318a1c810f010d844f",
+      "raw_px": [
+        1408,
+        768
+      ],
+      "generated_utc": "2026-10-11T20:26:50Z",
+      "generator": "arena-agent-mode image generation",
+      "alpha": {
+        "required": true,
+        "mode": "straight RGBA",
+        "transparent_px_fraction": 0.4277,
+        "opaque_px_fraction": 0.513,
+        "partial_edge_px": 728,
+        "border_all_transparent": false,
+        "matte_rgb": [
+          255,
+          0,
+          255
+        ],
+        "transparent_fraction": 0.9482,
+        "partial_fraction": 0.0,
+        "matte_residual_opaque_px": 0,
+        "source_keyed_px": [
+          1408,
+          768
+        ]
+      },
+      "format": "PNG RGBA",
+      "trim_bbox_in_keyed_source": [
+        557,
+        241,
+        868,
+        516
+      ],
+      "actual_px": [
+        128,
+        96
+      ],
+      "sha256": "9f747466e837748f1db3638c78e235a6670fdb9e31012a6135e0d6280b0ce3f1",
+      "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+    },
     "EX-VF02": {
       "id": "EX-VF02",
       "name": "Dome moving lift motor dust",
@@ -4143,6 +4268,59 @@
         96
       ],
       "sha256": "62956b84c92ead5d036d0b687f402bda9e131cf57be6f282681053ccd25c2990",
+      "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+    },
+    "EX-VF06": {
+      "id": "EX-VF06",
+      "name": "Assist mode safe landing ring",
+      "group": "EX-VF",
+      "priority": "P2",
+      "path": "assets/production/effects/ex_vf06.png",
+      "target_px": [
+        128,
+        32
+      ],
+      "pivot": "center",
+      "raw_source": ".artifact-cache/raw/ex_vf06.png",
+      "raw_sha256": "c3420e946ea2572ba6ecd3eb3dbff438bc709ceac805c23bad0e6e4cedc38e23",
+      "raw_px": [
+        1408,
+        768
+      ],
+      "generated_utc": "2026-10-11T20:26:50Z",
+      "generator": "arena-agent-mode image generation",
+      "alpha": {
+        "required": true,
+        "mode": "straight RGBA",
+        "transparent_px_fraction": 0.2451,
+        "opaque_px_fraction": 0.6399,
+        "partial_edge_px": 471,
+        "border_all_transparent": false,
+        "matte_rgb": [
+          255,
+          0,
+          255
+        ],
+        "transparent_fraction": 0.8035,
+        "partial_fraction": 0.0,
+        "matte_residual_opaque_px": 0,
+        "source_keyed_px": [
+          1408,
+          768
+        ]
+      },
+      "format": "PNG RGBA",
+      "trim_bbox_in_keyed_source": [
+        200,
+        251,
+        1199,
+        521
+      ],
+      "actual_px": [
+        128,
+        32
+      ],
+      "sha256": "7623bed512fa7bf4b08ceb532ff9d07b5d4f53859119595e74283f1e2d5dbb85",
       "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
     },
     "EX-VF07": {

@@ -49,12 +49,12 @@ Canvas engine: 960x540 logical screen, 32px tile contacts, source game inputs vi
 | BOSS ATTACK READABILITY | 12 | 0 | 0 | 7 | 4 | 1 |
 | CINNAMON SOURCE SPRITES / REFINEMENTS | 33 | 26 | 6 | 1 | 6 | 0 |
 | COLLECTIBLES | 4 | 0 | 0 | 3 | 1 | 0 |
-| DOME PARALLAX / VIEWPORTS | 8 | 0 | 3 | 3 | 3 | 2 |
+| DOME PARALLAX / VIEWPORTS | 8 | 0 | 2 | 3 | 3 | 2 |
 | DOME MECHANICS | 10 | 0 | 0 | 7 | 3 | 0 |
 | DOME ARCHITECTURE / PROPS | 10 | 0 | 0 | 3 | 5 | 2 |
-| DOME STONE / GOLDEN TILES | 16 | 0 | 2 | 6 | 9 | 1 |
+| DOME STONE / GOLDEN TILES | 16 | 0 | 1 | 6 | 9 | 1 |
 | CAMPUS ENEMY STATES | 7 | 0 | 0 | 4 | 3 | 0 |
-| ADDITIONAL EFFECTS | 8 | 0 | 3 | 0 | 5 | 3 |
+| ADDITIONAL EFFECTS | 8 | 0 | 1 | 0 | 5 | 3 |
 | THE FOX / INTRO AND BOSS | 16 | 0 | 0 | 9 | 5 | 2 |
 | TRANSITIONS / STORY EFFECTS | 4 | 0 | 0 | 2 | 2 | 0 |
 | CAMPUS PULSE OBJECTS | 9 | 0 | 0 | 8 | 1 | 0 |
@@ -65,7 +65,7 @@ Canvas engine: 960x540 logical screen, 32px tile contacts, source game inputs vi
 | ADDITIONAL UI / TOUCH | 14 | 0 | 0 | 1 | 10 | 3 |
 | CAMPUS VISUAL EFFECTS | 10 | 0 | 0 | 1 | 9 | 0 |
 
-TOTAL VISUAL CONTRACT: **220** individually specified logical IDs; **26** source-verified Cinnamon frames; **174** generated, byte-verified and normalized production images; **20** still missing final production images.
+TOTAL VISUAL CONTRACT: **220** individually specified logical IDs; **26** source-verified Cinnamon frames; **178** generated, byte-verified and normalized production images; **16** still missing final production images.
 
 ## LM ARENA UNIVERSAL EXECUTION ORDER
 
@@ -4806,7 +4806,7 @@ DO NOT BAKE LIVE TEXT: all headings, counters, accessibility instructions, and b
 **Integration:** Verify file bytes exist at assets/production/dome/backgrounds/dm_bg05.png; measure intrinsic 960x540 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID DM-BG05 in runtime manifest. At runtime map ID to Dome parallax/landmark layer; place in dome with anchor top-left; use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### DM-BG06 — Bell Gallery shadow layer
-**State:** MISSING_GENERATION · **Priority:** P2 · **Where:** dome · **Target:** 960×540 px · **Source:** 1920×1080 px · **Output:** `assets/production/dome/backgrounds/dm_bg06.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P2 · **Where:** dome · **Target:** 960×540 px · **Source:** 1920×1080 px · **Output:** `assets/production/dome/backgrounds/dm_bg06.png`
 **Anchor:** top-left · **Collision:** none · **Animation:** static repeat as specified in integration metadata
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Original Notre Dame Golden Dome silhouette and character palette
 
@@ -5438,7 +5438,7 @@ TILE EDGE REQUIREMENT: art edges must meet exactly with adjacent tile copies; pr
 **Integration:** Verify file bytes exist at assets/production/dome/tiles/dm_tl15.png; measure intrinsic 32x64 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID DM-TL15 in runtime manifest. At runtime map ID to Dome authored collision art or decoration; place in dome with anchor tile top-left; use the engine auth collider "no collision" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### DM-TL14 — Cracked landing platform
-**State:** MISSING_GENERATION · **Priority:** P2 · **Where:** dome · **Target:** 32×32 px · **Source:** 64×64 px · **Output:** `assets/production/dome/tiles/dm_tl14.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P2 · **Where:** dome · **Target:** 32×32 px · **Source:** 64×64 px · **Output:** `assets/production/dome/tiles/dm_tl14.png`
 **Anchor:** tile top-left · **Collision:** one-way AABB top · **Animation:** static tile, edge seams must align
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** 32px world tile grid and existing platforms geometry
 
@@ -6820,7 +6820,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 8 individual asset contracts. Process P0 first, P1 next, P2 last. Reference sheets and complete per-asset instructions are repeated in every prompt.
 
 #### EX-VF01 — Dome jump burst
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** all · **Target:** 128×96 px · **Source:** 256×192 px · **Output:** `assets/production/effects/ex_vf01.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** all · **Target:** 128×96 px · **Source:** 256×192 px · **Output:** `assets/production/effects/ex_vf01.png`
 **Anchor:** center · **Collision:** FX only · **Animation:** single VFX key pose/independent output
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Named gameplay event and existing Canvas renderer
 
@@ -7030,7 +7030,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/effects/ex_vf05.png; measure intrinsic 960x540 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID EX-VF05 in runtime manifest. At runtime map ID to Interactivity/impact readability; place in all with anchor center; use the engine auth collider "FX only" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### EX-VF06 — Assist mode safe landing ring
-**State:** MISSING_GENERATION · **Priority:** P2 · **Where:** all · **Target:** 128×32 px · **Source:** 256×64 px · **Output:** `assets/production/effects/ex_vf06.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P2 · **Where:** all · **Target:** 128×32 px · **Source:** 256×64 px · **Output:** `assets/production/effects/ex_vf06.png`
 **Anchor:** center · **Collision:** FX only · **Animation:** single VFX key pose/independent output
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Named gameplay event and existing Canvas renderer
 
