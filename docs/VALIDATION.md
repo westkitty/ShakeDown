@@ -1,13 +1,15 @@
 # ShakeDown evidence ledger
 
 ## Confirmed executed work
-- `node --test tests/*.test.mjs`: 11 passing platforming/mechanics/boss/event-ledger tests on Oct 11, 2026.
+- `node --test tests/*.test.mjs`: 12 passing platforming/mechanics/boss/event-ledger/step-reachability tests on Oct 11, 2026.
 - `node --check`: production JavaScript modules parsed without syntax errors.
 - Chromium runtime: the real ES module source was concatenated for test injection into an empty Chromium DOM because host navigation is blocked (`ERR_BLOCKED_BY_ADMINISTRATOR` on localhost, file and data URLs). The HTML/CSS, 26 real PNG source cut-outs, Canvas renderer and interaction logic executed with **0 uncaught page errors** at 1280px desktop and 390px mobile viewport. Screenshots inspected for opening scene, quad, Dome ascent, summit, Fox battle and birthday finale. See `docs/PROJECT_STATUS.md` for limitations.
 - Fox phase and victory via test-only `?qa=1` equivalent warp/recovery controls plus actual J swish presses: 3 HP to 0 and game state `victory`; this proves battle transitions, **not traversal of the entire route**.
 - `frames.json` contains real existing files and SHA256; deterministic extractor regenerates the same cut-outs from the supplied source art.
 
 - `docs/assets/` master document: 220 asset specs, 21 audio contracts, 273-page PDF with both embedded reference sheets; 0 missing asset IDs in extracted PDF text, 0 blank pages; full editable Markdown and JSON; PDF final art is NOT generated.
+
+- Adjacent Golden Dome platform reachability: deterministic isolated physics simulations passed 23/23 consecutive authored step pairs, using normal jump/double-jump inputs, preserved moving-platform physics and a forced pulse-on test condition. This is NOT a full human game run; enemies and cannon hazards were disabled for this geometry-only test.
 
 ## Deliberate evidence limits
 - Browser test-bundle injection is NOT normal URL navigation or proof that GitHub Pages works.

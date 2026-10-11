@@ -35,7 +35,7 @@ The original four-stage campaign plan is superseded by the user's October 11 com
 
 ## Validation
 
-`npm test` runs deterministic movement/interaction/boss tests. `npm run validate` also checks asset manifest entries and planning invariants. Visual playback has been exercised in headless Chromium using an injected bundle because this container forbids browser URL navigation; that **does not** constitute live-site proof. See `docs/VALIDATION.md` for precise evidence boundaries.
+`npm test` runs deterministic movement/interaction/boss tests, including all 23 consecutive Dome-platform reachability transitions. `npm run validate` also checks asset manifest entries and planning invariants. Visual playback has been exercised in headless Chromium using an injected bundle because this container forbids browser URL navigation; that **does not** constitute live-site proof. See `docs/VALIDATION.md` for precise evidence boundaries.
 
 ## Project and authority
 

@@ -60,7 +60,7 @@ The browser-executed game, controls, 26 image loads, Dome camera, Fox three-hit 
 New candidate Fox identity is unapproved; visual final-generation count 0. Live Pages URL playback and physical-phone touch/audio performance still require proof.
 
 ## 9. Pending Work
-Completed the 26-frame hash-backed upload, playable runtime, local Chromium injection checks, 11 deterministic tests and expanded asset specification. Remaining: commit this packet, enable Pages, validate public URL and actual player journey when feasible; LM Arena generates final assets as a separate future handoff.
+Completed the 26-frame hash-backed upload, playable runtime, local Chromium injection checks, 12 deterministic tests and expanded asset specification. Remaining: commit this packet, enable Pages, validate public URL and actual player journey when feasible; LM Arena generates final assets as a separate future handoff.
 
 ## 10. Active Decisions, Defaults, and Prohibitions
 Modern Pixel Candidate B selected. Do not overwrite Cloud Chaser. Do not claim art source sheets are game-ready animation atlases. No Bethel setting; Notre Dame / South Bend story only.
