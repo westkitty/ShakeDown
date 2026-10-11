@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "generated_utc": "2026-10-11T21:24:50Z",
+  "generated_utc": "2026-10-11T21:43:10Z",
   "note": "Byte-level truth for generated production art. Every sha256 and pixel dimension here was measured from the file actually written to disk. Human visual review is a separate, still-open gate.",
-  "count": 193,
+  "count": 194,
   "assets": {
     "BD-01": {
       "id": "BD-01",
@@ -6743,6 +6743,64 @@
       ],
       "sha256": "d090be4dc0483b69073be32e13a6e05b555e7ad32e22f77920d698a7160dd7c0",
       "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+    },
+    "PK-03": {
+      "id": "PK-03",
+      "name": "Shake cup flip frame C",
+      "group": "PK",
+      "priority": "P1",
+      "path": "assets/production/pickups/pk_03.png",
+      "target_px": [
+        64,
+        64
+      ],
+      "pivot": "center",
+      "raw_source": ".artifact-cache/raw/pk_03.png",
+      "raw_sha256": "43ccf345c955593d973c9624e8eae35526e94f2b66c9d4c31b1c34705ab674af",
+      "raw_px": [
+        64,
+        64
+      ],
+      "generated_utc": "2026-10-11T21:43:10Z",
+      "generator": "arena-agent-mode image generation",
+      "alpha": {
+        "required": true,
+        "mode": "straight RGBA",
+        "transparent_px_fraction": 0.8115,
+        "opaque_px_fraction": 0.1885,
+        "partial_edge_px": 0,
+        "border_all_transparent": false,
+        "matte_rgb": [
+          255,
+          0,
+          255
+        ],
+        "transparent_fraction": 0.8115,
+        "partial_fraction": 0.0,
+        "matte_residual_opaque_px": 0,
+        "source_keyed_px": [
+          64,
+          64
+        ]
+      },
+      "format": "PNG RGBA",
+      "trim_bbox_in_keyed_source": [
+        22,
+        0,
+        42,
+        64
+      ],
+      "actual_px": [
+        64,
+        64
+      ],
+      "sha256": "f87f81e9f8e56f518d3996dd520ce62d7ceb13b44bfc597582c75030ac9407bb",
+      "review_status": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "derived": {
+        "method": "horizontal squeeze to 60% width of approved PK-01, re-centred on 64x64 and keyed",
+        "status": "DERIVED_NOT_GENERATED",
+        "note": "Approximates the narrower side-view lid; five generation attempts returned front-facing cups."
+      }
     },
     "PK-04": {
       "id": "PK-04",

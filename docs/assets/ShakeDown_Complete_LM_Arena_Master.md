@@ -58,14 +58,14 @@ Canvas engine: 960x540 logical screen, 32px tile contacts, source game inputs vi
 | THE FOX / INTRO AND BOSS | 16 | 0 | 0 | 9 | 5 | 2 |
 | TRANSITIONS / STORY EFFECTS | 4 | 0 | 0 | 2 | 2 | 0 |
 | CAMPUS PULSE OBJECTS | 9 | 0 | 0 | 8 | 1 | 0 |
-| COLLECTIBLES / POWERUPS / PICKUP FRAMES | 6 | 0 | 1 | 0 | 4 | 2 |
+| COLLECTIBLES / POWERUPS / PICKUP FRAMES | 6 | 0 | 0 | 0 | 4 | 2 |
 | CAMPUS PROPS / LANDMARKS | 14 | 0 | 0 | 6 | 8 | 0 |
 | CAMPUS TERRAIN / COLLISION TILES | 10 | 0 | 0 | 6 | 4 | 0 |
 | BASE INTERFACE | 9 | 0 | 0 | 0 | 9 | 0 |
 | ADDITIONAL UI / TOUCH | 14 | 0 | 0 | 1 | 10 | 3 |
 | CAMPUS VISUAL EFFECTS | 10 | 0 | 0 | 1 | 9 | 0 |
 
-TOTAL VISUAL CONTRACT: **220** individually specified logical IDs; **26** source-verified Cinnamon frames; **193** generated, byte-verified and normalized production images; **1** still missing final production images.
+TOTAL VISUAL CONTRACT: **220** individually specified logical IDs; **26** source-verified Cinnamon frames; **194** generated, byte-verified and normalized production images; **0** still missing final production images.
 
 ## LM ARENA UNIVERSAL EXECUTION ORDER
 
@@ -6677,7 +6677,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/pickups/pk_02.png; measure intrinsic 64x64 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID PK-02 in runtime manifest. At runtime map ID to Collectible animation or optional power-up; place in campus,dome with anchor center; use the engine auth collider "radial pickup radius authored separately" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### PK-03 — Shake cup flip frame C
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** campus,dome · **Target:** 64×64 px · **Source:** 128×128 px · **Output:** `assets/production/pickups/pk_03.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** campus,dome · **Target:** 64×64 px · **Source:** 128×128 px · **Output:** `assets/production/pickups/pk_03.png`
 **Anchor:** center · **Collision:** radial pickup radius authored separately · **Animation:** single frame for this specific named animation state
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** CO-01 pickup art + runtime entity metadata
 
