@@ -240,3 +240,15 @@ The static preflight fingerprints physically present runtime files and fails whe
 ### Round 5 tested candidate receipt
 
 Final local candidate before Git delivery: npm run validate **31/31 PASS**, release-preflight 38 physical runtime files and no missing paths. Browser tests run in bounded one-worker groups: **desktop 35 executed passed, four expected skips; mobile-emulated 36 executed passed, three expected skips**. Remote headed rAF p95 stayed around 205-216ms despite roughly 1ms Canvas render cost; this is not normal target-device performance proof. The original 26 Cinnamon source frames, untouched asset generator contracts and zero-final-production-art state remain preserved. GitHub CI and delivery receipts to be appended only after actual commits and runs.
+
+## 2026-10-11: Unified Arena asset integration and Art Jury (revision 8)
+
+**Verified source:** Original source cutouts for Cinnamon remain hash-locked (26); the separate Arena branch contributed 194 physically present normalized images with recorded exact dimensions and SHA-256, no duplicate source SHA hashes. The generator contract has 220 visuals total and 21 recorded audio requests. Raw generator inputs are missing. The Arena contract's claimed approval statuses conflict with the actual 194 candidate records (`AWAITING_HUMAN_VISUAL_REVIEW`) and the empty authoritative accepted-runtime ledger. No new user approval is invented.
+
+**Curation:** All 194 original images remain available, recorded as 28 context-selected previews, 131 alternate options, 11 visual revision requests, 24 structurally blocked missing required alpha. Individual rationale and source hash under `assets/production/curation.json`. Distinct cakes and Shamrock Shakes; the newer purple-scarf FOX series beats the older FX set. 
+
+**Runtime:** SHA/dimension verified `?art=curated` opt-in overlay, checkbox in title and Pause. Original physics, platforms, authoritative state, old source sprites and default display preserved. Broken source art falls back gracefully. Browser Art Jury supports manual, source-hash-bound KEEP/REVISE/REJECT judgement, notes and JSON export; votes cannot automatically approve assets.
+
+**Evidence:** In the local combined BigMac checkout, npm validate **34/34 PASS**, static preflight **238/238 physical runtime files**, classic and curated scripted full routes completed, and desktop/mobile-emulated gallery tests passed. The BigMac connector then went offline; GitHub exact-commit CI and hosted Pages proof are separate. Missing actual mobile device, user artistic acceptance, audio and raw source evidence are not falsely claimed.
+
+**Architecture decision:** Preserve Canvas 2D and original running game, do not convert to a new engine. Two-parent git history is preserved, with only validator and ignore conflicts resolved explicitly. All final art remains candidate-only until individual user approvals.

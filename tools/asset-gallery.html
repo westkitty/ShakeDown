@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#101a2a">
+<meta name="description" content="ShakeDown's 194 generated art candidates, personally curated and awaiting your artistic verdict.">
+<title>ShakeDown | The Art Jury</title><link rel="stylesheet" href="asset-gallery.css">
+</head>
+<body>
+<a class="skip" href="#candidates">Skip to artworks</a>
+<div class="shell">
+<header class="banner">
+  <div class="eyebrow">STINKY WEASEL PRODUCTIONS • THE BIRTHDAY ART JURY</div>
+  <div class="intro"><div><h1>SHAKEDOWN<span>!</span><small>THE ART JURY</small></h1>
+  <p>194 physical candidates. One very opinionated curator. <strong>You hold the final gavel.</strong></p></div>
+  <div class="intro-actions"><a class="pill solid" href="../?art=curated">PLAY THE CURATOR'S CUT ↗</a><a class="pill" href="../?art=classic">PLAY THE CLASSIC GAME</a></div></div>
+  <div class="stats" aria-label="Asset audit summary">
+    <div><b id="total">—</b><span>physically generated</span></div>
+    <div><b id="recommended">—</b><span>my preview choices</span></div>
+    <div><b id="alternate">—</b><span>consider / compare</span></div>
+    <div><b id="revise">—</b><span>revise the drawing</span></div>
+    <div><b id="blocked">—</b><span>structurally blocked</span></div>
+    <div class="vote-count"><b id="voted">0</b><span>your verdicts saved</span></div>
+  </div>
+</header>
+<div class="warning" role="note"><strong>NOT AUTOMATICALLY APPROVED.</strong> My selected art is enabled only in an optional visual preview. Classic gameplay, the original Cinnamon reference sprites, and game physics are preserved. These votes are saved in this browser, and exporting them does not alter GitHub or activate production artwork.</div>
+<section class="filters" aria-label="Find artwork">
+ <label>Search names, IDs, my notes<input id="query" type="search" placeholder="Fox, cup, cake, campus, ..."></label>
+ <label>Art category<select id="group"><option value="">All categories</option></select></label>
+ <label>My verdict<select id="verdict"><option value="">All candidates</option><option value="preview">Preview selected</option><option value="alternate">Consider alternatives</option><option value="revise">Recommend revision</option><option value="blocked">Blocked by requirements</option></select></label>
+ <label>Compare collections<select id="compare"><option value="">All collections</option></select></label>
+ <label>Sort<select id="sort"><option value="priority">My picks first</option><option value="id">Logical asset ID</option><option value="score">My highest scores</option><option value="needs-vote">Awaiting your vote</option></select></label>
+ <button id="clear-filters" type="button">Clear filters</button>
+</section>
+<div class="workbar"><span id="summary" role="status" aria-live="polite">Loading actual art and decisions…</span>
+ <div><button id="export-votes" type="button" class="export">EXPORT MY VERDICTS ↓</button></div></div>
+<main id="candidates" class="gallery" aria-label="Generated artwork candidates"></main>
+<section class="footer-panel"><h2>How your verdicts work</h2>
+<p>Each card shows my provisional decision, why I made it, the exact artwork ID and the original PNG. You can vote <strong>Keep</strong>, <strong>Revise</strong>, or <strong>Reject</strong> independently. Your choices stay in your browser; export the JSON to share them for actual approval and integration. There is no hidden auto-accept, no deletion of rejected artwork, and no silent overwrite of the originals.</p>
+<p>Artwork is shown on a true transparency checkerboard. Candidates that should contain transparency but do not are labeled <strong>Blocked</strong>. Some backgrounds are too painterly for the sprite style and remain alternative references rather than secretly deployed scenery.</p>
+<a class="pill" href="../">Return to the game ↖</a></section>
+</div><script type="module" src="asset-gallery.mjs"></script>
+</body></html>

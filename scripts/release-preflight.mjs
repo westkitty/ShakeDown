@@ -44,6 +44,23 @@ try{
  include('index.html');include('src/styles.css');include('assets/runtime/manifest.json');
  include('assets/sprites/cinnamon/frames.json');
  traceModule('src/main.mjs');
+ // The optional curated demo must ship all physical, source-hash-verified PNGs.
+ for(const f of ['tools/asset-gallery.html','tools/asset-gallery.css',
+    'tools/asset-gallery.mjs','assets/production/curation.json',
+    'assets/production/manifest.json'])include(f);
+ const curation=JSON.parse(fs.readFileSync(rel('assets/production/curation.json'),'utf8'));
+ const candidateData=JSON.parse(fs.readFileSync(rel('assets/production/manifest.json'),'utf8'));
+ if(curation.schemaVersion!==1||curation.generatedCount!==194||
+    candidateData.count!==194||Object.keys(candidateData.assets||{}).length!==194)
+  missing.push({path:'assets/production/curation.json',error:'194-image art manifest inventory invalid'});
+ for(const [id,record] of Object.entries(candidateData.assets||{})){
+  const curated=curation.entries?.[id];
+  if(!curated||record.path!==curated.sourcePath||record.sha256!==curated.sha256)
+   missing.push({path:id,error:'Source/curator artifact digest or ID drift'});
+  include(record.path);
+  if(entries.get(record.path)?.sha256!==record.sha256)
+   missing.push({path:record.path,error:'Physical PNG digest does not match its source manifest'});
+ }
  const index=fs.readFileSync(rel('index.html'),'utf8');
  for(const m of index.matchAll(/\b(?:src|href)\s*=\s*["']([^"']+)["']/g)){
   const url=m[1];if(url.startsWith('#')||url.startsWith('mailto:'))continue;

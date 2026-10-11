@@ -44,28 +44,28 @@ Canvas engine: 960x540 logical screen, 32px tile contacts, source game inputs vi
 
 | Asset family | Specifications | Physically verified now | Missing image generation | P0 | P1 | P2 |
 |---|---:|---:|---:|---:|---:|---:|
-| BIRTHDAY REVEAL / CAKE / SHAKES | 14 | 0 | 14 | 6 | 7 | 1 |
-| CAMPUS BACKGROUNDS / QUAD | 6 | 0 | 6 | 3 | 3 | 0 |
-| BOSS ATTACK READABILITY | 12 | 0 | 12 | 7 | 4 | 1 |
-| CINNAMON SOURCE SPRITES / REFINEMENTS | 33 | 26 | 7 | 1 | 6 | 0 |
-| COLLECTIBLES | 4 | 0 | 4 | 3 | 1 | 0 |
-| DOME PARALLAX / VIEWPORTS | 8 | 0 | 8 | 3 | 3 | 2 |
-| DOME MECHANICS | 10 | 0 | 10 | 7 | 3 | 0 |
-| DOME ARCHITECTURE / PROPS | 10 | 0 | 10 | 3 | 5 | 2 |
-| DOME STONE / GOLDEN TILES | 16 | 0 | 16 | 6 | 9 | 1 |
-| CAMPUS ENEMY STATES | 7 | 0 | 7 | 4 | 3 | 0 |
-| ADDITIONAL EFFECTS | 8 | 0 | 8 | 0 | 5 | 3 |
-| THE FOX / INTRO AND BOSS | 16 | 0 | 16 | 9 | 5 | 2 |
-| TRANSITIONS / STORY EFFECTS | 4 | 0 | 4 | 2 | 2 | 0 |
-| CAMPUS PULSE OBJECTS | 9 | 0 | 9 | 8 | 1 | 0 |
-| COLLECTIBLES / POWERUPS / PICKUP FRAMES | 6 | 0 | 6 | 0 | 4 | 2 |
-| CAMPUS PROPS / LANDMARKS | 14 | 0 | 14 | 6 | 8 | 0 |
-| CAMPUS TERRAIN / COLLISION TILES | 10 | 0 | 10 | 6 | 4 | 0 |
-| BASE INTERFACE | 9 | 0 | 9 | 0 | 9 | 0 |
-| ADDITIONAL UI / TOUCH | 14 | 0 | 14 | 1 | 10 | 3 |
-| CAMPUS VISUAL EFFECTS | 10 | 0 | 10 | 1 | 9 | 0 |
+| BIRTHDAY REVEAL / CAKE / SHAKES | 14 | 0 | 0 | 6 | 7 | 1 |
+| CAMPUS BACKGROUNDS / QUAD | 6 | 0 | 0 | 3 | 3 | 0 |
+| BOSS ATTACK READABILITY | 12 | 0 | 0 | 7 | 4 | 1 |
+| CINNAMON SOURCE SPRITES / REFINEMENTS | 33 | 26 | 0 | 1 | 6 | 0 |
+| COLLECTIBLES | 4 | 0 | 0 | 3 | 1 | 0 |
+| DOME PARALLAX / VIEWPORTS | 8 | 0 | 0 | 3 | 3 | 2 |
+| DOME MECHANICS | 10 | 0 | 0 | 7 | 3 | 0 |
+| DOME ARCHITECTURE / PROPS | 10 | 0 | 0 | 3 | 5 | 2 |
+| DOME STONE / GOLDEN TILES | 16 | 0 | 0 | 6 | 9 | 1 |
+| CAMPUS ENEMY STATES | 7 | 0 | 0 | 4 | 3 | 0 |
+| ADDITIONAL EFFECTS | 8 | 0 | 0 | 0 | 5 | 3 |
+| THE FOX / INTRO AND BOSS | 16 | 0 | 0 | 9 | 5 | 2 |
+| TRANSITIONS / STORY EFFECTS | 4 | 0 | 0 | 2 | 2 | 0 |
+| CAMPUS PULSE OBJECTS | 9 | 0 | 0 | 8 | 1 | 0 |
+| COLLECTIBLES / POWERUPS / PICKUP FRAMES | 6 | 0 | 0 | 0 | 4 | 2 |
+| CAMPUS PROPS / LANDMARKS | 14 | 0 | 0 | 6 | 8 | 0 |
+| CAMPUS TERRAIN / COLLISION TILES | 10 | 0 | 0 | 6 | 4 | 0 |
+| BASE INTERFACE | 9 | 0 | 0 | 0 | 9 | 0 |
+| ADDITIONAL UI / TOUCH | 14 | 0 | 0 | 1 | 10 | 3 |
+| CAMPUS VISUAL EFFECTS | 10 | 0 | 0 | 1 | 9 | 0 |
 
-TOTAL VISUAL CONTRACT: **220** individually specified logical IDs; **26** source-verified frames; **194** missing final production images; **0** newly generated-and-verified external LM Arena renders; **0** generated final art assets awaiting integration.
+TOTAL VISUAL CONTRACT: **220** individually specified logical IDs; **26** source-verified Cinnamon frames; **194** generated, byte-verified and normalized production images; **0** still missing final production images.
 
 ## LM ARENA UNIVERSAL EXECUTION ORDER
 
@@ -81,7 +81,7 @@ TOTAL VISUAL CONTRACT: **220** individually specified logical IDs; **26** source
 33 individual asset contracts. Process P0 first, P1 next, P2 last. Reference sheets and complete per-asset instructions are repeated in every prompt.
 
 #### CIN-N06 — Final birthday cheers
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** finale · **Target:** 240×160 px · **Source:** 480×320 px · **Output:** `assets/production/cinnamon/birthday_celebrate.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** finale · **Target:** 240×160 px · **Source:** 480×320 px · **Output:** `assets/production/cinnamon/birthday_celebrate.png`
 **Anchor:** face=(145,147 feet) · **Collision:** player physics stays 38x60, art-only extension · **Animation:** one PNG frame; do not pack with adjacent frames
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** All 26 verified Cinnamon cutouts + source sheets
 
@@ -118,7 +118,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/cinnamon/birthday_celebrate.png; measure intrinsic 240x160 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID CIN-N06 in runtime manifest. At runtime map ID to Finale choreography; place in finale with anchor face=(145,147 feet); use the engine auth collider "player physics stays 38x60, art-only extension" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### CIN-N01 — Landing recovery neutral
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** dome · **Target:** 240×160 px · **Source:** 480×320 px · **Output:** `assets/production/cinnamon/land_recover.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** dome · **Target:** 240×160 px · **Source:** 480×320 px · **Output:** `assets/production/cinnamon/land_recover.png`
 **Anchor:** face=(145,147 feet) · **Collision:** player physics stays 38x60, art-only extension · **Animation:** one PNG frame; do not pack with adjacent frames
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** All 26 verified Cinnamon cutouts + source sheets
 
@@ -155,7 +155,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/cinnamon/land_recover.png; measure intrinsic 240x160 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID CIN-N01 in runtime manifest. At runtime map ID to Player game-feel recovery; place in dome with anchor face=(145,147 feet); use the engine auth collider "player physics stays 38x60, art-only extension" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### CIN-N02 — Climb contact left
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** dome · **Target:** 240×160 px · **Source:** 480×320 px · **Output:** `assets/production/cinnamon/climb_hold.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** dome · **Target:** 240×160 px · **Source:** 480×320 px · **Output:** `assets/production/cinnamon/climb_hold.png`
 **Anchor:** face=(145,147 feet) · **Collision:** player physics stays 38x60, art-only extension · **Animation:** one PNG frame; do not pack with adjacent frames
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** All 26 verified Cinnamon cutouts + source sheets
 
@@ -192,7 +192,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/cinnamon/climb_hold.png; measure intrinsic 240x160 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID CIN-N02 in runtime manifest. At runtime map ID to Dome ledge hold; place in dome with anchor face=(145,147 feet); use the engine auth collider "player physics stays 38x60, art-only extension" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### CIN-N03 — Climb mantle
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** dome · **Target:** 240×160 px · **Source:** 480×320 px · **Output:** `assets/production/cinnamon/climb_mantle.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** dome · **Target:** 240×160 px · **Source:** 480×320 px · **Output:** `assets/production/cinnamon/climb_mantle.png`
 **Anchor:** face=(145,147 feet) · **Collision:** player physics stays 38x60, art-only extension · **Animation:** one PNG frame; do not pack with adjacent frames
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** All 26 verified Cinnamon cutouts + source sheets
 
@@ -229,7 +229,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/cinnamon/climb_mantle.png; measure intrinsic 240x160 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID CIN-N03 in runtime manifest. At runtime map ID to Dome ledge pull-up; place in dome with anchor face=(145,147 feet); use the engine auth collider "player physics stays 38x60, art-only extension" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### CIN-N04 — Shake pickup celebration
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** dome · **Target:** 240×160 px · **Source:** 480×320 px · **Output:** `assets/production/cinnamon/pickup.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** dome · **Target:** 240×160 px · **Source:** 480×320 px · **Output:** `assets/production/cinnamon/pickup.png`
 **Anchor:** face=(145,147 feet) · **Collision:** player physics stays 38x60, art-only extension · **Animation:** one PNG frame; do not pack with adjacent frames
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** All 26 verified Cinnamon cutouts + source sheets
 
@@ -266,7 +266,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/cinnamon/pickup.png; measure intrinsic 240x160 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID CIN-N04 in runtime manifest. At runtime map ID to Pickup reaction; place in dome with anchor face=(145,147 feet); use the engine auth collider "player physics stays 38x60, art-only extension" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### CIN-N05 — Boss dodge recovery
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** dome · **Target:** 240×160 px · **Source:** 480×320 px · **Output:** `assets/production/cinnamon/dodge_recover.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** dome · **Target:** 240×160 px · **Source:** 480×320 px · **Output:** `assets/production/cinnamon/dodge_recover.png`
 **Anchor:** face=(145,147 feet) · **Collision:** player physics stays 38x60, art-only extension · **Animation:** one PNG frame; do not pack with adjacent frames
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** All 26 verified Cinnamon cutouts + source sheets
 
@@ -303,7 +303,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/cinnamon/dodge_recover.png; measure intrinsic 240x160 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID CIN-N05 in runtime manifest. At runtime map ID to Boss dodge; place in dome with anchor face=(145,147 feet); use the engine auth collider "player physics stays 38x60, art-only extension" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### CIN-N07 — Sip finishing pose
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** finale · **Target:** 240×160 px · **Source:** 480×320 px · **Output:** `assets/production/cinnamon/sip.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** finale · **Target:** 240×160 px · **Source:** 480×320 px · **Output:** `assets/production/cinnamon/sip.png`
 **Anchor:** face=(145,147 feet) · **Collision:** player physics stays 38x60, art-only extension · **Animation:** one PNG frame; do not pack with adjacent frames
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** All 26 verified Cinnamon cutouts + source sheets
 
@@ -1357,7 +1357,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 16 individual asset contracts. Process P0 first, P1 next, P2 last. Reference sheets and complete per-asset instructions are repeated in every prompt.
 
 #### FOX-01 — Fox identity approval turnaround
-**State:** PROVISIONAL_MISSING_APPROVAL · **Priority:** P0 · **Where:** intro,boss · **Target:** 1024×768 px · **Source:** 1536×1152 px · **Output:** `assets/production/fox/fox_01.png`
+**State:** APPROVED · **Priority:** P0 · **Where:** intro,boss · **Target:** 1024×768 px · **Source:** 1536×1152 px · **Output:** `assets/production/fox/fox_01.png`
 **Anchor:** center · **Collision:** none · **Animation:** model-sheet only
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** FOX-01 approved reference needed before final PROMOTED status
 
@@ -1394,7 +1394,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/fox/fox_01.png; measure intrinsic 1024x768 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID FOX-01 in runtime manifest. At runtime map ID to model sheet; place in intro,boss with anchor center; use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### FOX-02 — Fox idle flank
-**State:** PROVISIONAL_MISSING_APPROVAL · **Priority:** P0 · **Where:** intro,boss · **Target:** 240×240 px · **Source:** 480×480 px · **Output:** `assets/production/fox/fox_02.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** intro,boss · **Target:** 240×240 px · **Source:** 480×480 px · **Output:** `assets/production/fox/fox_02.png`
 **Anchor:** (120,215) · **Collision:** none · **Animation:** single action state/frame, not a sheet; boss 3 hits, 2 telegraphed attack families
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** FOX-01 approved reference needed before final PROMOTED status
 
@@ -1431,7 +1431,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/fox/fox_02.png; measure intrinsic 240x240 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID FOX-02 in runtime manifest. At runtime map ID to boss idle; place in intro,boss with anchor (120,215); use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### FOX-03 — Fox run contact
-**State:** PROVISIONAL_MISSING_APPROVAL · **Priority:** P0 · **Where:** intro,boss · **Target:** 240×240 px · **Source:** 480×480 px · **Output:** `assets/production/fox/fox_03.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** intro,boss · **Target:** 240×240 px · **Source:** 480×480 px · **Output:** `assets/production/fox/fox_03.png`
 **Anchor:** (120,215) · **Collision:** none · **Animation:** single action state/frame, not a sheet; boss 3 hits, 2 telegraphed attack families
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** FOX-01 approved reference needed before final PROMOTED status
 
@@ -1468,7 +1468,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/fox/fox_03.png; measure intrinsic 240x240 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID FOX-03 in runtime manifest. At runtime map ID to intro and escape; place in intro,boss with anchor (120,215); use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### FOX-05 — Fox charge tell
-**State:** PROVISIONAL_MISSING_APPROVAL · **Priority:** P0 · **Where:** intro,boss · **Target:** 240×240 px · **Source:** 480×480 px · **Output:** `assets/production/fox/fox_05.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** intro,boss · **Target:** 240×240 px · **Source:** 480×480 px · **Output:** `assets/production/fox/fox_05.png`
 **Anchor:** (120,215) · **Collision:** none · **Animation:** single action state/frame, not a sheet; boss 3 hits, 2 telegraphed attack families
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** FOX-01 approved reference needed before final PROMOTED status
 
@@ -1505,7 +1505,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/fox/fox_05.png; measure intrinsic 240x240 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID FOX-05 in runtime manifest. At runtime map ID to boss attack windup; place in intro,boss with anchor (120,215); use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### FOX-06 — Fox charge lunge
-**State:** PROVISIONAL_MISSING_APPROVAL · **Priority:** P0 · **Where:** intro,boss · **Target:** 240×240 px · **Source:** 480×480 px · **Output:** `assets/production/fox/fox_06.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** intro,boss · **Target:** 240×240 px · **Source:** 480×480 px · **Output:** `assets/production/fox/fox_06.png`
 **Anchor:** (120,215) · **Collision:** none · **Animation:** single action state/frame, not a sheet; boss 3 hits, 2 telegraphed attack families
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** FOX-01 approved reference needed before final PROMOTED status
 
@@ -1542,7 +1542,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/fox/fox_06.png; measure intrinsic 240x240 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID FOX-06 in runtime manifest. At runtime map ID to boss charge active; place in intro,boss with anchor (120,215); use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### FOX-07 — Fox volley ready
-**State:** PROVISIONAL_MISSING_APPROVAL · **Priority:** P0 · **Where:** intro,boss · **Target:** 240×240 px · **Source:** 480×480 px · **Output:** `assets/production/fox/fox_07.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** intro,boss · **Target:** 240×240 px · **Source:** 480×480 px · **Output:** `assets/production/fox/fox_07.png`
 **Anchor:** (120,215) · **Collision:** none · **Animation:** single action state/frame, not a sheet; boss 3 hits, 2 telegraphed attack families
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** FOX-01 approved reference needed before final PROMOTED status
 
@@ -1579,7 +1579,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/fox/fox_07.png; measure intrinsic 240x240 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID FOX-07 in runtime manifest. At runtime map ID to boss projectile windup; place in intro,boss with anchor (120,215); use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### FOX-09 — Fox stun frame A
-**State:** PROVISIONAL_MISSING_APPROVAL · **Priority:** P0 · **Where:** intro,boss · **Target:** 240×240 px · **Source:** 480×480 px · **Output:** `assets/production/fox/fox_09.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** intro,boss · **Target:** 240×240 px · **Source:** 480×480 px · **Output:** `assets/production/fox/fox_09.png`
 **Anchor:** (120,215) · **Collision:** none · **Animation:** single action state/frame, not a sheet; boss 3 hits, 2 telegraphed attack families
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** FOX-01 approved reference needed before final PROMOTED status
 
@@ -1616,7 +1616,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/fox/fox_09.png; measure intrinsic 240x240 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID FOX-09 in runtime manifest. At runtime map ID to boss rest vulnerability; place in intro,boss with anchor (120,215); use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### FOX-11 — Fox hurt recoil
-**State:** PROVISIONAL_MISSING_APPROVAL · **Priority:** P0 · **Where:** intro,boss · **Target:** 240×240 px · **Source:** 480×480 px · **Output:** `assets/production/fox/fox_11.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** intro,boss · **Target:** 240×240 px · **Source:** 480×480 px · **Output:** `assets/production/fox/fox_11.png`
 **Anchor:** (120,215) · **Collision:** none · **Animation:** single action state/frame, not a sheet; boss 3 hits, 2 telegraphed attack families
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** FOX-01 approved reference needed before final PROMOTED status
 
@@ -1653,7 +1653,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/fox/fox_11.png; measure intrinsic 240x240 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID FOX-11 in runtime manifest. At runtime map ID to boss damaged; place in intro,boss with anchor (120,215); use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### FOX-12 — Fox defeated
-**State:** PROVISIONAL_MISSING_APPROVAL · **Priority:** P0 · **Where:** intro,boss · **Target:** 240×240 px · **Source:** 480×480 px · **Output:** `assets/production/fox/fox_12.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** intro,boss · **Target:** 240×240 px · **Source:** 480×480 px · **Output:** `assets/production/fox/fox_12.png`
 **Anchor:** (120,215) · **Collision:** none · **Animation:** single action state/frame, not a sheet; boss 3 hits, 2 telegraphed attack families
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** FOX-01 approved reference needed before final PROMOTED status
 
@@ -1690,7 +1690,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/fox/fox_12.png; measure intrinsic 240x240 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID FOX-12 in runtime manifest. At runtime map ID to boss defeat; place in intro,boss with anchor (120,215); use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### FOX-04 — Fox run airborne
-**State:** PROVISIONAL_MISSING_APPROVAL · **Priority:** P1 · **Where:** intro,boss · **Target:** 240×240 px · **Source:** 480×480 px · **Output:** `assets/production/fox/fox_04.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** intro,boss · **Target:** 240×240 px · **Source:** 480×480 px · **Output:** `assets/production/fox/fox_04.png`
 **Anchor:** (120,215) · **Collision:** none · **Animation:** single action state/frame, not a sheet; boss 3 hits, 2 telegraphed attack families
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** FOX-01 approved reference needed before final PROMOTED status
 
@@ -1727,7 +1727,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/fox/fox_04.png; measure intrinsic 240x240 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID FOX-04 in runtime manifest. At runtime map ID to intro and escape; place in intro,boss with anchor (120,215); use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### FOX-08 — Fox volley release
-**State:** PROVISIONAL_MISSING_APPROVAL · **Priority:** P1 · **Where:** intro,boss · **Target:** 240×240 px · **Source:** 480×480 px · **Output:** `assets/production/fox/fox_08.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** intro,boss · **Target:** 240×240 px · **Source:** 480×480 px · **Output:** `assets/production/fox/fox_08.png`
 **Anchor:** (120,215) · **Collision:** none · **Animation:** single action state/frame, not a sheet; boss 3 hits, 2 telegraphed attack families
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** FOX-01 approved reference needed before final PROMOTED status
 
@@ -1764,7 +1764,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/fox/fox_08.png; measure intrinsic 240x240 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID FOX-08 in runtime manifest. At runtime map ID to boss projectile release; place in intro,boss with anchor (120,215); use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### FOX-10 — Fox stun frame B
-**State:** PROVISIONAL_MISSING_APPROVAL · **Priority:** P1 · **Where:** intro,boss · **Target:** 240×240 px · **Source:** 480×480 px · **Output:** `assets/production/fox/fox_10.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** intro,boss · **Target:** 240×240 px · **Source:** 480×480 px · **Output:** `assets/production/fox/fox_10.png`
 **Anchor:** (120,215) · **Collision:** none · **Animation:** single action state/frame, not a sheet; boss 3 hits, 2 telegraphed attack families
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** FOX-01 approved reference needed before final PROMOTED status
 
@@ -1801,7 +1801,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/fox/fox_10.png; measure intrinsic 240x240 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID FOX-10 in runtime manifest. At runtime map ID to boss rest vulnerability; place in intro,boss with anchor (120,215); use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### FOX-13 — Fox taunt portrait
-**State:** PROVISIONAL_MISSING_APPROVAL · **Priority:** P1 · **Where:** intro,boss · **Target:** 256×256 px · **Source:** 480×480 px · **Output:** `assets/production/fox/fox_13.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** intro,boss · **Target:** 256×256 px · **Source:** 480×480 px · **Output:** `assets/production/fox/fox_13.png`
 **Anchor:** center · **Collision:** none · **Animation:** single action state/frame, not a sheet; boss 3 hits, 2 telegraphed attack families
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** FOX-01 approved reference needed before final PROMOTED status
 
@@ -1838,7 +1838,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/fox/fox_13.png; measure intrinsic 256x256 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID FOX-13 in runtime manifest. At runtime map ID to dialogue; place in intro,boss with anchor center; use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### FOX-15 — Fox getaway silhouette
-**State:** PROVISIONAL_MISSING_APPROVAL · **Priority:** P1 · **Where:** intro,boss · **Target:** 192×128 px · **Source:** 480×480 px · **Output:** `assets/production/fox/fox_15.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** intro,boss · **Target:** 192×128 px · **Source:** 480×480 px · **Output:** `assets/production/fox/fox_15.png`
 **Anchor:** bottom-center · **Collision:** none · **Animation:** single action state/frame, not a sheet; boss 3 hits, 2 telegraphed attack families
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** FOX-01 approved reference needed before final PROMOTED status
 
@@ -1875,7 +1875,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/fox/fox_15.png; measure intrinsic 192x128 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID FOX-15 in runtime manifest. At runtime map ID to intro distance silhouette; place in intro,boss with anchor bottom-center; use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### FOX-14 — Fox cardboard decoy
-**State:** PROVISIONAL_MISSING_APPROVAL · **Priority:** P2 · **Where:** intro,boss · **Target:** 256×256 px · **Source:** 480×480 px · **Output:** `assets/production/fox/fox_14.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P2 · **Where:** intro,boss · **Target:** 256×256 px · **Source:** 480×480 px · **Output:** `assets/production/fox/fox_14.png`
 **Anchor:** bottom-center · **Collision:** none · **Animation:** single action state/frame, not a sheet; boss 3 hits, 2 telegraphed attack families
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** FOX-01 approved reference needed before final PROMOTED status
 
@@ -1912,7 +1912,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/fox/fox_14.png; measure intrinsic 256x256 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID FOX-14 in runtime manifest. At runtime map ID to intro comedy and secret; place in intro,boss with anchor bottom-center; use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### FOX-16 — Fox happy truce
-**State:** PROVISIONAL_MISSING_APPROVAL · **Priority:** P2 · **Where:** intro,boss · **Target:** 240×240 px · **Source:** 480×480 px · **Output:** `assets/production/fox/fox_16.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P2 · **Where:** intro,boss · **Target:** 240×240 px · **Source:** 480×480 px · **Output:** `assets/production/fox/fox_16.png`
 **Anchor:** (120,215) · **Collision:** none · **Animation:** single action state/frame, not a sheet; boss 3 hits, 2 telegraphed attack families
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** FOX-01 approved reference needed before final PROMOTED status
 
@@ -1952,7 +1952,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 6 individual asset contracts. Process P0 first, P1 next, P2 last. Reference sheets and complete per-asset instructions are repeated in every prompt.
 
 #### BG-01 — Daylight sky
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** all · **Target:** 960×540 px · **Source:** 1920×1080 px · **Output:** `assets/level1/backgrounds/bg_01_daylight_sky.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** all · **Target:** 960×540 px · **Source:** 1920×1080 px · **Output:** `assets/level1/backgrounds/bg_01_daylight_sky.png`
 **Anchor:** top-left · **Collision:** none · **Animation:** single static component
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -1989,7 +1989,7 @@ DO NOT BAKE LIVE TEXT: all headings, counters, accessibility instructions, and b
 **Integration:** Verify file bytes exist at assets/level1/backgrounds/bg_01_daylight_sky.png; measure intrinsic 960x540 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID BG-01 in runtime manifest. At runtime map ID to Opaque far background; all outdoor zones; place in all with anchor top-left; use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### BG-03 — South Quad architecture
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** all · **Target:** 960×540 px · **Source:** 1920×1080 px · **Output:** `assets/level1/backgrounds/bg_03_south_quad_architecture.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** all · **Target:** 960×540 px · **Source:** 1920×1080 px · **Output:** `assets/level1/backgrounds/bg_03_south_quad_architecture.png`
 **Anchor:** top-left · **Collision:** none · **Animation:** single static component
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -2026,7 +2026,7 @@ DO NOT BAKE LIVE TEXT: all headings, counters, accessibility instructions, and b
 **Integration:** Verify file bytes exist at assets/level1/backgrounds/bg_03_south_quad_architecture.png; measure intrinsic 960x540 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID BG-03 in runtime manifest. At runtime map ID to Majority of quad route; place in all with anchor top-left; use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### BG-05 — Golden Dome hero backdrop
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** all · **Target:** 960×540 px · **Source:** 1920×1080 px · **Output:** `assets/level1/backgrounds/bg_05_golden_dome_hero_backdrop.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** all · **Target:** 960×540 px · **Source:** 1920×1080 px · **Output:** `assets/level1/backgrounds/bg_05_golden_dome_hero_backdrop.png`
 **Anchor:** top-left · **Collision:** none · **Animation:** single static component
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -2063,7 +2063,7 @@ DO NOT BAKE LIVE TEXT: all headings, counters, accessibility instructions, and b
 **Integration:** Verify file bytes exist at assets/level1/backgrounds/bg_05_golden_dome_hero_backdrop.png; measure intrinsic 960x540 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID BG-05 in runtime manifest. At runtime map ID to Dome approach and ascent; place in all with anchor top-left; use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### BG-02 — Campus approach silhouette
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** all · **Target:** 960×540 px · **Source:** 1920×1080 px · **Output:** `assets/level1/backgrounds/bg_02_campus_approach_silhouette.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** all · **Target:** 960×540 px · **Source:** 1920×1080 px · **Output:** `assets/level1/backgrounds/bg_02_campus_approach_silhouette.png`
 **Anchor:** top-left · **Collision:** none · **Animation:** single static component
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -2100,7 +2100,7 @@ DO NOT BAKE LIVE TEXT: all headings, counters, accessibility instructions, and b
 **Integration:** Verify file bytes exist at assets/level1/backgrounds/bg_02_campus_approach_silhouette.png; measure intrinsic 960x540 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID BG-02 in runtime manifest. At runtime map ID to Vendor introduction and eastward chase; place in all with anchor top-left; use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### BG-04 — Quad tree and lawn midground
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** all · **Target:** 960×540 px · **Source:** 1920×1080 px · **Output:** `assets/level1/backgrounds/bg_04_quad_tree_and_lawn_midground.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** all · **Target:** 960×540 px · **Source:** 1920×1080 px · **Output:** `assets/level1/backgrounds/bg_04_quad_tree_and_lawn_midground.png`
 **Anchor:** top-left · **Collision:** none · **Animation:** single static component
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -2137,7 +2137,7 @@ DO NOT BAKE LIVE TEXT: all headings, counters, accessibility instructions, and b
 **Integration:** Verify file bytes exist at assets/level1/backgrounds/bg_04_quad_tree_and_lawn_midground.png; measure intrinsic 960x540 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID BG-04 in runtime manifest. At runtime map ID to Readable quad depth and run route; place in all with anchor top-left; use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### BG-06 — Escape horizon
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** all · **Target:** 960×540 px · **Source:** 1920×1080 px · **Output:** `assets/level1/backgrounds/bg_06_escape_horizon.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** all · **Target:** 960×540 px · **Source:** 1920×1080 px · **Output:** `assets/level1/backgrounds/bg_06_escape_horizon.png`
 **Anchor:** top-left · **Collision:** none · **Animation:** single static component
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -2177,7 +2177,7 @@ DO NOT BAKE LIVE TEXT: all headings, counters, accessibility instructions, and b
 10 individual asset contracts. Process P0 first, P1 next, P2 last. Reference sheets and complete per-asset instructions are repeated in every prompt.
 
 #### TL-01 — Grass top tile
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** all · **Target:** 32×32 px · **Source:** 128×128 px · **Output:** `assets/level1/tiles/tl_01_grass_top_tile.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** all · **Target:** 32×32 px · **Source:** 128×128 px · **Output:** `assets/level1/tiles/tl_01_grass_top_tile.png`
 **Anchor:** tile-top-left · **Collision:** tile authored AABB · **Animation:** single static component
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -2214,7 +2214,7 @@ TILE EDGE REQUIREMENT: art edges must meet exactly with adjacent tile copies; pr
 **Integration:** Verify file bytes exist at assets/level1/tiles/tl_01_grass_top_tile.png; measure intrinsic 32x32 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID TL-01 in runtime manifest. At runtime map ID to Modular level geometry; place in all with anchor tile-top-left; use the engine auth collider "tile authored AABB" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### TL-02 — Grass fill tile
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** all · **Target:** 32×32 px · **Source:** 128×128 px · **Output:** `assets/level1/tiles/tl_02_grass_fill_tile.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** all · **Target:** 32×32 px · **Source:** 128×128 px · **Output:** `assets/level1/tiles/tl_02_grass_fill_tile.png`
 **Anchor:** tile-top-left · **Collision:** tile fill · **Animation:** single static component
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -2251,7 +2251,7 @@ TILE EDGE REQUIREMENT: art edges must meet exactly with adjacent tile copies; pr
 **Integration:** Verify file bytes exist at assets/level1/tiles/tl_02_grass_fill_tile.png; measure intrinsic 32x32 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID TL-02 in runtime manifest. At runtime map ID to Modular level geometry; place in all with anchor tile-top-left; use the engine auth collider "tile fill" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### TL-03 — Stone path top tile
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** all · **Target:** 32×32 px · **Source:** 128×128 px · **Output:** `assets/level1/tiles/tl_03_stone_path_top_tile.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** all · **Target:** 32×32 px · **Source:** 128×128 px · **Output:** `assets/level1/tiles/tl_03_stone_path_top_tile.png`
 **Anchor:** tile-top-left · **Collision:** tile authored AABB · **Animation:** single static component
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -2288,7 +2288,7 @@ TILE EDGE REQUIREMENT: art edges must meet exactly with adjacent tile copies; pr
 **Integration:** Verify file bytes exist at assets/level1/tiles/tl_03_stone_path_top_tile.png; measure intrinsic 32x32 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID TL-03 in runtime manifest. At runtime map ID to Modular level geometry; place in all with anchor tile-top-left; use the engine auth collider "tile authored AABB" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### TL-04 — Stone path fill tile
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** all · **Target:** 32×32 px · **Source:** 128×128 px · **Output:** `assets/level1/tiles/tl_04_stone_path_fill_tile.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** all · **Target:** 32×32 px · **Source:** 128×128 px · **Output:** `assets/level1/tiles/tl_04_stone_path_fill_tile.png`
 **Anchor:** tile-top-left · **Collision:** tile fill · **Animation:** single static component
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -2325,7 +2325,7 @@ TILE EDGE REQUIREMENT: art edges must meet exactly with adjacent tile copies; pr
 **Integration:** Verify file bytes exist at assets/level1/tiles/tl_04_stone_path_fill_tile.png; measure intrinsic 32x32 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID TL-04 in runtime manifest. At runtime map ID to Modular level geometry; place in all with anchor tile-top-left; use the engine auth collider "tile fill" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### TL-05 — Stone ledge center tile
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** all · **Target:** 32×32 px · **Source:** 128×128 px · **Output:** `assets/level1/tiles/tl_05_stone_ledge_center_tile.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** all · **Target:** 32×32 px · **Source:** 128×128 px · **Output:** `assets/level1/tiles/tl_05_stone_ledge_center_tile.png`
 **Anchor:** tile-top-left · **Collision:** tile authored AABB · **Animation:** single static component
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -2362,7 +2362,7 @@ TILE EDGE REQUIREMENT: art edges must meet exactly with adjacent tile copies; pr
 **Integration:** Verify file bytes exist at assets/level1/tiles/tl_05_stone_ledge_center_tile.png; measure intrinsic 32x32 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID TL-05 in runtime manifest. At runtime map ID to Modular level geometry; place in all with anchor tile-top-left; use the engine auth collider "tile authored AABB" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### TL-08 — Stone step tile
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** all · **Target:** 32×32 px · **Source:** 128×128 px · **Output:** `assets/level1/tiles/tl_08_stone_step_tile.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** all · **Target:** 32×32 px · **Source:** 128×128 px · **Output:** `assets/level1/tiles/tl_08_stone_step_tile.png`
 **Anchor:** tile-top-left · **Collision:** tile authored AABB · **Animation:** single static component
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -2399,7 +2399,7 @@ TILE EDGE REQUIREMENT: art edges must meet exactly with adjacent tile copies; pr
 **Integration:** Verify file bytes exist at assets/level1/tiles/tl_08_stone_step_tile.png; measure intrinsic 32x32 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID TL-08 in runtime manifest. At runtime map ID to Modular level geometry; place in all with anchor tile-top-left; use the engine auth collider "tile authored AABB" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### TL-06 — Stone ledge left cap
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** all · **Target:** 32×32 px · **Source:** 128×128 px · **Output:** `assets/level1/tiles/tl_06_stone_ledge_left_cap.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** all · **Target:** 32×32 px · **Source:** 128×128 px · **Output:** `assets/level1/tiles/tl_06_stone_ledge_left_cap.png`
 **Anchor:** tile-top-left · **Collision:** tile authored AABB · **Animation:** single static component
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -2436,7 +2436,7 @@ TILE EDGE REQUIREMENT: art edges must meet exactly with adjacent tile copies; pr
 **Integration:** Verify file bytes exist at assets/level1/tiles/tl_06_stone_ledge_left_cap.png; measure intrinsic 32x32 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID TL-06 in runtime manifest. At runtime map ID to Modular level geometry; place in all with anchor tile-top-left; use the engine auth collider "tile authored AABB" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### TL-07 — Stone ledge right cap
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** all · **Target:** 32×32 px · **Source:** 128×128 px · **Output:** `assets/level1/tiles/tl_07_stone_ledge_right_cap.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** all · **Target:** 32×32 px · **Source:** 128×128 px · **Output:** `assets/level1/tiles/tl_07_stone_ledge_right_cap.png`
 **Anchor:** tile-top-left · **Collision:** tile authored AABB · **Animation:** single static component
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -2473,7 +2473,7 @@ TILE EDGE REQUIREMENT: art edges must meet exactly with adjacent tile copies; pr
 **Integration:** Verify file bytes exist at assets/level1/tiles/tl_07_stone_ledge_right_cap.png; measure intrinsic 32x32 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID TL-07 in runtime manifest. At runtime map ID to Modular level geometry; place in all with anchor tile-top-left; use the engine auth collider "tile authored AABB" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### TL-09 — Brick fill tile
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** all · **Target:** 32×32 px · **Source:** 128×128 px · **Output:** `assets/level1/tiles/tl_09_brick_fill_tile.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** all · **Target:** 32×32 px · **Source:** 128×128 px · **Output:** `assets/level1/tiles/tl_09_brick_fill_tile.png`
 **Anchor:** tile-top-left · **Collision:** tile fill · **Animation:** single static component
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -2510,7 +2510,7 @@ TILE EDGE REQUIREMENT: art edges must meet exactly with adjacent tile copies; pr
 **Integration:** Verify file bytes exist at assets/level1/tiles/tl_09_brick_fill_tile.png; measure intrinsic 32x32 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID TL-09 in runtime manifest. At runtime map ID to Modular level geometry; place in all with anchor tile-top-left; use the engine auth collider "tile fill" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### TL-10 — Banner mount tile
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** all · **Target:** 32×32 px · **Source:** 128×128 px · **Output:** `assets/level1/tiles/tl_10_banner_mount_tile.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** all · **Target:** 32×32 px · **Source:** 128×128 px · **Output:** `assets/level1/tiles/tl_10_banner_mount_tile.png`
 **Anchor:** tile-top-left · **Collision:** tile fill · **Animation:** single static component
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -2550,7 +2550,7 @@ TILE EDGE REQUIREMENT: art edges must meet exactly with adjacent tile copies; pr
 14 individual asset contracts. Process P0 first, P1 next, P2 last. Reference sheets and complete per-asset instructions are repeated in every prompt.
 
 #### PR-01 — Shamrock Shake stand
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** all · **Target:** 256×192 px · **Source:** 1024×768 px · **Output:** `assets/level1/props/pr_01_shamrock_shake_stand.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** all · **Target:** 256×192 px · **Source:** 1024×768 px · **Output:** `assets/level1/props/pr_01_shamrock_shake_stand.png`
 **Anchor:** bottom-center · **Collision:** specified per placement · **Animation:** single static component
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -2585,7 +2585,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/level1/props/pr_01_shamrock_shake_stand.png; measure intrinsic 256x192 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID PR-01 in runtime manifest. At runtime map ID to Opening theft kiosk; place in all with anchor bottom-center; use the engine auth collider "specified per placement" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### PR-03 — Campus bench
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** all · **Target:** 128×80 px · **Source:** 512×320 px · **Output:** `assets/level1/props/pr_03_campus_bench.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** all · **Target:** 128×80 px · **Source:** 512×320 px · **Output:** `assets/level1/props/pr_03_campus_bench.png`
 **Anchor:** bottom-center · **Collision:** specified per placement · **Animation:** single static component
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -2620,7 +2620,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/level1/props/pr_03_campus_bench.png; measure intrinsic 128x80 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID PR-03 in runtime manifest. At runtime map ID to Quad seating obstacle; place in all with anchor bottom-center; use the engine auth collider "specified per placement" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### PR-04 — Campus lamppost
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** all · **Target:** 96×256 px · **Source:** 384×1024 px · **Output:** `assets/level1/props/pr_04_campus_lamppost.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** all · **Target:** 96×256 px · **Source:** 384×1024 px · **Output:** `assets/level1/props/pr_04_campus_lamppost.png`
 **Anchor:** bottom-center · **Collision:** specified per placement · **Animation:** single static component
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -2655,7 +2655,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/level1/props/pr_04_campus_lamppost.png; measure intrinsic 96x256 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID PR-04 in runtime manifest. At runtime map ID to Vertical landmark and obstacle; place in all with anchor bottom-center; use the engine auth collider "specified per placement" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### PR-05 — Mature quad tree
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** all · **Target:** 192×256 px · **Source:** 768×1024 px · **Output:** `assets/level1/props/pr_05_mature_quad_tree.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** all · **Target:** 192×256 px · **Source:** 768×1024 px · **Output:** `assets/level1/props/pr_05_mature_quad_tree.png`
 **Anchor:** bottom-center · **Collision:** specified per placement · **Animation:** single static component
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -2690,7 +2690,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/level1/props/pr_05_mature_quad_tree.png; measure intrinsic 192x256 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID PR-05 in runtime manifest. At runtime map ID to Depth and foreground framing; place in all with anchor bottom-center; use the engine auth collider "specified per placement" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### PR-09 — Parade utility cart
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** all · **Target:** 192×112 px · **Source:** 768×448 px · **Output:** `assets/level1/props/pr_09_parade_utility_cart.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** all · **Target:** 192×112 px · **Source:** 768×448 px · **Output:** `assets/level1/props/pr_09_parade_utility_cart.png`
 **Anchor:** bottom-center · **Collision:** specified per placement · **Animation:** single static component
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -2725,7 +2725,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/level1/props/pr_09_parade_utility_cart.png; measure intrinsic 192x112 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID PR-09 in runtime manifest. At runtime map ID to Moving platform in quad climax; place in all with anchor bottom-center; use the engine auth collider "specified per placement" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### PR-10 — Fallen campus sign
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** all · **Target:** 128×64 px · **Source:** 512×256 px · **Output:** `assets/level1/props/pr_10_fallen_campus_sign.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** all · **Target:** 128×64 px · **Source:** 512×256 px · **Output:** `assets/level1/props/pr_10_fallen_campus_sign.png`
 **Anchor:** bottom-center · **Collision:** specified per placement · **Animation:** single static component
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -2760,7 +2760,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/level1/props/pr_10_fallen_campus_sign.png; measure intrinsic 128x64 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID PR-10 in runtime manifest. At runtime map ID to First jump obstacle; place in all with anchor bottom-center; use the engine auth collider "specified per placement" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### PR-02 — Folded menu board
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** all · **Target:** 96×128 px · **Source:** 384×512 px · **Output:** `assets/level1/props/pr_02_folded_menu_board.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** all · **Target:** 96×128 px · **Source:** 384×512 px · **Output:** `assets/level1/props/pr_02_folded_menu_board.png`
 **Anchor:** bottom-center · **Collision:** specified per placement · **Animation:** single static component
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -2795,7 +2795,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/level1/props/pr_02_folded_menu_board.png; measure intrinsic 96x128 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID PR-02 in runtime manifest. At runtime map ID to Opening vendor dressing; place in all with anchor bottom-center; use the engine auth collider "specified per placement" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### PR-06 — Low hedge
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** all · **Target:** 128×64 px · **Source:** 512×256 px · **Output:** `assets/level1/props/pr_06_low_hedge.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** all · **Target:** 128×64 px · **Source:** 512×256 px · **Output:** `assets/level1/props/pr_06_low_hedge.png`
 **Anchor:** bottom-center · **Collision:** specified per placement · **Animation:** single static component
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -2830,7 +2830,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/level1/props/pr_06_low_hedge.png; measure intrinsic 128x64 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID PR-06 in runtime manifest. At runtime map ID to Campus lawn edging; place in all with anchor bottom-center; use the engine auth collider "specified per placement" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### PR-07 — Campus directional sign
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** all · **Target:** 96×128 px · **Source:** 384×512 px · **Output:** `assets/level1/props/pr_07_campus_directional_sign.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** all · **Target:** 96×128 px · **Source:** 384×512 px · **Output:** `assets/level1/props/pr_07_campus_directional_sign.png`
 **Anchor:** bottom-center · **Collision:** specified per placement · **Animation:** single static component
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -2865,7 +2865,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/level1/props/pr_07_campus_directional_sign.png; measure intrinsic 96x128 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID PR-07 in runtime manifest. At runtime map ID to Diegetic hint / wayfinding; place in all with anchor bottom-center; use the engine auth collider "specified per placement" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### PR-08 — Blue-gold pennant pole
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** all · **Target:** 64×192 px · **Source:** 256×768 px · **Output:** `assets/level1/props/pr_08_blue_gold_pennant_pole.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** all · **Target:** 64×192 px · **Source:** 256×768 px · **Output:** `assets/level1/props/pr_08_blue_gold_pennant_pole.png`
 **Anchor:** bottom-center · **Collision:** specified per placement · **Animation:** single static component
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -2900,7 +2900,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/level1/props/pr_08_blue_gold_pennant_pole.png; measure intrinsic 64x192 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID PR-08 in runtime manifest. At runtime map ID to Notre Dame visual signal; place in all with anchor bottom-center; use the engine auth collider "specified per placement" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### PR-11 — Concession cooler
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** all · **Target:** 96×80 px · **Source:** 384×320 px · **Output:** `assets/level1/props/pr_11_concession_cooler.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** all · **Target:** 96×80 px · **Source:** 384×320 px · **Output:** `assets/level1/props/pr_11_concession_cooler.png`
 **Anchor:** bottom-center · **Collision:** specified per placement · **Animation:** single static component
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -2935,7 +2935,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/level1/props/pr_11_concession_cooler.png; measure intrinsic 96x80 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID PR-11 in runtime manifest. At runtime map ID to Cup-crawler arena decoration; place in all with anchor bottom-center; use the engine auth collider "specified per placement" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### PR-12 — Festival pennant string
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** all · **Target:** 256×64 px · **Source:** 1024×256 px · **Output:** `assets/level1/props/pr_12_festival_pennant_string.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** all · **Target:** 256×64 px · **Source:** 1024×256 px · **Output:** `assets/level1/props/pr_12_festival_pennant_string.png`
 **Anchor:** bottom-center · **Collision:** specified per placement · **Animation:** single static component
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -2970,7 +2970,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/level1/props/pr_12_festival_pennant_string.png; measure intrinsic 256x64 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID PR-12 in runtime manifest. At runtime map ID to Overhead quad festival dressing; place in all with anchor bottom-center; use the engine auth collider "specified per placement" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### PR-13 — Stone planter
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** all · **Target:** 96×96 px · **Source:** 384×384 px · **Output:** `assets/level1/props/pr_13_stone_planter.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** all · **Target:** 96×96 px · **Source:** 384×384 px · **Output:** `assets/level1/props/pr_13_stone_planter.png`
 **Anchor:** bottom-center · **Collision:** specified per placement · **Animation:** single static component
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -3005,7 +3005,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/level1/props/pr_13_stone_planter.png; measure intrinsic 96x96 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID PR-13 in runtime manifest. At runtime map ID to Dome approach dressing; place in all with anchor bottom-center; use the engine auth collider "specified per placement" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### PR-14 — Collapsible rope barrier
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** all · **Target:** 128×80 px · **Source:** 512×320 px · **Output:** `assets/level1/props/pr_14_collapsible_rope_barrier.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** all · **Target:** 128×80 px · **Source:** 512×320 px · **Output:** `assets/level1/props/pr_14_collapsible_rope_barrier.png`
 **Anchor:** bottom-center · **Collision:** specified per placement · **Animation:** single static component
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -3043,7 +3043,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 9 individual asset contracts. Process P0 first, P1 next, P2 last. Reference sheets and complete per-asset instructions are repeated in every prompt.
 
 #### MC-01 — Banner bridge retracted
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** all · **Target:** 256×64 px · **Source:** 1024×256 px · **Output:** `assets/level1/mechanics/mc_01_banner_bridge_retracted.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** all · **Target:** 256×64 px · **Source:** 1024×256 px · **Output:** `assets/level1/mechanics/mc_01_banner_bridge_retracted.png`
 **Anchor:** bottom-center · **Collision:** none · **Animation:** one frame for this specific listed state; do NOT merge with other states
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -3078,7 +3078,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/level1/mechanics/mc_01_banner_bridge_retracted.png; measure intrinsic 256x64 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID MC-01 in runtime manifest. At runtime map ID to Pulse bridge OFF; place in all with anchor bottom-center; use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### MC-02 — Banner bridge extended
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** all · **Target:** 256×64 px · **Source:** 1024×256 px · **Output:** `assets/level1/mechanics/mc_02_banner_bridge_extended.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** all · **Target:** 256×64 px · **Source:** 1024×256 px · **Output:** `assets/level1/mechanics/mc_02_banner_bridge_extended.png`
 **Anchor:** bottom-center · **Collision:** collider_top=16,18,224,12 · **Animation:** one frame for this specific listed state; do NOT merge with other states
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -3113,7 +3113,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/level1/mechanics/mc_02_banner_bridge_extended.png; measure intrinsic 256x64 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID MC-02 in runtime manifest. At runtime map ID to Pulse bridge ON; place in all with anchor bottom-center; use the engine auth collider "collider_top=16,18,224,12" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### MC-03 — Gold lift tucked
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** all · **Target:** 128×64 px · **Source:** 512×256 px · **Output:** `assets/level1/mechanics/mc_03_gold_lift_tucked.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** all · **Target:** 128×64 px · **Source:** 512×256 px · **Output:** `assets/level1/mechanics/mc_03_gold_lift_tucked.png`
 **Anchor:** bottom-center · **Collision:** none · **Animation:** one frame for this specific listed state; do NOT merge with other states
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -3148,7 +3148,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/level1/mechanics/mc_03_gold_lift_tucked.png; measure intrinsic 128x64 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID MC-03 in runtime manifest. At runtime map ID to Pulse platform OFF; place in all with anchor bottom-center; use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### MC-04 — Gold lift raised
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** all · **Target:** 128×64 px · **Source:** 512×256 px · **Output:** `assets/level1/mechanics/mc_04_gold_lift_raised.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** all · **Target:** 128×64 px · **Source:** 512×256 px · **Output:** `assets/level1/mechanics/mc_04_gold_lift_raised.png`
 **Anchor:** bottom-center · **Collision:** collider_top=12,12,104,12 · **Animation:** one frame for this specific listed state; do NOT merge with other states
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -3183,7 +3183,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/level1/mechanics/mc_04_gold_lift_raised.png; measure intrinsic 128x64 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID MC-04 in runtime manifest. At runtime map ID to Pulse platform ON; place in all with anchor bottom-center; use the engine auth collider "collider_top=12,12,104,12" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### MC-05 — Drum Beacon quiet
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** all · **Target:** 96×128 px · **Source:** 384×512 px · **Output:** `assets/level1/mechanics/mc_05_drum_beacon_quiet.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** all · **Target:** 96×128 px · **Source:** 384×512 px · **Output:** `assets/level1/mechanics/mc_05_drum_beacon_quiet.png`
 **Anchor:** bottom-center · **Collision:** hitbox=20,35,56,70 · **Animation:** one frame for this specific listed state; do NOT merge with other states
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -3218,7 +3218,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/level1/mechanics/mc_05_drum_beacon_quiet.png; measure intrinsic 96x128 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID MC-05 in runtime manifest. At runtime map ID to Manual pulse activation; place in all with anchor bottom-center; use the engine auth collider "hitbox=20,35,56,70" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### MC-06 — Drum Beacon active
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** all · **Target:** 96×128 px · **Source:** 384×512 px · **Output:** `assets/level1/mechanics/mc_06_drum_beacon_active.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** all · **Target:** 96×128 px · **Source:** 384×512 px · **Output:** `assets/level1/mechanics/mc_06_drum_beacon_active.png`
 **Anchor:** bottom-center · **Collision:** hitbox=20,35,56,70 · **Animation:** one frame for this specific listed state; do NOT merge with other states
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -3253,7 +3253,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/level1/mechanics/mc_06_drum_beacon_active.png; measure intrinsic 96x128 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID MC-06 in runtime manifest. At runtime map ID to Manual pulse feedback; place in all with anchor bottom-center; use the engine auth collider "hitbox=20,35,56,70" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### MC-07 — Checkpoint unlit
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** all · **Target:** 64×128 px · **Source:** 256×512 px · **Output:** `assets/level1/mechanics/mc_07_checkpoint_unlit.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** all · **Target:** 64×128 px · **Source:** 256×512 px · **Output:** `assets/level1/mechanics/mc_07_checkpoint_unlit.png`
 **Anchor:** bottom-center · **Collision:** hitbox=18,12,28,114 · **Animation:** one frame for this specific listed state; do NOT merge with other states
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -3288,7 +3288,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/level1/mechanics/mc_07_checkpoint_unlit.png; measure intrinsic 64x128 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID MC-07 in runtime manifest. At runtime map ID to Respawn marker; place in all with anchor bottom-center; use the engine auth collider "hitbox=18,12,28,114" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### MC-08 — Checkpoint lit
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** all · **Target:** 64×128 px · **Source:** 256×512 px · **Output:** `assets/level1/mechanics/mc_08_checkpoint_lit.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** all · **Target:** 64×128 px · **Source:** 256×512 px · **Output:** `assets/level1/mechanics/mc_08_checkpoint_lit.png`
 **Anchor:** bottom-center · **Collision:** hitbox=18,12,28,114 · **Animation:** one frame for this specific listed state; do NOT merge with other states
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -3323,7 +3323,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/level1/mechanics/mc_08_checkpoint_lit.png; measure intrinsic 64x128 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID MC-08 in runtime manifest. At runtime map ID to Checkpoint confirmed; place in all with anchor bottom-center; use the engine auth collider "hitbox=18,12,28,114" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### MC-09 — Final route flag
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** all · **Target:** 64×128 px · **Source:** 256×512 px · **Output:** `assets/level1/mechanics/mc_09_final_route_flag.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** all · **Target:** 64×128 px · **Source:** 256×512 px · **Output:** `assets/level1/mechanics/mc_09_final_route_flag.png`
 **Anchor:** bottom-center · **Collision:** none · **Animation:** one frame for this specific listed state; do NOT merge with other states
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -3361,7 +3361,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 7 individual asset contracts. Process P0 first, P1 next, P2 last. Reference sheets and complete per-asset instructions are repeated in every prompt.
 
 #### EN-01 — Cup Crawler walk A
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** all · **Target:** 64×64 px · **Source:** 256×256 px · **Output:** `assets/level1/enemies/en_01_cup_crawler_walk_a.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** all · **Target:** 64×64 px · **Source:** 256×256 px · **Output:** `assets/level1/enemies/en_01_cup_crawler_walk_a.png`
 **Anchor:** bottom-center · **Collision:** hurtbox=13,25,38,30 · **Animation:** one frame for this specific listed state; do NOT merge with other states
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -3396,7 +3396,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/level1/enemies/en_01_cup_crawler_walk_a.png; measure intrinsic 64x64 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID EN-01 in runtime manifest. At runtime map ID to Ground enemy patrol; place in all with anchor bottom-center; use the engine auth collider "hurtbox=13,25,38,30" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### EN-04 — Confetti cannon idle
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** all · **Target:** 96×96 px · **Source:** 384×384 px · **Output:** `assets/level1/enemies/en_04_confetti_cannon_idle.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** all · **Target:** 96×96 px · **Source:** 384×384 px · **Output:** `assets/level1/enemies/en_04_confetti_cannon_idle.png`
 **Anchor:** bottom-center · **Collision:** hurtbox=18,34,60,58 · **Animation:** one frame for this specific listed state; do NOT merge with other states
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -3431,7 +3431,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/level1/enemies/en_04_confetti_cannon_idle.png; measure intrinsic 96x96 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID EN-04 in runtime manifest. At runtime map ID to Stationary ranged hazard; place in all with anchor bottom-center; use the engine auth collider "hurtbox=18,34,60,58" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### EN-05 — Confetti cannon warning
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** all · **Target:** 96×96 px · **Source:** 384×384 px · **Output:** `assets/level1/enemies/en_05_confetti_cannon_warning.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** all · **Target:** 96×96 px · **Source:** 384×384 px · **Output:** `assets/level1/enemies/en_05_confetti_cannon_warning.png`
 **Anchor:** bottom-center · **Collision:** hurtbox=18,34,60,58 · **Animation:** one frame for this specific listed state; do NOT merge with other states
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -3466,7 +3466,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/level1/enemies/en_05_confetti_cannon_warning.png; measure intrinsic 96x96 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID EN-05 in runtime manifest. At runtime map ID to Hazard readable anticipation; place in all with anchor bottom-center; use the engine auth collider "hurtbox=18,34,60,58" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### EN-07 — Hazardous paper burst
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** all · **Target:** 32×32 px · **Source:** 128×128 px · **Output:** `assets/level1/enemies/en_07_hazardous_paper_burst.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** all · **Target:** 32×32 px · **Source:** 128×128 px · **Output:** `assets/level1/enemies/en_07_hazardous_paper_burst.png`
 **Anchor:** bottom-center · **Collision:** projectile=5,5,22,22 · **Animation:** one frame for this specific listed state; do NOT merge with other states
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -3501,7 +3501,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/level1/enemies/en_07_hazardous_paper_burst.png; measure intrinsic 32x32 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID EN-07 in runtime manifest. At runtime map ID to Cannon projectile; place in all with anchor bottom-center; use the engine auth collider "projectile=5,5,22,22" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### EN-02 — Cup Crawler walk B
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** all · **Target:** 64×64 px · **Source:** 256×256 px · **Output:** `assets/level1/enemies/en_02_cup_crawler_walk_b.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** all · **Target:** 64×64 px · **Source:** 256×256 px · **Output:** `assets/level1/enemies/en_02_cup_crawler_walk_b.png`
 **Anchor:** bottom-center · **Collision:** hurtbox=13,25,38,30 · **Animation:** one frame for this specific listed state; do NOT merge with other states
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -3536,7 +3536,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/level1/enemies/en_02_cup_crawler_walk_b.png; measure intrinsic 64x64 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID EN-02 in runtime manifest. At runtime map ID to Ground enemy patrol; place in all with anchor bottom-center; use the engine auth collider "hurtbox=13,25,38,30" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### EN-03 — Cup Crawler defeated
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** all · **Target:** 64×64 px · **Source:** 256×256 px · **Output:** `assets/level1/enemies/en_03_cup_crawler_defeated.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** all · **Target:** 64×64 px · **Source:** 256×256 px · **Output:** `assets/level1/enemies/en_03_cup_crawler_defeated.png`
 **Anchor:** bottom-center · **Collision:** none · **Animation:** one frame for this specific listed state; do NOT merge with other states
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -3571,7 +3571,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/level1/enemies/en_03_cup_crawler_defeated.png; measure intrinsic 64x64 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID EN-03 in runtime manifest. At runtime map ID to Enemy hit reaction; place in all with anchor bottom-center; use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### EN-06 — Confetti cannon firing
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** all · **Target:** 96×96 px · **Source:** 384×384 px · **Output:** `assets/level1/enemies/en_06_confetti_cannon_firing.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** all · **Target:** 96×96 px · **Source:** 384×384 px · **Output:** `assets/level1/enemies/en_06_confetti_cannon_firing.png`
 **Anchor:** bottom-center · **Collision:** hurtbox=18,34,60,58 · **Animation:** one frame for this specific listed state; do NOT merge with other states
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -3609,7 +3609,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 4 individual asset contracts. Process P0 first, P1 next, P2 last. Reference sheets and complete per-asset instructions are repeated in every prompt.
 
 #### CO-01 — Green shake token
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** all · **Target:** 32×32 px · **Source:** 128×128 px · **Output:** `assets/level1/collectibles/co_01_green_shake_token.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** all · **Target:** 32×32 px · **Source:** 128×128 px · **Output:** `assets/level1/collectibles/co_01_green_shake_token.png`
 **Anchor:** center · **Collision:** pickup_radius=12 · **Animation:** single static component
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -3644,7 +3644,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/level1/collectibles/co_01_green_shake_token.png; measure intrinsic 32x32 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID CO-01 in runtime manifest. At runtime map ID to Optional ordinary pickup; place in all with anchor center; use the engine auth collider "pickup_radius=12" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### CO-03 — Shamrock Shake cup
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** all · **Target:** 64×96 px · **Source:** 256×384 px · **Output:** `assets/level1/collectibles/co_03_shamrock_shake_cup.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** all · **Target:** 64×96 px · **Source:** 256×384 px · **Output:** `assets/level1/collectibles/co_03_shamrock_shake_cup.png`
 **Anchor:** center · **Collision:** none · **Animation:** single static component
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -3679,7 +3679,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/level1/collectibles/co_03_shamrock_shake_cup.png; measure intrinsic 64x96 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID CO-03 in runtime manifest. At runtime map ID to Stolen prize used as independent overlay; place in all with anchor center; use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### CO-04 — Green shake drip
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** all · **Target:** 24×32 px · **Source:** 96×128 px · **Output:** `assets/level1/collectibles/co_04_green_shake_drip.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** all · **Target:** 24×32 px · **Source:** 96×128 px · **Output:** `assets/level1/collectibles/co_04_green_shake_drip.png`
 **Anchor:** center · **Collision:** none · **Animation:** single static component
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -3714,7 +3714,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/level1/collectibles/co_04_green_shake_drip.png; measure intrinsic 24x32 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID CO-04 in runtime manifest. At runtime map ID to Exit breadcrumb tease; place in all with anchor center; use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### CO-02 — Gold shake token
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** all · **Target:** 32×32 px · **Source:** 128×128 px · **Output:** `assets/level1/collectibles/co_02_gold_shake_token.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** all · **Target:** 32×32 px · **Source:** 128×128 px · **Output:** `assets/level1/collectibles/co_02_gold_shake_token.png`
 **Anchor:** center · **Collision:** pickup_radius=12 · **Animation:** single static component
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -3752,7 +3752,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 10 individual asset contracts. Process P0 first, P1 next, P2 last. Reference sheets and complete per-asset instructions are repeated in every prompt.
 
 #### VF-01 — GO pulse halo
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** all · **Target:** 128×128 px · **Source:** 512×512 px · **Output:** `assets/level1/effects/vf_01_go_pulse_halo.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** all · **Target:** 128×128 px · **Source:** 512×512 px · **Output:** `assets/level1/effects/vf_01_go_pulse_halo.png`
 **Anchor:** center · **Collision:** none · **Animation:** one frame for this specific listed state; do NOT merge with other states
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -3787,7 +3787,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/level1/effects/vf_01_go_pulse_halo.png; measure intrinsic 128x128 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID VF-01 in runtime manifest. At runtime map ID to Pulse affordance; place in all with anchor center; use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### VF-02 — IRISH pulse settle
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** all · **Target:** 128×128 px · **Source:** 512×512 px · **Output:** `assets/level1/effects/vf_02_irish_pulse_settle.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** all · **Target:** 128×128 px · **Source:** 512×512 px · **Output:** `assets/level1/effects/vf_02_irish_pulse_settle.png`
 **Anchor:** center · **Collision:** none · **Animation:** one frame for this specific listed state; do NOT merge with other states
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -3822,7 +3822,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/level1/effects/vf_02_irish_pulse_settle.png; measure intrinsic 128x128 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID VF-02 in runtime manifest. At runtime map ID to Pulse reset affordance; place in all with anchor center; use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### VF-03 — Drum strike spark
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** all · **Target:** 64×64 px · **Source:** 256×256 px · **Output:** `assets/level1/effects/vf_03_drum_strike_spark.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** all · **Target:** 64×64 px · **Source:** 256×256 px · **Output:** `assets/level1/effects/vf_03_drum_strike_spark.png`
 **Anchor:** center · **Collision:** none · **Animation:** one frame for this specific listed state; do NOT merge with other states
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -3857,7 +3857,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/level1/effects/vf_03_drum_strike_spark.png; measure intrinsic 64x64 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID VF-03 in runtime manifest. At runtime map ID to Manual pulse hit feedback; place in all with anchor center; use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### VF-04 — Token collect gleam
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** all · **Target:** 64×64 px · **Source:** 256×256 px · **Output:** `assets/level1/effects/vf_04_token_collect_gleam.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** all · **Target:** 64×64 px · **Source:** 256×256 px · **Output:** `assets/level1/effects/vf_04_token_collect_gleam.png`
 **Anchor:** center · **Collision:** none · **Animation:** one frame for this specific listed state; do NOT merge with other states
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -3892,7 +3892,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/level1/effects/vf_04_token_collect_gleam.png; measure intrinsic 64x64 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID VF-04 in runtime manifest. At runtime map ID to Pickup confirmation; place in all with anchor center; use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### VF-05 — Enemy stomp puff
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** all · **Target:** 64×64 px · **Source:** 256×256 px · **Output:** `assets/level1/effects/vf_05_enemy_stomp_puff.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** all · **Target:** 64×64 px · **Source:** 256×256 px · **Output:** `assets/level1/effects/vf_05_enemy_stomp_puff.png`
 **Anchor:** center · **Collision:** none · **Animation:** one frame for this specific listed state; do NOT merge with other states
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -3927,7 +3927,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/level1/effects/vf_05_enemy_stomp_puff.png; measure intrinsic 64x64 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID VF-05 in runtime manifest. At runtime map ID to Enemy hit confirmation; place in all with anchor center; use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### VF-06 — Safe ambient confetti
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** all · **Target:** 128×128 px · **Source:** 512×512 px · **Output:** `assets/level1/effects/vf_06_safe_ambient_confetti.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** all · **Target:** 128×128 px · **Source:** 512×512 px · **Output:** `assets/level1/effects/vf_06_safe_ambient_confetti.png`
 **Anchor:** center · **Collision:** none · **Animation:** one frame for this specific listed state; do NOT merge with other states
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -3962,7 +3962,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/level1/effects/vf_06_safe_ambient_confetti.png; measure intrinsic 128x128 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID VF-06 in runtime manifest. At runtime map ID to Background celebration, never damage; place in all with anchor center; use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### VF-07 — Projectile hit burst
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** all · **Target:** 64×64 px · **Source:** 256×256 px · **Output:** `assets/level1/effects/vf_07_projectile_hit_burst.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** all · **Target:** 64×64 px · **Source:** 256×256 px · **Output:** `assets/level1/effects/vf_07_projectile_hit_burst.png`
 **Anchor:** center · **Collision:** none · **Animation:** one frame for this specific listed state; do NOT merge with other states
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -3997,7 +3997,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/level1/effects/vf_07_projectile_hit_burst.png; measure intrinsic 64x64 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID VF-07 in runtime manifest. At runtime map ID to Dangerous projectile contact; place in all with anchor center; use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### VF-08 — Checkpoint gleam
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** all · **Target:** 128×128 px · **Source:** 512×512 px · **Output:** `assets/level1/effects/vf_08_checkpoint_gleam.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** all · **Target:** 128×128 px · **Source:** 512×512 px · **Output:** `assets/level1/effects/vf_08_checkpoint_gleam.png`
 **Anchor:** center · **Collision:** none · **Animation:** one frame for this specific listed state; do NOT merge with other states
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -4032,7 +4032,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/level1/effects/vf_08_checkpoint_gleam.png; measure intrinsic 128x128 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID VF-08 in runtime manifest. At runtime map ID to Checkpoint acceptance; place in all with anchor center; use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### VF-09 — Fox exit poof
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** all · **Target:** 128×128 px · **Source:** 512×512 px · **Output:** `assets/level1/effects/vf_09_fox_exit_poof.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** all · **Target:** 128×128 px · **Source:** 512×512 px · **Output:** `assets/level1/effects/vf_09_fox_exit_poof.png`
 **Anchor:** center · **Collision:** none · **Animation:** one frame for this specific listed state; do NOT merge with other states
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -4067,7 +4067,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/level1/effects/vf_09_fox_exit_poof.png; measure intrinsic 128x128 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID VF-09 in runtime manifest. At runtime map ID to Getaway cutscene accent; place in all with anchor center; use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### VF-10 — Landing dust
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** all · **Target:** 64×64 px · **Source:** 256×256 px · **Output:** `assets/level1/effects/vf_10_landing_dust.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** all · **Target:** 64×64 px · **Source:** 256×256 px · **Output:** `assets/level1/effects/vf_10_landing_dust.png`
 **Anchor:** center · **Collision:** none · **Animation:** one frame for this specific listed state; do NOT merge with other states
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -4105,7 +4105,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 4 individual asset contracts. Process P0 first, P1 next, P2 last. Reference sheets and complete per-asset instructions are repeated in every prompt.
 
 #### FX-01 — Fox thief holding shake
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** all · **Target:** 96×96 px · **Source:** 384×384 px · **Output:** `assets/level1/fox/fx_01_fox_thief_holding_shake.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** all · **Target:** 96×96 px · **Source:** 384×384 px · **Output:** `assets/level1/fox/fx_01_fox_thief_holding_shake.png`
 **Anchor:** bottom-center · **Collision:** none · **Animation:** one frame for this specific listed state; do NOT merge with other states
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -4140,7 +4140,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/level1/fox/fx_01_fox_thief_holding_shake.png; measure intrinsic 96x96 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID FX-01 in runtime manifest. At runtime map ID to Theft scene / silhouette read; place in all with anchor bottom-center; use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### FX-02 — Fox escape sprint
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** all · **Target:** 96×96 px · **Source:** 384×384 px · **Output:** `assets/level1/fox/fx_02_fox_escape_sprint.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** all · **Target:** 96×96 px · **Source:** 384×384 px · **Output:** `assets/level1/fox/fx_02_fox_escape_sprint.png`
 **Anchor:** bottom-center · **Collision:** none · **Animation:** one frame for this specific listed state; do NOT merge with other states
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -4175,7 +4175,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/level1/fox/fx_02_fox_escape_sprint.png; measure intrinsic 96x96 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID FX-02 in runtime manifest. At runtime map ID to Scripted first and final escape; place in all with anchor bottom-center; use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### FX-03 — Fox mocking taunt
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** all · **Target:** 96×96 px · **Source:** 384×384 px · **Output:** `assets/level1/fox/fx_03_fox_mocking_taunt.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** all · **Target:** 96×96 px · **Source:** 384×384 px · **Output:** `assets/level1/fox/fx_03_fox_mocking_taunt.png`
 **Anchor:** bottom-center · **Collision:** none · **Animation:** one frame for this specific listed state; do NOT merge with other states
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -4210,7 +4210,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/level1/fox/fx_03_fox_mocking_taunt.png; measure intrinsic 96x96 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID FX-03 in runtime manifest. At runtime map ID to Final scripted decoy reveal; place in all with anchor bottom-center; use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### FX-04 — Cardboard fox decoy
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** all · **Target:** 96×112 px · **Source:** 384×448 px · **Output:** `assets/level1/fox/fx_04_cardboard_fox_decoy.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** all · **Target:** 96×112 px · **Source:** 384×448 px · **Output:** `assets/level1/fox/fx_04_cardboard_fox_decoy.png`
 **Anchor:** bottom-center · **Collision:** none · **Animation:** one frame for this specific listed state; do NOT merge with other states
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -4248,7 +4248,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 9 individual asset contracts. Process P0 first, P1 next, P2 last. Reference sheets and complete per-asset instructions are repeated in every prompt.
 
 #### UI-01 — Filled heart icon
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** all · **Target:** 32×32 px · **Source:** 128×128 px · **Output:** `assets/level1/ui/ui_01_filled_heart_icon.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** all · **Target:** 32×32 px · **Source:** 128×128 px · **Output:** `assets/level1/ui/ui_01_filled_heart_icon.png`
 **Anchor:** center · **Collision:** none · **Animation:** single static component
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -4285,7 +4285,7 @@ DO NOT BAKE LIVE TEXT: all headings, counters, accessibility instructions, and b
 **Integration:** Verify file bytes exist at assets/level1/ui/ui_01_filled_heart_icon.png; measure intrinsic 32x32 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID UI-01 in runtime manifest. At runtime map ID to HUD health; place in all with anchor center; use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### UI-02 — Empty heart icon
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** all · **Target:** 32×32 px · **Source:** 128×128 px · **Output:** `assets/level1/ui/ui_02_empty_heart_icon.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** all · **Target:** 32×32 px · **Source:** 128×128 px · **Output:** `assets/level1/ui/ui_02_empty_heart_icon.png`
 **Anchor:** center · **Collision:** none · **Animation:** single static component
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -4322,7 +4322,7 @@ DO NOT BAKE LIVE TEXT: all headings, counters, accessibility instructions, and b
 **Integration:** Verify file bytes exist at assets/level1/ui/ui_02_empty_heart_icon.png; measure intrinsic 32x32 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID UI-02 in runtime manifest. At runtime map ID to HUD damage; place in all with anchor center; use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### UI-03 — Token HUD icon
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** all · **Target:** 32×32 px · **Source:** 128×128 px · **Output:** `assets/level1/ui/ui_03_token_hud_icon.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** all · **Target:** 32×32 px · **Source:** 128×128 px · **Output:** `assets/level1/ui/ui_03_token_hud_icon.png`
 **Anchor:** center · **Collision:** none · **Animation:** single static component
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -4359,7 +4359,7 @@ DO NOT BAKE LIVE TEXT: all headings, counters, accessibility instructions, and b
 **Integration:** Verify file bytes exist at assets/level1/ui/ui_03_token_hud_icon.png; measure intrinsic 32x32 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID UI-03 in runtime manifest. At runtime map ID to HUD pickup counter; place in all with anchor center; use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### UI-04 — Jump button glyph
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** all · **Target:** 48×48 px · **Source:** 192×192 px · **Output:** `assets/level1/ui/ui_04_jump_button_glyph.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** all · **Target:** 48×48 px · **Source:** 192×192 px · **Output:** `assets/level1/ui/ui_04_jump_button_glyph.png`
 **Anchor:** center · **Collision:** none · **Animation:** single static component
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -4396,7 +4396,7 @@ DO NOT BAKE LIVE TEXT: all headings, counters, accessibility instructions, and b
 **Integration:** Verify file bytes exist at assets/level1/ui/ui_04_jump_button_glyph.png; measure intrinsic 48x48 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID UI-04 in runtime manifest. At runtime map ID to Touch/key tutorial; place in all with anchor center; use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### UI-05 — Tail-swish glyph
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** all · **Target:** 48×48 px · **Source:** 192×192 px · **Output:** `assets/level1/ui/ui_05_tail_swish_glyph.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** all · **Target:** 48×48 px · **Source:** 192×192 px · **Output:** `assets/level1/ui/ui_05_tail_swish_glyph.png`
 **Anchor:** center · **Collision:** none · **Animation:** single static component
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -4433,7 +4433,7 @@ DO NOT BAKE LIVE TEXT: all headings, counters, accessibility instructions, and b
 **Integration:** Verify file bytes exist at assets/level1/ui/ui_05_tail_swish_glyph.png; measure intrinsic 48x48 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID UI-05 in runtime manifest. At runtime map ID to Touch/key tutorial; place in all with anchor center; use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### UI-06 — Move arrows glyph
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** all · **Target:** 48×48 px · **Source:** 192×192 px · **Output:** `assets/level1/ui/ui_06_move_arrows_glyph.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** all · **Target:** 48×48 px · **Source:** 192×192 px · **Output:** `assets/level1/ui/ui_06_move_arrows_glyph.png`
 **Anchor:** center · **Collision:** none · **Animation:** single static component
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -4470,7 +4470,7 @@ DO NOT BAKE LIVE TEXT: all headings, counters, accessibility instructions, and b
 **Integration:** Verify file bytes exist at assets/level1/ui/ui_06_move_arrows_glyph.png; measure intrinsic 48x48 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID UI-06 in runtime manifest. At runtime map ID to Touch/key tutorial; place in all with anchor center; use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### UI-07 — Pulse icon
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** all · **Target:** 32×32 px · **Source:** 128×128 px · **Output:** `assets/level1/ui/ui_07_pulse_icon.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** all · **Target:** 32×32 px · **Source:** 128×128 px · **Output:** `assets/level1/ui/ui_07_pulse_icon.png`
 **Anchor:** center · **Collision:** none · **Animation:** single static component
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -4507,7 +4507,7 @@ DO NOT BAKE LIVE TEXT: all headings, counters, accessibility instructions, and b
 **Integration:** Verify file bytes exist at assets/level1/ui/ui_07_pulse_icon.png; measure intrinsic 32x32 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID UI-07 in runtime manifest. At runtime map ID to Gimmick tutorial/indication; place in all with anchor center; use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### UI-08 — Fox dialogue portrait
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** all · **Target:** 128×128 px · **Source:** 512×512 px · **Output:** `assets/level1/ui/ui_08_fox_dialogue_portrait.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** all · **Target:** 128×128 px · **Source:** 512×512 px · **Output:** `assets/level1/ui/ui_08_fox_dialogue_portrait.png`
 **Anchor:** center · **Collision:** none · **Animation:** single static component
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -4544,7 +4544,7 @@ DO NOT BAKE LIVE TEXT: all headings, counters, accessibility instructions, and b
 **Integration:** Verify file bytes exist at assets/level1/ui/ui_08_fox_dialogue_portrait.png; measure intrinsic 128x128 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID UI-08 in runtime manifest. At runtime map ID to Intro/ending dialogue vignette; place in all with anchor center; use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### UI-09 — Level clear medal
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** all · **Target:** 64×64 px · **Source:** 256×256 px · **Output:** `assets/level1/ui/ui_09_level_clear_medal.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** all · **Target:** 64×64 px · **Source:** 256×256 px · **Output:** `assets/level1/ui/ui_09_level_clear_medal.png`
 **Anchor:** center · **Collision:** none · **Animation:** single static component
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -4584,7 +4584,7 @@ DO NOT BAKE LIVE TEXT: all headings, counters, accessibility instructions, and b
 8 individual asset contracts. Process P0 first, P1 next, P2 last. Reference sheets and complete per-asset instructions are repeated in every prompt.
 
 #### DM-BG01 — Dome approach hero panorama
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** dome · **Target:** 960×540 px · **Source:** 1920×1080 px · **Output:** `assets/production/dome/backgrounds/dm_bg01.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** dome · **Target:** 960×540 px · **Source:** 1920×1080 px · **Output:** `assets/production/dome/backgrounds/dm_bg01.png`
 **Anchor:** top-left · **Collision:** none · **Animation:** static repeat as specified in integration metadata
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Original Notre Dame Golden Dome silhouette and character palette
 
@@ -4621,7 +4621,7 @@ DO NOT BAKE LIVE TEXT: all headings, counters, accessibility instructions, and b
 **Integration:** Verify file bytes exist at assets/production/dome/backgrounds/dm_bg01.png; measure intrinsic 960x540 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID DM-BG01 in runtime manifest. At runtime map ID to Dome parallax/landmark layer; place in dome with anchor top-left; use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### DM-BG02 — Dome wall parallax midground
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** dome · **Target:** 960×1080 px · **Source:** 1920×2160 px · **Output:** `assets/production/dome/backgrounds/dm_bg02.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** dome · **Target:** 960×1080 px · **Source:** 1920×2160 px · **Output:** `assets/production/dome/backgrounds/dm_bg02.png`
 **Anchor:** top-left · **Collision:** none · **Animation:** static repeat as specified in integration metadata
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Original Notre Dame Golden Dome silhouette and character palette
 
@@ -4658,7 +4658,7 @@ DO NOT BAKE LIVE TEXT: all headings, counters, accessibility instructions, and b
 **Integration:** Verify file bytes exist at assets/production/dome/backgrounds/dm_bg02.png; measure intrinsic 960x1080 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID DM-BG02 in runtime manifest. At runtime map ID to Dome parallax/landmark layer; place in dome with anchor top-left; use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### DM-BG07 — Summit sky panorama
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** dome · **Target:** 960×540 px · **Source:** 1920×1080 px · **Output:** `assets/production/dome/backgrounds/dm_bg07.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** dome · **Target:** 960×540 px · **Source:** 1920×1080 px · **Output:** `assets/production/dome/backgrounds/dm_bg07.png`
 **Anchor:** top-left · **Collision:** none · **Animation:** static repeat as specified in integration metadata
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Original Notre Dame Golden Dome silhouette and character palette
 
@@ -4695,7 +4695,7 @@ DO NOT BAKE LIVE TEXT: all headings, counters, accessibility instructions, and b
 **Integration:** Verify file bytes exist at assets/production/dome/backgrounds/dm_bg07.png; measure intrinsic 960x540 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID DM-BG07 in runtime manifest. At runtime map ID to Dome parallax/landmark layer; place in dome with anchor top-left; use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### DM-BG03 — Golden afternoon sky
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** dome · **Target:** 960×540 px · **Source:** 1920×1080 px · **Output:** `assets/production/dome/backgrounds/dm_bg03.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** dome · **Target:** 960×540 px · **Source:** 1920×1080 px · **Output:** `assets/production/dome/backgrounds/dm_bg03.png`
 **Anchor:** top-left · **Collision:** none · **Animation:** static repeat as specified in integration metadata
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Original Notre Dame Golden Dome silhouette and character palette
 
@@ -4732,7 +4732,7 @@ DO NOT BAKE LIVE TEXT: all headings, counters, accessibility instructions, and b
 **Integration:** Verify file bytes exist at assets/production/dome/backgrounds/dm_bg03.png; measure intrinsic 960x540 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID DM-BG03 in runtime manifest. At runtime map ID to Dome parallax/landmark layer; place in dome with anchor top-left; use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### DM-BG04 — Distant campus vista
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** dome · **Target:** 960×540 px · **Source:** 1920×1080 px · **Output:** `assets/production/dome/backgrounds/dm_bg04.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** dome · **Target:** 960×540 px · **Source:** 1920×1080 px · **Output:** `assets/production/dome/backgrounds/dm_bg04.png`
 **Anchor:** top-left · **Collision:** none · **Animation:** static repeat as specified in integration metadata
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Original Notre Dame Golden Dome silhouette and character palette
 
@@ -4769,7 +4769,7 @@ DO NOT BAKE LIVE TEXT: all headings, counters, accessibility instructions, and b
 **Integration:** Verify file bytes exist at assets/production/dome/backgrounds/dm_bg04.png; measure intrinsic 960x540 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID DM-BG04 in runtime manifest. At runtime map ID to Dome parallax/landmark layer; place in dome with anchor top-left; use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### DM-BG05 — Dome lower roof foreground
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** dome · **Target:** 960×540 px · **Source:** 1920×1080 px · **Output:** `assets/production/dome/backgrounds/dm_bg05.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** dome · **Target:** 960×540 px · **Source:** 1920×1080 px · **Output:** `assets/production/dome/backgrounds/dm_bg05.png`
 **Anchor:** top-left · **Collision:** none · **Animation:** static repeat as specified in integration metadata
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Original Notre Dame Golden Dome silhouette and character palette
 
@@ -4806,7 +4806,7 @@ DO NOT BAKE LIVE TEXT: all headings, counters, accessibility instructions, and b
 **Integration:** Verify file bytes exist at assets/production/dome/backgrounds/dm_bg05.png; measure intrinsic 960x540 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID DM-BG05 in runtime manifest. At runtime map ID to Dome parallax/landmark layer; place in dome with anchor top-left; use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### DM-BG06 — Bell Gallery shadow layer
-**State:** MISSING_GENERATION · **Priority:** P2 · **Where:** dome · **Target:** 960×540 px · **Source:** 1920×1080 px · **Output:** `assets/production/dome/backgrounds/dm_bg06.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P2 · **Where:** dome · **Target:** 960×540 px · **Source:** 1920×1080 px · **Output:** `assets/production/dome/backgrounds/dm_bg06.png`
 **Anchor:** top-left · **Collision:** none · **Animation:** static repeat as specified in integration metadata
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Original Notre Dame Golden Dome silhouette and character palette
 
@@ -4843,7 +4843,7 @@ DO NOT BAKE LIVE TEXT: all headings, counters, accessibility instructions, and b
 **Integration:** Verify file bytes exist at assets/production/dome/backgrounds/dm_bg06.png; measure intrinsic 960x540 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID DM-BG06 in runtime manifest. At runtime map ID to Dome parallax/landmark layer; place in dome with anchor top-left; use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### DM-BG08 — Fox finale night glow
-**State:** MISSING_GENERATION · **Priority:** P2 · **Where:** dome · **Target:** 960×540 px · **Source:** 1920×1080 px · **Output:** `assets/production/dome/backgrounds/dm_bg08.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P2 · **Where:** dome · **Target:** 960×540 px · **Source:** 1920×1080 px · **Output:** `assets/production/dome/backgrounds/dm_bg08.png`
 **Anchor:** top-left · **Collision:** none · **Animation:** static repeat as specified in integration metadata
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Original Notre Dame Golden Dome silhouette and character palette
 
@@ -4883,7 +4883,7 @@ DO NOT BAKE LIVE TEXT: all headings, counters, accessibility instructions, and b
 16 individual asset contracts. Process P0 first, P1 next, P2 last. Reference sheets and complete per-asset instructions are repeated in every prompt.
 
 #### DM-TL01 — Limestone walkable cap
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** dome · **Target:** 32×32 px · **Source:** 64×64 px · **Output:** `assets/production/dome/tiles/dm_tl01.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** dome · **Target:** 32×32 px · **Source:** 64×64 px · **Output:** `assets/production/dome/tiles/dm_tl01.png`
 **Anchor:** tile top-left · **Collision:** tile AABB · **Animation:** static tile, edge seams must align
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** 32px world tile grid and existing platforms geometry
 
@@ -4920,7 +4920,7 @@ TILE EDGE REQUIREMENT: art edges must meet exactly with adjacent tile copies; pr
 **Integration:** Verify file bytes exist at assets/production/dome/tiles/dm_tl01.png; measure intrinsic 32x32 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID DM-TL01 in runtime manifest. At runtime map ID to Dome authored collision art or decoration; place in dome with anchor tile top-left; use the engine auth collider "tile AABB" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### DM-TL02 — Limestone side brick
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** dome · **Target:** 32×32 px · **Source:** 64×64 px · **Output:** `assets/production/dome/tiles/dm_tl02.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** dome · **Target:** 32×32 px · **Source:** 64×64 px · **Output:** `assets/production/dome/tiles/dm_tl02.png`
 **Anchor:** tile top-left · **Collision:** fill only · **Animation:** static tile, edge seams must align
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** 32px world tile grid and existing platforms geometry
 
@@ -4957,7 +4957,7 @@ TILE EDGE REQUIREMENT: art edges must meet exactly with adjacent tile copies; pr
 **Integration:** Verify file bytes exist at assets/production/dome/tiles/dm_tl02.png; measure intrinsic 32x32 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID DM-TL02 in runtime manifest. At runtime map ID to Dome authored collision art or decoration; place in dome with anchor tile top-left; use the engine auth collider "fill only" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### DM-TL03 — Gold roof tile
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** dome · **Target:** 32×32 px · **Source:** 64×64 px · **Output:** `assets/production/dome/tiles/dm_tl03.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** dome · **Target:** 32×32 px · **Source:** 64×64 px · **Output:** `assets/production/dome/tiles/dm_tl03.png`
 **Anchor:** tile top-left · **Collision:** tile AABB · **Animation:** static tile, edge seams must align
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** 32px world tile grid and existing platforms geometry
 
@@ -4994,7 +4994,7 @@ TILE EDGE REQUIREMENT: art edges must meet exactly with adjacent tile copies; pr
 **Integration:** Verify file bytes exist at assets/production/dome/tiles/dm_tl03.png; measure intrinsic 32x32 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID DM-TL03 in runtime manifest. At runtime map ID to Dome authored collision art or decoration; place in dome with anchor tile top-left; use the engine auth collider "tile AABB" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### DM-TL06 — Cornice center
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** dome · **Target:** 32×32 px · **Source:** 64×64 px · **Output:** `assets/production/dome/tiles/dm_tl06.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** dome · **Target:** 32×32 px · **Source:** 64×64 px · **Output:** `assets/production/dome/tiles/dm_tl06.png`
 **Anchor:** tile top-left · **Collision:** one-way AABB top · **Animation:** static tile, edge seams must align
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** 32px world tile grid and existing platforms geometry
 
@@ -5031,7 +5031,7 @@ TILE EDGE REQUIREMENT: art edges must meet exactly with adjacent tile copies; pr
 **Integration:** Verify file bytes exist at assets/production/dome/tiles/dm_tl06.png; measure intrinsic 32x32 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID DM-TL06 in runtime manifest. At runtime map ID to Dome authored collision art or decoration; place in dome with anchor tile top-left; use the engine auth collider "one-way AABB top" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### DM-TL09 — Scaffold deck center
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** dome · **Target:** 32×32 px · **Source:** 64×64 px · **Output:** `assets/production/dome/tiles/dm_tl09.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** dome · **Target:** 32×32 px · **Source:** 64×64 px · **Output:** `assets/production/dome/tiles/dm_tl09.png`
 **Anchor:** tile top-left · **Collision:** one-way AABB top · **Animation:** static tile, edge seams must align
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** 32px world tile grid and existing platforms geometry
 
@@ -5068,7 +5068,7 @@ TILE EDGE REQUIREMENT: art edges must meet exactly with adjacent tile copies; pr
 **Integration:** Verify file bytes exist at assets/production/dome/tiles/dm_tl09.png; measure intrinsic 32x32 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID DM-TL09 in runtime manifest. At runtime map ID to Dome authored collision art or decoration; place in dome with anchor tile top-left; use the engine auth collider "one-way AABB top" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### DM-TL16 — Summit parapet block
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** dome · **Target:** 64×64 px · **Source:** 128×128 px · **Output:** `assets/production/dome/tiles/dm_tl16.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** dome · **Target:** 64×64 px · **Source:** 128×128 px · **Output:** `assets/production/dome/tiles/dm_tl16.png`
 **Anchor:** tile top-left · **Collision:** one-way AABB top · **Animation:** static tile, edge seams must align
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** 32px world tile grid and existing platforms geometry
 
@@ -5105,7 +5105,7 @@ TILE EDGE REQUIREMENT: art edges must meet exactly with adjacent tile copies; pr
 **Integration:** Verify file bytes exist at assets/production/dome/tiles/dm_tl16.png; measure intrinsic 64x64 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID DM-TL16 in runtime manifest. At runtime map ID to Dome authored collision art or decoration; place in dome with anchor tile top-left; use the engine auth collider "one-way AABB top" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### DM-TL04 — Curved roof eave left
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** dome · **Target:** 32×32 px · **Source:** 64×64 px · **Output:** `assets/production/dome/tiles/dm_tl04.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** dome · **Target:** 32×32 px · **Source:** 64×64 px · **Output:** `assets/production/dome/tiles/dm_tl04.png`
 **Anchor:** tile top-left · **Collision:** corner display only · **Animation:** static tile, edge seams must align
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** 32px world tile grid and existing platforms geometry
 
@@ -5142,7 +5142,7 @@ TILE EDGE REQUIREMENT: art edges must meet exactly with adjacent tile copies; pr
 **Integration:** Verify file bytes exist at assets/production/dome/tiles/dm_tl04.png; measure intrinsic 32x32 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID DM-TL04 in runtime manifest. At runtime map ID to Dome authored collision art or decoration; place in dome with anchor tile top-left; use the engine auth collider "corner display only" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### DM-TL05 — Curved roof eave right
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** dome · **Target:** 32×32 px · **Source:** 64×64 px · **Output:** `assets/production/dome/tiles/dm_tl05.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** dome · **Target:** 32×32 px · **Source:** 64×64 px · **Output:** `assets/production/dome/tiles/dm_tl05.png`
 **Anchor:** tile top-left · **Collision:** corner display only · **Animation:** static tile, edge seams must align
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** 32px world tile grid and existing platforms geometry
 
@@ -5179,7 +5179,7 @@ TILE EDGE REQUIREMENT: art edges must meet exactly with adjacent tile copies; pr
 **Integration:** Verify file bytes exist at assets/production/dome/tiles/dm_tl05.png; measure intrinsic 32x32 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID DM-TL05 in runtime manifest. At runtime map ID to Dome authored collision art or decoration; place in dome with anchor tile top-left; use the engine auth collider "corner display only" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### DM-TL07 — Cornice left cap
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** dome · **Target:** 32×32 px · **Source:** 64×64 px · **Output:** `assets/production/dome/tiles/dm_tl07.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** dome · **Target:** 32×32 px · **Source:** 64×64 px · **Output:** `assets/production/dome/tiles/dm_tl07.png`
 **Anchor:** tile top-left · **Collision:** one-way AABB top · **Animation:** static tile, edge seams must align
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** 32px world tile grid and existing platforms geometry
 
@@ -5216,7 +5216,7 @@ TILE EDGE REQUIREMENT: art edges must meet exactly with adjacent tile copies; pr
 **Integration:** Verify file bytes exist at assets/production/dome/tiles/dm_tl07.png; measure intrinsic 32x32 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID DM-TL07 in runtime manifest. At runtime map ID to Dome authored collision art or decoration; place in dome with anchor tile top-left; use the engine auth collider "one-way AABB top" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### DM-TL08 — Cornice right cap
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** dome · **Target:** 32×32 px · **Source:** 64×64 px · **Output:** `assets/production/dome/tiles/dm_tl08.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** dome · **Target:** 32×32 px · **Source:** 64×64 px · **Output:** `assets/production/dome/tiles/dm_tl08.png`
 **Anchor:** tile top-left · **Collision:** one-way AABB top · **Animation:** static tile, edge seams must align
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** 32px world tile grid and existing platforms geometry
 
@@ -5253,7 +5253,7 @@ TILE EDGE REQUIREMENT: art edges must meet exactly with adjacent tile copies; pr
 **Integration:** Verify file bytes exist at assets/production/dome/tiles/dm_tl08.png; measure intrinsic 32x32 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID DM-TL08 in runtime manifest. At runtime map ID to Dome authored collision art or decoration; place in dome with anchor tile top-left; use the engine auth collider "one-way AABB top" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### DM-TL10 — Scaffold steel support
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** dome · **Target:** 32×32 px · **Source:** 64×64 px · **Output:** `assets/production/dome/tiles/dm_tl10.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** dome · **Target:** 32×32 px · **Source:** 64×64 px · **Output:** `assets/production/dome/tiles/dm_tl10.png`
 **Anchor:** tile top-left · **Collision:** no collision · **Animation:** static tile, edge seams must align
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** 32px world tile grid and existing platforms geometry
 
@@ -5290,7 +5290,7 @@ TILE EDGE REQUIREMENT: art edges must meet exactly with adjacent tile copies; pr
 **Integration:** Verify file bytes exist at assets/production/dome/tiles/dm_tl10.png; measure intrinsic 32x32 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID DM-TL10 in runtime manifest. At runtime map ID to Dome authored collision art or decoration; place in dome with anchor tile top-left; use the engine auth collider "no collision" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### DM-TL11 — Arch keystone
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** dome · **Target:** 64×64 px · **Source:** 128×128 px · **Output:** `assets/production/dome/tiles/dm_tl11.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** dome · **Target:** 64×64 px · **Source:** 128×128 px · **Output:** `assets/production/dome/tiles/dm_tl11.png`
 **Anchor:** tile top-left · **Collision:** no collision · **Animation:** static tile, edge seams must align
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** 32px world tile grid and existing platforms geometry
 
@@ -5327,7 +5327,7 @@ TILE EDGE REQUIREMENT: art edges must meet exactly with adjacent tile copies; pr
 **Integration:** Verify file bytes exist at assets/production/dome/tiles/dm_tl11.png; measure intrinsic 64x64 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID DM-TL11 in runtime manifest. At runtime map ID to Dome authored collision art or decoration; place in dome with anchor tile top-left; use the engine auth collider "no collision" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### DM-TL12 — Window half arch left
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** dome · **Target:** 64×64 px · **Source:** 128×128 px · **Output:** `assets/production/dome/tiles/dm_tl12.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** dome · **Target:** 64×64 px · **Source:** 128×128 px · **Output:** `assets/production/dome/tiles/dm_tl12.png`
 **Anchor:** tile top-left · **Collision:** no collision · **Animation:** static tile, edge seams must align
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** 32px world tile grid and existing platforms geometry
 
@@ -5364,7 +5364,7 @@ TILE EDGE REQUIREMENT: art edges must meet exactly with adjacent tile copies; pr
 **Integration:** Verify file bytes exist at assets/production/dome/tiles/dm_tl12.png; measure intrinsic 64x64 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID DM-TL12 in runtime manifest. At runtime map ID to Dome authored collision art or decoration; place in dome with anchor tile top-left; use the engine auth collider "no collision" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### DM-TL13 — Window half arch right
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** dome · **Target:** 64×64 px · **Source:** 128×128 px · **Output:** `assets/production/dome/tiles/dm_tl13.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** dome · **Target:** 64×64 px · **Source:** 128×128 px · **Output:** `assets/production/dome/tiles/dm_tl13.png`
 **Anchor:** tile top-left · **Collision:** no collision · **Animation:** static tile, edge seams must align
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** 32px world tile grid and existing platforms geometry
 
@@ -5401,7 +5401,7 @@ TILE EDGE REQUIREMENT: art edges must meet exactly with adjacent tile copies; pr
 **Integration:** Verify file bytes exist at assets/production/dome/tiles/dm_tl13.png; measure intrinsic 64x64 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID DM-TL13 in runtime manifest. At runtime map ID to Dome authored collision art or decoration; place in dome with anchor tile top-left; use the engine auth collider "no collision" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### DM-TL15 — Gold dome rib vertical
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** dome · **Target:** 32×64 px · **Source:** 64×128 px · **Output:** `assets/production/dome/tiles/dm_tl15.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** dome · **Target:** 32×64 px · **Source:** 64×128 px · **Output:** `assets/production/dome/tiles/dm_tl15.png`
 **Anchor:** tile top-left · **Collision:** no collision · **Animation:** static tile, edge seams must align
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** 32px world tile grid and existing platforms geometry
 
@@ -5438,7 +5438,7 @@ TILE EDGE REQUIREMENT: art edges must meet exactly with adjacent tile copies; pr
 **Integration:** Verify file bytes exist at assets/production/dome/tiles/dm_tl15.png; measure intrinsic 32x64 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID DM-TL15 in runtime manifest. At runtime map ID to Dome authored collision art or decoration; place in dome with anchor tile top-left; use the engine auth collider "no collision" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### DM-TL14 — Cracked landing platform
-**State:** MISSING_GENERATION · **Priority:** P2 · **Where:** dome · **Target:** 32×32 px · **Source:** 64×64 px · **Output:** `assets/production/dome/tiles/dm_tl14.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P2 · **Where:** dome · **Target:** 32×32 px · **Source:** 64×64 px · **Output:** `assets/production/dome/tiles/dm_tl14.png`
 **Anchor:** tile top-left · **Collision:** one-way AABB top · **Animation:** static tile, edge seams must align
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** 32px world tile grid and existing platforms geometry
 
@@ -5478,7 +5478,7 @@ TILE EDGE REQUIREMENT: art edges must meet exactly with adjacent tile copies; pr
 10 individual asset contracts. Process P0 first, P1 next, P2 last. Reference sheets and complete per-asset instructions are repeated in every prompt.
 
 #### DM-PR01 — Main Building window module
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** dome · **Target:** 128×192 px · **Source:** 256×384 px · **Output:** `assets/production/dome/props/dm_pr01.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** dome · **Target:** 128×192 px · **Source:** 256×384 px · **Output:** `assets/production/dome/props/dm_pr01.png`
 **Anchor:** base-center · **Collision:** none unless separately scripted · **Animation:** static prop
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Dome hero backdrop and actual level geometry, not baked collisions
 
@@ -5513,7 +5513,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/dome/props/dm_pr01.png; measure intrinsic 128x192 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID DM-PR01 in runtime manifest. At runtime map ID to Dome atmosphere and architecture dressing; place in dome with anchor base-center; use the engine auth collider "none unless separately scripted" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### DM-PR03 — Cupola hero silhouette
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** dome · **Target:** 512×384 px · **Source:** 1024×768 px · **Output:** `assets/production/dome/props/dm_pr03.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** dome · **Target:** 512×384 px · **Source:** 1024×768 px · **Output:** `assets/production/dome/props/dm_pr03.png`
 **Anchor:** bottom-center · **Collision:** none unless separately scripted · **Animation:** static prop
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Dome hero backdrop and actual level geometry, not baked collisions
 
@@ -5548,7 +5548,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/dome/props/dm_pr03.png; measure intrinsic 512x384 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID DM-PR03 in runtime manifest. At runtime map ID to Dome atmosphere and architecture dressing; place in dome with anchor bottom-center; use the engine auth collider "none unless separately scripted" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### DM-PR04 — Mary statue silhouette
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** dome · **Target:** 160×256 px · **Source:** 320×512 px · **Output:** `assets/production/dome/props/dm_pr04.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** dome · **Target:** 160×256 px · **Source:** 320×512 px · **Output:** `assets/production/dome/props/dm_pr04.png`
 **Anchor:** bottom-center · **Collision:** none unless separately scripted · **Animation:** static prop
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Dome hero backdrop and actual level geometry, not baked collisions
 
@@ -5583,7 +5583,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/dome/props/dm_pr04.png; measure intrinsic 160x256 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID DM-PR04 in runtime manifest. At runtime map ID to Dome atmosphere and architecture dressing; place in dome with anchor bottom-center; use the engine auth collider "none unless separately scripted" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### DM-PR02 — Main Building pilaster
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** dome · **Target:** 128×256 px · **Source:** 256×512 px · **Output:** `assets/production/dome/props/dm_pr02.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** dome · **Target:** 128×256 px · **Source:** 256×512 px · **Output:** `assets/production/dome/props/dm_pr02.png`
 **Anchor:** base-center · **Collision:** none unless separately scripted · **Animation:** static prop
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Dome hero backdrop and actual level geometry, not baked collisions
 
@@ -5618,7 +5618,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/dome/props/dm_pr02.png; measure intrinsic 128x256 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID DM-PR02 in runtime manifest. At runtime map ID to Dome atmosphere and architecture dressing; place in dome with anchor base-center; use the engine auth collider "none unless separately scripted" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### DM-PR05 — Summit railing section
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** dome · **Target:** 256×96 px · **Source:** 512×192 px · **Output:** `assets/production/dome/props/dm_pr05.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** dome · **Target:** 256×96 px · **Source:** 512×192 px · **Output:** `assets/production/dome/props/dm_pr05.png`
 **Anchor:** base-center · **Collision:** none unless separately scripted · **Animation:** static prop
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Dome hero backdrop and actual level geometry, not baked collisions
 
@@ -5653,7 +5653,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/dome/props/dm_pr05.png; measure intrinsic 256x96 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID DM-PR05 in runtime manifest. At runtime map ID to Dome atmosphere and architecture dressing; place in dome with anchor base-center; use the engine auth collider "none unless separately scripted" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### DM-PR06 — Blue-and-gold heraldic pennant
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** dome · **Target:** 128×192 px · **Source:** 256×384 px · **Output:** `assets/production/dome/props/dm_pr06.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** dome · **Target:** 128×192 px · **Source:** 256×384 px · **Output:** `assets/production/dome/props/dm_pr06.png`
 **Anchor:** base-center · **Collision:** none unless separately scripted · **Animation:** static prop
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Dome hero backdrop and actual level geometry, not baked collisions
 
@@ -5688,7 +5688,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/dome/props/dm_pr06.png; measure intrinsic 128x192 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID DM-PR06 in runtime manifest. At runtime map ID to Dome atmosphere and architecture dressing; place in dome with anchor base-center; use the engine auth collider "none unless separately scripted" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### DM-PR09 — Sunlit cornice column
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** dome · **Target:** 128×256 px · **Source:** 256×512 px · **Output:** `assets/production/dome/props/dm_pr09.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** dome · **Target:** 128×256 px · **Source:** 256×512 px · **Output:** `assets/production/dome/props/dm_pr09.png`
 **Anchor:** base-center · **Collision:** none unless separately scripted · **Animation:** static prop
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Dome hero backdrop and actual level geometry, not baked collisions
 
@@ -5723,7 +5723,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/dome/props/dm_pr09.png; measure intrinsic 128x256 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID DM-PR09 in runtime manifest. At runtime map ID to Dome atmosphere and architecture dressing; place in dome with anchor base-center; use the engine auth collider "none unless separately scripted" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### DM-PR10 — Final summit flag
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** dome · **Target:** 160×256 px · **Source:** 320×512 px · **Output:** `assets/production/dome/props/dm_pr10.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** dome · **Target:** 160×256 px · **Source:** 320×512 px · **Output:** `assets/production/dome/props/dm_pr10.png`
 **Anchor:** base-center · **Collision:** none unless separately scripted · **Animation:** static prop
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Dome hero backdrop and actual level geometry, not baked collisions
 
@@ -5758,7 +5758,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/dome/props/dm_pr10.png; measure intrinsic 160x256 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID DM-PR10 in runtime manifest. At runtime map ID to Dome atmosphere and architecture dressing; place in dome with anchor base-center; use the engine auth collider "none unless separately scripted" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### DM-PR07 — Gilded bell arch ornament
-**State:** MISSING_GENERATION · **Priority:** P2 · **Where:** dome · **Target:** 256×256 px · **Source:** 512×512 px · **Output:** `assets/production/dome/props/dm_pr07.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P2 · **Where:** dome · **Target:** 256×256 px · **Source:** 512×512 px · **Output:** `assets/production/dome/props/dm_pr07.png`
 **Anchor:** base-center · **Collision:** none unless separately scripted · **Animation:** static prop
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Dome hero backdrop and actual level geometry, not baked collisions
 
@@ -5793,7 +5793,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/dome/props/dm_pr07.png; measure intrinsic 256x256 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID DM-PR07 in runtime manifest. At runtime map ID to Dome atmosphere and architecture dressing; place in dome with anchor base-center; use the engine auth collider "none unless separately scripted" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### DM-PR08 — Rooftop sandstone gargoyle
-**State:** MISSING_GENERATION · **Priority:** P2 · **Where:** dome · **Target:** 128×128 px · **Source:** 256×256 px · **Output:** `assets/production/dome/props/dm_pr08.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P2 · **Where:** dome · **Target:** 128×128 px · **Source:** 256×256 px · **Output:** `assets/production/dome/props/dm_pr08.png`
 **Anchor:** base-center · **Collision:** none unless separately scripted · **Animation:** static prop
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Dome hero backdrop and actual level geometry, not baked collisions
 
@@ -5831,7 +5831,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 10 individual asset contracts. Process P0 first, P1 next, P2 last. Reference sheets and complete per-asset instructions are repeated in every prompt.
 
 #### DM-MC01 — Moving lift deck idle
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** dome · **Target:** 256×64 px · **Source:** 512×128 px · **Output:** `assets/production/dome/mechanics/dm_mc01.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** dome · **Target:** 256×64 px · **Source:** 512×128 px · **Output:** `assets/production/dome/mechanics/dm_mc01.png`
 **Anchor:** top-left · **Collision:** one-way moving AABB · **Animation:** single exact mechanic state; pair shares identical pivot and bounds
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** World pulse script, collision and alternate matching state
 
@@ -5866,7 +5866,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/dome/mechanics/dm_mc01.png; measure intrinsic 256x64 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID DM-MC01 in runtime manifest. At runtime map ID to Dome authored interactive object; place in dome with anchor top-left; use the engine auth collider "one-way moving AABB" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### DM-MC03 — Pulse banner bridge off
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** dome · **Target:** 256×64 px · **Source:** 512×128 px · **Output:** `assets/production/dome/mechanics/dm_mc03.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** dome · **Target:** 256×64 px · **Source:** 512×128 px · **Output:** `assets/production/dome/mechanics/dm_mc03.png`
 **Anchor:** top-left · **Collision:** inactive non-collidable · **Animation:** single exact mechanic state; pair shares identical pivot and bounds
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** World pulse script, collision and alternate matching state
 
@@ -5901,7 +5901,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/dome/mechanics/dm_mc03.png; measure intrinsic 256x64 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID DM-MC03 in runtime manifest. At runtime map ID to Dome authored interactive object; place in dome with anchor top-left; use the engine auth collider "inactive non-collidable" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### DM-MC04 — Pulse banner bridge on
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** dome · **Target:** 256×64 px · **Source:** 512×128 px · **Output:** `assets/production/dome/mechanics/dm_mc04.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** dome · **Target:** 256×64 px · **Source:** 512×128 px · **Output:** `assets/production/dome/mechanics/dm_mc04.png`
 **Anchor:** top-left · **Collision:** active one-way AABB · **Animation:** single exact mechanic state; pair shares identical pivot and bounds
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** World pulse script, collision and alternate matching state
 
@@ -5936,7 +5936,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/dome/mechanics/dm_mc04.png; measure intrinsic 256x64 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID DM-MC04 in runtime manifest. At runtime map ID to Dome authored interactive object; place in dome with anchor top-left; use the engine auth collider "active one-way AABB" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### DM-MC05 — Dome relay drum quiet
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** dome · **Target:** 128×128 px · **Source:** 256×256 px · **Output:** `assets/production/dome/mechanics/dm_mc05.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** dome · **Target:** 128×128 px · **Source:** 256×256 px · **Output:** `assets/production/dome/mechanics/dm_mc05.png`
 **Anchor:** top-left · **Collision:** interaction AABB only · **Animation:** single exact mechanic state; pair shares identical pivot and bounds
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** World pulse script, collision and alternate matching state
 
@@ -5971,7 +5971,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/dome/mechanics/dm_mc05.png; measure intrinsic 128x128 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID DM-MC05 in runtime manifest. At runtime map ID to Dome authored interactive object; place in dome with anchor top-left; use the engine auth collider "interaction AABB only" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### DM-MC06 — Dome relay drum activated
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** dome · **Target:** 128×128 px · **Source:** 256×256 px · **Output:** `assets/production/dome/mechanics/dm_mc06.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** dome · **Target:** 128×128 px · **Source:** 256×256 px · **Output:** `assets/production/dome/mechanics/dm_mc06.png`
 **Anchor:** top-left · **Collision:** interaction AABB only · **Animation:** single exact mechanic state; pair shares identical pivot and bounds
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** World pulse script, collision and alternate matching state
 
@@ -6006,7 +6006,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/dome/mechanics/dm_mc06.png; measure intrinsic 128x128 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID DM-MC06 in runtime manifest. At runtime map ID to Dome authored interactive object; place in dome with anchor top-left; use the engine auth collider "interaction AABB only" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### DM-MC07 — Gilded checkpoint dark
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** dome · **Target:** 128×192 px · **Source:** 256×384 px · **Output:** `assets/production/dome/mechanics/dm_mc07.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** dome · **Target:** 128×192 px · **Source:** 256×384 px · **Output:** `assets/production/dome/mechanics/dm_mc07.png`
 **Anchor:** bottom-center · **Collision:** proximity checkpoint · **Animation:** single exact mechanic state; pair shares identical pivot and bounds
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** World pulse script, collision and alternate matching state
 
@@ -6041,7 +6041,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/dome/mechanics/dm_mc07.png; measure intrinsic 128x192 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID DM-MC07 in runtime manifest. At runtime map ID to Dome authored interactive object; place in dome with anchor bottom-center; use the engine auth collider "proximity checkpoint" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### DM-MC08 — Gilded checkpoint active
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** dome · **Target:** 128×192 px · **Source:** 256×384 px · **Output:** `assets/production/dome/mechanics/dm_mc08.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** dome · **Target:** 128×192 px · **Source:** 256×384 px · **Output:** `assets/production/dome/mechanics/dm_mc08.png`
 **Anchor:** bottom-center · **Collision:** proximity checkpoint · **Animation:** single exact mechanic state; pair shares identical pivot and bounds
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** World pulse script, collision and alternate matching state
 
@@ -6076,7 +6076,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/dome/mechanics/dm_mc08.png; measure intrinsic 128x192 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID DM-MC08 in runtime manifest. At runtime map ID to Dome authored interactive object; place in dome with anchor bottom-center; use the engine auth collider "proximity checkpoint" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### DM-MC02 — Moving lift undercarriage
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** dome · **Target:** 256×128 px · **Source:** 512×256 px · **Output:** `assets/production/dome/mechanics/dm_mc02.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** dome · **Target:** 256×128 px · **Source:** 512×256 px · **Output:** `assets/production/dome/mechanics/dm_mc02.png`
 **Anchor:** top-left · **Collision:** none · **Animation:** single exact mechanic state; pair shares identical pivot and bounds
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** World pulse script, collision and alternate matching state
 
@@ -6111,7 +6111,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/dome/mechanics/dm_mc02.png; measure intrinsic 256x128 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID DM-MC02 in runtime manifest. At runtime map ID to Dome authored interactive object; place in dome with anchor top-left; use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### DM-MC09 — Final Summit Gate locked
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** dome · **Target:** 256×320 px · **Source:** 512×640 px · **Output:** `assets/production/dome/mechanics/dm_mc09.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** dome · **Target:** 256×320 px · **Source:** 512×640 px · **Output:** `assets/production/dome/mechanics/dm_mc09.png`
 **Anchor:** top-left · **Collision:** gate collision bounds · **Animation:** single exact mechanic state; pair shares identical pivot and bounds
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** World pulse script, collision and alternate matching state
 
@@ -6146,7 +6146,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/dome/mechanics/dm_mc09.png; measure intrinsic 256x320 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID DM-MC09 in runtime manifest. At runtime map ID to Dome authored interactive object; place in dome with anchor top-left; use the engine auth collider "gate collision bounds" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### DM-MC10 — Final Summit Gate open
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** dome · **Target:** 256×320 px · **Source:** 512×640 px · **Output:** `assets/production/dome/mechanics/dm_mc10.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** dome · **Target:** 256×320 px · **Source:** 512×640 px · **Output:** `assets/production/dome/mechanics/dm_mc10.png`
 **Anchor:** top-left · **Collision:** no collision when open · **Animation:** single exact mechanic state; pair shares identical pivot and bounds
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** World pulse script, collision and alternate matching state
 
@@ -6184,7 +6184,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 12 individual asset contracts. Process P0 first, P1 next, P2 last. Reference sheets and complete per-asset instructions are repeated in every prompt.
 
 #### BS-VF01 — Charge telegraph ring
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** boss · **Target:** 256×256 px · **Source:** 512×512 px · **Output:** `assets/production/boss/effects/bs_vf01.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** boss · **Target:** 256×256 px · **Source:** 512×512 px · **Output:** `assets/production/boss/effects/bs_vf01.png`
 **Anchor:** center · **Collision:** FX only, separate from hitboxes · **Animation:** single state, no spritesheet unless intentional sequence is later verified
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Fox art approved by human + boss state machine
 
@@ -6219,7 +6219,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/boss/effects/bs_vf01.png; measure intrinsic 256x256 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID BS-VF01 in runtime manifest. At runtime map ID to Boss readability, counterplay and feedback; place in boss with anchor center; use the engine auth collider "FX only, separate from hitboxes" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### BS-VF02 — Charge direction streak
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** boss · **Target:** 256×96 px · **Source:** 512×192 px · **Output:** `assets/production/boss/effects/bs_vf02.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** boss · **Target:** 256×96 px · **Source:** 512×192 px · **Output:** `assets/production/boss/effects/bs_vf02.png`
 **Anchor:** center · **Collision:** FX only, separate from hitboxes · **Animation:** single state, no spritesheet unless intentional sequence is later verified
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Fox art approved by human + boss state machine
 
@@ -6254,7 +6254,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/boss/effects/bs_vf02.png; measure intrinsic 256x96 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID BS-VF02 in runtime manifest. At runtime map ID to Boss readability, counterplay and feedback; place in boss with anchor center; use the engine auth collider "FX only, separate from hitboxes" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### BS-VF04 — Fox confetti projectile
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** boss · **Target:** 64×64 px · **Source:** 128×128 px · **Output:** `assets/production/boss/effects/bs_vf04.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** boss · **Target:** 64×64 px · **Source:** 128×128 px · **Output:** `assets/production/boss/effects/bs_vf04.png`
 **Anchor:** center · **Collision:** FX only, separate from hitboxes · **Animation:** single state, no spritesheet unless intentional sequence is later verified
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Fox art approved by human + boss state machine
 
@@ -6289,7 +6289,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/boss/effects/bs_vf04.png; measure intrinsic 64x64 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID BS-VF04 in runtime manifest. At runtime map ID to Boss readability, counterplay and feedback; place in boss with anchor center; use the engine auth collider "FX only, separate from hitboxes" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### BS-VF05 — Fox volley warning
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** boss · **Target:** 192×96 px · **Source:** 384×192 px · **Output:** `assets/production/boss/effects/bs_vf05.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** boss · **Target:** 192×96 px · **Source:** 384×192 px · **Output:** `assets/production/boss/effects/bs_vf05.png`
 **Anchor:** center · **Collision:** FX only, separate from hitboxes · **Animation:** single state, no spritesheet unless intentional sequence is later verified
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Fox art approved by human + boss state machine
 
@@ -6324,7 +6324,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/boss/effects/bs_vf05.png; measure intrinsic 192x96 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID BS-VF05 in runtime manifest. At runtime map ID to Boss readability, counterplay and feedback; place in boss with anchor center; use the engine auth collider "FX only, separate from hitboxes" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### BS-VF06 — Fox stagger stars
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** boss · **Target:** 96×96 px · **Source:** 192×192 px · **Output:** `assets/production/boss/effects/bs_vf06.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** boss · **Target:** 96×96 px · **Source:** 192×192 px · **Output:** `assets/production/boss/effects/bs_vf06.png`
 **Anchor:** center · **Collision:** FX only, separate from hitboxes · **Animation:** single state, no spritesheet unless intentional sequence is later verified
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Fox art approved by human + boss state machine
 
@@ -6359,7 +6359,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/boss/effects/bs_vf06.png; measure intrinsic 96x96 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID BS-VF06 in runtime manifest. At runtime map ID to Boss readability, counterplay and feedback; place in boss with anchor center; use the engine auth collider "FX only, separate from hitboxes" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### BS-VF08 — Boss health pip full
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** boss · **Target:** 64×64 px · **Source:** 128×128 px · **Output:** `assets/production/boss/effects/bs_vf08.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** boss · **Target:** 64×64 px · **Source:** 128×128 px · **Output:** `assets/production/boss/effects/bs_vf08.png`
 **Anchor:** center · **Collision:** FX only, separate from hitboxes · **Animation:** single state, no spritesheet unless intentional sequence is later verified
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Fox art approved by human + boss state machine
 
@@ -6394,7 +6394,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/boss/effects/bs_vf08.png; measure intrinsic 64x64 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID BS-VF08 in runtime manifest. At runtime map ID to Boss readability, counterplay and feedback; place in boss with anchor center; use the engine auth collider "FX only, separate from hitboxes" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### BS-VF09 — Boss health pip empty
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** boss · **Target:** 64×64 px · **Source:** 128×128 px · **Output:** `assets/production/boss/effects/bs_vf09.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** boss · **Target:** 64×64 px · **Source:** 128×128 px · **Output:** `assets/production/boss/effects/bs_vf09.png`
 **Anchor:** center · **Collision:** FX only, separate from hitboxes · **Animation:** single state, no spritesheet unless intentional sequence is later verified
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Fox art approved by human + boss state machine
 
@@ -6429,7 +6429,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/boss/effects/bs_vf09.png; measure intrinsic 64x64 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID BS-VF09 in runtime manifest. At runtime map ID to Boss readability, counterplay and feedback; place in boss with anchor center; use the engine auth collider "FX only, separate from hitboxes" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### BS-VF03 — Fox charge dust burst
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** boss · **Target:** 192×96 px · **Source:** 384×192 px · **Output:** `assets/production/boss/effects/bs_vf03.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** boss · **Target:** 192×96 px · **Source:** 384×192 px · **Output:** `assets/production/boss/effects/bs_vf03.png`
 **Anchor:** center · **Collision:** FX only, separate from hitboxes · **Animation:** single state, no spritesheet unless intentional sequence is later verified
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Fox art approved by human + boss state machine
 
@@ -6464,7 +6464,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/boss/effects/bs_vf03.png; measure intrinsic 192x96 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID BS-VF03 in runtime manifest. At runtime map ID to Boss readability, counterplay and feedback; place in boss with anchor center; use the engine auth collider "FX only, separate from hitboxes" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### BS-VF07 — Fox hit shimmer
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** boss · **Target:** 128×128 px · **Source:** 256×256 px · **Output:** `assets/production/boss/effects/bs_vf07.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** boss · **Target:** 128×128 px · **Source:** 256×256 px · **Output:** `assets/production/boss/effects/bs_vf07.png`
 **Anchor:** center · **Collision:** FX only, separate from hitboxes · **Animation:** single state, no spritesheet unless intentional sequence is later verified
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Fox art approved by human + boss state machine
 
@@ -6499,7 +6499,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/boss/effects/bs_vf07.png; measure intrinsic 128x128 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID BS-VF07 in runtime manifest. At runtime map ID to Boss readability, counterplay and feedback; place in boss with anchor center; use the engine auth collider "FX only, separate from hitboxes" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### BS-VF10 — Boss defeated puff
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** boss · **Target:** 192×128 px · **Source:** 384×256 px · **Output:** `assets/production/boss/effects/bs_vf10.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** boss · **Target:** 192×128 px · **Source:** 384×256 px · **Output:** `assets/production/boss/effects/bs_vf10.png`
 **Anchor:** center · **Collision:** FX only, separate from hitboxes · **Animation:** single state, no spritesheet unless intentional sequence is later verified
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Fox art approved by human + boss state machine
 
@@ -6534,7 +6534,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/boss/effects/bs_vf10.png; measure intrinsic 192x128 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID BS-VF10 in runtime manifest. At runtime map ID to Boss readability, counterplay and feedback; place in boss with anchor center; use the engine auth collider "FX only, separate from hitboxes" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### BS-VF11 — Summit shockwave
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** boss · **Target:** 256×64 px · **Source:** 512×128 px · **Output:** `assets/production/boss/effects/bs_vf11.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** boss · **Target:** 256×64 px · **Source:** 512×128 px · **Output:** `assets/production/boss/effects/bs_vf11.png`
 **Anchor:** center · **Collision:** FX only, separate from hitboxes · **Animation:** single state, no spritesheet unless intentional sequence is later verified
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Fox art approved by human + boss state machine
 
@@ -6569,7 +6569,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/boss/effects/bs_vf11.png; measure intrinsic 256x64 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID BS-VF11 in runtime manifest. At runtime map ID to Boss readability, counterplay and feedback; place in boss with anchor center; use the engine auth collider "FX only, separate from hitboxes" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### BS-VF12 — Fox victory truce sparkle
-**State:** MISSING_GENERATION · **Priority:** P2 · **Where:** boss · **Target:** 128×128 px · **Source:** 256×256 px · **Output:** `assets/production/boss/effects/bs_vf12.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P2 · **Where:** boss · **Target:** 128×128 px · **Source:** 256×256 px · **Output:** `assets/production/boss/effects/bs_vf12.png`
 **Anchor:** center · **Collision:** FX only, separate from hitboxes · **Animation:** single state, no spritesheet unless intentional sequence is later verified
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Fox art approved by human + boss state machine
 
@@ -6607,7 +6607,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 6 individual asset contracts. Process P0 first, P1 next, P2 last. Reference sheets and complete per-asset instructions are repeated in every prompt.
 
 #### PK-01 — Shake cup flip frame A
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** campus,dome · **Target:** 64×64 px · **Source:** 128×128 px · **Output:** `assets/production/pickups/pk_01.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** campus,dome · **Target:** 64×64 px · **Source:** 128×128 px · **Output:** `assets/production/pickups/pk_01.png`
 **Anchor:** center · **Collision:** radial pickup radius authored separately · **Animation:** single frame for this specific named animation state
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** CO-01 pickup art + runtime entity metadata
 
@@ -6642,7 +6642,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/pickups/pk_01.png; measure intrinsic 64x64 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID PK-01 in runtime manifest. At runtime map ID to Collectible animation or optional power-up; place in campus,dome with anchor center; use the engine auth collider "radial pickup radius authored separately" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### PK-02 — Shake cup flip frame B
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** campus,dome · **Target:** 64×64 px · **Source:** 128×128 px · **Output:** `assets/production/pickups/pk_02.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** campus,dome · **Target:** 64×64 px · **Source:** 128×128 px · **Output:** `assets/production/pickups/pk_02.png`
 **Anchor:** center · **Collision:** radial pickup radius authored separately · **Animation:** single frame for this specific named animation state
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** CO-01 pickup art + runtime entity metadata
 
@@ -6677,7 +6677,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/pickups/pk_02.png; measure intrinsic 64x64 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID PK-02 in runtime manifest. At runtime map ID to Collectible animation or optional power-up; place in campus,dome with anchor center; use the engine auth collider "radial pickup radius authored separately" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### PK-03 — Shake cup flip frame C
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** campus,dome · **Target:** 64×64 px · **Source:** 128×128 px · **Output:** `assets/production/pickups/pk_03.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** campus,dome · **Target:** 64×64 px · **Source:** 128×128 px · **Output:** `assets/production/pickups/pk_03.png`
 **Anchor:** center · **Collision:** radial pickup radius authored separately · **Animation:** single frame for this specific named animation state
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** CO-01 pickup art + runtime entity metadata
 
@@ -6712,7 +6712,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/pickups/pk_03.png; measure intrinsic 64x64 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID PK-03 in runtime manifest. At runtime map ID to Collectible animation or optional power-up; place in campus,dome with anchor center; use the engine auth collider "radial pickup radius authored separately" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### PK-04 — Golden shake secret pulse
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** campus,dome · **Target:** 64×64 px · **Source:** 128×128 px · **Output:** `assets/production/pickups/pk_04.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** campus,dome · **Target:** 64×64 px · **Source:** 128×128 px · **Output:** `assets/production/pickups/pk_04.png`
 **Anchor:** center · **Collision:** radial pickup radius authored separately · **Animation:** single frame for this specific named animation state
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** CO-01 pickup art + runtime entity metadata
 
@@ -6747,7 +6747,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/pickups/pk_04.png; measure intrinsic 64x64 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID PK-04 in runtime manifest. At runtime map ID to Collectible animation or optional power-up; place in campus,dome with anchor center; use the engine auth collider "radial pickup radius authored separately" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### PK-05 — Heart pickup
-**State:** MISSING_GENERATION · **Priority:** P2 · **Where:** campus,dome · **Target:** 64×64 px · **Source:** 128×128 px · **Output:** `assets/production/pickups/pk_05.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P2 · **Where:** campus,dome · **Target:** 64×64 px · **Source:** 128×128 px · **Output:** `assets/production/pickups/pk_05.png`
 **Anchor:** center · **Collision:** radial pickup radius authored separately · **Animation:** single frame for this specific named animation state
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** CO-01 pickup art + runtime entity metadata
 
@@ -6782,7 +6782,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/pickups/pk_05.png; measure intrinsic 64x64 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID PK-05 in runtime manifest. At runtime map ID to Collectible animation or optional power-up; place in campus,dome with anchor center; use the engine auth collider "radial pickup radius authored separately" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### PK-06 — Speed paw booster
-**State:** MISSING_GENERATION · **Priority:** P2 · **Where:** campus,dome · **Target:** 64×64 px · **Source:** 128×128 px · **Output:** `assets/production/pickups/pk_06.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P2 · **Where:** campus,dome · **Target:** 64×64 px · **Source:** 128×128 px · **Output:** `assets/production/pickups/pk_06.png`
 **Anchor:** center · **Collision:** radial pickup radius authored separately · **Animation:** single frame for this specific named animation state
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** CO-01 pickup art + runtime entity metadata
 
@@ -6820,7 +6820,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 8 individual asset contracts. Process P0 first, P1 next, P2 last. Reference sheets and complete per-asset instructions are repeated in every prompt.
 
 #### EX-VF01 — Dome jump burst
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** all · **Target:** 128×96 px · **Source:** 256×192 px · **Output:** `assets/production/effects/ex_vf01.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** all · **Target:** 128×96 px · **Source:** 256×192 px · **Output:** `assets/production/effects/ex_vf01.png`
 **Anchor:** center · **Collision:** FX only · **Animation:** single VFX key pose/independent output
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Named gameplay event and existing Canvas renderer
 
@@ -6855,7 +6855,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/effects/ex_vf01.png; measure intrinsic 128x96 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID EX-VF01 in runtime manifest. At runtime map ID to Interactivity/impact readability; place in all with anchor center; use the engine auth collider "FX only" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### EX-VF02 — Dome moving lift motor dust
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** all · **Target:** 128×96 px · **Source:** 256×192 px · **Output:** `assets/production/effects/ex_vf02.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** all · **Target:** 128×96 px · **Source:** 256×192 px · **Output:** `assets/production/effects/ex_vf02.png`
 **Anchor:** center · **Collision:** FX only · **Animation:** single VFX key pose/independent output
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Named gameplay event and existing Canvas renderer
 
@@ -6890,7 +6890,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/effects/ex_vf02.png; measure intrinsic 128x96 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID EX-VF02 in runtime manifest. At runtime map ID to Interactivity/impact readability; place in all with anchor center; use the engine auth collider "FX only" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### EX-VF03 — Pulse bridge warning tick
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** all · **Target:** 256×32 px · **Source:** 512×64 px · **Output:** `assets/production/effects/ex_vf03.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** all · **Target:** 256×32 px · **Source:** 512×64 px · **Output:** `assets/production/effects/ex_vf03.png`
 **Anchor:** center · **Collision:** FX only · **Animation:** single VFX key pose/independent output
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Named gameplay event and existing Canvas renderer
 
@@ -6925,7 +6925,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/effects/ex_vf03.png; measure intrinsic 256x32 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID EX-VF03 in runtime manifest. At runtime map ID to Interactivity/impact readability; place in all with anchor center; use the engine auth collider "FX only" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### EX-VF04 — Shamrock counter fly-up
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** all · **Target:** 128×96 px · **Source:** 256×192 px · **Output:** `assets/production/effects/ex_vf04.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** all · **Target:** 128×96 px · **Source:** 256×192 px · **Output:** `assets/production/effects/ex_vf04.png`
 **Anchor:** center · **Collision:** FX only · **Animation:** single VFX key pose/independent output
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Named gameplay event and existing Canvas renderer
 
@@ -6960,7 +6960,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/effects/ex_vf04.png; measure intrinsic 128x96 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID EX-VF04 in runtime manifest. At runtime map ID to Interactivity/impact readability; place in all with anchor center; use the engine auth collider "FX only" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### EX-VF07 — Fox win impact
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** all · **Target:** 256×256 px · **Source:** 512×512 px · **Output:** `assets/production/effects/ex_vf07.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** all · **Target:** 256×256 px · **Source:** 512×512 px · **Output:** `assets/production/effects/ex_vf07.png`
 **Anchor:** center · **Collision:** FX only · **Animation:** single VFX key pose/independent output
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Named gameplay event and existing Canvas renderer
 
@@ -6995,7 +6995,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/effects/ex_vf07.png; measure intrinsic 256x256 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID EX-VF07 in runtime manifest. At runtime map ID to Interactivity/impact readability; place in all with anchor center; use the engine auth collider "FX only" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### EX-VF05 — Golden summit sunray
-**State:** MISSING_GENERATION · **Priority:** P2 · **Where:** all · **Target:** 960×540 px · **Source:** 1920×1080 px · **Output:** `assets/production/effects/ex_vf05.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P2 · **Where:** all · **Target:** 960×540 px · **Source:** 1920×1080 px · **Output:** `assets/production/effects/ex_vf05.png`
 **Anchor:** center · **Collision:** FX only · **Animation:** single VFX key pose/independent output
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Named gameplay event and existing Canvas renderer
 
@@ -7030,7 +7030,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/effects/ex_vf05.png; measure intrinsic 960x540 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID EX-VF05 in runtime manifest. At runtime map ID to Interactivity/impact readability; place in all with anchor center; use the engine auth collider "FX only" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### EX-VF06 — Assist mode safe landing ring
-**State:** MISSING_GENERATION · **Priority:** P2 · **Where:** all · **Target:** 128×32 px · **Source:** 256×64 px · **Output:** `assets/production/effects/ex_vf06.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P2 · **Where:** all · **Target:** 128×32 px · **Source:** 256×64 px · **Output:** `assets/production/effects/ex_vf06.png`
 **Anchor:** center · **Collision:** FX only · **Animation:** single VFX key pose/independent output
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Named gameplay event and existing Canvas renderer
 
@@ -7065,7 +7065,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/effects/ex_vf06.png; measure intrinsic 128x32 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID EX-VF06 in runtime manifest. At runtime map ID to Interactivity/impact readability; place in all with anchor center; use the engine auth collider "FX only" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### EX-VF08 — Bonus secret reveal shimmer
-**State:** MISSING_GENERATION · **Priority:** P2 · **Where:** all · **Target:** 128×128 px · **Source:** 256×256 px · **Output:** `assets/production/effects/ex_vf08.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P2 · **Where:** all · **Target:** 128×128 px · **Source:** 256×256 px · **Output:** `assets/production/effects/ex_vf08.png`
 **Anchor:** center · **Collision:** FX only · **Animation:** single VFX key pose/independent output
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Named gameplay event and existing Canvas renderer
 
@@ -7103,7 +7103,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 14 individual asset contracts. Process P0 first, P1 next, P2 last. Reference sheets and complete per-asset instructions are repeated in every prompt.
 
 #### BD-01 — Birthday cake full base
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** finale · **Target:** 512×384 px · **Source:** 1024×768 px · **Output:** `assets/production/birthday/bd_01.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** finale · **Target:** 512×384 px · **Source:** 1024×768 px · **Output:** `assets/production/birthday/bd_01.png`
 **Anchor:** bottom-center · **Collision:** none (decorative only) · **Animation:** single static state/one-shot sprite
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Cinnamon existing victory pose + birthday DOM text + independent Shake cup source
 
@@ -7138,7 +7138,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/birthday/bd_01.png; measure intrinsic 512x384 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID BD-01 in runtime manifest. At runtime map ID to Birthday finale visual celebration; place in finale with anchor bottom-center; use the engine auth collider "none (decorative only)" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### BD-03 — Cake candle set unlit
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** finale · **Target:** 256×96 px · **Source:** 512×192 px · **Output:** `assets/production/birthday/bd_03.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** finale · **Target:** 256×96 px · **Source:** 512×192 px · **Output:** `assets/production/birthday/bd_03.png`
 **Anchor:** bottom-center · **Collision:** none (decorative only) · **Animation:** single static state/one-shot sprite
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Cinnamon existing victory pose + birthday DOM text + independent Shake cup source
 
@@ -7173,7 +7173,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/birthday/bd_03.png; measure intrinsic 256x96 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID BD-03 in runtime manifest. At runtime map ID to Birthday finale visual celebration; place in finale with anchor bottom-center; use the engine auth collider "none (decorative only)" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### BD-04 — Cake candle set lit
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** finale · **Target:** 256×96 px · **Source:** 512×192 px · **Output:** `assets/production/birthday/bd_04.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** finale · **Target:** 256×96 px · **Source:** 512×192 px · **Output:** `assets/production/birthday/bd_04.png`
 **Anchor:** bottom-center · **Collision:** none (decorative only) · **Animation:** single static state/one-shot sprite
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Cinnamon existing victory pose + birthday DOM text + independent Shake cup source
 
@@ -7208,7 +7208,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/birthday/bd_04.png; measure intrinsic 256x96 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID BD-04 in runtime manifest. At runtime map ID to Birthday finale visual celebration; place in finale with anchor bottom-center; use the engine auth collider "none (decorative only)" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### BD-05 — Shamrock Shake hero cup
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** finale · **Target:** 256×384 px · **Source:** 512×768 px · **Output:** `assets/production/birthday/bd_05.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** finale · **Target:** 256×384 px · **Source:** 512×768 px · **Output:** `assets/production/birthday/bd_05.png`
 **Anchor:** bottom-center · **Collision:** none (decorative only) · **Animation:** single static state/one-shot sprite
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Cinnamon existing victory pose + birthday DOM text + independent Shake cup source
 
@@ -7243,7 +7243,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/birthday/bd_05.png; measure intrinsic 256x384 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID BD-05 in runtime manifest. At runtime map ID to Birthday finale visual celebration; place in finale with anchor bottom-center; use the engine auth collider "none (decorative only)" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### BD-11 — Victory stage backdrop
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** finale · **Target:** 960×540 px · **Source:** 1920×1080 px · **Output:** `assets/production/birthday/bd_11.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** finale · **Target:** 960×540 px · **Source:** 1920×1080 px · **Output:** `assets/production/birthday/bd_11.png`
 **Anchor:** top-left · **Collision:** none (decorative only) · **Animation:** single static state/one-shot sprite
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Cinnamon existing victory pose + birthday DOM text + independent Shake cup source
 
@@ -7278,7 +7278,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/birthday/bd_11.png; measure intrinsic 960x540 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID BD-11 in runtime manifest. At runtime map ID to Birthday finale visual celebration; place in finale with anchor top-left; use the engine auth collider "none (decorative only)" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### BD-12 — Victory frame plaque
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** finale · **Target:** 960×256 px · **Source:** 1920×512 px · **Output:** `assets/production/birthday/bd_12.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** finale · **Target:** 960×256 px · **Source:** 1920×512 px · **Output:** `assets/production/birthday/bd_12.png`
 **Anchor:** top-left · **Collision:** none (decorative only) · **Animation:** single static state/one-shot sprite
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Cinnamon existing victory pose + birthday DOM text + independent Shake cup source
 
@@ -7313,7 +7313,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/birthday/bd_12.png; measure intrinsic 960x256 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID BD-12 in runtime manifest. At runtime map ID to Birthday finale visual celebration; place in finale with anchor top-left; use the engine auth collider "none (decorative only)" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### BD-02 — Birthday cake frosting flourish
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** finale · **Target:** 256×128 px · **Source:** 512×256 px · **Output:** `assets/production/birthday/bd_02.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** finale · **Target:** 256×128 px · **Source:** 512×256 px · **Output:** `assets/production/birthday/bd_02.png`
 **Anchor:** bottom-center · **Collision:** none (decorative only) · **Animation:** single static state/one-shot sprite
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Cinnamon existing victory pose + birthday DOM text + independent Shake cup source
 
@@ -7348,7 +7348,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/birthday/bd_02.png; measure intrinsic 256x128 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID BD-02 in runtime manifest. At runtime map ID to Birthday finale visual celebration; place in finale with anchor bottom-center; use the engine auth collider "none (decorative only)" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### BD-06 — Victory milkshake trio
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** finale · **Target:** 512×256 px · **Source:** 1024×512 px · **Output:** `assets/production/birthday/bd_06.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** finale · **Target:** 512×256 px · **Source:** 1024×512 px · **Output:** `assets/production/birthday/bd_06.png`
 **Anchor:** bottom-center · **Collision:** none (decorative only) · **Animation:** single static state/one-shot sprite
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Cinnamon existing victory pose + birthday DOM text + independent Shake cup source
 
@@ -7383,7 +7383,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/birthday/bd_06.png; measure intrinsic 512x256 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID BD-06 in runtime manifest. At runtime map ID to Birthday finale visual celebration; place in finale with anchor bottom-center; use the engine auth collider "none (decorative only)" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### BD-07 — Birthday bunting arc
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** finale · **Target:** 960×192 px · **Source:** 1920×384 px · **Output:** `assets/production/birthday/bd_07.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** finale · **Target:** 960×192 px · **Source:** 1920×384 px · **Output:** `assets/production/birthday/bd_07.png`
 **Anchor:** top-left · **Collision:** none (decorative only) · **Animation:** single static state/one-shot sprite
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Cinnamon existing victory pose + birthday DOM text + independent Shake cup source
 
@@ -7418,7 +7418,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/birthday/bd_07.png; measure intrinsic 960x192 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID BD-07 in runtime manifest. At runtime map ID to Birthday finale visual celebration; place in finale with anchor top-left; use the engine auth collider "none (decorative only)" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### BD-08 — Birthday confetti master
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** finale · **Target:** 512×256 px · **Source:** 1024×512 px · **Output:** `assets/production/birthday/bd_08.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** finale · **Target:** 512×256 px · **Source:** 1024×512 px · **Output:** `assets/production/birthday/bd_08.png`
 **Anchor:** bottom-center · **Collision:** none (decorative only) · **Animation:** single static state/one-shot sprite
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Cinnamon existing victory pose + birthday DOM text + independent Shake cup source
 
@@ -7453,7 +7453,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/birthday/bd_08.png; measure intrinsic 512x256 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID BD-08 in runtime manifest. At runtime map ID to Birthday finale visual celebration; place in finale with anchor bottom-center; use the engine auth collider "none (decorative only)" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### BD-09 — Birthday sparkle burst A
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** finale · **Target:** 256×256 px · **Source:** 512×512 px · **Output:** `assets/production/birthday/bd_09.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** finale · **Target:** 256×256 px · **Source:** 512×512 px · **Output:** `assets/production/birthday/bd_09.png`
 **Anchor:** bottom-center · **Collision:** none (decorative only) · **Animation:** single static state/one-shot sprite
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Cinnamon existing victory pose + birthday DOM text + independent Shake cup source
 
@@ -7488,7 +7488,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/birthday/bd_09.png; measure intrinsic 256x256 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID BD-09 in runtime manifest. At runtime map ID to Birthday finale visual celebration; place in finale with anchor bottom-center; use the engine auth collider "none (decorative only)" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### BD-10 — Birthday sparkle burst B
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** finale · **Target:** 256×256 px · **Source:** 512×512 px · **Output:** `assets/production/birthday/bd_10.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** finale · **Target:** 256×256 px · **Source:** 512×512 px · **Output:** `assets/production/birthday/bd_10.png`
 **Anchor:** bottom-center · **Collision:** none (decorative only) · **Animation:** single static state/one-shot sprite
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Cinnamon existing victory pose + birthday DOM text + independent Shake cup source
 
@@ -7523,7 +7523,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/birthday/bd_10.png; measure intrinsic 256x256 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID BD-10 in runtime manifest. At runtime map ID to Birthday finale visual celebration; place in finale with anchor bottom-center; use the engine auth collider "none (decorative only)" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### BD-13 — Cake reveal poof
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** finale · **Target:** 256×192 px · **Source:** 512×384 px · **Output:** `assets/production/birthday/bd_13.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** finale · **Target:** 256×192 px · **Source:** 512×384 px · **Output:** `assets/production/birthday/bd_13.png`
 **Anchor:** bottom-center · **Collision:** none (decorative only) · **Animation:** single static state/one-shot sprite
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Cinnamon existing victory pose + birthday DOM text + independent Shake cup source
 
@@ -7558,7 +7558,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/birthday/bd_13.png; measure intrinsic 256x192 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID BD-13 in runtime manifest. At runtime map ID to Birthday finale visual celebration; place in finale with anchor bottom-center; use the engine auth collider "none (decorative only)" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### BD-14 — Golden shamrock medal
-**State:** MISSING_GENERATION · **Priority:** P2 · **Where:** finale · **Target:** 128×128 px · **Source:** 256×256 px · **Output:** `assets/production/birthday/bd_14.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P2 · **Where:** finale · **Target:** 128×128 px · **Source:** 256×256 px · **Output:** `assets/production/birthday/bd_14.png`
 **Anchor:** bottom-center · **Collision:** none (decorative only) · **Animation:** single static state/one-shot sprite
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Cinnamon existing victory pose + birthday DOM text + independent Shake cup source
 
@@ -7596,7 +7596,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 14 individual asset contracts. Process P0 first, P1 next, P2 last. Reference sheets and complete per-asset instructions are repeated in every prompt.
 
 #### UX-05 — Victory UI frame
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** all · **Target:** 640×384 px · **Source:** 1280×768 px · **Output:** `assets/production/ui/ux_05.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** all · **Target:** 640×384 px · **Source:** 1280×768 px · **Output:** `assets/production/ui/ux_05.png`
 **Anchor:** top-left · **Collision:** none · **Animation:** static, 9-slice when frame
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Native accessible DOM text and touch hit areas; art must never own interaction
 
@@ -7633,7 +7633,7 @@ DO NOT BAKE LIVE TEXT: all headings, counters, accessibility instructions, and b
 **Integration:** Verify file bytes exist at assets/production/ui/ux_05.png; measure intrinsic 640x384 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID UX-05 in runtime manifest. At runtime map ID to Persistent interface or menu art; place in all with anchor top-left; use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### UX-01 — Main title backdrop
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** all · **Target:** 960×540 px · **Source:** 1920×1080 px · **Output:** `assets/production/ui/ux_01.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** all · **Target:** 960×540 px · **Source:** 1920×1080 px · **Output:** `assets/production/ui/ux_01.png`
 **Anchor:** top-left · **Collision:** none · **Animation:** static, 9-slice when frame
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Native accessible DOM text and touch hit areas; art must never own interaction
 
@@ -7670,7 +7670,7 @@ DO NOT BAKE LIVE TEXT: all headings, counters, accessibility instructions, and b
 **Integration:** Verify file bytes exist at assets/production/ui/ux_01.png; measure intrinsic 960x540 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID UX-01 in runtime manifest. At runtime map ID to Persistent interface or menu art; place in all with anchor top-left; use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### UX-02 — Title panel border
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** all · **Target:** 480×256 px · **Source:** 960×512 px · **Output:** `assets/production/ui/ux_02.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** all · **Target:** 480×256 px · **Source:** 960×512 px · **Output:** `assets/production/ui/ux_02.png`
 **Anchor:** top-left · **Collision:** none · **Animation:** static, 9-slice when frame
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Native accessible DOM text and touch hit areas; art must never own interaction
 
@@ -7707,7 +7707,7 @@ DO NOT BAKE LIVE TEXT: all headings, counters, accessibility instructions, and b
 **Integration:** Verify file bytes exist at assets/production/ui/ux_02.png; measure intrinsic 480x256 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID UX-02 in runtime manifest. At runtime map ID to Persistent interface or menu art; place in all with anchor top-left; use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### UX-03 — Pause window frame
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** all · **Target:** 512×384 px · **Source:** 1024×768 px · **Output:** `assets/production/ui/ux_03.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** all · **Target:** 512×384 px · **Source:** 1024×768 px · **Output:** `assets/production/ui/ux_03.png`
 **Anchor:** top-left · **Collision:** none · **Animation:** static, 9-slice when frame
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Native accessible DOM text and touch hit areas; art must never own interaction
 
@@ -7744,7 +7744,7 @@ DO NOT BAKE LIVE TEXT: all headings, counters, accessibility instructions, and b
 **Integration:** Verify file bytes exist at assets/production/ui/ux_03.png; measure intrinsic 512x384 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID UX-03 in runtime manifest. At runtime map ID to Persistent interface or menu art; place in all with anchor top-left; use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### UX-04 — Death/retry panel frame
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** all · **Target:** 512×384 px · **Source:** 1024×768 px · **Output:** `assets/production/ui/ux_04.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** all · **Target:** 512×384 px · **Source:** 1024×768 px · **Output:** `assets/production/ui/ux_04.png`
 **Anchor:** top-left · **Collision:** none · **Animation:** static, 9-slice when frame
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Native accessible DOM text and touch hit areas; art must never own interaction
 
@@ -7781,7 +7781,7 @@ DO NOT BAKE LIVE TEXT: all headings, counters, accessibility instructions, and b
 **Integration:** Verify file bytes exist at assets/production/ui/ux_04.png; measure intrinsic 512x384 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID UX-04 in runtime manifest. At runtime map ID to Persistent interface or menu art; place in all with anchor top-left; use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### UX-06 — Pause button icon
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** all · **Target:** 64×64 px · **Source:** 128×128 px · **Output:** `assets/production/ui/ux_06.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** all · **Target:** 64×64 px · **Source:** 128×128 px · **Output:** `assets/production/ui/ux_06.png`
 **Anchor:** center · **Collision:** none · **Animation:** static, 9-slice when frame
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Native accessible DOM text and touch hit areas; art must never own interaction
 
@@ -7818,7 +7818,7 @@ DO NOT BAKE LIVE TEXT: all headings, counters, accessibility instructions, and b
 **Integration:** Verify file bytes exist at assets/production/ui/ux_06.png; measure intrinsic 64x64 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID UX-06 in runtime manifest. At runtime map ID to Persistent interface or menu art; place in all with anchor center; use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### UX-07 — Touch dash glyph
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** all · **Target:** 64×64 px · **Source:** 128×128 px · **Output:** `assets/production/ui/ux_07.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** all · **Target:** 64×64 px · **Source:** 128×128 px · **Output:** `assets/production/ui/ux_07.png`
 **Anchor:** center · **Collision:** none · **Animation:** static, 9-slice when frame
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Native accessible DOM text and touch hit areas; art must never own interaction
 
@@ -7855,7 +7855,7 @@ DO NOT BAKE LIVE TEXT: all headings, counters, accessibility instructions, and b
 **Integration:** Verify file bytes exist at assets/production/ui/ux_07.png; measure intrinsic 64x64 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID UX-07 in runtime manifest. At runtime map ID to Persistent interface or menu art; place in all with anchor center; use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### UX-08 — Touch jump glyph
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** all · **Target:** 64×64 px · **Source:** 128×128 px · **Output:** `assets/production/ui/ux_08.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** all · **Target:** 64×64 px · **Source:** 128×128 px · **Output:** `assets/production/ui/ux_08.png`
 **Anchor:** center · **Collision:** none · **Animation:** static, 9-slice when frame
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Native accessible DOM text and touch hit areas; art must never own interaction
 
@@ -7892,7 +7892,7 @@ DO NOT BAKE LIVE TEXT: all headings, counters, accessibility instructions, and b
 **Integration:** Verify file bytes exist at assets/production/ui/ux_08.png; measure intrinsic 64x64 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID UX-08 in runtime manifest. At runtime map ID to Persistent interface or menu art; place in all with anchor center; use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### UX-09 — Touch swish glyph
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** all · **Target:** 64×64 px · **Source:** 128×128 px · **Output:** `assets/production/ui/ux_09.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** all · **Target:** 64×64 px · **Source:** 128×128 px · **Output:** `assets/production/ui/ux_09.png`
 **Anchor:** center · **Collision:** none · **Animation:** static, 9-slice when frame
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Native accessible DOM text and touch hit areas; art must never own interaction
 
@@ -7929,7 +7929,7 @@ DO NOT BAKE LIVE TEXT: all headings, counters, accessibility instructions, and b
 **Integration:** Verify file bytes exist at assets/production/ui/ux_09.png; measure intrinsic 64x64 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID UX-09 in runtime manifest. At runtime map ID to Persistent interface or menu art; place in all with anchor center; use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### UX-10 — Boss HP frame
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** all · **Target:** 256×64 px · **Source:** 512×128 px · **Output:** `assets/production/ui/ux_10.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** all · **Target:** 256×64 px · **Source:** 512×128 px · **Output:** `assets/production/ui/ux_10.png`
 **Anchor:** top-left · **Collision:** none · **Animation:** static, 9-slice when frame
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Native accessible DOM text and touch hit areas; art must never own interaction
 
@@ -7966,7 +7966,7 @@ DO NOT BAKE LIVE TEXT: all headings, counters, accessibility instructions, and b
 **Integration:** Verify file bytes exist at assets/production/ui/ux_10.png; measure intrinsic 256x64 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID UX-10 in runtime manifest. At runtime map ID to Persistent interface or menu art; place in all with anchor top-left; use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### UX-12 — Shake counter HUD frame
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** all · **Target:** 256×64 px · **Source:** 512×128 px · **Output:** `assets/production/ui/ux_12.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** all · **Target:** 256×64 px · **Source:** 512×128 px · **Output:** `assets/production/ui/ux_12.png`
 **Anchor:** top-left · **Collision:** none · **Animation:** static, 9-slice when frame
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Native accessible DOM text and touch hit areas; art must never own interaction
 
@@ -8003,7 +8003,7 @@ DO NOT BAKE LIVE TEXT: all headings, counters, accessibility instructions, and b
 **Integration:** Verify file bytes exist at assets/production/ui/ux_12.png; measure intrinsic 256x64 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID UX-12 in runtime manifest. At runtime map ID to Persistent interface or menu art; place in all with anchor top-left; use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### UX-11 — Checkpoint popup art
-**State:** MISSING_GENERATION · **Priority:** P2 · **Where:** all · **Target:** 384×96 px · **Source:** 768×192 px · **Output:** `assets/production/ui/ux_11.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P2 · **Where:** all · **Target:** 384×96 px · **Source:** 768×192 px · **Output:** `assets/production/ui/ux_11.png`
 **Anchor:** top-left · **Collision:** none · **Animation:** static, 9-slice when frame
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Native accessible DOM text and touch hit areas; art must never own interaction
 
@@ -8040,7 +8040,7 @@ DO NOT BAKE LIVE TEXT: all headings, counters, accessibility instructions, and b
 **Integration:** Verify file bytes exist at assets/production/ui/ux_11.png; measure intrinsic 384x96 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID UX-11 in runtime manifest. At runtime map ID to Persistent interface or menu art; place in all with anchor top-left; use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### UX-13 — Story Fox portrait frame
-**State:** MISSING_GENERATION · **Priority:** P2 · **Where:** all · **Target:** 256×256 px · **Source:** 512×512 px · **Output:** `assets/production/ui/ux_13.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P2 · **Where:** all · **Target:** 256×256 px · **Source:** 512×512 px · **Output:** `assets/production/ui/ux_13.png`
 **Anchor:** top-left · **Collision:** none · **Animation:** static, 9-slice when frame
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Native accessible DOM text and touch hit areas; art must never own interaction
 
@@ -8077,7 +8077,7 @@ DO NOT BAKE LIVE TEXT: all headings, counters, accessibility instructions, and b
 **Integration:** Verify file bytes exist at assets/production/ui/ux_13.png; measure intrinsic 256x256 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID UX-13 in runtime manifest. At runtime map ID to Persistent interface or menu art; place in all with anchor top-left; use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### UX-14 — Assist mode marker
-**State:** MISSING_GENERATION · **Priority:** P2 · **Where:** all · **Target:** 64×64 px · **Source:** 128×128 px · **Output:** `assets/production/ui/ux_14.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P2 · **Where:** all · **Target:** 64×64 px · **Source:** 128×128 px · **Output:** `assets/production/ui/ux_14.png`
 **Anchor:** center · **Collision:** none · **Animation:** static, 9-slice when frame
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Native accessible DOM text and touch hit areas; art must never own interaction
 

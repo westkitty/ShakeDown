@@ -106,3 +106,16 @@ body.high-contrast .touch-jump{
 body.high-contrast .touch.held{background:#9dffb4;color:#08131a}
 body.high-contrast button:focus-visible,
 body.high-contrast input:focus-visible{outline:4px solid #ffed70;outline-offset:3px}
+
+
+/* Curator's cut is an explicit per-session audition, never an art approval. */
+.art-curator{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:5px 13px;margin:14px 0 5px;padding:9px;border:1px solid #6e9eb2;border-radius:8px;background:#0a2941a9}
+.art-curator label{margin:0;display:flex;align-items:center;gap:8px;font-size:12px;color:#e6f2ed}
+.art-curator input{width:18px;height:18px}
+.gallery-link{display:inline-block;color:#ffda86;font-weight:850;letter-spacing:.02em;font-size:12px;padding:5px;border-radius:4px;text-underline-offset:3px}
+.gallery-link:hover{color:#fff}
+.art-warning{font-size:10px;color:#ddc7a4;line-height:1.4;flex-basis:100%}
+body.curator-active .game-frame{border-color:#a0edbc}
+body.curator-active .art-curator{border-color:#91e3b7}
+@media(max-width:630px){.art-curator{margin:7px 0 3px;padding:5px;gap:3px}.art-curator label{font-size:10px;margin:0;min-height:26px}.gallery-link{font-size:10px}.art-warning{font-size:9px}}
+@media(max-height:520px) and (orientation:landscape) and (pointer:coarse){.art-curator{padding:3px;margin:3px 0;gap:3px}.art-curator label{font-size:9px;min-height:16px}.art-warning,.art-curator .gallery-link{display:none}.dialog .gallery-link{font-size:9px}}

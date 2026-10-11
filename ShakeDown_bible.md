@@ -156,3 +156,13 @@ The completed Round 5 static suite: **31/31 Node passed**, release-preflight che
 - The seven-area Round 5 candidate was implemented and committed at SHA fb158f30fdb3a180325b4e0ca7770b8eeb5d1446.
 - Final local verification before this commit: npm run validate 31/31 pass; 35 distinct desktop browser tests pass with four intentional skips; 36 mobile-emulated browser tests pass with three intentional skips. Browser tests were run as bounded 1-worker groups and two additional contrast checks. The static release preflight reported 38 actual runtime files with no missing files.
 - This hash identifies the preparation branch, **not** a merged or deployed main release. GitHub CI must verify the final documentation follow-up SHA independently.
+
+## 2026-10-11 — The Art Jury: unified source and playable curation 
+
+PR #1 delivered the verified engineering baseline to main. The separate Arena branch contained 194 real PNG assets in a distinct source family. They were physically audited for hashes, pixel dimensions, identity/semantics and strict alpha. 170 pass the initial transparency contract, 24 do not. Every candidate is preserved. Actual user approval is still pending.
+
+The new `?art=curated` switch provides an opt-in Canvas rendering layer using 28 personally chosen, SHA-verified candidates: coherent purple-scarf FOX action poses, green Shamrock Shake, a clearly independent birthday cake and hero shake, supplemental Cinnamon reaction poses, Quad scenery, cannon, Cup Crawler, beacons/checkpoints and boss indicators. The default source-art rendition, controller, level platforms and Fox behavior are unchanged.
+
+A 194-entry gallery at `tools/asset-gallery.html` presents independent per-image reasons (28 selected, 131 alternatives, 11 revisions, 24 blocked), source bytes/hashes, compare sets and KEEP/REVISE/REJECT owner judgement with export. This is an art-direction aid rather than a synthetic approval. Original audio generation has not delivered the 21 requested recordings; procedural WebAudio remains the honest working fallback. See docs/ASSET_CURATION_REPORT.md.
+
+Earlier true BigMac localhost candidate tests: Node 34/34 pass, static package inspection 238 files, actual browser UI/gallery/play checks pass, 23-stage assisted/normal/curated scripted gameplay reached victory. Remote builder became temporarily disconnected before final GitHub publication; exact GitHub CI must be rechecked independently.
