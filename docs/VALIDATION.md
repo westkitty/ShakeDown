@@ -104,3 +104,6 @@ Evidence boundaries: these are local served-HTTP tests in Chromium-compatible Br
 
 ### Final checkpoint geometry extension — latest local status
 A fourth independent progress unit test exercised **all five** authored checkpoint positions after restoring the new versioned record. Each remained in playing mode, landed on supporting geometry, retained positive health, and preserved the correct checkpoint index over 55 real fixed-step updates. Following that addition, the **latest full npm run validate passed 25/25 Node checks**, zero failures. Desktop Brave and Pixel-7-emulated Playwright results remain 23/23 executed each (46 total), with four deliberate skips across both projects.
+
+### Round 4 implementation hash receipt
+The exact tested code and documentation were delivered at commit 4be648f53e3c03c5a11e084b0bf093c65731e3d0 on prep/asset-ready-20261011. The live public main remains unchanged pending release review. GitHub CI for the final PR head is a separate verification gate.
