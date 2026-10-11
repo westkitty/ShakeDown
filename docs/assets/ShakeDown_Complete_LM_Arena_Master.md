@@ -52,7 +52,7 @@ Canvas engine: 960x540 logical screen, 32px tile contacts, source game inputs vi
 | DOME PARALLAX / VIEWPORTS | 8 | 0 | 5 | 3 | 3 | 2 |
 | DOME MECHANICS | 10 | 0 | 3 | 7 | 3 | 0 |
 | DOME ARCHITECTURE / PROPS | 10 | 0 | 5 | 3 | 5 | 2 |
-| DOME STONE / GOLDEN TILES | 16 | 0 | 6 | 6 | 9 | 1 |
+| DOME STONE / GOLDEN TILES | 16 | 0 | 2 | 6 | 9 | 1 |
 | CAMPUS ENEMY STATES | 7 | 0 | 0 | 4 | 3 | 0 |
 | ADDITIONAL EFFECTS | 8 | 0 | 8 | 0 | 5 | 3 |
 | THE FOX / INTRO AND BOSS | 16 | 0 | 0 | 9 | 5 | 2 |
@@ -65,7 +65,7 @@ Canvas engine: 960x540 logical screen, 32px tile contacts, source game inputs vi
 | ADDITIONAL UI / TOUCH | 14 | 0 | 13 | 1 | 10 | 3 |
 | CAMPUS VISUAL EFFECTS | 10 | 0 | 0 | 1 | 9 | 0 |
 
-TOTAL VISUAL CONTRACT: **220** individually specified logical IDs; **26** source-verified Cinnamon frames; **122** generated, byte-verified and normalized production images; **72** still missing final production images.
+TOTAL VISUAL CONTRACT: **220** individually specified logical IDs; **26** source-verified Cinnamon frames; **126** generated, byte-verified and normalized production images; **68** still missing final production images.
 
 ## LM ARENA UNIVERSAL EXECUTION ORDER
 
@@ -5105,7 +5105,7 @@ TILE EDGE REQUIREMENT: art edges must meet exactly with adjacent tile copies; pr
 **Integration:** Verify file bytes exist at assets/production/dome/tiles/dm_tl16.png; measure intrinsic 64x64 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID DM-TL16 in runtime manifest. At runtime map ID to Dome authored collision art or decoration; place in dome with anchor tile top-left; use the engine auth collider "one-way AABB top" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### DM-TL04 — Curved roof eave left
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** dome · **Target:** 32×32 px · **Source:** 64×64 px · **Output:** `assets/production/dome/tiles/dm_tl04.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** dome · **Target:** 32×32 px · **Source:** 64×64 px · **Output:** `assets/production/dome/tiles/dm_tl04.png`
 **Anchor:** tile top-left · **Collision:** corner display only · **Animation:** static tile, edge seams must align
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** 32px world tile grid and existing platforms geometry
 
@@ -5142,7 +5142,7 @@ TILE EDGE REQUIREMENT: art edges must meet exactly with adjacent tile copies; pr
 **Integration:** Verify file bytes exist at assets/production/dome/tiles/dm_tl04.png; measure intrinsic 32x32 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID DM-TL04 in runtime manifest. At runtime map ID to Dome authored collision art or decoration; place in dome with anchor tile top-left; use the engine auth collider "corner display only" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### DM-TL05 — Curved roof eave right
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** dome · **Target:** 32×32 px · **Source:** 64×64 px · **Output:** `assets/production/dome/tiles/dm_tl05.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** dome · **Target:** 32×32 px · **Source:** 64×64 px · **Output:** `assets/production/dome/tiles/dm_tl05.png`
 **Anchor:** tile top-left · **Collision:** corner display only · **Animation:** static tile, edge seams must align
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** 32px world tile grid and existing platforms geometry
 
@@ -5216,7 +5216,7 @@ TILE EDGE REQUIREMENT: art edges must meet exactly with adjacent tile copies; pr
 **Integration:** Verify file bytes exist at assets/production/dome/tiles/dm_tl07.png; measure intrinsic 32x32 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID DM-TL07 in runtime manifest. At runtime map ID to Dome authored collision art or decoration; place in dome with anchor tile top-left; use the engine auth collider "one-way AABB top" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### DM-TL08 — Cornice right cap
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** dome · **Target:** 32×32 px · **Source:** 64×64 px · **Output:** `assets/production/dome/tiles/dm_tl08.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** dome · **Target:** 32×32 px · **Source:** 64×64 px · **Output:** `assets/production/dome/tiles/dm_tl08.png`
 **Anchor:** tile top-left · **Collision:** one-way AABB top · **Animation:** static tile, edge seams must align
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** 32px world tile grid and existing platforms geometry
 
@@ -5327,7 +5327,7 @@ TILE EDGE REQUIREMENT: art edges must meet exactly with adjacent tile copies; pr
 **Integration:** Verify file bytes exist at assets/production/dome/tiles/dm_tl11.png; measure intrinsic 64x64 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID DM-TL11 in runtime manifest. At runtime map ID to Dome authored collision art or decoration; place in dome with anchor tile top-left; use the engine auth collider "no collision" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### DM-TL12 — Window half arch left
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** dome · **Target:** 64×64 px · **Source:** 128×128 px · **Output:** `assets/production/dome/tiles/dm_tl12.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** dome · **Target:** 64×64 px · **Source:** 128×128 px · **Output:** `assets/production/dome/tiles/dm_tl12.png`
 **Anchor:** tile top-left · **Collision:** no collision · **Animation:** static tile, edge seams must align
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** 32px world tile grid and existing platforms geometry
 

@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "generated_utc": "2026-10-11T19:47:41Z",
+  "generated_utc": "2026-10-11T19:49:49Z",
   "note": "Byte-level truth for generated production art. Every sha256 and pixel dimension here was measured from the file actually written to disk. Human visual review is a separate, still-open gate.",
-  "count": 122,
+  "count": 126,
   "assets": {
     "BD-01": {
       "id": "BD-01",
@@ -1884,6 +1884,112 @@
       "sha256": "9d1fa300ae3302e3d65728ee8f2a520d441ebc9a5b80edc01e5fa04b201569ef",
       "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
     },
+    "DM-TL04": {
+      "id": "DM-TL04",
+      "name": "Curved roof eave left",
+      "group": "DM-TL",
+      "priority": "P1",
+      "path": "assets/production/dome/tiles/dm_tl04.png",
+      "target_px": [
+        32,
+        32
+      ],
+      "pivot": "tile top-left",
+      "raw_source": ".artifact-cache/raw/dm_tl04.png",
+      "raw_sha256": "7ae6630a1d1b77d465845906d09d63939cba3446e9507b82972ecdb6e6f370e8",
+      "raw_px": [
+        1408,
+        768
+      ],
+      "generated_utc": "2026-10-11T19:49:49Z",
+      "generator": "arena-agent-mode image generation",
+      "alpha": {
+        "required": true,
+        "mode": "straight RGBA",
+        "transparent_px_fraction": 0.6914,
+        "opaque_px_fraction": 0.166,
+        "partial_edge_px": 146,
+        "border_all_transparent": false,
+        "matte_rgb": [
+          255,
+          0,
+          255
+        ],
+        "transparent_fraction": 0.8355,
+        "partial_fraction": 0.0,
+        "matte_residual_opaque_px": 0,
+        "source_keyed_px": [
+          1408,
+          768
+        ]
+      },
+      "format": "PNG RGBA",
+      "trim_bbox_in_keyed_source": [
+        293,
+        211,
+        1109,
+        557
+      ],
+      "actual_px": [
+        32,
+        32
+      ],
+      "sha256": "9f1bcb6ca9d94b354fb5ec55781f8162728cf68909ad7addf1006f5068df2d8c",
+      "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+    },
+    "DM-TL05": {
+      "id": "DM-TL05",
+      "name": "Curved roof eave right",
+      "group": "DM-TL",
+      "priority": "P1",
+      "path": "assets/production/dome/tiles/dm_tl05.png",
+      "target_px": [
+        32,
+        32
+      ],
+      "pivot": "tile top-left",
+      "raw_source": ".artifact-cache/raw/dm_tl05.png",
+      "raw_sha256": "bcd34ecc41928c6fbc39e9e67d287cf1722918667e80387a8ca0c55116e7b969",
+      "raw_px": [
+        1408,
+        768
+      ],
+      "generated_utc": "2026-10-11T19:49:49Z",
+      "generator": "arena-agent-mode image generation",
+      "alpha": {
+        "required": true,
+        "mode": "straight RGBA",
+        "transparent_px_fraction": 0.7793,
+        "opaque_px_fraction": 0.1289,
+        "partial_edge_px": 94,
+        "border_all_transparent": false,
+        "matte_rgb": [
+          255,
+          0,
+          255
+        ],
+        "transparent_fraction": 0.7992,
+        "partial_fraction": 0.0,
+        "matte_residual_opaque_px": 0,
+        "source_keyed_px": [
+          1408,
+          768
+        ]
+      },
+      "format": "PNG RGBA",
+      "trim_bbox_in_keyed_source": [
+        176,
+        211,
+        1226,
+        569
+      ],
+      "actual_px": [
+        32,
+        32
+      ],
+      "sha256": "92648b9322f85efb733ba31d4edd6bdfcac14b72dc45953708a50d9adb32cfc8",
+      "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+    },
     "DM-TL06": {
       "id": "DM-TL06",
       "name": "Cornice center",
@@ -1971,6 +2077,59 @@
         32
       ],
       "sha256": "29a464b2a92c011d87993ea80100206740777a8be43b8395e9eb0d19681474c4",
+      "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+    },
+    "DM-TL08": {
+      "id": "DM-TL08",
+      "name": "Cornice right cap",
+      "group": "DM-TL",
+      "priority": "P1",
+      "path": "assets/production/dome/tiles/dm_tl08.png",
+      "target_px": [
+        32,
+        32
+      ],
+      "pivot": "tile top-left",
+      "raw_source": ".artifact-cache/raw/dm_tl08.png",
+      "raw_sha256": "3cc825d43e0c53b35575f08c81443a13ded84239563c5b31a626cf8382160036",
+      "raw_px": [
+        1408,
+        768
+      ],
+      "generated_utc": "2026-10-11T19:49:49Z",
+      "generator": "arena-agent-mode image generation",
+      "alpha": {
+        "required": true,
+        "mode": "straight RGBA",
+        "transparent_px_fraction": 0.6387,
+        "opaque_px_fraction": 0.2939,
+        "partial_edge_px": 69,
+        "border_all_transparent": false,
+        "matte_rgb": [
+          255,
+          0,
+          255
+        ],
+        "transparent_fraction": 0.5552,
+        "partial_fraction": 0.0,
+        "matte_residual_opaque_px": 0,
+        "source_keyed_px": [
+          1408,
+          768
+        ]
+      },
+      "format": "PNG RGBA",
+      "trim_bbox_in_keyed_source": [
+        117,
+        141,
+        1291,
+        627
+      ],
+      "actual_px": [
+        32,
+        32
+      ],
+      "sha256": "3c3fe50ecfc007a08487d0529d82ca4d9abffddb5b6b2c6882293ab31f7a4f17",
       "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
     },
     "DM-TL09": {
@@ -2113,6 +2272,59 @@
         64
       ],
       "sha256": "71a667266dc2a1ddd02990b1f52691007e46e93bf597209fc3a84a776b05b2e5",
+      "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+    },
+    "DM-TL12": {
+      "id": "DM-TL12",
+      "name": "Window half arch left",
+      "group": "DM-TL",
+      "priority": "P1",
+      "path": "assets/production/dome/tiles/dm_tl12.png",
+      "target_px": [
+        64,
+        64
+      ],
+      "pivot": "tile top-left",
+      "raw_source": ".artifact-cache/raw/dm_tl12.png",
+      "raw_sha256": "8a723ff2a6e5773bdcc0d1dbf7e51c1ed13a277cf075d450bc111fa5971a02b8",
+      "raw_px": [
+        1408,
+        768
+      ],
+      "generated_utc": "2026-10-11T19:49:49Z",
+      "generator": "arena-agent-mode image generation",
+      "alpha": {
+        "required": true,
+        "mode": "straight RGBA",
+        "transparent_px_fraction": 0.3662,
+        "opaque_px_fraction": 0.5596,
+        "partial_edge_px": 304,
+        "border_all_transparent": false,
+        "matte_rgb": [
+          255,
+          0,
+          255
+        ],
+        "transparent_fraction": 0.72,
+        "partial_fraction": 0.0,
+        "matte_residual_opaque_px": 0,
+        "source_keyed_px": [
+          1408,
+          768
+        ]
+      },
+      "format": "PNG RGBA",
+      "trim_bbox_in_keyed_source": [
+        382,
+        70,
+        927,
+        768
+      ],
+      "actual_px": [
+        64,
+        64
+      ],
+      "sha256": "62a533c04c449a651b22053b8dca5347e716f4759ab70f3bbf08b39f9072ea7c",
       "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
     },
     "DM-TL15": {
