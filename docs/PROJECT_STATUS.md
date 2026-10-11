@@ -20,6 +20,6 @@ The initial repository was Phase 0 with only documentation and a prior 73-reques
 Cinnamon Fuzzbutt is a burnt-orange/cream red panda with black circular glasses, blue headband, gray shirt, olive cargo shorts and large striped tail. The generated art master ZIP documented in `docs/CINNAMON_SPRITE_MASTER_HANDOFF.md` is still off-repository; the new user-supplied reference sheet is physically committed separately, along with independently extracted cut-outs. The Fox remains provisional until approved reference is supplied.
 
 ## Remaining gates
-- Complete asset-generation master PDF and editable source (not proof of generated files).
+- Expanded complete LM Arena master packet: **generated as 273-page readable PDF + editable Markdown + machine-readable JSON** with 220 named visual contracts (26 existing / 194 not generated) and 21 audio requests; all logical IDs specified. Reproducible compiler `scripts/build_complete_asset_packet.py`. PDF is not proof of generated final art.
 - LM Arena produces source assets; user or game agent verifies and integrates before upgrading status.
 - Deploy static site, prove HTTP response and when capable complete playthrough on the actual URL, verify touch/audio on real device.

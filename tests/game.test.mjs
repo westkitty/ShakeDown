@@ -28,3 +28,5 @@ test('Fox has telegraphed charge and a real three-hit victory',()=>{let s=newGam
 });
 test('unique viewport and camera never expose NaN',()=>{let s=newGame();startGame(s);ticks(s,300,i=>({right:true,jumpPressed:i%65===0,jumpHeld:i%65<13}));let q=snapshot(s);
  for(let v of [q.player.x,q.player.y,q.camera.x,q.camera.y])assert.ok(Number.isFinite(v));});
+
+test('event feed remains monotonic beyond its bounded history',()=>{let s=newGame();startGame(s);for(let i=0;i<55;i++){s.player.attackCooldown=0;update(s,{swishPressed:true},DT);}assert.equal(s.events.length,35);assert.ok(s.eventSerial>=55);assert.equal(s.events.at(-1).serial,s.eventSerial);assert.ok(s.events[0].serial>1);for(let i=1;i<s.events.length;i++)assert.equal(s.events[i].serial,s.events[i-1].serial+1);});

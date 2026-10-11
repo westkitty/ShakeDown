@@ -9,7 +9,7 @@ const saveKey='shakedown:birthday:v1';
 function readSave(){try{const value=JSON.parse(localStorage.getItem(saveKey)||'null');return value?.schema===1?value:{schema:1}}catch{return {schema:1}}}
 let saved=readSave(),state=newGame(saved.settings||{}),sprites={},assetCount=0,assetErrors=[];
 const audio=new AudioBox();audio.mute(state.settings.mute);
-let lastStatus='',eventCursor=0,displayedMode='';
+let lastStatus='',lastEventSerial=0,displayedMode='';
 function save(){try{localStorage.setItem(saveKey,JSON.stringify({schema:1,settings:state.settings,completed:saved.completed||state.mode==='victory',bestShakes:Math.max(saved.bestShakes||0,state.shakeCount)}))}catch{/* Restricted storage: game still playable. */}}
 function showMode(){if(displayedMode===state.mode)return;displayedMode=state.mode;
  for(const id of ['title-overlay','pause-overlay','dead-overlay','victory-overlay'])$(id).classList.add('hidden');
@@ -40,7 +40,7 @@ for(const button of document.querySelectorAll('.touch')){
   if(![...pointerActs.values()].includes(action))held.delete(action);button.classList.remove('held')}
  button.addEventListener('pointerup',endPointer);button.addEventListener('pointercancel',endPointer);button.addEventListener('lostpointercapture',endPointer);
 }
-function newRound(){state=newGame(state.settings);state.assetCount=assetCount;eventCursor=0;displayedMode='';clearInputs();lastStamp=0;accumulator=0;audio.beat=0;audio.nextBeat=0;startGame(state);audio.activate();showMode();canvas.focus({preventScroll:true});}
+function newRound(){state=newGame(state.settings);state.assetCount=assetCount;lastEventSerial=0;displayedMode='';clearInputs();lastStamp=0;accumulator=0;audio.beat=0;audio.nextBeat=0;startGame(state);audio.activate();showMode();canvas.focus({preventScroll:true});}
 function start(){newRound()}
 function retry(){clearInputs();if(state.mode==='victory'){newRound();return}resetToCheckpoint(state);displayedMode='';showMode();canvas.focus({preventScroll:true});}
 function togglePause(){pauseGame(state);clearInputs();displayedMode='';showMode();lastStamp=0;accumulator=0;save()}
@@ -79,8 +79,9 @@ function animate(ms){requestAnimationFrame(animate);
    queued.clear();update(state,input,DT);accumulator-=DT;count++;if(state.mode!=='playing')break;
   }
   audio.musicTick(ms/1000,state.boss.triggered);
-  while(eventCursor<state.events.length){audio.event(state.events[eventCursor].type);eventCursor++}
-  if(eventCursor>state.events.length)eventCursor=state.events.length;
+  // Events have monotonic IDs because the rolling 35-event history shifts.
+  // An array cursor would silently stop all audio after event 35.
+  for(const ev of state.events){if(ev.serial>lastEventSerial){audio.event(ev.type);lastEventSerial=ev.serial}}
  }else{accumulator=0}
  if(state.mode==='victory')state.elapsed+=dt;
  render(ctx,state,sprites,accumulator/DT);

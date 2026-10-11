@@ -25,7 +25,7 @@ export function resetToCheckpoint(s){
  s.mode='playing';s.projectiles=[];s.boss.mode=s.boss.triggered?'tell':'sleep';s.boss.timer=1;
  s.lastDamage=''; s.status='Back on your paws.';
 }
-const say=(s,type,detail='')=>{s.events.push({type,detail,t:s.elapsed,x:s.player.x+s.player.w/2,y:s.player.y+s.player.h/2});s.lastEvent=type; if(s.events.length>35)s.events.shift()};
+const say=(s,type,detail='')=>{s.eventSerial=(s.eventSerial||0)+1;s.events.push({serial:s.eventSerial,type,detail,t:s.elapsed,x:s.player.x+s.player.w/2,y:s.player.y+s.player.h/2});s.lastEvent=type; if(s.events.length>35)s.events.shift()};
 function damage(s,reason,sourceX){const p=s.player;if(p.invulnerable>0||s.mode!=='playing')return;
  const amount=s.settings.assist?0.5:1;p.hp=Math.max(0,p.hp-amount);p.invulnerable=1.25;
  p.vy=-275;p.vx=sourceX<p.x?270:-270;s.lastDamage=reason;s.status=reason;say(s,'hurt',reason);

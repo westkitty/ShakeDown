@@ -7,10 +7,10 @@
   "project_name": "ShakeDown",
   "project_root": "westkitty/ShakeDown",
   "artifact_path": "",
-  "state_revision": 1,
-  "last_updated": "2026-10-11T17:55:00Z",
+  "state_revision": 2,
+  "last_updated": "2026-10-11T18:52:00Z",
   "current_baseline": {
-    "identity": "main@0836473342088d406a089be2e5badd783bc4aff9 (before handoff metadata commit)",
+    "identity": "main@8b39c32ced8f7051908b10a4d936b85e02e42a0d (runtime milestone before asset packet commit)",
     "state": "current-baseline",
     "last_verified": null
   },
@@ -23,10 +23,10 @@
 ShakeDown: birthday platformer for Maverick, Cinnamon Fuzzbutt as playable red panda; South Bend / Notre Dame, Shamrock Shakes, Fox antagonist.
 
 ## 2. Current Baseline
-Phase 0 project documents exist. A generated sprite-art handoff is available as a separate verified ZIP, but its binary contents are not in the repository.
+A playable static Canvas 2D runtime and 26 Cinnamon source-derived PNG frames are pushed to main. Fox, terrain, props and cake are honest procedural Canvas fallbacks pending the 220-visual/21-audio LM Arena specification packet, not final generated art. The historical separate ZIP remains an off-repo source and was not silently imported.
 
 ## 3. Artifact Contract
-Modern pixel art, clean transparent PNG sprite frames, reproducible atlas JSON, accurate provenance and asset hashes, eventual browser gameplay test.
+Modern pixel art, clean independent transparent source-derived Cinnamon PNG frames, actual frames.json hashes, full 273-page asset production PDF + editable Markdown + complete JSON contract, verified browser game interaction, and Pages deployment only when confirmed.
 
 ## 4. Active Invariants
 <!-- operational-state:entry
@@ -54,13 +54,13 @@ Modern pixel art, clean transparent PNG sprite frames, reproducible atlas JSON, 
 <!-- /operational-state:entry -->
 
 ## 7. Implemented but Unverified
-Expanded pose-source alpha remapping; no individual approved gameplay frames for new action families and no browser animation viewer.
+The browser-executed game, controls, 26 image loads, Dome camera, Fox three-hit state machine and birthday finale were observed in injected Chromium harness; an unassisted full traversal, real mobile device testing, and live deployed URL navigation remain unverified.
 
 ## 8. Unknown or Evidence-Stale State
-Final sprite frame sizes and pixel hitboxes in ShakeDown runtime; fidelity after rendering at 960x540 mobile viewport.
+New candidate Fox identity is unapproved; visual final-generation count 0. Live Pages URL playback and physical-phone touch/audio performance still require proof.
 
 ## 9. Pending Work
-Binary GitHub upload; hash check on actual branch; action-frame extraction; palette consistency/alpha QA; source-tested platformer; gameplay browser QA.
+Completed the 26-frame hash-backed upload, playable runtime, local Chromium injection checks, 11 deterministic tests and expanded asset specification. Remaining: commit this packet, enable Pages, validate public URL and actual player journey when feasible; LM Arena generates final assets as a separate future handoff.
 
 ## 10. Active Decisions, Defaults, and Prohibitions
 Modern Pixel Candidate B selected. Do not overwrite Cloud Chaser. Do not claim art source sheets are game-ready animation atlases. No Bethel setting; Notre Dame / South Bend story only.
@@ -70,10 +70,13 @@ Modern Pixel Candidate B selected. Do not overwrite Cloud Chaser. Do not claim a
 |---|---|---|---|
 | VER-001 | ZIP hash / normalized frame integrity | Tested local file bytes | Verify remote binaries after upload |
 | BRK-001 | run_03 source edge crop | Inspected raster alpha boundary | Regenerate/repair source |
-| PND-001 | Gameplay animation | Not implemented | Browser execution + visual and control QA |
+| PND-001 | Gameplay animation | 26 real source cutouts browser loaded | Full live-site playthrough and more complete animations |
+| PND-002 | Full birthday route | Unit tests + sampled browser scenes | Unassisted run and device tests |
+| PND-003 | Production art library | 220 standalone specs, 26 source-existing | 194 missing generated visuals and Fox approval |
 
 ## 12. Current Change Scope and Impact Radius
-Add truthful sprite-master handoff metadata and operational state; do not mutate gameplay code, renderer, Cloud Chaser, or production deployment.
+After 8b39c32 runtime milestone: publish expanded LM Arena PDF/MD/JSON and fixed event ledger, preserve gameplay and original sprites, deploy to Pages only after CI pass. Cloud Chaser remains strictly read-only.
 
 ## 13. Compact Revision Log
 - Revision 1: established asset-state boundary, verified local artifact hashes, protected missing animation/binary-transfer gates.
+- Revision 2: recorded tested playable 8b39c32 milestone, 26 source-derived integrated frames, bounded browser proof, comprehensive art contract and remaining Pages/live-device/LM Arena gates.

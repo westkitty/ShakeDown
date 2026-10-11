@@ -31,7 +31,7 @@ The original four-stage campaign plan is superseded by the user's October 11 com
 - `assets/references/` contains two physically present user-provided Cinnamon source sheets.
 - `assets/sprites/cinnamon/*.png` and `frames.json` contain 26 reproducible cut-outs physically produced from `cinnamon_actions_sheet.png`; they are **real, loaded sprites**, but not a claim of individually newly hand-drawn animations. See `scripts/extract_cinnamon.py`.
 - The Fox, backgrounds, terrain, collectibles, UI and cake currently use explicit procedural Canvas illustrations. They are playable **temporary integrated drawings**, not LM Arena final artwork.
-- `docs/assets/` will hold the complete generation package for those missing final outputs. A specification never stands in for verified bytes.
+- `docs/assets/ShakeDown_Complete_LM_Arena_Master.pdf` is the expanded 220-visual-asset / 21-audio-request LM Arena production master; its editable Markdown source, machine-readable JSON and reproducible compiler are committed alongside. 26 existing Cinnamon frames are verified; 194 final visual requests are still **not generated**. A specification never stands in for verified bytes.
 
 ## Validation
 
