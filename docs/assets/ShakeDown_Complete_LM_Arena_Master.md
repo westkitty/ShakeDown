@@ -46,7 +46,7 @@ Canvas engine: 960x540 logical screen, 32px tile contacts, source game inputs vi
 |---|---:|---:|---:|---:|---:|---:|
 | BIRTHDAY REVEAL / CAKE / SHAKES | 14 | 0 | 8 | 6 | 7 | 1 |
 | CAMPUS BACKGROUNDS / QUAD | 6 | 0 | 3 | 3 | 3 | 0 |
-| BOSS ATTACK READABILITY | 12 | 0 | 6 | 7 | 4 | 1 |
+| BOSS ATTACK READABILITY | 12 | 0 | 5 | 7 | 4 | 1 |
 | CINNAMON SOURCE SPRITES / REFINEMENTS | 33 | 26 | 6 | 1 | 6 | 0 |
 | COLLECTIBLES | 4 | 0 | 3 | 3 | 1 | 0 |
 | DOME PARALLAX / VIEWPORTS | 8 | 0 | 5 | 3 | 3 | 2 |
@@ -55,7 +55,7 @@ Canvas engine: 960x540 logical screen, 32px tile contacts, source game inputs vi
 | DOME STONE / GOLDEN TILES | 16 | 0 | 10 | 6 | 9 | 1 |
 | CAMPUS ENEMY STATES | 7 | 0 | 7 | 4 | 3 | 0 |
 | ADDITIONAL EFFECTS | 8 | 0 | 8 | 0 | 5 | 3 |
-| THE FOX / INTRO AND BOSS | 16 | 0 | 9 | 9 | 5 | 2 |
+| THE FOX / INTRO AND BOSS | 16 | 0 | 0 | 9 | 5 | 2 |
 | TRANSITIONS / STORY EFFECTS | 4 | 0 | 4 | 2 | 2 | 0 |
 | CAMPUS PULSE OBJECTS | 9 | 0 | 9 | 8 | 1 | 0 |
 | COLLECTIBLES / POWERUPS / PICKUP FRAMES | 6 | 0 | 6 | 0 | 4 | 2 |
@@ -65,7 +65,7 @@ Canvas engine: 960x540 logical screen, 32px tile contacts, source game inputs vi
 | ADDITIONAL UI / TOUCH | 14 | 0 | 13 | 1 | 10 | 3 |
 | CAMPUS VISUAL EFFECTS | 10 | 0 | 10 | 1 | 9 | 0 |
 
-TOTAL VISUAL CONTRACT: **220** individually specified logical IDs; **26** source-verified Cinnamon frames; **29** generated, byte-verified and normalized production images; **158** still missing final production images.
+TOTAL VISUAL CONTRACT: **220** individually specified logical IDs; **26** source-verified Cinnamon frames; **46** generated, byte-verified and normalized production images; **148** still missing final production images.
 
 ## LM ARENA UNIVERSAL EXECUTION ORDER
 
@@ -1357,7 +1357,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 16 individual asset contracts. Process P0 first, P1 next, P2 last. Reference sheets and complete per-asset instructions are repeated in every prompt.
 
 #### FOX-01 — Fox identity approval turnaround
-**State:** PROVISIONAL_MISSING_APPROVAL · **Priority:** P0 · **Where:** intro,boss · **Target:** 1024×768 px · **Source:** 1536×1152 px · **Output:** `assets/production/fox/fox_01.png`
+**State:** APPROVED · **Priority:** P0 · **Where:** intro,boss · **Target:** 1024×768 px · **Source:** 1536×1152 px · **Output:** `assets/production/fox/fox_01.png`
 **Anchor:** center · **Collision:** none · **Animation:** model-sheet only
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** FOX-01 approved reference needed before final PROMOTED status
 
@@ -1394,7 +1394,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/fox/fox_01.png; measure intrinsic 1024x768 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID FOX-01 in runtime manifest. At runtime map ID to model sheet; place in intro,boss with anchor center; use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### FOX-02 — Fox idle flank
-**State:** PROVISIONAL_MISSING_APPROVAL · **Priority:** P0 · **Where:** intro,boss · **Target:** 240×240 px · **Source:** 480×480 px · **Output:** `assets/production/fox/fox_02.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** intro,boss · **Target:** 240×240 px · **Source:** 480×480 px · **Output:** `assets/production/fox/fox_02.png`
 **Anchor:** (120,215) · **Collision:** none · **Animation:** single action state/frame, not a sheet; boss 3 hits, 2 telegraphed attack families
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** FOX-01 approved reference needed before final PROMOTED status
 
@@ -1431,7 +1431,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/fox/fox_02.png; measure intrinsic 240x240 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID FOX-02 in runtime manifest. At runtime map ID to boss idle; place in intro,boss with anchor (120,215); use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### FOX-03 — Fox run contact
-**State:** PROVISIONAL_MISSING_APPROVAL · **Priority:** P0 · **Where:** intro,boss · **Target:** 240×240 px · **Source:** 480×480 px · **Output:** `assets/production/fox/fox_03.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** intro,boss · **Target:** 240×240 px · **Source:** 480×480 px · **Output:** `assets/production/fox/fox_03.png`
 **Anchor:** (120,215) · **Collision:** none · **Animation:** single action state/frame, not a sheet; boss 3 hits, 2 telegraphed attack families
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** FOX-01 approved reference needed before final PROMOTED status
 
@@ -1468,7 +1468,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/fox/fox_03.png; measure intrinsic 240x240 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID FOX-03 in runtime manifest. At runtime map ID to intro and escape; place in intro,boss with anchor (120,215); use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### FOX-05 — Fox charge tell
-**State:** PROVISIONAL_MISSING_APPROVAL · **Priority:** P0 · **Where:** intro,boss · **Target:** 240×240 px · **Source:** 480×480 px · **Output:** `assets/production/fox/fox_05.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** intro,boss · **Target:** 240×240 px · **Source:** 480×480 px · **Output:** `assets/production/fox/fox_05.png`
 **Anchor:** (120,215) · **Collision:** none · **Animation:** single action state/frame, not a sheet; boss 3 hits, 2 telegraphed attack families
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** FOX-01 approved reference needed before final PROMOTED status
 
@@ -1505,7 +1505,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/fox/fox_05.png; measure intrinsic 240x240 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID FOX-05 in runtime manifest. At runtime map ID to boss attack windup; place in intro,boss with anchor (120,215); use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### FOX-06 — Fox charge lunge
-**State:** PROVISIONAL_MISSING_APPROVAL · **Priority:** P0 · **Where:** intro,boss · **Target:** 240×240 px · **Source:** 480×480 px · **Output:** `assets/production/fox/fox_06.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** intro,boss · **Target:** 240×240 px · **Source:** 480×480 px · **Output:** `assets/production/fox/fox_06.png`
 **Anchor:** (120,215) · **Collision:** none · **Animation:** single action state/frame, not a sheet; boss 3 hits, 2 telegraphed attack families
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** FOX-01 approved reference needed before final PROMOTED status
 
@@ -1542,7 +1542,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/fox/fox_06.png; measure intrinsic 240x240 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID FOX-06 in runtime manifest. At runtime map ID to boss charge active; place in intro,boss with anchor (120,215); use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### FOX-07 — Fox volley ready
-**State:** PROVISIONAL_MISSING_APPROVAL · **Priority:** P0 · **Where:** intro,boss · **Target:** 240×240 px · **Source:** 480×480 px · **Output:** `assets/production/fox/fox_07.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** intro,boss · **Target:** 240×240 px · **Source:** 480×480 px · **Output:** `assets/production/fox/fox_07.png`
 **Anchor:** (120,215) · **Collision:** none · **Animation:** single action state/frame, not a sheet; boss 3 hits, 2 telegraphed attack families
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** FOX-01 approved reference needed before final PROMOTED status
 
@@ -1579,7 +1579,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/fox/fox_07.png; measure intrinsic 240x240 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID FOX-07 in runtime manifest. At runtime map ID to boss projectile windup; place in intro,boss with anchor (120,215); use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### FOX-09 — Fox stun frame A
-**State:** PROVISIONAL_MISSING_APPROVAL · **Priority:** P0 · **Where:** intro,boss · **Target:** 240×240 px · **Source:** 480×480 px · **Output:** `assets/production/fox/fox_09.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** intro,boss · **Target:** 240×240 px · **Source:** 480×480 px · **Output:** `assets/production/fox/fox_09.png`
 **Anchor:** (120,215) · **Collision:** none · **Animation:** single action state/frame, not a sheet; boss 3 hits, 2 telegraphed attack families
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** FOX-01 approved reference needed before final PROMOTED status
 
@@ -1616,7 +1616,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/fox/fox_09.png; measure intrinsic 240x240 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID FOX-09 in runtime manifest. At runtime map ID to boss rest vulnerability; place in intro,boss with anchor (120,215); use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### FOX-11 — Fox hurt recoil
-**State:** PROVISIONAL_MISSING_APPROVAL · **Priority:** P0 · **Where:** intro,boss · **Target:** 240×240 px · **Source:** 480×480 px · **Output:** `assets/production/fox/fox_11.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** intro,boss · **Target:** 240×240 px · **Source:** 480×480 px · **Output:** `assets/production/fox/fox_11.png`
 **Anchor:** (120,215) · **Collision:** none · **Animation:** single action state/frame, not a sheet; boss 3 hits, 2 telegraphed attack families
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** FOX-01 approved reference needed before final PROMOTED status
 
@@ -1653,7 +1653,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/fox/fox_11.png; measure intrinsic 240x240 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID FOX-11 in runtime manifest. At runtime map ID to boss damaged; place in intro,boss with anchor (120,215); use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### FOX-12 — Fox defeated
-**State:** PROVISIONAL_MISSING_APPROVAL · **Priority:** P0 · **Where:** intro,boss · **Target:** 240×240 px · **Source:** 480×480 px · **Output:** `assets/production/fox/fox_12.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** intro,boss · **Target:** 240×240 px · **Source:** 480×480 px · **Output:** `assets/production/fox/fox_12.png`
 **Anchor:** (120,215) · **Collision:** none · **Animation:** single action state/frame, not a sheet; boss 3 hits, 2 telegraphed attack families
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** FOX-01 approved reference needed before final PROMOTED status
 
@@ -1690,7 +1690,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/fox/fox_12.png; measure intrinsic 240x240 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID FOX-12 in runtime manifest. At runtime map ID to boss defeat; place in intro,boss with anchor (120,215); use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### FOX-04 — Fox run airborne
-**State:** PROVISIONAL_MISSING_APPROVAL · **Priority:** P1 · **Where:** intro,boss · **Target:** 240×240 px · **Source:** 480×480 px · **Output:** `assets/production/fox/fox_04.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** intro,boss · **Target:** 240×240 px · **Source:** 480×480 px · **Output:** `assets/production/fox/fox_04.png`
 **Anchor:** (120,215) · **Collision:** none · **Animation:** single action state/frame, not a sheet; boss 3 hits, 2 telegraphed attack families
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** FOX-01 approved reference needed before final PROMOTED status
 
@@ -1727,7 +1727,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/fox/fox_04.png; measure intrinsic 240x240 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID FOX-04 in runtime manifest. At runtime map ID to intro and escape; place in intro,boss with anchor (120,215); use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### FOX-08 — Fox volley release
-**State:** PROVISIONAL_MISSING_APPROVAL · **Priority:** P1 · **Where:** intro,boss · **Target:** 240×240 px · **Source:** 480×480 px · **Output:** `assets/production/fox/fox_08.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** intro,boss · **Target:** 240×240 px · **Source:** 480×480 px · **Output:** `assets/production/fox/fox_08.png`
 **Anchor:** (120,215) · **Collision:** none · **Animation:** single action state/frame, not a sheet; boss 3 hits, 2 telegraphed attack families
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** FOX-01 approved reference needed before final PROMOTED status
 
@@ -1764,7 +1764,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/fox/fox_08.png; measure intrinsic 240x240 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID FOX-08 in runtime manifest. At runtime map ID to boss projectile release; place in intro,boss with anchor (120,215); use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### FOX-10 — Fox stun frame B
-**State:** PROVISIONAL_MISSING_APPROVAL · **Priority:** P1 · **Where:** intro,boss · **Target:** 240×240 px · **Source:** 480×480 px · **Output:** `assets/production/fox/fox_10.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** intro,boss · **Target:** 240×240 px · **Source:** 480×480 px · **Output:** `assets/production/fox/fox_10.png`
 **Anchor:** (120,215) · **Collision:** none · **Animation:** single action state/frame, not a sheet; boss 3 hits, 2 telegraphed attack families
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** FOX-01 approved reference needed before final PROMOTED status
 
@@ -1801,7 +1801,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/fox/fox_10.png; measure intrinsic 240x240 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID FOX-10 in runtime manifest. At runtime map ID to boss rest vulnerability; place in intro,boss with anchor (120,215); use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### FOX-13 — Fox taunt portrait
-**State:** PROVISIONAL_MISSING_APPROVAL · **Priority:** P1 · **Where:** intro,boss · **Target:** 256×256 px · **Source:** 480×480 px · **Output:** `assets/production/fox/fox_13.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** intro,boss · **Target:** 256×256 px · **Source:** 480×480 px · **Output:** `assets/production/fox/fox_13.png`
 **Anchor:** center · **Collision:** none · **Animation:** single action state/frame, not a sheet; boss 3 hits, 2 telegraphed attack families
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** FOX-01 approved reference needed before final PROMOTED status
 
@@ -1838,7 +1838,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/fox/fox_13.png; measure intrinsic 256x256 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID FOX-13 in runtime manifest. At runtime map ID to dialogue; place in intro,boss with anchor center; use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### FOX-15 — Fox getaway silhouette
-**State:** PROVISIONAL_MISSING_APPROVAL · **Priority:** P1 · **Where:** intro,boss · **Target:** 192×128 px · **Source:** 480×480 px · **Output:** `assets/production/fox/fox_15.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** intro,boss · **Target:** 192×128 px · **Source:** 480×480 px · **Output:** `assets/production/fox/fox_15.png`
 **Anchor:** bottom-center · **Collision:** none · **Animation:** single action state/frame, not a sheet; boss 3 hits, 2 telegraphed attack families
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** FOX-01 approved reference needed before final PROMOTED status
 
@@ -1875,7 +1875,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/fox/fox_15.png; measure intrinsic 192x128 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID FOX-15 in runtime manifest. At runtime map ID to intro distance silhouette; place in intro,boss with anchor bottom-center; use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### FOX-14 — Fox cardboard decoy
-**State:** PROVISIONAL_MISSING_APPROVAL · **Priority:** P2 · **Where:** intro,boss · **Target:** 256×256 px · **Source:** 480×480 px · **Output:** `assets/production/fox/fox_14.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P2 · **Where:** intro,boss · **Target:** 256×256 px · **Source:** 480×480 px · **Output:** `assets/production/fox/fox_14.png`
 **Anchor:** bottom-center · **Collision:** none · **Animation:** single action state/frame, not a sheet; boss 3 hits, 2 telegraphed attack families
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** FOX-01 approved reference needed before final PROMOTED status
 
@@ -1912,7 +1912,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/fox/fox_14.png; measure intrinsic 256x256 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID FOX-14 in runtime manifest. At runtime map ID to intro comedy and secret; place in intro,boss with anchor bottom-center; use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### FOX-16 — Fox happy truce
-**State:** PROVISIONAL_MISSING_APPROVAL · **Priority:** P2 · **Where:** intro,boss · **Target:** 240×240 px · **Source:** 480×480 px · **Output:** `assets/production/fox/fox_16.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P2 · **Where:** intro,boss · **Target:** 240×240 px · **Source:** 480×480 px · **Output:** `assets/production/fox/fox_16.png`
 **Anchor:** (120,215) · **Collision:** none · **Animation:** single action state/frame, not a sheet; boss 3 hits, 2 telegraphed attack families
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** FOX-01 approved reference needed before final PROMOTED status
 
@@ -6394,7 +6394,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/boss/effects/bs_vf08.png; measure intrinsic 64x64 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID BS-VF08 in runtime manifest. At runtime map ID to Boss readability, counterplay and feedback; place in boss with anchor center; use the engine auth collider "FX only, separate from hitboxes" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### BS-VF09 — Boss health pip empty
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** boss · **Target:** 64×64 px · **Source:** 128×128 px · **Output:** `assets/production/boss/effects/bs_vf09.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** boss · **Target:** 64×64 px · **Source:** 128×128 px · **Output:** `assets/production/boss/effects/bs_vf09.png`
 **Anchor:** center · **Collision:** FX only, separate from hitboxes · **Animation:** single state, no spritesheet unless intentional sequence is later verified
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Fox art approved by human + boss state machine
 

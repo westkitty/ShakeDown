@@ -1,8 +1,8 @@
 {
  "schema_version": 1,
- "generated_utc": "2026-10-11T19:23:08Z",
+ "generated_utc": "2026-10-11T19:25:30Z",
  "note": "Byte-level truth for generated production art. Every sha256 and pixel dimension here was measured from the file actually written to disk. Human visual review is a separate, still-open gate.",
- "count": 36,
+ "count": 46,
  "assets": {
   "BD-01": {
    "id": "BD-01",
@@ -760,6 +760,59 @@
    "sha256": "038546d68e13dcd62fdec1356d9d5eb9af83adf6b7e81db8fb28ea9b32ebab8b",
    "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
   },
+  "BS-VF09": {
+   "id": "BS-VF09",
+   "name": "Boss health pip empty",
+   "group": "BS-VF",
+   "priority": "P0",
+   "path": "assets/production/boss/effects/bs_vf09.png",
+   "target_px": [
+    64,
+    64
+   ],
+   "pivot": "center",
+   "raw_source": ".artifact-cache/raw/bs_vf09.png",
+   "raw_sha256": "f68570ace552a76d8377e0fbc7e1c8db8f607c472f905c249eeaad25f34e8852",
+   "raw_px": [
+    1024,
+    1024
+   ],
+   "generated_utc": "2026-10-11T19:25:30Z",
+   "generator": "arena-agent-mode image generation",
+   "alpha": {
+    "required": true,
+    "mode": "straight RGBA",
+    "transparent_px_fraction": 0.3513,
+    "opaque_px_fraction": 0.5383,
+    "partial_edge_px": 452,
+    "border_all_transparent": false,
+    "matte_rgb": [
+     255,
+     0,
+     255
+    ],
+    "transparent_fraction": 0.8182,
+    "partial_fraction": 0.0,
+    "matte_residual_opaque_px": 0,
+    "source_keyed_px": [
+     1024,
+     1024
+    ]
+   },
+   "format": "PNG RGBA",
+   "trim_bbox_in_keyed_source": [
+    256,
+    235,
+    768,
+    788
+   ],
+   "actual_px": [
+    64,
+    64
+   ],
+   "sha256": "8b997fb81a57dd99044fd33b6b4e4085dc7f82722f5efcde05b1117af6cb7cc0",
+   "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+  },
   "CIN-N06": {
    "id": "CIN-N06",
    "name": "Final birthday cheers",
@@ -1351,6 +1404,59 @@
    "sha256": "1d37189a87768988e71c34179356f4f0be7d73b1763489961f799d93232a7ce2",
    "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
   },
+  "FOX-04": {
+   "id": "FOX-04",
+   "name": "Fox run airborne",
+   "group": "FOX",
+   "priority": "P1",
+   "path": "assets/production/fox/fox_04.png",
+   "target_px": [
+    240,
+    240
+   ],
+   "pivot": "(120,215)",
+   "raw_source": ".artifact-cache/raw/fox_04.png",
+   "raw_sha256": "6f61610b7c28847f6b72fd865e4fea29be36d643348e311dc021447a0f90832f",
+   "raw_px": [
+    1376,
+    768
+   ],
+   "generated_utc": "2026-10-11T19:25:30Z",
+   "generator": "arena-agent-mode image generation",
+   "alpha": {
+    "required": true,
+    "mode": "straight RGBA",
+    "transparent_px_fraction": 0.7586,
+    "opaque_px_fraction": 0.1911,
+    "partial_edge_px": 2898,
+    "border_all_transparent": false,
+    "matte_rgb": [
+     255,
+     0,
+     255
+    ],
+    "transparent_fraction": 0.8314,
+    "partial_fraction": 0.0,
+    "matte_residual_opaque_px": 0,
+    "source_keyed_px": [
+     1376,
+     768
+    ]
+   },
+   "format": "PNG RGBA",
+   "trim_bbox_in_keyed_source": [
+    230,
+    77,
+    1112,
+    685
+   ],
+   "actual_px": [
+    240,
+    240
+   ],
+   "sha256": "93be56f9646eb20d82689fac17dbd8d428ea3626df23dc756ff13a491cb7359c",
+   "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+  },
   "FOX-05": {
    "id": "FOX-05",
    "name": "Fox charge tell",
@@ -1510,6 +1616,59 @@
    "sha256": "147e994e44286fc67150d90f49fc9c98e43611ad802ef22f869ba1e889583fd5",
    "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
   },
+  "FOX-08": {
+   "id": "FOX-08",
+   "name": "Fox volley release",
+   "group": "FOX",
+   "priority": "P1",
+   "path": "assets/production/fox/fox_08.png",
+   "target_px": [
+    240,
+    240
+   ],
+   "pivot": "(120,215)",
+   "raw_source": ".artifact-cache/raw/fox_08.png",
+   "raw_sha256": "0aca4c7a6693df94be86e38c021da9a464979c2ecc4aa21c8dc42dd23bcbf42b",
+   "raw_px": [
+    1024,
+    1024
+   ],
+   "generated_utc": "2026-10-11T19:25:30Z",
+   "generator": "arena-agent-mode image generation",
+   "alpha": {
+    "required": true,
+    "mode": "straight RGBA",
+    "transparent_px_fraction": 0.7162,
+    "opaque_px_fraction": 0.2258,
+    "partial_edge_px": 3342,
+    "border_all_transparent": false,
+    "matte_rgb": [
+     255,
+     0,
+     255
+    ],
+    "transparent_fraction": 0.8024,
+    "partial_fraction": 0.0,
+    "matte_residual_opaque_px": 0,
+    "source_keyed_px": [
+     1024,
+     1024
+    ]
+   },
+   "format": "PNG RGBA",
+   "trim_bbox_in_keyed_source": [
+    123,
+    72,
+    881,
+    952
+   ],
+   "actual_px": [
+    240,
+    240
+   ],
+   "sha256": "576e609ccd70dc0c1c23c100508b7c62ace41b7bbaffafbed3d8763732a01dfd",
+   "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+  },
   "FOX-09": {
    "id": "FOX-09",
    "name": "Fox stun frame A",
@@ -1561,6 +1720,377 @@
     240
    ],
    "sha256": "a04fa19d68259a92f5a98df2c5740570f0ed7fb6b6d427c81b0fb812ad2d145b",
+   "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+  },
+  "FOX-10": {
+   "id": "FOX-10",
+   "name": "Fox stun frame B",
+   "group": "FOX",
+   "priority": "P1",
+   "path": "assets/production/fox/fox_10.png",
+   "target_px": [
+    240,
+    240
+   ],
+   "pivot": "(120,215)",
+   "raw_source": ".artifact-cache/raw/fox_10.png",
+   "raw_sha256": "20a0cba438a684c9ed9e398f2202b83a36740ff2555ae356af3760a3dba18341",
+   "raw_px": [
+    1408,
+    768
+   ],
+   "generated_utc": "2026-10-11T19:25:30Z",
+   "generator": "arena-agent-mode image generation",
+   "alpha": {
+    "required": true,
+    "mode": "straight RGBA",
+    "transparent_px_fraction": 0.6766,
+    "opaque_px_fraction": 0.261,
+    "partial_edge_px": 3594,
+    "border_all_transparent": false,
+    "matte_rgb": [
+     255,
+     0,
+     255
+    ],
+    "transparent_fraction": 0.8602,
+    "partial_fraction": 0.0,
+    "matte_residual_opaque_px": 0,
+    "source_keyed_px": [
+     1408,
+     768
+    ]
+   },
+   "format": "PNG RGBA",
+   "trim_bbox_in_keyed_source": [
+    346,
+    47,
+    1050,
+    727
+   ],
+   "actual_px": [
+    240,
+    240
+   ],
+   "sha256": "1c803b6f5e501ff2ed70a22449bc1aad6bed13b8732c09d6b3c6b3c335fff1e2",
+   "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+  },
+  "FOX-11": {
+   "id": "FOX-11",
+   "name": "Fox hurt recoil",
+   "group": "FOX",
+   "priority": "P0",
+   "path": "assets/production/fox/fox_11.png",
+   "target_px": [
+    240,
+    240
+   ],
+   "pivot": "(120,215)",
+   "raw_source": ".artifact-cache/raw/fox_11.png",
+   "raw_sha256": "a511a04bb06471ad956071f1c2aa5b706b5961d30e7492f1aa818031ac84336c",
+   "raw_px": [
+    1376,
+    768
+   ],
+   "generated_utc": "2026-10-11T19:25:30Z",
+   "generator": "arena-agent-mode image generation",
+   "alpha": {
+    "required": true,
+    "mode": "straight RGBA",
+    "transparent_px_fraction": 0.6364,
+    "opaque_px_fraction": 0.3011,
+    "partial_edge_px": 3599,
+    "border_all_transparent": false,
+    "matte_rgb": [
+     255,
+     0,
+     255
+    ],
+    "transparent_fraction": 0.8626,
+    "partial_fraction": 0.0,
+    "matte_residual_opaque_px": 0,
+    "source_keyed_px": [
+     1376,
+     768
+    ]
+   },
+   "format": "PNG RGBA",
+   "trim_bbox_in_keyed_source": [
+    373,
+    60,
+    1004,
+    708
+   ],
+   "actual_px": [
+    240,
+    240
+   ],
+   "sha256": "eac444cae0ca3be8b8d97804f44571c2db4e4bb52c8b829f38e49a262bba87cb",
+   "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+  },
+  "FOX-12": {
+   "id": "FOX-12",
+   "name": "Fox defeated",
+   "group": "FOX",
+   "priority": "P0",
+   "path": "assets/production/fox/fox_12.png",
+   "target_px": [
+    240,
+    240
+   ],
+   "pivot": "(120,215)",
+   "raw_source": ".artifact-cache/raw/fox_12.png",
+   "raw_sha256": "addec3aa84703db203558c3ff0d91ce4be83a1582cc5019e6b3deee6a7d13983",
+   "raw_px": [
+    1408,
+    768
+   ],
+   "generated_utc": "2026-10-11T19:25:30Z",
+   "generator": "arena-agent-mode image generation",
+   "alpha": {
+    "required": true,
+    "mode": "straight RGBA",
+    "transparent_px_fraction": 0.7835,
+    "opaque_px_fraction": 0.1813,
+    "partial_edge_px": 2030,
+    "border_all_transparent": false,
+    "matte_rgb": [
+     255,
+     0,
+     255
+    ],
+    "transparent_fraction": 0.717,
+    "partial_fraction": 0.0,
+    "matte_residual_opaque_px": 0,
+    "source_keyed_px": [
+     1408,
+     768
+    ]
+   },
+   "format": "PNG RGBA",
+   "trim_bbox_in_keyed_source": [
+    123,
+    88,
+    1338,
+    704
+   ],
+   "actual_px": [
+    240,
+    240
+   ],
+   "sha256": "ddb651a74923a9c093c24d32b6d37ebbcbd2a54f1fdd2bc4f9f4a567c279f9b4",
+   "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+  },
+  "FOX-13": {
+   "id": "FOX-13",
+   "name": "Fox taunt portrait",
+   "group": "FOX",
+   "priority": "P1",
+   "path": "assets/production/fox/fox_13.png",
+   "target_px": [
+    256,
+    256
+   ],
+   "pivot": "center",
+   "raw_source": ".artifact-cache/raw/fox_13.png",
+   "raw_sha256": "742cdc0e3812f19f491590d48abc8f047b2e8e3849b87b728cdad90135f00b75",
+   "raw_px": [
+    1024,
+    1024
+   ],
+   "generated_utc": "2026-10-11T19:25:30Z",
+   "generator": "arena-agent-mode image generation",
+   "alpha": {
+    "required": true,
+    "mode": "straight RGBA",
+    "transparent_px_fraction": 0.568,
+    "opaque_px_fraction": 0.4015,
+    "partial_edge_px": 1997,
+    "border_all_transparent": false,
+    "matte_rgb": [
+     255,
+     0,
+     255
+    ],
+    "transparent_fraction": 0.5932,
+    "partial_fraction": 0.0,
+    "matte_residual_opaque_px": 0,
+    "source_keyed_px": [
+     1024,
+     1024
+    ]
+   },
+   "format": "PNG RGBA",
+   "trim_bbox_in_keyed_source": [
+    174,
+    20,
+    860,
+    1024
+   ],
+   "actual_px": [
+    256,
+    256
+   ],
+   "sha256": "737cd08e82035708526493c04c86f4a0d936bc7ff2b37ee68abfdc4acbf5ffee",
+   "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+  },
+  "FOX-14": {
+   "id": "FOX-14",
+   "name": "Fox cardboard decoy",
+   "group": "FOX",
+   "priority": "P2",
+   "path": "assets/production/fox/fox_14.png",
+   "target_px": [
+    256,
+    256
+   ],
+   "pivot": "bottom-center",
+   "raw_source": ".artifact-cache/raw/fox_14.png",
+   "raw_sha256": "e3f3bcfb37c523d354d1bc176055b43236844c16be5103204c33e71527748144",
+   "raw_px": [
+    1408,
+    768
+   ],
+   "generated_utc": "2026-10-11T19:25:30Z",
+   "generator": "arena-agent-mode image generation",
+   "alpha": {
+    "required": true,
+    "mode": "straight RGBA",
+    "transparent_px_fraction": 0.6241,
+    "opaque_px_fraction": 0.3395,
+    "partial_edge_px": 2386,
+    "border_all_transparent": false,
+    "matte_rgb": [
+     255,
+     0,
+     255
+    ],
+    "transparent_fraction": 0.8464,
+    "partial_fraction": 0.0,
+    "matte_residual_opaque_px": 0,
+    "source_keyed_px": [
+     1408,
+     768
+    ]
+   },
+   "format": "PNG RGBA",
+   "trim_bbox_in_keyed_source": [
+    434,
+    47,
+    968,
+    721
+   ],
+   "actual_px": [
+    256,
+    256
+   ],
+   "sha256": "d49c16864b5b7a2b0ac7cea382e989f5fdf3a541bc7a4d337784b26644a8a43c",
+   "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+  },
+  "FOX-15": {
+   "id": "FOX-15",
+   "name": "Fox getaway silhouette",
+   "group": "FOX",
+   "priority": "P1",
+   "path": "assets/production/fox/fox_15.png",
+   "target_px": [
+    192,
+    128
+   ],
+   "pivot": "bottom-center",
+   "raw_source": ".artifact-cache/raw/fox_15.png",
+   "raw_sha256": "f9b10ed31e37e307d63c25861baff3bb8f53509eab97ccf61b525bb41b67a202",
+   "raw_px": [
+    1408,
+    768
+   ],
+   "generated_utc": "2026-10-11T19:25:30Z",
+   "generator": "arena-agent-mode image generation",
+   "alpha": {
+    "required": true,
+    "mode": "straight RGBA",
+    "transparent_px_fraction": 0.6267,
+    "opaque_px_fraction": 0.3002,
+    "partial_edge_px": 1796,
+    "border_all_transparent": false,
+    "matte_rgb": [
+     255,
+     0,
+     255
+    ],
+    "transparent_fraction": 0.9671,
+    "partial_fraction": 0.0,
+    "matte_residual_opaque_px": 0,
+    "source_keyed_px": [
+     1408,
+     768
+    ]
+   },
+   "format": "PNG RGBA",
+   "trim_bbox_in_keyed_source": [
+    498,
+    270,
+    886,
+    481
+   ],
+   "actual_px": [
+    192,
+    128
+   ],
+   "sha256": "68aac5a84e280fe226eb65176e6de2ec10c2fdbd1bfc4f4c1d640f57977035a8",
+   "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+  },
+  "FOX-16": {
+   "id": "FOX-16",
+   "name": "Fox happy truce",
+   "group": "FOX",
+   "priority": "P2",
+   "path": "assets/production/fox/fox_16.png",
+   "target_px": [
+    240,
+    240
+   ],
+   "pivot": "(120,215)",
+   "raw_source": ".artifact-cache/raw/fox_16.png",
+   "raw_sha256": "a9bc6c94e9b3684e6f5cd4ba36d93590eb35c76d54388db9876c660e39a75c7a",
+   "raw_px": [
+    1408,
+    768
+   ],
+   "generated_utc": "2026-10-11T19:25:30Z",
+   "generator": "arena-agent-mode image generation",
+   "alpha": {
+    "required": true,
+    "mode": "straight RGBA",
+    "transparent_px_fraction": 0.7053,
+    "opaque_px_fraction": 0.2489,
+    "partial_edge_px": 2637,
+    "border_all_transparent": false,
+    "matte_rgb": [
+     255,
+     0,
+     255
+    ],
+    "transparent_fraction": 0.8744,
+    "partial_fraction": 0.0,
+    "matte_residual_opaque_px": 0,
+    "source_keyed_px": [
+     1408,
+     768
+    ]
+   },
+   "format": "PNG RGBA",
+   "trim_bbox_in_keyed_source": [
+    410,
+    47,
+    962,
+    739
+   ],
+   "actual_px": [
+    240,
+    240
+   ],
+   "sha256": "329e80208d5adee418d8713a23d9f7469d6a79548ff0b4055a3faaef28e0ac9f",
    "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
   },
   "PR-01": {

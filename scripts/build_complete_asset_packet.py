@@ -354,6 +354,11 @@ MANIFEST_PATH=ROOT/'assets/production/manifest.json'
 MANIFEST={}
 if MANIFEST_PATH.exists():
  MANIFEST=json.loads(MANIFEST_PATH.read_text()).get('assets',{})
+APPROVALS={}
+APPROVALS_PATH=ROOT/'assets/production/approvals.json'
+if APPROVALS_PATH.exists():
+ APPROVALS=json.loads(APPROVALS_PATH.read_text()).get('decisions',{})
+FOX_IDENTITY_APPROVED=APPROVALS.get('FOX-01',{}).get('decision')=='APPROVED'
 GENERATED_STATUSES=('NORMALIZED_VERIFIED','INTEGRATED_BROWSER_CHECKED','APPROVED')
 def is_generated(a):
  return a['status'] in GENERATED_STATUSES
@@ -367,7 +372,13 @@ for a in ASSETS:
  actual=hashlib.sha256(target.read_bytes()).hexdigest()
  if actual!=record.get('sha256'):
   raise SystemExit(f'{a["id"]} sha256 mismatch: manifest {record.get("sha256")} != disk {actual}')
- a['status']='PROVISIONAL_MISSING_APPROVAL' if a['group']=='FOX' else 'NORMALIZED_VERIFIED'
+ if a['id'] in APPROVALS:
+  a['status']='APPROVED'
+ elif a['group']=='FOX' and not FOX_IDENTITY_APPROVED:
+  a['status']='PROVISIONAL_MISSING_APPROVAL'
+ else:
+  a['status']='NORMALIZED_VERIFIED'
+ a['approval']=APPROVALS.get(a['id'],{}).get('decision','PENDING_HUMAN_REVIEW')
  a['has_bytes']=True
  a['sha256']=actual
  a['notes']=(f'Generated and normalized {record.get("generated_utc","")}; '
