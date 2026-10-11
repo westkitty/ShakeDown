@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "generated_utc": "2026-10-11T20:49:25Z",
+  "generated_utc": "2026-10-11T21:24:50Z",
   "note": "Byte-level truth for generated production art. Every sha256 and pixel dimension here was measured from the file actually written to disk. Human visual review is a separate, still-open gate.",
-  "count": 185,
+  "count": 193,
   "assets": {
     "BD-01": {
       "id": "BD-01",
@@ -269,6 +269,59 @@
       "sha256": "a471dfae9d364a9db0f123c774b8d399428cde8912959e9dad114d301029c3bd",
       "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
     },
+    "BD-06": {
+      "id": "BD-06",
+      "name": "Victory milkshake trio",
+      "group": "BD",
+      "priority": "P1",
+      "path": "assets/production/birthday/bd_06.png",
+      "target_px": [
+        512,
+        256
+      ],
+      "pivot": "bottom-center",
+      "raw_source": ".artifact-cache/raw/bd_06.png",
+      "raw_sha256": "930e8cd33c2c0be18faa97bb611b56d79db968d98a78504c337bf71458140fb5",
+      "raw_px": [
+        1408,
+        768
+      ],
+      "generated_utc": "2026-10-11T21:24:50Z",
+      "generator": "arena-agent-mode image generation",
+      "alpha": {
+        "required": true,
+        "mode": "straight RGBA",
+        "transparent_px_fraction": 0.5581,
+        "opaque_px_fraction": 0.4109,
+        "partial_edge_px": 4065,
+        "border_all_transparent": false,
+        "matte_rgb": [
+          255,
+          0,
+          255
+        ],
+        "transparent_fraction": 0.766,
+        "partial_fraction": 0.0,
+        "matte_residual_opaque_px": 0,
+        "source_keyed_px": [
+          1408,
+          768
+        ]
+      },
+      "format": "PNG RGBA",
+      "trim_bbox_in_keyed_source": [
+        164,
+        105,
+        1244,
+        645
+      ],
+      "actual_px": [
+        512,
+        256
+      ],
+      "sha256": "7929972d92812a6167561fde42ba26e6c9f322d209d430a3126f71812d4291de",
+      "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+    },
     "BD-07": {
       "id": "BD-07",
       "name": "Birthday bunting arc",
@@ -320,6 +373,59 @@
         192
       ],
       "sha256": "b2c2682e83e9d05f8b44cddcaf85d7d25b6062823cbe8526cb8b3fb5e2ce66a3",
+      "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+    },
+    "BD-08": {
+      "id": "BD-08",
+      "name": "Birthday confetti master",
+      "group": "BD",
+      "priority": "P1",
+      "path": "assets/production/birthday/bd_08.png",
+      "target_px": [
+        512,
+        256
+      ],
+      "pivot": "bottom-center",
+      "raw_source": ".artifact-cache/raw/bd_08.png",
+      "raw_sha256": "5591ffab63cf1c325485d63dd9792482873cde4363571c23081160a8392d231c",
+      "raw_px": [
+        1408,
+        768
+      ],
+      "generated_utc": "2026-10-11T21:24:50Z",
+      "generator": "arena-agent-mode image generation",
+      "alpha": {
+        "required": true,
+        "mode": "straight RGBA",
+        "transparent_px_fraction": 0.8867,
+        "opaque_px_fraction": 0.0586,
+        "partial_edge_px": 7170,
+        "border_all_transparent": false,
+        "matte_rgb": [
+          255,
+          0,
+          255
+        ],
+        "transparent_fraction": 0.918,
+        "partial_fraction": 0.0,
+        "matte_residual_opaque_px": 0,
+        "source_keyed_px": [
+          1408,
+          768
+        ]
+      },
+      "format": "PNG RGBA",
+      "trim_bbox_in_keyed_source": [
+        47,
+        47,
+        1355,
+        726
+      ],
+      "actual_px": [
+        512,
+        256
+      ],
+      "sha256": "92079dddab1e0ccea394b23132e34e986a1086290c7681a607636f9ebc8abb3e",
       "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
     },
     "BD-09": {
@@ -1504,6 +1610,271 @@
       "sha256": "baf5d8707a1cf0d9a11bd7303300eed8d38847aab4df659a3fc4f1e4082743fe",
       "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
     },
+    "CIN-N01": {
+      "id": "CIN-N01",
+      "name": "Landing recovery neutral",
+      "group": "CIN",
+      "priority": "P1",
+      "path": "assets/production/cinnamon/land_recover.png",
+      "target_px": [
+        240,
+        160
+      ],
+      "pivot": "face=(145,147 feet)",
+      "raw_source": ".artifact-cache/raw/cin_n01.png",
+      "raw_sha256": "f36e6ef6a367486b7a5bb7064e219a585463acf64b3e209dd771de45df51d5c9",
+      "raw_px": [
+        1408,
+        768
+      ],
+      "generated_utc": "2026-10-11T21:24:50Z",
+      "generator": "arena-agent-mode image generation",
+      "alpha": {
+        "required": true,
+        "mode": "straight RGBA",
+        "transparent_px_fraction": 0.5477,
+        "opaque_px_fraction": 0.4036,
+        "partial_edge_px": 1871,
+        "border_all_transparent": false,
+        "matte_rgb": [
+          255,
+          0,
+          255
+        ],
+        "transparent_fraction": 0.7908,
+        "partial_fraction": 0.0,
+        "matte_residual_opaque_px": 0,
+        "source_keyed_px": [
+          1408,
+          768
+        ]
+      },
+      "format": "PNG RGBA",
+      "trim_bbox_in_keyed_source": [
+        252,
+        106,
+        992,
+        692
+      ],
+      "actual_px": [
+        240,
+        160
+      ],
+      "sha256": "bebc761c6286a285d6be4641556ae4e07ccdd589bbe3c0a171879f792e732116",
+      "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+    },
+    "CIN-N02": {
+      "id": "CIN-N02",
+      "name": "Climb contact left",
+      "group": "CIN",
+      "priority": "P1",
+      "path": "assets/production/cinnamon/climb_hold.png",
+      "target_px": [
+        240,
+        160
+      ],
+      "pivot": "face=(145,147 feet)",
+      "raw_source": ".artifact-cache/raw/cin_n02.png",
+      "raw_sha256": "d542403d40a03bdfc17b8978e02765e55c6e59e1232d105d698de4e8db260d18",
+      "raw_px": [
+        1376,
+        768
+      ],
+      "generated_utc": "2026-10-11T21:24:50Z",
+      "generator": "arena-agent-mode image generation",
+      "alpha": {
+        "required": true,
+        "mode": "straight RGBA",
+        "transparent_px_fraction": 0.8071,
+        "opaque_px_fraction": 0.1613,
+        "partial_edge_px": 1213,
+        "border_all_transparent": false,
+        "matte_rgb": [
+          255,
+          0,
+          255
+        ],
+        "transparent_fraction": 0.8547,
+        "partial_fraction": 0.0,
+        "matte_residual_opaque_px": 0,
+        "source_keyed_px": [
+          1376,
+          768
+        ]
+      },
+      "format": "PNG RGBA",
+      "trim_bbox_in_keyed_source": [
+        441,
+        0,
+        975,
+        742
+      ],
+      "actual_px": [
+        240,
+        160
+      ],
+      "sha256": "875857775530c30a5007569474fa57add5198d48cba7ac782b3acd1047592d33",
+      "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+    },
+    "CIN-N03": {
+      "id": "CIN-N03",
+      "name": "Climb mantle",
+      "group": "CIN",
+      "priority": "P1",
+      "path": "assets/production/cinnamon/climb_mantle.png",
+      "target_px": [
+        240,
+        160
+      ],
+      "pivot": "face=(145,147 feet)",
+      "raw_source": ".artifact-cache/raw/cin_n03.png",
+      "raw_sha256": "a0f588ca53ed632dc9819196f1cde3f3fefca147c4709f726333a0e156d24299",
+      "raw_px": [
+        1408,
+        768
+      ],
+      "generated_utc": "2026-10-11T21:24:50Z",
+      "generator": "arena-agent-mode image generation",
+      "alpha": {
+        "required": true,
+        "mode": "straight RGBA",
+        "transparent_px_fraction": 0.6288,
+        "opaque_px_fraction": 0.3137,
+        "partial_edge_px": 2208,
+        "border_all_transparent": false,
+        "matte_rgb": [
+          255,
+          0,
+          255
+        ],
+        "transparent_fraction": 0.7672,
+        "partial_fraction": 0.0,
+        "matte_residual_opaque_px": 0,
+        "source_keyed_px": [
+          1408,
+          768
+        ]
+      },
+      "format": "PNG RGBA",
+      "trim_bbox_in_keyed_source": [
+        328,
+        52,
+        1091,
+        739
+      ],
+      "actual_px": [
+        240,
+        160
+      ],
+      "sha256": "16988e1d511f69e02de365a33afbd5a6d5f7c6811e5846b92f2bd06551a668e8",
+      "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+    },
+    "CIN-N04": {
+      "id": "CIN-N04",
+      "name": "Shake pickup celebration",
+      "group": "CIN",
+      "priority": "P1",
+      "path": "assets/production/cinnamon/pickup.png",
+      "target_px": [
+        240,
+        160
+      ],
+      "pivot": "face=(145,147 feet)",
+      "raw_source": ".artifact-cache/raw/cin_n04.png",
+      "raw_sha256": "4962f4293e23af9f1f56058a39e279ad7b189eab30374ff8871de434dd70546d",
+      "raw_px": [
+        1408,
+        768
+      ],
+      "generated_utc": "2026-10-11T21:24:50Z",
+      "generator": "arena-agent-mode image generation",
+      "alpha": {
+        "required": true,
+        "mode": "straight RGBA",
+        "transparent_px_fraction": 0.6178,
+        "opaque_px_fraction": 0.3348,
+        "partial_edge_px": 1817,
+        "border_all_transparent": false,
+        "matte_rgb": [
+          255,
+          0,
+          255
+        ],
+        "transparent_fraction": 0.8539,
+        "partial_fraction": 0.0,
+        "matte_residual_opaque_px": 0,
+        "source_keyed_px": [
+          1408,
+          768
+        ]
+      },
+      "format": "PNG RGBA",
+      "trim_bbox_in_keyed_source": [
+        358,
+        135,
+        868,
+        669
+      ],
+      "actual_px": [
+        240,
+        160
+      ],
+      "sha256": "2a3d0b550748e0acdef89edfe0d707d1800462d6c96ce1a8da311cb7b14022b9",
+      "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+    },
+    "CIN-N05": {
+      "id": "CIN-N05",
+      "name": "Boss dodge recovery",
+      "group": "CIN",
+      "priority": "P1",
+      "path": "assets/production/cinnamon/dodge_recover.png",
+      "target_px": [
+        240,
+        160
+      ],
+      "pivot": "face=(145,147 feet)",
+      "raw_source": ".artifact-cache/raw/cin_n05.png",
+      "raw_sha256": "6a52972ec9a2c62bb8d8622eda1e1f66f5a26a2f32afb1ce93e6e948f02b52f7",
+      "raw_px": [
+        1408,
+        768
+      ],
+      "generated_utc": "2026-10-11T21:24:50Z",
+      "generator": "arena-agent-mode image generation",
+      "alpha": {
+        "required": true,
+        "mode": "straight RGBA",
+        "transparent_px_fraction": 0.5151,
+        "opaque_px_fraction": 0.429,
+        "partial_edge_px": 2150,
+        "border_all_transparent": false,
+        "matte_rgb": [
+          255,
+          0,
+          255
+        ],
+        "transparent_fraction": 0.6321,
+        "partial_fraction": 0.0,
+        "matte_residual_opaque_px": 0,
+        "source_keyed_px": [
+          1408,
+          768
+        ]
+      },
+      "format": "PNG RGBA",
+      "trim_bbox_in_keyed_source": [
+        141,
+        64,
+        1267,
+        721
+      ],
+      "actual_px": [
+        240,
+        160
+      ],
+      "sha256": "386c1cf96d363d50f70cafc4042dbaabd979e209578b1087774d15f16e24cb55",
+      "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+    },
     "CIN-N06": {
       "id": "CIN-N06",
       "name": "Final birthday cheers",
@@ -1555,6 +1926,59 @@
         160
       ],
       "sha256": "9d3fd62bcff3c3da53341643dab1fb35c3dd2d50e86a2c7bbb31b40e61eeb507",
+      "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+    },
+    "CIN-N07": {
+      "id": "CIN-N07",
+      "name": "Sip finishing pose",
+      "group": "CIN",
+      "priority": "P1",
+      "path": "assets/production/cinnamon/sip.png",
+      "target_px": [
+        240,
+        160
+      ],
+      "pivot": "face=(145,147 feet)",
+      "raw_source": ".artifact-cache/raw/cin_n07.png",
+      "raw_sha256": "34052e370234528fa12bc5fc31415f8a75bb7ed5e3dfdc1e29ad16990f5422ab",
+      "raw_px": [
+        1408,
+        768
+      ],
+      "generated_utc": "2026-10-11T21:24:50Z",
+      "generator": "arena-agent-mode image generation",
+      "alpha": {
+        "required": true,
+        "mode": "straight RGBA",
+        "transparent_px_fraction": 0.5036,
+        "opaque_px_fraction": 0.4401,
+        "partial_edge_px": 2162,
+        "border_all_transparent": false,
+        "matte_rgb": [
+          255,
+          0,
+          255
+        ],
+        "transparent_fraction": 0.6959,
+        "partial_fraction": 0.0,
+        "matte_residual_opaque_px": 0,
+        "source_keyed_px": [
+          1408,
+          768
+        ]
+      },
+      "format": "PNG RGBA",
+      "trim_bbox_in_keyed_source": [
+        111,
+        53,
+        1044,
+        727
+      ],
+      "actual_px": [
+        240,
+        160
+      ],
+      "sha256": "0b4918bf11ead9d03ce41b53e77bc97aa605ff0b99872b9565629d5b5fbe5f25",
       "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
     },
     "CO-01": {

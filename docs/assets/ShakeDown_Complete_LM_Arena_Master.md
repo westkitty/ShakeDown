@@ -44,10 +44,10 @@ Canvas engine: 960x540 logical screen, 32px tile contacts, source game inputs vi
 
 | Asset family | Specifications | Physically verified now | Missing image generation | P0 | P1 | P2 |
 |---|---:|---:|---:|---:|---:|---:|
-| BIRTHDAY REVEAL / CAKE / SHAKES | 14 | 0 | 2 | 6 | 7 | 1 |
+| BIRTHDAY REVEAL / CAKE / SHAKES | 14 | 0 | 0 | 6 | 7 | 1 |
 | CAMPUS BACKGROUNDS / QUAD | 6 | 0 | 0 | 3 | 3 | 0 |
 | BOSS ATTACK READABILITY | 12 | 0 | 0 | 7 | 4 | 1 |
-| CINNAMON SOURCE SPRITES / REFINEMENTS | 33 | 26 | 6 | 1 | 6 | 0 |
+| CINNAMON SOURCE SPRITES / REFINEMENTS | 33 | 26 | 0 | 1 | 6 | 0 |
 | COLLECTIBLES | 4 | 0 | 0 | 3 | 1 | 0 |
 | DOME PARALLAX / VIEWPORTS | 8 | 0 | 0 | 3 | 3 | 2 |
 | DOME MECHANICS | 10 | 0 | 0 | 7 | 3 | 0 |
@@ -65,7 +65,7 @@ Canvas engine: 960x540 logical screen, 32px tile contacts, source game inputs vi
 | ADDITIONAL UI / TOUCH | 14 | 0 | 0 | 1 | 10 | 3 |
 | CAMPUS VISUAL EFFECTS | 10 | 0 | 0 | 1 | 9 | 0 |
 
-TOTAL VISUAL CONTRACT: **220** individually specified logical IDs; **26** source-verified Cinnamon frames; **185** generated, byte-verified and normalized production images; **9** still missing final production images.
+TOTAL VISUAL CONTRACT: **220** individually specified logical IDs; **26** source-verified Cinnamon frames; **193** generated, byte-verified and normalized production images; **1** still missing final production images.
 
 ## LM ARENA UNIVERSAL EXECUTION ORDER
 
@@ -118,7 +118,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/cinnamon/birthday_celebrate.png; measure intrinsic 240x160 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID CIN-N06 in runtime manifest. At runtime map ID to Finale choreography; place in finale with anchor face=(145,147 feet); use the engine auth collider "player physics stays 38x60, art-only extension" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### CIN-N01 — Landing recovery neutral
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** dome · **Target:** 240×160 px · **Source:** 480×320 px · **Output:** `assets/production/cinnamon/land_recover.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** dome · **Target:** 240×160 px · **Source:** 480×320 px · **Output:** `assets/production/cinnamon/land_recover.png`
 **Anchor:** face=(145,147 feet) · **Collision:** player physics stays 38x60, art-only extension · **Animation:** one PNG frame; do not pack with adjacent frames
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** All 26 verified Cinnamon cutouts + source sheets
 
@@ -155,7 +155,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/cinnamon/land_recover.png; measure intrinsic 240x160 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID CIN-N01 in runtime manifest. At runtime map ID to Player game-feel recovery; place in dome with anchor face=(145,147 feet); use the engine auth collider "player physics stays 38x60, art-only extension" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### CIN-N02 — Climb contact left
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** dome · **Target:** 240×160 px · **Source:** 480×320 px · **Output:** `assets/production/cinnamon/climb_hold.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** dome · **Target:** 240×160 px · **Source:** 480×320 px · **Output:** `assets/production/cinnamon/climb_hold.png`
 **Anchor:** face=(145,147 feet) · **Collision:** player physics stays 38x60, art-only extension · **Animation:** one PNG frame; do not pack with adjacent frames
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** All 26 verified Cinnamon cutouts + source sheets
 
@@ -192,7 +192,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/cinnamon/climb_hold.png; measure intrinsic 240x160 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID CIN-N02 in runtime manifest. At runtime map ID to Dome ledge hold; place in dome with anchor face=(145,147 feet); use the engine auth collider "player physics stays 38x60, art-only extension" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### CIN-N03 — Climb mantle
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** dome · **Target:** 240×160 px · **Source:** 480×320 px · **Output:** `assets/production/cinnamon/climb_mantle.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** dome · **Target:** 240×160 px · **Source:** 480×320 px · **Output:** `assets/production/cinnamon/climb_mantle.png`
 **Anchor:** face=(145,147 feet) · **Collision:** player physics stays 38x60, art-only extension · **Animation:** one PNG frame; do not pack with adjacent frames
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** All 26 verified Cinnamon cutouts + source sheets
 
@@ -229,7 +229,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/cinnamon/climb_mantle.png; measure intrinsic 240x160 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID CIN-N03 in runtime manifest. At runtime map ID to Dome ledge pull-up; place in dome with anchor face=(145,147 feet); use the engine auth collider "player physics stays 38x60, art-only extension" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### CIN-N04 — Shake pickup celebration
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** dome · **Target:** 240×160 px · **Source:** 480×320 px · **Output:** `assets/production/cinnamon/pickup.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** dome · **Target:** 240×160 px · **Source:** 480×320 px · **Output:** `assets/production/cinnamon/pickup.png`
 **Anchor:** face=(145,147 feet) · **Collision:** player physics stays 38x60, art-only extension · **Animation:** one PNG frame; do not pack with adjacent frames
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** All 26 verified Cinnamon cutouts + source sheets
 
@@ -266,7 +266,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/cinnamon/pickup.png; measure intrinsic 240x160 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID CIN-N04 in runtime manifest. At runtime map ID to Pickup reaction; place in dome with anchor face=(145,147 feet); use the engine auth collider "player physics stays 38x60, art-only extension" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### CIN-N05 — Boss dodge recovery
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** dome · **Target:** 240×160 px · **Source:** 480×320 px · **Output:** `assets/production/cinnamon/dodge_recover.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** dome · **Target:** 240×160 px · **Source:** 480×320 px · **Output:** `assets/production/cinnamon/dodge_recover.png`
 **Anchor:** face=(145,147 feet) · **Collision:** player physics stays 38x60, art-only extension · **Animation:** one PNG frame; do not pack with adjacent frames
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** All 26 verified Cinnamon cutouts + source sheets
 
@@ -303,7 +303,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/cinnamon/dodge_recover.png; measure intrinsic 240x160 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID CIN-N05 in runtime manifest. At runtime map ID to Boss dodge; place in dome with anchor face=(145,147 feet); use the engine auth collider "player physics stays 38x60, art-only extension" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### CIN-N07 — Sip finishing pose
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** finale · **Target:** 240×160 px · **Source:** 480×320 px · **Output:** `assets/production/cinnamon/sip.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** finale · **Target:** 240×160 px · **Source:** 480×320 px · **Output:** `assets/production/cinnamon/sip.png`
 **Anchor:** face=(145,147 feet) · **Collision:** player physics stays 38x60, art-only extension · **Animation:** one PNG frame; do not pack with adjacent frames
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** All 26 verified Cinnamon cutouts + source sheets
 
@@ -7348,7 +7348,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/birthday/bd_02.png; measure intrinsic 256x128 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID BD-02 in runtime manifest. At runtime map ID to Birthday finale visual celebration; place in finale with anchor bottom-center; use the engine auth collider "none (decorative only)" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### BD-06 — Victory milkshake trio
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** finale · **Target:** 512×256 px · **Source:** 1024×512 px · **Output:** `assets/production/birthday/bd_06.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** finale · **Target:** 512×256 px · **Source:** 1024×512 px · **Output:** `assets/production/birthday/bd_06.png`
 **Anchor:** bottom-center · **Collision:** none (decorative only) · **Animation:** single static state/one-shot sprite
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Cinnamon existing victory pose + birthday DOM text + independent Shake cup source
 
@@ -7418,7 +7418,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/birthday/bd_07.png; measure intrinsic 960x192 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID BD-07 in runtime manifest. At runtime map ID to Birthday finale visual celebration; place in finale with anchor top-left; use the engine auth collider "none (decorative only)" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### BD-08 — Birthday confetti master
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** finale · **Target:** 512×256 px · **Source:** 1024×512 px · **Output:** `assets/production/birthday/bd_08.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** finale · **Target:** 512×256 px · **Source:** 1024×512 px · **Output:** `assets/production/birthday/bd_08.png`
 **Anchor:** bottom-center · **Collision:** none (decorative only) · **Animation:** single static state/one-shot sprite
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Cinnamon existing victory pose + birthday DOM text + independent Shake cup source
 
