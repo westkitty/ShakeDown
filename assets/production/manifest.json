@@ -1,9 +1,310 @@
 {
  "schema_version": 1,
- "generated_utc": "2026-10-11T19:11:06Z",
+ "generated_utc": "2026-10-11T19:17:13Z",
  "note": "Byte-level truth for generated production art. Every sha256 and pixel dimension here was measured from the file actually written to disk. Human visual review is a separate, still-open gate.",
- "count": 9,
+ "count": 18,
  "assets": {
+  "BD-01": {
+   "id": "BD-01",
+   "name": "Birthday cake full base",
+   "group": "BD",
+   "priority": "P0",
+   "path": "assets/production/birthday/bd_01.png",
+   "target_px": [
+    512,
+    384
+   ],
+   "pivot": "bottom-center",
+   "raw_source": ".artifact-cache/raw/bd_01.png",
+   "raw_sha256": "686fd246c7dc92bacc80cae36c329841454584cf492e914f341a4cc96292410d",
+   "raw_px": [
+    1408,
+    768
+   ],
+   "generated_utc": "2026-10-11T19:17:13Z",
+   "generator": "arena-agent-mode image generation",
+   "alpha": {
+    "required": true,
+    "mode": "straight RGBA",
+    "transparent_px_fraction": 0.1903,
+    "opaque_px_fraction": 0.795,
+    "partial_edge_px": 2889,
+    "border_all_transparent": false,
+    "matte_rgb": [
+     255,
+     0,
+     255
+    ],
+    "transparent_fraction": 0.6104,
+    "partial_fraction": 0.0,
+    "matte_residual_opaque_px": 0,
+    "source_keyed_px": [
+     1408,
+     768
+    ]
+   },
+   "format": "PNG RGBA",
+   "trim_bbox_in_keyed_source": [
+    287,
+    82,
+    1121,
+    692
+   ],
+   "actual_px": [
+    512,
+    384
+   ],
+   "sha256": "9355f51781ae6476cad5202e71a42b0881a233e8727ad00a265594722359ca69",
+   "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+  },
+  "BD-03": {
+   "id": "BD-03",
+   "name": "Cake candle set unlit",
+   "group": "BD",
+   "priority": "P0",
+   "path": "assets/production/birthday/bd_03.png",
+   "target_px": [
+    256,
+    96
+   ],
+   "pivot": "bottom-center",
+   "raw_source": ".artifact-cache/raw/bd_03.png",
+   "raw_sha256": "279a0af5d5bea8ba70597c436e4e701984a4e43c0a9bf2a4767574e5bb4aefbd",
+   "raw_px": [
+    1376,
+    768
+   ],
+   "generated_utc": "2026-10-11T19:17:13Z",
+   "generator": "arena-agent-mode image generation",
+   "alpha": {
+    "required": true,
+    "mode": "straight RGBA",
+    "transparent_px_fraction": 0.6668,
+    "opaque_px_fraction": 0.2399,
+    "partial_edge_px": 2292,
+    "border_all_transparent": false,
+    "matte_rgb": [
+     255,
+     0,
+     255
+    ],
+    "transparent_fraction": 0.8623,
+    "partial_fraction": 0.0,
+    "matte_residual_opaque_px": 0,
+    "source_keyed_px": [
+     1376,
+     768
+    ]
+   },
+   "format": "PNG RGBA",
+   "trim_bbox_in_keyed_source": [
+    126,
+    260,
+    1250,
+    524
+   ],
+   "actual_px": [
+    256,
+    96
+   ],
+   "sha256": "1d7dfa5481a4b96774d6addc91010687d8a40f8134b2b514d692bda5ff79d627",
+   "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+  },
+  "BD-04": {
+   "id": "BD-04",
+   "name": "Cake candle set lit",
+   "group": "BD",
+   "priority": "P0",
+   "path": "assets/production/birthday/bd_04.png",
+   "target_px": [
+    256,
+    96
+   ],
+   "pivot": "bottom-center",
+   "raw_source": ".artifact-cache/raw/bd_04.png",
+   "raw_sha256": "956eaecd3431ddaaefae9f8c915a6c53af9bb21a61bcd01477a1bc72c94aee2b",
+   "raw_px": [
+    1376,
+    768
+   ],
+   "generated_utc": "2026-10-11T19:17:13Z",
+   "generator": "arena-agent-mode image generation",
+   "alpha": {
+    "required": true,
+    "mode": "straight RGBA",
+    "transparent_px_fraction": 0.6733,
+    "opaque_px_fraction": 0.2344,
+    "partial_edge_px": 2268,
+    "border_all_transparent": false,
+    "matte_rgb": [
+     255,
+     0,
+     255
+    ],
+    "transparent_fraction": 0.8747,
+    "partial_fraction": 0.0,
+    "matte_residual_opaque_px": 0,
+    "source_keyed_px": [
+     1376,
+     768
+    ]
+   },
+   "format": "PNG RGBA",
+   "trim_bbox_in_keyed_source": [
+    149,
+    250,
+    1227,
+    513
+   ],
+   "actual_px": [
+    256,
+    96
+   ],
+   "sha256": "87fc8b7037d719460b74994db7efaac1704012acd51be4b98e0496dc3b13c7c6",
+   "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+  },
+  "BD-05": {
+   "id": "BD-05",
+   "name": "Shamrock Shake hero cup",
+   "group": "BD",
+   "priority": "P0",
+   "path": "assets/production/birthday/bd_05.png",
+   "target_px": [
+    256,
+    384
+   ],
+   "pivot": "bottom-center",
+   "raw_source": ".artifact-cache/raw/bd_05.png",
+   "raw_sha256": "d2335a4ba637eb69a1c768dff502d45a42b8072d252adeb764ac7551722ff265",
+   "raw_px": [
+    1408,
+    768
+   ],
+   "generated_utc": "2026-10-11T19:17:13Z",
+   "generator": "arena-agent-mode image generation",
+   "alpha": {
+    "required": true,
+    "mode": "straight RGBA",
+    "transparent_px_fraction": 0.4444,
+    "opaque_px_fraction": 0.5276,
+    "partial_edge_px": 2743,
+    "border_all_transparent": false,
+    "matte_rgb": [
+     255,
+     0,
+     255
+    ],
+    "transparent_fraction": 0.8688,
+    "partial_fraction": 0.0,
+    "matte_residual_opaque_px": 0,
+    "source_keyed_px": [
+     1408,
+     768
+    ]
+   },
+   "format": "PNG RGBA",
+   "trim_bbox_in_keyed_source": [
+    540,
+    70,
+    868,
+    692
+   ],
+   "actual_px": [
+    256,
+    384
+   ],
+   "sha256": "a471dfae9d364a9db0f123c774b8d399428cde8912959e9dad114d301029c3bd",
+   "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+  },
+  "BD-11": {
+   "id": "BD-11",
+   "name": "Victory stage backdrop",
+   "group": "BD",
+   "priority": "P0",
+   "path": "assets/production/birthday/bd_11.png",
+   "target_px": [
+    960,
+    540
+   ],
+   "pivot": "top-left",
+   "raw_source": ".artifact-cache/raw/bd_11.png",
+   "raw_sha256": "e77b2122c26c28fbef29eaddf6638cbffab9bab680cb26ee5101a62fe0ce9488",
+   "raw_px": [
+    1376,
+    768
+   ],
+   "generated_utc": "2026-10-11T19:17:13Z",
+   "generator": "arena-agent-mode image generation",
+   "alpha": {
+    "required": true,
+    "mode": "straight RGBA",
+    "transparent_px_fraction": 0.0,
+    "opaque_px_fraction": 1.0,
+    "partial_edge_px": 0,
+    "full_bleed": true,
+    "border_all_transparent": false
+   },
+   "format": "PNG RGBA",
+   "actual_px": [
+    960,
+    540
+   ],
+   "sha256": "e9e885edc32a0ed716e9b173c912fd55c95d5c8f3b0b148c355619ca8a9c49c8",
+   "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+  },
+  "BD-12": {
+   "id": "BD-12",
+   "name": "Victory frame plaque",
+   "group": "BD",
+   "priority": "P0",
+   "path": "assets/production/birthday/bd_12.png",
+   "target_px": [
+    960,
+    256
+   ],
+   "pivot": "top-left",
+   "raw_source": ".artifact-cache/raw/bd_12.png",
+   "raw_sha256": "6ec894ddfaeb547c7119a3b97d09c7350b603a673e52103d7c305b82afbd4aaf",
+   "raw_px": [
+    1408,
+    768
+   ],
+   "generated_utc": "2026-10-11T19:17:13Z",
+   "generator": "arena-agent-mode image generation",
+   "alpha": {
+    "required": true,
+    "mode": "straight RGBA",
+    "transparent_px_fraction": 0.8178,
+    "opaque_px_fraction": 0.1688,
+    "partial_edge_px": 3309,
+    "border_all_transparent": false,
+    "matte_rgb": [
+     255,
+     0,
+     255
+    ],
+    "transparent_fraction": 0.764,
+    "partial_fraction": 0.0,
+    "matte_residual_opaque_px": 0,
+    "source_keyed_px": [
+     1408,
+     768
+    ]
+   },
+   "format": "PNG RGBA",
+   "trim_bbox_in_keyed_source": [
+    76,
+    76,
+    1332,
+    692
+   ],
+   "actual_px": [
+    960,
+    256
+   ],
+   "sha256": "15438833f5dbbfe593d79b2af77891e346ce79bc7e5f81b084f1675de81ec832",
+   "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+  },
   "BG-01": {
    "id": "BG-01",
    "name": "Daylight sky",
@@ -139,6 +440,59 @@
     540
    ],
    "sha256": "b4bdeef3e1ffb2ce856ff9b6dd7f547fdbc58d3283e19717c7072e1487de134a",
+   "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+  },
+  "BS-VF01": {
+   "id": "BS-VF01",
+   "name": "Charge telegraph ring",
+   "group": "BS-VF",
+   "priority": "P0",
+   "path": "assets/production/boss/effects/bs_vf01.png",
+   "target_px": [
+    256,
+    256
+   ],
+   "pivot": "center",
+   "raw_source": ".artifact-cache/raw/bs_vf01.png",
+   "raw_sha256": "2127b329ab3708922c25e37b34a1b816deeb92842d7c0011b44cdd5343996f7d",
+   "raw_px": [
+    1408,
+    768
+   ],
+   "generated_utc": "2026-10-11T19:17:13Z",
+   "generator": "arena-agent-mode image generation",
+   "alpha": {
+    "required": true,
+    "mode": "straight RGBA",
+    "transparent_px_fraction": 0.5604,
+    "opaque_px_fraction": 0.3963,
+    "partial_edge_px": 2837,
+    "border_all_transparent": false,
+    "matte_rgb": [
+     255,
+     0,
+     255
+    ],
+    "transparent_fraction": 0.8411,
+    "partial_fraction": 0.0,
+    "matte_residual_opaque_px": 0,
+    "source_keyed_px": [
+     1408,
+     768
+    ]
+   },
+   "format": "PNG RGBA",
+   "trim_bbox_in_keyed_source": [
+    387,
+    70,
+    1021,
+    692
+   ],
+   "actual_px": [
+    256,
+    256
+   ],
+   "sha256": "8772fab5dc054407a0f38878849376b1326340240373d965eeff036caab05f2b",
    "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
   },
   "CO-03": {
@@ -309,6 +663,37 @@
    "sha256": "4d7e3bbeb8db3cf912cfec79bc2ebf1da39a79e657960e34b75eaf668a08aab1",
    "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
   },
+  "FOX-01": {
+   "id": "FOX-01",
+   "name": "Fox identity approval turnaround",
+   "group": "FOX",
+   "priority": "P0",
+   "path": "assets/production/fox/fox_01.png",
+   "target_px": [
+    1024,
+    768
+   ],
+   "pivot": "center",
+   "raw_source": ".artifact-cache/raw/fox_01.png",
+   "raw_sha256": "e6ad731b697df1f99273f1f2550ffa38174122c42011a90f644fe236d4850261",
+   "raw_px": [
+    1408,
+    768
+   ],
+   "generated_utc": "2026-10-11T19:17:13Z",
+   "generator": "arena-agent-mode image generation",
+   "alpha": {
+    "required": false,
+    "mode": "RGB"
+   },
+   "format": "PNG RGB",
+   "actual_px": [
+    1024,
+    768
+   ],
+   "sha256": "bf41bdf36294aad552d1eb7aa6a9521e09652abc1774bf1d6cb55d9ce4842651",
+   "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+  },
   "PR-01": {
    "id": "PR-01",
    "name": "Shamrock Shake stand",
@@ -413,6 +798,59 @@
     80
    ],
    "sha256": "28ec99b567276dfbe3c2bba1a3a78932c02e1e04cd45638ed84d9cd8da2df1b1",
+   "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+  },
+  "UX-05": {
+   "id": "UX-05",
+   "name": "Victory UI frame",
+   "group": "UIX",
+   "priority": "P0",
+   "path": "assets/production/ui/ux_05.png",
+   "target_px": [
+    640,
+    384
+   ],
+   "pivot": "top-left",
+   "raw_source": ".artifact-cache/raw/ux_05.png",
+   "raw_sha256": "cc7e944fd30216808df98137436cc6d30ed6aba653300bc5dd7f9ad72967edfd",
+   "raw_px": [
+    1408,
+    768
+   ],
+   "generated_utc": "2026-10-11T19:17:13Z",
+   "generator": "arena-agent-mode image generation",
+   "alpha": {
+    "required": true,
+    "mode": "straight RGBA",
+    "transparent_px_fraction": 0.1511,
+    "opaque_px_fraction": 0.8435,
+    "partial_edge_px": 1313,
+    "border_all_transparent": false,
+    "matte_rgb": [
+     255,
+     0,
+     255
+    ],
+    "transparent_fraction": 0.2175,
+    "partial_fraction": 0.0,
+    "matte_residual_opaque_px": 0,
+    "source_keyed_px": [
+     1408,
+     768
+    ]
+   },
+   "format": "PNG RGBA",
+   "trim_bbox_in_keyed_source": [
+    59,
+    58,
+    1349,
+    715
+   ],
+   "actual_px": [
+    640,
+    384
+   ],
+   "sha256": "6d26afedf3e31769b5f103acbb431e5c34f4590210fe14689925a6be0636043f",
    "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
   }
  }

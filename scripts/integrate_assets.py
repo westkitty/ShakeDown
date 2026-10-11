@@ -286,6 +286,30 @@ def integrate(entries, now=None):
                 'sha256': sha256_file(out_path),
             })
         else:
+            if entry.get('alpha_mode') == 'full':
+                # Full-bleed layer that must still ship as RGBA (contract) but has
+                # no matte anywhere: all pixels are content, alpha is opaque.
+                rgba = Image.open(raw).convert('RGBA')
+                fitted = fit_alpha(rgba, target, 'cover')
+                placed = place(fitted, target, 'top-left')
+                placed.save(out_path, 'PNG', optimize=True)
+                alpha_ch = np.asarray(Image.open(out_path))[:, :, 3]
+                record.update({
+                    'alpha': {'required': True, 'mode': 'straight RGBA',
+                              'transparent_px_fraction': 0.0,
+                              'opaque_px_fraction': 1.0,
+                              'partial_edge_px': 0,
+                              'full_bleed': True,
+                              'border_all_transparent': False},
+                    'format': 'PNG RGBA',
+                    'actual_px': list(Image.open(out_path).size),
+                    'sha256': sha256_file(out_path),
+                })
+                record['review_status'] = 'AWAITING_HUMAN_VISUAL_REVIEW'
+                manifest[aid] = record
+                results.append({'id': aid, 'ok': True, 'path': asset['path'],
+                                'sha256': record['sha256'], 'alpha': record['alpha']})
+                continue
             keyed, key_stats = key_matte(Image.open(raw), matte=matte)
             trimmed, bbox = trim_alpha(keyed)
             if trimmed.size[0] == 0 or trimmed.size[1] == 0:

@@ -44,9 +44,9 @@ Canvas engine: 960x540 logical screen, 32px tile contacts, source game inputs vi
 
 | Asset family | Specifications | Physically verified now | Missing image generation | P0 | P1 | P2 |
 |---|---:|---:|---:|---:|---:|---:|
-| BIRTHDAY REVEAL / CAKE / SHAKES | 14 | 0 | 14 | 6 | 7 | 1 |
+| BIRTHDAY REVEAL / CAKE / SHAKES | 14 | 0 | 8 | 6 | 7 | 1 |
 | CAMPUS BACKGROUNDS / QUAD | 6 | 0 | 3 | 3 | 3 | 0 |
-| BOSS ATTACK READABILITY | 12 | 0 | 12 | 7 | 4 | 1 |
+| BOSS ATTACK READABILITY | 12 | 0 | 11 | 7 | 4 | 1 |
 | CINNAMON SOURCE SPRITES / REFINEMENTS | 33 | 26 | 7 | 1 | 6 | 0 |
 | COLLECTIBLES | 4 | 0 | 3 | 3 | 1 | 0 |
 | DOME PARALLAX / VIEWPORTS | 8 | 0 | 5 | 3 | 3 | 2 |
@@ -55,17 +55,17 @@ Canvas engine: 960x540 logical screen, 32px tile contacts, source game inputs vi
 | DOME STONE / GOLDEN TILES | 16 | 0 | 16 | 6 | 9 | 1 |
 | CAMPUS ENEMY STATES | 7 | 0 | 7 | 4 | 3 | 0 |
 | ADDITIONAL EFFECTS | 8 | 0 | 8 | 0 | 5 | 3 |
-| THE FOX / INTRO AND BOSS | 16 | 0 | 16 | 9 | 5 | 2 |
+| THE FOX / INTRO AND BOSS | 16 | 0 | 15 | 9 | 5 | 2 |
 | TRANSITIONS / STORY EFFECTS | 4 | 0 | 4 | 2 | 2 | 0 |
 | CAMPUS PULSE OBJECTS | 9 | 0 | 9 | 8 | 1 | 0 |
 | COLLECTIBLES / POWERUPS / PICKUP FRAMES | 6 | 0 | 6 | 0 | 4 | 2 |
 | CAMPUS PROPS / LANDMARKS | 14 | 0 | 12 | 6 | 8 | 0 |
 | CAMPUS TERRAIN / COLLISION TILES | 10 | 0 | 10 | 6 | 4 | 0 |
 | BASE INTERFACE | 9 | 0 | 9 | 0 | 9 | 0 |
-| ADDITIONAL UI / TOUCH | 14 | 0 | 14 | 1 | 10 | 3 |
+| ADDITIONAL UI / TOUCH | 14 | 0 | 13 | 1 | 10 | 3 |
 | CAMPUS VISUAL EFFECTS | 10 | 0 | 10 | 1 | 9 | 0 |
 
-TOTAL VISUAL CONTRACT: **220** individually specified logical IDs; **26** source-verified Cinnamon frames; **9** generated, byte-verified and normalized production images; **185** still missing final production images.
+TOTAL VISUAL CONTRACT: **220** individually specified logical IDs; **26** source-verified Cinnamon frames; **17** generated, byte-verified and normalized production images; **176** still missing final production images.
 
 ## LM ARENA UNIVERSAL EXECUTION ORDER
 
@@ -6184,7 +6184,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 12 individual asset contracts. Process P0 first, P1 next, P2 last. Reference sheets and complete per-asset instructions are repeated in every prompt.
 
 #### BS-VF01 — Charge telegraph ring
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** boss · **Target:** 256×256 px · **Source:** 512×512 px · **Output:** `assets/production/boss/effects/bs_vf01.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** boss · **Target:** 256×256 px · **Source:** 512×512 px · **Output:** `assets/production/boss/effects/bs_vf01.png`
 **Anchor:** center · **Collision:** FX only, separate from hitboxes · **Animation:** single state, no spritesheet unless intentional sequence is later verified
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Fox art approved by human + boss state machine
 
@@ -7103,7 +7103,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 14 individual asset contracts. Process P0 first, P1 next, P2 last. Reference sheets and complete per-asset instructions are repeated in every prompt.
 
 #### BD-01 — Birthday cake full base
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** finale · **Target:** 512×384 px · **Source:** 1024×768 px · **Output:** `assets/production/birthday/bd_01.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** finale · **Target:** 512×384 px · **Source:** 1024×768 px · **Output:** `assets/production/birthday/bd_01.png`
 **Anchor:** bottom-center · **Collision:** none (decorative only) · **Animation:** single static state/one-shot sprite
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Cinnamon existing victory pose + birthday DOM text + independent Shake cup source
 
@@ -7138,7 +7138,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/birthday/bd_01.png; measure intrinsic 512x384 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID BD-01 in runtime manifest. At runtime map ID to Birthday finale visual celebration; place in finale with anchor bottom-center; use the engine auth collider "none (decorative only)" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### BD-03 — Cake candle set unlit
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** finale · **Target:** 256×96 px · **Source:** 512×192 px · **Output:** `assets/production/birthday/bd_03.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** finale · **Target:** 256×96 px · **Source:** 512×192 px · **Output:** `assets/production/birthday/bd_03.png`
 **Anchor:** bottom-center · **Collision:** none (decorative only) · **Animation:** single static state/one-shot sprite
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Cinnamon existing victory pose + birthday DOM text + independent Shake cup source
 
@@ -7173,7 +7173,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/birthday/bd_03.png; measure intrinsic 256x96 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID BD-03 in runtime manifest. At runtime map ID to Birthday finale visual celebration; place in finale with anchor bottom-center; use the engine auth collider "none (decorative only)" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### BD-04 — Cake candle set lit
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** finale · **Target:** 256×96 px · **Source:** 512×192 px · **Output:** `assets/production/birthday/bd_04.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** finale · **Target:** 256×96 px · **Source:** 512×192 px · **Output:** `assets/production/birthday/bd_04.png`
 **Anchor:** bottom-center · **Collision:** none (decorative only) · **Animation:** single static state/one-shot sprite
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Cinnamon existing victory pose + birthday DOM text + independent Shake cup source
 
@@ -7208,7 +7208,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/birthday/bd_04.png; measure intrinsic 256x96 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID BD-04 in runtime manifest. At runtime map ID to Birthday finale visual celebration; place in finale with anchor bottom-center; use the engine auth collider "none (decorative only)" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### BD-05 — Shamrock Shake hero cup
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** finale · **Target:** 256×384 px · **Source:** 512×768 px · **Output:** `assets/production/birthday/bd_05.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** finale · **Target:** 256×384 px · **Source:** 512×768 px · **Output:** `assets/production/birthday/bd_05.png`
 **Anchor:** bottom-center · **Collision:** none (decorative only) · **Animation:** single static state/one-shot sprite
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Cinnamon existing victory pose + birthday DOM text + independent Shake cup source
 
@@ -7243,7 +7243,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/birthday/bd_05.png; measure intrinsic 256x384 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID BD-05 in runtime manifest. At runtime map ID to Birthday finale visual celebration; place in finale with anchor bottom-center; use the engine auth collider "none (decorative only)" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### BD-11 — Victory stage backdrop
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** finale · **Target:** 960×540 px · **Source:** 1920×1080 px · **Output:** `assets/production/birthday/bd_11.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** finale · **Target:** 960×540 px · **Source:** 1920×1080 px · **Output:** `assets/production/birthday/bd_11.png`
 **Anchor:** top-left · **Collision:** none (decorative only) · **Animation:** single static state/one-shot sprite
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Cinnamon existing victory pose + birthday DOM text + independent Shake cup source
 
@@ -7278,7 +7278,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/birthday/bd_11.png; measure intrinsic 960x540 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID BD-11 in runtime manifest. At runtime map ID to Birthday finale visual celebration; place in finale with anchor top-left; use the engine auth collider "none (decorative only)" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### BD-12 — Victory frame plaque
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** finale · **Target:** 960×256 px · **Source:** 1920×512 px · **Output:** `assets/production/birthday/bd_12.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** finale · **Target:** 960×256 px · **Source:** 1920×512 px · **Output:** `assets/production/birthday/bd_12.png`
 **Anchor:** top-left · **Collision:** none (decorative only) · **Animation:** single static state/one-shot sprite
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Cinnamon existing victory pose + birthday DOM text + independent Shake cup source
 
@@ -7596,7 +7596,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 14 individual asset contracts. Process P0 first, P1 next, P2 last. Reference sheets and complete per-asset instructions are repeated in every prompt.
 
 #### UX-05 — Victory UI frame
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** all · **Target:** 640×384 px · **Source:** 1280×768 px · **Output:** `assets/production/ui/ux_05.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** all · **Target:** 640×384 px · **Source:** 1280×768 px · **Output:** `assets/production/ui/ux_05.png`
 **Anchor:** top-left · **Collision:** none · **Animation:** static, 9-slice when frame
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Native accessible DOM text and touch hit areas; art must never own interaction
 

@@ -368,6 +368,7 @@ for a in ASSETS:
  if actual!=record.get('sha256'):
   raise SystemExit(f'{a["id"]} sha256 mismatch: manifest {record.get("sha256")} != disk {actual}')
  a['status']='PROVISIONAL_MISSING_APPROVAL' if a['group']=='FOX' else 'NORMALIZED_VERIFIED'
+ a['has_bytes']=True
  a['sha256']=actual
  a['notes']=(f'Generated and normalized {record.get("generated_utc","")}; '
              f'measured {record.get("actual_px")}; sha256 {actual[:16]}…; '
@@ -377,7 +378,7 @@ for a in ASSETS:
 assert len(ASSETS)==len(set(a['id'] for a in ASSETS)), 'unique IDs'
 assert len(set(a['path'] for a in ASSETS))==len(ASSETS), 'unique output paths'
 assert sum(a['status']=='VERIFIED_IN_REPO_LOCAL_BROWSER' for a in ASSETS)==26, 'known existing cutouts only'
-assert sum(is_generated(a) for a in ASSETS)==len([a for a in ASSETS if a['id'] in MANIFEST]), 'manifest coverage'
+assert sum(1 for a in ASSETS if a.get('has_bytes'))==len([a for a in ASSETS if a['id'] in MANIFEST]), 'manifest coverage'
 assert all(a['prompt'] and a['acceptance'] and a['rejection'] and a['integration'] for a in ASSETS)
 
 AUDIO=list(BASE['audio'])
@@ -405,7 +406,7 @@ for a in ASSETS:
  GROUP_COUNTS[a['group']]['planned_or_verified']+=1
  GROUP_COUNTS[a['group']]['verified_in_repo']+=int(a['status']=='VERIFIED_IN_REPO_LOCAL_BROWSER')
  GROUP_COUNTS[a['group']]['generated_normalized']+=int(is_generated(a))
- GROUP_COUNTS[a['group']]['missing_generation']+=int(not (a['status']=='VERIFIED_IN_REPO_LOCAL_BROWSER' or is_generated(a)))
+ GROUP_COUNTS[a['group']]['missing_generation']+=int(not (a['status']=='VERIFIED_IN_REPO_LOCAL_BROWSER' or a.get('has_bytes')))
  GROUP_COUNTS[a['group']]['P0']+=int(a['priority']=='P0')
  GROUP_COUNTS[a['group']]['P1']+=int(a['priority']=='P1')
  GROUP_COUNTS[a['group']]['P2']+=int(a['priority']=='P2')
@@ -424,7 +425,8 @@ contract={
  'source_grounding':'73 existing Level 1 specs + real Cinnamon cutout manifest + latest full birthday game contract',
  'visual_guidelines':{'palette':PALETTE,'style':GLOBAL_LOCK,'cinnamon_lock':CIN_LOCK,'fox_candidate_not_approved':FOX_LOCK,'technical_rules':TECH_LOCK},
  'coverage_matrix':COVERAGE,
- 'totals':{'visual_specification_count':len(ASSETS),'source_verified_cinnamon_frames':sum(a['status']=='VERIFIED_IN_REPO_LOCAL_BROWSER' for a in ASSETS),'generated_normalized_verified':sum(is_generated(a) for a in ASSETS),'require_generation':sum(not (a['status']=='VERIFIED_IN_REPO_LOCAL_BROWSER' or is_generated(a)) for a in ASSETS),'awaiting_human_visual_approval':sum(is_generated(a) for a in ASSETS),'all_final_art_fully_integrated':False},
+ 'totals':{'visual_specification_count':len(ASSETS),'source_verified_cinnamon_frames':sum(a['status']=='VERIFIED_IN_REPO_LOCAL_BROWSER' for a in ASSETS),'generated_normalized_verified':sum(is_generated(a) for a in ASSETS),
+        'generated_pending_fox_approval':sum(1 for a in ASSETS if a.get('has_bytes') and not is_generated(a)),'require_generation':sum(not (a['status']=='VERIFIED_IN_REPO_LOCAL_BROWSER' or a.get('has_bytes')) for a in ASSETS),'awaiting_human_visual_approval':sum(1 for a in ASSETS if a.get('has_bytes')),'all_final_art_fully_integrated':False},
  'pipeline_statuses':{'VERIFIED_IN_REPO_LOCAL_BROWSER':'actual Cinnamon source-derived, SHA-backed runtime assets only',
  'MISSING_GENERATION':'visual brief only; NO generated file exists at requested output path',
  'APPROVAL_PENDING':'Fox model needs acceptance, and dependent Fox sprites are prohibited from canon promotion until accepted'},
