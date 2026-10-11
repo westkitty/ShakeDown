@@ -53,19 +53,19 @@ Canvas engine: 960x540 logical screen, 32px tile contacts, source game inputs vi
 | DOME MECHANICS | 10 | 0 | 10 | 7 | 3 | 0 |
 | DOME ARCHITECTURE / PROPS | 10 | 0 | 10 | 3 | 5 | 2 |
 | DOME STONE / GOLDEN TILES | 16 | 0 | 10 | 6 | 9 | 1 |
-| CAMPUS ENEMY STATES | 7 | 0 | 5 | 4 | 3 | 0 |
+| CAMPUS ENEMY STATES | 7 | 0 | 3 | 4 | 3 | 0 |
 | ADDITIONAL EFFECTS | 8 | 0 | 8 | 0 | 5 | 3 |
 | THE FOX / INTRO AND BOSS | 16 | 0 | 0 | 9 | 5 | 2 |
 | TRANSITIONS / STORY EFFECTS | 4 | 0 | 2 | 2 | 2 | 0 |
-| CAMPUS PULSE OBJECTS | 9 | 0 | 9 | 8 | 1 | 0 |
+| CAMPUS PULSE OBJECTS | 9 | 0 | 5 | 8 | 1 | 0 |
 | COLLECTIBLES / POWERUPS / PICKUP FRAMES | 6 | 0 | 6 | 0 | 4 | 2 |
-| CAMPUS PROPS / LANDMARKS | 14 | 0 | 11 | 6 | 8 | 0 |
+| CAMPUS PROPS / LANDMARKS | 14 | 0 | 8 | 6 | 8 | 0 |
 | CAMPUS TERRAIN / COLLISION TILES | 10 | 0 | 10 | 6 | 4 | 0 |
 | BASE INTERFACE | 9 | 0 | 9 | 0 | 9 | 0 |
 | ADDITIONAL UI / TOUCH | 14 | 0 | 13 | 1 | 10 | 3 |
-| CAMPUS VISUAL EFFECTS | 10 | 0 | 10 | 1 | 9 | 0 |
+| CAMPUS VISUAL EFFECTS | 10 | 0 | 9 | 1 | 9 | 0 |
 
-TOTAL VISUAL CONTRACT: **220** individually specified logical IDs; **26** source-verified Cinnamon frames; **53** generated, byte-verified and normalized production images; **141** still missing final production images.
+TOTAL VISUAL CONTRACT: **220** individually specified logical IDs; **26** source-verified Cinnamon frames; **63** generated, byte-verified and normalized production images; **131** still missing final production images.
 
 ## LM ARENA UNIVERSAL EXECUTION ORDER
 
@@ -2655,7 +2655,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/level1/props/pr_04_campus_lamppost.png; measure intrinsic 96x256 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID PR-04 in runtime manifest. At runtime map ID to Vertical landmark and obstacle; place in all with anchor bottom-center; use the engine auth collider "specified per placement" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### PR-05 — Mature quad tree
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** all · **Target:** 192×256 px · **Source:** 768×1024 px · **Output:** `assets/level1/props/pr_05_mature_quad_tree.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** all · **Target:** 192×256 px · **Source:** 768×1024 px · **Output:** `assets/level1/props/pr_05_mature_quad_tree.png`
 **Anchor:** bottom-center · **Collision:** specified per placement · **Animation:** single static component
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -2690,7 +2690,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/level1/props/pr_05_mature_quad_tree.png; measure intrinsic 192x256 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID PR-05 in runtime manifest. At runtime map ID to Depth and foreground framing; place in all with anchor bottom-center; use the engine auth collider "specified per placement" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### PR-09 — Parade utility cart
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** all · **Target:** 192×112 px · **Source:** 768×448 px · **Output:** `assets/level1/props/pr_09_parade_utility_cart.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** all · **Target:** 192×112 px · **Source:** 768×448 px · **Output:** `assets/level1/props/pr_09_parade_utility_cart.png`
 **Anchor:** bottom-center · **Collision:** specified per placement · **Animation:** single static component
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -2725,7 +2725,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/level1/props/pr_09_parade_utility_cart.png; measure intrinsic 192x112 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID PR-09 in runtime manifest. At runtime map ID to Moving platform in quad climax; place in all with anchor bottom-center; use the engine auth collider "specified per placement" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### PR-10 — Fallen campus sign
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** all · **Target:** 128×64 px · **Source:** 512×256 px · **Output:** `assets/level1/props/pr_10_fallen_campus_sign.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** all · **Target:** 128×64 px · **Source:** 512×256 px · **Output:** `assets/level1/props/pr_10_fallen_campus_sign.png`
 **Anchor:** bottom-center · **Collision:** specified per placement · **Animation:** single static component
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -3043,7 +3043,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 9 individual asset contracts. Process P0 first, P1 next, P2 last. Reference sheets and complete per-asset instructions are repeated in every prompt.
 
 #### MC-01 — Banner bridge retracted
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** all · **Target:** 256×64 px · **Source:** 1024×256 px · **Output:** `assets/level1/mechanics/mc_01_banner_bridge_retracted.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** all · **Target:** 256×64 px · **Source:** 1024×256 px · **Output:** `assets/level1/mechanics/mc_01_banner_bridge_retracted.png`
 **Anchor:** bottom-center · **Collision:** none · **Animation:** one frame for this specific listed state; do NOT merge with other states
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -3078,7 +3078,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/level1/mechanics/mc_01_banner_bridge_retracted.png; measure intrinsic 256x64 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID MC-01 in runtime manifest. At runtime map ID to Pulse bridge OFF; place in all with anchor bottom-center; use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### MC-02 — Banner bridge extended
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** all · **Target:** 256×64 px · **Source:** 1024×256 px · **Output:** `assets/level1/mechanics/mc_02_banner_bridge_extended.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** all · **Target:** 256×64 px · **Source:** 1024×256 px · **Output:** `assets/level1/mechanics/mc_02_banner_bridge_extended.png`
 **Anchor:** bottom-center · **Collision:** collider_top=16,18,224,12 · **Animation:** one frame for this specific listed state; do NOT merge with other states
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -3113,7 +3113,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/level1/mechanics/mc_02_banner_bridge_extended.png; measure intrinsic 256x64 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID MC-02 in runtime manifest. At runtime map ID to Pulse bridge ON; place in all with anchor bottom-center; use the engine auth collider "collider_top=16,18,224,12" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### MC-03 — Gold lift tucked
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** all · **Target:** 128×64 px · **Source:** 512×256 px · **Output:** `assets/level1/mechanics/mc_03_gold_lift_tucked.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** all · **Target:** 128×64 px · **Source:** 512×256 px · **Output:** `assets/level1/mechanics/mc_03_gold_lift_tucked.png`
 **Anchor:** bottom-center · **Collision:** none · **Animation:** one frame for this specific listed state; do NOT merge with other states
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -3148,7 +3148,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/level1/mechanics/mc_03_gold_lift_tucked.png; measure intrinsic 128x64 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID MC-03 in runtime manifest. At runtime map ID to Pulse platform OFF; place in all with anchor bottom-center; use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### MC-04 — Gold lift raised
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** all · **Target:** 128×64 px · **Source:** 512×256 px · **Output:** `assets/level1/mechanics/mc_04_gold_lift_raised.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** all · **Target:** 128×64 px · **Source:** 512×256 px · **Output:** `assets/level1/mechanics/mc_04_gold_lift_raised.png`
 **Anchor:** bottom-center · **Collision:** collider_top=12,12,104,12 · **Animation:** one frame for this specific listed state; do NOT merge with other states
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -3396,7 +3396,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/level1/enemies/en_01_cup_crawler_walk_a.png; measure intrinsic 64x64 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID EN-01 in runtime manifest. At runtime map ID to Ground enemy patrol; place in all with anchor bottom-center; use the engine auth collider "hurtbox=13,25,38,30" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### EN-04 — Confetti cannon idle
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** all · **Target:** 96×96 px · **Source:** 384×384 px · **Output:** `assets/level1/enemies/en_04_confetti_cannon_idle.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** all · **Target:** 96×96 px · **Source:** 384×384 px · **Output:** `assets/level1/enemies/en_04_confetti_cannon_idle.png`
 **Anchor:** bottom-center · **Collision:** hurtbox=18,34,60,58 · **Animation:** one frame for this specific listed state; do NOT merge with other states
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -3431,7 +3431,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/level1/enemies/en_04_confetti_cannon_idle.png; measure intrinsic 96x96 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID EN-04 in runtime manifest. At runtime map ID to Stationary ranged hazard; place in all with anchor bottom-center; use the engine auth collider "hurtbox=18,34,60,58" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### EN-05 — Confetti cannon warning
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** all · **Target:** 96×96 px · **Source:** 384×384 px · **Output:** `assets/level1/enemies/en_05_confetti_cannon_warning.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** all · **Target:** 96×96 px · **Source:** 384×384 px · **Output:** `assets/level1/enemies/en_05_confetti_cannon_warning.png`
 **Anchor:** bottom-center · **Collision:** hurtbox=18,34,60,58 · **Animation:** one frame for this specific listed state; do NOT merge with other states
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -3752,7 +3752,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 10 individual asset contracts. Process P0 first, P1 next, P2 last. Reference sheets and complete per-asset instructions are repeated in every prompt.
 
 #### VF-01 — GO pulse halo
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** all · **Target:** 128×128 px · **Source:** 512×512 px · **Output:** `assets/level1/effects/vf_01_go_pulse_halo.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** all · **Target:** 128×128 px · **Source:** 512×512 px · **Output:** `assets/level1/effects/vf_01_go_pulse_halo.png`
 **Anchor:** center · **Collision:** none · **Animation:** one frame for this specific listed state; do NOT merge with other states
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
