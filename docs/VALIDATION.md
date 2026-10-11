@@ -70,3 +70,7 @@ Project: westkitty/ShakeDown; branch: prep/asset-ready-20261011; baseline: main@
 **Hardware probe:** DEX BigMac ADB unavailable (adb not installed on that node); MacBook Air ADB available but reported 0 devices and 0 mDNS wireless-debug services. Consequently **no physical Android test was performed**. No real physical iPhone test or speaker/audio playback proof was performed. Headless FPS and real-world sustained frame pacing remain unverified. LM Arena still has 0 independently generated production images/audio in the approved manifest.
 
 **No launch claim:** These fixes remain on the preparation branch until committed and validated on the exact GitHub SHA. main and the hosted GitHub Pages game are not claimed to contain them.
+
+### Round 3 delivery receipt
+- GitHub implementation commit 6c432d60a633143fe920c8ec61b8d9001d28b6ca on branch prep/asset-ready-20261011.
+- Local evidence already recorded above; GitHub exact-SHA workflows were queued when this receipt was appended. Their final status must be verified separately.
