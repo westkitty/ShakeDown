@@ -1,0 +1,4018 @@
+{
+  "schemaVersion": 1,
+  "project": "westkitty/ShakeDown",
+  "assessed": "2026-10-11",
+  "methodology": "Visual inspection of actual original contact-sheet images on a live Mac plus actual measured PNG and SHA tests. This entry is the assistant's independent provisional decision, not owner approval.",
+  "authority": "User will judge the 194 source-linked recommendations. All original variants preserved. Arena FOX-01 prior owner signoff assertion is historical, not an authorization to activate artwork in the final player build.",
+  "sourceBranch": "arena/34b09180-shakedown",
+  "sourceHead": "57c45560fd389dc873a2debc05700c7eb4801e3e",
+  "generatedCount": 194,
+  "knownOriginalSourceCount": 26,
+  "audioStillMissing": 21,
+  "nonCommittedRawSourcesAvailable": 0,
+  "summary": {
+    "preview": 28,
+    "alternate": 131,
+    "revise": 11,
+    "blocked": 24
+  },
+  "safety": {
+    "approvedFinalArt": 0,
+    "neverActivateBlocked": true,
+    "previewOptInOnly": true,
+    "baselineDefault": "Original Canvas + Cinnamon cutouts"
+  },
+  "comparisonGroups": {
+    "THE FOX": [
+      "FOX-02",
+      "FOX-03",
+      "FOX-05",
+      "FOX-06",
+      "FOX-08",
+      "FOX-09",
+      "FOX-11",
+      "FOX-12",
+      "FX-01",
+      "FX-02",
+      "FX-03"
+    ],
+    "SHAMROCK SHAKE": [
+      "CO-03",
+      "PK-01",
+      "PK-02",
+      "PK-03",
+      "BD-05",
+      "BD-06"
+    ],
+    "BIRTHDAY": [
+      "BD-01",
+      "BD-02",
+      "BD-03",
+      "BD-04",
+      "BD-05",
+      "BD-06",
+      "BD-11",
+      "BD-14"
+    ],
+    "NOTRE DAME BACKGROUNDS": [
+      "BG-01",
+      "BG-02",
+      "BG-03",
+      "BG-04",
+      "BG-05",
+      "BG-06",
+      "DM-BG01",
+      "DM-BG03",
+      "DM-BG07"
+    ],
+    "COLLISION READABILITY": [
+      "TL-01",
+      "TL-05",
+      "TL-06",
+      "TL-07",
+      "DM-TL01",
+      "DM-TL12",
+      "DM-TL13"
+    ],
+    "CHECKPOINT & RALLY": [
+      "MC-05",
+      "MC-06",
+      "MC-07",
+      "MC-08",
+      "DM-MC05",
+      "DM-MC06",
+      "DM-MC07",
+      "DM-MC08"
+    ]
+  },
+  "entries": {
+    "BD-01": {
+      "id": "BD-01",
+      "name": "Birthday cake full base",
+      "group": "BD",
+      "sourcePath": "assets/production/birthday/bd_01.png",
+      "sha256": "9355f51781ae6476cad5202e71a42b0881a233e8727ad00a265594722359ca69",
+      "sourcePx": [
+        512,
+        384
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 4.5,
+      "verdict": "preview",
+      "previewWired": true,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Clearly a separate, pink double-tier birthday cake, never mistaken for the stolen shake.",
+      "finalHumanApproval": false
+    },
+    "BD-02": {
+      "id": "BD-02",
+      "name": "Birthday cake frosting flourish",
+      "group": "BD",
+      "sourcePath": "assets/production/birthday/bd_02.png",
+      "sha256": "794096601901be75ef9005bb59fb0af04341af302caf1a4ef45861068cf5adb6",
+      "sourcePx": [
+        256,
+        128
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Birthday effect/prop alternative; preserve separate cake, shake and readable result text.",
+      "finalHumanApproval": false
+    },
+    "BD-03": {
+      "id": "BD-03",
+      "name": "Cake candle set unlit",
+      "group": "BD",
+      "sourcePath": "assets/production/birthday/bd_03.png",
+      "sha256": "1d7dfa5481a4b96774d6addc91010687d8a40f8134b2b514d692bda5ff79d627",
+      "sourcePx": [
+        256,
+        96
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Birthday effect/prop alternative; preserve separate cake, shake and readable result text.",
+      "finalHumanApproval": false
+    },
+    "BD-04": {
+      "id": "BD-04",
+      "name": "Cake candle set lit",
+      "group": "BD",
+      "sourcePath": "assets/production/birthday/bd_04.png",
+      "sha256": "87fc8b7037d719460b74994db7efaac1704012acd51be4b98e0496dc3b13c7c6",
+      "sourcePx": [
+        256,
+        96
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Birthday effect/prop alternative; preserve separate cake, shake and readable result text.",
+      "finalHumanApproval": false
+    },
+    "BD-05": {
+      "id": "BD-05",
+      "name": "Shamrock Shake hero cup",
+      "group": "BD",
+      "sourcePath": "assets/production/birthday/bd_05.png",
+      "sha256": "a471dfae9d364a9db0f123c774b8d399428cde8912959e9dad114d301029c3bd",
+      "sourcePx": [
+        256,
+        384
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 4.5,
+      "verdict": "preview",
+      "previewWired": true,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Large celebratory Shamrock Shake appearance, distinct from actual birthday cake.",
+      "finalHumanApproval": false
+    },
+    "BD-06": {
+      "id": "BD-06",
+      "name": "Victory milkshake trio",
+      "group": "BD",
+      "sourcePath": "assets/production/birthday/bd_06.png",
+      "sha256": "7929972d92812a6167561fde42ba26e6c9f322d209d430a3126f71812d4291de",
+      "sourcePx": [
+        512,
+        256
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Birthday effect/prop alternative; preserve separate cake, shake and readable result text.",
+      "finalHumanApproval": false
+    },
+    "BD-07": {
+      "id": "BD-07",
+      "name": "Birthday bunting arc",
+      "group": "BD",
+      "sourcePath": "assets/production/birthday/bd_07.png",
+      "sha256": "b2c2682e83e9d05f8b44cddcaf85d7d25b6062823cbe8526cb8b3fb5e2ce66a3",
+      "sourcePx": [
+        960,
+        192
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Birthday effect/prop alternative; preserve separate cake, shake and readable result text.",
+      "finalHumanApproval": false
+    },
+    "BD-08": {
+      "id": "BD-08",
+      "name": "Birthday confetti master",
+      "group": "BD",
+      "sourcePath": "assets/production/birthday/bd_08.png",
+      "sha256": "92079dddab1e0ccea394b23132e34e986a1086290c7681a607636f9ebc8abb3e",
+      "sourcePx": [
+        512,
+        256
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Birthday effect/prop alternative; preserve separate cake, shake and readable result text.",
+      "finalHumanApproval": false
+    },
+    "BD-09": {
+      "id": "BD-09",
+      "name": "Birthday sparkle burst A",
+      "group": "BD",
+      "sourcePath": "assets/production/birthday/bd_09.png",
+      "sha256": "a23fea22096d8d98ca8ae2a7e76d4fbf5a507ea66dccc6874ace826b1094ad8b",
+      "sourcePx": [
+        256,
+        256
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Birthday effect/prop alternative; preserve separate cake, shake and readable result text.",
+      "finalHumanApproval": false
+    },
+    "BD-10": {
+      "id": "BD-10",
+      "name": "Birthday sparkle burst B",
+      "group": "BD",
+      "sourcePath": "assets/production/birthday/bd_10.png",
+      "sha256": "c941a7669f5929a8f9cc4f048aac8ee1d125b786f0879b10bf06a809a5bd3041",
+      "sourcePx": [
+        256,
+        256
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Birthday effect/prop alternative; preserve separate cake, shake and readable result text.",
+      "finalHumanApproval": false
+    },
+    "BD-11": {
+      "id": "BD-11",
+      "name": "Victory stage backdrop",
+      "group": "BD",
+      "sourcePath": "assets/production/birthday/bd_11.png",
+      "sha256": "e9e885edc32a0ed716e9b173c912fd55c95d5c8f3b0b148c355619ca8a9c49c8",
+      "sourcePx": [
+        960,
+        540
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 1.4,
+      "verdict": "blocked",
+      "previewWired": false,
+      "structuralIssues": [
+        "TRANSPARENCY_MISSING"
+      ],
+      "cropRisk": true,
+      "reason": "DO NOT ACTIVATE: transparency required by the original contract but none is present. Birthday effect/prop alternative; preserve separate cake, shake and readable result text.",
+      "finalHumanApproval": false
+    },
+    "BD-12": {
+      "id": "BD-12",
+      "name": "Victory frame plaque",
+      "group": "BD",
+      "sourcePath": "assets/production/birthday/bd_12.png",
+      "sha256": "15438833f5dbbfe593d79b2af77891e346ce79bc7e5f81b084f1675de81ec832",
+      "sourcePx": [
+        960,
+        256
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Birthday effect/prop alternative; preserve separate cake, shake and readable result text.",
+      "finalHumanApproval": false
+    },
+    "BD-13": {
+      "id": "BD-13",
+      "name": "Cake reveal poof",
+      "group": "BD",
+      "sourcePath": "assets/production/birthday/bd_13.png",
+      "sha256": "3ad703b648a0fa79ab23d7a79b76faa57c9ee76085d17e050b7f036189576df3",
+      "sourcePx": [
+        256,
+        192
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Birthday effect/prop alternative; preserve separate cake, shake and readable result text.",
+      "finalHumanApproval": false
+    },
+    "BD-14": {
+      "id": "BD-14",
+      "name": "Golden shamrock medal",
+      "group": "BD",
+      "sourcePath": "assets/production/birthday/bd_14.png",
+      "sha256": "b25f8f6444c919e3a9489e1cc118ee7db139b35e4b35bb74345af52924386f40",
+      "sourcePx": [
+        128,
+        128
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Birthday effect/prop alternative; preserve separate cake, shake and readable result text.",
+      "finalHumanApproval": false
+    },
+    "BG-01": {
+      "id": "BG-01",
+      "name": "Daylight sky",
+      "group": "BG",
+      "sourcePath": "assets/level1/backgrounds/bg_01_daylight_sky.png",
+      "sha256": "e136396af18725b57ab50ea3a50c881ad46b7e6035cf5adeb71ece2663dffd19",
+      "sourcePx": [
+        960,
+        540
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 4.5,
+      "verdict": "preview",
+      "previewWired": true,
+      "structuralIssues": [],
+      "cropRisk": false,
+      "reason": "Quiet, crisp, restrained sky; readable contrast behind player, hazards and HUD.",
+      "finalHumanApproval": false
+    },
+    "BG-02": {
+      "id": "BG-02",
+      "name": "Campus approach silhouette",
+      "group": "BG",
+      "sourcePath": "assets/level1/backgrounds/bg_02_campus_approach_silhouette.png",
+      "sha256": "8691be1ccdc9819ad3d214d855ef0296527141fea73b27e9893236f0a2507bd5",
+      "sourcePx": [
+        960,
+        540
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 1.4,
+      "verdict": "blocked",
+      "previewWired": false,
+      "structuralIssues": [
+        "TRANSPARENCY_MISSING"
+      ],
+      "cropRisk": true,
+      "reason": "DO NOT ACTIVATE: transparency required by the original contract but none is present. Landscape art needs actual pixel-art style and layer/alpha match; reserve rather than smear behind characters.",
+      "finalHumanApproval": false
+    },
+    "BG-03": {
+      "id": "BG-03",
+      "name": "South Quad architecture",
+      "group": "BG",
+      "sourcePath": "assets/level1/backgrounds/bg_03_south_quad_architecture.png",
+      "sha256": "9566386b16e328db5d1cdc9f65aaf011611641ead04e13377be1f17968b3dcda",
+      "sourcePx": [
+        960,
+        540
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 1.4,
+      "verdict": "blocked",
+      "previewWired": false,
+      "structuralIssues": [
+        "TRANSPARENCY_MISSING"
+      ],
+      "cropRisk": true,
+      "reason": "DO NOT ACTIVATE: transparency required by the original contract but none is present. Landscape art needs actual pixel-art style and layer/alpha match; reserve rather than smear behind characters.",
+      "finalHumanApproval": false
+    },
+    "BG-04": {
+      "id": "BG-04",
+      "name": "Quad tree and lawn midground",
+      "group": "BG",
+      "sourcePath": "assets/level1/backgrounds/bg_04_quad_tree_and_lawn_midground.png",
+      "sha256": "bee2649b4c48990e65b5c77cda5a85bf22df20db4b7dfcea4023b93e52b6b181",
+      "sourcePx": [
+        960,
+        540
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 1.4,
+      "verdict": "blocked",
+      "previewWired": false,
+      "structuralIssues": [
+        "TRANSPARENCY_MISSING"
+      ],
+      "cropRisk": true,
+      "reason": "DO NOT ACTIVATE: transparency required by the original contract but none is present. Landscape art needs actual pixel-art style and layer/alpha match; reserve rather than smear behind characters.",
+      "finalHumanApproval": false
+    },
+    "BG-05": {
+      "id": "BG-05",
+      "name": "Golden Dome hero backdrop",
+      "group": "BG",
+      "sourcePath": "assets/level1/backgrounds/bg_05_golden_dome_hero_backdrop.png",
+      "sha256": "b4bdeef3e1ffb2ce856ff9b6dd7f547fdbc58d3283e19717c7072e1487de134a",
+      "sourcePx": [
+        960,
+        540
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 1.4,
+      "verdict": "blocked",
+      "previewWired": false,
+      "structuralIssues": [
+        "TRANSPARENCY_MISSING"
+      ],
+      "cropRisk": true,
+      "reason": "DO NOT ACTIVATE: transparency required by the original contract but none is present. Landscape art needs actual pixel-art style and layer/alpha match; reserve rather than smear behind characters.",
+      "finalHumanApproval": false
+    },
+    "BG-06": {
+      "id": "BG-06",
+      "name": "Escape horizon",
+      "group": "BG",
+      "sourcePath": "assets/level1/backgrounds/bg_06_escape_horizon.png",
+      "sha256": "b635fe8bf9246a25ceedc0bb60f1c2cdc49a20c854c2f0ef1b3676ae418b3c31",
+      "sourcePx": [
+        960,
+        540
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 1.4,
+      "verdict": "blocked",
+      "previewWired": false,
+      "structuralIssues": [
+        "TRANSPARENCY_MISSING"
+      ],
+      "cropRisk": true,
+      "reason": "DO NOT ACTIVATE: transparency required by the original contract but none is present. Landscape art needs actual pixel-art style and layer/alpha match; reserve rather than smear behind characters.",
+      "finalHumanApproval": false
+    },
+    "BS-VF01": {
+      "id": "BS-VF01",
+      "name": "Charge telegraph ring",
+      "group": "BS-VF",
+      "sourcePath": "assets/production/boss/effects/bs_vf01.png",
+      "sha256": "8772fab5dc054407a0f38878849376b1326340240373d965eeff036caab05f2b",
+      "sourcePx": [
+        256,
+        256
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 4.5,
+      "verdict": "preview",
+      "previewWired": true,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Large unmistakable red circle strengthens rather than replaces code-owned charge tell.",
+      "finalHumanApproval": false
+    },
+    "BS-VF02": {
+      "id": "BS-VF02",
+      "name": "Charge direction streak",
+      "group": "BS-VF",
+      "sourcePath": "assets/production/boss/effects/bs_vf02.png",
+      "sha256": "283ce08fd5d7f01773e106112ed53769993d2b2d987691c741bc8cf052027ea4",
+      "sourcePx": [
+        256,
+        96
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Optional Fox VFX; no decorative overlay may hide code-owned safe windows.",
+      "finalHumanApproval": false
+    },
+    "BS-VF03": {
+      "id": "BS-VF03",
+      "name": "Fox charge dust burst",
+      "group": "BS-VF",
+      "sourcePath": "assets/production/boss/effects/bs_vf03.png",
+      "sha256": "d7287319d58a17a89c7160b44c6700739beb5947b7334daf6da177f7a0d55e4d",
+      "sourcePx": [
+        192,
+        96
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Optional Fox VFX; no decorative overlay may hide code-owned safe windows.",
+      "finalHumanApproval": false
+    },
+    "BS-VF04": {
+      "id": "BS-VF04",
+      "name": "Fox confetti projectile",
+      "group": "BS-VF",
+      "sourcePath": "assets/production/boss/effects/bs_vf04.png",
+      "sha256": "f66ce5b0bd57359c201d2f68447547455068da5a03ac845d555a9edcb62c93f7",
+      "sourcePx": [
+        64,
+        64
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Optional Fox VFX; no decorative overlay may hide code-owned safe windows.",
+      "finalHumanApproval": false
+    },
+    "BS-VF05": {
+      "id": "BS-VF05",
+      "name": "Fox volley warning",
+      "group": "BS-VF",
+      "sourcePath": "assets/production/boss/effects/bs_vf05.png",
+      "sha256": "59ee86a03aa549720688e45293d5a0d2b9899d9a6b5087bb6ba3ad62b4df76d7",
+      "sourcePx": [
+        192,
+        96
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Optional Fox VFX; no decorative overlay may hide code-owned safe windows.",
+      "finalHumanApproval": false
+    },
+    "BS-VF06": {
+      "id": "BS-VF06",
+      "name": "Fox stagger stars",
+      "group": "BS-VF",
+      "sourcePath": "assets/production/boss/effects/bs_vf06.png",
+      "sha256": "edf24659ec8aa11edf2139529566d473706f79db2932c5e48aef199b53091307",
+      "sourcePx": [
+        96,
+        96
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 4.5,
+      "verdict": "preview",
+      "previewWired": true,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Golden stun stars strengthen visual stagger if STUNNED text stays clear.",
+      "finalHumanApproval": false
+    },
+    "BS-VF07": {
+      "id": "BS-VF07",
+      "name": "Fox hit shimmer",
+      "group": "BS-VF",
+      "sourcePath": "assets/production/boss/effects/bs_vf07.png",
+      "sha256": "6287f577654e9d8bfaa6d2e445e3dbec109bc766e7a894ba6005c450c5acd12c",
+      "sourcePx": [
+        128,
+        128
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Optional Fox VFX; no decorative overlay may hide code-owned safe windows.",
+      "finalHumanApproval": false
+    },
+    "BS-VF08": {
+      "id": "BS-VF08",
+      "name": "Boss health pip full",
+      "group": "BS-VF",
+      "sourcePath": "assets/production/boss/effects/bs_vf08.png",
+      "sha256": "038546d68e13dcd62fdec1356d9d5eb9af83adf6b7e81db8fb28ea9b32ebab8b",
+      "sourcePx": [
+        64,
+        64
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Optional Fox VFX; no decorative overlay may hide code-owned safe windows.",
+      "finalHumanApproval": false
+    },
+    "BS-VF09": {
+      "id": "BS-VF09",
+      "name": "Boss health pip empty",
+      "group": "BS-VF",
+      "sourcePath": "assets/production/boss/effects/bs_vf09.png",
+      "sha256": "8b997fb81a57dd99044fd33b6b4e4085dc7f82722f5efcde05b1117af6cb7cc0",
+      "sourcePx": [
+        64,
+        64
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Optional Fox VFX; no decorative overlay may hide code-owned safe windows.",
+      "finalHumanApproval": false
+    },
+    "BS-VF10": {
+      "id": "BS-VF10",
+      "name": "Boss defeated puff",
+      "group": "BS-VF",
+      "sourcePath": "assets/production/boss/effects/bs_vf10.png",
+      "sha256": "80dc244fec6e094e241dc59b079eaaa484e5e6ac48bf904707083e7668235893",
+      "sourcePx": [
+        192,
+        128
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Optional Fox VFX; no decorative overlay may hide code-owned safe windows.",
+      "finalHumanApproval": false
+    },
+    "BS-VF11": {
+      "id": "BS-VF11",
+      "name": "Summit shockwave",
+      "group": "BS-VF",
+      "sourcePath": "assets/production/boss/effects/bs_vf11.png",
+      "sha256": "68fc5c03261ec1f7e7fc83efae7ba0765565769c78f107d98eefeb0d6bbc7f28",
+      "sourcePx": [
+        256,
+        64
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Optional Fox VFX; no decorative overlay may hide code-owned safe windows.",
+      "finalHumanApproval": false
+    },
+    "BS-VF12": {
+      "id": "BS-VF12",
+      "name": "Fox victory truce sparkle",
+      "group": "BS-VF",
+      "sourcePath": "assets/production/boss/effects/bs_vf12.png",
+      "sha256": "baf5d8707a1cf0d9a11bd7303300eed8d38847aab4df659a3fc4f1e4082743fe",
+      "sourcePx": [
+        128,
+        128
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Optional Fox VFX; no decorative overlay may hide code-owned safe windows.",
+      "finalHumanApproval": false
+    },
+    "CIN-N01": {
+      "id": "CIN-N01",
+      "name": "Landing recovery neutral",
+      "group": "CIN",
+      "sourcePath": "assets/production/cinnamon/land_recover.png",
+      "sha256": "bebc761c6286a285d6be4641556ae4e07ccdd589bbe3c0a171879f792e732116",
+      "sourcePx": [
+        240,
+        160
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Supplemental source-like pose; 26 canonical Cinnamon frames stay unchanged.",
+      "finalHumanApproval": false
+    },
+    "CIN-N02": {
+      "id": "CIN-N02",
+      "name": "Climb contact left",
+      "group": "CIN",
+      "sourcePath": "assets/production/cinnamon/climb_hold.png",
+      "sha256": "875857775530c30a5007569474fa57add5198d48cba7ac782b3acd1047592d33",
+      "sourcePx": [
+        240,
+        160
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Supplemental source-like pose; 26 canonical Cinnamon frames stay unchanged.",
+      "finalHumanApproval": false
+    },
+    "CIN-N03": {
+      "id": "CIN-N03",
+      "name": "Climb mantle",
+      "group": "CIN",
+      "sourcePath": "assets/production/cinnamon/climb_mantle.png",
+      "sha256": "16988e1d511f69e02de365a33afbd5a6d5f7c6811e5846b92f2bd06551a668e8",
+      "sourcePx": [
+        240,
+        160
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Supplemental source-like pose; 26 canonical Cinnamon frames stay unchanged.",
+      "finalHumanApproval": false
+    },
+    "CIN-N04": {
+      "id": "CIN-N04",
+      "name": "Shake pickup celebration",
+      "group": "CIN",
+      "sourcePath": "assets/production/cinnamon/pickup.png",
+      "sha256": "2a3d0b550748e0acdef89edfe0d707d1800462d6c96ce1a8da311cb7b14022b9",
+      "sourcePx": [
+        240,
+        160
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 4.5,
+      "verdict": "preview",
+      "previewWired": true,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Pickup celebration retains headband, round glasses, striped red panda tail, grey shirt and olive shorts.",
+      "finalHumanApproval": false
+    },
+    "CIN-N05": {
+      "id": "CIN-N05",
+      "name": "Boss dodge recovery",
+      "group": "CIN",
+      "sourcePath": "assets/production/cinnamon/dodge_recover.png",
+      "sha256": "386c1cf96d363d50f70cafc4042dbaabd979e209578b1087774d15f16e24cb55",
+      "sourcePx": [
+        240,
+        160
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Supplemental source-like pose; 26 canonical Cinnamon frames stay unchanged.",
+      "finalHumanApproval": false
+    },
+    "CIN-N06": {
+      "id": "CIN-N06",
+      "name": "Final birthday cheers",
+      "group": "CIN",
+      "sourcePath": "assets/production/cinnamon/birthday_celebrate.png",
+      "sha256": "9d3fd62bcff3c3da53341643dab1fb35c3dd2d50e86a2c7bbb31b40e61eeb507",
+      "sourcePx": [
+        240,
+        160
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 4.5,
+      "verdict": "preview",
+      "previewWired": true,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Birthday cheer adds an identity-faithful supplemental victory reaction.",
+      "finalHumanApproval": false
+    },
+    "CIN-N07": {
+      "id": "CIN-N07",
+      "name": "Sip finishing pose",
+      "group": "CIN",
+      "sourcePath": "assets/production/cinnamon/sip.png",
+      "sha256": "0b4918bf11ead9d03ce41b53e77bc97aa605ff0b99872b9565629d5b5fbe5f25",
+      "sourcePx": [
+        240,
+        160
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 2.1,
+      "verdict": "revise",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Sip pose does not unmistakably depict a separate drinking cup.",
+      "finalHumanApproval": false
+    },
+    "CO-01": {
+      "id": "CO-01",
+      "name": "Green shake token",
+      "group": "CO",
+      "sourcePath": "assets/level1/collectibles/co_01_green_shake_token.png",
+      "sha256": "08647e0464a7721d41c0ff80b98ce07af1f43d6566fc99ccd8a6c70360c3ee91",
+      "sourcePx": [
+        32,
+        32
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Alternative pickup artwork; no new pickup gameplay role implied.",
+      "finalHumanApproval": false
+    },
+    "CO-02": {
+      "id": "CO-02",
+      "name": "Gold shake token",
+      "group": "CO",
+      "sourcePath": "assets/level1/collectibles/co_02_gold_shake_token.png",
+      "sha256": "7b4e4ccda7caea8eb89414f390007cb3d8d47eb73c9ee47f4d8b4799d4777fc1",
+      "sourcePx": [
+        32,
+        32
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Alternative pickup artwork; no new pickup gameplay role implied.",
+      "finalHumanApproval": false
+    },
+    "CO-03": {
+      "id": "CO-03",
+      "name": "Shamrock Shake cup",
+      "group": "CO",
+      "sourcePath": "assets/level1/collectibles/co_03_shamrock_shake_cup.png",
+      "sha256": "3e20e5ed0380783e777f06781301e01a3f0be203d852c0ca407f3f9dbf7d882b",
+      "sourcePx": [
+        64,
+        96
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 4.5,
+      "verdict": "preview",
+      "previewWired": true,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Shamrock Shake has the needed distinct cup, straw and cream, readable at game scale.",
+      "finalHumanApproval": false
+    },
+    "CO-04": {
+      "id": "CO-04",
+      "name": "Green shake drip",
+      "group": "CO",
+      "sourcePath": "assets/level1/collectibles/co_04_green_shake_drip.png",
+      "sha256": "9dd590fa37523049fd789a0fa0fd2e3f926b4dca8e959b4c341d1cac670e012d",
+      "sourcePx": [
+        24,
+        32
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Alternative pickup artwork; no new pickup gameplay role implied.",
+      "finalHumanApproval": false
+    },
+    "DM-BG01": {
+      "id": "DM-BG01",
+      "name": "Dome approach hero panorama",
+      "group": "DM-BG",
+      "sourcePath": "assets/production/dome/backgrounds/dm_bg01.png",
+      "sha256": "f6699ea1c4e1e1cad17f153d9581a3dde55985178fa4ff6ce69dc8185a27b688",
+      "sourcePx": [
+        960,
+        540
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": false,
+      "reason": "Dome kit part; verify 1:1 seam/pivot and do not paint invisible colliders into the scenery.",
+      "finalHumanApproval": false
+    },
+    "DM-BG02": {
+      "id": "DM-BG02",
+      "name": "Dome wall parallax midground",
+      "group": "DM-BG",
+      "sourcePath": "assets/production/dome/backgrounds/dm_bg02.png",
+      "sha256": "c05102c0f45fae4b2490c540ace904a80a5f74e309eb6bbd6335d8d9b0f2652a",
+      "sourcePx": [
+        960,
+        1080
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 1.4,
+      "verdict": "blocked",
+      "previewWired": false,
+      "structuralIssues": [
+        "TRANSPARENCY_MISSING"
+      ],
+      "cropRisk": true,
+      "reason": "DO NOT ACTIVATE: transparency required by the original contract but none is present. Dome kit part; verify 1:1 seam/pivot and do not paint invisible colliders into the scenery.",
+      "finalHumanApproval": false
+    },
+    "DM-BG03": {
+      "id": "DM-BG03",
+      "name": "Golden afternoon sky",
+      "group": "DM-BG",
+      "sourcePath": "assets/production/dome/backgrounds/dm_bg03.png",
+      "sha256": "2d4709d796f070ea742fdd68d38eeea7fc812a4d8e5063ed16f15f227a322a22",
+      "sourcePx": [
+        960,
+        540
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": false,
+      "reason": "Dome kit part; verify 1:1 seam/pivot and do not paint invisible colliders into the scenery.",
+      "finalHumanApproval": false
+    },
+    "DM-BG04": {
+      "id": "DM-BG04",
+      "name": "Distant campus vista",
+      "group": "DM-BG",
+      "sourcePath": "assets/production/dome/backgrounds/dm_bg04.png",
+      "sha256": "8b2a6252ee2263d900ad853e3ac1245e2b7b1aad9a287b7f6fcb1d4583cf301c",
+      "sourcePx": [
+        960,
+        540
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 1.4,
+      "verdict": "blocked",
+      "previewWired": false,
+      "structuralIssues": [
+        "TRANSPARENCY_MISSING"
+      ],
+      "cropRisk": true,
+      "reason": "DO NOT ACTIVATE: transparency required by the original contract but none is present. Dome kit part; verify 1:1 seam/pivot and do not paint invisible colliders into the scenery.",
+      "finalHumanApproval": false
+    },
+    "DM-BG05": {
+      "id": "DM-BG05",
+      "name": "Dome lower roof foreground",
+      "group": "DM-BG",
+      "sourcePath": "assets/production/dome/backgrounds/dm_bg05.png",
+      "sha256": "b0eba98675ca7058a6583c7243dd6f111852cbf617d38807e756db4093c5ee5d",
+      "sourcePx": [
+        960,
+        540
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Dome kit part; verify 1:1 seam/pivot and do not paint invisible colliders into the scenery.",
+      "finalHumanApproval": false
+    },
+    "DM-BG06": {
+      "id": "DM-BG06",
+      "name": "Bell Gallery shadow layer",
+      "group": "DM-BG",
+      "sourcePath": "assets/production/dome/backgrounds/dm_bg06.png",
+      "sha256": "a1aec2524b30d5acc6e6b81627136d7cfa0c100881d3fee9e8209253da835639",
+      "sourcePx": [
+        960,
+        540
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 1.4,
+      "verdict": "blocked",
+      "previewWired": false,
+      "structuralIssues": [
+        "TRANSPARENCY_MISSING"
+      ],
+      "cropRisk": true,
+      "reason": "DO NOT ACTIVATE: transparency required by the original contract but none is present. Dome kit part; verify 1:1 seam/pivot and do not paint invisible colliders into the scenery.",
+      "finalHumanApproval": false
+    },
+    "DM-BG07": {
+      "id": "DM-BG07",
+      "name": "Summit sky panorama",
+      "group": "DM-BG",
+      "sourcePath": "assets/production/dome/backgrounds/dm_bg07.png",
+      "sha256": "4d7e3bbeb8db3cf912cfec79bc2ebf1da39a79e657960e34b75eaf668a08aab1",
+      "sourcePx": [
+        960,
+        540
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": false,
+      "reason": "Dome kit part; verify 1:1 seam/pivot and do not paint invisible colliders into the scenery.",
+      "finalHumanApproval": false
+    },
+    "DM-BG08": {
+      "id": "DM-BG08",
+      "name": "Fox finale night glow",
+      "group": "DM-BG",
+      "sourcePath": "assets/production/dome/backgrounds/dm_bg08.png",
+      "sha256": "9ac8919d035846126848349751849947434c1cba6fb4230ab05f816565a6bb4c",
+      "sourcePx": [
+        960,
+        540
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Dome kit part; verify 1:1 seam/pivot and do not paint invisible colliders into the scenery.",
+      "finalHumanApproval": false
+    },
+    "DM-MC01": {
+      "id": "DM-MC01",
+      "name": "Moving lift deck idle",
+      "group": "DM-MC",
+      "sourcePath": "assets/production/dome/mechanics/dm_mc01.png",
+      "sha256": "f7575d2246e26389d81bba695749289aaad121d74d312a0bbe1dd194e0a2a109",
+      "sourcePx": [
+        256,
+        64
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Dome kit part; verify 1:1 seam/pivot and do not paint invisible colliders into the scenery.",
+      "finalHumanApproval": false
+    },
+    "DM-MC02": {
+      "id": "DM-MC02",
+      "name": "Moving lift undercarriage",
+      "group": "DM-MC",
+      "sourcePath": "assets/production/dome/mechanics/dm_mc02.png",
+      "sha256": "dc1b2ddfa8beb26e70e3f7be1e31f437a4c84f0abc2000ccea62fa5653a026d9",
+      "sourcePx": [
+        256,
+        128
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Dome kit part; verify 1:1 seam/pivot and do not paint invisible colliders into the scenery.",
+      "finalHumanApproval": false
+    },
+    "DM-MC03": {
+      "id": "DM-MC03",
+      "name": "Pulse banner bridge off",
+      "group": "DM-MC",
+      "sourcePath": "assets/production/dome/mechanics/dm_mc03.png",
+      "sha256": "6371482991969febfec7a306ff884b12644d3260b24665f49f97832b812d68df",
+      "sourcePx": [
+        256,
+        64
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Dome kit part; verify 1:1 seam/pivot and do not paint invisible colliders into the scenery.",
+      "finalHumanApproval": false
+    },
+    "DM-MC04": {
+      "id": "DM-MC04",
+      "name": "Pulse banner bridge on",
+      "group": "DM-MC",
+      "sourcePath": "assets/production/dome/mechanics/dm_mc04.png",
+      "sha256": "4be2d6e9af0a4c0e1f062a62a3456381acaffd1ae19b31223f5c3bd0a3e0f907",
+      "sourcePx": [
+        256,
+        64
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Dome kit part; verify 1:1 seam/pivot and do not paint invisible colliders into the scenery.",
+      "finalHumanApproval": false
+    },
+    "DM-MC05": {
+      "id": "DM-MC05",
+      "name": "Dome relay drum quiet",
+      "group": "DM-MC",
+      "sourcePath": "assets/production/dome/mechanics/dm_mc05.png",
+      "sha256": "439a7956f81b6b788e438e7ab6c6e4b7ead7eb7c92f7c2b7ae1cbd941f884da2",
+      "sourcePx": [
+        128,
+        128
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Dome kit part; verify 1:1 seam/pivot and do not paint invisible colliders into the scenery.",
+      "finalHumanApproval": false
+    },
+    "DM-MC06": {
+      "id": "DM-MC06",
+      "name": "Dome relay drum activated",
+      "group": "DM-MC",
+      "sourcePath": "assets/production/dome/mechanics/dm_mc06.png",
+      "sha256": "8d6cc9937f27ab9f45f822e092079b01b42ab111acc3a24c1a8ef02c605eadc0",
+      "sourcePx": [
+        128,
+        128
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Dome kit part; verify 1:1 seam/pivot and do not paint invisible colliders into the scenery.",
+      "finalHumanApproval": false
+    },
+    "DM-MC07": {
+      "id": "DM-MC07",
+      "name": "Gilded checkpoint dark",
+      "group": "DM-MC",
+      "sourcePath": "assets/production/dome/mechanics/dm_mc07.png",
+      "sha256": "b626a9a6e5d696c8f1edcbc8c5b23d4a166a59f108932be4876a158d5cbb87c9",
+      "sourcePx": [
+        128,
+        192
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Dome kit part; verify 1:1 seam/pivot and do not paint invisible colliders into the scenery.",
+      "finalHumanApproval": false
+    },
+    "DM-MC08": {
+      "id": "DM-MC08",
+      "name": "Gilded checkpoint active",
+      "group": "DM-MC",
+      "sourcePath": "assets/production/dome/mechanics/dm_mc08.png",
+      "sha256": "f0033c316b5544e07396b6c6cef4c9c570faa6514897db4ace6efa64cc047e91",
+      "sourcePx": [
+        128,
+        192
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Dome kit part; verify 1:1 seam/pivot and do not paint invisible colliders into the scenery.",
+      "finalHumanApproval": false
+    },
+    "DM-MC09": {
+      "id": "DM-MC09",
+      "name": "Final Summit Gate locked",
+      "group": "DM-MC",
+      "sourcePath": "assets/production/dome/mechanics/dm_mc09.png",
+      "sha256": "36fae51b7bfecfab9697385afe24be277854b4d62cafd44d57354bb8c77706be",
+      "sourcePx": [
+        256,
+        320
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Dome kit part; verify 1:1 seam/pivot and do not paint invisible colliders into the scenery.",
+      "finalHumanApproval": false
+    },
+    "DM-MC10": {
+      "id": "DM-MC10",
+      "name": "Final Summit Gate open",
+      "group": "DM-MC",
+      "sourcePath": "assets/production/dome/mechanics/dm_mc10.png",
+      "sha256": "75595f4f1ba08317c72d86a730206e550d7b67729133f870d62fd6655be16f89",
+      "sourcePx": [
+        256,
+        320
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Dome kit part; verify 1:1 seam/pivot and do not paint invisible colliders into the scenery.",
+      "finalHumanApproval": false
+    },
+    "DM-PR01": {
+      "id": "DM-PR01",
+      "name": "Main Building window module",
+      "group": "DM-PR",
+      "sourcePath": "assets/production/dome/props/dm_pr01.png",
+      "sha256": "e2c39fcadeaa38ada041e1471afa354381d29ca41f0cae667f7430a2ed74d2a7",
+      "sourcePx": [
+        128,
+        192
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Dome kit part; verify 1:1 seam/pivot and do not paint invisible colliders into the scenery.",
+      "finalHumanApproval": false
+    },
+    "DM-PR02": {
+      "id": "DM-PR02",
+      "name": "Main Building pilaster",
+      "group": "DM-PR",
+      "sourcePath": "assets/production/dome/props/dm_pr02.png",
+      "sha256": "ec978acb82fd676457f4d332bbc8a63b81c942130c25c17bdcab5fef34e785f0",
+      "sourcePx": [
+        128,
+        256
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Dome kit part; verify 1:1 seam/pivot and do not paint invisible colliders into the scenery.",
+      "finalHumanApproval": false
+    },
+    "DM-PR03": {
+      "id": "DM-PR03",
+      "name": "Cupola hero silhouette",
+      "group": "DM-PR",
+      "sourcePath": "assets/production/dome/props/dm_pr03.png",
+      "sha256": "b91c057b7c59476d9999329b2c901ddf2758e684089c6d1b75fabd0c97b5f766",
+      "sourcePx": [
+        512,
+        384
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Dome kit part; verify 1:1 seam/pivot and do not paint invisible colliders into the scenery.",
+      "finalHumanApproval": false
+    },
+    "DM-PR04": {
+      "id": "DM-PR04",
+      "name": "Mary statue silhouette",
+      "group": "DM-PR",
+      "sourcePath": "assets/production/dome/props/dm_pr04.png",
+      "sha256": "ad3599cce5b7ff8f6e659b3561c6aa4cd215f36cab51983c2c2ff686e96d69c2",
+      "sourcePx": [
+        160,
+        256
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Dome kit part; verify 1:1 seam/pivot and do not paint invisible colliders into the scenery.",
+      "finalHumanApproval": false
+    },
+    "DM-PR05": {
+      "id": "DM-PR05",
+      "name": "Summit railing section",
+      "group": "DM-PR",
+      "sourcePath": "assets/production/dome/props/dm_pr05.png",
+      "sha256": "454abe116ab706de7fcc73b8d66f47a9d45f6f50ff41428ec586587dd4e02199",
+      "sourcePx": [
+        256,
+        96
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Dome kit part; verify 1:1 seam/pivot and do not paint invisible colliders into the scenery.",
+      "finalHumanApproval": false
+    },
+    "DM-PR06": {
+      "id": "DM-PR06",
+      "name": "Blue-and-gold heraldic pennant",
+      "group": "DM-PR",
+      "sourcePath": "assets/production/dome/props/dm_pr06.png",
+      "sha256": "f717543478cca6243919038369f39c5e8b3dfc60027344c14cf5d251f051ee34",
+      "sourcePx": [
+        128,
+        192
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Dome kit part; verify 1:1 seam/pivot and do not paint invisible colliders into the scenery.",
+      "finalHumanApproval": false
+    },
+    "DM-PR07": {
+      "id": "DM-PR07",
+      "name": "Gilded bell arch ornament",
+      "group": "DM-PR",
+      "sourcePath": "assets/production/dome/props/dm_pr07.png",
+      "sha256": "b7f1eaaa310e27a2c34456f45dffd346c6118926ecfff3e5494579237d88fa7c",
+      "sourcePx": [
+        256,
+        256
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Dome kit part; verify 1:1 seam/pivot and do not paint invisible colliders into the scenery.",
+      "finalHumanApproval": false
+    },
+    "DM-PR08": {
+      "id": "DM-PR08",
+      "name": "Rooftop sandstone gargoyle",
+      "group": "DM-PR",
+      "sourcePath": "assets/production/dome/props/dm_pr08.png",
+      "sha256": "669a23a5c81291dfa01642609b77ec1ef2d56305cab8072018153770ac116d26",
+      "sourcePx": [
+        128,
+        128
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Dome kit part; verify 1:1 seam/pivot and do not paint invisible colliders into the scenery.",
+      "finalHumanApproval": false
+    },
+    "DM-PR09": {
+      "id": "DM-PR09",
+      "name": "Sunlit cornice column",
+      "group": "DM-PR",
+      "sourcePath": "assets/production/dome/props/dm_pr09.png",
+      "sha256": "a063cdc9850cc46fc67bd495787a1fe080aa5dbcfa36c700122d4cb70bbe6434",
+      "sourcePx": [
+        128,
+        256
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Dome kit part; verify 1:1 seam/pivot and do not paint invisible colliders into the scenery.",
+      "finalHumanApproval": false
+    },
+    "DM-PR10": {
+      "id": "DM-PR10",
+      "name": "Final summit flag",
+      "group": "DM-PR",
+      "sourcePath": "assets/production/dome/props/dm_pr10.png",
+      "sha256": "b3dd9ae7730595e1250e907c7f07a673e6eb24af25ef0b3e80d2a6972bec220f",
+      "sourcePx": [
+        160,
+        256
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Dome kit part; verify 1:1 seam/pivot and do not paint invisible colliders into the scenery.",
+      "finalHumanApproval": false
+    },
+    "DM-TL01": {
+      "id": "DM-TL01",
+      "name": "Limestone walkable cap",
+      "group": "DM-TL",
+      "sourcePath": "assets/production/dome/tiles/dm_tl01.png",
+      "sha256": "f6e4208e8e2c6851ec1e98e7cf43f323569a34722be792b01b9c6cc287c44d59",
+      "sourcePx": [
+        32,
+        32
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 1.4,
+      "verdict": "blocked",
+      "previewWired": false,
+      "structuralIssues": [
+        "TRANSPARENCY_MISSING"
+      ],
+      "cropRisk": true,
+      "reason": "DO NOT ACTIVATE: transparency required by the original contract but none is present. Dome kit part; verify 1:1 seam/pivot and do not paint invisible colliders into the scenery.",
+      "finalHumanApproval": false
+    },
+    "DM-TL02": {
+      "id": "DM-TL02",
+      "name": "Limestone side brick",
+      "group": "DM-TL",
+      "sourcePath": "assets/production/dome/tiles/dm_tl02.png",
+      "sha256": "cadca7712a4adc4dd9dd02e8c0240f3fa8c2475381c2e6fdfe75afa2b9b1d086",
+      "sourcePx": [
+        32,
+        32
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 1.4,
+      "verdict": "blocked",
+      "previewWired": false,
+      "structuralIssues": [
+        "TRANSPARENCY_MISSING"
+      ],
+      "cropRisk": true,
+      "reason": "DO NOT ACTIVATE: transparency required by the original contract but none is present. Dome kit part; verify 1:1 seam/pivot and do not paint invisible colliders into the scenery.",
+      "finalHumanApproval": false
+    },
+    "DM-TL03": {
+      "id": "DM-TL03",
+      "name": "Gold roof tile",
+      "group": "DM-TL",
+      "sourcePath": "assets/production/dome/tiles/dm_tl03.png",
+      "sha256": "9d1fa300ae3302e3d65728ee8f2a520d441ebc9a5b80edc01e5fa04b201569ef",
+      "sourcePx": [
+        32,
+        32
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 1.4,
+      "verdict": "blocked",
+      "previewWired": false,
+      "structuralIssues": [
+        "TRANSPARENCY_MISSING"
+      ],
+      "cropRisk": true,
+      "reason": "DO NOT ACTIVATE: transparency required by the original contract but none is present. Dome kit part; verify 1:1 seam/pivot and do not paint invisible colliders into the scenery.",
+      "finalHumanApproval": false
+    },
+    "DM-TL04": {
+      "id": "DM-TL04",
+      "name": "Curved roof eave left",
+      "group": "DM-TL",
+      "sourcePath": "assets/production/dome/tiles/dm_tl04.png",
+      "sha256": "9f1bcb6ca9d94b354fb5ec55781f8162728cf68909ad7addf1006f5068df2d8c",
+      "sourcePx": [
+        32,
+        32
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Dome kit part; verify 1:1 seam/pivot and do not paint invisible colliders into the scenery.",
+      "finalHumanApproval": false
+    },
+    "DM-TL05": {
+      "id": "DM-TL05",
+      "name": "Curved roof eave right",
+      "group": "DM-TL",
+      "sourcePath": "assets/production/dome/tiles/dm_tl05.png",
+      "sha256": "92648b9322f85efb733ba31d4edd6bdfcac14b72dc45953708a50d9adb32cfc8",
+      "sourcePx": [
+        32,
+        32
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Dome kit part; verify 1:1 seam/pivot and do not paint invisible colliders into the scenery.",
+      "finalHumanApproval": false
+    },
+    "DM-TL06": {
+      "id": "DM-TL06",
+      "name": "Cornice center",
+      "group": "DM-TL",
+      "sourcePath": "assets/production/dome/tiles/dm_tl06.png",
+      "sha256": "609f570a94646e8e6f6351a7b3a4e6a4603726e9722156a6e4d32a3659d97458",
+      "sourcePx": [
+        32,
+        32
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 1.4,
+      "verdict": "blocked",
+      "previewWired": false,
+      "structuralIssues": [
+        "TRANSPARENCY_MISSING"
+      ],
+      "cropRisk": true,
+      "reason": "DO NOT ACTIVATE: transparency required by the original contract but none is present. Dome kit part; verify 1:1 seam/pivot and do not paint invisible colliders into the scenery.",
+      "finalHumanApproval": false
+    },
+    "DM-TL07": {
+      "id": "DM-TL07",
+      "name": "Cornice left cap",
+      "group": "DM-TL",
+      "sourcePath": "assets/production/dome/tiles/dm_tl07.png",
+      "sha256": "29a464b2a92c011d87993ea80100206740777a8be43b8395e9eb0d19681474c4",
+      "sourcePx": [
+        32,
+        32
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Dome kit part; verify 1:1 seam/pivot and do not paint invisible colliders into the scenery.",
+      "finalHumanApproval": false
+    },
+    "DM-TL08": {
+      "id": "DM-TL08",
+      "name": "Cornice right cap",
+      "group": "DM-TL",
+      "sourcePath": "assets/production/dome/tiles/dm_tl08.png",
+      "sha256": "3c3fe50ecfc007a08487d0529d82ca4d9abffddb5b6b2c6882293ab31f7a4f17",
+      "sourcePx": [
+        32,
+        32
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Dome kit part; verify 1:1 seam/pivot and do not paint invisible colliders into the scenery.",
+      "finalHumanApproval": false
+    },
+    "DM-TL09": {
+      "id": "DM-TL09",
+      "name": "Scaffold deck center",
+      "group": "DM-TL",
+      "sourcePath": "assets/production/dome/tiles/dm_tl09.png",
+      "sha256": "8d177741472827e83c9daf61a475ad2cb22064d88e2ff4c63387fcf9532eb611",
+      "sourcePx": [
+        32,
+        32
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 1.4,
+      "verdict": "blocked",
+      "previewWired": false,
+      "structuralIssues": [
+        "TRANSPARENCY_MISSING"
+      ],
+      "cropRisk": true,
+      "reason": "DO NOT ACTIVATE: transparency required by the original contract but none is present. Dome kit part; verify 1:1 seam/pivot and do not paint invisible colliders into the scenery.",
+      "finalHumanApproval": false
+    },
+    "DM-TL10": {
+      "id": "DM-TL10",
+      "name": "Scaffold steel support",
+      "group": "DM-TL",
+      "sourcePath": "assets/production/dome/tiles/dm_tl10.png",
+      "sha256": "4baaaf76d90ac61f03b3433978e55b178107bf1e8a666e430250becb68736401",
+      "sourcePx": [
+        32,
+        32
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Dome kit part; verify 1:1 seam/pivot and do not paint invisible colliders into the scenery.",
+      "finalHumanApproval": false
+    },
+    "DM-TL11": {
+      "id": "DM-TL11",
+      "name": "Arch keystone",
+      "group": "DM-TL",
+      "sourcePath": "assets/production/dome/tiles/dm_tl11.png",
+      "sha256": "71a667266dc2a1ddd02990b1f52691007e46e93bf597209fc3a84a776b05b2e5",
+      "sourcePx": [
+        64,
+        64
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Dome kit part; verify 1:1 seam/pivot and do not paint invisible colliders into the scenery.",
+      "finalHumanApproval": false
+    },
+    "DM-TL12": {
+      "id": "DM-TL12",
+      "name": "Window half arch left",
+      "group": "DM-TL",
+      "sourcePath": "assets/production/dome/tiles/dm_tl12.png",
+      "sha256": "62a533c04c449a651b22053b8dca5347e716f4759ab70f3bbf08b39f9072ea7c",
+      "sourcePx": [
+        64,
+        64
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Dome kit part; verify 1:1 seam/pivot and do not paint invisible colliders into the scenery.",
+      "finalHumanApproval": false
+    },
+    "DM-TL13": {
+      "id": "DM-TL13",
+      "name": "Window half arch right",
+      "group": "DM-TL",
+      "sourcePath": "assets/production/dome/tiles/dm_tl13.png",
+      "sha256": "e0b6e4105941cbd5018da1fbc8959dbf2675ff17ddcacc2372a68bed50ba4d73",
+      "sourcePx": [
+        64,
+        64
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Dome kit part; verify 1:1 seam/pivot and do not paint invisible colliders into the scenery.",
+      "finalHumanApproval": false
+    },
+    "DM-TL14": {
+      "id": "DM-TL14",
+      "name": "Cracked landing platform",
+      "group": "DM-TL",
+      "sourcePath": "assets/production/dome/tiles/dm_tl14.png",
+      "sha256": "2d199235b7d90ac8322ee0ed41344d0e41093aa6e3e2c8635fecc00e8001bce0",
+      "sourcePx": [
+        32,
+        32
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 1.4,
+      "verdict": "blocked",
+      "previewWired": false,
+      "structuralIssues": [
+        "TRANSPARENCY_MISSING"
+      ],
+      "cropRisk": true,
+      "reason": "DO NOT ACTIVATE: transparency required by the original contract but none is present. Dome kit part; verify 1:1 seam/pivot and do not paint invisible colliders into the scenery.",
+      "finalHumanApproval": false
+    },
+    "DM-TL15": {
+      "id": "DM-TL15",
+      "name": "Gold dome rib vertical",
+      "group": "DM-TL",
+      "sourcePath": "assets/production/dome/tiles/dm_tl15.png",
+      "sha256": "5394b1e526dd309cbcc79f8b3ea2c3029bb4f156cd7aab1dd37b04328ffeb1a7",
+      "sourcePx": [
+        32,
+        64
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Dome kit part; verify 1:1 seam/pivot and do not paint invisible colliders into the scenery.",
+      "finalHumanApproval": false
+    },
+    "DM-TL16": {
+      "id": "DM-TL16",
+      "name": "Summit parapet block",
+      "group": "DM-TL",
+      "sourcePath": "assets/production/dome/tiles/dm_tl16.png",
+      "sha256": "33e040bf01bf09c6ec323493f35d1bc0e1c7c1e6899e1a4a9378c6ea9e7299af",
+      "sourcePx": [
+        64,
+        64
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Dome kit part; verify 1:1 seam/pivot and do not paint invisible colliders into the scenery.",
+      "finalHumanApproval": false
+    },
+    "EN-01": {
+      "id": "EN-01",
+      "name": "Cup Crawler walk A",
+      "group": "EN",
+      "sourcePath": "assets/level1/enemies/en_01_cup_crawler_walk_a.png",
+      "sha256": "419fe7446c4707d7d6809755faf0764c244d130fd27ca4e22945b7441ae95d62",
+      "sourcePx": [
+        64,
+        64
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 4.5,
+      "verdict": "preview",
+      "previewWired": true,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Cup Crawler enemy silhouette reads distinctly from health items and the player.",
+      "finalHumanApproval": false
+    },
+    "EN-02": {
+      "id": "EN-02",
+      "name": "Cup Crawler walk B",
+      "group": "EN",
+      "sourcePath": "assets/level1/enemies/en_02_cup_crawler_walk_b.png",
+      "sha256": "37e38abe9790e3ef2fb5c92857aa05b05b1bf5a8734173d6ce4d7b450063f00f",
+      "sourcePx": [
+        64,
+        64
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Existing enemy feedback state variant, subject to exact size and warnings.",
+      "finalHumanApproval": false
+    },
+    "EN-03": {
+      "id": "EN-03",
+      "name": "Cup Crawler defeated",
+      "group": "EN",
+      "sourcePath": "assets/level1/enemies/en_03_cup_crawler_defeated.png",
+      "sha256": "a27a91b3aaaa49ac0764179d71c775552afdbd84a2d0c232d3b92aa73458cd2e",
+      "sourcePx": [
+        64,
+        64
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Existing enemy feedback state variant, subject to exact size and warnings.",
+      "finalHumanApproval": false
+    },
+    "EN-04": {
+      "id": "EN-04",
+      "name": "Confetti cannon idle",
+      "group": "EN",
+      "sourcePath": "assets/level1/enemies/en_04_confetti_cannon_idle.png",
+      "sha256": "f4655eac8f7e0062b2f39a7693769b9c3a7f2ea3ff7b1eb091e7291acb8308c1",
+      "sourcePx": [
+        96,
+        96
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 4.5,
+      "verdict": "preview",
+      "previewWired": true,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Clear cup cannon idle.",
+      "finalHumanApproval": false
+    },
+    "EN-05": {
+      "id": "EN-05",
+      "name": "Confetti cannon warning",
+      "group": "EN",
+      "sourcePath": "assets/level1/enemies/en_05_confetti_cannon_warning.png",
+      "sha256": "8f48907165fbb49656da096fcc5fcfce6e1a69f7923f31a6aa64eb442e5e4ee5",
+      "sourcePx": [
+        96,
+        96
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 4.5,
+      "verdict": "preview",
+      "previewWired": true,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Matching warning cannon with red tell.",
+      "finalHumanApproval": false
+    },
+    "EN-06": {
+      "id": "EN-06",
+      "name": "Confetti cannon firing",
+      "group": "EN",
+      "sourcePath": "assets/level1/enemies/en_06_confetti_cannon_firing.png",
+      "sha256": "071a464882a31690e712c9f631f0a3704e840c0a5966781b7fa631a6e4bbfbbc",
+      "sourcePx": [
+        96,
+        96
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 4.5,
+      "verdict": "preview",
+      "previewWired": true,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Matching cannon firing state with visible ejection.",
+      "finalHumanApproval": false
+    },
+    "EN-07": {
+      "id": "EN-07",
+      "name": "Hazardous paper burst",
+      "group": "EN",
+      "sourcePath": "assets/level1/enemies/en_07_hazardous_paper_burst.png",
+      "sha256": "fbc6be78a1d5293e012af9af4406640dbdb6d1a0c03567cfc8b47842228a7d68",
+      "sourcePx": [
+        32,
+        32
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 2.1,
+      "verdict": "revise",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Hazard burst looks like blurred fire rather than deliberate confetti paper.",
+      "finalHumanApproval": false
+    },
+    "EX-VF01": {
+      "id": "EX-VF01",
+      "name": "Dome jump burst",
+      "group": "EX-VF",
+      "sourcePath": "assets/production/effects/ex_vf01.png",
+      "sha256": "9f747466e837748f1db3638c78e235a6670fdb9e31012a6135e0d6280b0ce3f1",
+      "sourcePx": [
+        128,
+        96
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Dome particle effect candidate for future integration with reduced-motion gating.",
+      "finalHumanApproval": false
+    },
+    "EX-VF02": {
+      "id": "EX-VF02",
+      "name": "Dome moving lift motor dust",
+      "group": "EX-VF",
+      "sourcePath": "assets/production/effects/ex_vf02.png",
+      "sha256": "bf994b34aaf11082ecc9e7508726178b30812e1db5695200d2627c613c9ebf33",
+      "sourcePx": [
+        128,
+        96
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Dome particle effect candidate for future integration with reduced-motion gating.",
+      "finalHumanApproval": false
+    },
+    "EX-VF03": {
+      "id": "EX-VF03",
+      "name": "Pulse bridge warning tick",
+      "group": "EX-VF",
+      "sourcePath": "assets/production/effects/ex_vf03.png",
+      "sha256": "198288eb18795b7df12b98fb47a01e5b833fb224e840d1a11bc5437048bd6f71",
+      "sourcePx": [
+        256,
+        32
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Dome particle effect candidate for future integration with reduced-motion gating.",
+      "finalHumanApproval": false
+    },
+    "EX-VF04": {
+      "id": "EX-VF04",
+      "name": "Shamrock counter fly-up",
+      "group": "EX-VF",
+      "sourcePath": "assets/production/effects/ex_vf04.png",
+      "sha256": "62956b84c92ead5d036d0b687f402bda9e131cf57be6f282681053ccd25c2990",
+      "sourcePx": [
+        128,
+        96
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Dome particle effect candidate for future integration with reduced-motion gating.",
+      "finalHumanApproval": false
+    },
+    "EX-VF05": {
+      "id": "EX-VF05",
+      "name": "Golden summit sunray",
+      "group": "EX-VF",
+      "sourcePath": "assets/production/effects/ex_vf05.png",
+      "sha256": "35e1bf151e104fc134a4e5bdd6058108bc138024b5b15b60b933b3fd062f179e",
+      "sourcePx": [
+        960,
+        540
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Dome particle effect candidate for future integration with reduced-motion gating.",
+      "finalHumanApproval": false
+    },
+    "EX-VF06": {
+      "id": "EX-VF06",
+      "name": "Assist mode safe landing ring",
+      "group": "EX-VF",
+      "sourcePath": "assets/production/effects/ex_vf06.png",
+      "sha256": "7623bed512fa7bf4b08ceb532ff9d07b5d4f53859119595e74283f1e2d5dbb85",
+      "sourcePx": [
+        128,
+        32
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Dome particle effect candidate for future integration with reduced-motion gating.",
+      "finalHumanApproval": false
+    },
+    "EX-VF07": {
+      "id": "EX-VF07",
+      "name": "Fox win impact",
+      "group": "EX-VF",
+      "sourcePath": "assets/production/effects/ex_vf07.png",
+      "sha256": "9d580fe03f39d8792c086fd2a5153dd768b34b73920cbfccd40f750913dd8c4b",
+      "sourcePx": [
+        256,
+        256
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Dome particle effect candidate for future integration with reduced-motion gating.",
+      "finalHumanApproval": false
+    },
+    "EX-VF08": {
+      "id": "EX-VF08",
+      "name": "Bonus secret reveal shimmer",
+      "group": "EX-VF",
+      "sourcePath": "assets/production/effects/ex_vf08.png",
+      "sha256": "daf7def23c687eb43e1984e393127af1f3aa183dbedd7c6ab4d48c41b571d635",
+      "sourcePx": [
+        128,
+        128
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Dome particle effect candidate for future integration with reduced-motion gating.",
+      "finalHumanApproval": false
+    },
+    "FOX-01": {
+      "id": "FOX-01",
+      "name": "Fox identity approval turnaround",
+      "group": "FOX",
+      "sourcePath": "assets/production/fox/fox_01.png",
+      "sha256": "272af860542fe8a75ac7205c9406b6c4401ac8f050c9bfaa5b4b47e95b93a351",
+      "sourcePx": [
+        1024,
+        768
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "APPROVED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": false,
+      "reason": "Purple-scarfed Fox action candidate, compare with the complete character family.",
+      "finalHumanApproval": false
+    },
+    "FOX-02": {
+      "id": "FOX-02",
+      "name": "Fox idle flank",
+      "group": "FOX",
+      "sourcePath": "assets/production/fox/fox_02.png",
+      "sha256": "7d9d0d31c64f85499bf9f0fe7cec73c496bf67992a0b22d849a053a82189af74",
+      "sourcePx": [
+        240,
+        240
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 4.5,
+      "verdict": "preview",
+      "previewWired": true,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Coherent bipedal Fox wearing purple scarf, crisp idle pose.",
+      "finalHumanApproval": false
+    },
+    "FOX-03": {
+      "id": "FOX-03",
+      "name": "Fox run contact",
+      "group": "FOX",
+      "sourcePath": "assets/production/fox/fox_03.png",
+      "sha256": "1d37189a87768988e71c34179356f4f0be7d73b1763489961f799d93232a7ce2",
+      "sourcePx": [
+        240,
+        240
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 4.5,
+      "verdict": "preview",
+      "previewWired": true,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Readable sneaky fox running posture, separate from Cinnamon's ringed-tailed silhouette.",
+      "finalHumanApproval": false
+    },
+    "FOX-04": {
+      "id": "FOX-04",
+      "name": "Fox run airborne",
+      "group": "FOX",
+      "sourcePath": "assets/production/fox/fox_04.png",
+      "sha256": "93be56f9646eb20d82689fac17dbd8d428ea3626df23dc756ff13a491cb7359c",
+      "sourcePx": [
+        240,
+        240
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Purple-scarfed Fox action candidate, compare with the complete character family.",
+      "finalHumanApproval": false
+    },
+    "FOX-05": {
+      "id": "FOX-05",
+      "name": "Fox charge tell",
+      "group": "FOX",
+      "sourcePath": "assets/production/fox/fox_05.png",
+      "sha256": "9b7b6b1dac7ab72cd2b37fd0c46bbf4304630e10f4156da6ed0cfdf5fa28430f",
+      "sourcePx": [
+        240,
+        240
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 4.5,
+      "verdict": "preview",
+      "previewWired": true,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Forward-loaded lunge windup communicates imminent danger.",
+      "finalHumanApproval": false
+    },
+    "FOX-06": {
+      "id": "FOX-06",
+      "name": "Fox charge lunge",
+      "group": "FOX",
+      "sourcePath": "assets/production/fox/fox_06.png",
+      "sha256": "e6af75430829d9a24f8bffc181a345116199ca06396a3a3e2d01347e0d3c1511",
+      "sourcePx": [
+        240,
+        240
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 4.5,
+      "verdict": "preview",
+      "previewWired": true,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Clean sprinting charge action, same costume and silhouette as idle.",
+      "finalHumanApproval": false
+    },
+    "FOX-07": {
+      "id": "FOX-07",
+      "name": "Fox volley ready",
+      "group": "FOX",
+      "sourcePath": "assets/production/fox/fox_07.png",
+      "sha256": "147e994e44286fc67150d90f49fc9c98e43611ad802ef22f869ba1e889583fd5",
+      "sourcePx": [
+        240,
+        240
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Purple-scarfed Fox action candidate, compare with the complete character family.",
+      "finalHumanApproval": false
+    },
+    "FOX-08": {
+      "id": "FOX-08",
+      "name": "Fox volley release",
+      "group": "FOX",
+      "sourcePath": "assets/production/fox/fox_08.png",
+      "sha256": "576e609ccd70dc0c1c23c100508b7c62ace41b7bbaffafbed3d8763732a01dfd",
+      "sourcePx": [
+        240,
+        240
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 4.5,
+      "verdict": "preview",
+      "previewWired": true,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Clear volley-release pose; not confused with incoming charge.",
+      "finalHumanApproval": false
+    },
+    "FOX-09": {
+      "id": "FOX-09",
+      "name": "Fox stun frame A",
+      "group": "FOX",
+      "sourcePath": "assets/production/fox/fox_09.png",
+      "sha256": "a04fa19d68259a92f5a98df2c5740570f0ed7fb6b6d427c81b0fb812ad2d145b",
+      "sourcePx": [
+        240,
+        240
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 4.5,
+      "verdict": "preview",
+      "previewWired": true,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Collapsed stun pose communicates hit window without UI text alone.",
+      "finalHumanApproval": false
+    },
+    "FOX-10": {
+      "id": "FOX-10",
+      "name": "Fox stun frame B",
+      "group": "FOX",
+      "sourcePath": "assets/production/fox/fox_10.png",
+      "sha256": "1c803b6f5e501ff2ed70a22449bc1aad6bed13b8732c09d6b3c6b3c335fff1e2",
+      "sourcePx": [
+        240,
+        240
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Purple-scarfed Fox action candidate, compare with the complete character family.",
+      "finalHumanApproval": false
+    },
+    "FOX-11": {
+      "id": "FOX-11",
+      "name": "Fox hurt recoil",
+      "group": "FOX",
+      "sourcePath": "assets/production/fox/fox_11.png",
+      "sha256": "eac444cae0ca3be8b8d97804f44571c2db4e4bb52c8b829f38e49a262bba87cb",
+      "sourcePx": [
+        240,
+        240
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 4.5,
+      "verdict": "preview",
+      "previewWired": true,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Explicit hurt recoil action, visually not a telegraphed attack.",
+      "finalHumanApproval": false
+    },
+    "FOX-12": {
+      "id": "FOX-12",
+      "name": "Fox defeated",
+      "group": "FOX",
+      "sourcePath": "assets/production/fox/fox_12.png",
+      "sha256": "ddb651a74923a9c093c24d32b6d37ebbcbd2a54f1fdd2bc4f9f4a567c279f9b4",
+      "sourcePx": [
+        240,
+        240
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 4.5,
+      "verdict": "preview",
+      "previewWired": true,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Distinct defeated Fox pose, readable for victory moment.",
+      "finalHumanApproval": false
+    },
+    "FOX-13": {
+      "id": "FOX-13",
+      "name": "Fox taunt portrait",
+      "group": "FOX",
+      "sourcePath": "assets/production/fox/fox_13.png",
+      "sha256": "737cd08e82035708526493c04c86f4a0d936bc7ff2b37ee68abfdc4acbf5ffee",
+      "sourcePx": [
+        256,
+        256
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Purple-scarfed Fox action candidate, compare with the complete character family.",
+      "finalHumanApproval": false
+    },
+    "FOX-14": {
+      "id": "FOX-14",
+      "name": "Fox cardboard decoy",
+      "group": "FOX",
+      "sourcePath": "assets/production/fox/fox_14.png",
+      "sha256": "d49c16864b5b7a2b0ac7cea382e989f5fdf3a541bc7a4d337784b26644a8a43c",
+      "sourcePx": [
+        256,
+        256
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Purple-scarfed Fox action candidate, compare with the complete character family.",
+      "finalHumanApproval": false
+    },
+    "FOX-15": {
+      "id": "FOX-15",
+      "name": "Fox getaway silhouette",
+      "group": "FOX",
+      "sourcePath": "assets/production/fox/fox_15.png",
+      "sha256": "68aac5a84e280fe226eb65176e6de2ec10c2fdbd1bfc4f4c1d640f57977035a8",
+      "sourcePx": [
+        192,
+        128
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Purple-scarfed Fox action candidate, compare with the complete character family.",
+      "finalHumanApproval": false
+    },
+    "FOX-16": {
+      "id": "FOX-16",
+      "name": "Fox happy truce",
+      "group": "FOX",
+      "sourcePath": "assets/production/fox/fox_16.png",
+      "sha256": "329e80208d5adee418d8713a23d9f7469d6a79548ff0b4055a3faaef28e0ac9f",
+      "sourcePx": [
+        240,
+        240
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Purple-scarfed Fox action candidate, compare with the complete character family.",
+      "finalHumanApproval": false
+    },
+    "FX-01": {
+      "id": "FX-01",
+      "name": "Fox thief holding shake",
+      "group": "FX",
+      "sourcePath": "assets/level1/fox/fx_01_fox_thief_holding_shake.png",
+      "sha256": "4813130fc2b91ef7472b95ecd48b22477bb9fa4172aea066062b7b37197cfe77",
+      "sourcePx": [
+        96,
+        96
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 2.1,
+      "verdict": "revise",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Older mini-fox does not convincingly show stolen cup and lacks accepted purple scarf.",
+      "finalHumanApproval": false
+    },
+    "FX-02": {
+      "id": "FX-02",
+      "name": "Fox escape sprint",
+      "group": "FX",
+      "sourcePath": "assets/level1/fox/fx_02_fox_escape_sprint.png",
+      "sha256": "ff479ef669385399fb8cc2de3eb4639be8f6bd8762381119dbaa8575d325f923",
+      "sourcePx": [
+        96,
+        96
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 2.1,
+      "verdict": "revise",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Earlier Fox depiction lacks purple scarf and differs from consistent bipedal boss.",
+      "finalHumanApproval": false
+    },
+    "FX-03": {
+      "id": "FX-03",
+      "name": "Fox mocking taunt",
+      "group": "FX",
+      "sourcePath": "assets/level1/fox/fx_03_fox_mocking_taunt.png",
+      "sha256": "66ac01e931192bbb70b8a1a8245404f3357f26e1f7136afc9d67303e3752b479",
+      "sourcePx": [
+        96,
+        96
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 2.1,
+      "verdict": "revise",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Earlier Fox depiction lacks scarf and continuity; do not splice into current boss.",
+      "finalHumanApproval": false
+    },
+    "FX-04": {
+      "id": "FX-04",
+      "name": "Cardboard fox decoy",
+      "group": "FX",
+      "sourcePath": "assets/level1/fox/fx_04_cardboard_fox_decoy.png",
+      "sha256": "3e879de706074536c156938af0bf3e6e3751d906e88e6afce7456714d76d5c26",
+      "sourcePx": [
+        96,
+        112
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 2.1,
+      "verdict": "revise",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Cardboard decoy stylistically diverges from the approved-direction boss action family.",
+      "finalHumanApproval": false
+    },
+    "MC-01": {
+      "id": "MC-01",
+      "name": "Banner bridge retracted",
+      "group": "MC",
+      "sourcePath": "assets/level1/mechanics/mc_01_banner_bridge_retracted.png",
+      "sha256": "8425798691407f039094a5403c1b200437c71b8e2625d7ecd03205f7acb3f32d",
+      "sourcePx": [
+        256,
+        64
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Mechanism variant; stage and puzzle state remain code-owned.",
+      "finalHumanApproval": false
+    },
+    "MC-02": {
+      "id": "MC-02",
+      "name": "Banner bridge extended",
+      "group": "MC",
+      "sourcePath": "assets/level1/mechanics/mc_02_banner_bridge_extended.png",
+      "sha256": "9f385136d3b6c737e29cec0b80a93018d5c04451c5944b72b2cd672cb51d19ed",
+      "sourcePx": [
+        256,
+        64
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Mechanism variant; stage and puzzle state remain code-owned.",
+      "finalHumanApproval": false
+    },
+    "MC-03": {
+      "id": "MC-03",
+      "name": "Gold lift tucked",
+      "group": "MC",
+      "sourcePath": "assets/level1/mechanics/mc_03_gold_lift_tucked.png",
+      "sha256": "ded7e0a77a5169923a96045945ba8d6cbcd23aaf446c848970eedc74a99f36bf",
+      "sourcePx": [
+        128,
+        64
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Mechanism variant; stage and puzzle state remain code-owned.",
+      "finalHumanApproval": false
+    },
+    "MC-04": {
+      "id": "MC-04",
+      "name": "Gold lift raised",
+      "group": "MC",
+      "sourcePath": "assets/level1/mechanics/mc_04_gold_lift_raised.png",
+      "sha256": "a3b41e9973bdab0c9714f0de1c7916c3e8b3851a936be5dd9b391a192207c35e",
+      "sourcePx": [
+        128,
+        64
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Mechanism variant; stage and puzzle state remain code-owned.",
+      "finalHumanApproval": false
+    },
+    "MC-05": {
+      "id": "MC-05",
+      "name": "Drum Beacon quiet",
+      "group": "MC",
+      "sourcePath": "assets/level1/mechanics/mc_05_drum_beacon_quiet.png",
+      "sha256": "aa1d659a50bb21fefb7f9e15173021f53ad61c71f65259a39c52fbd0f7cd753e",
+      "sourcePx": [
+        96,
+        128
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 4.5,
+      "verdict": "preview",
+      "previewWired": true,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Readable idle drum beacon, Notre Dame colors.",
+      "finalHumanApproval": false
+    },
+    "MC-06": {
+      "id": "MC-06",
+      "name": "Drum Beacon active",
+      "group": "MC",
+      "sourcePath": "assets/level1/mechanics/mc_06_drum_beacon_active.png",
+      "sha256": "19c711525bc5669f5874def632448b7fdf78db6d45306027219ac83bf5bd3b98",
+      "sourcePx": [
+        96,
+        128
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 4.5,
+      "verdict": "preview",
+      "previewWired": true,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Lit activation counterpart, same beacon base.",
+      "finalHumanApproval": false
+    },
+    "MC-07": {
+      "id": "MC-07",
+      "name": "Checkpoint unlit",
+      "group": "MC",
+      "sourcePath": "assets/level1/mechanics/mc_07_checkpoint_unlit.png",
+      "sha256": "83b7cc6c214c8e026265933d42d4e1cbe6eb645cb81abf036be3d3960b3e35ec",
+      "sourcePx": [
+        64,
+        128
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 4.5,
+      "verdict": "preview",
+      "previewWired": true,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Unactivated checkpoint flag with blue/gold silhouette.",
+      "finalHumanApproval": false
+    },
+    "MC-08": {
+      "id": "MC-08",
+      "name": "Checkpoint lit",
+      "group": "MC",
+      "sourcePath": "assets/level1/mechanics/mc_08_checkpoint_lit.png",
+      "sha256": "ffe3f95d4c4cd924ed315e2c23e85c04ad2763d113cb5d5113acd40bf484a5ee",
+      "sourcePx": [
+        64,
+        128
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 4.5,
+      "verdict": "preview",
+      "previewWired": true,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Activated checkpoint's glowing counterpart is distinct.",
+      "finalHumanApproval": false
+    },
+    "MC-09": {
+      "id": "MC-09",
+      "name": "Final route flag",
+      "group": "MC",
+      "sourcePath": "assets/level1/mechanics/mc_09_final_route_flag.png",
+      "sha256": "b98ecbd907d8c477c94fd41b832053826d77f44ec73390b3fc5590b5264a72b5",
+      "sourcePx": [
+        64,
+        128
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 2.1,
+      "verdict": "revise",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Final route flag is cropped or too small to read as an objective.",
+      "finalHumanApproval": false
+    },
+    "PK-01": {
+      "id": "PK-01",
+      "name": "Shake cup flip frame A",
+      "group": "PK",
+      "sourcePath": "assets/production/pickups/pk_01.png",
+      "sha256": "4b3fd3c1cf39a85bb5d2e9f9ef71e6747017804aec9a426042d502bc198af7a6",
+      "sourcePx": [
+        64,
+        64
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Pickup/bonus alternate, not automatically a separate collectible mechanic.",
+      "finalHumanApproval": false
+    },
+    "PK-02": {
+      "id": "PK-02",
+      "name": "Shake cup flip frame B",
+      "group": "PK",
+      "sourcePath": "assets/production/pickups/pk_02.png",
+      "sha256": "d090be4dc0483b69073be32e13a6e05b555e7ad32e22f77920d698a7160dd7c0",
+      "sourcePx": [
+        64,
+        64
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Pickup/bonus alternate, not automatically a separate collectible mechanic.",
+      "finalHumanApproval": false
+    },
+    "PK-03": {
+      "id": "PK-03",
+      "name": "Shake cup flip frame C",
+      "group": "PK",
+      "sourcePath": "assets/production/pickups/pk_03.png",
+      "sha256": "f87f81e9f8e56f518d3996dd520ce62d7ceb13b44bfc597582c75030ac9407bb",
+      "sourcePx": [
+        64,
+        64
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 2.1,
+      "verdict": "revise",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Third rotation is nearly front-facing again; doesn't read as unique turn.",
+      "finalHumanApproval": false
+    },
+    "PK-04": {
+      "id": "PK-04",
+      "name": "Golden shake secret pulse",
+      "group": "PK",
+      "sourcePath": "assets/production/pickups/pk_04.png",
+      "sha256": "c244906ad50ca020a4f8c5f86fbd8a465efb211b2002de943aea8d5a67cc030c",
+      "sourcePx": [
+        64,
+        64
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Pickup/bonus alternate, not automatically a separate collectible mechanic.",
+      "finalHumanApproval": false
+    },
+    "PK-05": {
+      "id": "PK-05",
+      "name": "Heart pickup",
+      "group": "PK",
+      "sourcePath": "assets/production/pickups/pk_05.png",
+      "sha256": "aa87a7a91d9092e7cc1fa2833904c85b81ee77a7037e2c05b1ac4f30565e6a91",
+      "sourcePx": [
+        64,
+        64
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Pickup/bonus alternate, not automatically a separate collectible mechanic.",
+      "finalHumanApproval": false
+    },
+    "PK-06": {
+      "id": "PK-06",
+      "name": "Speed paw booster",
+      "group": "PK",
+      "sourcePath": "assets/production/pickups/pk_06.png",
+      "sha256": "d7189e4fedb125da7ab6b6b0f726ed665027705b06f2cd8b6b280dc81ca1e2de",
+      "sourcePx": [
+        64,
+        64
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Pickup/bonus alternate, not automatically a separate collectible mechanic.",
+      "finalHumanApproval": false
+    },
+    "PR-01": {
+      "id": "PR-01",
+      "name": "Shamrock Shake stand",
+      "group": "PR",
+      "sourcePath": "assets/level1/props/pr_01_shamrock_shake_stand.png",
+      "sha256": "2b8d147f02121d1beeaed3a6172275283dd36ca22db67bfa390f559121f970ff",
+      "sourcePx": [
+        256,
+        192
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 2.1,
+      "verdict": "revise",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Background-like checkerboard artifact appears baked into the stall.",
+      "finalHumanApproval": false
+    },
+    "PR-02": {
+      "id": "PR-02",
+      "name": "Folded menu board",
+      "group": "PR",
+      "sourcePath": "assets/level1/props/pr_02_folded_menu_board.png",
+      "sha256": "e98137cb5306a30582cb298f65c580d86b79d4ffd6207931f11d6c0b3bc913be",
+      "sourcePx": [
+        96,
+        128
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Non-colliding campus prop; inspect crop and actual context.",
+      "finalHumanApproval": false
+    },
+    "PR-03": {
+      "id": "PR-03",
+      "name": "Campus bench",
+      "group": "PR",
+      "sourcePath": "assets/level1/props/pr_03_campus_bench.png",
+      "sha256": "28ec99b567276dfbe3c2bba1a3a78932c02e1e04cd45638ed84d9cd8da2df1b1",
+      "sourcePx": [
+        128,
+        80
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 4.5,
+      "verdict": "preview",
+      "previewWired": true,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Solid campus bench adds life without promising a walkable platform.",
+      "finalHumanApproval": false
+    },
+    "PR-04": {
+      "id": "PR-04",
+      "name": "Campus lamppost",
+      "group": "PR",
+      "sourcePath": "assets/level1/props/pr_04_campus_lamppost.png",
+      "sha256": "3e192519822a6312347eadf38c933270b539e55a45b14f74eea6525b1ae8bdcd",
+      "sourcePx": [
+        96,
+        256
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Non-colliding campus prop; inspect crop and actual context.",
+      "finalHumanApproval": false
+    },
+    "PR-05": {
+      "id": "PR-05",
+      "name": "Mature quad tree",
+      "group": "PR",
+      "sourcePath": "assets/level1/props/pr_05_mature_quad_tree.png",
+      "sha256": "82e418bccc923e1cca22e0d98b9af93d091a4bf3c15e00b79fdda1bfbba49ac4",
+      "sourcePx": [
+        192,
+        256
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Non-colliding campus prop; inspect crop and actual context.",
+      "finalHumanApproval": false
+    },
+    "PR-06": {
+      "id": "PR-06",
+      "name": "Low hedge",
+      "group": "PR",
+      "sourcePath": "assets/level1/props/pr_06_low_hedge.png",
+      "sha256": "e6733f442cbf8f5c4689442eabacf00709544075858c8b8a5e82c2f0a22164ca",
+      "sourcePx": [
+        128,
+        64
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 4.5,
+      "verdict": "preview",
+      "previewWired": true,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Foliage/hedge contrast is suitable for background enrichment.",
+      "finalHumanApproval": false
+    },
+    "PR-07": {
+      "id": "PR-07",
+      "name": "Campus directional sign",
+      "group": "PR",
+      "sourcePath": "assets/level1/props/pr_07_campus_directional_sign.png",
+      "sha256": "d84c91d52cb5557bd5fab32f3f571c653956a106a72ab30fe5318561ebbdf41c",
+      "sourcePx": [
+        96,
+        128
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Non-colliding campus prop; inspect crop and actual context.",
+      "finalHumanApproval": false
+    },
+    "PR-08": {
+      "id": "PR-08",
+      "name": "Blue-gold pennant pole",
+      "group": "PR",
+      "sourcePath": "assets/level1/props/pr_08_blue_gold_pennant_pole.png",
+      "sha256": "f77eb5fab16cb199984967eb2003b109c5993d967559fc2310ec55157afaee3d",
+      "sourcePx": [
+        64,
+        192
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 2.1,
+      "verdict": "revise",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Supposed pennant pole is not legible at its delivered dimensions.",
+      "finalHumanApproval": false
+    },
+    "PR-09": {
+      "id": "PR-09",
+      "name": "Parade utility cart",
+      "group": "PR",
+      "sourcePath": "assets/level1/props/pr_09_parade_utility_cart.png",
+      "sha256": "caebbf41944e1bd7d0e6d1bda9fa4bf15b973dbc4bbf6298a8009751f14f17fb",
+      "sourcePx": [
+        192,
+        112
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 4.5,
+      "verdict": "preview",
+      "previewWired": true,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Recognizable blue-gold utility parade cart supports a celebratory Quad.",
+      "finalHumanApproval": false
+    },
+    "PR-10": {
+      "id": "PR-10",
+      "name": "Fallen campus sign",
+      "group": "PR",
+      "sourcePath": "assets/level1/props/pr_10_fallen_campus_sign.png",
+      "sha256": "a0860c2b7472b671d23071c3f928e1eb06612cf88d6ee471e3874e87f84edf1d",
+      "sourcePx": [
+        128,
+        64
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Non-colliding campus prop; inspect crop and actual context.",
+      "finalHumanApproval": false
+    },
+    "PR-11": {
+      "id": "PR-11",
+      "name": "Concession cooler",
+      "group": "PR",
+      "sourcePath": "assets/level1/props/pr_11_concession_cooler.png",
+      "sha256": "a70ec62cff917445da519dfa71475f6b4da8908c9dabd83441e45a0933f5ab25",
+      "sourcePx": [
+        96,
+        80
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Non-colliding campus prop; inspect crop and actual context.",
+      "finalHumanApproval": false
+    },
+    "PR-12": {
+      "id": "PR-12",
+      "name": "Festival pennant string",
+      "group": "PR",
+      "sourcePath": "assets/level1/props/pr_12_festival_pennant_string.png",
+      "sha256": "79716bae7ca18c69895f9054042ad0c4a365ba4599306020f0bbe1ee2751264f",
+      "sourcePx": [
+        256,
+        64
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 4.5,
+      "verdict": "preview",
+      "previewWired": true,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Blue/gold string pennants add a Notre Dame festival motif.",
+      "finalHumanApproval": false
+    },
+    "PR-13": {
+      "id": "PR-13",
+      "name": "Stone planter",
+      "group": "PR",
+      "sourcePath": "assets/level1/props/pr_13_stone_planter.png",
+      "sha256": "a444e020bf31075d298899d25bf6ea267b155ac4189cb0a38b8ee03d26f0abc9",
+      "sourcePx": [
+        96,
+        96
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Non-colliding campus prop; inspect crop and actual context.",
+      "finalHumanApproval": false
+    },
+    "PR-14": {
+      "id": "PR-14",
+      "name": "Collapsible rope barrier",
+      "group": "PR",
+      "sourcePath": "assets/level1/props/pr_14_collapsible_rope_barrier.png",
+      "sha256": "389cca0dbe2098fb81e3295320518e837ea7b993d2334c198aa1702b0639db04",
+      "sourcePx": [
+        128,
+        80
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Non-colliding campus prop; inspect crop and actual context.",
+      "finalHumanApproval": false
+    },
+    "TL-01": {
+      "id": "TL-01",
+      "name": "Grass top tile",
+      "group": "TL",
+      "sourcePath": "assets/level1/tiles/tl_01_grass_top_tile.png",
+      "sha256": "8d3f7b2c068bca63e56c1fc71216771a02f04c2da4821da941534ca8954ba45c",
+      "sourcePx": [
+        32,
+        32
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 1.4,
+      "verdict": "blocked",
+      "previewWired": false,
+      "structuralIssues": [
+        "TRANSPARENCY_MISSING"
+      ],
+      "cropRisk": true,
+      "reason": "DO NOT ACTIVATE: transparency required by the original contract but none is present. Tiny tile requires crisp 32px readability, alpha and seam fit.",
+      "finalHumanApproval": false
+    },
+    "TL-02": {
+      "id": "TL-02",
+      "name": "Grass fill tile",
+      "group": "TL",
+      "sourcePath": "assets/level1/tiles/tl_02_grass_fill_tile.png",
+      "sha256": "7f83cc993b9d9623f832f0a88202863bcb65bcd5cc4669fa9c99e557c946279c",
+      "sourcePx": [
+        32,
+        32
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 1.4,
+      "verdict": "blocked",
+      "previewWired": false,
+      "structuralIssues": [
+        "TRANSPARENCY_MISSING"
+      ],
+      "cropRisk": true,
+      "reason": "DO NOT ACTIVATE: transparency required by the original contract but none is present. Tiny tile requires crisp 32px readability, alpha and seam fit.",
+      "finalHumanApproval": false
+    },
+    "TL-03": {
+      "id": "TL-03",
+      "name": "Stone path top tile",
+      "group": "TL",
+      "sourcePath": "assets/level1/tiles/tl_03_stone_path_top_tile.png",
+      "sha256": "3565faf0795189035ed260a8c51bc0f81a2152a510e2c16578917f067f21a89d",
+      "sourcePx": [
+        32,
+        32
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 1.4,
+      "verdict": "blocked",
+      "previewWired": false,
+      "structuralIssues": [
+        "TRANSPARENCY_MISSING"
+      ],
+      "cropRisk": true,
+      "reason": "DO NOT ACTIVATE: transparency required by the original contract but none is present. Tiny tile requires crisp 32px readability, alpha and seam fit.",
+      "finalHumanApproval": false
+    },
+    "TL-04": {
+      "id": "TL-04",
+      "name": "Stone path fill tile",
+      "group": "TL",
+      "sourcePath": "assets/level1/tiles/tl_04_stone_path_fill_tile.png",
+      "sha256": "06c1d6e3c3ca0b11371e70f137e5c290c2044ec00fe8a26a517fab2168e2f971",
+      "sourcePx": [
+        32,
+        32
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 1.4,
+      "verdict": "blocked",
+      "previewWired": false,
+      "structuralIssues": [
+        "TRANSPARENCY_MISSING"
+      ],
+      "cropRisk": true,
+      "reason": "DO NOT ACTIVATE: transparency required by the original contract but none is present. Tiny tile requires crisp 32px readability, alpha and seam fit.",
+      "finalHumanApproval": false
+    },
+    "TL-05": {
+      "id": "TL-05",
+      "name": "Stone ledge center tile",
+      "group": "TL",
+      "sourcePath": "assets/level1/tiles/tl_05_stone_ledge_center_tile.png",
+      "sha256": "e9e42f34da6d01ce59dab09525e8332e4267e9cf89bc62d5aef280184f06d5ee",
+      "sourcePx": [
+        32,
+        32
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 1.4,
+      "verdict": "blocked",
+      "previewWired": false,
+      "structuralIssues": [
+        "TRANSPARENCY_MISSING"
+      ],
+      "cropRisk": true,
+      "reason": "DO NOT ACTIVATE: transparency required by the original contract but none is present. Tiny tile requires crisp 32px readability, alpha and seam fit.",
+      "finalHumanApproval": false
+    },
+    "TL-06": {
+      "id": "TL-06",
+      "name": "Stone ledge left cap",
+      "group": "TL",
+      "sourcePath": "assets/level1/tiles/tl_06_stone_ledge_left_cap.png",
+      "sha256": "c4eb3332b1c2112504090bafeca009ab1ecea79ab49ce5657edc94eec704b54a",
+      "sourcePx": [
+        32,
+        32
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Tiny tile requires crisp 32px readability, alpha and seam fit.",
+      "finalHumanApproval": false
+    },
+    "TL-07": {
+      "id": "TL-07",
+      "name": "Stone ledge right cap",
+      "group": "TL",
+      "sourcePath": "assets/level1/tiles/tl_07_stone_ledge_right_cap.png",
+      "sha256": "a450b83d6a60fb89675b66837655cc4c1e850114f7d8977ecd3a18109c2cd033",
+      "sourcePx": [
+        32,
+        32
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Tiny tile requires crisp 32px readability, alpha and seam fit.",
+      "finalHumanApproval": false
+    },
+    "TL-08": {
+      "id": "TL-08",
+      "name": "Stone step tile",
+      "group": "TL",
+      "sourcePath": "assets/level1/tiles/tl_08_stone_step_tile.png",
+      "sha256": "eb5405bf46b64d3144c35472505515d55d633139d4527222318607959ba2fed2",
+      "sourcePx": [
+        32,
+        32
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 1.4,
+      "verdict": "blocked",
+      "previewWired": false,
+      "structuralIssues": [
+        "TRANSPARENCY_MISSING"
+      ],
+      "cropRisk": true,
+      "reason": "DO NOT ACTIVATE: transparency required by the original contract but none is present. Tiny tile requires crisp 32px readability, alpha and seam fit.",
+      "finalHumanApproval": false
+    },
+    "TL-09": {
+      "id": "TL-09",
+      "name": "Brick fill tile",
+      "group": "TL",
+      "sourcePath": "assets/level1/tiles/tl_09_brick_fill_tile.png",
+      "sha256": "b7e6b685f832b2fb562d132f29be74b237d925914f11dc2e459760e183cac36f",
+      "sourcePx": [
+        32,
+        32
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 1.4,
+      "verdict": "blocked",
+      "previewWired": false,
+      "structuralIssues": [
+        "TRANSPARENCY_MISSING"
+      ],
+      "cropRisk": true,
+      "reason": "DO NOT ACTIVATE: transparency required by the original contract but none is present. Tiny tile requires crisp 32px readability, alpha and seam fit.",
+      "finalHumanApproval": false
+    },
+    "TL-10": {
+      "id": "TL-10",
+      "name": "Banner mount tile",
+      "group": "TL",
+      "sourcePath": "assets/level1/tiles/tl_10_banner_mount_tile.png",
+      "sha256": "3be8cf6d2f0a78d876a1abef985643f16604d7340eaf773af39565311fdeefcf",
+      "sourcePx": [
+        32,
+        32
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 1.4,
+      "verdict": "blocked",
+      "previewWired": false,
+      "structuralIssues": [
+        "TRANSPARENCY_MISSING"
+      ],
+      "cropRisk": true,
+      "reason": "DO NOT ACTIVATE: transparency required by the original contract but none is present. Tiny tile requires crisp 32px readability, alpha and seam fit.",
+      "finalHumanApproval": false
+    },
+    "UI-01": {
+      "id": "UI-01",
+      "name": "Filled heart icon",
+      "group": "UI",
+      "sourcePath": "assets/level1/ui/ui_01_filled_heart_icon.png",
+      "sha256": "8ed3b3997defb262ecf2f423f161596e796f6eb277380f4fdace9e2ba733308b",
+      "sourcePx": [
+        32,
+        32
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "UI alternate; verify semantics, legibility and touch target size.",
+      "finalHumanApproval": false
+    },
+    "UI-02": {
+      "id": "UI-02",
+      "name": "Empty heart icon",
+      "group": "UI",
+      "sourcePath": "assets/level1/ui/ui_02_empty_heart_icon.png",
+      "sha256": "ba744633880fb5d179b467b2ddbd2022c0ba0298a6df714b6b23a0710d597efc",
+      "sourcePx": [
+        32,
+        32
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "UI alternate; verify semantics, legibility and touch target size.",
+      "finalHumanApproval": false
+    },
+    "UI-03": {
+      "id": "UI-03",
+      "name": "Token HUD icon",
+      "group": "UI",
+      "sourcePath": "assets/level1/ui/ui_03_token_hud_icon.png",
+      "sha256": "6e6f22b8059777caaf67f0c0bf076195866a8505851c5b4057a9ab88465324df",
+      "sourcePx": [
+        32,
+        32
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "UI alternate; verify semantics, legibility and touch target size.",
+      "finalHumanApproval": false
+    },
+    "UI-04": {
+      "id": "UI-04",
+      "name": "Jump button glyph",
+      "group": "UI",
+      "sourcePath": "assets/level1/ui/ui_04_jump_button_glyph.png",
+      "sha256": "9e2f29b6652f430a28bb35c4e4aa1a01f6d30339f4f3ef7c91e87e8f05e6df1c",
+      "sourcePx": [
+        48,
+        48
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "UI alternate; verify semantics, legibility and touch target size.",
+      "finalHumanApproval": false
+    },
+    "UI-05": {
+      "id": "UI-05",
+      "name": "Tail-swish glyph",
+      "group": "UI",
+      "sourcePath": "assets/level1/ui/ui_05_tail_swish_glyph.png",
+      "sha256": "a0c1849b37e81e6a69e058983734eba970df2c00c9e0f43924505b7b37a40935",
+      "sourcePx": [
+        48,
+        48
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "UI alternate; verify semantics, legibility and touch target size.",
+      "finalHumanApproval": false
+    },
+    "UI-06": {
+      "id": "UI-06",
+      "name": "Move arrows glyph",
+      "group": "UI",
+      "sourcePath": "assets/level1/ui/ui_06_move_arrows_glyph.png",
+      "sha256": "db649c78e7d665370fd6cd1a98227a960f6c0eae4f783995f429cd514cb323de",
+      "sourcePx": [
+        48,
+        48
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "UI alternate; verify semantics, legibility and touch target size.",
+      "finalHumanApproval": false
+    },
+    "UI-07": {
+      "id": "UI-07",
+      "name": "Pulse icon",
+      "group": "UI",
+      "sourcePath": "assets/level1/ui/ui_07_pulse_icon.png",
+      "sha256": "801b90be87e43fc0e30f3b7728e642cc8559e516184f5a6f3216943c0657b43b",
+      "sourcePx": [
+        32,
+        32
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "UI alternate; verify semantics, legibility and touch target size.",
+      "finalHumanApproval": false
+    },
+    "UI-08": {
+      "id": "UI-08",
+      "name": "Fox dialogue portrait",
+      "group": "UI",
+      "sourcePath": "assets/level1/ui/ui_08_fox_dialogue_portrait.png",
+      "sha256": "ec50e33b1d02a34bc5d15b8e1108a28613cdfe05fecc30d6b812cc80dfb6a2f6",
+      "sourcePx": [
+        128,
+        128
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "UI alternate; verify semantics, legibility and touch target size.",
+      "finalHumanApproval": false
+    },
+    "UI-09": {
+      "id": "UI-09",
+      "name": "Level clear medal",
+      "group": "UI",
+      "sourcePath": "assets/level1/ui/ui_09_level_clear_medal.png",
+      "sha256": "2b859f9354f79cb2a52671721ee05dfde6e1996bc3942555c2ea5b527aec990e",
+      "sourcePx": [
+        64,
+        64
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "UI alternate; verify semantics, legibility and touch target size.",
+      "finalHumanApproval": false
+    },
+    "UX-01": {
+      "id": "UX-01",
+      "name": "Main title backdrop",
+      "group": "UIX",
+      "sourcePath": "assets/production/ui/ux_01.png",
+      "sha256": "c7a1845a7b18874333e061863f144dfd4face31dee0bea2aeecc0bf096729240",
+      "sourcePx": [
+        960,
+        540
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 1.4,
+      "verdict": "blocked",
+      "previewWired": false,
+      "structuralIssues": [
+        "TRANSPARENCY_MISSING"
+      ],
+      "cropRisk": true,
+      "reason": "DO NOT ACTIVATE: transparency required by the original contract but none is present. Frame/icon candidate; preserve keyboard focus and original UI labels.",
+      "finalHumanApproval": false
+    },
+    "UX-02": {
+      "id": "UX-02",
+      "name": "Title panel border",
+      "group": "UIX",
+      "sourcePath": "assets/production/ui/ux_02.png",
+      "sha256": "f3c4f7b80877ed64b2f6c147a732fdc198cdeca0bf73c7dae7b287782c6d5666",
+      "sourcePx": [
+        480,
+        256
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Frame/icon candidate; preserve keyboard focus and original UI labels.",
+      "finalHumanApproval": false
+    },
+    "UX-03": {
+      "id": "UX-03",
+      "name": "Pause window frame",
+      "group": "UIX",
+      "sourcePath": "assets/production/ui/ux_03.png",
+      "sha256": "a79e896f0125cf3088569289f836ea2a3c0b6256b837842c1190902b4120e50f",
+      "sourcePx": [
+        512,
+        384
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Frame/icon candidate; preserve keyboard focus and original UI labels.",
+      "finalHumanApproval": false
+    },
+    "UX-04": {
+      "id": "UX-04",
+      "name": "Death/retry panel frame",
+      "group": "UIX",
+      "sourcePath": "assets/production/ui/ux_04.png",
+      "sha256": "e3b2ed2fde09565c2ec8138e639dbc972861752df9d49f9847f8fba504564876",
+      "sourcePx": [
+        512,
+        384
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Frame/icon candidate; preserve keyboard focus and original UI labels.",
+      "finalHumanApproval": false
+    },
+    "UX-05": {
+      "id": "UX-05",
+      "name": "Victory UI frame",
+      "group": "UIX",
+      "sourcePath": "assets/production/ui/ux_05.png",
+      "sha256": "6d26afedf3e31769b5f103acbb431e5c34f4590210fe14689925a6be0636043f",
+      "sourcePx": [
+        640,
+        384
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Frame/icon candidate; preserve keyboard focus and original UI labels.",
+      "finalHumanApproval": false
+    },
+    "UX-06": {
+      "id": "UX-06",
+      "name": "Pause button icon",
+      "group": "UIX",
+      "sourcePath": "assets/production/ui/ux_06.png",
+      "sha256": "40525e1c13b6ccb3c615311e269807b6788c24ef8d870a85c885780a080ed214",
+      "sourcePx": [
+        64,
+        64
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 2.1,
+      "verdict": "revise",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Artwork labeled pause button reads as opposing left/right arrows instead of Pause.",
+      "finalHumanApproval": false
+    },
+    "UX-07": {
+      "id": "UX-07",
+      "name": "Touch dash glyph",
+      "group": "UIX",
+      "sourcePath": "assets/production/ui/ux_07.png",
+      "sha256": "697ec0d378bb6bda2a6d0e7ae9b25d4d012841c2bae4cba210b79ee5626e4c95",
+      "sourcePx": [
+        64,
+        64
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Frame/icon candidate; preserve keyboard focus and original UI labels.",
+      "finalHumanApproval": false
+    },
+    "UX-08": {
+      "id": "UX-08",
+      "name": "Touch jump glyph",
+      "group": "UIX",
+      "sourcePath": "assets/production/ui/ux_08.png",
+      "sha256": "37b86819340c34d179b48005a2d7b26246cf5026a80378aae964f6d40c23e7f8",
+      "sourcePx": [
+        64,
+        64
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Frame/icon candidate; preserve keyboard focus and original UI labels.",
+      "finalHumanApproval": false
+    },
+    "UX-09": {
+      "id": "UX-09",
+      "name": "Touch swish glyph",
+      "group": "UIX",
+      "sourcePath": "assets/production/ui/ux_09.png",
+      "sha256": "2d2191ef125fb2976d74a6f4e0fbbde2ba1af6d96659c90ea0a2953b88ea521e",
+      "sourcePx": [
+        64,
+        64
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Frame/icon candidate; preserve keyboard focus and original UI labels.",
+      "finalHumanApproval": false
+    },
+    "UX-10": {
+      "id": "UX-10",
+      "name": "Boss HP frame",
+      "group": "UIX",
+      "sourcePath": "assets/production/ui/ux_10.png",
+      "sha256": "0bf4794cdb8e05c17ef849f13e6443f3bb0dab22806cc36bfd3b466bf78a9597",
+      "sourcePx": [
+        256,
+        64
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Frame/icon candidate; preserve keyboard focus and original UI labels.",
+      "finalHumanApproval": false
+    },
+    "UX-11": {
+      "id": "UX-11",
+      "name": "Checkpoint popup art",
+      "group": "UIX",
+      "sourcePath": "assets/production/ui/ux_11.png",
+      "sha256": "6abd152284fa1885a86edebe7482af5a53d222b92a80d92b4b8b3a927209a991",
+      "sourcePx": [
+        384,
+        96
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Frame/icon candidate; preserve keyboard focus and original UI labels.",
+      "finalHumanApproval": false
+    },
+    "UX-12": {
+      "id": "UX-12",
+      "name": "Shake counter HUD frame",
+      "group": "UIX",
+      "sourcePath": "assets/production/ui/ux_12.png",
+      "sha256": "4de42b03fbcb114ec6a8dc4a2c0bec9dc3e06891f6785b9e425a10eb8dc08b50",
+      "sourcePx": [
+        256,
+        64
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Frame/icon candidate; preserve keyboard focus and original UI labels.",
+      "finalHumanApproval": false
+    },
+    "UX-13": {
+      "id": "UX-13",
+      "name": "Story Fox portrait frame",
+      "group": "UIX",
+      "sourcePath": "assets/production/ui/ux_13.png",
+      "sha256": "6b24ec552ccd61c39936ea92bdeef801cb7030f07b2b5ac8e339c549db8103f5",
+      "sourcePx": [
+        256,
+        256
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Frame/icon candidate; preserve keyboard focus and original UI labels.",
+      "finalHumanApproval": false
+    },
+    "UX-14": {
+      "id": "UX-14",
+      "name": "Assist mode marker",
+      "group": "UIX",
+      "sourcePath": "assets/production/ui/ux_14.png",
+      "sha256": "6ed8989ce842583e9c1df16fcc827628802ee42381192bb1d7deeb3b84baca44",
+      "sourcePx": [
+        64,
+        64
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Frame/icon candidate; preserve keyboard focus and original UI labels.",
+      "finalHumanApproval": false
+    },
+    "VF-01": {
+      "id": "VF-01",
+      "name": "GO pulse halo",
+      "group": "VF",
+      "sourcePath": "assets/level1/effects/vf_01_go_pulse_halo.png",
+      "sha256": "6eb7daa7aaa23264f9089a6d0b583f80e4ce4a980c40c2ea643c5442d75296fd",
+      "sourcePx": [
+        128,
+        128
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Optional VFX needs gameplay readability and reduced motion.",
+      "finalHumanApproval": false
+    },
+    "VF-02": {
+      "id": "VF-02",
+      "name": "IRISH pulse settle",
+      "group": "VF",
+      "sourcePath": "assets/level1/effects/vf_02_irish_pulse_settle.png",
+      "sha256": "48cb99886bcd680c030ceac51c5f0e96c42b058c51520cc1ca934d98106445c7",
+      "sourcePx": [
+        128,
+        128
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Optional VFX needs gameplay readability and reduced motion.",
+      "finalHumanApproval": false
+    },
+    "VF-03": {
+      "id": "VF-03",
+      "name": "Drum strike spark",
+      "group": "VF",
+      "sourcePath": "assets/level1/effects/vf_03_drum_strike_spark.png",
+      "sha256": "810c331acf0c6e892c72d8d2e079e51414701ab36b3868b53f1b81d566b46dda",
+      "sourcePx": [
+        64,
+        64
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Optional VFX needs gameplay readability and reduced motion.",
+      "finalHumanApproval": false
+    },
+    "VF-04": {
+      "id": "VF-04",
+      "name": "Token collect gleam",
+      "group": "VF",
+      "sourcePath": "assets/level1/effects/vf_04_token_collect_gleam.png",
+      "sha256": "bccc3af64f4adb9463100437ac2c7fef385ff3d437cd90b087ff37244dbed520",
+      "sourcePx": [
+        64,
+        64
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Optional VFX needs gameplay readability and reduced motion.",
+      "finalHumanApproval": false
+    },
+    "VF-05": {
+      "id": "VF-05",
+      "name": "Enemy stomp puff",
+      "group": "VF",
+      "sourcePath": "assets/level1/effects/vf_05_enemy_stomp_puff.png",
+      "sha256": "833f4d07b751b944e35aca8ada7139fda64c8f62dd635fc67efc936e0248f852",
+      "sourcePx": [
+        64,
+        64
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Optional VFX needs gameplay readability and reduced motion.",
+      "finalHumanApproval": false
+    },
+    "VF-06": {
+      "id": "VF-06",
+      "name": "Safe ambient confetti",
+      "group": "VF",
+      "sourcePath": "assets/level1/effects/vf_06_safe_ambient_confetti.png",
+      "sha256": "1c116eaf8aafc7621efd406fa0fbaf0c0d239f0e3f05f442fe0c776ca7cbac96",
+      "sourcePx": [
+        128,
+        128
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Optional VFX needs gameplay readability and reduced motion.",
+      "finalHumanApproval": false
+    },
+    "VF-07": {
+      "id": "VF-07",
+      "name": "Projectile hit burst",
+      "group": "VF",
+      "sourcePath": "assets/level1/effects/vf_07_projectile_hit_burst.png",
+      "sha256": "7deb34af73eeeec0d77a13a3b00255e5256d524d884a711174c4be204cfefa8c",
+      "sourcePx": [
+        64,
+        64
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Optional VFX needs gameplay readability and reduced motion.",
+      "finalHumanApproval": false
+    },
+    "VF-08": {
+      "id": "VF-08",
+      "name": "Checkpoint gleam",
+      "group": "VF",
+      "sourcePath": "assets/level1/effects/vf_08_checkpoint_gleam.png",
+      "sha256": "2f2c8388cb5a3a2f3e438cb8deb249a896e2abecbf0c3bbf23f7a13c9d790a03",
+      "sourcePx": [
+        128,
+        128
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Optional VFX needs gameplay readability and reduced motion.",
+      "finalHumanApproval": false
+    },
+    "VF-09": {
+      "id": "VF-09",
+      "name": "Fox exit poof",
+      "group": "VF",
+      "sourcePath": "assets/level1/effects/vf_09_fox_exit_poof.png",
+      "sha256": "b694ab5bfc20be82562fc74f5edb7384d36514ab7ba0e9e94962235c66f62cc0",
+      "sourcePx": [
+        128,
+        128
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Optional VFX needs gameplay readability and reduced motion.",
+      "finalHumanApproval": false
+    },
+    "VF-10": {
+      "id": "VF-10",
+      "name": "Landing dust",
+      "group": "VF",
+      "sourcePath": "assets/level1/effects/vf_10_landing_dust.png",
+      "sha256": "faa6b38387966f779bb096a230bca7fbbc99dc720303b5c8a09397d15487125d",
+      "sourcePx": [
+        64,
+        64
+      ],
+      "sourceStatus": "AWAITING_HUMAN_VISUAL_REVIEW",
+      "contractStatus": "NORMALIZED_VERIFIED",
+      "score": 3,
+      "verdict": "alternate",
+      "previewWired": false,
+      "structuralIssues": [],
+      "cropRisk": true,
+      "reason": "Optional VFX needs gameplay readability and reduced motion.",
+      "finalHumanApproval": false
+    }
+  }
+}

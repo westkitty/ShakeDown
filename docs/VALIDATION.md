@@ -139,3 +139,11 @@ The first oversubscribed 3-worker browser suite exposed a genuine transient loca
 - GitHub branch prep/asset-ready-20261011 fast-forward implementation commit: fb158f30fdb3a180325b4e0ca7770b8eeb5d1446.
 - Static-preflight JSON artifact is configured on the GitHub browser workflow. This receipt does not preemptively claim that the new exact-HEAD workflow has completed; verify it separately.
 - Main and the production GitHub Pages version remain unchanged pending separate art/device/human acceptance and explicit release decision.
+
+## Arena branch curation integration, October 11, 2026
+
+- 194 actual PNG files appeared on the Arena branch, each SHA-256 matched and at contract target dimensions in the remote physical audit; no duplicate exact hashes. Original 26 verified Cinnamon cutouts preserved. 24 PNGs failed required transparency (170 structurally pass). Zero human approvals were manufactured.
+- The source status conflict is explicit: generator master claims normalized/approved status, whereas all actual Arena candidate records require human visual review, and the accepted-runtime ledger remains empty.
+- The generated 194-image gallery, 28 selected SHA/dimension-verified preview images, opt-in reversible game display and manual source-bound review export were tested locally on actual HTTP/Brave. Scripted input-driven full normal, assisted and curated gameplay routes passed, including birthday victory. The scripted rAF tests do not prove real-time FPS or real phone responsiveness.
+- npm run validate 34/34 pass on local combined checkout; static release-preflight enumerated 238 actual files and zero missing source SHA-linked PNGs. These are local candidate tests; the remote Mac connector later became inaccessible. GitHub CI must verify the exact integration commit.
+- Browser user-review votes never activate production artwork. Recorded audio files and original generator raw inputs remain unavailable. Details: docs/ASSET_CURATION_REPORT.md.

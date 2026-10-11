@@ -3,6 +3,7 @@ import {VIEW,WORLD} from './game/world.mjs';
 import {render} from './game/render.mjs';
 import {AudioBox} from './game/audio.mjs';
 import {loadApprovedArt} from './game/production-assets.mjs';
+import {loadCuratedPreview} from './game/curated-assets.mjs';
 import {checkpointRecord,validCheckpointRecord,restoreCheckpoint} from './game/progress.mjs';
 const $=id=>document.getElementById(id);
 const canvas=$('game'),ctx=canvas.getContext('2d',{alpha:false});
@@ -29,9 +30,39 @@ function showContinue(){
 }
 const audio=new AudioBox();audio.mute(state.settings.mute,{resume:false});
 let productionArt={},productionLoaded=0,productionDeclared=0,productionErrors=[];
+let curatedArt={},renderArt=productionArt,curatedLoaded=0,curatedSelected=0,curatedErrors=[];
+let curatedEnabled=new URLSearchParams(location.search).get('art')==='curated';
+let curatorLoading=null,curatorStatus='';
+function refreshArt(){renderArt=curatedEnabled?{...curatedArt,...productionArt}:productionArt}
+function updateCuratorControls(){
+ $('art-preview-title').checked=curatedEnabled;$('art-preview-pause').checked=curatedEnabled;
+ document.body.classList.toggle('curator-active',curatedEnabled);
+}
+async function setCuratedPreview(enabled){
+ curatedEnabled=Boolean(enabled);
+ updateCuratorControls();refreshArt();
+ curatorStatus=curatedEnabled
+  ?(curatedLoaded?curatedLoaded+' provisional art pieces previewing (not activated)':'Loading provisional curator artwork…')
+  :'';
+ showAssetStatus();
+ if(!curatedEnabled||curatorLoading||curatedLoaded)return;
+ curatorLoading=loadCuratedPreview().then(({images,errors,selected})=>{
+  curatedArt=images;curatedLoaded=Object.keys(images).length;
+  curatedSelected=selected;curatedErrors=errors;
+  refreshArt();
+  curatorStatus=curatedEnabled?curatedLoaded+' of '+selected+' curated preview pieces loaded (not approved)':'';
+  showAssetStatus();
+ }).catch(error=>{
+  curatedErrors.push('preview: '+error.message);
+  curatorStatus=curatedEnabled?'Art preview unavailable · classic fallbacks preserved':'';
+  showAssetStatus();
+ }).finally(()=>{curatorLoading=null});
+ await curatorLoading;
+}
 let spriteStatus='Loading Cinnamon poses…',productionStatus='';
+updateCuratorControls();
 function showAssetStatus(){
- $('load-status').textContent=[spriteStatus,productionStatus].filter(Boolean).join(' · ');
+ $('load-status').textContent=[spriteStatus,productionStatus,curatorStatus].filter(Boolean).join(' · ');
 }
 let lastStatus='',lastEventSerial=0,displayedMode='';
 function safeScore(value){return Number.isFinite(value)?Math.max(0,value):0}
@@ -96,7 +127,7 @@ function handleModalTab(e){
  const overlayId=overlayByMode[state.mode];
  if(!overlayId)return false;
  const panel=$(overlayId);
- const focusables=[...panel.querySelectorAll('button:not(:disabled):not([hidden]),input:not(:disabled)')]
+ const focusables=[...panel.querySelectorAll('button:not(:disabled):not([hidden]),input:not(:disabled),a[href]')]
   .filter(element=>element.getClientRects().length>0);
  if(!focusables.length)return false;
  const first=focusables[0],last=focusables[focusables.length-1],active=document.activeElement;
@@ -210,6 +241,9 @@ updateContrast();
 $('assist-check').addEventListener('change',e=>{state.settings.assist=e.target.checked;save()});
 $('motion-check').addEventListener('change',e=>{state.settings.reducedMotion=e.target.checked;save()});
 $('contrast-check').addEventListener('change',e=>{state.settings.contrast=e.target.checked;updateContrast();save()});
+for(const id of ['art-preview-title','art-preview-pause'])
+ $(id).addEventListener('change',event=>setCuratedPreview(event.target.checked));
+if(curatedEnabled)setCuratedPreview(true);
 updateMute();showContinue();
 async function loadAssets(){
  try{
@@ -282,7 +316,7 @@ function animate(ms){requestAnimationFrame(animate);
  }else{accumulator=0}
  if(state.mode==='victory')state.elapsed+=dt;
  const drawStart=performance.now();
- render(ctx,state,sprites,accumulator/DT,productionArt);
+ render(ctx,state,sprites,accumulator/DT,renderArt);
  if(actualFrameMs>0){frameTimings.push({frame:actualFrameMs,render:performance.now()-drawStart});
   if(frameTimings.length>240)frameTimings.shift()}
  if(ms-lastHUD>110){hud();lastHUD=ms}
@@ -297,7 +331,7 @@ const previewId=(location.hostname==='localhost'||location.hostname==='127.0.0.1
   ?params.get('preview-art'):null;
 if(previewId){productionStatus='LOCAL ART PREVIEW ONLY: '+previewId+' (NOT production activated)';showAssetStatus();}
  loadApprovedArt({previewUnverifiedId:previewId}).then(({images,errors,approved})=>{
-  productionArt=images;productionLoaded=Object.keys(images).length;
+  productionArt=images;productionLoaded=Object.keys(images).length;refreshArt();
   productionDeclared=approved;productionErrors=errors;
   if(previewId){
    productionStatus='LOCAL ART PREVIEW: '+previewId+' '+(productionArt[previewId]?'candidate loaded; NOT production activated':'unavailable; NOT production activated');
@@ -307,7 +341,7 @@ if(previewId){productionStatus='LOCAL ART PREVIEW ONLY: '+previewId+' (NOT produ
   showAssetStatus();
  }).catch(error=>{productionErrors=['loader: '+error.message];showAssetStatus()});
  showMode();requestAnimationFrame(animate);
-window.__SHAKEDOWN_QA={snapshot:()=>snapshot(state),metrics,audio:()=>audio.diagnostics(),assets:()=>({loaded:assetCount,failed:[...assetErrors],productionLoaded,productionDeclared,productionErrors:[...productionErrors]}),
+window.__SHAKEDOWN_QA={snapshot:()=>snapshot(state),metrics,audio:()=>audio.diagnostics(),assets:()=>({loaded:assetCount,failed:[...assetErrors],productionLoaded,productionDeclared,productionErrors:[...productionErrors],curatedEnabled,curatedLoaded,curatedSelected,curatedErrors:[...curatedErrors]}),
  // Developer-only deterministic test aids; excluded from normal gameplay and production paths.
  ...(new URLSearchParams(location.search).has('qa')?{
   warp:(x,y)=>{state.player.x=x;state.player.y=y;state.player.prevX=x;state.player.prevY=y;state.player.vx=0;state.player.vy=0;state.camera.x=Math.max(0,x-450);state.camera.y=Math.min(0,y-260);},

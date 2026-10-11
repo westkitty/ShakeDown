@@ -82,3 +82,11 @@ The batch intake reports physical generator outputs against the actual 220-image
 For asset-independent release evidence, use npm run release:preflight (deterministic static bytes, import and original sprite checks) and npm run perf:audit -- --seconds 4 (real browser frame pacing, render cost, input observation, layout checks). See docs/RELEASE_REHEARSAL.md and docs/READABILITY_AND_PERFORMANCE_AUDIT.md. On the authorized BigMac node, set SHAKEDOWN_BROWSER_PATH to the absolute installed Brave executable when running Playwright locally.
 
 Two browser tabs now reconcile earned completion/best Shake records when an older tab saves settings; checkpoint Continue stays visible across tab changes. Browser storage has no transaction/compare-and-swap facility, so simultaneous racing writes on different tabs remain an acknowledged limitation. No external LM Arena artwork was approved or activated in this pass.
+
+## SHAKE DOWN: Art Jury and Curator's Cut
+
+**Play with the curated generated art:** launch `?art=curated` or toggle **Curator's Cut** in the game title/Pause menu. The original functioning presentation is the default and the mode is reversible without changing saves, physics or boss timing. Previewing is not final art acceptance.
+
+**Judge all the candidates:** [Open the Art Jury](tools/asset-gallery.html). All **194** physical Arena images are available for visual comparison, category and ID search, original image/hash inspection, and KEEP/REVISE/REJECT voting. Add notes and export your hash-bound JSON review. Votes persist locally in the browser and **never automatically activate art**. The curator's current classification is **28 preview, 131 alternatives, 11 revise, 24 transparency-blocked**.
+
+The source-hash manifest is `assets/production/manifest.json`; individual reasons and owner-review fields are in `assets/production/curation.json`. Read [docs/ASSET_CURATION_REPORT.md](docs/ASSET_CURATION_REPORT.md) for visual comparisons and provenance limits. Twenty-one requested recorded audio outputs still await delivery. 

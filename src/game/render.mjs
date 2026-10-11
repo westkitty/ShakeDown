@@ -49,6 +49,16 @@ function quad(ctx,cam,t,art={}){
   for(let i=0;i<7;i++)brickWindow(ctx,x+22+i*68,237,34,61,i%4===0);
   ctx.fillStyle='#244d8c';for(let i=0;i<6;i++){ctx.beginPath();ctx.moveTo(x+26+i*80,184);ctx.lineTo(x+51+i*80,184);ctx.lineTo(x+38+i*80,217);ctx.closePath();ctx.fill()}
  }
+ // Curated props decorate existing Quad, but never add collision surfaces.
+ const scenery=[
+  ['PR-03',850,384,100,60],['PR-03',2900,384,96,60],
+  ['PR-06',1420,397,172,54],['PR-06',3260,396,172,54],
+  ['PR-09',2100,365,170,100],['PR-12',670,175,252,72],
+  ['PR-12',3050,172,252,72]
+ ];
+ for(const [id,x,y,w,h] of scenery){
+  const image=art[id];if(image&&x+w>cx-90&&x<cx+VIEW.width+140)ctx.drawImage(image,x,y,w,h);
+ }
  // First scene vendor - simple but unmistakable stolen drink tableau.
  if(cx<900){const x=122,y=442;ctx.fillStyle='#d4a47b';ctx.fillRect(x-40,y-109,177,99);
  ctx.fillStyle='#2a518a';ctx.fillRect(x-50,y-130,196,27);ctx.fillStyle='#f4cc55';for(let i=0;i<7;i++)ctx.fillRect(x-50+i*28,y-130,13,27);
@@ -122,10 +132,16 @@ function drawFox(ctx,x,y,phase,t,art={}){
  if(image){
   ctx.save();ctx.drawImage(image,x-38,y-118,125,125);
   // Production art must not conceal state warnings; boss tells remain separately drawn.
-  if(phase==='tell'){ctx.strokeStyle='#f44d44';ctx.lineWidth=6;ctx.beginPath();
+  if(phase==='tell'){
+   if(art['BS-VF01'])ctx.drawImage(art['BS-VF01'],x-77,y-153,200,200);
+   ctx.strokeStyle='#f44d44';ctx.lineWidth=6;ctx.beginPath();
    ctx.arc(x+24,y-50,86,0,TAU);ctx.stroke();ctx.fillStyle='#fff0bb';
    ctx.font='900 35px system-ui';ctx.fillText('!',x+3,y-136)}
-  if(phase==='rest'){ctx.fillStyle='#fff0b5';ctx.font='900 16px system-ui';ctx.fillText('STUNNED',x-22,y-122)}
+  if(phase==='rest'){
+   if(art['BS-VF06'])ctx.drawImage(art['BS-VF06'],x-45,y-189,120,62);
+   ctx.fillStyle='#102b40';rounded(ctx,x-27,y-139,116,26,6);ctx.fill();
+   ctx.strokeStyle='#f3d478';ctx.lineWidth=2;ctx.stroke();
+   ctx.fillStyle='#fff0b5';ctx.font='900 17px system-ui';ctx.fillText('STUNNED',x-19,y-121)}
   ctx.restore();return;
  }
  ctx.save();ctx.translate(x,y);
@@ -149,42 +165,66 @@ function drawFox(ctx,x,y,phase,t,art={}){
  if(phase==='rest'){ctx.fillStyle='#f5e57a';ctx.font='900 16px system-ui';ctx.fillText('STUNNED',-22,-122)}
  ctx.restore();}
 function confetti(ctx,x,y,r=0){ctx.save();ctx.translate(x,y);ctx.rotate(r);ctx.fillStyle='#ef6371';ctx.fillRect(-8,-6,16,8);ctx.fillStyle='#ffdc64';ctx.fillRect(-2,-12,8,6);ctx.restore()}
-function cupCrawler(ctx,e,t){ctx.save();ctx.translate(e.x,e.y);ctx.fillStyle='#573d41';rounded(ctx,-2,19,51,26,8);ctx.fill();
+function cupCrawler(ctx,e,t,art={}){if(art['EN-01']){ctx.drawImage(art['EN-01'],e.x-5,e.y,64,58);return}ctx.save();ctx.translate(e.x,e.y);ctx.fillStyle='#573d41';rounded(ctx,-2,19,51,26,8);ctx.fill();
  ctx.fillStyle='#ceb789';for(let i=0;i<3;i++){rounded(ctx,8+i*3,7-i*11,27,17,4);ctx.fill();stroke(ctx,'#57464b',2);ctx.stroke()}
  ctx.fillStyle='#ee5c61';ctx.beginPath();ctx.arc(36,28,6,0,TAU);ctx.fill();
  ctx.fillStyle='#333742';for(const xx of [7,43]){ctx.beginPath();ctx.arc(xx,47,8,0,TAU);ctx.fill()}
  ctx.restore()}
-function cannon(ctx,h,t){ctx.save();ctx.translate(h.x,h.y);ctx.fillStyle='#5e6385';rounded(ctx,-2,12,55,29,5);ctx.fill();
+function cannon(ctx,h,t,art={}){
+ if(art['EN-04']){
+  const phase=(t+h.offset)%h.period;
+  const id=phase<.22?'EN-06':phase>h.period-.8?'EN-05':'EN-04';
+  ctx.drawImage(art[id]||art['EN-04'],h.x-8,h.y-33,77,82);
+  if(phase>h.period-.8){ctx.fillStyle='#fff5ba';ctx.strokeStyle='#202738';
+   ctx.lineWidth=4;ctx.font='900 22px system-ui';ctx.strokeText('!',h.x+18,h.y-36);
+   ctx.fillText('!',h.x+18,h.y-36);}
+  return;
+ }
+ ctx.save();ctx.translate(h.x,h.y);ctx.fillStyle='#5e6385';rounded(ctx,-2,12,55,29,5);ctx.fill();
  ctx.fillStyle='#44516a';rounded(ctx,3,-3,39,18,5);ctx.fill();
  ctx.fillStyle='#fa7390';ctx.beginPath();ctx.arc(43,28,5,0,TAU);ctx.fill();
  const phase=(t+h.offset)%h.period;if(phase>h.period-.8){ctx.fillStyle='#fcdb73';ctx.font='900 19px system-ui';ctx.fillText('!',23,-16)}ctx.restore()}
-function beacon(ctx,b,active,t){const x=b.x,y=b.footY;ctx.save();ctx.translate(x,y);
+function beacon(ctx,b,active,t,art={}){
+ const image=art[active?'MC-06':'MC-05'];
+ if(image){
+  ctx.drawImage(image,b.x-47,b.footY-112,94,110);
+  if(active){ctx.strokeStyle='#d7fff2';ctx.lineWidth=2;ctx.beginPath();ctx.arc(b.x,b.footY-59,32+Math.sin(t*6)*6,0,TAU);ctx.stroke()}
+  return;
+ }
+ const x=b.x,y=b.footY;ctx.save();ctx.translate(x,y);
  ctx.fillStyle='#553e3f';ctx.fillRect(-11,-58,25,55);ctx.fillStyle='#e6bc62';ctx.beginPath();ctx.ellipse(1,-60,29,14,0,0,TAU);ctx.fill();
  ctx.fillStyle=active?'#75ecd0':'#315481';ctx.beginPath();ctx.ellipse(1,-60,23,9,0,0,TAU);ctx.fill();
  if(active){ctx.strokeStyle='#d7fff2';ctx.lineWidth=3;ctx.beginPath();ctx.arc(1,-59,35+Math.sin(t*8)*9,0,TAU);ctx.stroke()}
  ctx.restore()}
-function checkpoint(ctx,c,on,t){ctx.save();ctx.translate(c.x,c.footY);ctx.fillStyle='#e5cc9f';ctx.fillRect(-4,-79,9,79);
+function checkpoint(ctx,c,on,t,art={}){
+ const image=art[on?'MC-08':'MC-07'];
+ if(image){ctx.drawImage(image,c.x-17,c.footY-116,86,116);
+  if(on){ctx.fillStyle='#fff7b3';ctx.beginPath();ctx.arc(c.x+2,c.footY-88,5+Math.sin(t*7)*2,0,TAU);ctx.fill()}
+  return;
+ }
+ ctx.save();ctx.translate(c.x,c.footY);ctx.fillStyle='#e5cc9f';ctx.fillRect(-4,-79,9,79);
  ctx.fillStyle=on?'#ffe171':'#305b98';ctx.beginPath();ctx.moveTo(3,-78);ctx.lineTo(49,-62);ctx.lineTo(3,-44);ctx.closePath();ctx.fill();
  if(on){ctx.fillStyle='#f2ffa5';ctx.beginPath();ctx.arc(2,-80,5+Math.sin(t*6)*2,0,TAU);ctx.fill()}
  ctx.restore()}
 function decoration(ctx,s,t,art={}){const cam=s.camera;ctx.save();ctx.translate(-cam.x,-cam.y);
- for(const e of s.level.enemies){if(e.alive&&Math.abs(e.x-cam.x)<1100&&Math.abs(e.y-cam.y)<720)cupCrawler(ctx,e,t)}
- for(const h of s.level.hazards){if(Math.abs(h.x-cam.x)<1100&&Math.abs(h.y-cam.y)<700)cannon(ctx,h,t)}
- for(const b of s.level.beacons){if(Math.abs(b.x-cam.x)<1000&&Math.abs(b.footY-cam.y)<700)beacon(ctx,b,s.activePulse,t)}
- for(const c of s.level.checkpoints){if(Math.abs(c.x-cam.x)<1100&&Math.abs(c.footY-cam.y)<700)checkpoint(ctx,c,s.checkpoint>=s.level.checkpoints.indexOf(c),t)}
+ for(const e of s.level.enemies){if(e.alive&&Math.abs(e.x-cam.x)<1100&&Math.abs(e.y-cam.y)<720)cupCrawler(ctx,e,t,art)}
+ for(const h of s.level.hazards){if(Math.abs(h.x-cam.x)<1100&&Math.abs(h.y-cam.y)<700)cannon(ctx,h,t,art)}
+ for(const b of s.level.beacons){if(Math.abs(b.x-cam.x)<1000&&Math.abs(b.footY-cam.y)<700)beacon(ctx,b,s.activePulse,t,art)}
+ for(const c of s.level.checkpoints){if(Math.abs(c.x-cam.x)<1100&&Math.abs(c.footY-cam.y)<700)checkpoint(ctx,c,s.checkpoint>=s.level.checkpoints.indexOf(c),t,art)}
  for(const q of s.level.shakes){if(q.taken||Math.abs(q.x-cam.x)>1030||Math.abs(q.y-cam.y)>650)continue;
   drawShake(ctx,q.x,q.y+Math.sin(t*4+q.x)*3,q.special?1.16:.9,q.special,art);
   if(q.special){ctx.strokeStyle='#edc86b';ctx.lineWidth=3;ctx.beginPath();ctx.arc(q.x,q.y,23+Math.sin(t*3)*2,0,TAU);ctx.stroke()}
  }
  for(const b of s.projectiles){confetti(ctx,b.x,b.y,b.age*10);ctx.strokeStyle='#ea7074';ctx.lineWidth=2;ctx.beginPath();ctx.arc(b.x,b.y,10,0,TAU);ctx.stroke()}
- if(s.boss.triggered||cam.x>7100){drawFox(ctx,s.boss.x,s.boss.y+83,s.boss.mode,t,art)}
+ if(s.boss.triggered||cam.x>7100){drawFox(ctx,s.boss.x,s.boss.y+83,s.mode==='victory'?'defeated':s.boss.mode,t,art)}
  ctx.restore()}
-function player(ctx,s,sprites){const p=s.player;let state='idle';
+function player(ctx,s,sprites,art={}){const p=s.player;let state='idle';
  if(s.mode==='victory')state='victory';else if(p.invulnerable>0&&s.lastDamage)state='hurt';
  else if(p.attackTime>0)state='swish';else if(p.dashTime>0)state='dash';
  else if(!p.grounded)state=p.vy<0?'jump':'fall';else if(Math.abs(p.vx)>30)state='run';
  const key=frameForState(state,s.settings.reducedMotion?0:s.elapsed);
- const image=sprites[key]||sprites.idle_00;
+ const bonusArt=state==='victory'?art['CIN-N06']:s.shakePickup>0?art['CIN-N04']:null;
+ const image=bonusArt||sprites[key]||sprites.idle_00;
  ctx.save();ctx.translate(Math.round(p.x+p.w/2-s.camera.x),Math.round(p.y+p.h-s.camera.y));
  if(p.facing<0)ctx.scale(-1,1);
  if(p.invulnerable>0)ctx.globalAlpha=s.settings.reducedMotion?.8:(Math.floor(s.elapsed*13)%2===0?.5:1);
@@ -215,7 +255,9 @@ function birthdayDecor(ctx,t,art={}){
  for(let i=0;i<8;i++){const x=-100+i*27;ctx.fillStyle='#3573a0';ctx.fillRect(x,-117,7,32);ctx.fillStyle='#fbe56e';ctx.beginPath();ctx.ellipse(x+3,-124,5,9,0,0,TAU);ctx.fill()}
  }
  ctx.shadowBlur=0;ctx.restore();
- for(const x of [550,860])drawShake(ctx,x,420,2.0,true,art);
+ if(art['BD-05'])ctx.drawImage(art['BD-05'],492,298,104,140);
+ else drawShake(ctx,550,420,2.0,true,art);
+ drawShake(ctx,860,420,2.0,true,art);
  confettiSky(ctx,t);
 }
 export function render(ctx,s,sprites,alpha=0,art={}){
@@ -235,7 +277,7 @@ export function render(ctx,s,sprites,alpha=0,art={}){
   drawFox(ctx,fx,440,'escape',decorativeTime,art);drawShake(ctx,fx+84,375,.78,true,art);
   ctx.restore();
  }
- player(ctx,s,sprites);if(!s.settings.reducedMotion)events(ctx,s,t);
+ player(ctx,s,sprites,art);if(!s.settings.reducedMotion)events(ctx,s,t);
  const inPulse=s.activePulse;ctx.save();ctx.textAlign='center';ctx.font='900 31px system-ui';
  if(s.mode==='playing'&&!s.boss.triggered){
   ctx.globalAlpha=.90;ctx.fillStyle=inPulse?'#fff0ac':'#a9d7f6';ctx.shadowColor='#2b4d78';ctx.shadowBlur=10;

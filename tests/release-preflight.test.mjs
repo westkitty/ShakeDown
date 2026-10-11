@@ -30,7 +30,7 @@ test('offline static rehearsal fingerprints only real reachable runtime bytes',(
 test('release rehearsal refuses deployment when an imported module is missing',()=>{
  const temp=fs.mkdtempSync(path.join(os.tmpdir(),'shakedown-release-fixture-'));
  try{
-  for(const rel of ['src','assets/sprites/cinnamon']){
+  for(const rel of ['src','tools','assets/sprites/cinnamon','assets/production','assets/level1']){
    fs.cpSync(path.join(root,rel),path.join(temp,rel),{recursive:true});
   }
   fs.mkdirSync(path.join(temp,'assets/runtime'),{recursive:true});

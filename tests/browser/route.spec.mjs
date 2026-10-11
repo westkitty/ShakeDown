@@ -2,7 +2,7 @@ import {test,expect} from '@playwright/test';
 
 // The browser performs actual game DOM input/UI/Canvas/physics. Only rAF scheduling
 // is virtualized for reproducibility; no warps or direct update() calls are allowed.
-async function driveBrowserRoute(page,{assist}={}){
+async function driveBrowserRoute(page,{assist,curated=false}={}){
  // Both modes use the same game and input driver, with no test shortcuts.
 
  await page.addInitScript(()=>{
@@ -14,7 +14,11 @@ async function driveBrowserRoute(page,{assist}={}){
    for(const cb of batch)cb(time);
   };
  });
- await page.goto('./?qa=1');
+ await page.goto(curated?'./?qa=1&art=curated':'./?qa=1');
+ if(curated){
+  await expect.poll(async()=>page.evaluate(()=>window.__SHAKEDOWN_QA?.assets?.().curatedLoaded),{timeout:30000}).toBe(28);
+  expect((await page.evaluate(()=>window.__SHAKEDOWN_QA.assets())).productionLoaded).toBe(0);
+ }
  await page.locator('#start-btn').click();
  if(assist){
   await page.locator('#pause-btn').click();
@@ -104,4 +108,14 @@ test('browser-executed deterministic NORMAL difficulty full route, birthday and 
  test.skip(testInfo.project.name!=='desktop-chromium','Full-route desktop validation; mobile interaction tests run separately');
  test.setTimeout(90000);
  await driveBrowserRoute(page,{assist:false});
+});
+
+test('curator-selected art remains playable across the full real-input scripted boss victory route',async({page},testInfo)=>{
+ test.skip(testInfo.project.name!=='desktop-chromium','Curated route desktop gate; mobile art controls are checked separately');
+ test.setTimeout(90000);
+ await driveBrowserRoute(page,{assist:true,curated:true});
+ const art=await page.evaluate(()=>window.__SHAKEDOWN_QA.assets());
+ expect(art.curatedEnabled).toBe(true);
+ expect(art.curatedLoaded).toBe(28);
+ expect(art.productionLoaded).toBe(0,'Preview does not auto-approve art');
 });
