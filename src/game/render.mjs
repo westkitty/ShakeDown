@@ -223,7 +223,7 @@ export function render(ctx,s,sprites,alpha=0){
  }
  player(ctx,s,sprites);events(ctx,s,t);
  const inPulse=s.activePulse;ctx.save();ctx.textAlign='center';ctx.font='900 31px system-ui';
- if(s.mode==='playing'){
+ if(s.mode==='playing'&&!s.boss.triggered){
   ctx.globalAlpha=.90;ctx.fillStyle=inPulse?'#fff0ac':'#a9d7f6';ctx.shadowColor='#2b4d78';ctx.shadowBlur=10;
   ctx.fillText(inPulse?'GO! IRISH!':'LISTEN FOR THE CHANT',VIEW.width/2,116);ctx.shadowBlur=0;
   if(s.pulseFlash>0){ctx.globalAlpha=s.pulseFlash*.18;ctx.fillStyle='#f6da8b';ctx.fillRect(0,0,VIEW.width,VIEW.height)}
