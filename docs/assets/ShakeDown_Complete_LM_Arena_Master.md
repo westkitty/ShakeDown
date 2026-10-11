@@ -45,11 +45,11 @@ Canvas engine: 960x540 logical screen, 32px tile contacts, source game inputs vi
 | Asset family | Specifications | Physically verified now | Missing image generation | P0 | P1 | P2 |
 |---|---:|---:|---:|---:|---:|---:|
 | BIRTHDAY REVEAL / CAKE / SHAKES | 14 | 0 | 8 | 6 | 7 | 1 |
-| CAMPUS BACKGROUNDS / QUAD | 6 | 0 | 3 | 3 | 3 | 0 |
+| CAMPUS BACKGROUNDS / QUAD | 6 | 0 | 0 | 3 | 3 | 0 |
 | BOSS ATTACK READABILITY | 12 | 0 | 5 | 7 | 4 | 1 |
 | CINNAMON SOURCE SPRITES / REFINEMENTS | 33 | 26 | 6 | 1 | 6 | 0 |
 | COLLECTIBLES | 4 | 0 | 1 | 3 | 1 | 0 |
-| DOME PARALLAX / VIEWPORTS | 8 | 0 | 5 | 3 | 3 | 2 |
+| DOME PARALLAX / VIEWPORTS | 8 | 0 | 4 | 3 | 3 | 2 |
 | DOME MECHANICS | 10 | 0 | 3 | 7 | 3 | 0 |
 | DOME ARCHITECTURE / PROPS | 10 | 0 | 5 | 3 | 5 | 2 |
 | DOME STONE / GOLDEN TILES | 16 | 0 | 2 | 6 | 9 | 1 |
@@ -65,7 +65,7 @@ Canvas engine: 960x540 logical screen, 32px tile contacts, source game inputs vi
 | ADDITIONAL UI / TOUCH | 14 | 0 | 13 | 1 | 10 | 3 |
 | CAMPUS VISUAL EFFECTS | 10 | 0 | 0 | 1 | 9 | 0 |
 
-TOTAL VISUAL CONTRACT: **220** individually specified logical IDs; **26** source-verified Cinnamon frames; **126** generated, byte-verified and normalized production images; **68** still missing final production images.
+TOTAL VISUAL CONTRACT: **220** individually specified logical IDs; **26** source-verified Cinnamon frames; **130** generated, byte-verified and normalized production images; **64** still missing final production images.
 
 ## LM ARENA UNIVERSAL EXECUTION ORDER
 
@@ -2063,7 +2063,7 @@ DO NOT BAKE LIVE TEXT: all headings, counters, accessibility instructions, and b
 **Integration:** Verify file bytes exist at assets/level1/backgrounds/bg_05_golden_dome_hero_backdrop.png; measure intrinsic 960x540 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID BG-05 in runtime manifest. At runtime map ID to Dome approach and ascent; place in all with anchor top-left; use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### BG-02 — Campus approach silhouette
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** all · **Target:** 960×540 px · **Source:** 1920×1080 px · **Output:** `assets/level1/backgrounds/bg_02_campus_approach_silhouette.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** all · **Target:** 960×540 px · **Source:** 1920×1080 px · **Output:** `assets/level1/backgrounds/bg_02_campus_approach_silhouette.png`
 **Anchor:** top-left · **Collision:** none · **Animation:** single static component
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -2100,7 +2100,7 @@ DO NOT BAKE LIVE TEXT: all headings, counters, accessibility instructions, and b
 **Integration:** Verify file bytes exist at assets/level1/backgrounds/bg_02_campus_approach_silhouette.png; measure intrinsic 960x540 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID BG-02 in runtime manifest. At runtime map ID to Vendor introduction and eastward chase; place in all with anchor top-left; use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### BG-04 — Quad tree and lawn midground
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** all · **Target:** 960×540 px · **Source:** 1920×1080 px · **Output:** `assets/level1/backgrounds/bg_04_quad_tree_and_lawn_midground.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** all · **Target:** 960×540 px · **Source:** 1920×1080 px · **Output:** `assets/level1/backgrounds/bg_04_quad_tree_and_lawn_midground.png`
 **Anchor:** top-left · **Collision:** none · **Animation:** single static component
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -2137,7 +2137,7 @@ DO NOT BAKE LIVE TEXT: all headings, counters, accessibility instructions, and b
 **Integration:** Verify file bytes exist at assets/level1/backgrounds/bg_04_quad_tree_and_lawn_midground.png; measure intrinsic 960x540 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID BG-04 in runtime manifest. At runtime map ID to Readable quad depth and run route; place in all with anchor top-left; use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### BG-06 — Escape horizon
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** all · **Target:** 960×540 px · **Source:** 1920×1080 px · **Output:** `assets/level1/backgrounds/bg_06_escape_horizon.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** all · **Target:** 960×540 px · **Source:** 1920×1080 px · **Output:** `assets/level1/backgrounds/bg_06_escape_horizon.png`
 **Anchor:** top-left · **Collision:** none · **Animation:** single static component
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -4695,7 +4695,7 @@ DO NOT BAKE LIVE TEXT: all headings, counters, accessibility instructions, and b
 **Integration:** Verify file bytes exist at assets/production/dome/backgrounds/dm_bg07.png; measure intrinsic 960x540 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID DM-BG07 in runtime manifest. At runtime map ID to Dome parallax/landmark layer; place in dome with anchor top-left; use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### DM-BG03 — Golden afternoon sky
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** dome · **Target:** 960×540 px · **Source:** 1920×1080 px · **Output:** `assets/production/dome/backgrounds/dm_bg03.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** dome · **Target:** 960×540 px · **Source:** 1920×1080 px · **Output:** `assets/production/dome/backgrounds/dm_bg03.png`
 **Anchor:** top-left · **Collision:** none · **Animation:** static repeat as specified in integration metadata
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Original Notre Dame Golden Dome silhouette and character palette
 
