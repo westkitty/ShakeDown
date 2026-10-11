@@ -39,3 +39,6 @@ The package is available as a ChatGPT conversation artifact, not from a permanen
 
 ## Transfer principle
 No invented filenames, pivots, timings, animation counts, or checksums. Source images and physically generated runtime assets have separate status. The requested push includes this truthful handoff text **only**, not binary sprite art.
+
+## Updated 2026-10-11 — new source-sheet cut-outs in repository
+The prior 29-entry `ShakeDown_Cinnamon_Art_PreHandoff.zip` remains off-repository. Separately, the user's physically attached `cinnamon_actions_sheet.png` has been committed as `assets/references/cinnamon_actions_sheet.png`; `scripts/extract_cinnamon.py` deterministically extracts 26 stand-alone **240x160 RGBA** player pose cut-outs with manifest checksums under `assets/sprites/cinnamon/`. This does not assert their art is newly drawn, and it does not falsely restore the earlier 320x320 normalized archive. Source regions, hashes, canvas, anchor, and fallback behavior are documented in `frames.json`. All 26 load in the local browser-injection smoke harness; HTTP navigation and production Pages still require validation.

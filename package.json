@@ -1,0 +1,9 @@
+{
+  "name":"shakedown-birthday-caper",
+  "version":"1.0.0",
+  "private":true,
+  "type":"module",
+  "scripts":{"test":"node --test tests/*.test.mjs","validate":"node scripts/validate-content.mjs && npm test","serve":"python3 -m http.server 8765"},
+  "engines":{"node":">=20"},
+  "description":"Single-file static-hosted Canvas 2D birthday adventure; no production dependencies"
+}

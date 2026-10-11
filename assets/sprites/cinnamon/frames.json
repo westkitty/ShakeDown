@@ -1,0 +1,429 @@
+{
+  "source": "assets/references/cinnamon_actions_sheet.png",
+  "source_sha256": "124481c14c7c02843c7d1c813a32ff5f5e503ba726782e462598e80bc0ea41f2",
+  "status": "source-cutout-verified-not-artist-approved-runtime-animation",
+  "canvas": [
+    240,
+    160
+  ],
+  "face_anchor_px": 145,
+  "foot_anchor_px": 147,
+  "frames": {
+    "idle_00": {
+      "file": "assets/sprites/cinnamon/idle_00.png",
+      "sha256": "1e4d65d43d335ddbdac77057dc28061848803134289495fc8b7e7a6bf8594de6",
+      "source_rect": [
+        12,
+        8,
+        151,
+        191
+      ],
+      "pixel_bounds": [
+        91,
+        13,
+        195,
+        143
+      ]
+    },
+    "idle_01": {
+      "file": "assets/sprites/cinnamon/idle_01.png",
+      "sha256": "c72c1ff9574c55aef5ef2103c92ed6002c4e712ea33786483a6b5edb070c2fb2",
+      "source_rect": [
+        164,
+        8,
+        309,
+        191
+      ],
+      "pixel_bounds": [
+        91,
+        12,
+        199,
+        143
+      ]
+    },
+    "idle_02": {
+      "file": "assets/sprites/cinnamon/idle_02.png",
+      "sha256": "1ea3f343621e46b1e177837a38f684fe1642b6853e02ee493f62dd11b6f3ea2a",
+      "source_rect": [
+        321,
+        8,
+        468,
+        191
+      ],
+      "pixel_bounds": [
+        91,
+        9,
+        202,
+        144
+      ]
+    },
+    "idle_03": {
+      "file": "assets/sprites/cinnamon/idle_03.png",
+      "sha256": "a751072cb348136e0076d285d992f583473e47819bf3c1b7480be80b8fe290c3",
+      "source_rect": [
+        471,
+        8,
+        613,
+        191
+      ],
+      "pixel_bounds": [
+        90,
+        13,
+        198,
+        145
+      ]
+    },
+    "idle_04": {
+      "file": "assets/sprites/cinnamon/idle_04.png",
+      "sha256": "54b746b82fa65d7732c852f1a900296b79b27c78f10712ea305875b1e6c068c4",
+      "source_rect": [
+        620,
+        8,
+        766,
+        191
+      ],
+      "pixel_bounds": [
+        82,
+        8,
+        190,
+        145
+      ]
+    },
+    "idle_05": {
+      "file": "assets/sprites/cinnamon/idle_05.png",
+      "sha256": "553d1bf4ddcabc866e8ad616eacce48b0e852290817e36aaad9e8a0a4a1f695d",
+      "source_rect": [
+        788,
+        8,
+        943,
+        191
+      ],
+      "pixel_bounds": [
+        90,
+        20,
+        208,
+        145
+      ]
+    },
+    "run_00": {
+      "file": "assets/sprites/cinnamon/run_00.png",
+      "sha256": "a6576212bf76acd7e379bbdcad05886b7c652447186d24fd54f498eac5269f88",
+      "source_rect": [
+        13,
+        202,
+        211,
+        358
+      ],
+      "pixel_bounds": [
+        66,
+        28,
+        214,
+        147
+      ]
+    },
+    "run_01": {
+      "file": "assets/sprites/cinnamon/run_01.png",
+      "sha256": "e8685ee535c4f732224f7ea01d0d850b5b4c2fc86ebefbe3ede1ca334ea92ccd",
+      "source_rect": [
+        234,
+        202,
+        450,
+        359
+      ],
+      "pixel_bounds": [
+        55,
+        28,
+        215,
+        147
+      ]
+    },
+    "run_02": {
+      "file": "assets/sprites/cinnamon/run_02.png",
+      "sha256": "f88c665ec4e32a7bc1ff874c2fc2139fc1931f73ef87e1886f66e9910fd828e0",
+      "source_rect": [
+        466,
+        202,
+        672,
+        359
+      ],
+      "pixel_bounds": [
+        64,
+        28,
+        220,
+        147
+      ]
+    },
+    "run_03": {
+      "file": "assets/sprites/cinnamon/run_03.png",
+      "sha256": "0e409225a8c22b1f7b624e9917383a167fb9b745ef92d514a73e0e9c3c2db325",
+      "source_rect": [
+        676,
+        202,
+        888,
+        359
+      ],
+      "pixel_bounds": [
+        63,
+        28,
+        224,
+        146
+      ]
+    },
+    "run_04": {
+      "file": "assets/sprites/cinnamon/run_04.png",
+      "sha256": "491370e7e907b7c0e143f2985647444c267abcb1224f441eafc73d05ea93432a",
+      "source_rect": [
+        893,
+        202,
+        1058,
+        359
+      ],
+      "pixel_bounds": [
+        86,
+        28,
+        211,
+        146
+      ]
+    },
+    "run_05": {
+      "file": "assets/sprites/cinnamon/run_05.png",
+      "sha256": "36d94932389c6c28a6b08b2df2d69d6d36492ae743dd1d22a8f30cc068cc78e2",
+      "source_rect": [
+        1061,
+        202,
+        1240,
+        359
+      ],
+      "pixel_bounds": [
+        79,
+        28,
+        215,
+        146
+      ]
+    },
+    "dash_00": {
+      "file": "assets/sprites/cinnamon/dash_00.png",
+      "sha256": "d8e699562ed4d3339f1d82c726d4b66c1c80587e142af9ef4179e6d4f52b0bcc",
+      "source_rect": [
+        420,
+        365,
+        719,
+        502
+      ],
+      "pixel_bounds": [
+        15,
+        43,
+        237,
+        147
+      ]
+    },
+    "dash_01": {
+      "file": "assets/sprites/cinnamon/dash_01.png",
+      "sha256": "8f145fbd6b229495e6c01006a97d85630fc022cbfa9c942df2005045a5d8c863",
+      "source_rect": [
+        735,
+        363,
+        1016,
+        504
+      ],
+      "pixel_bounds": [
+        27,
+        45,
+        239,
+        146
+      ]
+    },
+    "jump_00": {
+      "file": "assets/sprites/cinnamon/jump_00.png",
+      "sha256": "4b2647097fc8e3232b57aec340eed1c87f68912f71eb92f1df493c0dafca101b",
+      "source_rect": [
+        214,
+        512,
+        423,
+        654
+      ],
+      "pixel_bounds": [
+        60,
+        39,
+        219,
+        147
+      ]
+    },
+    "jump_01": {
+      "file": "assets/sprites/cinnamon/jump_01.png",
+      "sha256": "7958f42b8bacf8077429a283acfaacf8655fcc38df1332e9a9ae598158647d16",
+      "source_rect": [
+        445,
+        512,
+        645,
+        655
+      ],
+      "pixel_bounds": [
+        64,
+        38,
+        213,
+        136
+      ]
+    },
+    "fall_00": {
+      "file": "assets/sprites/cinnamon/fall_00.png",
+      "sha256": "dbb440899f0ea29bcb6fdd21f370ed348696e8976bdeaf74cd5939ac8ff0f2b3",
+      "source_rect": [
+        653,
+        510,
+        824,
+        657
+      ],
+      "pixel_bounds": [
+        80,
+        39,
+        204,
+        147
+      ]
+    },
+    "land_00": {
+      "file": "assets/sprites/cinnamon/land_00.png",
+      "sha256": "9e0460679e08c8e0e8e17d281f8f6c68d84b8a2578f5b535e4163514fde6c7cf",
+      "source_rect": [
+        835,
+        515,
+        1025,
+        655
+      ],
+      "pixel_bounds": [
+        72,
+        64,
+        212,
+        147
+      ]
+    },
+    "swish_00": {
+      "file": "assets/sprites/cinnamon/swish_00.png",
+      "sha256": "1243e9b455d1fb2e61ef84856c52e33800d1eb14c2d5c0a5fdab31a9255e1410",
+      "source_rect": [
+        235,
+        666,
+        485,
+        825
+      ],
+      "pixel_bounds": [
+        60,
+        26,
+        237,
+        143
+      ]
+    },
+    "swish_01": {
+      "file": "assets/sprites/cinnamon/swish_01.png",
+      "sha256": "8a08fec838c14df4ef4c66bb26eb1a603ec255bdd19c441743cb123cbc8f908d",
+      "source_rect": [
+        500,
+        666,
+        757,
+        824
+      ],
+      "pixel_bounds": [
+        60,
+        27,
+        240,
+        142
+      ]
+    },
+    "hurt_00": {
+      "file": "assets/sprites/cinnamon/hurt_00.png",
+      "sha256": "db81f5aea81e24133718c3639c53d234088b7fd744d1a926847de50f465674e0",
+      "source_rect": [
+        112,
+        818,
+        267,
+        920
+      ],
+      "pixel_bounds": [
+        92,
+        75,
+        199,
+        147
+      ]
+    },
+    "hurt_01": {
+      "file": "assets/sprites/cinnamon/hurt_01.png",
+      "sha256": "e5f98152031a1a5e2981bcadf3f89e81f65ff4705285c4d35adb89adef8bbd6a",
+      "source_rect": [
+        279,
+        820,
+        450,
+        915
+      ],
+      "pixel_bounds": [
+        87,
+        79,
+        209,
+        147
+      ]
+    },
+    "victory_00": {
+      "file": "assets/sprites/cinnamon/victory_00.png",
+      "sha256": "4944ac8dd1817f584c2a0562f6ae4289fedf0db98a3a5c8ba136caafc6020dee",
+      "source_rect": [
+        464,
+        929,
+        600,
+        1083
+      ],
+      "pixel_bounds": [
+        95,
+        42,
+        191,
+        144
+      ]
+    },
+    "victory_01": {
+      "file": "assets/sprites/cinnamon/victory_01.png",
+      "sha256": "6faac44239fb3c5ab6bea6e5a4f288943aa48375acbc78e4d3bb1c4c004f936e",
+      "source_rect": [
+        588,
+        929,
+        745,
+        1083
+      ],
+      "pixel_bounds": [
+        88,
+        36,
+        204,
+        144
+      ]
+    },
+    "victory_02": {
+      "file": "assets/sprites/cinnamon/victory_02.png",
+      "sha256": "7e6bdff94dfe31ab889724bd0486a02141106b8a387bf30a27af4415520643d0",
+      "source_rect": [
+        745,
+        925,
+        900,
+        1083
+      ],
+      "pixel_bounds": [
+        89,
+        28,
+        206,
+        146
+      ]
+    },
+    "shake_00": {
+      "file": "assets/sprites/cinnamon/shake_00.png",
+      "sha256": "71d2594e5251b7796fa5f14c904adb3bba3b1380e4770dde947e1878dedf2f5c",
+      "source_rect": [
+        886,
+        926,
+        1081,
+        1083
+      ],
+      "pixel_bounds": [
+        84,
+        28,
+        232,
+        147
+      ]
+    }
+  }
+}

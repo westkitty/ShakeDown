@@ -1,4 +1,4 @@
-name: Phase 0 contract
+name: Game and asset contract
 on:
   push:
   pull_request:
@@ -10,4 +10,4 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - run: node scripts/validate-content.mjs
+      - run: npm run validate

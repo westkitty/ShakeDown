@@ -1,30 +1,42 @@
-# ShakeDown: Cinnamon Fuzzbutt and the Shamrock Shake Caper
+# ShakeDown — Cinnamon Fuzzbutt's Shamrock Shake Caper
 
-A short, mobile-first 2D birthday platformer set in South Bend, Indiana. Cinnamon Fuzzbutt (a red panda) pursues the stolen Shamrock Shake across Notre Dame, the riverfront, Eddy Street, and the Fox's lair.
+A playable, static-hosted Canvas 2D birthday platformer for **Maverick**. Cinnamon Fuzzbutt (a red panda, not a cat) chases the Fox across Notre Dame's South Quad, climbs a playable Golden Dome, beats the Fox, and celebrates with cake and Shamrock Shakes.
 
-## Current status
-**Phase 0 scaffolding only.** This repository is not yet a finished playable game. All final character/environment art is pending an independently verified asset handoff. Do not represent placeholders as approved art.
+## Play
 
-## Authoritative references
-- Cinnamon and Maverick sheets: user-supplied character reference images (retained in production bible).
-- Technical precedent: [Cloud Chaser](https://github.com/westkitty/c_chase), not a codebase to modify.
-- Modern 2D Browser Game Architecture Toolkit v2.0, Gaming Guides project.
-- ShakeDown Master Development Blueprint and LM Arena Asset Production Bible (production documents, not yet copied into this repository).
+**[Open the birthday game](https://westkitty.github.io/ShakeDown/)** (live only after GitHub Pages is enabled and deployment is verified).
 
-## Production boundaries
-- Do not overwrite or modify Cloud Chaser.
-- Canvas 2D, fixed 60 Hz physics, interpolation as needed, DOM menus and accessibility.
-- Character: burnt-orange and cream red panda; circular black glasses, blue headband, grey T-shirt, olive cargo shorts, dark paws, thick ringed tail.
-- No Bethel campus, no birthday-cake rescue. Notre Dame / South Bend setting; Shamrock Shake prize; Fox antagonist.
-- No invented assets: all generated files need inspection, dimensions, alpha checks, and manifest registration before being used.
+Run locally from the repository root with `npm run serve` and open `http://localhost:8765` in a normal browser. No production packages or build step. The app is `index.html` with JavaScript modules in `src/`.
 
-## Local workflow
-This repository will acquire a runnable app in implementation Phase 1. At Phase 0, validate planning files with `node scripts/validate-content.mjs`.
+## Controls
 
-## Delivery acceptance
-Keyboard and touch end-to-end journey; four different levels; Fox boss; actual victory and birthday message; pause/retry/checkpoints; no console or asset errors; deployment to GitHub Pages only once the game has been tested.
+- Move: A/D or left/right arrows.
+- Jump: Space, W or up arrow. Tap twice for double jump; variable height, coyote time and input buffering.
+- Tail-swish: J or X. Stun the Fox during recovery; hit Drum Beacons to activate the GO IRISH pulse.
+- Dash: Shift or K.
+- Pause: P or Esc. M toggles audio.
+- On touch screens: five large accessible move, dash, tail-swish and jump controls.
 
-## Project documents
-- [Scope and systems](docs/IMPLEMENTATION_PLAN.md)
-- [Asset handoff](docs/ASSET_HANDOFF.md)
-- [Build status](docs/PROJECT_STATUS.md)
+## Gameplay
+
+- **Campus (0–3770 world px):** shake stand theft, banner bridges, safe pulse tutorial, concession robots, confetti cannons, moving platform, secrets and checkpoints.
+- **Golden Dome (3770–8350 px):** 23-stage architectural ascent, moving lifts, pulse platforms, safety ledges, Notre Dame-inspired building and dome, boss arena and checkpoint.
+- **The Fox:** an explicitly *provisional* illustrated runtime stand-in pending an approved antagonist sheet. Three-hit fight with charge and projectile patterns, visible telegraphs and recovery windows.
+- **Finale:** cake, shakes, confetti, exact HAPPY BIRTHDAY, MAVERICK! text and replay.
+
+The original four-stage campaign plan is superseded by the user's October 11 complete-birthday-game directive. Prior documents are retained in `docs/level1/` as historical design artifacts.
+
+## Asset truth
+
+- `assets/references/` contains two physically present user-provided Cinnamon source sheets.
+- `assets/sprites/cinnamon/*.png` and `frames.json` contain 26 reproducible cut-outs physically produced from `cinnamon_actions_sheet.png`; they are **real, loaded sprites**, but not a claim of individually newly hand-drawn animations. See `scripts/extract_cinnamon.py`.
+- The Fox, backgrounds, terrain, collectibles, UI and cake currently use explicit procedural Canvas illustrations. They are playable **temporary integrated drawings**, not LM Arena final artwork.
+- `docs/assets/` will hold the complete generation package for those missing final outputs. A specification never stands in for verified bytes.
+
+## Validation
+
+`npm test` runs deterministic movement/interaction/boss tests. `npm run validate` also checks asset manifest entries and planning invariants. Visual playback has been exercised in headless Chromium using an injected bundle because this container forbids browser URL navigation; that **does not** constitute live-site proof. See `docs/VALIDATION.md` for precise evidence boundaries.
+
+## Project and authority
+
+This is **westkitty/ShakeDown**. Cloud Chaser (`westkitty/c_chase`) was inspected strictly as a movement/UX reference and has not been modified. The Modern 2D Browser Game Architecture Toolkit v2.0 governs the static game architecture and evidence labels.
