@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "generated_utc": "2026-10-11T19:34:54Z",
+  "generated_utc": "2026-10-11T19:36:42Z",
   "note": "Byte-level truth for generated production art. Every sha256 and pixel dimension here was measured from the file actually written to disk. Human visual review is a separate, still-open gate.",
-  "count": 72,
+  "count": 80,
   "assets": {
     "BD-01": {
       "id": "BD-01",
@@ -1246,6 +1246,59 @@
       "sha256": "6371482991969febfec7a306ff884b12644d3260b24665f49f97832b812d68df",
       "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
     },
+    "DM-MC04": {
+      "id": "DM-MC04",
+      "name": "Pulse banner bridge on",
+      "group": "DM-MC",
+      "priority": "P0",
+      "path": "assets/production/dome/mechanics/dm_mc04.png",
+      "target_px": [
+        256,
+        64
+      ],
+      "pivot": "top-left",
+      "raw_source": ".artifact-cache/raw/dm_mc04.png",
+      "raw_sha256": "e40a1375891b4e57358a8879bd83a89ff8c7f0513b73b5beb9f312ef4cf6e1ee",
+      "raw_px": [
+        1408,
+        768
+      ],
+      "generated_utc": "2026-10-11T19:36:32Z",
+      "generator": "arena-agent-mode image generation",
+      "alpha": {
+        "required": true,
+        "mode": "straight RGBA",
+        "transparent_px_fraction": 0.382,
+        "opaque_px_fraction": 0.5594,
+        "partial_edge_px": 961,
+        "border_all_transparent": false,
+        "matte_rgb": [
+          255,
+          0,
+          255
+        ],
+        "transparent_fraction": 0.6911,
+        "partial_fraction": 0.0,
+        "matte_residual_opaque_px": 0,
+        "source_keyed_px": [
+          1408,
+          768
+        ]
+      },
+      "format": "PNG RGBA",
+      "trim_bbox_in_keyed_source": [
+        129,
+        199,
+        1273,
+        569
+      ],
+      "actual_px": [
+        256,
+        64
+      ],
+      "sha256": "4be2d6e9af0a4c0e1f062a62a3456381acaffd1ae19b31223f5c3bd0a3e0f907",
+      "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+    },
     "DM-MC05": {
       "id": "DM-MC05",
       "name": "Dome relay drum quiet",
@@ -1299,6 +1352,59 @@
       "sha256": "439a7956f81b6b788e438e7ab6c6e4b7ead7eb7c92f7c2b7ae1cbd941f884da2",
       "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
     },
+    "DM-MC06": {
+      "id": "DM-MC06",
+      "name": "Dome relay drum activated",
+      "group": "DM-MC",
+      "priority": "P0",
+      "path": "assets/production/dome/mechanics/dm_mc06.png",
+      "target_px": [
+        128,
+        128
+      ],
+      "pivot": "top-left",
+      "raw_source": ".artifact-cache/raw/dm_mc06.png",
+      "raw_sha256": "cbf6ccfec58f5f92a4508d87f43c9f50b4301ff51f1c8665108376cff206e52d",
+      "raw_px": [
+        1408,
+        768
+      ],
+      "generated_utc": "2026-10-11T19:36:32Z",
+      "generator": "arena-agent-mode image generation",
+      "alpha": {
+        "required": true,
+        "mode": "straight RGBA",
+        "transparent_px_fraction": 0.7079,
+        "opaque_px_fraction": 0.1299,
+        "partial_edge_px": 2657,
+        "border_all_transparent": false,
+        "matte_rgb": [
+          255,
+          0,
+          255
+        ],
+        "transparent_fraction": 0.6942,
+        "partial_fraction": 0.0,
+        "matte_residual_opaque_px": 0,
+        "source_keyed_px": [
+          1408,
+          768
+        ]
+      },
+      "format": "PNG RGBA",
+      "trim_bbox_in_keyed_source": [
+        123,
+        41,
+        1285,
+        756
+      ],
+      "actual_px": [
+        128,
+        128
+      ],
+      "sha256": "8d6cc9937f27ab9f45f822e092079b01b42ab111acc3a24c1a8ef02c605eadc0",
+      "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+    },
     "DM-MC07": {
       "id": "DM-MC07",
       "name": "Gilded checkpoint dark",
@@ -1350,6 +1456,59 @@
         192
       ],
       "sha256": "b626a9a6e5d696c8f1edcbc8c5b23d4a166a59f108932be4876a158d5cbb87c9",
+      "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+    },
+    "DM-MC08": {
+      "id": "DM-MC08",
+      "name": "Gilded checkpoint active",
+      "group": "DM-MC",
+      "priority": "P0",
+      "path": "assets/production/dome/mechanics/dm_mc08.png",
+      "target_px": [
+        128,
+        192
+      ],
+      "pivot": "bottom-center",
+      "raw_source": ".artifact-cache/raw/dm_mc08.png",
+      "raw_sha256": "6e1e769e9f1e251379adc16d6dd2efdedbdfbdd81098b4da880e6102964def10",
+      "raw_px": [
+        1408,
+        768
+      ],
+      "generated_utc": "2026-10-11T19:36:32Z",
+      "generator": "arena-agent-mode image generation",
+      "alpha": {
+        "required": true,
+        "mode": "straight RGBA",
+        "transparent_px_fraction": 0.6316,
+        "opaque_px_fraction": 0.2522,
+        "partial_edge_px": 2855,
+        "border_all_transparent": false,
+        "matte_rgb": [
+          255,
+          0,
+          255
+        ],
+        "transparent_fraction": 0.8769,
+        "partial_fraction": 0.0,
+        "matte_residual_opaque_px": 0,
+        "source_keyed_px": [
+          1408,
+          768
+        ]
+      },
+      "format": "PNG RGBA",
+      "trim_bbox_in_keyed_source": [
+        528,
+        6,
+        1056,
+        680
+      ],
+      "actual_px": [
+        128,
+        192
+      ],
+      "sha256": "f0033c316b5544e07396b6c6cef4c9c570faa6514897db4ace6efa64cc047e91",
       "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
     },
     "DM-PR01": {
@@ -1456,6 +1615,59 @@
         384
       ],
       "sha256": "b91c057b7c59476d9999329b2c901ddf2758e684089c6d1b75fabd0c97b5f766",
+      "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+    },
+    "DM-PR04": {
+      "id": "DM-PR04",
+      "name": "Mary statue silhouette",
+      "group": "DM-PR",
+      "priority": "P0",
+      "path": "assets/production/dome/props/dm_pr04.png",
+      "target_px": [
+        160,
+        256
+      ],
+      "pivot": "bottom-center",
+      "raw_source": ".artifact-cache/raw/dm_pr04.png",
+      "raw_sha256": "b3ebbf4118a918bfe36037833d4c3036ee6bedde5450c8bb09ac5122388f52b7",
+      "raw_px": [
+        1408,
+        768
+      ],
+      "generated_utc": "2026-10-11T19:36:32Z",
+      "generator": "arena-agent-mode image generation",
+      "alpha": {
+        "required": true,
+        "mode": "straight RGBA",
+        "transparent_px_fraction": 0.5922,
+        "opaque_px_fraction": 0.3703,
+        "partial_edge_px": 1537,
+        "border_all_transparent": false,
+        "matte_rgb": [
+          255,
+          0,
+          255
+        ],
+        "transparent_fraction": 0.8984,
+        "partial_fraction": 0.0,
+        "matte_residual_opaque_px": 0,
+        "source_keyed_px": [
+          1408,
+          768
+        ]
+      },
+      "format": "PNG RGBA",
+      "trim_bbox_in_keyed_source": [
+        572,
+        63,
+        837,
+        727
+      ],
+      "actual_px": [
+        160,
+        256
+      ],
+      "sha256": "ad3599cce5b7ff8f6e659b3561c6aa4cd215f36cab51983c2c2ff686e96d69c2",
       "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
     },
     "DM-TL01": {
@@ -3206,6 +3418,59 @@
       "sha256": "83b7cc6c214c8e026265933d42d4e1cbe6eb645cb81abf036be3d3960b3e35ec",
       "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
     },
+    "MC-08": {
+      "id": "MC-08",
+      "name": "Checkpoint lit",
+      "group": "MC",
+      "priority": "P0",
+      "path": "assets/level1/mechanics/mc_08_checkpoint_lit.png",
+      "target_px": [
+        64,
+        128
+      ],
+      "pivot": "bottom-center",
+      "raw_source": ".artifact-cache/raw/mc_08.png",
+      "raw_sha256": "27b81fbcb1d3a7af01fef4a50b957d39fe8ccbd3309b7e3b7f2bc8f117a7def0",
+      "raw_px": [
+        848,
+        1264
+      ],
+      "generated_utc": "2026-10-11T19:36:32Z",
+      "generator": "arena-agent-mode image generation",
+      "alpha": {
+        "required": true,
+        "mode": "straight RGBA",
+        "transparent_px_fraction": 0.6984,
+        "opaque_px_fraction": 0.2166,
+        "partial_edge_px": 697,
+        "border_all_transparent": false,
+        "matte_rgb": [
+          255,
+          0,
+          255
+        ],
+        "transparent_fraction": 0.8608,
+        "partial_fraction": 0.0,
+        "matte_residual_opaque_px": 0,
+        "source_keyed_px": [
+          848,
+          1264
+        ]
+      },
+      "format": "PNG RGBA",
+      "trim_bbox_in_keyed_source": [
+        272,
+        156,
+        787,
+        1109
+      ],
+      "actual_px": [
+        64,
+        128
+      ],
+      "sha256": "ffe3f95d4c4cd924ed315e2c23e85c04ad2763d113cb5d5113acd40bf484a5ee",
+      "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+    },
     "PR-01": {
       "id": "PR-01",
       "name": "Shamrock Shake stand",
@@ -3430,26 +3695,26 @@
       ],
       "pivot": "bottom-center",
       "raw_source": ".artifact-cache/raw/pr_09.png",
-      "raw_sha256": "58dc3054fcf770e554958f75e074b29cb3d3b9193d66d37aaaeb7496b2fd548c",
+      "raw_sha256": "f0f093a50c2a47f01f8eda1e4f95f74fb2045025da34bf7c471f5391b55b5d09",
       "raw_px": [
         1408,
         768
       ],
-      "generated_utc": "2026-10-11T19:33:01Z",
+      "generated_utc": "2026-10-11T19:36:32Z",
       "generator": "arena-agent-mode image generation",
       "alpha": {
         "required": true,
         "mode": "straight RGBA",
-        "transparent_px_fraction": 0.4588,
-        "opaque_px_fraction": 0.4515,
-        "partial_edge_px": 1930,
+        "transparent_px_fraction": 0.4408,
+        "opaque_px_fraction": 0.479,
+        "partial_edge_px": 1726,
         "border_all_transparent": false,
         "matte_rgb": [
           255,
           0,
           255
         ],
-        "transparent_fraction": 0.7845,
+        "transparent_fraction": 0.5572,
         "partial_fraction": 0.0,
         "matte_residual_opaque_px": 0,
         "source_keyed_px": [
@@ -3459,16 +3724,16 @@
       },
       "format": "PNG RGBA",
       "trim_bbox_in_keyed_source": [
-        334,
-        123,
-        1091,
-        633
+        88,
+        94,
+        1326,
+        686
       ],
       "actual_px": [
         192,
         112
       ],
-      "sha256": "8be6c6c4d6b4bb62a3fcf7beb3efb816e8113221cade6f1639850706121aa138",
+      "sha256": "caebbf41944e1bd7d0e6d1bda9fa4bf15b973dbc4bbf6298a8009751f14f17fb",
       "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
     },
     "PR-10": {
@@ -3522,6 +3787,114 @@
         64
       ],
       "sha256": "a0860c2b7472b671d23071c3f928e1eb06612cf88d6ee471e3874e87f84edf1d",
+      "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+    },
+    "TL-02": {
+      "id": "TL-02",
+      "name": "Grass fill tile",
+      "group": "TL",
+      "priority": "P0",
+      "path": "assets/level1/tiles/tl_02_grass_fill_tile.png",
+      "target_px": [
+        32,
+        32
+      ],
+      "pivot": "tile-top-left",
+      "raw_source": ".artifact-cache/raw/tl_02.png",
+      "raw_sha256": "383a042802c07d09536981639a7e55cb8d0a69bd1517b27dd13ecf9a77c81776",
+      "raw_px": [
+        1024,
+        1024
+      ],
+      "generated_utc": "2026-10-11T19:36:42Z",
+      "generator": "arena-agent-mode image generation",
+      "alpha": {
+        "required": true,
+        "mode": "straight RGBA",
+        "transparent_px_fraction": 0.0,
+        "opaque_px_fraction": 1.0,
+        "partial_edge_px": 0,
+        "full_bleed": true,
+        "border_all_transparent": false
+      },
+      "format": "PNG RGBA",
+      "actual_px": [
+        32,
+        32
+      ],
+      "sha256": "7f83cc993b9d9623f832f0a88202863bcb65bcd5cc4669fa9c99e557c946279c",
+      "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+    },
+    "TL-03": {
+      "id": "TL-03",
+      "name": "Stone path top tile",
+      "group": "TL",
+      "priority": "P0",
+      "path": "assets/level1/tiles/tl_03_stone_path_top_tile.png",
+      "target_px": [
+        32,
+        32
+      ],
+      "pivot": "tile-top-left",
+      "raw_source": ".artifact-cache/raw/tl_03.png",
+      "raw_sha256": "294e2f8bd0039318a69310f8227e1ebfb372c6a9a13482e5efe4f17a8ba877c9",
+      "raw_px": [
+        1024,
+        1024
+      ],
+      "generated_utc": "2026-10-11T19:36:42Z",
+      "generator": "arena-agent-mode image generation",
+      "alpha": {
+        "required": true,
+        "mode": "straight RGBA",
+        "transparent_px_fraction": 0.0,
+        "opaque_px_fraction": 1.0,
+        "partial_edge_px": 0,
+        "full_bleed": true,
+        "border_all_transparent": false
+      },
+      "format": "PNG RGBA",
+      "actual_px": [
+        32,
+        32
+      ],
+      "sha256": "f8d455339e0225e9cf1721e85cff7ee36d0c66242609d3ffc986165cc11a41f2",
+      "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+    },
+    "TL-04": {
+      "id": "TL-04",
+      "name": "Stone path fill tile",
+      "group": "TL",
+      "priority": "P0",
+      "path": "assets/level1/tiles/tl_04_stone_path_fill_tile.png",
+      "target_px": [
+        32,
+        32
+      ],
+      "pivot": "tile-top-left",
+      "raw_source": ".artifact-cache/raw/tl_04.png",
+      "raw_sha256": "01db5f13135d7f23f9bee41790234a2f88158e9994a6b4f97feca250b0ff5370",
+      "raw_px": [
+        1024,
+        1024
+      ],
+      "generated_utc": "2026-10-11T19:36:42Z",
+      "generator": "arena-agent-mode image generation",
+      "alpha": {
+        "required": true,
+        "mode": "straight RGBA",
+        "transparent_px_fraction": 0.0,
+        "opaque_px_fraction": 1.0,
+        "partial_edge_px": 0,
+        "full_bleed": true,
+        "border_all_transparent": false
+      },
+      "format": "PNG RGBA",
+      "actual_px": [
+        32,
+        32
+      ],
+      "sha256": "06c1d6e3c3ca0b11371e70f137e5c290c2044ec00fe8a26a517fab2168e2f971",
       "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
     },
     "UX-05": {

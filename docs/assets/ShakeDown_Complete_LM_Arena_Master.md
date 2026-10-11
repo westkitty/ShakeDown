@@ -50,22 +50,22 @@ Canvas engine: 960x540 logical screen, 32px tile contacts, source game inputs vi
 | CINNAMON SOURCE SPRITES / REFINEMENTS | 33 | 26 | 6 | 1 | 6 | 0 |
 | COLLECTIBLES | 4 | 0 | 1 | 3 | 1 | 0 |
 | DOME PARALLAX / VIEWPORTS | 8 | 0 | 5 | 3 | 3 | 2 |
-| DOME MECHANICS | 10 | 0 | 6 | 7 | 3 | 0 |
-| DOME ARCHITECTURE / PROPS | 10 | 0 | 8 | 3 | 5 | 2 |
+| DOME MECHANICS | 10 | 0 | 3 | 7 | 3 | 0 |
+| DOME ARCHITECTURE / PROPS | 10 | 0 | 7 | 3 | 5 | 2 |
 | DOME STONE / GOLDEN TILES | 16 | 0 | 10 | 6 | 9 | 1 |
 | CAMPUS ENEMY STATES | 7 | 0 | 3 | 4 | 3 | 0 |
 | ADDITIONAL EFFECTS | 8 | 0 | 8 | 0 | 5 | 3 |
 | THE FOX / INTRO AND BOSS | 16 | 0 | 0 | 9 | 5 | 2 |
 | TRANSITIONS / STORY EFFECTS | 4 | 0 | 2 | 2 | 2 | 0 |
-| CAMPUS PULSE OBJECTS | 9 | 0 | 2 | 8 | 1 | 0 |
+| CAMPUS PULSE OBJECTS | 9 | 0 | 1 | 8 | 1 | 0 |
 | COLLECTIBLES / POWERUPS / PICKUP FRAMES | 6 | 0 | 6 | 0 | 4 | 2 |
 | CAMPUS PROPS / LANDMARKS | 14 | 0 | 8 | 6 | 8 | 0 |
-| CAMPUS TERRAIN / COLLISION TILES | 10 | 0 | 10 | 6 | 4 | 0 |
+| CAMPUS TERRAIN / COLLISION TILES | 10 | 0 | 7 | 6 | 4 | 0 |
 | BASE INTERFACE | 9 | 0 | 9 | 0 | 9 | 0 |
 | ADDITIONAL UI / TOUCH | 14 | 0 | 13 | 1 | 10 | 3 |
 | CAMPUS VISUAL EFFECTS | 10 | 0 | 9 | 1 | 9 | 0 |
 
-TOTAL VISUAL CONTRACT: **220** individually specified logical IDs; **26** source-verified Cinnamon frames; **72** generated, byte-verified and normalized production images; **122** still missing final production images.
+TOTAL VISUAL CONTRACT: **220** individually specified logical IDs; **26** source-verified Cinnamon frames; **80** generated, byte-verified and normalized production images; **114** still missing final production images.
 
 ## LM ARENA UNIVERSAL EXECUTION ORDER
 
@@ -2214,7 +2214,7 @@ TILE EDGE REQUIREMENT: art edges must meet exactly with adjacent tile copies; pr
 **Integration:** Verify file bytes exist at assets/level1/tiles/tl_01_grass_top_tile.png; measure intrinsic 32x32 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID TL-01 in runtime manifest. At runtime map ID to Modular level geometry; place in all with anchor tile-top-left; use the engine auth collider "tile authored AABB" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### TL-02 — Grass fill tile
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** all · **Target:** 32×32 px · **Source:** 128×128 px · **Output:** `assets/level1/tiles/tl_02_grass_fill_tile.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** all · **Target:** 32×32 px · **Source:** 128×128 px · **Output:** `assets/level1/tiles/tl_02_grass_fill_tile.png`
 **Anchor:** tile-top-left · **Collision:** tile fill · **Animation:** single static component
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -2251,7 +2251,7 @@ TILE EDGE REQUIREMENT: art edges must meet exactly with adjacent tile copies; pr
 **Integration:** Verify file bytes exist at assets/level1/tiles/tl_02_grass_fill_tile.png; measure intrinsic 32x32 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID TL-02 in runtime manifest. At runtime map ID to Modular level geometry; place in all with anchor tile-top-left; use the engine auth collider "tile fill" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### TL-03 — Stone path top tile
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** all · **Target:** 32×32 px · **Source:** 128×128 px · **Output:** `assets/level1/tiles/tl_03_stone_path_top_tile.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** all · **Target:** 32×32 px · **Source:** 128×128 px · **Output:** `assets/level1/tiles/tl_03_stone_path_top_tile.png`
 **Anchor:** tile-top-left · **Collision:** tile authored AABB · **Animation:** single static component
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -2288,7 +2288,7 @@ TILE EDGE REQUIREMENT: art edges must meet exactly with adjacent tile copies; pr
 **Integration:** Verify file bytes exist at assets/level1/tiles/tl_03_stone_path_top_tile.png; measure intrinsic 32x32 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID TL-03 in runtime manifest. At runtime map ID to Modular level geometry; place in all with anchor tile-top-left; use the engine auth collider "tile authored AABB" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### TL-04 — Stone path fill tile
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** all · **Target:** 32×32 px · **Source:** 128×128 px · **Output:** `assets/level1/tiles/tl_04_stone_path_fill_tile.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** all · **Target:** 32×32 px · **Source:** 128×128 px · **Output:** `assets/level1/tiles/tl_04_stone_path_fill_tile.png`
 **Anchor:** tile-top-left · **Collision:** tile fill · **Animation:** single static component
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -3288,7 +3288,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/level1/mechanics/mc_07_checkpoint_unlit.png; measure intrinsic 64x128 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID MC-07 in runtime manifest. At runtime map ID to Respawn marker; place in all with anchor bottom-center; use the engine auth collider "hitbox=18,12,28,114" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### MC-08 — Checkpoint lit
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** all · **Target:** 64×128 px · **Source:** 256×512 px · **Output:** `assets/level1/mechanics/mc_08_checkpoint_lit.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** all · **Target:** 64×128 px · **Source:** 256×512 px · **Output:** `assets/level1/mechanics/mc_08_checkpoint_lit.png`
 **Anchor:** bottom-center · **Collision:** hitbox=18,12,28,114 · **Animation:** one frame for this specific listed state; do NOT merge with other states
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -5548,7 +5548,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/dome/props/dm_pr03.png; measure intrinsic 512x384 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID DM-PR03 in runtime manifest. At runtime map ID to Dome atmosphere and architecture dressing; place in dome with anchor bottom-center; use the engine auth collider "none unless separately scripted" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### DM-PR04 — Mary statue silhouette
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** dome · **Target:** 160×256 px · **Source:** 320×512 px · **Output:** `assets/production/dome/props/dm_pr04.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** dome · **Target:** 160×256 px · **Source:** 320×512 px · **Output:** `assets/production/dome/props/dm_pr04.png`
 **Anchor:** bottom-center · **Collision:** none unless separately scripted · **Animation:** static prop
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Dome hero backdrop and actual level geometry, not baked collisions
 
@@ -5901,7 +5901,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/dome/mechanics/dm_mc03.png; measure intrinsic 256x64 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID DM-MC03 in runtime manifest. At runtime map ID to Dome authored interactive object; place in dome with anchor top-left; use the engine auth collider "inactive non-collidable" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### DM-MC04 — Pulse banner bridge on
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** dome · **Target:** 256×64 px · **Source:** 512×128 px · **Output:** `assets/production/dome/mechanics/dm_mc04.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** dome · **Target:** 256×64 px · **Source:** 512×128 px · **Output:** `assets/production/dome/mechanics/dm_mc04.png`
 **Anchor:** top-left · **Collision:** active one-way AABB · **Animation:** single exact mechanic state; pair shares identical pivot and bounds
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** World pulse script, collision and alternate matching state
 
@@ -5971,7 +5971,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/dome/mechanics/dm_mc05.png; measure intrinsic 128x128 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID DM-MC05 in runtime manifest. At runtime map ID to Dome authored interactive object; place in dome with anchor top-left; use the engine auth collider "interaction AABB only" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### DM-MC06 — Dome relay drum activated
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** dome · **Target:** 128×128 px · **Source:** 256×256 px · **Output:** `assets/production/dome/mechanics/dm_mc06.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** dome · **Target:** 128×128 px · **Source:** 256×256 px · **Output:** `assets/production/dome/mechanics/dm_mc06.png`
 **Anchor:** top-left · **Collision:** interaction AABB only · **Animation:** single exact mechanic state; pair shares identical pivot and bounds
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** World pulse script, collision and alternate matching state
 
@@ -6041,7 +6041,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/dome/mechanics/dm_mc07.png; measure intrinsic 128x192 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID DM-MC07 in runtime manifest. At runtime map ID to Dome authored interactive object; place in dome with anchor bottom-center; use the engine auth collider "proximity checkpoint" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### DM-MC08 — Gilded checkpoint active
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** dome · **Target:** 128×192 px · **Source:** 256×384 px · **Output:** `assets/production/dome/mechanics/dm_mc08.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** dome · **Target:** 128×192 px · **Source:** 256×384 px · **Output:** `assets/production/dome/mechanics/dm_mc08.png`
 **Anchor:** bottom-center · **Collision:** proximity checkpoint · **Animation:** single exact mechanic state; pair shares identical pivot and bounds
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** World pulse script, collision and alternate matching state
 
