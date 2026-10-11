@@ -134,3 +134,8 @@ The first oversubscribed 3-worker browser suite exposed a genuine transient loca
 - Thus **71 distinct executed browser scenarios passed and seven expected skips** across desktop and mobile-emulated configurations. This was a bounded group-by-group local run, not one simultaneous 2-project command. All scheduled one-worker groups and follow-up focused runs were green.
 - The one oversubscribed multi-worker run suffered an intermittent Python test HTTP connection reset and failed one visual-preview test; the request was traced to a missing game ES module under network failure. Bounded one-worker retests passed; a direct failed-module/retry browser test also passed. We do not label the earlier failed overloaded run as green.
 - No physical device gameplay, real phone FPS or audio speaker audition, human-paced full-game journey or externally generated art has been verified.
+
+### Round 5 Git implementation delivery receipt
+- GitHub branch prep/asset-ready-20261011 fast-forward implementation commit: fb158f30fdb3a180325b4e0ca7770b8eeb5d1446.
+- Static-preflight JSON artifact is configured on the GitHub browser workflow. This receipt does not preemptively claim that the new exact-HEAD workflow has completed; verify it separately.
+- Main and the production GitHub Pages version remain unchanged pending separate art/device/human acceptance and explicit release decision.

@@ -151,3 +151,8 @@ Following the initial full sweep, the authored geometry safety check was extende
 ### Round 5 final local execution receipt
 
 The completed Round 5 static suite: **31/31 Node passed**, release-preflight checks 38 physically present runtime files. Final one-worker local browser groups: desktop 14+20+1 = **35 passed** with 4 intentional skips; mobile-emulated 14+21+1 = **36 passed** with 3 intentional skips. Follow-up mixed-project accessibility recheck after the High Contrast setting passed 5/5 executed checks with one duplicate desktop touch test skipped, not double-counted. No remaining failures in controlled final runs. This evidence is narrower than real-device FPS, speaker output, human gameplay, art approval, or hosted main deployment.
+
+### Round 5 implementation commit receipt
+- The seven-area Round 5 candidate was implemented and committed at SHA fb158f30fdb3a180325b4e0ca7770b8eeb5d1446.
+- Final local verification before this commit: npm run validate 31/31 pass; 35 distinct desktop browser tests pass with four intentional skips; 36 mobile-emulated browser tests pass with three intentional skips. Browser tests were run as bounded 1-worker groups and two additional contrast checks. The static release preflight reported 38 actual runtime files with no missing files.
+- This hash identifies the preparation branch, **not** a merged or deployed main release. GitHub CI must verify the final documentation follow-up SHA independently.
