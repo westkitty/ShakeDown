@@ -21,3 +21,9 @@ Operational State, the current user corrections, implementation plan and complet
 ### Git evidence
 - Implementation commit: pending.
 - Documentation follow-up hash: append implementation hash after the implementation commit if authorized.
+
+## 2026-10-11 — implementation delivery hash
+- Round 2 code implementation commit: `602a87ebb98d72b4a2a01110a38a061efb099f68`.
+- Local `npm run validate`: 20/20 Node tests PASS.
+- Local Playwright on BigMac / Brave with two workers: 21 browser tests PASS, 1 intended mobile-duplicate route SKIP; real HTTP site and synthetic deterministic route clearly differentiated.
+- No source art, compiled generation prompts or runtime-approved images changed.

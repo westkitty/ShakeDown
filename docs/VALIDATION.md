@@ -44,3 +44,8 @@ Project: westkitty/ShakeDown; branch: prep/asset-ready-20261011; baseline: main@
 - Actual-browser scripted assisted route: DOM keyboard events through real game listeners, visible pause/assist/retry/replay UI, Canvas rendering; 2,238 virtualized requestAnimationFrame callbacks, 23 steps, 31 shakes, one retry, natural Fox defeat and victory. Simulated elapsed time about 37.3 seconds. The QA query parameter supplies read-only state; mutating helpers were not called.
 - Browser Asset Control Room: canonical 220 image + 21 audio contracts, 26 source-derived frames, 0 approved outputs, 215 pending visual/audio requests; local valid/invalid PNG alpha/dimension/hash, WAV truncated vs synthetic PCM, desktop/mobile and deep links. No upload or runtime manifest mutation.
 - Limitation: virtualized browser frame scheduling is not ordinary pacing, a human-played route or hardware FPS measurement. Normal-difficulty route, physical mobile/speakers, final external art approvals and hosted exact-SHA proof remain open.
+
+### Round 2 final local validation receipt
+- `npm run validate`: **20/20 passed, 0 failed** (includes one full assist-mode, no-warp input journey).
+- `SHAKEDOWN_BROWSER_PATH=/Applications/Brave Browser.app/Contents/MacOS/Brave Browser npx playwright test --workers=2 --reporter=list`: **21 passed, 1 intentionally skipped**, zero failures (real localhost HTTP, desktop and mobile emulation, studio, virtual-rAF full-route browser interaction).
+- Code commit: `602a87ebb98d72b4a2a01110a38a061efb099f68`. GitHub Actions for this code and this documentation follow-up must be checked independently before any merge.
