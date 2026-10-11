@@ -107,7 +107,7 @@ test('synthetic accepted-cup fixture loads by logical ID and actually replaces v
  await page.route('**/assets/level1/collectibles/co_03_shamrock_shake_cup.png',
   route=>route.fulfill({body:PNG.sync.write(png),contentType:'image/png'}));
  await page.goto('./');
- await expect.poll(async()=>page.evaluate(()=>window.__SHAKEDOWN_QA.assets().productionLoaded)).toBe(1);
+ await expect.poll(async()=>page.evaluate(()=>window.__SHAKEDOWN_QA?.assets?.().productionLoaded??null)).toBe(1);
  await page.locator('#start-btn').click();
  await page.waitForTimeout(300);
  const rgb=await page.evaluate(()=>{
@@ -134,13 +134,13 @@ test('reviewed but UNVERIFIED art is not displayed outside local explicit QA pre
  await page.route('**/assets/level1/collectibles/co_03_shamrock_shake_cup.png',
   route=>route.fulfill({body:PNG.sync.write(png),contentType:'image/png'}));
  await page.goto('./');
- await expect.poll(async()=>page.evaluate(()=>window.__SHAKEDOWN_QA.assets().productionDeclared)).toBe(0);
+ await expect.poll(async()=>page.evaluate(()=>window.__SHAKEDOWN_QA?.assets?.().productionDeclared??null)).toBe(0);
  await page.goto('./?preview-art=CO-03');
- await expect.poll(async()=>page.evaluate(()=>window.__SHAKEDOWN_QA.assets().productionLoaded)).toBe(1);
+ await expect.poll(async()=>page.evaluate(()=>window.__SHAKEDOWN_QA?.assets?.().productionLoaded??null)).toBe(1);
  await expect(page.locator('#load-status')).toContainText('LOCAL ART PREVIEW');
  await expect(page.locator('#load-status')).toContainText('NOT production activated');
  await page.goto('./');
- await expect.poll(async()=>page.evaluate(()=>window.__SHAKEDOWN_QA.assets().productionDeclared)).toBe(0);
+ await expect.poll(async()=>page.evaluate(()=>window.__SHAKEDOWN_QA?.assets?.().productionDeclared??null)).toBe(0);
 });
 test('real frame and render timing collected over a named idle/title scenario',async({page},testInfo)=>{
  await page.goto('./');

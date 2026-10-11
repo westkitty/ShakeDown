@@ -82,3 +82,18 @@ Keep the last accepted commit and asset record immutable. On failure, repair via
 - [x] Automated: Tab-contained modal overlays, keyboard Enter on Continue, repeat-safe pause, native Space on sound button and keyboard-operated touch Jump.
 - [ ] Device/assistive tech: physical iPhone/Android, screen reader/switch control, audible sound, long-term localStorage behavior and normal-paced player run.
 - [ ] Deployment: exact merge SHA on GitHub Pages and complete hosted browser route only after explicit merge and release acceptance.
+
+
+## Round 5 — seven-area pre-art hardening gates
+
+- [x] Real wall-clock browser audit tool measured original and corrected mobile geometry, requestAnimationFrame pacing, Canvas cost and input-to-motion observation. The output explicitly labels remote scheduling uncertainty; it is not phone FPS proof.
+- [x] Audio lifecycle unit/browser tests cover no autoplay context creation, pause/mute/restart stop, bounded 24 live voices, context recovery and graceful device failure.
+- [x] Bulk incoming-art dry-run and stage-only tool verifies unique exact contract IDs, dimensions, alpha and hashes; rejects ambiguous/duplicate/symlink/corrupted files; never writes approval manifest.
+- [x] Visual/gameplay legibility: first-viewport Start and touch controls fit 320px portrait and 844x390 landscape; critical solid-button contrast >=4.5:1; both complete scripted routes exercise Fox tell, charge, volley, recovery, hit and birthday.
+- [x] Save stress: cross-tab completion and checkpoint retention, storage restriction behavior, repeated restart/mute/pause without corruption.
+- [x] Accessibility: user High Contrast setting now has visible effect and persists; existing Reduced Motion/keyboard UI remains tested; new coarse-pointer minimum 44x44 for visible touch targets.
+- [x] Read-only static release preflight inventories actual runtime files and prevents packaging a missing imported module; named CI artifact and non-destructive rollback steps documented in docs/RELEASE_REHEARSAL.md.
+- [x] Bonus: ESM boot failure offers Retry Loading, and network loss after loading or missing optional art doesn't crash gameplay.
+- [ ] Physical iPhone/Android touch/speaker/screen-reader and actual normal-speed gameplay and FPS measurement.
+- [ ] Final LM Arena output file delivery, character identity signoff, in-game screenshot review and staged-to-active integration per existing contract.
+- [ ] Explicitly approved merge, Pages build for the exact new SHA and hosted game full journey. All pre-art work remains on prep/asset-ready-20261011 until authorized release.

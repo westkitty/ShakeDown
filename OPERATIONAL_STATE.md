@@ -7,8 +7,8 @@
   "project_name": "ShakeDown",
   "project_root": "westkitty/ShakeDown",
   "artifact_path": "",
-  "state_revision": 6,
-  "last_updated": "2026-10-11T20:55:18Z",
+  "state_revision": 7,
+  "last_updated": "2026-10-11T21:54:52Z",
   "current_baseline": {
     "identity": "main@80d388828bfcad0cf454fe0b2b166e6528ac5e6d (pre-preparation production baseline)",
     "state": "current-baseline",
@@ -193,3 +193,50 @@ Baseline checks: 21/21 Node passed. Round 4 local candidate: **24/24 Node** pass
 
 ### Round 4 latest Node evidence correction (additive)
 The earlier local receipt of 24/24 preceded one additional authored-checkpoint geometry test. The latest executed full Node suite is **25/25 passed**, including safe recovery at each of the five actual checkpoints. Browser evidence stays **46 passed, 4 deliberately skipped** on desktop and mobile emulation. This additive correction does not rewrite prior run evidence.
+
+## 18. Preparation Round 5 — asset-independent production readiness (revision 7)
+
+<!-- operational-state:entry
+{"id":"VER-012","title":"Audio lifecycle and bounded scheduled voices","state":"partially-verified","scope":"Round 5 on prep/asset-ready-20261011","evidence":"Fake AudioContext unit tests plus actual served-Brave gesture, mute/pause/restart and context-state tests; no physical-speaker audition","last_verified":"2026-10-11"}
+-->
+### VER-012
+The browser no longer instantiates AudioContext on page launch. Explicit game gesture creates it; pause/mute/restart stop scheduled oscillators, close/dispose cleans context, simultaneous sound effects are capped to 24 live voices, and absent WebAudio never prevents gameplay. Synthetic unit/browser tests passed. Audible speaker quality, music-loop seams, licensing and real mobile sound remain unverified.
+
+<!-- operational-state:entry
+{"id":"VER-013","title":"Cross-tab localStorage preservation","state":"partially-verified","scope":"Round 5 user settings and birthday progress","evidence":"Stale-title-tab settings save reproduced deleting newer victory record before fix; desktop/mobile browser tests pass with pre-write merge, updated title Continue and storage-denial stress","last_verified":"2026-10-11"}
+-->
+### VER-013
+The stale tab's settings save used to erase another tab's earned birthday completion. Read-before-write reconciliation now retains monotonic completion/best values; storage events refresh a title-screen checkpoint Continue. Storage denial and rapid replay are non-crashing. Atomic simultaneous multi-tab writes remain an unresolved narrow race because localStorage has no compare-and-swap semantics.
+
+<!-- operational-state:entry
+{"id":"VER-014","title":"Batch asset intake without promotion","state":"partially-verified","scope":"scripts/batch-intake.mjs plus governing 220/21 contracts","evidence":"Isolated files test real PNG dimensions, SHA duplicates, canonical filenames/IDs, wrong WAV, symlink, ZIP ignoring, no-approval stage operation; 215 outstanding jobs","last_verified":"2026-10-11"}
+-->
+### VER-014
+An actual batch intake dry-run reports 220 visual requests, 21 audio, 26 existing Cinnamon cutouts, zero external approvals and 215 awaiting review. Explicit --stage copies only unique valid files to ignored candidate staging, without writing approval or activation. No received art has been accepted; artistic fidelity remains a human gate.
+
+<!-- operational-state:entry
+{"id":"VER-015","title":"Measured responsive fixes and high-contrast preference","state":"partially-verified","scope":"CSS-only narrow/landscape and presentation controls","evidence":"Headed Brave measured 320px width overflow 345 to 320; landscape Start bottom 448 to 236, touch bottom 682 to 380; contrast and 44px target browser tests","last_verified":"2026-10-11"}
+-->
+### VER-015
+Real browser layout probes found and corrected narrow horizontal overflow and landscape first-fold controls without changing 960x540 Canvas physics or state. High Contrast is now a visible persisted setting with actual HUD/menu/touch styling. Browser tests verify contrasts and dimensions. Real screen readers/physical devices are not yet tested.
+
+<!-- operational-state:entry
+{"id":"VER-016","title":"Static release rehearsal, runtime resilience and honest performance diagnosis","state":"partially-verified","scope":"read-only release preflight, gameplay boot fallback and headed browser performance script","evidence":"Deterministic 38-file static manifest, intentionally missing module negative control, direct ESM request failure/retry, network loss and resize checks, remote headed rAF p95 205-216ms while Canvas ~1ms","last_verified":"2026-10-11"}
+-->
+### VER-016
+The static preflight fingerprints physically present runtime files and fails when an import is absent; GitHub browser CI is configured to upload this artifact. A classic-script startup guard shows Retry Loading after a failed module import, proven by real injected network failure/recovery. Fallback art remains playable when source manifests fail, and loaded sessions continue offline without cold-start support. Remote Mac rAF was substantially throttled (~205–216ms p95); Canvas draw cost was ~0.9–1.2ms p95. This is not 60fps proof or a reason to rewrite the renderer.
+
+### Round 5 release boundaries
+- Baseline clean branch a584f03d3c6240de803ad3cc352b441d3e25de2f; existing 25/25 Node tests.
+- Preliminary local candidate validation after batch/audio/release implementation: 31/31 Node passed; 38 runtime files physically present.
+- One-worker split desktop browser suites: 14+20 executed passed, 4 deliberate skips. Mobile suites: 14+21 executed passed, 3 deliberate skips. Separate High Contrast tests desktop+mobile passed, with focused accessibility regression rechecked. No remaining failures in those controlled runs.
+- Original upstream source PNGs, game physics/engine and master generator specifications unchanged. External final art approved count still zero.
+- Remaining: true physical iPhone/Android touch/speaker tests, human-paced full route, actual generated art identity/visual approval, representative target device FPS and exact deployed production SHA check.
+- Changes remain on the preparation branch until an authorized, tested PR merge; no main merge or Pages release is claimed.
+
+### Revision log
+- Revision 7: audio lifecycle, two-tab save repair, bulk candidate intake, static release preflight, startup retry, measured phone layout, high contrast and honest browser performance boundaries.
+
+### Round 5 tested candidate receipt
+
+Final local candidate before Git delivery: npm run validate **31/31 PASS**, release-preflight 38 physical runtime files and no missing paths. Browser tests run in bounded one-worker groups: **desktop 35 executed passed, four expected skips; mobile-emulated 36 executed passed, three expected skips**. Remote headed rAF p95 stayed around 205-216ms despite roughly 1ms Canvas render cost; this is not normal target-device performance proof. The original 26 Cinnamon source frames, untouched asset generator contracts and zero-final-production-art state remain preserved. GitHub CI and delivery receipts to be appended only after actual commits and runs.

@@ -69,3 +69,16 @@ ShakeDown saves **checkpoint progress locally in this browser** after each reach
 ## Accessible controls
 
 Reduced Motion now changes the actual Canvas visuals: it reduces decorative animation, flashing, particle trails and invulnerability blinking without freezing gameplay physics, hazards or moving platforms. On first use it respects the operating system's reduced-motion setting; a player's explicit checkbox choice persists across reloads. Pause, loss, victory and title overlays have keyboard focus handling, Tab containment and Escape/pause-key recovery. Pressing Space on a focused button activates that button rather than unexpectedly jumping, and keyboard-accessible touch controls also trigger their labeled actions.
+
+
+## Round 5 — reliable audio, incoming-art batches, and release rehearsal
+
+The browser game no longer creates WebAudio before the first user gesture. Pause/mute/restart stop scheduled voices, a 24-voice cap prevents runaway effect overlap, and a failed audio device never blocks gameplay. Browser failures to load the game's ES module graph now show a useful Retry Loading action rather than an indefinitely inert title screen. A browser test deliberately aborts a module import, verifies the recovery UI, and successfully retries after restoring the request.
+
+The new High Contrast toggle in Pause changes the actual HUD, touch buttons and dialogue chrome. Unlike the earlier dormant saved preference, it now works and persists. Narrow 320px portrait and 844x390 landscape layouts were adjusted without changing the 960x540 logical game canvas or collider geometry.
+
+The batch intake reports physical generator outputs against the actual 220-image / 21-audio master, detects duplicates and incompatible bytes, and can explicitly stage valid independent files without approving them. See docs/ASSET_BATCH_INTAKE_RUNBOOK.md. Use npm run asset:batch -- --dir /ABSOLUTE/PATH/TO/FILES (dry run) or append --stage only after reviewing the dry-run findings.
+
+For asset-independent release evidence, use npm run release:preflight (deterministic static bytes, import and original sprite checks) and npm run perf:audit -- --seconds 4 (real browser frame pacing, render cost, input observation, layout checks). See docs/RELEASE_REHEARSAL.md and docs/READABILITY_AND_PERFORMANCE_AUDIT.md. On the authorized BigMac node, set SHAKEDOWN_BROWSER_PATH to the absolute installed Brave executable when running Playwright locally.
+
+Two browser tabs now reconcile earned completion/best Shake records when an older tab saves settings; checkpoint Continue stays visible across tab changes. Browser storage has no transaction/compare-and-swap facility, so simultaneous racing writes on different tabs remain an acknowledged limitation. No external LM Arena artwork was approved or activated in this pass.

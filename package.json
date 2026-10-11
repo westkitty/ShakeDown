@@ -8,7 +8,10 @@
     "validate": "node scripts/validate-content.mjs && node scripts/asset-intake.mjs validate && npm test",
     "serve": "python3 -m http.server 8765",
     "test:browser": "playwright test --config=playwright.config.mjs",
-    "asset:validate": "node scripts/asset-intake.mjs validate"
+    "asset:validate": "node scripts/asset-intake.mjs validate",
+    "asset:batch": "node scripts/batch-intake.mjs",
+    "perf:audit": "node scripts/perf-audit.mjs",
+    "release:preflight": "node scripts/release-preflight.mjs"
   },
   "engines": {
     "node": ">=20"

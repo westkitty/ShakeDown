@@ -37,14 +37,15 @@ async function driveBrowserRoute(page,{assist}={}){
    else if(!want&&active.has(code))send(code,false);
   };
   const release=()=>{for(const code of [...active])send(code,false)};
-  const history=[],checkpointWrites=[];let highestCheckpoint=0;
+  const history=[],checkpointWrites=[],bossModes=new Set();let highestCheckpoint=0;
   for(let frames=0;frames<4600;frames++){
    const game=window.__SHAKEDOWN_QA.inspectState();
+   if(game.boss.triggered)bossModes.add(game.boss.mode);
    if(game.mode==='victory'){
     release();return {reached:true,frames,steps:pilot.climbed.size,stage:pilot.stage,
      retries:pilot.retries,pitResets:pilot.pitResets,shakes:game.shakeCount,bossHP:game.boss.hp,
      seconds:game.elapsed,assist:game.settings.assist,history,checkpoint:game.checkpoint,
-     checkpointWrites,
+     checkpointWrites,bossModes:[...bossModes],
      saved:JSON.parse(localStorage.getItem('shakedown:birthday:v1')||'{}'),
      victoryText:document.querySelector('#victory-heading').textContent};
    }
@@ -81,6 +82,8 @@ async function driveBrowserRoute(page,{assist}={}){
  else expect(result.steps).toBeGreaterThanOrEqual(18);
  expect(result.assist).toBe(assist);
  expect(result.bossHP).toBe(0);
+ for(const mode of ['tell','rest','hit'])expect(result.bossModes).toContain(mode);
+ expect(result.bossModes.some(x=>['charge','volley'].includes(x))).toBe(true);
  expect(result.shakes).toBeGreaterThan(0);
  expect(result.victoryText).toContain('MAVERICK');
  expect(result.checkpointWrites.length).toBeGreaterThanOrEqual(2);

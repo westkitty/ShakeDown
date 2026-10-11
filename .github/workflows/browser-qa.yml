@@ -15,6 +15,12 @@ jobs:
       - run: npm ci
       - run: npx playwright install --with-deps chromium
       - run: npm run validate
+      - run: mkdir -p test-results && node scripts/release-preflight.mjs > test-results/static-preflight.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: shakedown-static-preflight
+          path: test-results/static-preflight.json
+          retention-days: 7
       - run: npm run test:browser
       - uses: actions/upload-artifact@v4
         if: failure()

@@ -27,22 +27,38 @@ function showContinue(){
  if(record){button.textContent='CONTINUE FROM '+record.checkpointId.toUpperCase();
   note.textContent='Saved at '+record.checkpointId+' — start fresh or continue.';}
 }
-const audio=new AudioBox();audio.mute(state.settings.mute);
+const audio=new AudioBox();audio.mute(state.settings.mute,{resume:false});
 let productionArt={},productionLoaded=0,productionDeclared=0,productionErrors=[];
 let spriteStatus='Loading Cinnamon poses…',productionStatus='';
 function showAssetStatus(){
  $('load-status').textContent=[spriteStatus,productionStatus].filter(Boolean).join(' · ');
 }
 let lastStatus='',lastEventSerial=0,displayedMode='';
+function safeScore(value){return Number.isFinite(value)?Math.max(0,value):0}
 function save(){
- const previousBest=Number.isFinite(saved.bestShakes)?Math.max(0,saved.bestShakes):0;
+ // Preserve monotonic accomplishments from a newer tab before this tab writes.
+ // Storage does not offer compare-and-swap; simultaneous writes still need
+ // manual recovery, but ordinary stale-tab settings changes cannot erase wins.
+ const current=readSave(),currentProgress=validCheckpointRecord(current.progress,state.level)?current.progress:null;
  saved={schema:1,settings:{...state.settings},
-  completed:saved.completed===true||state.mode==='victory',
-  bestShakes:Math.max(previousBest,state.shakeCount),
-  progress:state.mode==='victory'?null:(saved.progress||null)};
+  completed:saved.completed===true||current.completed===true||state.mode==='victory',
+  bestShakes:Math.max(safeScore(current.bestShakes),safeScore(saved.bestShakes),state.shakeCount),
+  progress:state.mode==='victory'?null:
+   state.mode==='title'?currentProgress:(saved.progress||null)};
  try{localStorage.setItem(saveKey,JSON.stringify(saved))}
  catch{/* Restricted storage: gameplay still works, even if progress cannot persist. */}
+ if(state.mode==='title')showContinue();
 }
+window.addEventListener('storage',event=>{
+ if(event.key!==saveKey)return;
+ const current=readSave();
+ saved.completed=saved.completed===true||current.completed===true;
+ saved.bestShakes=Math.max(safeScore(saved.bestShakes),safeScore(current.bestShakes));
+ if(state.mode==='title'){
+  saved.progress=validCheckpointRecord(current.progress,state.level)?current.progress:null;
+  showContinue();
+ }
+});
 function saveCheckpointIfNew(){
  if(state.mode!=='playing'||state.checkpoint<=lastSavedCheckpoint)return;
  const candidate=checkpointRecord(state);
@@ -140,6 +156,7 @@ window.addEventListener('keyup',e=>{
  keyActs.delete(e.code);updateHeld(act);e.preventDefault();
 });
 window.addEventListener('blur',()=>{clearInputs();if(state.mode==='playing')togglePause()});
+window.addEventListener('pagehide',()=>audio.dispose());
 document.addEventListener('visibilitychange',()=>{if(document.hidden){clearInputs();if(state.mode==='playing')togglePause()}lastStamp=0;accumulator=0});
 for(const button of document.querySelectorAll('.touch')){
  const action=button.dataset.action;
@@ -163,7 +180,7 @@ for(const button of document.querySelectorAll('.touch')){
 function newRound(){
  state=newGame(state.settings);state.assetCount=assetCount;
  lastEventSerial=0;lastSavedCheckpoint=0;displayedMode='';
- clearInputs();lastStamp=0;accumulator=0;audio.beat=0;audio.nextBeat=0;
+ clearInputs();lastStamp=0;accumulator=0;audio.resetSequence();audio.setPaused(false);
  saved.progress=null;
  startGame(state);save();audio.activate();showMode();canvas.focus({preventScroll:true});
 }
@@ -174,12 +191,12 @@ function continueRound(){
  if(!restoreCheckpoint(resumed,record))return;
  state=resumed;state.assetCount=assetCount;
  lastEventSerial=0;lastSavedCheckpoint=state.checkpoint;displayedMode='';
- clearInputs();lastStamp=0;accumulator=0;audio.beat=0;audio.nextBeat=0;
+ clearInputs();lastStamp=0;accumulator=0;audio.resetSequence();audio.setPaused(false);
  audio.activate();showMode();canvas.focus({preventScroll:true});
 }
 function start(){newRound()}
 function retry(){clearInputs();if(state.mode==='victory'){newRound();return}resetToCheckpoint(state);displayedMode='';showMode();canvas.focus({preventScroll:true});}
-function togglePause(){pauseGame(state);clearInputs();displayedMode='';showMode();lastStamp=0;accumulator=0;save()}
+function togglePause(){pauseGame(state);clearInputs();audio.setPaused(state.mode!=='playing');displayedMode='';showMode();lastStamp=0;accumulator=0;save()}
 function updateMute(){$('mute-btn').textContent=state.settings.mute?'♫ MUTED':'♪ SOUND';$('mute-btn').setAttribute('aria-pressed',String(state.settings.mute));}
 $('start-btn').addEventListener('click',start);
 $('continue-btn').addEventListener('click',continueRound);
@@ -187,9 +204,12 @@ $('resume-btn').addEventListener('click',togglePause);
 $('retry-btn').addEventListener('click',retry);$('pause-retry-btn').addEventListener('click',retry);
 $('replay-btn').addEventListener('click',newRound);$('pause-btn').addEventListener('click',togglePause);
 $('mute-btn').addEventListener('click',()=>{state.settings.mute=!state.settings.mute;audio.mute(state.settings.mute);audio.activate();updateMute();save()});
-$('assist-check').checked=state.settings.assist;$('motion-check').checked=state.settings.reducedMotion;
+$('assist-check').checked=state.settings.assist;$('motion-check').checked=state.settings.reducedMotion;$('contrast-check').checked=Boolean(state.settings.contrast);
+function updateContrast(){document.body.classList.toggle('high-contrast',Boolean(state.settings.contrast))}
+updateContrast();
 $('assist-check').addEventListener('change',e=>{state.settings.assist=e.target.checked;save()});
 $('motion-check').addEventListener('change',e=>{state.settings.reducedMotion=e.target.checked;save()});
+$('contrast-check').addEventListener('change',e=>{state.settings.contrast=e.target.checked;updateContrast();save()});
 updateMute();showContinue();
 async function loadAssets(){
  try{
@@ -287,10 +307,11 @@ if(previewId){productionStatus='LOCAL ART PREVIEW ONLY: '+previewId+' (NOT produ
   showAssetStatus();
  }).catch(error=>{productionErrors=['loader: '+error.message];showAssetStatus()});
  showMode();requestAnimationFrame(animate);
-window.__SHAKEDOWN_QA={snapshot:()=>snapshot(state),metrics,assets:()=>({loaded:assetCount,failed:[...assetErrors],productionLoaded,productionDeclared,productionErrors:[...productionErrors]}),
+window.__SHAKEDOWN_QA={snapshot:()=>snapshot(state),metrics,audio:()=>audio.diagnostics(),assets:()=>({loaded:assetCount,failed:[...assetErrors],productionLoaded,productionDeclared,productionErrors:[...productionErrors]}),
  // Developer-only deterministic test aids; excluded from normal gameplay and production paths.
  ...(new URLSearchParams(location.search).has('qa')?{
   warp:(x,y)=>{state.player.x=x;state.player.y=y;state.player.prevX=x;state.player.prevY=y;state.player.vx=0;state.player.vy=0;state.camera.x=Math.max(0,x-450);state.camera.y=Math.min(0,y-260);},
   setBossRecovery:()=>{state.boss.triggered=true;state.boss.mode='rest';state.boss.timer=999;state.boss.hurtTime=0;},
   inspectState:()=>state
  }:{})};
+window.__SHAKEDOWN_BOOT_READY?.();

@@ -105,3 +105,49 @@ Following the initial full sweep, the authored geometry safety check was extende
 - Tested implementation commit: 4be648f53e3c03c5a11e084b0bf093c65731e3d0.
 - Local BigMac final npm run validate 25/25 passed; desktop browser 23 executed passed and 2 expected skipped; mobile browser 23 executed passed and 2 expected skipped.
 - This implementation commit remains on the PR preparation branch; no main merge or public-site deployment is claimed. Final GitHub CI status must be checked independently.
+
+## 2026-10-11 - Round 5: Asset-independent production reliability and release preparation
+
+### Repository state and authority
+- Target: westkitty/ShakeDown, prep/asset-ready-20261011; starting Git HEAD a584f03d3c6240de803ad3cc352b441d3e25de2f, clean before this session.
+- Capability: authorized BigMac repo read/write, node/npm, locally served browser, installed Brave headed and headless; GitHub connector for guarded, reviewable fast-forward PR updates. No physically connected Android/iPhone and no physically received LM Arena final art.
+- Scope grouped into (1) audio/startup/save resilience, (2) deterministic bulk intake and release evidence, and (3) mobile/readability/accessibility/performance checks, preserving the Canvas 2D game, physics/world, original source sprites and active 220 visual/21 audio generation requests. No new dependencies, engine migration, external art or changes to main.
+
+### Baseline and defects confirmed
+- Baseline npm ci and npm run validate: 25/25 Node passed.
+- Confirmed (high): two-tab settings save could erase the other tab's earned birthday completion; reproduced failing before repair. LocalStorage provides no atomic cross-tab CAS, so simultaneous write collision remains a documented limitation.
+- Confirmed (medium): AudioContext constructed before user gesture; pause/mute/restart did not guarantee clearing scheduled oscillator voices and had no outstanding-voice ceiling.
+- Confirmed (medium): 320px phone layout overflowed to 345px; 844x390 mobile landscape had Start at bottom ~448px and touch actions at ~682px, both outside initial 390px viewport.
+- Confirmed (medium): High Contrast existed as a saved field but had no actual UI/visual effect.
+- Confirmed (medium): failed ES module dependency made title inert; a parallel BigMac browser test traced net::ERR_CONNECTION_RESET for the imported game progress module. An independent warning/reload retry now handles game-script-load failures.
+- Confirmed gap: incoming generator files lacked safe multi-file inventory/stage flow; release had no static byte-graph identity report or reproducible real-time diagnostic measurement.
+
+### Implemented
+- AudioBox creates audio only after permitted user input, supports mute/pause/reset/dispose, caps live effect voices at 24, tracks/cleans oscillators, and never blocks gameplay when WebAudio fails. Main controls wire these operations and exposes read-only QA diagnostics.
+- Storage reconciliation reads the current disk record before writing stale-tab settings, preserves earned completed/best score, and observes storage changes for on-title Continue updates.
+- Added batch-intake CLI: exact logical-ID or canonical basename mapping, SHA-256 deduplication, PNG/WAV/OGG checks, unsafe path/symlink rejection, dry-run report and explicit --stage into ignored .asset-staging, never approval/activation.
+- Added wall-clock perf-audit CLI with honest rAF, render timing, input observation, responsive bounds, browser errors, representative viewport scenarios and optional screenshots, explicitly distinct from synthetic-clock route tests.
+- Added static release-preflight CLI with deterministic SHA-256 manifest, actual runtime-module/HTML/Cinnamon/approved-art checks; negative control removes a module in isolated fixture and ensures failure. CI browser workflow writes and uploads per-run static-preflight report.
+- Fixed narrow 320px overflow and first-viewport landscape controls with CSS presentation only; no world/physics changes.
+- Activated saved High Contrast preference: visible Pause checkbox, higher contrast HUD/menu/touch styles; persisted preference verified across reload.
+- Added fixed-network-failure startup Retry Loading fallback; verified failure by aborting an actual imported module request.
+- Browser tests expanded for source-art missing fallback, offline post-load, repeated resize/focus/voice lifecycle, two tabs and restricted storage, mobile action sizing/contrast, natural boss states in assisted/normal scripted routes and high contrast.
+
+### Execution evidence
+- After implementing CLI/audio/lifecycle changes: npm run validate 31/31 passed; release preflight 38 actual runtime files present, zero missing, deterministic SHA-256 byte inventory and a dirty-worktree warning as expected before commit.
+- Isolated asset batch produced true 220+21 inventory, 26 source frames, zero external approved, 215 outstanding; tested malformed/ambiguous/symlink/duplicate and correct stage-only behavior.
+- Browser tests run on actual localhost HTTP/Brave in separated 1-worker groups to fit bounded DEX execution: desktop group A 14 passed/1 skipped; desktop B 20 passed/3 skipped; mobile A 14 passed/1 skipped; mobile B 21 passed/2 skipped. High Contrast tested separately: desktop 1 and mobile 1 pass; accessibility rechecked after extra Pause option: 5 passed/1 skipped. No other browser failures in those bounded final passes.
+- Remote headed browser rAF showed p95 roughly 205-216ms across responsive viewports, with Canvas render cost roughly 0.9-1.2ms. A 12-second sample observed 78 callbacks and roughly 3.34MB JavaScript heap at one point. This is remote-scheduling evidence, NOT proof of 60 FPS, leak freedom or mobile performance.
+- Earlier oversubscribed (3 workers) browser runs failed a preview test when the local Python server reset the imported progress module connection. Trace confirmed the HTTP connection reset, not a failed art integration. Added classic-script recovery and tested Retry Loading. The single-worker grouped runs were green.
+- Audio output has NOT been listened to through physical speakers. True cross-tab simultaneous writes, real user FPS, visual identity of pending art and in-person full-game play remain unverified.
+
+### Architecture, protected identity and release gates
+- No changes to original 26 Cinnamon images or their source hashes, 220 visual and 21 audio LM Arena job master, collision/camera/renderer ownership, the golden dome 23-step world or existing GitHub Pages config.
+- No production final art intake, human Fox identity signoff, runtime activation of generated artwork or physical phone test. The user has not requested premature merge to main.
+- Release docs: docs/ASSET_BATCH_INTAKE_RUNBOOK.md, docs/READABILITY_AND_PERFORMANCE_AUDIT.md, docs/RELEASE_REHEARSAL.md.
+- Full exact-GitHub SHA CI and code review required after delivery before any release; rollback must be a normal reviewed revert PR, never force push.
+- Implementation commit SHA to append once published; documentation followup separate. Existing Bible is additive.
+
+### Round 5 final local execution receipt
+
+The completed Round 5 static suite: **31/31 Node passed**, release-preflight checks 38 physically present runtime files. Final one-worker local browser groups: desktop 14+20+1 = **35 passed** with 4 intentional skips; mobile-emulated 14+21+1 = **36 passed** with 3 intentional skips. Follow-up mixed-project accessibility recheck after the High Contrast setting passed 5/5 executed checks with one duplicate desktop touch test skipped, not double-counted. No remaining failures in controlled final runs. This evidence is narrower than real-device FPS, speaker output, human gameplay, art approval, or hosted main deployment.

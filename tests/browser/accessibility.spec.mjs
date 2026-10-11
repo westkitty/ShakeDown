@@ -13,11 +13,11 @@ test('pause is a keyboard-accessible dialog with focus containment and no auto-r
   code:'KeyP',key:'p',repeat:true,bubbles:true,cancelable:true
  })));
  await expect(page.locator('#pause-overlay')).not.toHaveClass(/hidden/);
- await page.locator('#motion-check').focus();
+ await page.locator('#contrast-check').focus();
  await page.keyboard.press('Tab');
  await expect(page.locator('#resume-btn')).toBeFocused();
  await page.keyboard.press('Shift+Tab');
- await expect(page.locator('#motion-check')).toBeFocused();
+ await expect(page.locator('#contrast-check')).toBeFocused();
  await page.keyboard.press('Escape');
  await expect(page.locator('#pause-overlay')).toHaveClass(/hidden/);
  await expect(page.locator('#game')).toBeFocused();

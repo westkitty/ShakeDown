@@ -100,3 +100,18 @@ Reduced Motion has a real renderer gate: optional decorative drifting, moving co
 Keyboard accessibility: native Enter/Space activation of focused controls, repeat-safe pause/mute keys, focus moved to dialog controls and restored to the game, Tab focus within active overlays and keyboard-operable touch controls. Browser checks are not substitutes for physical device or assistive-technology audits.
 
 No final LM Arena image or audio was fabricated or approved; the existing two-stage production art review and activation gate remains intact.
+
+
+## Round 5 — asset-independent verification extension (October 11, 2026)
+
+This round groups the seven requested opportunities into three bounded systems: (1) audio, startup and cross-tab storage resilience; (2) deterministic batch intake and release preflight; (3) measured real-browser performance, mobile readability, accessible controls and release rehearsal.
+
+A received LM Arena batch can now be assessed via scripts/batch-intake.mjs and docs/ASSET_BATCH_INTAKE_RUNBOOK.md. The report maps only exact original contract names or leading logical IDs, refuses unknown/ambiguous IDs, detects duplicate candidate IDs and reused SHA-256 across different IDs, rejects symlinks, bad geometry, corrupted PNG/WAV/OGG and oversize files, and provides missing-contract inventory. A default scan is read-only; --stage alone is an explicit file copy to ignored .asset-staging. Neither variant can approve or activate. The original master generator prompts remain unchanged.
+
+A separate release rehearsal script traces actual static HTML and module dependencies, physically present 26 Cinnamon source files and any approved external assets/evidence, computes a stable SHA-256 inventory, and fails on missing runtime bytes. The GitHub browser workflow also uploads its per-run static-preflight JSON. This is an offline byte/reference gate, not screenshot, audio, gameplay, deployment or character-fidelity proof.
+
+The AudioBox is now gesture-gated, explicit pause/mute aware, cleans up oscillators when they end, caps live voices to 24, supports reset/dispose and handles context suspension/recovery. A classic-script boot watchdog provides Retry Loading when the ESM graph fails to finish loading, without changing engine architecture. The storage writer reads newer tab records before replacing earned completion/best score; normal stale-tab writes are repaired, but localStorage has no atomic compare-and-swap under a truly simultaneous race.
+
+The High Contrast checkbox is now functional, with visibly different HUD/menu/touch styling and a persisted preference. The corrected narrow-portrait/landscape CSS keeps initial Start and touch controls on screen, with 44px minimum coarse-pointer targets, while preserving 960x540 canvas collision. The test-assisted and normal browser routes assert Fox tell, charge/volley, stagger and hit states as well as victory. Missing sprite/asset manifests degrade to procedural fallbacks, and an already-loaded session continues through a network drop; **offline cold-start is not supported and no service worker was introduced**.
+
+Normal wall-clock requestAnimationFrame measurement on a headed remote Brave instance showed roughly 205–216ms p95 frame intervals while Canvas rendering was about 0.9–1.2ms p95. The remote environment is throttled or contended and did not demonstrate 60 FPS. Do not attempt an unsolicited renderer/engine rewrite from this evidence. Genuine iPhone/Android FPS, physical touch/sound, human route, real delivered art identity and exact deployed SHA remain required.
