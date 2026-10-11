@@ -1,8 +1,8 @@
 {
  "schema_version": 1,
- "generated_utc": "2026-10-11T20:42:23Z",
+ "generated_utc": "2026-10-11T20:44:04Z",
  "note": "Byte-level truth for generated production art. Every sha256 and pixel dimension here was measured from the file actually written to disk. Human visual review is a separate, still-open gate.",
- "count": 182,
+ "count": 184,
  "assets": {
   "BD-01": {
    "id": "BD-01",
@@ -515,6 +515,59 @@
     256
    ],
    "sha256": "15438833f5dbbfe593d79b2af77891e346ce79bc7e5f81b084f1675de81ec832",
+   "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+  },
+  "BD-13": {
+   "id": "BD-13",
+   "name": "Cake reveal poof",
+   "group": "BD",
+   "priority": "P1",
+   "path": "assets/production/birthday/bd_13.png",
+   "target_px": [
+    256,
+    192
+   ],
+   "pivot": "bottom-center",
+   "raw_source": ".artifact-cache/raw/bd_13.png",
+   "raw_sha256": "57fb190719b696e35fa01fb115a619fb38f277e72a31687d2678c1f9bc51e35a",
+   "raw_px": [
+    1408,
+    768
+   ],
+   "generated_utc": "2026-10-11T20:44:02Z",
+   "generator": "arena-agent-mode image generation",
+   "alpha": {
+    "required": true,
+    "mode": "straight RGBA",
+    "transparent_px_fraction": 0.5605,
+    "opaque_px_fraction": 0.3879,
+    "partial_edge_px": 2539,
+    "border_all_transparent": false,
+    "matte_rgb": [
+     255,
+     0,
+     255
+    ],
+    "transparent_fraction": 0.9037,
+    "partial_fraction": 0.0,
+    "matte_residual_opaque_px": 0,
+    "source_keyed_px": [
+     1408,
+     768
+    ]
+   },
+   "format": "PNG RGBA",
+   "trim_bbox_in_keyed_source": [
+    493,
+    170,
+    915,
+    598
+   ],
+   "actual_px": [
+    256,
+    192
+   ],
+   "sha256": "3ad703b648a0fa79ab23d7a79b76faa57c9ee76085d17e050b7f036189576df3",
    "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
   },
   "BD-14": {
@@ -4374,6 +4427,59 @@
     96
    ],
    "sha256": "62956b84c92ead5d036d0b687f402bda9e131cf57be6f282681053ccd25c2990",
+   "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+  },
+  "EX-VF05": {
+   "id": "EX-VF05",
+   "name": "Golden summit sunray",
+   "group": "EX-VF",
+   "priority": "P2",
+   "path": "assets/production/effects/ex_vf05.png",
+   "target_px": [
+    960,
+    540
+   ],
+   "pivot": "center",
+   "raw_source": ".artifact-cache/raw/ex_vf05.png",
+   "raw_sha256": "2c5f68c6addae97d9492b794f48185e0316a5be5cb51fd22fef94bd897d63251",
+   "raw_px": [
+    1376,
+    768
+   ],
+   "generated_utc": "2026-10-11T20:44:04Z",
+   "generator": "arena-agent-mode image generation",
+   "alpha": {
+    "required": true,
+    "mode": "straight RGBA",
+    "transparent_px_fraction": 0.5548,
+    "opaque_px_fraction": 0.4383,
+    "partial_edge_px": 3602,
+    "border_all_transparent": false,
+    "matte_rgb": [
+     255,
+     0,
+     255
+    ],
+    "transparent_fraction": 0.6776,
+    "partial_fraction": 0.0,
+    "matte_residual_opaque_px": 0,
+    "source_keyed_px": [
+     1376,
+     768
+    ]
+   },
+   "format": "PNG RGBA",
+   "trim_bbox_in_keyed_source": [
+    0,
+    0,
+    1118,
+    746
+   ],
+   "actual_px": [
+    960,
+    540
+   ],
+   "sha256": "35e1bf151e104fc134a4e5bdd6058108bc138024b5b15b60b933b3fd062f179e",
    "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
   },
   "EX-VF06": {

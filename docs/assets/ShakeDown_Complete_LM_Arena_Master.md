@@ -44,7 +44,7 @@ Canvas engine: 960x540 logical screen, 32px tile contacts, source game inputs vi
 
 | Asset family | Specifications | Physically verified now | Missing image generation | P0 | P1 | P2 |
 |---|---:|---:|---:|---:|---:|---:|
-| BIRTHDAY REVEAL / CAKE / SHAKES | 14 | 0 | 3 | 6 | 7 | 1 |
+| BIRTHDAY REVEAL / CAKE / SHAKES | 14 | 0 | 2 | 6 | 7 | 1 |
 | CAMPUS BACKGROUNDS / QUAD | 6 | 0 | 0 | 3 | 3 | 0 |
 | BOSS ATTACK READABILITY | 12 | 0 | 0 | 7 | 4 | 1 |
 | CINNAMON SOURCE SPRITES / REFINEMENTS | 33 | 26 | 6 | 1 | 6 | 0 |
@@ -54,7 +54,7 @@ Canvas engine: 960x540 logical screen, 32px tile contacts, source game inputs vi
 | DOME ARCHITECTURE / PROPS | 10 | 0 | 0 | 3 | 5 | 2 |
 | DOME STONE / GOLDEN TILES | 16 | 0 | 1 | 6 | 9 | 1 |
 | CAMPUS ENEMY STATES | 7 | 0 | 0 | 4 | 3 | 0 |
-| ADDITIONAL EFFECTS | 8 | 0 | 1 | 0 | 5 | 3 |
+| ADDITIONAL EFFECTS | 8 | 0 | 0 | 0 | 5 | 3 |
 | THE FOX / INTRO AND BOSS | 16 | 0 | 0 | 9 | 5 | 2 |
 | TRANSITIONS / STORY EFFECTS | 4 | 0 | 0 | 2 | 2 | 0 |
 | CAMPUS PULSE OBJECTS | 9 | 0 | 0 | 8 | 1 | 0 |
@@ -65,7 +65,7 @@ Canvas engine: 960x540 logical screen, 32px tile contacts, source game inputs vi
 | ADDITIONAL UI / TOUCH | 14 | 0 | 0 | 1 | 10 | 3 |
 | CAMPUS VISUAL EFFECTS | 10 | 0 | 0 | 1 | 9 | 0 |
 
-TOTAL VISUAL CONTRACT: **220** individually specified logical IDs; **26** source-verified Cinnamon frames; **182** generated, byte-verified and normalized production images; **12** still missing final production images.
+TOTAL VISUAL CONTRACT: **220** individually specified logical IDs; **26** source-verified Cinnamon frames; **184** generated, byte-verified and normalized production images; **10** still missing final production images.
 
 ## LM ARENA UNIVERSAL EXECUTION ORDER
 
@@ -6995,7 +6995,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/effects/ex_vf07.png; measure intrinsic 256x256 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID EX-VF07 in runtime manifest. At runtime map ID to Interactivity/impact readability; place in all with anchor center; use the engine auth collider "FX only" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### EX-VF05 — Golden summit sunray
-**State:** MISSING_GENERATION · **Priority:** P2 · **Where:** all · **Target:** 960×540 px · **Source:** 1920×1080 px · **Output:** `assets/production/effects/ex_vf05.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P2 · **Where:** all · **Target:** 960×540 px · **Source:** 1920×1080 px · **Output:** `assets/production/effects/ex_vf05.png`
 **Anchor:** center · **Collision:** FX only · **Animation:** single VFX key pose/independent output
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Named gameplay event and existing Canvas renderer
 
@@ -7523,7 +7523,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/birthday/bd_10.png; measure intrinsic 256x256 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID BD-10 in runtime manifest. At runtime map ID to Birthday finale visual celebration; place in finale with anchor bottom-center; use the engine auth collider "none (decorative only)" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### BD-13 — Cake reveal poof
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** finale · **Target:** 256×192 px · **Source:** 512×384 px · **Output:** `assets/production/birthday/bd_13.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** finale · **Target:** 256×192 px · **Source:** 512×384 px · **Output:** `assets/production/birthday/bd_13.png`
 **Anchor:** bottom-center · **Collision:** none (decorative only) · **Animation:** single static state/one-shot sprite
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Cinnamon existing victory pose + birthday DOM text + independent Shake cup source
 
