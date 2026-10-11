@@ -48,24 +48,24 @@ Canvas engine: 960x540 logical screen, 32px tile contacts, source game inputs vi
 | CAMPUS BACKGROUNDS / QUAD | 6 | 0 | 3 | 3 | 3 | 0 |
 | BOSS ATTACK READABILITY | 12 | 0 | 5 | 7 | 4 | 1 |
 | CINNAMON SOURCE SPRITES / REFINEMENTS | 33 | 26 | 6 | 1 | 6 | 0 |
-| COLLECTIBLES | 4 | 0 | 3 | 3 | 1 | 0 |
+| COLLECTIBLES | 4 | 0 | 1 | 3 | 1 | 0 |
 | DOME PARALLAX / VIEWPORTS | 8 | 0 | 5 | 3 | 3 | 2 |
 | DOME MECHANICS | 10 | 0 | 10 | 7 | 3 | 0 |
 | DOME ARCHITECTURE / PROPS | 10 | 0 | 10 | 3 | 5 | 2 |
 | DOME STONE / GOLDEN TILES | 16 | 0 | 10 | 6 | 9 | 1 |
-| CAMPUS ENEMY STATES | 7 | 0 | 7 | 4 | 3 | 0 |
+| CAMPUS ENEMY STATES | 7 | 0 | 5 | 4 | 3 | 0 |
 | ADDITIONAL EFFECTS | 8 | 0 | 8 | 0 | 5 | 3 |
 | THE FOX / INTRO AND BOSS | 16 | 0 | 0 | 9 | 5 | 2 |
-| TRANSITIONS / STORY EFFECTS | 4 | 0 | 4 | 2 | 2 | 0 |
+| TRANSITIONS / STORY EFFECTS | 4 | 0 | 2 | 2 | 2 | 0 |
 | CAMPUS PULSE OBJECTS | 9 | 0 | 9 | 8 | 1 | 0 |
 | COLLECTIBLES / POWERUPS / PICKUP FRAMES | 6 | 0 | 6 | 0 | 4 | 2 |
-| CAMPUS PROPS / LANDMARKS | 14 | 0 | 12 | 6 | 8 | 0 |
+| CAMPUS PROPS / LANDMARKS | 14 | 0 | 11 | 6 | 8 | 0 |
 | CAMPUS TERRAIN / COLLISION TILES | 10 | 0 | 10 | 6 | 4 | 0 |
 | BASE INTERFACE | 9 | 0 | 9 | 0 | 9 | 0 |
 | ADDITIONAL UI / TOUCH | 14 | 0 | 13 | 1 | 10 | 3 |
 | CAMPUS VISUAL EFFECTS | 10 | 0 | 10 | 1 | 9 | 0 |
 
-TOTAL VISUAL CONTRACT: **220** individually specified logical IDs; **26** source-verified Cinnamon frames; **46** generated, byte-verified and normalized production images; **148** still missing final production images.
+TOTAL VISUAL CONTRACT: **220** individually specified logical IDs; **26** source-verified Cinnamon frames; **53** generated, byte-verified and normalized production images; **141** still missing final production images.
 
 ## LM ARENA UNIVERSAL EXECUTION ORDER
 
@@ -2620,7 +2620,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/level1/props/pr_03_campus_bench.png; measure intrinsic 128x80 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID PR-03 in runtime manifest. At runtime map ID to Quad seating obstacle; place in all with anchor bottom-center; use the engine auth collider "specified per placement" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### PR-04 — Campus lamppost
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** all · **Target:** 96×256 px · **Source:** 384×1024 px · **Output:** `assets/level1/props/pr_04_campus_lamppost.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** all · **Target:** 96×256 px · **Source:** 384×1024 px · **Output:** `assets/level1/props/pr_04_campus_lamppost.png`
 **Anchor:** bottom-center · **Collision:** specified per placement · **Animation:** single static component
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -3361,7 +3361,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 7 individual asset contracts. Process P0 first, P1 next, P2 last. Reference sheets and complete per-asset instructions are repeated in every prompt.
 
 #### EN-01 — Cup Crawler walk A
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** all · **Target:** 64×64 px · **Source:** 256×256 px · **Output:** `assets/level1/enemies/en_01_cup_crawler_walk_a.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** all · **Target:** 64×64 px · **Source:** 256×256 px · **Output:** `assets/level1/enemies/en_01_cup_crawler_walk_a.png`
 **Anchor:** bottom-center · **Collision:** hurtbox=13,25,38,30 · **Animation:** one frame for this specific listed state; do NOT merge with other states
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -3466,7 +3466,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/level1/enemies/en_05_confetti_cannon_warning.png; measure intrinsic 96x96 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID EN-05 in runtime manifest. At runtime map ID to Hazard readable anticipation; place in all with anchor bottom-center; use the engine auth collider "hurtbox=18,34,60,58" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### EN-07 — Hazardous paper burst
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** all · **Target:** 32×32 px · **Source:** 128×128 px · **Output:** `assets/level1/enemies/en_07_hazardous_paper_burst.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** all · **Target:** 32×32 px · **Source:** 128×128 px · **Output:** `assets/level1/enemies/en_07_hazardous_paper_burst.png`
 **Anchor:** bottom-center · **Collision:** projectile=5,5,22,22 · **Animation:** one frame for this specific listed state; do NOT merge with other states
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -3609,7 +3609,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 4 individual asset contracts. Process P0 first, P1 next, P2 last. Reference sheets and complete per-asset instructions are repeated in every prompt.
 
 #### CO-01 — Green shake token
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** all · **Target:** 32×32 px · **Source:** 128×128 px · **Output:** `assets/level1/collectibles/co_01_green_shake_token.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** all · **Target:** 32×32 px · **Source:** 128×128 px · **Output:** `assets/level1/collectibles/co_01_green_shake_token.png`
 **Anchor:** center · **Collision:** pickup_radius=12 · **Animation:** single static component
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -3679,7 +3679,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/level1/collectibles/co_03_shamrock_shake_cup.png; measure intrinsic 64x96 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID CO-03 in runtime manifest. At runtime map ID to Stolen prize used as independent overlay; place in all with anchor center; use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### CO-04 — Green shake drip
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** all · **Target:** 24×32 px · **Source:** 96×128 px · **Output:** `assets/level1/collectibles/co_04_green_shake_drip.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** all · **Target:** 24×32 px · **Source:** 96×128 px · **Output:** `assets/level1/collectibles/co_04_green_shake_drip.png`
 **Anchor:** center · **Collision:** none · **Animation:** single static component
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -4105,7 +4105,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 4 individual asset contracts. Process P0 first, P1 next, P2 last. Reference sheets and complete per-asset instructions are repeated in every prompt.
 
 #### FX-01 — Fox thief holding shake
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** all · **Target:** 96×96 px · **Source:** 384×384 px · **Output:** `assets/level1/fox/fx_01_fox_thief_holding_shake.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** all · **Target:** 96×96 px · **Source:** 384×384 px · **Output:** `assets/level1/fox/fx_01_fox_thief_holding_shake.png`
 **Anchor:** bottom-center · **Collision:** none · **Animation:** one frame for this specific listed state; do NOT merge with other states
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -4140,7 +4140,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/level1/fox/fx_01_fox_thief_holding_shake.png; measure intrinsic 96x96 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID FX-01 in runtime manifest. At runtime map ID to Theft scene / silhouette read; place in all with anchor bottom-center; use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### FX-02 — Fox escape sprint
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** all · **Target:** 96×96 px · **Source:** 384×384 px · **Output:** `assets/level1/fox/fx_02_fox_escape_sprint.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** all · **Target:** 96×96 px · **Source:** 384×384 px · **Output:** `assets/level1/fox/fx_02_fox_escape_sprint.png`
 **Anchor:** bottom-center · **Collision:** none · **Animation:** one frame for this specific listed state; do NOT merge with other states
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
