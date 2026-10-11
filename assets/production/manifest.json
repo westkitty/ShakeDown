@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "generated_utc": "2026-10-11T19:46:04Z",
+  "generated_utc": "2026-10-11T19:47:41Z",
   "note": "Byte-level truth for generated production art. Every sha256 and pixel dimension here was measured from the file actually written to disk. Human visual review is a separate, still-open gate.",
-  "count": 115,
+  "count": 122,
   "assets": {
     "BD-01": {
       "id": "BD-01",
@@ -1564,6 +1564,59 @@
       "sha256": "e2c39fcadeaa38ada041e1471afa354381d29ca41f0cae667f7430a2ed74d2a7",
       "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
     },
+    "DM-PR02": {
+      "id": "DM-PR02",
+      "name": "Main Building pilaster",
+      "group": "DM-PR",
+      "priority": "P1",
+      "path": "assets/production/dome/props/dm_pr02.png",
+      "target_px": [
+        128,
+        256
+      ],
+      "pivot": "base-center",
+      "raw_source": ".artifact-cache/raw/dm_pr02.png",
+      "raw_sha256": "172deeb120ad3a0cd2aa7375cd0aed361d1c96397d7955b4cbddca94b1f32edb",
+      "raw_px": [
+        1376,
+        768
+      ],
+      "generated_utc": "2026-10-11T19:47:41Z",
+      "generator": "arena-agent-mode image generation",
+      "alpha": {
+        "required": true,
+        "mode": "straight RGBA",
+        "transparent_px_fraction": 0.6135,
+        "opaque_px_fraction": 0.3528,
+        "partial_edge_px": 1104,
+        "border_all_transparent": false,
+        "matte_rgb": [
+          255,
+          0,
+          255
+        ],
+        "transparent_fraction": 0.8991,
+        "partial_fraction": 0.0,
+        "matte_residual_opaque_px": 0,
+        "source_keyed_px": [
+          1376,
+          768
+        ]
+      },
+      "format": "PNG RGBA",
+      "trim_bbox_in_keyed_source": [
+        585,
+        8,
+        791,
+        760
+      ],
+      "actual_px": [
+        128,
+        256
+      ],
+      "sha256": "ec978acb82fd676457f4d332bbc8a63b81c942130c25c17bdcab5fef34e785f0",
+      "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+    },
     "DM-PR03": {
       "id": "DM-PR03",
       "name": "Cupola hero silhouette",
@@ -1668,6 +1721,59 @@
         256
       ],
       "sha256": "ad3599cce5b7ff8f6e659b3561c6aa4cd215f36cab51983c2c2ff686e96d69c2",
+      "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+    },
+    "DM-PR05": {
+      "id": "DM-PR05",
+      "name": "Summit railing section",
+      "group": "DM-PR",
+      "priority": "P1",
+      "path": "assets/production/dome/props/dm_pr05.png",
+      "target_px": [
+        256,
+        96
+      ],
+      "pivot": "base-center",
+      "raw_source": ".artifact-cache/raw/dm_pr05.png",
+      "raw_sha256": "b80c3b9449ef62a5063a1003f1fb557e120c2fbd8047bbd4b19e99e24359eabc",
+      "raw_px": [
+        1408,
+        768
+      ],
+      "generated_utc": "2026-10-11T19:47:41Z",
+      "generator": "arena-agent-mode image generation",
+      "alpha": {
+        "required": true,
+        "mode": "straight RGBA",
+        "transparent_px_fraction": 0.3193,
+        "opaque_px_fraction": 0.3235,
+        "partial_edge_px": 8778,
+        "border_all_transparent": false,
+        "matte_rgb": [
+          255,
+          0,
+          255
+        ],
+        "transparent_fraction": 0.7504,
+        "partial_fraction": 0.0,
+        "matte_residual_opaque_px": 0,
+        "source_keyed_px": [
+          1408,
+          768
+        ]
+      },
+      "format": "PNG RGBA",
+      "trim_bbox_in_keyed_source": [
+        152,
+        199,
+        1256,
+        616
+      ],
+      "actual_px": [
+        256,
+        96
+      ],
+      "sha256": "454abe116ab706de7fcc73b8d66f47a9d45f6f50ff41428ec586587dd4e02199",
       "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
     },
     "DM-TL01": {
@@ -1814,6 +1920,59 @@
       "sha256": "609f570a94646e8e6f6351a7b3a4e6a4603726e9722156a6e4d32a3659d97458",
       "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
     },
+    "DM-TL07": {
+      "id": "DM-TL07",
+      "name": "Cornice left cap",
+      "group": "DM-TL",
+      "priority": "P1",
+      "path": "assets/production/dome/tiles/dm_tl07.png",
+      "target_px": [
+        32,
+        32
+      ],
+      "pivot": "tile top-left",
+      "raw_source": ".artifact-cache/raw/dm_tl07.png",
+      "raw_sha256": "7ee0229207c2250437e906f4afede2f8f45215334d4769b94dd288dabddc00bc",
+      "raw_px": [
+        1408,
+        768
+      ],
+      "generated_utc": "2026-10-11T19:47:41Z",
+      "generator": "arena-agent-mode image generation",
+      "alpha": {
+        "required": true,
+        "mode": "straight RGBA",
+        "transparent_px_fraction": 0.5908,
+        "opaque_px_fraction": 0.3301,
+        "partial_edge_px": 81,
+        "border_all_transparent": false,
+        "matte_rgb": [
+          255,
+          0,
+          255
+        ],
+        "transparent_fraction": 0.4531,
+        "partial_fraction": 0.0,
+        "matte_residual_opaque_px": 0,
+        "source_keyed_px": [
+          1408,
+          768
+        ]
+      },
+      "format": "PNG RGBA",
+      "trim_bbox_in_keyed_source": [
+        94,
+        117,
+        1326,
+        651
+      ],
+      "actual_px": [
+        32,
+        32
+      ],
+      "sha256": "29a464b2a92c011d87993ea80100206740777a8be43b8395e9eb0d19681474c4",
+      "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+    },
     "DM-TL09": {
       "id": "DM-TL09",
       "name": "Scaffold deck center",
@@ -1848,6 +2007,165 @@
         32
       ],
       "sha256": "8d177741472827e83c9daf61a475ad2cb22064d88e2ff4c63387fcf9532eb611",
+      "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+    },
+    "DM-TL10": {
+      "id": "DM-TL10",
+      "name": "Scaffold steel support",
+      "group": "DM-TL",
+      "priority": "P1",
+      "path": "assets/production/dome/tiles/dm_tl10.png",
+      "target_px": [
+        32,
+        32
+      ],
+      "pivot": "tile top-left",
+      "raw_source": ".artifact-cache/raw/dm_tl10.png",
+      "raw_sha256": "473d553fd37d1514ed593c68203322a385e152dc669c02c870eefe69c56330b9",
+      "raw_px": [
+        1024,
+        1024
+      ],
+      "generated_utc": "2026-10-11T19:47:41Z",
+      "generator": "arena-agent-mode image generation",
+      "alpha": {
+        "required": true,
+        "mode": "straight RGBA",
+        "transparent_px_fraction": 0.5713,
+        "opaque_px_fraction": 0.1201,
+        "partial_edge_px": 316,
+        "border_all_transparent": false,
+        "matte_rgb": [
+          255,
+          0,
+          255
+        ],
+        "transparent_fraction": 0.6739,
+        "partial_fraction": 0.0,
+        "matte_residual_opaque_px": 0,
+        "source_keyed_px": [
+          1024,
+          1024
+        ]
+      },
+      "format": "PNG RGBA",
+      "trim_bbox_in_keyed_source": [
+        0,
+        0,
+        1024,
+        1024
+      ],
+      "actual_px": [
+        32,
+        32
+      ],
+      "sha256": "4baaaf76d90ac61f03b3433978e55b178107bf1e8a666e430250becb68736401",
+      "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+    },
+    "DM-TL11": {
+      "id": "DM-TL11",
+      "name": "Arch keystone",
+      "group": "DM-TL",
+      "priority": "P1",
+      "path": "assets/production/dome/tiles/dm_tl11.png",
+      "target_px": [
+        64,
+        64
+      ],
+      "pivot": "tile top-left",
+      "raw_source": ".artifact-cache/raw/dm_tl11.png",
+      "raw_sha256": "6598c6ca768eed467e38e4f0df3db7d98c3c1bab3583f3ec188f6dc7d6e69477",
+      "raw_px": [
+        1408,
+        768
+      ],
+      "generated_utc": "2026-10-11T19:47:41Z",
+      "generator": "arena-agent-mode image generation",
+      "alpha": {
+        "required": true,
+        "mode": "straight RGBA",
+        "transparent_px_fraction": 0.6692,
+        "opaque_px_fraction": 0.2664,
+        "partial_edge_px": 264,
+        "border_all_transparent": false,
+        "matte_rgb": [
+          255,
+          0,
+          255
+        ],
+        "transparent_fraction": 0.4265,
+        "partial_fraction": 0.0,
+        "matte_residual_opaque_px": 0,
+        "source_keyed_px": [
+          1408,
+          768
+        ]
+      },
+      "format": "PNG RGBA",
+      "trim_bbox_in_keyed_source": [
+        0,
+        70,
+        1408,
+        768
+      ],
+      "actual_px": [
+        64,
+        64
+      ],
+      "sha256": "71a667266dc2a1ddd02990b1f52691007e46e93bf597209fc3a84a776b05b2e5",
+      "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+    },
+    "DM-TL15": {
+      "id": "DM-TL15",
+      "name": "Gold dome rib vertical",
+      "group": "DM-TL",
+      "priority": "P1",
+      "path": "assets/production/dome/tiles/dm_tl15.png",
+      "target_px": [
+        32,
+        64
+      ],
+      "pivot": "tile top-left",
+      "raw_source": ".artifact-cache/raw/dm_tl15.png",
+      "raw_sha256": "19e268e211556c125f8afa1c1b89167378a13246315a299fee08ec5a9026bc96",
+      "raw_px": [
+        1408,
+        768
+      ],
+      "generated_utc": "2026-10-11T19:47:41Z",
+      "generator": "arena-agent-mode image generation",
+      "alpha": {
+        "required": true,
+        "mode": "straight RGBA",
+        "transparent_px_fraction": 0.5884,
+        "opaque_px_fraction": 0.2378,
+        "partial_edge_px": 356,
+        "border_all_transparent": false,
+        "matte_rgb": [
+          255,
+          0,
+          255
+        ],
+        "transparent_fraction": 0.9031,
+        "partial_fraction": 0.0,
+        "matte_residual_opaque_px": 0,
+        "source_keyed_px": [
+          1408,
+          768
+        ]
+      },
+      "format": "PNG RGBA",
+      "trim_bbox_in_keyed_source": [
+        622,
+        18,
+        786,
+        751
+      ],
+      "actual_px": [
+        32,
+        64
+      ],
+      "sha256": "5394b1e526dd309cbcc79f8b3ea2c3029bb4f156cd7aab1dd37b04328ffeb1a7",
       "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
     },
     "DM-TL16": {
@@ -5612,6 +5930,59 @@
         128
       ],
       "sha256": "1c116eaf8aafc7621efd406fa0fbaf0c0d239f0e3f05f442fe0c776ca7cbac96",
+      "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+    },
+    "VF-07": {
+      "id": "VF-07",
+      "name": "Projectile hit burst",
+      "group": "VF",
+      "priority": "P1",
+      "path": "assets/level1/effects/vf_07_projectile_hit_burst.png",
+      "target_px": [
+        64,
+        64
+      ],
+      "pivot": "center",
+      "raw_source": ".artifact-cache/raw/vf_07.png",
+      "raw_sha256": "36b3ea4758e40d400d2f30f74814b083ad2da7f37d7e48af0a71ad6e3434b604",
+      "raw_px": [
+        1408,
+        768
+      ],
+      "generated_utc": "2026-10-11T19:47:41Z",
+      "generator": "arena-agent-mode image generation",
+      "alpha": {
+        "required": true,
+        "mode": "straight RGBA",
+        "transparent_px_fraction": 0.3677,
+        "opaque_px_fraction": 0.4182,
+        "partial_edge_px": 877,
+        "border_all_transparent": false,
+        "matte_rgb": [
+          255,
+          0,
+          255
+        ],
+        "transparent_fraction": 0.8878,
+        "partial_fraction": 0.0,
+        "matte_residual_opaque_px": 0,
+        "source_keyed_px": [
+          1408,
+          768
+        ]
+      },
+      "format": "PNG RGBA",
+      "trim_bbox_in_keyed_source": [
+        481,
+        164,
+        939,
+        604
+      ],
+      "actual_px": [
+        64,
+        64
+      ],
+      "sha256": "7deb34af73eeeec0d77a13a3b00255e5256d524d884a711174c4be204cfefa8c",
       "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
     },
     "VF-08": {
