@@ -346,9 +346,38 @@ for a in ASSETS:
   a['integration']=f'ALREADY VERIFIED IN REPOSITORY. Existing file {a["path"]} has SHA256 captured from source extraction in frames.json and is used in Canvas 2D runtime animation. Preserve; replace only after diff and regression visual proof. Physics AABB remains independent.'
  a['prompt']=make_prompt(a)
 
+# ---------------------------------------------------------------------------
+# Promotion from the real integration manifest. An asset only leaves
+# MISSING_GENERATION when bytes physically exist at its contract path and the
+# manifest recorded a measured sha256 for them. Nothing here is assumed.
+MANIFEST_PATH=ROOT/'assets/production/manifest.json'
+MANIFEST={}
+if MANIFEST_PATH.exists():
+ MANIFEST=json.loads(MANIFEST_PATH.read_text()).get('assets',{})
+GENERATED_STATUSES=('NORMALIZED_VERIFIED','INTEGRATED_BROWSER_CHECKED','APPROVED')
+def is_generated(a):
+ return a['status'] in GENERATED_STATUSES
+for a in ASSETS:
+ record=MANIFEST.get(a['id'])
+ if not record:
+  continue
+ target=ROOT/a['path']
+ if not target.exists():
+  raise SystemExit(f'manifest claims {a["id"]} but {a["path"]} is absent')
+ actual=hashlib.sha256(target.read_bytes()).hexdigest()
+ if actual!=record.get('sha256'):
+  raise SystemExit(f'{a["id"]} sha256 mismatch: manifest {record.get("sha256")} != disk {actual}')
+ a['status']='PROVISIONAL_MISSING_APPROVAL' if a['group']=='FOX' else 'NORMALIZED_VERIFIED'
+ a['sha256']=actual
+ a['notes']=(f'Generated and normalized {record.get("generated_utc","")}; '
+             f'measured {record.get("actual_px")}; sha256 {actual[:16]}…; '
+             f'human visual/identity approval still open. '
+             f'Alpha: {json.dumps(record.get("alpha",{}).get("mode","RGB"))}')
+
 assert len(ASSETS)==len(set(a['id'] for a in ASSETS)), 'unique IDs'
 assert len(set(a['path'] for a in ASSETS))==len(ASSETS), 'unique output paths'
-assert sum(a['status'].startswith('VERIFIED') for a in ASSETS)==26, 'known existing cutouts only'
+assert sum(a['status']=='VERIFIED_IN_REPO_LOCAL_BROWSER' for a in ASSETS)==26, 'known existing cutouts only'
+assert sum(is_generated(a) for a in ASSETS)==len([a for a in ASSETS if a['id'] in MANIFEST]), 'manifest coverage'
 assert all(a['prompt'] and a['acceptance'] and a['rejection'] and a['integration'] for a in ASSETS)
 
 AUDIO=list(BASE['audio'])
@@ -374,8 +403,9 @@ for au in AUDIO:
 GROUP_COUNTS=defaultdict(lambda:Counter())
 for a in ASSETS:
  GROUP_COUNTS[a['group']]['planned_or_verified']+=1
- GROUP_COUNTS[a['group']]['verified_in_repo']+=int(a['status'].startswith('VERIFIED'))
- GROUP_COUNTS[a['group']]['missing_generation']+=int(not a['status'].startswith('VERIFIED'))
+ GROUP_COUNTS[a['group']]['verified_in_repo']+=int(a['status']=='VERIFIED_IN_REPO_LOCAL_BROWSER')
+ GROUP_COUNTS[a['group']]['generated_normalized']+=int(is_generated(a))
+ GROUP_COUNTS[a['group']]['missing_generation']+=int(not (a['status']=='VERIFIED_IN_REPO_LOCAL_BROWSER' or is_generated(a)))
  GROUP_COUNTS[a['group']]['P0']+=int(a['priority']=='P0')
  GROUP_COUNTS[a['group']]['P1']+=int(a['priority']=='P1')
  GROUP_COUNTS[a['group']]['P2']+=int(a['priority']=='P2')
@@ -384,7 +414,9 @@ COUNTS=Counter(a['status'] for a in ASSETS)
 
 contract={
  'title':'SHAKEDOWN — COMPLETE BIRTHDAY EDITION ASSET CONTRACT',
- 'status':'SPECIFICATION_COMPLETE; GENERATED_ART_PENDING; 26 SOURCE_CINNAMON_FRAMES_VERIFIED',
+ 'status':f"SPECIFICATION_COMPLETE; {sum(is_generated(a) for a in ASSETS)} GENERATED ASSETS NORMALIZED_AND_VERIFIED_BY_BYTES; "
+ f"{sum(not (a['status']=='VERIFIED_IN_REPO_LOCAL_BROWSER' or is_generated(a)) for a in ASSETS)} STILL UNGENERATED; "
+ '26 SOURCE_CINNAMON_FRAMES_VERIFIED',
  'schema_version':'2.0.0','built_utc':'2026-10-11','source_repo':'westkitty/ShakeDown',
  'governing_commit_before_this_asset_packet':'8b39c32ced8f7051908b10a4d936b85e02e42a0d',
  'visual_authorities':REFS,
@@ -392,7 +424,7 @@ contract={
  'source_grounding':'73 existing Level 1 specs + real Cinnamon cutout manifest + latest full birthday game contract',
  'visual_guidelines':{'palette':PALETTE,'style':GLOBAL_LOCK,'cinnamon_lock':CIN_LOCK,'fox_candidate_not_approved':FOX_LOCK,'technical_rules':TECH_LOCK},
  'coverage_matrix':COVERAGE,
- 'totals':{'visual_specification_count':len(ASSETS),'verified_existing':sum(a['status'].startswith('VERIFIED') for a in ASSETS),'require_generation':sum(not a['status'].startswith('VERIFIED') for a in ASSETS),'awaiting_integrated_generated_art':0,'all_final_art_fully_integrated':False},
+ 'totals':{'visual_specification_count':len(ASSETS),'source_verified_cinnamon_frames':sum(a['status']=='VERIFIED_IN_REPO_LOCAL_BROWSER' for a in ASSETS),'generated_normalized_verified':sum(is_generated(a) for a in ASSETS),'require_generation':sum(not (a['status']=='VERIFIED_IN_REPO_LOCAL_BROWSER' or is_generated(a)) for a in ASSETS),'awaiting_human_visual_approval':sum(is_generated(a) for a in ASSETS),'all_final_art_fully_integrated':False},
  'pipeline_statuses':{'VERIFIED_IN_REPO_LOCAL_BROWSER':'actual Cinnamon source-derived, SHA-backed runtime assets only',
  'MISSING_GENERATION':'visual brief only; NO generated file exists at requested output path',
  'APPROVAL_PENDING':'Fox model needs acceptance, and dependent Fox sprites are prohibited from canon promotion until accepted'},
@@ -426,8 +458,8 @@ for name,desc in RUNTIME_MAP.items():lines.append(f'- **{name}:** {desc}')
 lines+=['','## PRODUCTION STATUS MATRIX','',
  '| Asset family | Specifications | Physically verified now | Missing image generation | P0 | P1 | P2 |','|---|---:|---:|---:|---:|---:|---:|']
 for g,c in COVERAGE.items():
- lines.append(f"| {GROUP_NAMES[g]} | {c['planned_or_verified']} | {c['verified_in_repo']} | {c['missing_generation']} | {c['P0']} | {c['P1']} | {c['P2']} |")
-lines+=['',f"TOTAL VISUAL CONTRACT: **{len(ASSETS)}** individually specified logical IDs; **{contract['totals']['verified_existing']}** source-verified frames; **{contract['totals']['require_generation']}** missing final production images; **0** newly generated-and-verified external LM Arena renders; **0** generated final art assets awaiting integration.",
+ lines.append(f"| {GROUP_NAMES[g]} | {c['planned_or_verified']} | {c.get('verified_in_repo',0)} | {c.get('missing_generation',0)} | {c['P0']} | {c['P1']} | {c['P2']} |")
+lines+=['',f"TOTAL VISUAL CONTRACT: **{len(ASSETS)}** individually specified logical IDs; **{contract['totals']['source_verified_cinnamon_frames']}** source-verified Cinnamon frames; **{contract['totals']['generated_normalized_verified']}** generated, byte-verified and normalized production images; **{contract['totals']['require_generation']}** still missing final production images.",
  '', '## LM ARENA UNIVERSAL EXECUTION ORDER',
  '', '1. Review the two embedded reference sheets. Confirm accepted character identity and that 26 source cutouts are existing assets; never produce redundant new Cinnamon core frames.',
  '2. Approve FOX-01 candidate before generating dependent FOX action states. If approval cannot be obtained in time, use the explicitly provisional in-game Canvas Fox.',
@@ -509,8 +541,8 @@ S(Table([[inline('01  CAMPUS QUAD','small'),inline('02  PLAYABLE GOLDEN DOME','s
          [inline('03  FOX ENCOUNTER','small'),inline('04  BIRTHDAY FINALE','small')]],
         colWidths=[238,238],style=TableStyle([('BACKGROUND',(0,0),(-1,-1),C_FAINT),('BOX',(0,0),(-1,-1),0.65,C_LINE),('INNERGRID',(0,0),(-1,-1),0.5,C_LINE),('LEFTPADDING',(0,0),(-1,-1),13),('TOPPADDING',(0,0),(-1,-1),10),('BOTTOMPADDING',(0,0),(-1,-1),10)])))
 S(Spacer(1,22))
-for l in [f'{len(ASSETS)} individually specified visual records. {contract["totals"]["verified_existing"]} source-verified Cinnamon frames.',
-          f'{contract["totals"]["require_generation"]} candidate visual outputs still require creation, approval, normalization and browser integration.',
+for l in [f'{len(ASSETS)} individually specified visual records. {contract["totals"]["source_verified_cinnamon_frames"]} source-verified Cinnamon frames.',
+          f'{contract["totals"]["generated_normalized_verified"]} generated outputs are byte-verified and normalized; {contract["totals"]["require_generation"]} candidate visual outputs still require creation.',
           'Full prompts independently executable, and each names its own asset, path, exact dimensions, source reference, visual rules, pivots and rejection criteria.',
           'The Fox has NO approved standalone turnaround; his candidate must be reviewed before promotion.']:
  S(para(l))
@@ -550,14 +582,14 @@ S(inline('COVERAGE MATRIX / VERIFIED VS REQUESTED','head'))
 headers=['Asset family','All','Existing','Generate','P0','P1','P2']
 t=[list(map(lambda v:inline(v,'table'),headers))]
 for g,c in COVERAGE.items():
- vals=[GROUP_NAMES[g],str(c['planned_or_verified']),str(c['verified_in_repo']),str(c['missing_generation']),str(c['P0']),str(c['P1']),str(c['P2'])]
+ vals=[GROUP_NAMES[g],str(c['planned_or_verified']),str(c.get('verified_in_repo',0)),str(c.get('missing_generation',0)),str(c['P0']),str(c['P1']),str(c['P2'])]
  t.append([inline(txt(v),'table') for v in vals])
 colW=[252,33,47,49,30,30,30]
 S(Table(t,colWidths=colW,repeatRows=1,hAlign='LEFT',style=TableStyle([
  ('BACKGROUND',(0,0),(-1,0),C_FAINT),('LINEBELOW',(0,0),(-1,0),1.1,C_GOLD),('LINEBELOW',(0,1),(-1,-1),0.2,C_LINE),
  ('LEFTPADDING',(0,0),(-1,-1),4),('RIGHTPADDING',(0,0),(-1,-1),3),('TOPPADDING',(0,0),(-1,-1),5),('BOTTOMPADDING',(0,0),(-1,-1),5),('VALIGN',(0,0),(-1,-1),'TOP')])))
 S(Spacer(1,16))
-S(para(f"TOTAL {len(ASSETS)} visual IDs; {contract['totals']['verified_existing']} existing actual verified; {contract['totals']['require_generation']} requests not yet generated; 0 new generated final art verified; 0 pending integration files. This is complete SPECIFICATION coverage, NOT completed final art coverage."))
+S(para(f"TOTAL {len(ASSETS)} visual IDs; {contract['totals']['source_verified_cinnamon_frames']} existing source frames verified; {contract['totals']['generated_normalized_verified']} generated outputs normalized and byte-verified; {contract['totals']['require_generation']} requests not yet generated. Human visual approval of generated outputs remains open."))
 S(para('Workflow: specification → approved visual reference → generate individual raw output → accept and normalize source → test dimensions/alpha/pivot → register SHA256 and logical ID → actual browser render plus interaction → approved and integrated.', 'small'))
 S(PageBreak())
 
@@ -623,6 +655,6 @@ SimpleDocTemplate(str(PDF),pagesize=letter,rightMargin=43,leftMargin=43,topMargi
 
 print(json.dumps({'pdf':str(PDF),'md':str(DEST/'ShakeDown_Complete_LM_Arena_Master.md'),
                   'json':str(DEST/'ShakeDown_Complete_Asset_Contract.json'),
-                  'visual_count':len(ASSETS),'verified':contract['totals']['verified_existing'],
+                  'visual_count':len(ASSETS),'verified':contract['totals']['source_verified_cinnamon_frames'],
                   'missing_generation':contract['totals']['require_generation'],
                   'audio_count':len(AUDIO),'groups':{g:dict(c) for g,c in COVERAGE.items()}},indent=2))

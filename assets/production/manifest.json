@@ -1,0 +1,419 @@
+{
+ "schema_version": 1,
+ "generated_utc": "2026-10-11T19:11:06Z",
+ "note": "Byte-level truth for generated production art. Every sha256 and pixel dimension here was measured from the file actually written to disk. Human visual review is a separate, still-open gate.",
+ "count": 9,
+ "assets": {
+  "BG-01": {
+   "id": "BG-01",
+   "name": "Daylight sky",
+   "group": "BG",
+   "priority": "P0",
+   "path": "assets/level1/backgrounds/bg_01_daylight_sky.png",
+   "target_px": [
+    960,
+    540
+   ],
+   "pivot": "top-left",
+   "raw_source": ".artifact-cache/raw/bg_01.png",
+   "raw_sha256": "706b644e38d81b0a8d39af1040b5c379e4f0c3ec5dcf28598ef3d5cd6c792b02",
+   "raw_px": [
+    1376,
+    768
+   ],
+   "generated_utc": "2026-10-11T19:10:39Z",
+   "generator": "arena-agent-mode image generation",
+   "alpha": {
+    "required": false,
+    "mode": "RGB"
+   },
+   "format": "PNG RGB",
+   "actual_px": [
+    960,
+    540
+   ],
+   "sha256": "e136396af18725b57ab50ea3a50c881ad46b7e6035cf5adeb71ece2663dffd19",
+   "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+  },
+  "BG-03": {
+   "id": "BG-03",
+   "name": "South Quad architecture",
+   "group": "BG",
+   "priority": "P0",
+   "path": "assets/level1/backgrounds/bg_03_south_quad_architecture.png",
+   "target_px": [
+    960,
+    540
+   ],
+   "pivot": "top-left",
+   "raw_source": ".artifact-cache/raw/bg_03.png",
+   "raw_sha256": "097f458775f04bcb716977c24caede0f77f006ef330c012ff8170963a416c7d6",
+   "raw_px": [
+    1376,
+    768
+   ],
+   "generated_utc": "2026-10-11T19:11:06Z",
+   "generator": "arena-agent-mode image generation",
+   "alpha": {
+    "required": true,
+    "mode": "straight RGBA",
+    "transparent_px_fraction": 0.0,
+    "opaque_px_fraction": 1.0,
+    "partial_edge_px": 0,
+    "border_all_transparent": false,
+    "matte_rgb": [
+     255,
+     0,
+     255
+    ],
+    "transparent_fraction": 0.0,
+    "partial_fraction": 0.0,
+    "matte_residual_opaque_px": 0,
+    "source_keyed_px": [
+     1376,
+     768
+    ]
+   },
+   "format": "PNG RGBA",
+   "trim_bbox_in_keyed_source": [
+    0,
+    0,
+    1376,
+    768
+   ],
+   "actual_px": [
+    960,
+    540
+   ],
+   "sha256": "9566386b16e328db5d1cdc9f65aaf011611641ead04e13377be1f17968b3dcda",
+   "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+  },
+  "BG-05": {
+   "id": "BG-05",
+   "name": "Golden Dome hero backdrop",
+   "group": "BG",
+   "priority": "P0",
+   "path": "assets/level1/backgrounds/bg_05_golden_dome_hero_backdrop.png",
+   "target_px": [
+    960,
+    540
+   ],
+   "pivot": "top-left",
+   "raw_source": ".artifact-cache/raw/bg_05.png",
+   "raw_sha256": "6aab57151b2afc95af64de28ca9bc5d23ea6791c9b8534c82d6eea4361e31cdb",
+   "raw_px": [
+    1376,
+    768
+   ],
+   "generated_utc": "2026-10-11T19:11:06Z",
+   "generator": "arena-agent-mode image generation",
+   "alpha": {
+    "required": true,
+    "mode": "straight RGBA",
+    "transparent_px_fraction": 0.0,
+    "opaque_px_fraction": 1.0,
+    "partial_edge_px": 0,
+    "border_all_transparent": false,
+    "matte_rgb": [
+     255,
+     0,
+     255
+    ],
+    "transparent_fraction": 0.0,
+    "partial_fraction": 0.0,
+    "matte_residual_opaque_px": 0,
+    "source_keyed_px": [
+     1376,
+     768
+    ]
+   },
+   "format": "PNG RGBA",
+   "trim_bbox_in_keyed_source": [
+    0,
+    0,
+    1376,
+    768
+   ],
+   "actual_px": [
+    960,
+    540
+   ],
+   "sha256": "b4bdeef3e1ffb2ce856ff9b6dd7f547fdbc58d3283e19717c7072e1487de134a",
+   "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+  },
+  "CO-03": {
+   "id": "CO-03",
+   "name": "Shamrock Shake cup",
+   "group": "CO",
+   "priority": "P0",
+   "path": "assets/level1/collectibles/co_03_shamrock_shake_cup.png",
+   "target_px": [
+    64,
+    96
+   ],
+   "pivot": "center",
+   "raw_source": ".artifact-cache/raw/co_03.png",
+   "raw_sha256": "1568061db4eb7a343d9e8b3c01a69ba6cd72c4d55643d6cbbe47f9c794b8b292",
+   "raw_px": [
+    1408,
+    768
+   ],
+   "generated_utc": "2026-10-11T19:10:39Z",
+   "generator": "arena-agent-mode image generation",
+   "alpha": {
+    "required": true,
+    "mode": "straight RGBA",
+    "transparent_px_fraction": 0.4788,
+    "opaque_px_fraction": 0.4116,
+    "partial_edge_px": 673,
+    "border_all_transparent": false,
+    "matte_rgb": [
+     255,
+     0,
+     255
+    ],
+    "transparent_fraction": 0.8908,
+    "partial_fraction": 0.0,
+    "matte_residual_opaque_px": 0,
+    "source_keyed_px": [
+     1408,
+     768
+    ]
+   },
+   "format": "PNG RGBA",
+   "trim_bbox_in_keyed_source": [
+    557,
+    82,
+    851,
+    686
+   ],
+   "actual_px": [
+    64,
+    96
+   ],
+   "sha256": "3e20e5ed0380783e777f06781301e01a3f0be203d852c0ca407f3f9dbf7d882b",
+   "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+  },
+  "DM-BG01": {
+   "id": "DM-BG01",
+   "name": "Dome approach hero panorama",
+   "group": "DM-BG",
+   "priority": "P0",
+   "path": "assets/production/dome/backgrounds/dm_bg01.png",
+   "target_px": [
+    960,
+    540
+   ],
+   "pivot": "top-left",
+   "raw_source": ".artifact-cache/raw/dm_bg01.png",
+   "raw_sha256": "549b1d9a2f831ebd1fe5dca3522c6bb44eb920089df6b17f9d4458813355f3b0",
+   "raw_px": [
+    1376,
+    768
+   ],
+   "generated_utc": "2026-10-11T19:10:39Z",
+   "generator": "arena-agent-mode image generation",
+   "alpha": {
+    "required": false,
+    "mode": "RGB"
+   },
+   "format": "PNG RGB",
+   "actual_px": [
+    960,
+    540
+   ],
+   "sha256": "f6699ea1c4e1e1cad17f153d9581a3dde55985178fa4ff6ce69dc8185a27b688",
+   "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+  },
+  "DM-BG02": {
+   "id": "DM-BG02",
+   "name": "Dome wall parallax midground",
+   "group": "DM-BG",
+   "priority": "P0",
+   "path": "assets/production/dome/backgrounds/dm_bg02.png",
+   "target_px": [
+    960,
+    1080
+   ],
+   "pivot": "top-left",
+   "raw_source": ".artifact-cache/raw/dm_bg02.png",
+   "raw_sha256": "e29581c4449fbb5a58a311a86217cb402395321711cc2bec9fc2171d3047c82e",
+   "raw_px": [
+    768,
+    1376
+   ],
+   "generated_utc": "2026-10-11T19:11:06Z",
+   "generator": "arena-agent-mode image generation",
+   "alpha": {
+    "required": true,
+    "mode": "straight RGBA",
+    "transparent_px_fraction": 0.0,
+    "opaque_px_fraction": 1.0,
+    "partial_edge_px": 0,
+    "border_all_transparent": false,
+    "matte_rgb": [
+     255,
+     0,
+     255
+    ],
+    "transparent_fraction": 0.0,
+    "partial_fraction": 0.0,
+    "matte_residual_opaque_px": 0,
+    "source_keyed_px": [
+     768,
+     1376
+    ]
+   },
+   "format": "PNG RGBA",
+   "trim_bbox_in_keyed_source": [
+    0,
+    0,
+    768,
+    1376
+   ],
+   "actual_px": [
+    960,
+    1080
+   ],
+   "sha256": "c05102c0f45fae4b2490c540ace904a80a5f74e309eb6bbd6335d8d9b0f2652a",
+   "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+  },
+  "DM-BG07": {
+   "id": "DM-BG07",
+   "name": "Summit sky panorama",
+   "group": "DM-BG",
+   "priority": "P0",
+   "path": "assets/production/dome/backgrounds/dm_bg07.png",
+   "target_px": [
+    960,
+    540
+   ],
+   "pivot": "top-left",
+   "raw_source": ".artifact-cache/raw/dm_bg07.png",
+   "raw_sha256": "8e315be1b4520b3ed5349764f9800c90b0ebd136ca3c4dafa8de08ea699ae45e",
+   "raw_px": [
+    1376,
+    768
+   ],
+   "generated_utc": "2026-10-11T19:10:39Z",
+   "generator": "arena-agent-mode image generation",
+   "alpha": {
+    "required": false,
+    "mode": "RGB"
+   },
+   "format": "PNG RGB",
+   "actual_px": [
+    960,
+    540
+   ],
+   "sha256": "4d7e3bbeb8db3cf912cfec79bc2ebf1da39a79e657960e34b75eaf668a08aab1",
+   "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+  },
+  "PR-01": {
+   "id": "PR-01",
+   "name": "Shamrock Shake stand",
+   "group": "PR",
+   "priority": "P0",
+   "path": "assets/level1/props/pr_01_shamrock_shake_stand.png",
+   "target_px": [
+    256,
+    192
+   ],
+   "pivot": "bottom-center",
+   "raw_source": ".artifact-cache/raw/pr_01.png",
+   "raw_sha256": "187394e5ba1208a3677871a78fb5c3e05fb37e94a99c6ccc0e81ba5e70c36dfc",
+   "raw_px": [
+    1408,
+    768
+   ],
+   "generated_utc": "2026-10-11T19:10:39Z",
+   "generator": "arena-agent-mode image generation",
+   "alpha": {
+    "required": true,
+    "mode": "straight RGBA",
+    "transparent_px_fraction": 0.2708,
+    "opaque_px_fraction": 0.7292,
+    "partial_edge_px": 0,
+    "border_all_transparent": false,
+    "matte_rgb": [
+     255,
+     0,
+     255
+    ],
+    "transparent_fraction": 0.0,
+    "partial_fraction": 0.0,
+    "matte_residual_opaque_px": 0,
+    "source_keyed_px": [
+     1408,
+     768
+    ]
+   },
+   "format": "PNG RGBA",
+   "trim_bbox_in_keyed_source": [
+    0,
+    0,
+    1408,
+    768
+   ],
+   "actual_px": [
+    256,
+    192
+   ],
+   "sha256": "2b8d147f02121d1beeaed3a6172275283dd36ca22db67bfa390f559121f970ff",
+   "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+  },
+  "PR-03": {
+   "id": "PR-03",
+   "name": "Campus bench",
+   "group": "PR",
+   "priority": "P0",
+   "path": "assets/level1/props/pr_03_campus_bench.png",
+   "target_px": [
+    128,
+    80
+   ],
+   "pivot": "bottom-center",
+   "raw_source": ".artifact-cache/raw/pr_03.png",
+   "raw_sha256": "43a7bd7af6e9f42871bd7e1247d6428f5f4ad53fea44549bde12250d6dd51bdd",
+   "raw_px": [
+    1408,
+    768
+   ],
+   "generated_utc": "2026-10-11T19:10:39Z",
+   "generator": "arena-agent-mode image generation",
+   "alpha": {
+    "required": true,
+    "mode": "straight RGBA",
+    "transparent_px_fraction": 0.4916,
+    "opaque_px_fraction": 0.3688,
+    "partial_edge_px": 1430,
+    "border_all_transparent": false,
+    "matte_rgb": [
+     255,
+     0,
+     255
+    ],
+    "transparent_fraction": 0.6284,
+    "partial_fraction": 0.0,
+    "matte_residual_opaque_px": 0,
+    "source_keyed_px": [
+     1408,
+     768
+    ]
+   },
+   "format": "PNG RGBA",
+   "trim_bbox_in_keyed_source": [
+    129,
+    106,
+    1291,
+    664
+   ],
+   "actual_px": [
+    128,
+    80
+   ],
+   "sha256": "28ec99b567276dfbe3c2bba1a3a78932c02e1e04cd45638ed84d9cd8da2df1b1",
+   "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+  }
+ }
+}

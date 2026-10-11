@@ -23,12 +23,26 @@ const rows=spec.assets;
 assert.equal(rows.length,220,'Unexpected comprehensive visual-contract coverage count');
 assert.equal(new Set(rows.map(x=>x.id)).size,rows.length,'Duplicate logical asset IDs');
 assert.equal(new Set(rows.map(x=>x.path)).size,rows.length,'Duplicate intended output paths');
-assert.equal(rows.filter(x=>x.status.startsWith('VERIFIED')).length,26,'Planned files misrepresented as generated');
+const GENERATED=['NORMALIZED_VERIFIED','INTEGRATED_BROWSER_CHECKED','APPROVED'];
+const generatedRows=rows.filter(x=>GENERATED.includes(x.status));
+const sourceRows=rows.filter(x=>x.status==='VERIFIED_IN_REPO_LOCAL_BROWSER');
+assert.equal(sourceRows.length,26,'Source-derived Cinnamon frame count changed');
+const manifest=JSON.parse(readFileSync('assets/production/manifest.json','utf8')).assets;
+assert.equal(Object.keys(manifest).length,generatedRows.length,'Manifest and contract disagree on generated-asset count');
+for(const r of generatedRows)assert.ok(manifest[r.id],'Generated asset missing from manifest '+r.id);
+for(const [id,rec] of Object.entries(manifest))assert.ok(rows.some(x=>x.id===id),'Manifest holds unknown asset '+id);
 for(const x of rows){
  assert.ok(x.prompt.includes(x.id) && x.prompt.includes(x.path),'Incomplete self-contained asset prompt '+x.id);
  assert.ok(x.acceptance&&x.rejection&&x.integration&&x.references.length>=1,'Missing production QA contract '+x.id);
  assert.ok(Array.isArray(x.target_px)&&x.target_px.every(n=>Number.isInteger(n)&&n>0),'Invalid target pixel dimensions '+x.id);
  if(x.status.startsWith('VERIFIED'))assert.ok(existsSync(x.path),'Existing output path missing '+x.id);
+ else if(GENERATED.includes(x.status)){
+  assert.ok(existsSync(x.path),'Promoted asset has no file on disk '+x.id);
+  const rec=manifest[x.id];
+  assert.equal(createHash('sha256').update(readFileSync(x.path)).digest('hex'),rec.sha256,'Promoted asset bytes drifted from manifest '+x.id);
+  assert.deepEqual(rec.actual_px,x.target_px,'Promoted asset size differs from contract target '+x.id);
+  if(x.transparent)assert.equal(rec.alpha.mode,'straight RGBA','Transparent asset lacks real alpha '+x.id);
+ }
  else assert.ok(!existsSync(x.path),'Generation-only asset unexpectedly present without manifest promotion '+x.id);
 }
 assert.equal(spec.audio.length,21,'Missing original audio contracts');
