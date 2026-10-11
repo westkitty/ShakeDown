@@ -1,5 +1,7 @@
 # ShakeDown — Project status — October 11, 2026
 
+> **Preparation branch update (2026-10-11):** Canonical scope is the single birthday adventure. The branch prep/asset-ready-20261011 adds asset intake and manifests, excludes clipped run_03 from runtime, and adds real local desktop/mobile-emulated browser smoke tests. Main SHA 80d3888 had successful CI and Pages deployment, and hosted index HTTP 200. Full live-site traversal and physical-device audio/touch are still unverified; LM Arena final art remains pending. See docs/PRODUCTION_READINESS.md.
+
 **Target:** westkitty/ShakeDown / branch main.
 
 ## Source-verified baseline

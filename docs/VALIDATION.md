@@ -21,3 +21,17 @@
 - `npm run validate` for deterministic tests and asset checks.
 - `python3 -m http.server 8765` for local static hosting.
 - Normal-browser manual checklist: title, keyboard jump/double jump/swish/dash, bridge pulse, beacon activation, collectibles, Dome climb, checkpoint, boss charge telegraph, swish on rest, victory, replay, pause, mute, loss/retry, touch portrait and landscape.
+
+
+## 2026-10-11 — preparation candidate verification (not main)
+
+Project: westkitty/ShakeDown; branch: prep/asset-ready-20261011; baseline: main@80d388828bfcad0cf454fe0b2b166e6528ac5e6d; execution: BigMac arm64 macOS, Node v26.11.1, browser executable Brave Browser through Playwright Chromium engine.
+
+- npm run validate: PASS; **19/19 Node tests**, including original 12 behavior/reachability checks, 6 asset-unit guards, and one temporary-directory real asset intake/approval/rejection test. The 26 original Cinnamon file hashes remain valid; 25 are eligible for runtime playback because run_03 source remains clipped and is deliberately excluded from loading and animation.
+- npm run test:browser: PASS; **10/10** served-HTTP Playwright tests: desktop Chromium-compatible Brave and Pixel-7-sized mobile emulation; title, movement, jump, pause, persistent mute, touch input, landscape resize, status instrumentation, synthetic approved-image pixel integration, test-assisted boss victory and replay. The source-image loader performs bounded concurrent load and retry for intermittent mobile-emulation failures.
+- Candidate production manifest is **empty**: no externally generated LM Arena final artwork has been received or approved. The browser image-swap test uses a synthetic PNG intercepted at request time and does not create or approve any production file.
+- Performance diagnostic: headless Brave idle-title scenario, approximately 4.2-second sampling, observed frameMsP95 approximately 200ms on both desktop and mobile emulation while renderMsP95 was approximately 0.8–1ms. Headless frame pacing is throttled; this does **not** establish 60fps or target-device gameplay performance.
+- The prior main GitHub Actions contract workflow run 38165872650 and Pages workflow run 38165872137 completed successfully for SHA 80d3888. Hosted index returned HTTP 200 from BigMac. These results apply to the **preparation baseline**, not this unmerged candidate branch.
+- git diff --check and node --check performed on edited JS; do not claim CI or release status until exact branch is pushed and independently passes.
+
+**Unverified:** natural player completion of every section in one continuous, no-warp browser session; physical iPhone/Android touch, audible audio quality, animation and level visual approval; long-session representative frame-budget data; live deployed new code; external generated final art. Tests using QA warps are specifically **not** full-route skill-playthrough evidence. Generated assets require actual source-file inspection and reviewer approval before source-to-runtime promotion.

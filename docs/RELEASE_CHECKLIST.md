@@ -1,0 +1,49 @@
+# ShakeDown Release Checklist — Birthday Edition
+
+**Deployment target:** westkitty/ShakeDown → GitHub Pages. This is a static site, not an installed app. No runtime npm dependencies. **Source of truth:** docs/IMPLEMENTATION_PLAN.md and docs/PRODUCTION_READINESS.md.
+
+## Candidate preflight
+
+- [ ] Branch includes only reviewed modifications, expected files and explicit asset provenance.
+- [ ] Original Cinnamon masters and the 26 source cut-outs are unchanged.
+- [ ] No generated-but-unverified art was checked in under the intended output path.
+- [ ] Asset file output manifest has valid dimensions/hashes and truthful review state.
+- [ ] Browser still works with zero production-art files (Canvas fallback).
+- [ ] All final Fox art references the approved FOX-01 master.
+- [ ] No Bethel setting, no cake-guardian quest, no false claims that the Fox is original final art.
+
+## Automated gates
+
+- [ ] npm ci
+- [ ] npm run validate
+- [ ] npm run test:browser (desktop + mobile-emulated Chromium via served HTTP).
+- [ ] CI for exact candidate SHA succeeds; tests match local results.
+- [ ] New PR diff has no accidental secrets, dependency/runtime rewrites or destructive asset replacements.
+
+## Required real-player acceptance
+
+- [ ] Title/menu loads correctly and playable input works.
+- [ ] Keyboard and touch input independently tested; focus-loss and pause release held actions.
+- [ ] Normal unassisted campus journey (no QA warp), collectibles and checkpoints.
+- [ ] All 23 Golden Dome jumps plus normal hazards and a recoverable loss/retry.
+- [ ] Clear Fox telegraph/charge/volley/readable recovery, three genuine hit windows.
+- [ ] Birthday cake *and independent Shamrock Shakes* visibly appear after boss defeat.
+- [ ] Exact HAPPY BIRTHDAY, MAVERICK! message and replay restore correct state.
+- [ ] Sound only starts after user interaction; mute/reload behavior; speaker listening check.
+- [ ] Physical mobile device portrait/landscape, touch, safe areas, no clipped controls, useful p95 frame sampling.
+
+## Deployment checks
+
+- [ ] Deploy exact approved merge SHA.
+- [ ] GitHub Pages workflow passes at that SHA.
+- [ ] Hosted index and each required module/asset path respond 200.
+- [ ] Perform live-URL complete gameplay and check browser console, not just page reachability.
+- [ ] Check persistence/replay after reload.
+- [ ] Compare representative performance to the recorded before-state with same browser/device/scenario.
+- [ ] Record known remaining partials clearly in OPERATIONAL_STATE.md; no unsupported COMPLETE label.
+
+## Rollback policy
+
+Keep the last accepted commit and asset record immutable. On failure, repair via a new candidate PR; if a specific approved-art candidate regresses fidelity/gameplay, revert only its manifest promotion and generated file. Never force-push main, delete unrelated images, change the original 220 prompts during in-progress LM Arena generation, or replace the working Canvas engine.
+
+**Evidence discipline:** Node pass ≠ browser pass. Playwright pass ≠ physical phone pass. GitHub Pages build pass ≠ complete hosted gameplay pass. Asset hash ≠ visual fidelity. A 60Hz simulation interval ≠ 60fps performance measurement.

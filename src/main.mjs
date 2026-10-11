@@ -2,6 +2,7 @@ import {newGame,startGame,pauseGame,resetToCheckpoint,update,DT,snapshot} from '
 import {VIEW,WORLD} from './game/world.mjs';
 import {render} from './game/render.mjs';
 import {AudioBox} from './game/audio.mjs';
+import {loadApprovedArt} from './game/production-assets.mjs';
 const $=id=>document.getElementById(id);
 const canvas=$('game'),ctx=canvas.getContext('2d',{alpha:false});
 if(!ctx){$('load-status').textContent='Canvas rendering is unavailable on this browser.';throw Error('Canvas 2D required')}
@@ -9,6 +10,7 @@ const saveKey='shakedown:birthday:v1';
 function readSave(){try{const value=JSON.parse(localStorage.getItem(saveKey)||'null');return value?.schema===1?value:{schema:1}}catch{return {schema:1}}}
 let saved=readSave(),state=newGame(saved.settings||{}),sprites={},assetCount=0,assetErrors=[];
 const audio=new AudioBox();audio.mute(state.settings.mute);
+let productionArt={},productionLoaded=0,productionDeclared=0,productionErrors=[];
 let lastStatus='',lastEventSerial=0,displayedMode='';
 function save(){try{localStorage.setItem(saveKey,JSON.stringify({schema:1,settings:state.settings,completed:saved.completed||state.mode==='victory',bestShakes:Math.max(saved.bestShakes||0,state.shakeCount)}))}catch{/* Restricted storage: game still playable. */}}
 function showMode(){if(displayedMode===state.mode)return;displayedMode=state.mode;
@@ -53,14 +55,42 @@ $('assist-check').checked=state.settings.assist;$('motion-check').checked=state.
 $('assist-check').addEventListener('change',e=>{state.settings.assist=e.target.checked;save()});
 $('motion-check').addEventListener('change',e=>{state.settings.reducedMotion=e.target.checked;save()});
 updateMute();
-async function loadAssets(){try{const response=await fetch('assets/sprites/cinnamon/frames.json');if(!response.ok)throw Error(`manifest ${response.status}`);
- const manifest=await response.json();if(!manifest.frames)throw Error('no frames');
- const entries=Object.entries(manifest.frames);const loaded=await Promise.all(entries.map(async([id,item])=>{
-  const url=item.file;const img=new Image();return new Promise(resolve=>{img.onload=()=>resolve([id,img]);img.onerror=()=>{assetErrors.push(id);resolve(null)};img.src=url;});
- }));sprites=Object.fromEntries(loaded.filter(Boolean));assetCount=Object.keys(sprites).length;state.assetCount=assetCount;
- if(assetErrors.length)$('load-status').textContent=`${assetErrors.length} missing sprites; fallback artwork in use.`;
- else $('load-status').textContent=`${assetCount} authentic Cinnamon poses ready.`;
- }catch(error){assetErrors.push('manifest');$('load-status').textContent='Sprite source unavailable. Temporary in-game fallback shown.'}
+async function loadAssets(){
+ try{
+  const response=await fetch('assets/sprites/cinnamon/frames.json',{cache:'no-store'});
+  if(!response.ok)throw Error('manifest HTTP '+response.status);
+  const manifest=await response.json();
+  if(!manifest.frames)throw Error('Missing frames');
+  // run_03 is a preserved but clipped reference cut-out. Never load it into active playback.
+  const entries=Object.entries(manifest.frames).filter(([id])=>id!=='run_03');
+  let next=0;const loaded=new Array(entries.length);
+  async function fetchImage(src){
+   return new Promise(resolve=>{
+    const image=new Image();
+    image.onload=()=>resolve(image);
+    image.onerror=()=>resolve(null);
+    image.src=src;
+   });
+  }
+  async function worker(){
+   while(next<entries.length){
+    const index=next++, [id,item]=entries[index];
+    let image=await fetchImage(item.file);
+    if(!image)image=await fetchImage(item.file+'?retry=1');
+    if(image)loaded[index]=[id,image];
+    else assetErrors.push(id);
+   }
+  }
+  await Promise.all(Array.from({length:4},worker));
+  sprites=Object.fromEntries(loaded.filter(Boolean));assetCount=Object.keys(sprites).length;
+  state.assetCount=assetCount;
+  $('load-status').textContent=assetErrors.length
+   ?assetErrors.length+' usable pose loads failed; procedural fallback remains active.'
+   :assetCount+' playable Cinnamon poses ready (1 clipped source archived).';
+ }catch(error){
+  assetErrors.push('manifest');
+  $('load-status').textContent='Sprite source unavailable. Temporary in-game fallback shown.';
+ }
 }
 function hud(){const p=state.player;
  $('hud-health').textContent='♥ '.repeat(Math.ceil(p.hp)).trim()||'♡';
@@ -70,7 +100,15 @@ function hud(){const p=state.player;
  const next=state.status;if(next!==lastStatus){$('status-text').textContent=next;lastStatus=next}
 }
 let accumulator=0,lastStamp=0,lastHUD=0;
+const frameTimings=[];
+function percentile(values,p){
+ if(!values.length)return null;
+ const sorted=[...values].sort((a,b)=>a-b);return Number(sorted[Math.floor((sorted.length-1)*p)].toFixed(2));
+}
+function metrics(){return {frames:frameTimings.length,frameMsP95:percentile(frameTimings.map(x=>x.frame),.95),
+ renderMsP95:percentile(frameTimings.map(x=>x.render),.95),devicePixelRatio:Math.min(window.devicePixelRatio||1,2)};}
 function animate(ms){requestAnimationFrame(animate);
+ const actualFrameMs=lastStamp?Math.max(0,ms-lastStamp):0;
  if(!lastStamp)lastStamp=ms;const dt=Math.min(.10,Math.max(0,(ms-lastStamp)/1000));lastStamp=ms;
  if(state.mode==='playing'){
   accumulator=Math.min(.15,accumulator+dt);let count=0;
@@ -84,15 +122,24 @@ function animate(ms){requestAnimationFrame(animate);
   for(const ev of state.events){if(ev.serial>lastEventSerial){audio.event(ev.type);lastEventSerial=ev.serial}}
  }else{accumulator=0}
  if(state.mode==='victory')state.elapsed+=dt;
- render(ctx,state,sprites,accumulator/DT);
+ const drawStart=performance.now();
+ render(ctx,state,sprites,accumulator/DT,productionArt);
+ if(actualFrameMs>0){frameTimings.push({frame:actualFrameMs,render:performance.now()-drawStart});
+  if(frameTimings.length>240)frameTimings.shift()}
  if(ms-lastHUD>110){hud();lastHUD=ms}
  showMode();
 }
 // Fixed logical camera, capped pixel-density: CSS handles responsiveness and letterboxing.
 function onResize(){const dpr=Math.min(window.devicePixelRatio||1,2);canvas.width=Math.round(VIEW.width*dpr);canvas.height=Math.round(VIEW.height*dpr);ctx.setTransform(dpr,0,0,dpr,0,0)}
 window.addEventListener('resize',onResize,{passive:true});onResize();
-loadAssets();showMode();requestAnimationFrame(animate);
-window.__SHAKEDOWN_QA={snapshot:()=>snapshot(state),assets:()=>({loaded:assetCount,failed:[...assetErrors]}),
+loadAssets();
+ loadApprovedArt().then(({images,errors,approved})=>{
+  productionArt=images;productionLoaded=Object.keys(images).length;
+  productionDeclared=approved;productionErrors=errors;
+  if(productionLoaded>0)$('load-status').textContent+=' · '+productionLoaded+' approved artwork elements ready.';
+ }).catch(error=>{productionErrors=['loader: '+error.message]});
+ showMode();requestAnimationFrame(animate);
+window.__SHAKEDOWN_QA={snapshot:()=>snapshot(state),metrics,assets:()=>({loaded:assetCount,failed:[...assetErrors],productionLoaded,productionDeclared,productionErrors:[...productionErrors]}),
  // Developer-only deterministic test aids; excluded from normal gameplay and production paths.
  ...(new URLSearchParams(location.search).has('qa')?{
   warp:(x,y)=>{state.player.x=x;state.player.y=y;state.player.prevX=x;state.player.prevY=y;state.player.vx=0;state.player.vy=0;state.camera.x=Math.max(0,x-450);state.camera.y=Math.min(0,y-260);},

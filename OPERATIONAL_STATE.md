@@ -7,10 +7,10 @@
   "project_name": "ShakeDown",
   "project_root": "westkitty/ShakeDown",
   "artifact_path": "",
-  "state_revision": 2,
-  "last_updated": "2026-10-11T18:52:00Z",
+  "state_revision": 3,
+  "last_updated": "2026-10-11T19:40:00Z",
   "current_baseline": {
-    "identity": "main@8b39c32ced8f7051908b10a4d936b85e02e42a0d (runtime milestone before asset packet commit)",
+    "identity": "main@80d388828bfcad0cf454fe0b2b166e6528ac5e6d (pre-preparation production baseline)",
     "state": "current-baseline",
     "last_verified": null
   },
@@ -80,3 +80,28 @@ After 8b39c32 runtime milestone: publish expanded LM Arena PDF/MD/JSON and fixed
 ## 13. Compact Revision Log
 - Revision 1: established asset-state boundary, verified local artifact hashes, protected missing animation/binary-transfer gates.
 - Revision 2: recorded tested playable 8b39c32 milestone, 26 source-derived integrated frames, bounded browser proof, comprehensive art contract and remaining Pages/live-device/LM Arena gates.
+
+
+## 14. Preparation candidate — 2026-10-11 (revision 3)
+
+<!-- operational-state:entry
+{"id":"VER-002","title":"Main-branch CI and hosted index availability","state":"partially-verified","scope":"main@80d3888 before preparation","evidence":"GitHub Actions contract run 38165872650 SUCCESS; Pages run 38165872137 SUCCESS; hosted index HTTP 200 by BigMac curl","last_verified":"2026-10-11"}
+-->
+### VER-002 — Main-branch availability
+Main baseline 80d3888 had successful GitHub Actions contract and Pages workflows, plus an independent HTTP 200 for the hosted index. This establishes availability only, not a complete unassisted live-site gameplay experience.
+
+<!-- operational-state:entry
+{"id":"VER-003","title":"Local preparation branch acceptance","state":"partially-verified","scope":"prep/asset-ready-20261011","evidence":"Original 12 Node tests passed; preparation 18/18 unit tests, 6/6 Playwright HTTP+Brave tests in desktop/mobile emulation; isolated asset acceptance test later added; boss test-assisted warp cannot prove route","last_verified":"2026-10-11"}
+-->
+### VER-003 — Local candidate
+The candidate adds image/audio acceptance, SHA256-based staging, reviewer attestation, immutable approved checkpoints, a runtime image loader with Canvas fallback, and tests. No newly generated LM Arena images were inserted. BRK-001 source run_03 remains clipped but is no longer selected or loaded for gameplay (25 usable of 26 original PNGs). Preserve all original PNG bytes.
+
+### Outstanding release evidence
+- GitHub CI for submitted preparation SHA; do not infer from local tests.
+- Ordinary player journey from campus through all Dome steps and natural boss defeat without QA warp.
+- Physical phone touch and audible speaker/mute validation; emulator screenshots do not qualify.
+- Fox FOX-01 identity review and actual LM Arena output intake; all final generated art still awaits delivery.
+- Hosted exact SHA full-journey proof and representative long-session performance measurements.
+
+### Revision log addition
+- Revision 3: reconciled current deployed baseline, documented asset intake and playable clip exclusion; tracked preparation browser evidence and remaining approvals/device/route gates.

@@ -1,3 +1,7 @@
+# Historical LM Arena asset handoff draft
+
+> **HISTORICAL / SUPERSEDED:** This file describes the earlier four-world/Level-1 production concept. It is retained for provenance only. The current Golden Dome single-adventure birthday game is governed by docs/IMPLEMENTATION_PLAN.md, docs/PRODUCTION_READINESS.md, and docs/assets/ShakeDown_Complete_Asset_Contract.json. The master has 220 image IDs and 21 audio contracts; 26 source Cinnamon cut-outs exist, while remaining generated assets await inspection and approval.
+
 # LM Arena asset handoff contract
 
 ## Roles

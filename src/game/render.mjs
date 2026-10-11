@@ -1,5 +1,6 @@
 import {VIEW,WORLD,DOME_ARENA_Y,visibleWorld} from './world.mjs';
 import {movingPosition} from './engine.mjs';
+import {frameForState} from './animation.mjs';
 const TAU=Math.PI*2;
 const lerp=(a,b,t)=>a+(b-a)*t;
 const clamp=(n,a,b)=>Math.min(Math.max(n,a),b);
@@ -16,7 +17,8 @@ function brickWindow(ctx,x,y,w,h,lit=false){
  ctx.fillStyle=lit?'#ffd991':'#b2cdd1';ctx.fillRect(x+w/2-2,y+6,4,h-12);ctx.fillRect(x+5,y+h/2,w-10,3);
  ctx.fillStyle='#f1d5ab';ctx.fillRect(x-6,y+h-3,w+12,7);
 }
-function sky(ctx,t,domeBlend){
+function sky(ctx,t,domeBlend,art={}){
+ if(art['BG-01']){ctx.drawImage(art['BG-01'],0,0,VIEW.width,VIEW.height);return;}
  const grad=ctx.createLinearGradient(0,0,0,VIEW.height);grad.addColorStop(0,domeBlend?'#6c8cae':'#7ab9d8');grad.addColorStop(.58,domeBlend?'#dfc49c':'#c0dce0');grad.addColorStop(1,'#fff0ca');ctx.fillStyle=grad;ctx.fillRect(0,0,VIEW.width,VIEW.height);
  ctx.save();ctx.globalAlpha=.5;ctx.fillStyle='#fff3bb';ctx.beginPath();ctx.arc(domeBlend?760:820,100,52,0,TAU);ctx.fill();ctx.restore();
  for(let i=0;i<7;i++) {const cx=((i*274+t*4)%(VIEW.width+350))-140;cloud(ctx,cx,85+(i%3)*65,.6+i%2*.26,.25+(i%2)*.13)}
@@ -31,7 +33,7 @@ function farCampus(ctx,cam,t){
  }
  ctx.restore();
 }
-function quad(ctx,cam,t){
+function quad(ctx,cam,t,art={}){
  const cx=cam.x,cy=cam.y;ctx.save();ctx.translate(-cx,-cy);
  ctx.fillStyle='#c8d0af';ctx.fillRect(Math.max(0,cx-80),330,Math.min(3850,cx+1100)-Math.max(0,cx-80),130);
  for(let i=0;i<22;i++){const x=i*182+90;if(x<cx-130||x>cx+1100||x>3770)continue;
@@ -52,7 +54,7 @@ function quad(ctx,cam,t){
  ctx.fillStyle='#2a518a';ctx.fillRect(x-50,y-130,196,27);ctx.fillStyle='#f4cc55';for(let i=0;i<7;i++)ctx.fillRect(x-50+i*28,y-130,13,27);
  ctx.fillStyle='#ffedbe';ctx.font='bold 15px system-ui';ctx.fillText('THE LAST SHAKE',x-30,y-112);
  ctx.fillStyle='#8b5e4b';ctx.fillRect(x-54,y-14,202,14);
- drawShake(ctx,x+106,y-68,.85,true);
+ drawShake(ctx,x+106,y-68,.85,true,art);
  }
  ctx.restore();
 }
@@ -104,14 +106,29 @@ function drawPlatform(ctx,p,x,y,active,t){
  ctx.globalAlpha=.36;ctx.fillStyle='#372822';for(let i=22;i<w-6;i+=40)ctx.fillRect(x+i,y+12,3,Math.min(h-13,20));ctx.globalAlpha=1;
  if(p.movement){ctx.strokeStyle='#f8d26f';ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(x+8,y-9);ctx.lineTo(x+w-8,y-9);ctx.stroke()}
 }
-function drawShake(ctx,x,y,s=1,big=false){ctx.save();ctx.translate(x,y);ctx.scale(s,s);
+function drawShake(ctx,x,y,s=1,big=false,art={}){const image=art['CO-03'];
+ if(image){ctx.drawImage(image,x-16*s,y-25*s,32*s,48*s);return;}
+ ctx.save();ctx.translate(x,y);ctx.scale(s,s);
  ctx.shadowColor='#9afb8c';ctx.shadowBlur=big?20:12;
  ctx.fillStyle='#2c795b';ctx.beginPath();ctx.moveTo(-11,-19);ctx.lineTo(11,-19);ctx.lineTo(9,14);ctx.quadraticCurveTo(0,21,-9,14);ctx.closePath();ctx.fill();
  ctx.fillStyle='#9af0a3';ctx.beginPath();ctx.moveTo(-7,-15);ctx.lineTo(7,-15);ctx.lineTo(5,10);ctx.lineTo(-5,10);ctx.closePath();ctx.fill();
  ctx.fillStyle='#effde7';ctx.beginPath();ctx.ellipse(0,-18,15,5,0,0,TAU);ctx.fill();
  ctx.fillStyle='#e8fff4';ctx.fillRect(3,-33,3,16);ctx.fillStyle='#f7fff7';ctx.beginPath();ctx.arc(0,-24,7,Math.PI,TAU);ctx.fill();
  ctx.shadowBlur=0;ctx.restore()}
-function drawFox(ctx,x,y,phase,t){ctx.save();ctx.translate(x,y);
+function drawFox(ctx,x,y,phase,t,art={}){
+ const byPhase={sleep:'FOX-02',escape:'FOX-03',tell:'FOX-05',charge:'FOX-06',volley:'FOX-08',
+  rest:'FOX-09',hit:'FOX-11',defeated:'FOX-12'};
+ const image=art[byPhase[phase]]||art['FOX-02'];
+ if(image){
+  ctx.save();ctx.drawImage(image,x-38,y-118,125,125);
+  // Production art must not conceal state warnings; boss tells remain separately drawn.
+  if(phase==='tell'){ctx.strokeStyle='#f44d44';ctx.lineWidth=6;ctx.beginPath();
+   ctx.arc(x+24,y-50,86,0,TAU);ctx.stroke();ctx.fillStyle='#fff0bb';
+   ctx.font='900 35px system-ui';ctx.fillText('!',x+3,y-136)}
+  if(phase==='rest'){ctx.fillStyle='#fff0b5';ctx.font='900 16px system-ui';ctx.fillText('STUNNED',x-22,y-122)}
+  ctx.restore();return;
+ }
+ ctx.save();ctx.translate(x,y);
  if(phase==='charge')ctx.translate(Math.sin(t*47)*3,0);
  if(phase==='hit'){ctx.globalAlpha=.68;ctx.translate(Math.sin(t*65)*5,0)}
  // Explicitly provisional vector portrait; not a silently accepted final Fox reference.
@@ -150,28 +167,23 @@ function checkpoint(ctx,c,on,t){ctx.save();ctx.translate(c.x,c.footY);ctx.fillSt
  ctx.fillStyle=on?'#ffe171':'#305b98';ctx.beginPath();ctx.moveTo(3,-78);ctx.lineTo(49,-62);ctx.lineTo(3,-44);ctx.closePath();ctx.fill();
  if(on){ctx.fillStyle='#f2ffa5';ctx.beginPath();ctx.arc(2,-80,5+Math.sin(t*6)*2,0,TAU);ctx.fill()}
  ctx.restore()}
-function decoration(ctx,s,t){const cam=s.camera;ctx.save();ctx.translate(-cam.x,-cam.y);
+function decoration(ctx,s,t,art={}){const cam=s.camera;ctx.save();ctx.translate(-cam.x,-cam.y);
  for(const e of s.level.enemies){if(e.alive&&Math.abs(e.x-cam.x)<1100&&Math.abs(e.y-cam.y)<720)cupCrawler(ctx,e,t)}
  for(const h of s.level.hazards){if(Math.abs(h.x-cam.x)<1100&&Math.abs(h.y-cam.y)<700)cannon(ctx,h,t)}
  for(const b of s.level.beacons){if(Math.abs(b.x-cam.x)<1000&&Math.abs(b.footY-cam.y)<700)beacon(ctx,b,s.activePulse,t)}
  for(const c of s.level.checkpoints){if(Math.abs(c.x-cam.x)<1100&&Math.abs(c.footY-cam.y)<700)checkpoint(ctx,c,s.checkpoint>=s.level.checkpoints.indexOf(c),t)}
  for(const q of s.level.shakes){if(q.taken||Math.abs(q.x-cam.x)>1030||Math.abs(q.y-cam.y)>650)continue;
-  drawShake(ctx,q.x,q.y+Math.sin(t*4+q.x)*3,q.special?1.16:.9,q.special);
+  drawShake(ctx,q.x,q.y+Math.sin(t*4+q.x)*3,q.special?1.16:.9,q.special,art);
   if(q.special){ctx.strokeStyle='#edc86b';ctx.lineWidth=3;ctx.beginPath();ctx.arc(q.x,q.y,23+Math.sin(t*3)*2,0,TAU);ctx.stroke()}
  }
  for(const b of s.projectiles){confetti(ctx,b.x,b.y,b.age*10);ctx.strokeStyle='#ea7074';ctx.lineWidth=2;ctx.beginPath();ctx.arc(b.x,b.y,10,0,TAU);ctx.stroke()}
- if(s.boss.triggered||cam.x>7100){drawFox(ctx,s.boss.x,s.boss.y+83,s.boss.mode,t)}
+ if(s.boss.triggered||cam.x>7100){drawFox(ctx,s.boss.x,s.boss.y+83,s.boss.mode,t,art)}
  ctx.restore()}
 function player(ctx,s,sprites){const p=s.player;let state='idle';
  if(s.mode==='victory')state='victory';else if(p.invulnerable>0&&s.lastDamage)state='hurt';
  else if(p.attackTime>0)state='swish';else if(p.dashTime>0)state='dash';
  else if(!p.grounded)state=p.vy<0?'jump':'fall';else if(Math.abs(p.vx)>30)state='run';
- const counts={idle:6,run:6,jump:2,fall:1,land:1,swish:2,dash:2,hurt:2,victory:3};
- let index=0;if(state==='run')index=Math.floor(s.elapsed*13)%6;
- else if(state==='idle')index=Math.floor(s.elapsed*2.3)%6;
- else if(state==='victory')index=Math.floor(s.elapsed*4)%3;
- else if(counts[state]>1)index=Math.floor(s.elapsed*10)%counts[state];
- const key=`${state}_${String(index).padStart(2,'0')}`;
+ const key=frameForState(state,s.elapsed);
  const image=sprites[key]||sprites.idle_00;
  ctx.save();ctx.translate(Math.round(p.x+p.w/2-s.camera.x),Math.round(p.y+p.h-s.camera.y));
  if(p.facing<0)ctx.scale(-1,1);
@@ -194,31 +206,33 @@ function events(ctx,s,t){ctx.save();ctx.translate(-s.camera.x,-s.camera.y);
 }
 function confettiSky(ctx,t){for(let i=0;i<45;i++){const x=(i*83+Math.sin(i*67)*32)%990;const y=((t*85+i*49)%690)-85;
  ctx.save();ctx.translate(x,y);ctx.rotate(t+i);ctx.fillStyle=['#ffdf6e','#80e9bb','#f06f78','#7ea8e8'][i%4];ctx.fillRect(0,0,8,12);ctx.restore()}}
-function birthdayDecor(ctx,t){
+function birthdayDecor(ctx,t,art={}){
  ctx.save();ctx.translate(735,330);ctx.shadowColor='#f7d15b';ctx.shadowBlur=25;
  // A deliberately visible birthday cake, not a quest objective.
+ if(art['BD-01']){ctx.shadowBlur=0;ctx.drawImage(art['BD-01'],-153,-126,306,204)}else{
  ctx.fillStyle='#f8a4bb';rounded(ctx,-156,-17,305,95,18);ctx.fill();ctx.fillStyle='#fff5e1';rounded(ctx,-156,-24,305,29,9);ctx.fill();
  ctx.fillStyle='#f1c26c';rounded(ctx,-122,-85,237,70,17);ctx.fill();ctx.fillStyle='#fff9e9';rounded(ctx,-122,-87,237,24,10);ctx.fill();
  for(let i=0;i<8;i++){const x=-100+i*27;ctx.fillStyle='#3573a0';ctx.fillRect(x,-117,7,32);ctx.fillStyle='#fbe56e';ctx.beginPath();ctx.ellipse(x+3,-124,5,9,0,0,TAU);ctx.fill()}
+ }
  ctx.shadowBlur=0;ctx.restore();
- for(const x of [550,860])drawShake(ctx,x,420,2.0,true);
+ for(const x of [550,860])drawShake(ctx,x,420,2.0,true,art);
  confettiSky(ctx,t);
 }
-export function render(ctx,s,sprites,alpha=0){
+export function render(ctx,s,sprites,alpha=0,art={}){
  const t=s.elapsed,cam=s.camera;
  ctx.clearRect(0,0,VIEW.width,VIEW.height);
- const isDome=cam.x>3150;sky(ctx,t,isDome);farCampus(ctx,cam,t);quad(ctx,cam,t);mainBuilding(ctx,cam,t);
+ const isDome=cam.x>3150;sky(ctx,t,isDome,art);farCampus(ctx,cam,t);quad(ctx,cam,t,art);mainBuilding(ctx,cam,t);
  ctx.save();ctx.translate(-cam.x,-cam.y);
  for(const p of visibleWorld(s.level.platforms,cam.x,cam.y)){
   const pos=movingPosition(p,t),active=!p.pulse||s.activePulse||s.player.onPlatform===p.id;
   drawPlatform(ctx,p,pos.x,pos.y,active,t);
  }
  ctx.restore();
- decoration(ctx,s,t);
+ decoration(ctx,s,t,art);
  // Readable non-colliding intro glimpse: the Fox runs away with the actual independent cup.
  if(s.elapsed<2.4 && cam.x<1050 && s.mode==='playing'){
   ctx.save();ctx.translate(-cam.x,-cam.y);const fx=490+s.elapsed*160;
-  drawFox(ctx,fx,440,'escape',t);drawShake(ctx,fx+84,375,.78,true);
+  drawFox(ctx,fx,440,'escape',t,art);drawShake(ctx,fx+84,375,.78,true,art);
   ctx.restore();
  }
  player(ctx,s,sprites);events(ctx,s,t);
@@ -232,6 +246,6 @@ export function render(ctx,s,sprites,alpha=0){
  if(s.boss.triggered&&s.boss.hp>0){ctx.textAlign='left';ctx.font='900 18px system-ui';ctx.fillStyle='#fff5dc';ctx.fillText('THE FOX',343,90);
   ctx.fillStyle='#352a37';rounded(ctx,434,73,210,23,7);ctx.fill();ctx.fillStyle='#f27e57';rounded(ctx,438,76,202*s.boss.hp/3,17,5);ctx.fill();}
  if(s.mode==='victory'){ctx.fillStyle='rgba(13,24,35,.66)';ctx.fillRect(0,0,VIEW.width,VIEW.height);
-  birthdayDecor(ctx,t);ctx.fillStyle='#fff6d2';ctx.font='900 55px system-ui';ctx.fillText('HAPPY BIRTHDAY,',480,155);ctx.fillStyle='#fbd57b';ctx.font='900 63px system-ui';ctx.fillText('MAVERICK!',480,215);}
+  birthdayDecor(ctx,t,art);ctx.fillStyle='#fff6d2';ctx.font='900 55px system-ui';ctx.fillText('HAPPY BIRTHDAY,',480,155);ctx.fillStyle='#fbd57b';ctx.font='900 63px system-ui';ctx.fillText('MAVERICK!',480,215);}
  ctx.restore();
 }
