@@ -1,8 +1,8 @@
 {
  "schema_version": 1,
- "generated_utc": "2026-10-11T19:20:52Z",
+ "generated_utc": "2026-10-11T19:23:08Z",
  "note": "Byte-level truth for generated production art. Every sha256 and pixel dimension here was measured from the file actually written to disk. Human visual review is a separate, still-open gate.",
- "count": 27,
+ "count": 36,
  "assets": {
   "BD-01": {
    "id": "BD-01",
@@ -548,6 +548,112 @@
    "sha256": "283ce08fd5d7f01773e106112ed53769993d2b2d987691c741bc8cf052027ea4",
    "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
   },
+  "BS-VF04": {
+   "id": "BS-VF04",
+   "name": "Fox confetti projectile",
+   "group": "BS-VF",
+   "priority": "P0",
+   "path": "assets/production/boss/effects/bs_vf04.png",
+   "target_px": [
+    64,
+    64
+   ],
+   "pivot": "center",
+   "raw_source": ".artifact-cache/raw/bs_vf04.png",
+   "raw_sha256": "1810bd663bdaa0edb517ddf2c12170b0918b9fc28075ebea09730897e976475f",
+   "raw_px": [
+    1024,
+    1024
+   ],
+   "generated_utc": "2026-10-11T19:23:08Z",
+   "generator": "arena-agent-mode image generation",
+   "alpha": {
+    "required": true,
+    "mode": "straight RGBA",
+    "transparent_px_fraction": 0.3293,
+    "opaque_px_fraction": 0.5857,
+    "partial_edge_px": 348,
+    "border_all_transparent": false,
+    "matte_rgb": [
+     255,
+     0,
+     255
+    ],
+    "transparent_fraction": 0.8193,
+    "partial_fraction": 0.0,
+    "matte_residual_opaque_px": 0,
+    "source_keyed_px": [
+     1024,
+     1024
+    ]
+   },
+   "format": "PNG RGBA",
+   "trim_bbox_in_keyed_source": [
+    225,
+    256,
+    768,
+    778
+   ],
+   "actual_px": [
+    64,
+    64
+   ],
+   "sha256": "f66ce5b0bd57359c201d2f68447547455068da5a03ac845d555a9edcb62c93f7",
+   "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+  },
+  "BS-VF05": {
+   "id": "BS-VF05",
+   "name": "Fox volley warning",
+   "group": "BS-VF",
+   "priority": "P0",
+   "path": "assets/production/boss/effects/bs_vf05.png",
+   "target_px": [
+    192,
+    96
+   ],
+   "pivot": "center",
+   "raw_source": ".artifact-cache/raw/bs_vf05.png",
+   "raw_sha256": "d5667b52a2b548c4f05d7c1f8e3db4605413c1847080d4a48cb7e521b596e88b",
+   "raw_px": [
+    1408,
+    768
+   ],
+   "generated_utc": "2026-10-11T19:23:08Z",
+   "generator": "arena-agent-mode image generation",
+   "alpha": {
+    "required": true,
+    "mode": "straight RGBA",
+    "transparent_px_fraction": 0.5072,
+    "opaque_px_fraction": 0.1752,
+    "partial_edge_px": 5854,
+    "border_all_transparent": false,
+    "matte_rgb": [
+     255,
+     0,
+     255
+    ],
+    "transparent_fraction": 0.8417,
+    "partial_fraction": 0.0,
+    "matte_residual_opaque_px": 0,
+    "source_keyed_px": [
+     1408,
+     768
+    ]
+   },
+   "format": "PNG RGBA",
+   "trim_bbox_in_keyed_source": [
+    246,
+    141,
+    1150,
+    610
+   ],
+   "actual_px": [
+    192,
+    96
+   ],
+   "sha256": "59ee86a03aa549720688e45293d5a0d2b9899d9a6b5087bb6ba3ad62b4df76d7",
+   "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+  },
   "BS-VF06": {
    "id": "BS-VF06",
    "name": "Fox stagger stars",
@@ -599,6 +705,59 @@
     96
    ],
    "sha256": "edf24659ec8aa11edf2139529566d473706f79db2932c5e48aef199b53091307",
+   "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+  },
+  "BS-VF08": {
+   "id": "BS-VF08",
+   "name": "Boss health pip full",
+   "group": "BS-VF",
+   "priority": "P0",
+   "path": "assets/production/boss/effects/bs_vf08.png",
+   "target_px": [
+    64,
+    64
+   ],
+   "pivot": "center",
+   "raw_source": ".artifact-cache/raw/bs_vf08.png",
+   "raw_sha256": "75c5f0e968ec99a9d6e2b372115cf90cb64ff28661c195bfbd2072656a245845",
+   "raw_px": [
+    1024,
+    1024
+   ],
+   "generated_utc": "2026-10-11T19:23:08Z",
+   "generator": "arena-agent-mode image generation",
+   "alpha": {
+    "required": true,
+    "mode": "straight RGBA",
+    "transparent_px_fraction": 0.3513,
+    "opaque_px_fraction": 0.5371,
+    "partial_edge_px": 457,
+    "border_all_transparent": false,
+    "matte_rgb": [
+     255,
+     0,
+     255
+    ],
+    "transparent_fraction": 0.8184,
+    "partial_fraction": 0.0,
+    "matte_residual_opaque_px": 0,
+    "source_keyed_px": [
+     1024,
+     1024
+    ]
+   },
+   "format": "PNG RGBA",
+   "trim_bbox_in_keyed_source": [
+    256,
+    235,
+    768,
+    788
+   ],
+   "actual_px": [
+    64,
+    64
+   ],
+   "sha256": "038546d68e13dcd62fdec1356d9d5eb9af83adf6b7e81db8fb28ea9b32ebab8b",
    "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
   },
   "CIN-N06": {
@@ -1084,6 +1243,324 @@
     768
    ],
    "sha256": "272af860542fe8a75ac7205c9406b6c4401ac8f050c9bfaa5b4b47e95b93a351",
+   "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+  },
+  "FOX-02": {
+   "id": "FOX-02",
+   "name": "Fox idle flank",
+   "group": "FOX",
+   "priority": "P0",
+   "path": "assets/production/fox/fox_02.png",
+   "target_px": [
+    240,
+    240
+   ],
+   "pivot": "(120,215)",
+   "raw_source": ".artifact-cache/raw/fox_02.png",
+   "raw_sha256": "c2fb23f99d3cbc90ad84b5e2bacd3fc0b530528bb8bdba12200d16b18dc594db",
+   "raw_px": [
+    1408,
+    768
+   ],
+   "generated_utc": "2026-10-11T19:23:08Z",
+   "generator": "arena-agent-mode image generation",
+   "alpha": {
+    "required": true,
+    "mode": "straight RGBA",
+    "transparent_px_fraction": 0.7484,
+    "opaque_px_fraction": 0.2116,
+    "partial_edge_px": 2305,
+    "border_all_transparent": false,
+    "matte_rgb": [
+     255,
+     0,
+     255
+    ],
+    "transparent_fraction": 0.9002,
+    "partial_fraction": 0.0,
+    "matte_residual_opaque_px": 0,
+    "source_keyed_px": [
+     1408,
+     768
+    ]
+   },
+   "format": "PNG RGBA",
+   "trim_bbox_in_keyed_source": [
+    569,
+    59,
+    962,
+    727
+   ],
+   "actual_px": [
+    240,
+    240
+   ],
+   "sha256": "7d9d0d31c64f85499bf9f0fe7cec73c496bf67992a0b22d849a053a82189af74",
+   "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+  },
+  "FOX-03": {
+   "id": "FOX-03",
+   "name": "Fox run contact",
+   "group": "FOX",
+   "priority": "P0",
+   "path": "assets/production/fox/fox_03.png",
+   "target_px": [
+    240,
+    240
+   ],
+   "pivot": "(120,215)",
+   "raw_source": ".artifact-cache/raw/fox_03.png",
+   "raw_sha256": "2793b7a2f2993ba1ed6ec74edbf2e1cd69a547fdea4d6c9b3c34a027fe6f37a6",
+   "raw_px": [
+    1408,
+    768
+   ],
+   "generated_utc": "2026-10-11T19:23:08Z",
+   "generator": "arena-agent-mode image generation",
+   "alpha": {
+    "required": true,
+    "mode": "straight RGBA",
+    "transparent_px_fraction": 0.8185,
+    "opaque_px_fraction": 0.1343,
+    "partial_edge_px": 2720,
+    "border_all_transparent": false,
+    "matte_rgb": [
+     255,
+     0,
+     255
+    ],
+    "transparent_fraction": 0.752,
+    "partial_fraction": 0.0,
+    "matte_residual_opaque_px": 0,
+    "source_keyed_px": [
+     1408,
+     768
+    ]
+   },
+   "format": "PNG RGBA",
+   "trim_bbox_in_keyed_source": [
+    65,
+    35,
+    1326,
+    745
+   ],
+   "actual_px": [
+    240,
+    240
+   ],
+   "sha256": "1d37189a87768988e71c34179356f4f0be7d73b1763489961f799d93232a7ce2",
+   "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+  },
+  "FOX-05": {
+   "id": "FOX-05",
+   "name": "Fox charge tell",
+   "group": "FOX",
+   "priority": "P0",
+   "path": "assets/production/fox/fox_05.png",
+   "target_px": [
+    240,
+    240
+   ],
+   "pivot": "(120,215)",
+   "raw_source": ".artifact-cache/raw/fox_05.png",
+   "raw_sha256": "7a557c3ff39737d3b5e6e3726b93a25b6ce03933b55625b885a145a5d2dcbf1e",
+   "raw_px": [
+    1376,
+    768
+   ],
+   "generated_utc": "2026-10-11T19:23:08Z",
+   "generator": "arena-agent-mode image generation",
+   "alpha": {
+    "required": true,
+    "mode": "straight RGBA",
+    "transparent_px_fraction": 0.6943,
+    "opaque_px_fraction": 0.2488,
+    "partial_edge_px": 3276,
+    "border_all_transparent": false,
+    "matte_rgb": [
+     255,
+     0,
+     255
+    ],
+    "transparent_fraction": 0.693,
+    "partial_fraction": 0.0,
+    "matte_residual_opaque_px": 0,
+    "source_keyed_px": [
+     1376,
+     768
+    ]
+   },
+   "format": "PNG RGBA",
+   "trim_bbox_in_keyed_source": [
+    120,
+    77,
+    1175,
+    720
+   ],
+   "actual_px": [
+    240,
+    240
+   ],
+   "sha256": "9b7b6b1dac7ab72cd2b37fd0c46bbf4304630e10f4156da6ed0cfdf5fa28430f",
+   "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+  },
+  "FOX-06": {
+   "id": "FOX-06",
+   "name": "Fox charge lunge",
+   "group": "FOX",
+   "priority": "P0",
+   "path": "assets/production/fox/fox_06.png",
+   "target_px": [
+    240,
+    240
+   ],
+   "pivot": "(120,215)",
+   "raw_source": ".artifact-cache/raw/fox_06.png",
+   "raw_sha256": "bf6aa40907cc1251a33808cc53923f66d06d03176e6dbe42d136d19b3c09b4ed",
+   "raw_px": [
+    1408,
+    768
+   ],
+   "generated_utc": "2026-10-11T19:23:08Z",
+   "generator": "arena-agent-mode image generation",
+   "alpha": {
+    "required": true,
+    "mode": "straight RGBA",
+    "transparent_px_fraction": 0.8309,
+    "opaque_px_fraction": 0.1324,
+    "partial_edge_px": 2112,
+    "border_all_transparent": false,
+    "matte_rgb": [
+     255,
+     0,
+     255
+    ],
+    "transparent_fraction": 0.7439,
+    "partial_fraction": 0.0,
+    "matte_residual_opaque_px": 0,
+    "source_keyed_px": [
+     1408,
+     768
+    ]
+   },
+   "format": "PNG RGBA",
+   "trim_bbox_in_keyed_source": [
+    47,
+    47,
+    1361,
+    721
+   ],
+   "actual_px": [
+    240,
+    240
+   ],
+   "sha256": "e6af75430829d9a24f8bffc181a345116199ca06396a3a3e2d01347e0d3c1511",
+   "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+  },
+  "FOX-07": {
+   "id": "FOX-07",
+   "name": "Fox volley ready",
+   "group": "FOX",
+   "priority": "P0",
+   "path": "assets/production/fox/fox_07.png",
+   "target_px": [
+    240,
+    240
+   ],
+   "pivot": "(120,215)",
+   "raw_source": ".artifact-cache/raw/fox_07.png",
+   "raw_sha256": "25c99d11e66c06435f6e7d5e3467b639cdb99e1215aa6fc5b7a4980270f9b909",
+   "raw_px": [
+    1408,
+    768
+   ],
+   "generated_utc": "2026-10-11T19:23:08Z",
+   "generator": "arena-agent-mode image generation",
+   "alpha": {
+    "required": true,
+    "mode": "straight RGBA",
+    "transparent_px_fraction": 0.6695,
+    "opaque_px_fraction": 0.2762,
+    "partial_edge_px": 3130,
+    "border_all_transparent": false,
+    "matte_rgb": [
+     255,
+     0,
+     255
+    ],
+    "transparent_fraction": 0.8629,
+    "partial_fraction": 0.0,
+    "matte_residual_opaque_px": 0,
+    "source_keyed_px": [
+     1408,
+     768
+    ]
+   },
+   "format": "PNG RGBA",
+   "trim_bbox_in_keyed_source": [
+    410,
+    47,
+    1032,
+    733
+   ],
+   "actual_px": [
+    240,
+    240
+   ],
+   "sha256": "147e994e44286fc67150d90f49fc9c98e43611ad802ef22f869ba1e889583fd5",
+   "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+  },
+  "FOX-09": {
+   "id": "FOX-09",
+   "name": "Fox stun frame A",
+   "group": "FOX",
+   "priority": "P0",
+   "path": "assets/production/fox/fox_09.png",
+   "target_px": [
+    240,
+    240
+   ],
+   "pivot": "(120,215)",
+   "raw_source": ".artifact-cache/raw/fox_09.png",
+   "raw_sha256": "a5ef3bfe19d05efbe0c4447526fd62dd733d90ee2699b72c88d6ba64f5673052",
+   "raw_px": [
+    1408,
+    768
+   ],
+   "generated_utc": "2026-10-11T19:23:08Z",
+   "generator": "arena-agent-mode image generation",
+   "alpha": {
+    "required": true,
+    "mode": "straight RGBA",
+    "transparent_px_fraction": 0.7704,
+    "opaque_px_fraction": 0.1885,
+    "partial_edge_px": 2368,
+    "border_all_transparent": false,
+    "matte_rgb": [
+     255,
+     0,
+     255
+    ],
+    "transparent_fraction": 0.782,
+    "partial_fraction": 0.0,
+    "matte_residual_opaque_px": 0,
+    "source_keyed_px": [
+     1408,
+     768
+    ]
+   },
+   "format": "PNG RGBA",
+   "trim_bbox_in_keyed_source": [
+    205,
+    76,
+    1244,
+    686
+   ],
+   "actual_px": [
+    240,
+    240
+   ],
+   "sha256": "a04fa19d68259a92f5a98df2c5740570f0ed7fb6b6d427c81b0fb812ad2d145b",
    "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
   },
   "PR-01": {

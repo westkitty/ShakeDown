@@ -46,7 +46,7 @@ Canvas engine: 960x540 logical screen, 32px tile contacts, source game inputs vi
 |---|---:|---:|---:|---:|---:|---:|
 | BIRTHDAY REVEAL / CAKE / SHAKES | 14 | 0 | 8 | 6 | 7 | 1 |
 | CAMPUS BACKGROUNDS / QUAD | 6 | 0 | 3 | 3 | 3 | 0 |
-| BOSS ATTACK READABILITY | 12 | 0 | 9 | 7 | 4 | 1 |
+| BOSS ATTACK READABILITY | 12 | 0 | 6 | 7 | 4 | 1 |
 | CINNAMON SOURCE SPRITES / REFINEMENTS | 33 | 26 | 6 | 1 | 6 | 0 |
 | COLLECTIBLES | 4 | 0 | 3 | 3 | 1 | 0 |
 | DOME PARALLAX / VIEWPORTS | 8 | 0 | 5 | 3 | 3 | 2 |
@@ -55,7 +55,7 @@ Canvas engine: 960x540 logical screen, 32px tile contacts, source game inputs vi
 | DOME STONE / GOLDEN TILES | 16 | 0 | 10 | 6 | 9 | 1 |
 | CAMPUS ENEMY STATES | 7 | 0 | 7 | 4 | 3 | 0 |
 | ADDITIONAL EFFECTS | 8 | 0 | 8 | 0 | 5 | 3 |
-| THE FOX / INTRO AND BOSS | 16 | 0 | 15 | 9 | 5 | 2 |
+| THE FOX / INTRO AND BOSS | 16 | 0 | 9 | 9 | 5 | 2 |
 | TRANSITIONS / STORY EFFECTS | 4 | 0 | 4 | 2 | 2 | 0 |
 | CAMPUS PULSE OBJECTS | 9 | 0 | 9 | 8 | 1 | 0 |
 | COLLECTIBLES / POWERUPS / PICKUP FRAMES | 6 | 0 | 6 | 0 | 4 | 2 |
@@ -65,7 +65,7 @@ Canvas engine: 960x540 logical screen, 32px tile contacts, source game inputs vi
 | ADDITIONAL UI / TOUCH | 14 | 0 | 13 | 1 | 10 | 3 |
 | CAMPUS VISUAL EFFECTS | 10 | 0 | 10 | 1 | 9 | 0 |
 
-TOTAL VISUAL CONTRACT: **220** individually specified logical IDs; **26** source-verified Cinnamon frames; **26** generated, byte-verified and normalized production images; **167** still missing final production images.
+TOTAL VISUAL CONTRACT: **220** individually specified logical IDs; **26** source-verified Cinnamon frames; **29** generated, byte-verified and normalized production images; **158** still missing final production images.
 
 ## LM ARENA UNIVERSAL EXECUTION ORDER
 
@@ -6254,7 +6254,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/boss/effects/bs_vf02.png; measure intrinsic 256x96 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID BS-VF02 in runtime manifest. At runtime map ID to Boss readability, counterplay and feedback; place in boss with anchor center; use the engine auth collider "FX only, separate from hitboxes" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### BS-VF04 — Fox confetti projectile
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** boss · **Target:** 64×64 px · **Source:** 128×128 px · **Output:** `assets/production/boss/effects/bs_vf04.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** boss · **Target:** 64×64 px · **Source:** 128×128 px · **Output:** `assets/production/boss/effects/bs_vf04.png`
 **Anchor:** center · **Collision:** FX only, separate from hitboxes · **Animation:** single state, no spritesheet unless intentional sequence is later verified
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Fox art approved by human + boss state machine
 
@@ -6289,7 +6289,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/boss/effects/bs_vf04.png; measure intrinsic 64x64 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID BS-VF04 in runtime manifest. At runtime map ID to Boss readability, counterplay and feedback; place in boss with anchor center; use the engine auth collider "FX only, separate from hitboxes" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### BS-VF05 — Fox volley warning
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** boss · **Target:** 192×96 px · **Source:** 384×192 px · **Output:** `assets/production/boss/effects/bs_vf05.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** boss · **Target:** 192×96 px · **Source:** 384×192 px · **Output:** `assets/production/boss/effects/bs_vf05.png`
 **Anchor:** center · **Collision:** FX only, separate from hitboxes · **Animation:** single state, no spritesheet unless intentional sequence is later verified
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Fox art approved by human + boss state machine
 
@@ -6359,7 +6359,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 **Integration:** Verify file bytes exist at assets/production/boss/effects/bs_vf06.png; measure intrinsic 96x96 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID BS-VF06 in runtime manifest. At runtime map ID to Boss readability, counterplay and feedback; place in boss with anchor center; use the engine auth collider "FX only, separate from hitboxes" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### BS-VF08 — Boss health pip full
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** boss · **Target:** 64×64 px · **Source:** 128×128 px · **Output:** `assets/production/boss/effects/bs_vf08.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** boss · **Target:** 64×64 px · **Source:** 128×128 px · **Output:** `assets/production/boss/effects/bs_vf08.png`
 **Anchor:** center · **Collision:** FX only, separate from hitboxes · **Animation:** single state, no spritesheet unless intentional sequence is later verified
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Fox art approved by human + boss state machine
 
