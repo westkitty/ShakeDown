@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "generated_utc": "2026-10-11T19:56:59Z",
+  "generated_utc": "2026-10-11T20:13:57Z",
   "note": "Byte-level truth for generated production art. Every sha256 and pixel dimension here was measured from the file actually written to disk. Human visual review is a separate, still-open gate.",
-  "count": 148,
+  "count": 157,
   "assets": {
     "BD-01": {
       "id": "BD-01",
@@ -358,6 +358,59 @@
       "sha256": "15438833f5dbbfe593d79b2af77891e346ce79bc7e5f81b084f1675de81ec832",
       "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
     },
+    "BD-14": {
+      "id": "BD-14",
+      "name": "Golden shamrock medal",
+      "group": "BD",
+      "priority": "P2",
+      "path": "assets/production/birthday/bd_14.png",
+      "target_px": [
+        128,
+        128
+      ],
+      "pivot": "bottom-center",
+      "raw_source": ".artifact-cache/raw/bd_14.png",
+      "raw_sha256": "96ce97055da7be8967e862a8b0ebfab51cf3590580ec0e8c56c8d405f008318a",
+      "raw_px": [
+        1408,
+        768
+      ],
+      "generated_utc": "2026-10-11T20:13:57Z",
+      "generator": "arena-agent-mode image generation",
+      "alpha": {
+        "required": true,
+        "mode": "straight RGBA",
+        "transparent_px_fraction": 0.1818,
+        "opaque_px_fraction": 0.7765,
+        "partial_edge_px": 683,
+        "border_all_transparent": false,
+        "matte_rgb": [
+          255,
+          0,
+          255
+        ],
+        "transparent_fraction": 0.8345,
+        "partial_fraction": 0.0,
+        "matte_residual_opaque_px": 0,
+        "source_keyed_px": [
+          1408,
+          768
+        ]
+      },
+      "format": "PNG RGBA",
+      "trim_bbox_in_keyed_source": [
+        470,
+        152,
+        938,
+        622
+      ],
+      "actual_px": [
+        128,
+        128
+      ],
+      "sha256": "b25f8f6444c919e3a9489e1cc118ee7db139b35e4b35bb74345af52924386f40",
+      "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+    },
     "BG-01": {
       "id": "BG-01",
       "name": "Daylight sky",
@@ -709,6 +762,59 @@
       "sha256": "283ce08fd5d7f01773e106112ed53769993d2b2d987691c741bc8cf052027ea4",
       "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
     },
+    "BS-VF03": {
+      "id": "BS-VF03",
+      "name": "Fox charge dust burst",
+      "group": "BS-VF",
+      "priority": "P1",
+      "path": "assets/production/boss/effects/bs_vf03.png",
+      "target_px": [
+        192,
+        96
+      ],
+      "pivot": "center",
+      "raw_source": ".artifact-cache/raw/bs_vf03.png",
+      "raw_sha256": "2bf915f7b5acf492de856b14d1edaa11f0e5b900e4c42a51e3f9b3bfc14daaf2",
+      "raw_px": [
+        1408,
+        768
+      ],
+      "generated_utc": "2026-10-11T20:13:57Z",
+      "generator": "arena-agent-mode image generation",
+      "alpha": {
+        "required": true,
+        "mode": "straight RGBA",
+        "transparent_px_fraction": 0.6918,
+        "opaque_px_fraction": 0.1416,
+        "partial_edge_px": 3071,
+        "border_all_transparent": false,
+        "matte_rgb": [
+          255,
+          0,
+          255
+        ],
+        "transparent_fraction": 0.9131,
+        "partial_fraction": 0.0,
+        "matte_residual_opaque_px": 0,
+        "source_keyed_px": [
+          1408,
+          768
+        ]
+      },
+      "format": "PNG RGBA",
+      "trim_bbox_in_keyed_source": [
+        399,
+        194,
+        974,
+        633
+      ],
+      "actual_px": [
+        192,
+        96
+      ],
+      "sha256": "d7287319d58a17a89c7160b44c6700739beb5947b7334daf6da177f7a0d55e4d",
+      "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+    },
     "BS-VF04": {
       "id": "BS-VF04",
       "name": "Fox confetti projectile",
@@ -1027,6 +1133,59 @@
       "sha256": "8b997fb81a57dd99044fd33b6b4e4085dc7f82722f5efcde05b1117af6cb7cc0",
       "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
     },
+    "BS-VF10": {
+      "id": "BS-VF10",
+      "name": "Boss defeated puff",
+      "group": "BS-VF",
+      "priority": "P1",
+      "path": "assets/production/boss/effects/bs_vf10.png",
+      "target_px": [
+        192,
+        128
+      ],
+      "pivot": "center",
+      "raw_source": ".artifact-cache/raw/bs_vf10.png",
+      "raw_sha256": "8ef508b1c913ae40fa5e44762d4cf12491f9aa2d1dcd11263af3f9390af0ad96",
+      "raw_px": [
+        1408,
+        768
+      ],
+      "generated_utc": "2026-10-11T20:13:57Z",
+      "generator": "arena-agent-mode image generation",
+      "alpha": {
+        "required": true,
+        "mode": "straight RGBA",
+        "transparent_px_fraction": 0.6815,
+        "opaque_px_fraction": 0.2618,
+        "partial_edge_px": 1394,
+        "border_all_transparent": false,
+        "matte_rgb": [
+          255,
+          0,
+          255
+        ],
+        "transparent_fraction": 0.8367,
+        "partial_fraction": 0.0,
+        "matte_residual_opaque_px": 0,
+        "source_keyed_px": [
+          1408,
+          768
+        ]
+      },
+      "format": "PNG RGBA",
+      "trim_bbox_in_keyed_source": [
+        235,
+        164,
+        1173,
+        598
+      ],
+      "actual_px": [
+        192,
+        128
+      ],
+      "sha256": "80dc244fec6e094e241dc59b079eaaa484e5e6ac48bf904707083e7668235893",
+      "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+    },
     "BS-VF11": {
       "id": "BS-VF11",
       "name": "Summit shockwave",
@@ -1078,6 +1237,59 @@
         64
       ],
       "sha256": "68fc5c03261ec1f7e7fc83efae7ba0765565769c78f107d98eefeb0d6bbc7f28",
+      "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+    },
+    "BS-VF12": {
+      "id": "BS-VF12",
+      "name": "Fox victory truce sparkle",
+      "group": "BS-VF",
+      "priority": "P2",
+      "path": "assets/production/boss/effects/bs_vf12.png",
+      "target_px": [
+        128,
+        128
+      ],
+      "pivot": "center",
+      "raw_source": ".artifact-cache/raw/bs_vf12.png",
+      "raw_sha256": "bb1c00ed4e4fdf36bbd5f7561f7aa30330769bc12823de269ede5ac0d677327c",
+      "raw_px": [
+        1408,
+        768
+      ],
+      "generated_utc": "2026-10-11T20:13:57Z",
+      "generator": "arena-agent-mode image generation",
+      "alpha": {
+        "required": true,
+        "mode": "straight RGBA",
+        "transparent_px_fraction": 0.7281,
+        "opaque_px_fraction": 0.165,
+        "partial_edge_px": 1750,
+        "border_all_transparent": false,
+        "matte_rgb": [
+          255,
+          0,
+          255
+        ],
+        "transparent_fraction": 0.9112,
+        "partial_fraction": 0.0,
+        "matte_residual_opaque_px": 0,
+        "source_keyed_px": [
+          1408,
+          768
+        ]
+      },
+      "format": "PNG RGBA",
+      "trim_bbox_in_keyed_source": [
+        388,
+        94,
+        1021,
+        704
+      ],
+      "actual_px": [
+        128,
+        128
+      ],
+      "sha256": "baf5d8707a1cf0d9a11bd7303300eed8d38847aab4df659a3fc4f1e4082743fe",
       "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
     },
     "CIN-N06": {
@@ -5041,6 +5253,59 @@
       "sha256": "4b3fd3c1cf39a85bb5d2e9f9ef71e6747017804aec9a426042d502bc198af7a6",
       "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
     },
+    "PK-02": {
+      "id": "PK-02",
+      "name": "Shake cup flip frame B",
+      "group": "PK",
+      "priority": "P1",
+      "path": "assets/production/pickups/pk_02.png",
+      "target_px": [
+        64,
+        64
+      ],
+      "pivot": "center",
+      "raw_source": ".artifact-cache/raw/pk_02.png",
+      "raw_sha256": "aed3b9607f1b919f1de533821b456658a626001ff06fbf5e1875dbade1ffdbde",
+      "raw_px": [
+        1408,
+        768
+      ],
+      "generated_utc": "2026-10-11T20:13:57Z",
+      "generator": "arena-agent-mode image generation",
+      "alpha": {
+        "required": true,
+        "mode": "straight RGBA",
+        "transparent_px_fraction": 0.6216,
+        "opaque_px_fraction": 0.2927,
+        "partial_edge_px": 351,
+        "border_all_transparent": false,
+        "matte_rgb": [
+          255,
+          0,
+          255
+        ],
+        "transparent_fraction": 0.8871,
+        "partial_fraction": 0.0,
+        "matte_residual_opaque_px": 0,
+        "source_keyed_px": [
+          1408,
+          768
+        ]
+      },
+      "format": "PNG RGBA",
+      "trim_bbox_in_keyed_source": [
+        540,
+        76,
+        868,
+        662
+      ],
+      "actual_px": [
+        64,
+        64
+      ],
+      "sha256": "d090be4dc0483b69073be32e13a6e05b555e7ad32e22f77920d698a7160dd7c0",
+      "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+    },
     "PK-04": {
       "id": "PK-04",
       "name": "Golden shake secret pulse",
@@ -5092,6 +5357,112 @@
         64
       ],
       "sha256": "c244906ad50ca020a4f8c5f86fbd8a465efb211b2002de943aea8d5a67cc030c",
+      "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+    },
+    "PK-05": {
+      "id": "PK-05",
+      "name": "Heart pickup",
+      "group": "PK",
+      "priority": "P2",
+      "path": "assets/production/pickups/pk_05.png",
+      "target_px": [
+        64,
+        64
+      ],
+      "pivot": "center",
+      "raw_source": ".artifact-cache/raw/pk_05.png",
+      "raw_sha256": "cc3af233ef6a844aab01b6e774868320f5ade2ee95dbe23125f84378c1fa85dd",
+      "raw_px": [
+        1408,
+        768
+      ],
+      "generated_utc": "2026-10-11T20:13:57Z",
+      "generator": "arena-agent-mode image generation",
+      "alpha": {
+        "required": true,
+        "mode": "straight RGBA",
+        "transparent_px_fraction": 0.2542,
+        "opaque_px_fraction": 0.6538,
+        "partial_edge_px": 377,
+        "border_all_transparent": false,
+        "matte_rgb": [
+          255,
+          0,
+          255
+        ],
+        "transparent_fraction": 0.8388,
+        "partial_fraction": 0.0,
+        "matte_residual_opaque_px": 0,
+        "source_keyed_px": [
+          1408,
+          768
+        ]
+      },
+      "format": "PNG RGBA",
+      "trim_bbox_in_keyed_source": [
+        458,
+        141,
+        950,
+        633
+      ],
+      "actual_px": [
+        64,
+        64
+      ],
+      "sha256": "aa87a7a91d9092e7cc1fa2833904c85b81ee77a7037e2c05b1ac4f30565e6a91",
+      "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+    },
+    "PK-06": {
+      "id": "PK-06",
+      "name": "Speed paw booster",
+      "group": "PK",
+      "priority": "P2",
+      "path": "assets/production/pickups/pk_06.png",
+      "target_px": [
+        64,
+        64
+      ],
+      "pivot": "center",
+      "raw_source": ".artifact-cache/raw/pk_06.png",
+      "raw_sha256": "bc3f7653b18ad0592dbd00171d1747fe2c6ee4819c9bf4ca057869e8f582b85f",
+      "raw_px": [
+        1408,
+        768
+      ],
+      "generated_utc": "2026-10-11T20:13:57Z",
+      "generator": "arena-agent-mode image generation",
+      "alpha": {
+        "required": true,
+        "mode": "straight RGBA",
+        "transparent_px_fraction": 0.3521,
+        "opaque_px_fraction": 0.5444,
+        "partial_edge_px": 424,
+        "border_all_transparent": false,
+        "matte_rgb": [
+          255,
+          0,
+          255
+        ],
+        "transparent_fraction": 0.8212,
+        "partial_fraction": 0.0,
+        "matte_residual_opaque_px": 0,
+        "source_keyed_px": [
+          1408,
+          768
+        ]
+      },
+      "format": "PNG RGBA",
+      "trim_bbox_in_keyed_source": [
+        458,
+        152,
+        1020,
+        633
+      ],
+      "actual_px": [
+        64,
+        64
+      ],
+      "sha256": "d7189e4fedb125da7ab6b6b0f726ed665027705b06f2cd8b6b280dc81ca1e2de",
       "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
     },
     "PR-01": {
@@ -6917,6 +7288,112 @@
         64
       ],
       "sha256": "4de42b03fbcb114ec6a8dc4a2c0bec9dc3e06891f6785b9e425a10eb8dc08b50",
+      "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+    },
+    "UX-13": {
+      "id": "UX-13",
+      "name": "Story Fox portrait frame",
+      "group": "UIX",
+      "priority": "P2",
+      "path": "assets/production/ui/ux_13.png",
+      "target_px": [
+        256,
+        256
+      ],
+      "pivot": "top-left",
+      "raw_source": ".artifact-cache/raw/ux_13.png",
+      "raw_sha256": "c6697c2ae6b075f58ed2ac4fd171703529978b08fe4d764d927a67d0f0f5ff52",
+      "raw_px": [
+        1408,
+        768
+      ],
+      "generated_utc": "2026-10-11T20:13:57Z",
+      "generator": "arena-agent-mode image generation",
+      "alpha": {
+        "required": true,
+        "mode": "straight RGBA",
+        "transparent_px_fraction": 0.0678,
+        "opaque_px_fraction": 0.9309,
+        "partial_edge_px": 85,
+        "border_all_transparent": false,
+        "matte_rgb": [
+          255,
+          0,
+          255
+        ],
+        "transparent_fraction": 0.7046,
+        "partial_fraction": 0.0,
+        "matte_residual_opaque_px": 0,
+        "source_keyed_px": [
+          1408,
+          768
+        ]
+      },
+      "format": "PNG RGBA",
+      "trim_bbox_in_keyed_source": [
+        411,
+        111,
+        997,
+        657
+      ],
+      "actual_px": [
+        256,
+        256
+      ],
+      "sha256": "6b24ec552ccd61c39936ea92bdeef801cb7030f07b2b5ac8e339c549db8103f5",
+      "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+    },
+    "UX-14": {
+      "id": "UX-14",
+      "name": "Assist mode marker",
+      "group": "UIX",
+      "priority": "P2",
+      "path": "assets/production/ui/ux_14.png",
+      "target_px": [
+        64,
+        64
+      ],
+      "pivot": "center",
+      "raw_source": ".artifact-cache/raw/ux_14.png",
+      "raw_sha256": "f14172335701cec6487efe57eb43a325d6a94ceb4fadce70efe3a10a475ec602",
+      "raw_px": [
+        1024,
+        1024
+      ],
+      "generated_utc": "2026-10-11T20:13:57Z",
+      "generator": "arena-agent-mode image generation",
+      "alpha": {
+        "required": true,
+        "mode": "straight RGBA",
+        "transparent_px_fraction": 0.3074,
+        "opaque_px_fraction": 0.5942,
+        "partial_edge_px": 403,
+        "border_all_transparent": false,
+        "matte_rgb": [
+          255,
+          0,
+          255
+        ],
+        "transparent_fraction": 0.7621,
+        "partial_fraction": 0.0,
+        "matte_residual_opaque_px": 0,
+        "source_keyed_px": [
+          1024,
+          1024
+        ]
+      },
+      "format": "PNG RGBA",
+      "trim_bbox_in_keyed_source": [
+        205,
+        231,
+        819,
+        793
+      ],
+      "actual_px": [
+        64,
+        64
+      ],
+      "sha256": "6ed8989ce842583e9c1df16fcc827628802ee42381192bb1d7deeb3b84baca44",
       "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
     },
     "VF-01": {
