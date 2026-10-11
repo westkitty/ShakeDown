@@ -1,8 +1,8 @@
 {
  "schema_version": 1,
- "generated_utc": "2026-10-11T19:40:56Z",
+ "generated_utc": "2026-10-11T19:43:31Z",
  "note": "Byte-level truth for generated production art. Every sha256 and pixel dimension here was measured from the file actually written to disk. Human visual review is a separate, still-open gate.",
- "count": 98,
+ "count": 108,
  "assets": {
   "BD-01": {
    "id": "BD-01",
@@ -3471,6 +3471,59 @@
    "sha256": "ffe3f95d4c4cd924ed315e2c23e85c04ad2763d113cb5d5113acd40bf484a5ee",
    "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
   },
+  "MC-09": {
+   "id": "MC-09",
+   "name": "Final route flag",
+   "group": "MC",
+   "priority": "P1",
+   "path": "assets/level1/mechanics/mc_09_final_route_flag.png",
+   "target_px": [
+    64,
+    128
+   ],
+   "pivot": "bottom-center",
+   "raw_source": ".artifact-cache/raw/mc_09.png",
+   "raw_sha256": "8eb7dc36c9e67d48db1440922271c9c68269324a53878f89d30585ead8eaf589",
+   "raw_px": [
+    1408,
+    768
+   ],
+   "generated_utc": "2026-10-11T19:43:31Z",
+   "generator": "arena-agent-mode image generation",
+   "alpha": {
+    "required": true,
+    "mode": "straight RGBA",
+    "transparent_px_fraction": 0.7491,
+    "opaque_px_fraction": 0.1748,
+    "partial_edge_px": 623,
+    "border_all_transparent": false,
+    "matte_rgb": [
+     255,
+     0,
+     255
+    ],
+    "transparent_fraction": 0.9503,
+    "partial_fraction": 0.0,
+    "matte_residual_opaque_px": 0,
+    "source_keyed_px": [
+     1408,
+     768
+    ]
+   },
+   "format": "PNG RGBA",
+   "trim_bbox_in_keyed_source": [
+    551,
+    182,
+    892,
+    586
+   ],
+   "actual_px": [
+    64,
+    128
+   ],
+   "sha256": "b98ecbd907d8c477c94fd41b832053826d77f44ec73390b3fc5590b5264a72b5",
+   "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+  },
   "PR-01": {
    "id": "PR-01",
    "name": "Shamrock Shake stand",
@@ -3789,6 +3842,112 @@
    "sha256": "e6733f442cbf8f5c4689442eabacf00709544075858c8b8a5e82c2f0a22164ca",
    "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
   },
+  "PR-07": {
+   "id": "PR-07",
+   "name": "Campus directional sign",
+   "group": "PR",
+   "priority": "P1",
+   "path": "assets/level1/props/pr_07_campus_directional_sign.png",
+   "target_px": [
+    96,
+    128
+   ],
+   "pivot": "bottom-center",
+   "raw_source": ".artifact-cache/raw/pr_07.png",
+   "raw_sha256": "124c619f3aebaa0898053010727c6092b284a66b4cada6ad31502799fe98034c",
+   "raw_px": [
+    1408,
+    768
+   ],
+   "generated_utc": "2026-10-11T19:43:31Z",
+   "generator": "arena-agent-mode image generation",
+   "alpha": {
+    "required": true,
+    "mode": "straight RGBA",
+    "transparent_px_fraction": 0.5893,
+    "opaque_px_fraction": 0.3585,
+    "partial_edge_px": 642,
+    "border_all_transparent": false,
+    "matte_rgb": [
+     255,
+     0,
+     255
+    ],
+    "transparent_fraction": 0.8815,
+    "partial_fraction": 0.0,
+    "matte_residual_opaque_px": 0,
+    "source_keyed_px": [
+     1408,
+     768
+    ]
+   },
+   "format": "PNG RGBA",
+   "trim_bbox_in_keyed_source": [
+    557,
+    64,
+    851,
+    721
+   ],
+   "actual_px": [
+    96,
+    128
+   ],
+   "sha256": "d84c91d52cb5557bd5fab32f3f571c653956a106a72ab30fe5318561ebbdf41c",
+   "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+  },
+  "PR-08": {
+   "id": "PR-08",
+   "name": "Blue-gold pennant pole",
+   "group": "PR",
+   "priority": "P1",
+   "path": "assets/level1/props/pr_08_blue_gold_pennant_pole.png",
+   "target_px": [
+    64,
+    192
+   ],
+   "pivot": "bottom-center",
+   "raw_source": ".artifact-cache/raw/pr_08.png",
+   "raw_sha256": "06fcab3ce0f02a0f8dd768bd8a860acc4d620c2acf10c101efde547979ef7611",
+   "raw_px": [
+    768,
+    1376
+   ],
+   "generated_utc": "2026-10-11T19:43:31Z",
+   "generator": "arena-agent-mode image generation",
+   "alpha": {
+    "required": true,
+    "mode": "straight RGBA",
+    "transparent_px_fraction": 0.8186,
+    "opaque_px_fraction": 0.1498,
+    "partial_edge_px": 388,
+    "border_all_transparent": false,
+    "matte_rgb": [
+     255,
+     0,
+     255
+    ],
+    "transparent_fraction": 0.9213,
+    "partial_fraction": 0.0,
+    "matte_residual_opaque_px": 0,
+    "source_keyed_px": [
+     768,
+     1376
+    ]
+   },
+   "format": "PNG RGBA",
+   "trim_bbox_in_keyed_source": [
+    203,
+    390,
+    605,
+    986
+   ],
+   "actual_px": [
+    64,
+    192
+   ],
+   "sha256": "f77eb5fab16cb199984967eb2003b109c5993d967559fc2310ec55157afaee3d",
+   "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+  },
   "PR-09": {
    "id": "PR-09",
    "name": "Parade utility cart",
@@ -3948,6 +4107,59 @@
    "sha256": "a70ec62cff917445da519dfa71475f6b4da8908c9dabd83441e45a0933f5ab25",
    "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
   },
+  "PR-12": {
+   "id": "PR-12",
+   "name": "Festival pennant string",
+   "group": "PR",
+   "priority": "P1",
+   "path": "assets/level1/props/pr_12_festival_pennant_string.png",
+   "target_px": [
+    256,
+    64
+   ],
+   "pivot": "bottom-center",
+   "raw_source": ".artifact-cache/raw/pr_12.png",
+   "raw_sha256": "464cf99d24c3f80a4d723d007cd0e75d9fc918dda593017a401002aa4eb065ea",
+   "raw_px": [
+    1408,
+    768
+   ],
+   "generated_utc": "2026-10-11T19:43:31Z",
+   "generator": "arena-agent-mode image generation",
+   "alpha": {
+    "required": true,
+    "mode": "straight RGBA",
+    "transparent_px_fraction": 0.7033,
+    "opaque_px_fraction": 0.2008,
+    "partial_edge_px": 1571,
+    "border_all_transparent": false,
+    "matte_rgb": [
+     255,
+     0,
+     255
+    ],
+    "transparent_fraction": 0.8331,
+    "partial_fraction": 0.0,
+    "matte_residual_opaque_px": 0,
+    "source_keyed_px": [
+     1408,
+     768
+    ]
+   },
+   "format": "PNG RGBA",
+   "trim_bbox_in_keyed_source": [
+    47,
+    176,
+    1361,
+    586
+   ],
+   "actual_px": [
+    256,
+    64
+   ],
+   "sha256": "79716bae7ca18c69895f9054042ad0c4a365ba4599306020f0bbe1ee2751264f",
+   "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+  },
   "PR-13": {
    "id": "PR-13",
    "name": "Stone planter",
@@ -3999,6 +4211,59 @@
     96
    ],
    "sha256": "a444e020bf31075d298899d25bf6ea267b155ac4189cb0a38b8ee03d26f0abc9",
+   "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+  },
+  "PR-14": {
+   "id": "PR-14",
+   "name": "Collapsible rope barrier",
+   "group": "PR",
+   "priority": "P1",
+   "path": "assets/level1/props/pr_14_collapsible_rope_barrier.png",
+   "target_px": [
+    128,
+    80
+   ],
+   "pivot": "bottom-center",
+   "raw_source": ".artifact-cache/raw/pr_14.png",
+   "raw_sha256": "8420913a7dcbc8f68e921aaf548e0a0d1731f8153672845dc025ed02f6d1df30",
+   "raw_px": [
+    1408,
+    768
+   ],
+   "generated_utc": "2026-10-11T19:43:31Z",
+   "generator": "arena-agent-mode image generation",
+   "alpha": {
+    "required": true,
+    "mode": "straight RGBA",
+    "transparent_px_fraction": 0.8287,
+    "opaque_px_fraction": 0.0968,
+    "partial_edge_px": 763,
+    "border_all_transparent": false,
+    "matte_rgb": [
+     255,
+     0,
+     255
+    ],
+    "transparent_fraction": 0.8849,
+    "partial_fraction": 0.0,
+    "matte_residual_opaque_px": 0,
+    "source_keyed_px": [
+     1408,
+     768
+    ]
+   },
+   "format": "PNG RGBA",
+   "trim_bbox_in_keyed_source": [
+    129,
+    223,
+    1279,
+    563
+   ],
+   "actual_px": [
+    128,
+    80
+   ],
+   "sha256": "389cca0dbe2098fb81e3295320518e837ea7b993d2334c198aa1702b0639db04",
    "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
   },
   "TL-01": {
@@ -4870,6 +5135,271 @@
     128
    ],
    "sha256": "6eb7daa7aaa23264f9089a6d0b583f80e4ce4a980c40c2ea643c5442d75296fd",
+   "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+  },
+  "VF-02": {
+   "id": "VF-02",
+   "name": "IRISH pulse settle",
+   "group": "VF",
+   "priority": "P1",
+   "path": "assets/level1/effects/vf_02_irish_pulse_settle.png",
+   "target_px": [
+    128,
+    128
+   ],
+   "pivot": "center",
+   "raw_source": ".artifact-cache/raw/vf_02.png",
+   "raw_sha256": "78473457d4841d7775fdcf810e0370f0c9b6334a19cd9878610cccb4d1cdad9e",
+   "raw_px": [
+    1408,
+    768
+   ],
+   "generated_utc": "2026-10-11T19:43:31Z",
+   "generator": "arena-agent-mode image generation",
+   "alpha": {
+    "required": true,
+    "mode": "straight RGBA",
+    "transparent_px_fraction": 0.6663,
+    "opaque_px_fraction": 0.1713,
+    "partial_edge_px": 2660,
+    "border_all_transparent": false,
+    "matte_rgb": [
+     255,
+     0,
+     255
+    ],
+    "transparent_fraction": 0.8901,
+    "partial_fraction": 0.0,
+    "matte_residual_opaque_px": 0,
+    "source_keyed_px": [
+     1408,
+     768
+    ]
+   },
+   "format": "PNG RGBA",
+   "trim_bbox_in_keyed_source": [
+    392,
+    66,
+    1016,
+    703
+   ],
+   "actual_px": [
+    128,
+    128
+   ],
+   "sha256": "48cb99886bcd680c030ceac51c5f0e96c42b058c51520cc1ca934d98106445c7",
+   "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+  },
+  "VF-03": {
+   "id": "VF-03",
+   "name": "Drum strike spark",
+   "group": "VF",
+   "priority": "P1",
+   "path": "assets/level1/effects/vf_03_drum_strike_spark.png",
+   "target_px": [
+    64,
+    64
+   ],
+   "pivot": "center",
+   "raw_source": ".artifact-cache/raw/vf_03.png",
+   "raw_sha256": "a1781fa18193105246f399b6cdd57f34854ba37d5080ce5840a6fba0ac884e28",
+   "raw_px": [
+    1408,
+    768
+   ],
+   "generated_utc": "2026-10-11T19:43:31Z",
+   "generator": "arena-agent-mode image generation",
+   "alpha": {
+    "required": true,
+    "mode": "straight RGBA",
+    "transparent_px_fraction": 0.6736,
+    "opaque_px_fraction": 0.1689,
+    "partial_edge_px": 645,
+    "border_all_transparent": false,
+    "matte_rgb": [
+     255,
+     0,
+     255
+    ],
+    "transparent_fraction": 0.9584,
+    "partial_fraction": 0.0,
+    "matte_residual_opaque_px": 0,
+    "source_keyed_px": [
+     1408,
+     768
+    ]
+   },
+   "format": "PNG RGBA",
+   "trim_bbox_in_keyed_source": [
+    522,
+    182,
+    903,
+    581
+   ],
+   "actual_px": [
+    64,
+    64
+   ],
+   "sha256": "810c331acf0c6e892c72d8d2e079e51414701ab36b3868b53f1b81d566b46dda",
+   "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+  },
+  "VF-04": {
+   "id": "VF-04",
+   "name": "Token collect gleam",
+   "group": "VF",
+   "priority": "P1",
+   "path": "assets/level1/effects/vf_04_token_collect_gleam.png",
+   "target_px": [
+    64,
+    64
+   ],
+   "pivot": "center",
+   "raw_source": ".artifact-cache/raw/vf_04.png",
+   "raw_sha256": "0e19ed1747b740a9e829168c38ac917fb0f44026662d3a83769561058ba62ccd",
+   "raw_px": [
+    1408,
+    768
+   ],
+   "generated_utc": "2026-10-11T19:43:31Z",
+   "generator": "arena-agent-mode image generation",
+   "alpha": {
+    "required": true,
+    "mode": "straight RGBA",
+    "transparent_px_fraction": 0.6875,
+    "opaque_px_fraction": 0.1396,
+    "partial_edge_px": 708,
+    "border_all_transparent": false,
+    "matte_rgb": [
+     255,
+     0,
+     255
+    ],
+    "transparent_fraction": 0.9355,
+    "partial_fraction": 0.0,
+    "matte_residual_opaque_px": 0,
+    "source_keyed_px": [
+     1408,
+     768
+    ]
+   },
+   "format": "PNG RGBA",
+   "trim_bbox_in_keyed_source": [
+    447,
+    141,
+    961,
+    632
+   ],
+   "actual_px": [
+    64,
+    64
+   ],
+   "sha256": "bccc3af64f4adb9463100437ac2c7fef385ff3d437cd90b087ff37244dbed520",
+   "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+  },
+  "VF-05": {
+   "id": "VF-05",
+   "name": "Enemy stomp puff",
+   "group": "VF",
+   "priority": "P1",
+   "path": "assets/level1/effects/vf_05_enemy_stomp_puff.png",
+   "target_px": [
+    64,
+    64
+   ],
+   "pivot": "center",
+   "raw_source": ".artifact-cache/raw/vf_05.png",
+   "raw_sha256": "74f0bfc773e2bac1a80d67175e5255801d970b47fb4c9986e66d9560ac17f671",
+   "raw_px": [
+    1408,
+    768
+   ],
+   "generated_utc": "2026-10-11T19:43:31Z",
+   "generator": "arena-agent-mode image generation",
+   "alpha": {
+    "required": true,
+    "mode": "straight RGBA",
+    "transparent_px_fraction": 0.303,
+    "opaque_px_fraction": 0.5588,
+    "partial_edge_px": 566,
+    "border_all_transparent": false,
+    "matte_rgb": [
+     255,
+     0,
+     255
+    ],
+    "transparent_fraction": 0.7434,
+    "partial_fraction": 0.0,
+    "matte_residual_opaque_px": 0,
+    "source_keyed_px": [
+     1408,
+     768
+    ]
+   },
+   "format": "PNG RGBA",
+   "trim_bbox_in_keyed_source": [
+    388,
+    59,
+    1020,
+    709
+   ],
+   "actual_px": [
+    64,
+    64
+   ],
+   "sha256": "833f4d07b751b944e35aca8ada7139fda64c8f62dd635fc67efc936e0248f852",
+   "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+  },
+  "VF-06": {
+   "id": "VF-06",
+   "name": "Safe ambient confetti",
+   "group": "VF",
+   "priority": "P1",
+   "path": "assets/level1/effects/vf_06_safe_ambient_confetti.png",
+   "target_px": [
+    128,
+    128
+   ],
+   "pivot": "center",
+   "raw_source": ".artifact-cache/raw/vf_06.png",
+   "raw_sha256": "ff882842f23427e30ab60cf88b3237e481f0b7c9c3181cb67840e446b4f18c5c",
+   "raw_px": [
+    1408,
+    768
+   ],
+   "generated_utc": "2026-10-11T19:43:31Z",
+   "generator": "arena-agent-mode image generation",
+   "alpha": {
+    "required": true,
+    "mode": "straight RGBA",
+    "transparent_px_fraction": 0.7002,
+    "opaque_px_fraction": 0.1108,
+    "partial_edge_px": 3096,
+    "border_all_transparent": false,
+    "matte_rgb": [
+     255,
+     0,
+     255
+    ],
+    "transparent_fraction": 0.8995,
+    "partial_fraction": 0.0,
+    "matte_residual_opaque_px": 0,
+    "source_keyed_px": [
+     1408,
+     768
+    ]
+   },
+   "format": "PNG RGBA",
+   "trim_bbox_in_keyed_source": [
+    364,
+    70,
+    1032,
+    692
+   ],
+   "actual_px": [
+    128,
+    128
+   ],
+   "sha256": "1c116eaf8aafc7621efd406fa0fbaf0c0d239f0e3f05f442fe0c776ca7cbac96",
    "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
   }
  }
