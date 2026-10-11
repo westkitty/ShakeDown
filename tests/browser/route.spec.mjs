@@ -2,9 +2,9 @@ import {test,expect} from '@playwright/test';
 
 // The browser performs actual game DOM input/UI/Canvas/physics. Only rAF scheduling
 // is virtualized for reproducibility; no warps or direct update() calls are allowed.
-test('browser-executed deterministic unwarped route: campus, Dome, Fox, birthday, replay',async({page},testInfo)=>{
- test.skip(testInfo.project.name!=='desktop-chromium','One full browser route; mobile has separate interaction coverage');
- test.setTimeout(90000);
+async function driveBrowserRoute(page,{assist}={}){
+ // Both modes use the same game and input driver, with no test shortcuts.
+
  await page.addInitScript(()=>{
   let time=0,next=1;const callbacks=new Map();
   window.requestAnimationFrame=cb=>{const id=next++;callbacks.set(id,cb);return id};
@@ -16,10 +16,12 @@ test('browser-executed deterministic unwarped route: campus, Dome, Fox, birthday
  });
  await page.goto('./?qa=1');
  await page.locator('#start-btn').click();
- await page.locator('#pause-btn').click();
- await page.locator('#assist-check').check();
- await page.locator('#resume-btn').click();
- expect(await page.evaluate(()=>window.__SHAKEDOWN_QA.inspectState().settings.assist)).toBe(true);
+ if(assist){
+  await page.locator('#pause-btn').click();
+  await page.locator('#assist-check').check();
+  await page.locator('#resume-btn').click();
+ }
+ expect(await page.evaluate(()=>window.__SHAKEDOWN_QA.inspectState().settings.assist)).toBe(assist);
  const result=await page.evaluate(async()=>{
   const {RoutePilot}=await import('./tests/helpers/route-pilot.mjs');
   const pilot=new RoutePilot(),active=new Set();
@@ -39,9 +41,9 @@ test('browser-executed deterministic unwarped route: campus, Dome, Fox, birthday
   for(let frames=0;frames<4600;frames++){
    const game=window.__SHAKEDOWN_QA.inspectState();
    if(game.mode==='victory'){
-    release();return {reached:true,frames,steps:pilot.climbed.size,
-     retries:pilot.retries,shakes:game.shakeCount,bossHP:game.boss.hp,
-     seconds:game.elapsed,history,checkpoint:game.checkpoint,
+    release();return {reached:true,frames,steps:pilot.climbed.size,stage:pilot.stage,
+     retries:pilot.retries,pitResets:pilot.pitResets,shakes:game.shakeCount,bossHP:game.boss.hp,
+     seconds:game.elapsed,assist:game.settings.assist,history,checkpoint:game.checkpoint,
      victoryText:document.querySelector('#victory-heading').textContent};
    }
    let action;
@@ -65,13 +67,26 @@ test('browser-executed deterministic unwarped route: campus, Dome, Fox, birthday
   return{reached:false,error:'4600 simulated browser frames exhausted',stage:pilot.stage,
    position:[state.player.x,state.player.y],retries:pilot.retries,history};
  });
- console.log('BROWSER_FULL_ROUTE',JSON.stringify(result));
+ console.log('BROWSER_FULL_ROUTE_'+(assist?'ASSIST':'NORMAL'),JSON.stringify(result));
  expect(result.reached,JSON.stringify(result)).toBe(true);
- expect(result.steps).toBe(23);
+ expect(result.stage).toBe(23);
+ if(assist)expect(result.steps).toBe(23);
+ else expect(result.steps).toBeGreaterThanOrEqual(18);
+ expect(result.assist).toBe(assist);
  expect(result.bossHP).toBe(0);
  expect(result.shakes).toBeGreaterThan(0);
  expect(result.victoryText).toContain('MAVERICK');
  await expect(page.locator('#victory-overlay')).not.toHaveClass(/hidden/);
  await page.locator('#replay-btn').click();
  expect((await page.evaluate(()=>window.__SHAKEDOWN_QA.snapshot())).mode).toBe('playing');
+}
+test('browser-executed deterministic assisted full route, birthday and replay',async({page},testInfo)=>{
+ test.skip(testInfo.project.name!=='desktop-chromium','Full-route desktop validation; mobile interaction tests run separately');
+ test.setTimeout(90000);
+ await driveBrowserRoute(page,{assist:true});
+});
+test('browser-executed deterministic NORMAL difficulty full route, birthday and replay',async({page},testInfo)=>{
+ test.skip(testInfo.project.name!=='desktop-chromium','Full-route desktop validation; mobile interaction tests run separately');
+ test.setTimeout(90000);
+ await driveBrowserRoute(page,{assist:false});
 });

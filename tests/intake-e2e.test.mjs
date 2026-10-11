@@ -35,10 +35,37 @@ test('isolated intake fixture: inspect, stage, accept, validate and prevent over
   const repeated=command(temp,'approve','--id','BG-01','--file',stagedPath,
    '--reviewer','QA_FIXTURE_ONLY','--visual-approved');
   assert.notEqual(repeated.status,0,'An accepted checkpoint must never be overwritten');
-  const valid=command(temp,'validate');
+  let valid=command(temp,'validate');
   assert.equal(valid.status,0,valid.stderr);
   assert.equal(JSON.parse(valid.stdout).imageCount,1);
-  const ledger=JSON.parse(fs.readFileSync(path.join(temp,'assets/runtime/manifest.json')));
+  let ledger=JSON.parse(fs.readFileSync(path.join(temp,'assets/runtime/manifest.json')));
   assert.equal(ledger.assets['BG-01'].integrationStatus,'unverified');
+  assert.equal(JSON.parse(valid.stdout).activated,0,'Art review never auto-activates');
+  const early=command(temp,'activate','--id','BG-01','--reviewer','QA_FIXTURE_ONLY','--visual-approved');
+  assert.notEqual(early.status,0,'An activation without screenshot evidence must fail');
+  const evidenceRel='docs/assets/qa/BG-01/scene.png';
+  const evidenceFile=path.join(temp,evidenceRel);
+  fs.mkdirSync(path.dirname(evidenceFile),{recursive:true});
+  const screenshot=PNG.sync.write(png);
+  fs.writeFileSync(evidenceFile,screenshot);
+  const missingAttestation=command(temp,'activate','--id','BG-01','--reviewer','QA_FIXTURE_ONLY','--qa-evidence',evidenceRel);
+  assert.notEqual(missingAttestation.status,0,'Image integration attestation is required');
+  const accepted=command(temp,'activate','--id','BG-01','--reviewer','QA_FIXTURE_ONLY',
+   '--qa-evidence',evidenceRel,'--visual-approved');
+  assert.equal(accepted.status,0,accepted.stderr);
+  valid=command(temp,'validate');
+  assert.equal(valid.status,0,valid.stderr);
+  assert.equal(JSON.parse(valid.stdout).activated,1,'New final-art activation must be explicit');
+  ledger=JSON.parse(fs.readFileSync(path.join(temp,'assets/runtime/manifest.json')));
+  assert.equal(ledger.assets['BG-01'].integrationStatus,'verified');
+  assert.equal(ledger.assets['BG-01'].integrationEvidence.screenshot.path,evidenceRel);
+  const duplicated=command(temp,'activate','--id','BG-01','--reviewer','QA_FIXTURE_ONLY',
+   '--qa-evidence',evidenceRel,'--visual-approved');
+  assert.notEqual(duplicated.status,0,'Production activation is idempotent and immutable');
+  fs.writeFileSync(evidenceFile,Buffer.alloc(screenshot.length,0));
+  valid=command(temp,'validate');
+  assert.notEqual(valid.status,0,'Damaged screenshot must invalidate its purported integration proof');
+  // Synthetic screenshot and synthetic reviewer identity exist in temporary fixture only.
+
  }finally{fs.rmSync(temp,{recursive:true,force:true});}
 });

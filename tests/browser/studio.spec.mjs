@@ -96,3 +96,27 @@ test('copying a staging template shell-quotes hostile filenames rather than exec
  expect(command).toContain("red'\\''$(echo SHOULD_NOT_RUN).png'");
  expect(await page.evaluate(()=>window.__SHAKEDOWN_QA)).toBeUndefined();
 });
+
+
+test('studio never conflates human-reviewed art with active in-game integration',async({page})=>{
+ const record=(path,integrationStatus)=>({
+  path,reviewStatus:'reviewer-attested',integrationStatus,width:64,height:96
+ });
+ const ledger={schemaVersion:1,assets:{
+  'BG-01':record('assets/level1/backgrounds/bg_01.png','unverified'),
+  'CO-03':record('assets/level1/collectibles/co_03_shamrock_shake_cup.png','verified')
+ },audio:{}};
+ await page.route('**/assets/runtime/manifest.json',route=>route.fulfill({json:ledger}));
+ await page.goto('./tools/asset-review.html#asset=BG-01');
+ await expect(page.locator('#approved-count')).toHaveText('2');
+ await expect(page.locator('#activated-count')).toHaveText('1');
+ await expect(page.locator('#pending-count')).toHaveText('213');
+ await expect(page.locator('#detail-state')).toHaveText('REVIEWED, NOT ACTIVE');
+ await expect(page.locator('#preview-in-game')).toBeVisible();
+ await expect(page.locator('#preview-in-game')).toHaveAttribute('href','../index.html?preview-art=BG-01');
+ await expect(page.locator('#copy-activation')).toBeEnabled();
+ await page.goto('./tools/asset-review.html#asset=CO-03');
+ await expect(page.locator('#detail-state')).toHaveText('ACTIVE IN GAME');
+ await expect(page.locator('#preview-in-game')).toHaveAttribute('href','../index.html');
+ await expect(page.locator('#copy-activation')).toBeDisabled();
+});

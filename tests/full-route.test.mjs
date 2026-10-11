@@ -24,3 +24,26 @@ test('ONE continuous no-warp player-input path reaches birthday ending via all 2
   climbSteps:pilot.climbed.size,checkpoint:game.checkpoint,shakes:game.shakeCount,
   retries:pilot.retries,bossHP:game.boss.hp}));
 });
+
+
+test('normal difficulty is beatable in one continuous unwarped journey with real hazards and checkpoints',()=>{
+ const game=newGame({assist:false}),pilot=new RoutePilot();
+ startGame(game);
+ let frames=0;
+ for(;frames<17000&&game.mode!=='victory';frames++){
+  const input=pilot.next(game);
+  if(input.retry)resetToCheckpoint(game);
+  else update(game,input,DT);
+ }
+ assert.equal(game.mode,'victory',JSON.stringify({stage:pilot.stage,trace:pilot.trace.slice(-15)}));
+ assert.equal(pilot.stage,23,'Normal gameplay reaches the Golden Dome summit');
+ assert.ok(pilot.climbed.size>=18,'The driver must physically ascend most of the authored steps');
+ assert.equal(game.settings.assist,false,'Assist must remain disabled');
+ assert.equal(game.boss.hp,0);
+ assert.equal(game.birthdayReady,true);
+ assert.ok(game.shakeCount>=20);
+ assert.ok(pilot.retries+pilot.pitResets<=15,'No excessive deaths or softlock');
+ console.log('Normal-difficulty route proof:',JSON.stringify({frames,
+  stepsTouched:pilot.climbed.size,pitResets:pilot.pitResets,retries:pilot.retries,
+  shakeCount:game.shakeCount,checkpoint:game.checkpoint,bossHP:game.boss.hp}));
+});

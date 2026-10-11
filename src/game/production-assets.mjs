@@ -5,17 +5,18 @@ export const RENDER_ASSET_IDS=Object.freeze([
  'FOX-07','FOX-08','FOX-09','FOX-10','FOX-11','FOX-12'
 ]);
 const SUPPORTED=new Set(RENDER_ASSET_IDS);
-export function imageEntries(manifest){
+export function imageEntries(manifest,{previewUnverifiedId=null}={}){
  if(!manifest||manifest.schemaVersion!==1||!manifest.assets||typeof manifest.assets!=='object')return [];
  return Object.entries(manifest.assets).filter(([id,e])=>
   SUPPORTED.has(id)&&e&&e.reviewStatus==='reviewer-attested'&&
-  e.integrationStatus==='unverified'&&
+  (e.integrationStatus==='verified'||
+    (e.integrationStatus==='unverified'&&id===previewUnverifiedId))&&
   typeof e.path==='string'&&/^assets\/(?:level1|production)\//.test(e.path)&&
   !e.path.split('/').includes('..')&&e.path.endsWith('.png')&&
   Number.isInteger(e.width)&&Number.isInteger(e.height)&&
   e.width>0&&e.height>0);
 }
-export async function loadApprovedArt({request=fetch,ImageCtor=Image}={}){
+export async function loadApprovedArt({request=fetch,ImageCtor=Image,previewUnverifiedId=null}={}){
  const images={},errors=[];
  let manifest;
  try{
@@ -23,7 +24,7 @@ export async function loadApprovedArt({request=fetch,ImageCtor=Image}={}){
   if(!response.ok)throw Error('asset ledger HTTP '+response.status);
   manifest=await response.json();
  }catch(e){return {images,errors:['ledger: '+e.message],approved:0}}
- const entries=imageEntries(manifest);
+ const entries=imageEntries(manifest,{previewUnverifiedId});
  await Promise.all(entries.map(([id,e])=>new Promise(resolve=>{
   const image=new ImageCtor();let done=false;
   const finish=(ok)=>{

@@ -40,15 +40,17 @@ Development-only tools: Node 20 or later, npm ci. Browser/game deployment still 
        node scripts/asset-intake.mjs approve --id CO-03 --file .asset-staging/CO-03/HASH.png --reviewer Andrew --visual-approved
 
 6. Approval copies bytes to the exact master-contract output path (without overwriting an accepted revision) and updates assets/runtime/manifest.json with real dimensions, hash, reviewer, provenance and **integrationStatus: unverified**. Approval is not browser proof.
-7. Run npm run validate and npm run test:browser. Inspect real rendering in desktop/mobile layouts, including boss visual tells and shadow/collider alignment; document interaction proof separately.
-8. Fox artwork FOX-02 onward requires reviewed FOX-01 identity source before approval; provisional procedural Fox remains in the game until then.
-9. Audio AU-01 through AU-21 accepts genuine WAV or OGG containers through the same intake command. Container validity is not proof of licensing/originality, loudness, seamless loops, or actual speaker playback. Keep the existing WebAudio synth fallback until those matters and playback integration are verified.
+7. Keep the art inactive until actual gameplay inspection. On localhost, open the normal game with ?preview-art=CO-03 after accepting the candidate; the local-only preview uses the exact approved file without activating it. Capture a real in-game screenshot under docs/assets/qa/CO-03/scene.png after inspecting geometry, readability, theme, collision alignment and boss telegraphs.
+8. Explicitly activate only a supported renderer ID using a real screenshot and human reviewer: node scripts/asset-intake.mjs activate --id CO-03 --reviewer REVIEWER_NAME --qa-evidence docs/assets/qa/CO-03/scene.png --visual-approved. The evidence checksum is bound to the exact source SHA-256. The screenshot's depicted content **cannot** be confirmed by code and still requires human inspection.
+9. Run npm run validate and npm run test:browser. Verify the integrated art in real gameplay and confirm fallback when external art is absent; then record the active state separately from source approval.
+10. Fox artwork FOX-02 onward requires reviewed FOX-01 identity source before approval; provisional procedural Fox remains in the game until then.
+11. Audio AU-01 through AU-21 accepts genuine WAV or OGG containers through the same intake command. Container validity is not proof of licensing/originality, loudness, seamless loops, or actual speaker playback. Keep the existing WebAudio synth fallback until those matters and playback integration are verified.
 
 Do not promote specs, thumbnails, prompts, art descriptions, staged candidate bytes, or successful compiler logs to verified assets.
 
 ## Renderer plug-in points
 
-The browser loader only attempts user-approved files with real manifest entries. It can replace visuals (never collisions or game-state values) for BG-01 sky, CO-03 shake cup, BD-01 birthday cake, and FOX-02/03/05/06/07/08/09/10/11/12, retaining existing telegraph and recovery warnings. Future production IDs can enter the manifest but still need deliberate in-game placements after evidence; the runtime does not pretend 194 candidate assets are already integrated.
+The normal browser loader only uses **reviewer-attested and explicitly integration-verified** supported IDs; approval alone is inert. A localhost-only preview query can load one unverified ID for human review without activating it. The renderer can replace visuals (never collisions or game-state values) for BG-01 sky, CO-03 shake cup, BD-01 birthday cake, and FOX-02/03/05/06/07/08/09/10/11/12, retaining existing telegraph and recovery warnings. Future production IDs can enter the manifest but still need deliberate in-game placements after evidence; the runtime does not pretend 194 candidate assets are already integrated.
 
 ## Priority order while generation proceeds
 

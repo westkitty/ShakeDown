@@ -102,7 +102,7 @@ test('synthetic accepted-cup fixture loads by logical ID and actually replaces v
  }
  const file='assets/level1/collectibles/co_03_shamrock_shake_cup.png';
  const manifest={schemaVersion:1,audio:{},assets:{'CO-03':{path:file,width:64,height:96,
-  reviewStatus:'reviewer-attested',integrationStatus:'unverified'}}};
+  reviewStatus:'reviewer-attested',integrationStatus:'verified'}}};
  await page.route('**/assets/runtime/manifest.json',route=>route.fulfill({json:manifest}));
  await page.route('**/assets/level1/collectibles/co_03_shamrock_shake_cup.png',
   route=>route.fulfill({body:PNG.sync.write(png),contentType:'image/png'}));
@@ -119,6 +119,29 @@ test('synthetic accepted-cup fixture loads by logical ID and actually replaces v
  expect(rgb[2]).toBeGreaterThan(220);
 });
 
+test('reviewed but UNVERIFIED art is not displayed outside local explicit QA preview',async({page})=>{
+ const png=new PNG({width:64,height:96});
+ for(let y=0;y<96;y++)for(let x=0;x<64;x++){
+  const i=(y*64+x)*4;
+  png.data[i]=255;png.data[i+1]=0;png.data[i+2]=235;
+  png.data[i+3]=(x>7&&x<56&&y>8&&y<87)?255:0;
+ }
+ const file='assets/level1/collectibles/co_03_shamrock_shake_cup.png';
+ const ledger={schemaVersion:1,audio:{},assets:{'CO-03':{
+  path:file,width:64,height:96,reviewStatus:'reviewer-attested',
+  integrationStatus:'unverified'}}};
+ await page.route('**/assets/runtime/manifest.json',route=>route.fulfill({json:ledger}));
+ await page.route('**/assets/level1/collectibles/co_03_shamrock_shake_cup.png',
+  route=>route.fulfill({body:PNG.sync.write(png),contentType:'image/png'}));
+ await page.goto('./');
+ await expect.poll(async()=>page.evaluate(()=>window.__SHAKEDOWN_QA.assets().productionDeclared)).toBe(0);
+ await page.goto('./?preview-art=CO-03');
+ await expect.poll(async()=>page.evaluate(()=>window.__SHAKEDOWN_QA.assets().productionLoaded)).toBe(1);
+ await expect(page.locator('#load-status')).toContainText('LOCAL ART PREVIEW');
+ await expect(page.locator('#load-status')).toContainText('NOT production activated');
+ await page.goto('./');
+ await expect.poll(async()=>page.evaluate(()=>window.__SHAKEDOWN_QA.assets().productionDeclared)).toBe(0);
+});
 test('real frame and render timing collected over a named idle/title scenario',async({page},testInfo)=>{
  await page.goto('./');
  await page.waitForTimeout(4200);
@@ -127,4 +150,42 @@ test('real frame and render timing collected over a named idle/title scenario',a
  expect(Number.isFinite(perf.frameMsP95)).toBe(true);
  expect(Number.isFinite(perf.renderMsP95)).toBe(true);
  console.log('PERF_TITLE_IDLE_'+testInfo.project.name,JSON.stringify(perf));
+});
+
+
+test('holding two keyboard aliases does not release movement when one key comes up',async({page})=>{
+ await page.goto('./');
+ await page.locator('#start-btn').click();
+ await page.keyboard.down('ArrowRight');
+ await page.keyboard.down('d');
+ await page.waitForTimeout(130);
+ await page.keyboard.up('ArrowRight');
+ const before=await page.evaluate(()=>window.__SHAKEDOWN_QA.snapshot().player.x);
+ await expect.poll(async()=>page.evaluate(()=>window.__SHAKEDOWN_QA.snapshot().player.x),{timeout:4000}).toBeGreaterThan(before+35);
+ await page.keyboard.up('d');
+ await expect.poll(async()=>Math.abs(await page.evaluate(()=>window.__SHAKEDOWN_QA.snapshot().player.vx)),{timeout:4000}).toBeLessThan(20);
+});
+
+test('touch and physical keyboard can own movement independently, with clean blur release',async({page},testInfo)=>{
+ test.skip(testInfo.project.name!=='mobile-chromium','Multi-source touch input requires touch-capable context');
+ await page.goto('./');
+ await page.locator('#start-btn').tap();
+ await page.keyboard.down('ArrowRight');
+ const button=page.locator('[data-action=right]');
+ const rect=await button.boundingBox();
+ const cdp=await page.context().newCDPSession(page);
+ const point={x:rect.x+rect.width/2,y:rect.y+rect.height/2,id:31};
+ await cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[point]});
+ await page.waitForTimeout(90);
+ await page.keyboard.up('ArrowRight');
+ const before=await page.evaluate(()=>window.__SHAKEDOWN_QA.snapshot().player.x);
+ await page.waitForTimeout(300);
+ const after=await page.evaluate(()=>window.__SHAKEDOWN_QA.snapshot().player.x);
+ expect(after).toBeGreaterThan(before+20);
+ await cdp.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});
+ await page.evaluate(()=>window.dispatchEvent(new Event('blur')));
+ await expect(page.locator('#pause-overlay')).not.toHaveClass(/hidden/);
+ const stationary=await page.evaluate(()=>window.__SHAKEDOWN_QA.snapshot().time);
+ await page.waitForTimeout(150);
+ expect(await page.evaluate(()=>window.__SHAKEDOWN_QA.snapshot().time)).toBe(stationary);
 });

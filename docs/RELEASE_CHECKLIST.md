@@ -57,3 +57,16 @@ Keep the last accepted commit and asset record immutable. On failure, repair via
 - [ ] Human-paced and normal-difficulty full route.
 - [ ] Physical phone touch/audio, final art identity approval and representative performance.
 - [ ] After any merge, exact SHA Pages deployment and full hosted URL player journey.
+
+
+## Round 3 — image activation safety, normal difficulty, and simultaneous-input correctness
+
+- [x] **Regression:** approved source art remains inactive until explicit integration attestation backed by a physically present PNG screenshot and its SHA-256 checksum. A screenshot being structurally valid does not prove what it depicts.
+- [x] **Regression:** localhost-only art preview can display reviewer-accepted but unactivated art. Ordinary gameplay does not load it; if absent, the existing Canvas artwork remains.
+- [x] **Regression:** synthetic intake fixture verifies approve -> dormant -> activation, rejects activation without an actual evidence file or reviewer attestation, prevents duplicate activation, and rejects tampered screenshot evidence.
+- [x] **Node scripted run:** normal difficulty (assist OFF), no warps, hazards and natural checkpoint recovery, reached summit and defeated the Fox. Valid jumps bypassed two intermediate steps; 21 different named Dome platforms were physically touched.
+- [x] **Browser scripted run:** assist OFF via the default UI, real keyboard/Canvas/game state with a synthetic rAF clock, no warps, actual boss victory and replay.
+- [x] **Browser interaction:** overlapping right-arrow and D key ownership; simultaneous keyboard + touch input with focus loss; local preview banner survives asynchronous sprite-loading completion.
+- [x] **Asset Studio:** separate Source/Reviewed (inactive)/Active states, actual status counts, local preview deep link, and explicit integration command template.
+- [ ] **Human and hardware:** a continuous player-performed run under real clock pacing, final art quality, original source provenance, real phone audio and touch controls.
+- [ ] **Release:** exact SHA deployment to GitHub Pages and live-site gameplay, after authorized merge. Keep main unchanged until release gates pass.

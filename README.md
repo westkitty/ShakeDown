@@ -35,7 +35,7 @@ The original four-stage campaign plan is superseded by the user's October 11 com
 
 ## Preparing for incoming LM Arena artwork
 
-The game remains playable without final outside artwork. The preparation branch adds source-safe staging, exact asset validation, explicit review and a runtime manifest that cannot silently promote generated descriptions to final files.
+The game remains playable without final outside artwork. Source approval stores files and provenance **without activating them**. A separate, reviewer-attested gameplay integration step with a real screenshot is now required before regular gameplay loads replacement art; local previews do not activate anything.
 
     npm ci
     node scripts/asset-intake.mjs inspect --id CO-03 --file /path/to/your-cup.png
@@ -47,11 +47,11 @@ See docs/PRODUCTION_READINESS.md and docs/RELEASE_CHECKLIST.md. No final LM Aren
 
 ## Asset Control Room
 
-Open http://localhost:8765/tools/asset-review.html after starting the local server. The standalone review bench reads the 220-visual / 21-audio master and the actual approved manifest. Search/filter by ID, priority, category and state; inspect local candidate PNG geometry/alpha/hash, WAV PCM chunks and OGG headers, then copy a staging command template. Nothing is uploaded or approved by the page. Human visual/audio review remains mandatory.
+Open http://localhost:8765/tools/asset-review.html after starting the local server. The standalone review bench reads the 220-visual / 21-audio master and the actual approved manifest. Search/filter by ID, priority, category and state; distinguish **source / pending / reviewed / active**; inspect PNG geometry/alpha/hash and WAV/OGG containers; open a local in-game preview for eligible reviewed art; then copy separate staging and activation command templates. Nothing is uploaded or approved by the page. Human visual/audio review remains mandatory.
 
 ## Validation
 
-Node tests include a continuous no-warp assist-mode game-input route from the actual spawn across campus and all 23 Dome stages to Fox victory. Browser tests replay the same input decisions using existing keyboard and UI handlers, with a test-only virtualized requestAnimationFrame scheduler. They validate the real Canvas/DOM path but do not prove ordinary human pacing or sustained physical-device FPS. Real-phone touch/audio, human normal-difficulty play, approved generated files and same-SHA hosted-site proof remain release gates.
+Node and real-HTTP browser regressions now prove **both assisted and normal-difficulty scripted routes** from the initial spawn through the Golden Dome to genuine Fox victory, using real keyboard/UI handlers and a test-only virtual requestAnimationFrame scheduler. Tests also cover independent keyboard and touch input ownership, local preview separation from activation, and screenshot-evidence integrity. These are synthetic-clock automated player routes, not human-paced or physical-phone proof. Real phone touch/audio, human play, final generated-art approval and exact-SHA hosted-site checks remain release gates.
 
 See docs/PRODUCTION_READINESS.md and docs/VALIDATION.md for exact evidence.
 

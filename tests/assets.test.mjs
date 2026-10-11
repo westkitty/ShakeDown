@@ -25,15 +25,18 @@ test('asset intake rejects mismatched geometry, absent alpha, invalid PNG and un
 });
 test('asset manifest blocks unknown approved IDs and path traversal',()=>{
  const good={path:'assets/production/fox/fox_05.png',width:240,height:240,
-  reviewStatus:'reviewer-attested',integrationStatus:'unverified'};
+  reviewStatus:'reviewer-attested',integrationStatus:'verified'};
  const ledger={schemaVersion:1,assets:{'FOX-05':good,'OTHER-01':good,'BG-01':{...good,path:'assets/../secret.png'}}};
  assert.deepEqual(imageEntries(ledger).map(([id])=>id),['FOX-05']);
+ assert.deepEqual(imageEntries({schemaVersion:1,assets:{'FOX-05':{...good,integrationStatus:'unverified'}}}),[]);
+ assert.deepEqual(imageEntries({schemaVersion:1,assets:{'FOX-05':{...good,integrationStatus:'unverified'}}},
+  {previewUnverifiedId:'FOX-05'}).map(([id])=>id),['FOX-05']);
  assert.throws(()=>safeRepoPath('../outside.png'),/leaves project/);
 });
 test('runtime image loader gives explicit fallback when a reviewed image cannot load',async()=>{
  class BrokenImage{set src(_) {this.onerror()}};
  const approved={schemaVersion:1,assets:{'FOX-05':{path:'assets/production/fox/fox_05.png',
-  width:240,height:240,reviewStatus:'reviewer-attested',integrationStatus:'unverified'}}};
+  width:240,height:240,reviewStatus:'reviewer-attested',integrationStatus:'verified'}}};
  const response=await loadApprovedArt({request:async()=>({ok:true,json:async()=>approved}),ImageCtor:BrokenImage});
  assert.deepEqual(Object.keys(response.images),[]);assert.deepEqual(response.errors,['FOX-05']);
 });

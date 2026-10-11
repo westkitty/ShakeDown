@@ -11,6 +11,10 @@ function readSave(){try{const value=JSON.parse(localStorage.getItem(saveKey)||'n
 let saved=readSave(),state=newGame(saved.settings||{}),sprites={},assetCount=0,assetErrors=[];
 const audio=new AudioBox();audio.mute(state.settings.mute);
 let productionArt={},productionLoaded=0,productionDeclared=0,productionErrors=[];
+let spriteStatus='Loading Cinnamon poses…',productionStatus='';
+function showAssetStatus(){
+ $('load-status').textContent=[spriteStatus,productionStatus].filter(Boolean).join(' · ');
+}
 let lastStatus='',lastEventSerial=0,displayedMode='';
 function save(){try{localStorage.setItem(saveKey,JSON.stringify({schema:1,settings:state.settings,completed:saved.completed||state.mode==='victory',bestShakes:Math.max(saved.bestShakes||0,state.shakeCount)}))}catch{/* Restricted storage: game still playable. */}}
 function showMode(){if(displayedMode===state.mode)return;displayedMode=state.mode;
@@ -21,25 +25,52 @@ function showMode(){if(displayedMode===state.mode)return;displayedMode=state.mod
  if(state.mode==='dead')$('dead-reason').textContent=state.lastDamage||'The Fox got the better of Cinnamon. For now.';
  if(state.mode==='victory'){$('victory-score').textContent=`${state.shakeCount} Shamrock Shakes found • ${state.secretCount} golden secrets discovered`;save()}
 }
-const held=new Set(),queued=new Set(),pointerActs=new Map();
+const held=new Set(),queued=new Set(),pointerActs=new Map(),keyActs=new Map();
+function updateHeld(action){
+ const active=[...keyActs.values()].includes(action)||[...pointerActs.values()].includes(action);
+ if(active)held.add(action);else held.delete(action);
+}
+
 function actionForKey(code){return ({ArrowLeft:'left',KeyA:'left',ArrowRight:'right',KeyD:'right',Space:'jump',ArrowUp:'jump',KeyW:'jump',KeyJ:'swish',KeyX:'swish',ShiftLeft:'dash',ShiftRight:'dash',KeyK:'dash'})[code]}
-function clearInputs(){held.clear();queued.clear();pointerActs.clear();document.querySelectorAll('.touch').forEach(b=>b.classList.remove('held'))}
+function clearInputs(){held.clear();queued.clear();pointerActs.clear();keyActs.clear();document.querySelectorAll('.touch').forEach(b=>b.classList.remove('held'))}
 window.addEventListener('keydown',e=>{
  if(e.code==='Escape'||e.code==='KeyP'){if(state.mode==='playing'||state.mode==='pause'){e.preventDefault();togglePause()}return}
  if(e.code==='KeyM'){audio.mute(!state.settings.mute);state.settings.mute=!state.settings.mute;updateMute();save();return}
  if(e.code==='KeyR'&&state.mode==='dead'){retry();return}
  if(e.code==='Enter'&&state.mode==='title'&&document.activeElement!==$('start-btn')){start();e.preventDefault();return}
  const act=actionForKey(e.code);if(!act)return;
- if(state.mode==='playing'){e.preventDefault();if(!held.has(act))queued.add(act);held.add(act)}
+ if(state.mode==='playing'){
+  e.preventDefault();
+  if(!keyActs.has(e.code)){
+   if(!held.has(act))queued.add(act);
+   keyActs.set(e.code,act);
+   updateHeld(act);
+  }
+ }
 });
-window.addEventListener('keyup',e=>{const act=actionForKey(e.code);if(act){held.delete(act);e.preventDefault()}});
+window.addEventListener('keyup',e=>{
+ const act=actionForKey(e.code);
+ if(act){keyActs.delete(e.code);updateHeld(act);e.preventDefault()}
+});
 window.addEventListener('blur',()=>{clearInputs();if(state.mode==='playing')togglePause()});
 document.addEventListener('visibilitychange',()=>{if(document.hidden){clearInputs();if(state.mode==='playing')togglePause()}lastStamp=0;accumulator=0});
 for(const button of document.querySelectorAll('.touch')){
  const action=button.dataset.action;
- button.addEventListener('pointerdown',e=>{if(state.mode!=='playing')return;e.preventDefault();audio.activate();pointerActs.set(e.pointerId,action);button.setPointerCapture(e.pointerId);button.classList.add('held');if(!held.has(action))queued.add(action);held.add(action)});
- function endPointer(e){const prev=pointerActs.get(e.pointerId);pointerActs.delete(e.pointerId);if(prev!==action)return;
-  if(![...pointerActs.values()].includes(action))held.delete(action);button.classList.remove('held')}
+ button.addEventListener('pointerdown',e=>{
+  if(state.mode!=='playing')return;
+  e.preventDefault();audio.activate();
+  if(!held.has(action))queued.add(action);
+  pointerActs.set(e.pointerId,action);
+  button.setPointerCapture(e.pointerId);
+  button.classList.add('held');
+  updateHeld(action);
+ });
+ function endPointer(e){
+  const prev=pointerActs.get(e.pointerId);pointerActs.delete(e.pointerId);
+  if(prev!==action)return;
+  updateHeld(action);
+  button.classList.toggle('held',[...pointerActs.values()].includes(action));
+ }
  button.addEventListener('pointerup',endPointer);button.addEventListener('pointercancel',endPointer);button.addEventListener('lostpointercapture',endPointer);
 }
 function newRound(){state=newGame(state.settings);state.assetCount=assetCount;lastEventSerial=0;displayedMode='';clearInputs();lastStamp=0;accumulator=0;audio.beat=0;audio.nextBeat=0;startGame(state);audio.activate();showMode();canvas.focus({preventScroll:true});}
@@ -84,12 +115,14 @@ async function loadAssets(){
   await Promise.all(Array.from({length:4},worker));
   sprites=Object.fromEntries(loaded.filter(Boolean));assetCount=Object.keys(sprites).length;
   state.assetCount=assetCount;
-  $('load-status').textContent=assetErrors.length
+  spriteStatus=assetErrors.length
    ?assetErrors.length+' usable pose loads failed; procedural fallback remains active.'
    :assetCount+' playable Cinnamon poses ready (1 clipped source archived).';
+  showAssetStatus();
  }catch(error){
   assetErrors.push('manifest');
-  $('load-status').textContent='Sprite source unavailable. Temporary in-game fallback shown.';
+  spriteStatus='Sprite source unavailable. Temporary in-game fallback shown.';
+  showAssetStatus();
  }
 }
 function hud(){const p=state.player;
@@ -133,11 +166,20 @@ function animate(ms){requestAnimationFrame(animate);
 function onResize(){const dpr=Math.min(window.devicePixelRatio||1,2);canvas.width=Math.round(VIEW.width*dpr);canvas.height=Math.round(VIEW.height*dpr);ctx.setTransform(dpr,0,0,dpr,0,0)}
 window.addEventListener('resize',onResize,{passive:true});onResize();
 loadAssets();
- loadApprovedArt().then(({images,errors,approved})=>{
+const params=new URLSearchParams(location.search);
+const previewId=(location.hostname==='localhost'||location.hostname==='127.0.0.1')
+  ?params.get('preview-art'):null;
+if(previewId){productionStatus='LOCAL ART PREVIEW ONLY: '+previewId+' (NOT production activated)';showAssetStatus();}
+ loadApprovedArt({previewUnverifiedId:previewId}).then(({images,errors,approved})=>{
   productionArt=images;productionLoaded=Object.keys(images).length;
   productionDeclared=approved;productionErrors=errors;
-  if(productionLoaded>0)$('load-status').textContent+=' · '+productionLoaded+' approved artwork elements ready.';
- }).catch(error=>{productionErrors=['loader: '+error.message]});
+  if(previewId){
+   productionStatus='LOCAL ART PREVIEW: '+previewId+' '+(productionArt[previewId]?'candidate loaded; NOT production activated':'unavailable; NOT production activated');
+  } else if(productionLoaded>0){
+   productionStatus=productionLoaded+' verified integrated artwork elements ready.';
+  }
+  showAssetStatus();
+ }).catch(error=>{productionErrors=['loader: '+error.message];showAssetStatus()});
  showMode();requestAnimationFrame(animate);
 window.__SHAKEDOWN_QA={snapshot:()=>snapshot(state),metrics,assets:()=>({loaded:assetCount,failed:[...assetErrors],productionLoaded,productionDeclared,productionErrors:[...productionErrors]}),
  // Developer-only deterministic test aids; excluded from normal gameplay and production paths.

@@ -1,4 +1,5 @@
 // Standalone read-only, browser-local asset inspection. No uploads, no approvals.
+import {RENDER_ASSET_IDS} from '../src/game/production-assets.mjs';
 const byId=id=>document.getElementById(id);
 const base='../';
 const state={items:[],selected:null,manifest:null,previewUrl:null,candidate:null};
@@ -11,7 +12,9 @@ function notify(message,error=false){
 function status(item){
  const collection=item.type==='image'?state.manifest.assets:state.manifest.audio;
  const candidate=collection&&collection[item.id];
- if(candidate&&candidate.reviewStatus==='reviewer-attested'&&candidate.path)return'approved';
+ if(candidate&&candidate.reviewStatus==='reviewer-attested'&&candidate.path){
+  return candidate.integrationStatus==='verified'?'active':'reviewed';
+ }
  if(item.type==='image'&&String(item.status).startsWith('VERIFIED'))return'source';
  return'pending';
 }
@@ -33,7 +36,7 @@ function placeholder(text='Awaiting production'){
 }
 function setPreview(item){
  const parent=byId('preview');parent.replaceChildren();
- const approved=(item.type==='image'&&status(item)==='approved')?state.manifest.assets[item.id]:null;
+ const approved=(item.type==='image'&&['reviewed','active'].includes(status(item)))?state.manifest.assets[item.id]:null;
  const path=approved?.path||(status(item)==='source'?item.path:null);
  if(item.type==='image'&&path){
   const img=document.createElement('img');img.alt='Verified '+item.name;
@@ -50,17 +53,24 @@ function detail(item){
  output('detail-name',item.name||item.title);
  output('detail-priority',contractPriority(item));
  const s=status(item);
- output('detail-state',s==='approved'?'APPROVED OUTPUT':s==='source'?'EXISTING SOURCE':'AWAITING ART');
+ output('detail-state',s==='active'?'ACTIVE IN GAME':s==='reviewed'?'REVIEWED, NOT ACTIVE':s==='source'?'EXISTING SOURCE':'AWAITING ART');
  output('detail-size',sizeLabel(item));
  output('detail-alpha',item.type==='audio'?'Audio file':item.transparent?'Required transparent':'Opaque');
  output('detail-group',(item.group||'AUDIO')+' / '+(item.zone||item.type));
- output('detail-origin',s==='approved'?'Reviewer-attested file':s==='source'?'Source-derived frame':'No accepted file');
+ output('detail-origin',s==='active'?'Verified game integration':s==='reviewed'?'Reviewer-attested file':s==='source'?'Source-derived frame':'No accepted file');
  output('detail-brief',item.visual||item.brief||'See source contract');
  output('detail-acceptance',item.acceptance||'Original recording, provenance, licensing, playback and listening review required.');
  output('detail-path',item.path||'Assigned by audio intake after WAV/OGG approval');
  byId('candidate').value='';
  const parent=byId('candidate-result');parent.className='candidate-result';parent.textContent='No file inspected for '+item.id+'. File selection remains on this device.';
  byId('copy-command').disabled=false;
+ const supported=RENDER_ASSET_IDS.includes(item.id);
+ const local=location.hostname==='localhost'||location.hostname==='127.0.0.1';
+ const canActivate=item.type==='image'&&s==='reviewed'&&supported;
+ byId('copy-activation').disabled=!canActivate;
+ const playLink=byId('preview-in-game');
+ playLink.hidden=!(local&&item.type==='image'&&supported&&['reviewed','active'].includes(s));
+ playLink.href=s==='reviewed'?'../index.html?preview-art='+encodeURIComponent(item.id):'../index.html';
  setPreview(item);
  try{history.replaceState(null,'','#asset='+encodeURIComponent(item.id))}catch{}
  renderList();
@@ -87,7 +97,7 @@ function renderList(){
   const id=document.createElement('span');id.className='id';id.textContent=item.id;
   const label=document.createElement('span');label.className='name';label.textContent=item.name||item.title;
   const pill=document.createElement('span');pill.className='pill '+status(item);
-  pill.textContent=status(item)==='approved'?'APPROVED':status(item)==='source'?'SOURCE':'PENDING';
+  pill.textContent=({active:'LIVE',reviewed:'REVIEWED',source:'SOURCE',pending:'PENDING'})[status(item)];
   button.append(id,label,pill);
   button.addEventListener('click',()=>detail(item));
   fragment.append(button);
@@ -221,7 +231,8 @@ async function main(){
   ].sort(sortItems);
   output('total-visual',spec.assets.length);
   output('source-count',state.items.filter(x=>status(x)==='source').length);
-  output('approved-count',state.items.filter(x=>status(x)==='approved').length);
+  output('approved-count',state.items.filter(x=>['reviewed','active'].includes(status(x))).length);
+  output('activated-count',state.items.filter(x=>status(x)==='active').length);
   output('pending-count',state.items.filter(x=>status(x)==='pending').length);
   for(const id of ['type-filter','priority-filter','status-filter'])byId(id).addEventListener('change',renderList);
   byId('search').addEventListener('input',renderList);
@@ -244,6 +255,21 @@ async function main(){
    const command='node scripts/asset-intake.mjs stage --id '+selected.id+' --file '+shellQuote(file);
    try{await navigator.clipboard.writeText(command);notify('Command template copied. Replace /ABSOLUTE/PATH/TO before running from repository root.')}
    catch{setCandidateResult('Clipboard unavailable. Run this from repo root:\n'+command,'warn')}
+  });
+  byId('copy-activation').addEventListener('click',async()=>{
+   const item=state.selected;
+   if(!item||status(item)!=='reviewed'||!RENDER_ASSET_IDS.includes(item.id))return;
+   const command='node scripts/asset-intake.mjs activate --id '+item.id+
+    ' --reviewer YOUR_NAME --qa-evidence docs/assets/qa/'+item.id+
+    '/scene.png --visual-approved';
+   try{await navigator.clipboard.writeText(command);
+    notify('Activation command template copied. Capture and inspect a real in-game screenshot FIRST.');
+   }catch{setCandidateResult('Clipboard unavailable. After in-game visual review, run:\n'+command,'warn')}
+  });
+  window.addEventListener('hashchange',()=>{
+   const id=decodeURIComponent((location.hash.split('asset=')[1]||'').split('&')[0]);
+   const item=currentItem(id);
+   if(item&&state.selected?.id!==id)detail(item);
   });
   const requested=decodeURIComponent((location.hash.split('asset=')[1]||'').split('&')[0]);
   const initial=currentItem(requested)||filterItems()[0]||state.items[0];

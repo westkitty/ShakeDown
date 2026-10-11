@@ -20,10 +20,11 @@
 <section class="stats" aria-label="Actual production status">
  <div class="stat"><span class="stat-label">Visual contract</span><strong id="total-visual">—</strong><small>Independent requests</small></div>
  <div class="stat"><span class="stat-label">Source cut-outs</span><strong id="source-count">—</strong><small>Cinnamon frames that exist</small></div>
- <div class="stat"><span class="stat-label">Production approved</span><strong id="approved-count">—</strong><small>Explicit manifest entries</small></div>
+ <div class="stat"><span class="stat-label">Artwork reviewed</span><strong id="approved-count">—</strong><small>Accepted candidate files</small></div>
+ <div class="stat"><span class="stat-label">Active in game</span><strong id="activated-count">—</strong><small>Separate integration approval</small></div>
  <div class="stat"><span class="stat-label">Still awaiting art</span><strong id="pending-count">—</strong><small>Visual + audio requests</small></div>
 </section>
-<div class="notice"><strong>Intake policy:</strong> inspection is local to this browser. Selecting a file neither uploads nor approves it. Final approval occurs separately through the repository's command-line intake gate, followed by real gameplay verification.</div>
+<div class="notice"><strong>Intake policy:</strong> inspection is local to this browser. Selecting a file neither uploads nor approves it. Artistic approval stores a candidate without activating it. Activation requires a separately inspected in-game screenshot and reviewer attestation.</div>
 <main class="workspace">
 <section id="library" class="library" aria-labelledby="library-title">
  <div class="panel-title"><h2 id="library-title">Asset inventory</h2><span id="filtered-count" aria-live="polite"></span></div>
@@ -32,7 +33,7 @@
   <div class="three">
    <label>Type <select id="type-filter"><option value="all">All</option><option value="image" selected>Visuals</option><option value="audio">Audio</option></select></label>
    <label>Priority <select id="priority-filter"><option value="all">All priorities</option><option value="P0" selected>P0 first</option><option value="P1">P1</option><option value="P2">P2</option></select></label>
-   <label>Status <select id="status-filter"><option value="all">All states</option><option value="pending" selected>Awaiting review</option><option value="source">Source verified</option><option value="approved">Approved outputs</option></select></label>
+   <label>Status <select id="status-filter"><option value="all">All states</option><option value="pending" selected>Awaiting review</option><option value="source">Source verified</option><option value="reviewed">Reviewed, not activated</option><option value="active">Active in game</option></select></label>
   </div>
  </div>
  <div id="asset-list" class="asset-list" aria-label="Matching asset requests"></div>
@@ -51,12 +52,14 @@
  </div>
  <div class="detail-copy"><h4>Visual / technical brief</h4><p id="detail-brief"></p><h4>Acceptance gate</h4><p id="detail-acceptance"></p></div>
  <div class="path"><span class="micro-label">Required output path</span><code id="detail-path">—</code></div>
+ <a id="preview-in-game" class="review-link" href="../index.html" hidden>Inspect this image in the running game (localhost only) ↗</a>
  <section class="intake" aria-labelledby="intake-title">
   <div class="intake-heading"><h4 id="intake-title">Test a candidate</h4><span>ON DEVICE ONLY</span></div>
   <label id="drop-zone" for="candidate" class="dropzone"><span class="upload-symbol" aria-hidden="true">↑</span><strong>Select or drop an independent file</strong><small>PNG, WAV or OGG · not transferred to a server</small></label>
   <input id="candidate" type="file" accept=".png,.wav,.ogg,image/png,audio/wav,audio/ogg">
   <div id="candidate-result" class="candidate-result" aria-live="polite">Choose an asset and supply a candidate to inspect file properties.</div>
   <button id="copy-command" type="button" class="copy">Copy staging command template <span aria-hidden="true">↗</span></button>
+  <button id="copy-activation" type="button" class="copy secondary-copy" disabled>Copy integration activation template <span aria-hidden="true">↗</span></button>
  </section>
 </section>
 </main>

@@ -7,8 +7,8 @@
   "project_name": "ShakeDown",
   "project_root": "westkitty/ShakeDown",
   "artifact_path": "",
-  "state_revision": 4,
-  "last_updated": "2026-10-11T19:52:50Z",
+  "state_revision": 5,
+  "last_updated": "2026-10-11T20:26:21Z",
   "current_baseline": {
     "identity": "main@80d388828bfcad0cf454fe0b2b166e6528ac5e6d (pre-preparation production baseline)",
     "state": "current-baseline",
@@ -123,3 +123,34 @@ Browser-local intake/review UI reads canonical source contracts and approval man
 
 ### Revision 4 release boundaries
 PR #1 SHA 553be7d passed GitHub CI; Round 2 changes need independent tests and CI. Human-paced normal-difficulty route, real mobile/audio, generated art approval and deployed live-SHA playthrough remain open. Preserve all existing Cinnamon source frames and unchanged LM Arena instructions.
+
+
+## 16. Preparation Round 3 — revised image activation and normal difficulty (revision 5)
+
+<!-- operational-state:entry
+{"id":"VER-006","title":"Approved images remain inactive until separately accepted into gameplay","state":"partially-verified","scope":"prep/asset-ready-20261011 Round 3","evidence":"Synthetic isolated full-lifecycle tests, two-stage renderer filter, localhost preview browser checks and screenshot SHA tamper rejection","last_verified":"2026-10-11"}
+-->
+### VER-006 — Source approval is not production activation
+A verified technical source and reviewer-attested image do not enter ordinary gameplay automatically. The approved manifest records unverified integration until a distinct reviewer activation with the exact source hash and physically present QA screenshot hash. Only already-mapped renderer IDs can activate. Local previews can display a reviewed image without activating it on the hosted game. No externally generated final art has been delivered, approved or activated. Hashes cannot establish character fidelity; human review remains necessary.
+
+<!-- operational-state:entry
+{"id":"VER-007","title":"Normal-difficulty scripted full route","state":"partially-verified","scope":"Round 3 on prep/asset-ready-20261011","evidence":"Node normal-mode game input and browser DOM-key virtual-rAF normal full route, hazards on, checkpoint retry, Fox victory and replay","last_verified":"2026-10-11"}
+-->
+### VER-007 — Normal difficulty has a verified scripted solution
+No-warp normal-mode Node route: 2,782 ticks, 21 Dome steps physically touched, 31 Shake pickups, a checkpoint retry and pit auto-reset, natural Fox 3-hit victory. Browser DOM route: 2,786 synthetic-rAF callbacks, 21 named steps, 32 pickups, normal Fox battle, birthday and replay. Legitimate jumps bypassed two steps. This is scripted mechanical solvability, NOT a human-paced player journey.
+
+<!-- operational-state:entry
+{"id":"VER-008","title":"Multiple physical input ownership","state":"partially-verified","scope":"Keyboard aliases and simultaneous keyboard/emulated touch","evidence":"Browser tests prove right-arrow/D ownership, keyboard+touch overlapping input, blur pause and input release","last_verified":"2026-10-11"}
+-->
+### VER-008 — Input ownership corrected
+Physical keyboard codes and touch pointer identifiers now independently own logical game actions, so releasing one alias does not cancel another. Test assertions cover simultaneous sources and focus-loss pause. Emulated touch is not physical Android or iPhone validation.
+
+### Round 3 delivery and release boundary
+- 21/21 Node checks and 29/29 executed browser checks passed locally (3 planned skips).
+- Starting PR commit 7cecff2 previously passed GitHub contract and browser CI; Round 3 exact-SHA delivery/CI remains pending.
+- BigMac ADB unavailable, MacBook Air ADB detected zero devices, so there was no physical Android test; iPhone/speaker QA also remains unverified.
+- Final generated assets, reviewed Fox identity, human-paced normal play, genuine mobile audio/touch, hosted exact-SHA game route and representative FPS remain outstanding.
+- Main remains the existing playable birthday build, not this pending candidate.
+
+### Revision log
+- Revision 5: separated artwork approval and gameplay activation, proved scripted normal difficulty, corrected simultaneous control ownership, preserved visible preview warning and clarified source/reviewed/active states.

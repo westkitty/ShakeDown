@@ -49,3 +49,24 @@ Project: westkitty/ShakeDown; branch: prep/asset-ready-20261011; baseline: main@
 - `npm run validate`: **20/20 passed, 0 failed** (includes one full assist-mode, no-warp input journey).
 - `SHAKEDOWN_BROWSER_PATH=/Applications/Brave Browser.app/Contents/MacOS/Brave Browser npx playwright test --workers=2 --reporter=list`: **21 passed, 1 intentionally skipped**, zero failures (real localhost HTTP, desktop and mobile emulation, studio, virtual-rAF full-route browser interaction).
 - Code commit: `602a87ebb98d72b4a2a01110a38a061efb099f68`. GitHub Actions for this code and this documentation follow-up must be checked independently before any merge.
+
+
+## 2026-10-11 — Round 3 candidate: physical approval gate and normal-difficulty route
+
+**Starting known-good branch:** prep/asset-ready-20261011 @ 7cecff2f321b474fa029a3163b956f02698f9757. That commit's contract and browser GitHub CI checks were independently SUCCESS. A new Round 3 commit and its CI must be checked separately.
+
+**Confirmed code defect, fixed in candidate:** Before this round, the renderer loaded any artwork with reviewer-attested status even when its integrationStatus was unverified. That made artistic/source approval itself activate a replacement image in ordinary gameplay. The renderer now requires an explicitly verified integration status; the activation CLI accepts only renderer-mapped assets, checks the exact approved SHA, requires a real hashed screenshot under docs/assets/qa and explicit reviewer attestation, and records that screenshot hash bound to the accepted art. PNG validity cannot prove screenshot subject correctness, so visual fidelity still needs a real human.
+
+**Real preview:** local-only game query preview-art=ID loads one reviewer-attested, nonactivated image while normal gameplay preserves Canvas fallbacks. Desktop and mobile-emulated regression tests prove the gate and fallback, including a repaired asynchronous race that had hidden the preview warning after Cinnamon's frames finished loading.
+
+**Normal difficulty:** Node real fixed-step continuous scripted route from spawn, no warp, hazards on, assist false: 2,782 frames, 21 physically contacted Dome steps, 31 shakes, one manual checkpoint retry plus one real pit reset, three legitimate Fox hits, victory. Browser DOM-input normal-mode virtual-frame route: 2,786 rAF callbacks, 21 named steps physically contacted, 32 shakes, one manual retry and one pit reset, natural Fox victory, birthday overlay and replay. Bypassing two steps by ordinary movement is legitimate and is **not** claimed as 23 physically touched.
+
+**Input correctness:** Game input ownership now tracks each physical key and touch pointer. Releasing one of two simultaneously held movement sources no longer cancels the other. Browser tests assert keyboard aliases and concurrent keyboard/touch movement; normal blur/visibility cleanup still pauses and releases controls.
+
+**User-facing review studio:** source/reviewed-but-inactive/activated labels and counts are independently represented; reviewed supported IDs expose a localhost game-preview link and explicit activation command template. Hash-fragment changes select the correct asset without silently leaving a stale inspector view.
+
+**Local validation:** npm run validate **21 passed, 0 failed**, including complete assisted and normal scripted Node player routes and synthetic-only screenshot tamper tests. Served localhost Brave Playwright, two workers: **29 passed, 3 intentionally skipped, 0 failed**; both scripted routes pass on desktop, mobile-emulated keyboard/touch/studio tests pass. These are local BigMac tests on the preparation candidate.
+
+**Hardware probe:** DEX BigMac ADB unavailable (adb not installed on that node); MacBook Air ADB available but reported 0 devices and 0 mDNS wireless-debug services. Consequently **no physical Android test was performed**. No real physical iPhone test or speaker/audio playback proof was performed. Headless FPS and real-world sustained frame pacing remain unverified. LM Arena still has 0 independently generated production images/audio in the approved manifest.
+
+**No launch claim:** These fixes remain on the preparation branch until committed and validated on the exact GitHub SHA. main and the hosted GitHub Pages game are not claimed to contain them.

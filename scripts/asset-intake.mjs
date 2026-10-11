@@ -3,11 +3,13 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { createHash } from 'node:crypto';
 import { PNG } from 'pngjs';
+import { RENDER_ASSET_IDS } from '../src/game/production-assets.mjs';
 
 const ROOT=process.cwd();
 const CONTRACT=path.join(ROOT,'docs/assets/ShakeDown_Complete_Asset_Contract.json');
 const LEDGER=path.join(ROOT,'assets/runtime/manifest.json');
 const STAGING=path.join(ROOT,'.asset-staging');
+const QA_DIR=path.join(ROOT,'docs/assets/qa');
 const MAX_IMAGE_BYTES=25*1024*1024;
 const MAX_AUDIO_BYTES=50*1024*1024;
 
@@ -106,13 +108,42 @@ function atomicJson(dest,value){
  fs.writeFileSync(tmp,JSON.stringify(value,null,2)+'\n',{flag:'wx'});
  fs.renameSync(tmp,dest);
 }
+function integrationEvidence(name){
+ if(typeof name!=='string'||!/^docs\/assets\/qa\/[a-zA-Z0-9/_-]+\.png$/.test(name))
+  throw Error('Evidence must be a PNG under docs/assets/qa, without spaces or traversal');
+ const candidate=safeRepoPath(name);
+ if(!fs.existsSync(candidate)||!fs.statSync(candidate).isFile()||fs.lstatSync(candidate).isSymbolicLink())
+  throw Error('Integration screenshot missing or invalid: '+name);
+ const actual=fs.realpathSync(candidate);
+ if(!actual.startsWith(QA_DIR+path.sep))throw Error('Evidence file escapes QA directory');
+ const contents=fs.readFileSync(candidate);
+ if(contents.length<100||contents.length>12*1024*1024)throw Error('Evidence image exceeds screenshot budget');
+ let image;
+ try{image=PNG.sync.read(contents,{checkCRC:true})}
+ catch(error){throw Error('Cannot decode integration screenshot: '+error.message)}
+ if(image.width<640||image.height<360)throw Error('QA screenshot must be at least 640x360');
+ return {path:name,sha256:sha256(contents),bytes:contents.length,width:image.width,height:image.height};
+}
 function validateLedger(){
- const ledger=readLedger(),registry=config(),results=[];
+ const ledger=readLedger(),registry=config(),results=[],active=[];
  for(const [type,entries] of [['image',ledger.assets],['audio',ledger.audio]]){
   for(const [id,entry] of Object.entries(entries)){
    const expected=targetFor(id,registry,path.extname(entry.path));
    if(expected.type!==type||expected.relPath!==entry.path)throw Error('Wrong manifest path/type: '+id);
-   if(entry.reviewStatus!=='reviewer-attested'||!entry.reviewer||entry.integrationStatus!=='unverified')throw Error('Unknown approval status: '+id);
+   if(entry.reviewStatus!=='reviewer-attested'||!entry.reviewer||
+       !['unverified','verified'].includes(entry.integrationStatus))throw Error('Unknown approval status: '+id);
+   if(entry.integrationStatus==='verified'){
+    if(type!=='image'||!RENDER_ASSET_IDS.includes(id))throw Error('Cannot activate unsupported asset: '+id);
+    const ev=entry.integrationEvidence;
+    if(!ev||typeof ev.reviewer!=='string'||!ev.reviewer.trim()||
+      typeof ev.assetSha256!=='string'||ev.assetSha256!==entry.sha256||
+      !ev.screenshot||!ev.verifiedAt)throw Error('Missing or mismatched integration evidence: '+id);
+    const proof=integrationEvidence(ev.screenshot.path);
+    if(proof.sha256!==ev.screenshot.sha256||proof.bytes!==ev.screenshot.bytes||
+      proof.width!==ev.screenshot.width||proof.height!==ev.screenshot.height)
+      throw Error('Integration screenshot changed after activation: '+id);
+    active.push(id);
+   }
    const file=safeRepoPath(entry.path);
    if(!fs.existsSync(file)||fs.lstatSync(file).isSymbolicLink())throw Error('Approved output missing or symlink: '+id);
    const report=inspectFile(id,file,registry);
@@ -121,7 +152,10 @@ function validateLedger(){
    results.push(id);
   }
  }
- return {ok:true,reviewerAttested:results.length,imageCount:Object.keys(ledger.assets).length,audioCount:Object.keys(ledger.audio).length,ids:results};
+ return {ok:true,reviewerAttested:results.length,activated:active.length,
+  pendingIntegration:results.length-active.length,
+  imageCount:Object.keys(ledger.assets).length,audioCount:Object.keys(ledger.audio).length,
+  ids:results,activeIds:active};
 }
 function argumentsFor(argv){
  const [action,...rest]=argv,options={};
@@ -135,7 +169,30 @@ function argumentsFor(argv){
 function main(){
  const {action,options}=argumentsFor(process.argv.slice(2));
  if(action==='validate'){console.log(JSON.stringify(validateLedger(),null,2));return}
- if(!['inspect','stage','approve'].includes(action))throw Error('Usage: asset-intake.mjs inspect|stage|approve --id ID --file filename [--reviewer name --visual-approved]');
+ if(!['inspect','stage','approve','activate'].includes(action))
+  throw Error('Usage: asset-intake.mjs inspect|stage|approve --id ID --file FILE; or activate --id ID --reviewer NAME --qa-evidence docs/assets/qa/NAME.png --visual-approved');
+ if(action==='activate'){
+  if(!options.id||!options.reviewer?.trim()||!options.visualApproved||!options['qa-evidence'])
+   throw Error('Activation needs --id, --reviewer, --qa-evidence and --visual-approved');
+  const ledger=readLedger(),entry=ledger.assets[options.id],registry=config();
+  if(!entry||entry.reviewStatus!=='reviewer-attested'||entry.integrationStatus!=='unverified')
+   throw Error('Asset must be accepted and not already activated');
+  if(!RENDER_ASSET_IDS.includes(options.id))throw Error('No verified renderer mapping for '+options.id);
+  const source=safeRepoPath(entry.path);
+  const report=inspectFile(options.id,source,registry);
+  if(!report.pass||report.hash!==entry.sha256)throw Error('Approved art changed: '+options.id);
+  const screenshot=integrationEvidence(options['qa-evidence']);
+  // A physical screenshot hash is required, but a human must establish that it
+  // really shows this asset correctly placed in the running game.
+  entry.integrationStatus='verified';
+  entry.integrationEvidence={reviewer:options.reviewer.trim(),assetSha256:entry.sha256,
+    screenshot,verifiedAt:new Date().toISOString(),
+    attestation:'Reviewer confirmed the named art in the running game with legible gameplay and preserved boss tells.'};
+  atomicJson(LEDGER,ledger);
+  console.log(JSON.stringify({activated:options.id,integrated:entry.integrationEvidence,
+    notice:'Reviewer-attested integration; subsequent automated browser and live-site checks remain separate'},null,2));
+  return;
+ }
  if(!options.id||!options.file)throw Error('--id and --file are required');
  if(!fs.existsSync(options.file)||!fs.statSync(options.file).isFile())throw Error('Candidate file not found');
  const report=inspectFile(options.id,options.file);
