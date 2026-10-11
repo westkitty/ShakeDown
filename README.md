@@ -4,7 +4,7 @@ A playable, static-hosted Canvas 2D birthday platformer for **Maverick**. Cinnam
 
 ## Play
 
-**[Open the birthday game](https://westkitty.github.io/ShakeDown/)** (live only after GitHub Pages is enabled and deployment is verified).
+**[Open the birthday game](https://westkitty.github.io/ShakeDown/)**. The October 11 main-branch Pages workflow passed and the hosted index returned HTTP 200; a full hosted playthrough remains unverified.
 
 Run locally from the repository root with `npm run serve` and open `http://localhost:8765` in a normal browser. No production packages or build step. The app is `index.html` with JavaScript modules in `src/`.
 
@@ -29,14 +29,56 @@ The original four-stage campaign plan is superseded by the user's October 11 com
 ## Asset truth
 
 - `assets/references/` contains two physically present user-provided Cinnamon source sheets.
-- `assets/sprites/cinnamon/*.png` and `frames.json` contain 26 reproducible cut-outs physically produced from `cinnamon_actions_sheet.png`; they are **real, loaded sprites**, but not a claim of individually newly hand-drawn animations. See `scripts/extract_cinnamon.py`.
+- `assets/sprites/cinnamon/*.png` and `frames.json` contain 26 reproducible cut-outs physically produced from `cinnamon_actions_sheet.png`; they are **real, physically present sprites** (25 eligible for playback; the clipped run_03 is skipped at runtime), but not a claim of individually newly hand-drawn animations. See `scripts/extract_cinnamon.py`.
 - The Fox, backgrounds, terrain, collectibles, UI and cake currently use explicit procedural Canvas illustrations. They are playable **temporary integrated drawings**, not LM Arena final artwork.
 - `docs/assets/ShakeDown_Complete_LM_Arena_Master.pdf` is the expanded 220-visual-asset / 21-audio-request LM Arena production master; its editable Markdown source, machine-readable JSON and reproducible compiler are committed alongside. 26 existing Cinnamon frames are verified; 194 final visual requests are still **not generated**. A specification never stands in for verified bytes.
 
+## Preparing for incoming LM Arena artwork
+
+The game remains playable without final outside artwork. Source approval stores files and provenance **without activating them**. A separate, reviewer-attested gameplay integration step with a real screenshot is now required before regular gameplay loads replacement art; local previews do not activate anything.
+
+    npm ci
+    node scripts/asset-intake.mjs inspect --id CO-03 --file /path/to/your-cup.png
+    node scripts/asset-intake.mjs stage --id CO-03 --file /path/to/your-cup.png
+    npm run validate
+    npm run test:browser
+
+See docs/PRODUCTION_READINESS.md and docs/RELEASE_CHECKLIST.md. No final LM Arena images were imported in this preparation sprint.
+
+## Asset Control Room
+
+Open http://localhost:8765/tools/asset-review.html after starting the local server. The standalone review bench reads the 220-visual / 21-audio master and the actual approved manifest. Search/filter by ID, priority, category and state; distinguish **source / pending / reviewed / active**; inspect PNG geometry/alpha/hash and WAV/OGG containers; open a local in-game preview for eligible reviewed art; then copy separate staging and activation command templates. Nothing is uploaded or approved by the page. Human visual/audio review remains mandatory.
+
 ## Validation
 
-`npm test` runs deterministic movement/interaction/boss tests, including all 23 consecutive Dome-platform reachability transitions. `npm run validate` also checks asset manifest entries and planning invariants. Visual playback has been exercised in headless Chromium using an injected bundle because this container forbids browser URL navigation; that **does not** constitute live-site proof. See `docs/VALIDATION.md` for precise evidence boundaries.
+Node and real-HTTP browser regressions now prove **both assisted and normal-difficulty scripted routes** from the initial spawn through the Golden Dome to genuine Fox victory, using real keyboard/UI handlers and a test-only virtual requestAnimationFrame scheduler. Tests also cover independent keyboard and touch input ownership, local preview separation from activation, and screenshot-evidence integrity. These are synthetic-clock automated player routes, not human-paced or physical-phone proof. Real phone touch/audio, human play, final generated-art approval and exact-SHA hosted-site checks remain release gates.
+
+See docs/PRODUCTION_READINESS.md and docs/VALIDATION.md for exact evidence.
 
 ## Project and authority
 
 This is **westkitty/ShakeDown**. Cloud Chaser (`westkitty/c_chase`) was inspected strictly as a movement/UX reference and has not been modified. The Modern 2D Browser Game Architecture Toolkit v2.0 governs the static game architecture and evidence labels.
+
+
+## Save and resume the birthday chase
+
+ShakeDown saves **checkpoint progress locally in this browser** after each reached checkpoint. Returning to the title screen after a reload presents a **Continue from [checkpoint]** option. It restores the authored checkpoint position, previously collected Shamrock Shakes and defeated Cup Crawlers, and normal game physics. The Fox battle starts fresh from the summit checkpoint rather than preserving a half-finished attack.
+
+**Start the Shakedown** deliberately begins a new journey and clears the unfinished checkpoint. It does **not** erase an earned birthday completion, best shake record, mute preference or accessibility choices. Winning clears the no-longer-needed unfinished checkpoint while retaining the completion record. Progress is local to that browser profile; private browsing, manual site-data clearing, restricted storage and switching devices can prevent recovery. Malformed or outdated checkpoints are safely ignored.
+
+## Accessible controls
+
+Reduced Motion now changes the actual Canvas visuals: it reduces decorative animation, flashing, particle trails and invulnerability blinking without freezing gameplay physics, hazards or moving platforms. On first use it respects the operating system's reduced-motion setting; a player's explicit checkbox choice persists across reloads. Pause, loss, victory and title overlays have keyboard focus handling, Tab containment and Escape/pause-key recovery. Pressing Space on a focused button activates that button rather than unexpectedly jumping, and keyboard-accessible touch controls also trigger their labeled actions.
+
+
+## Round 5 — reliable audio, incoming-art batches, and release rehearsal
+
+The browser game no longer creates WebAudio before the first user gesture. Pause/mute/restart stop scheduled voices, a 24-voice cap prevents runaway effect overlap, and a failed audio device never blocks gameplay. Browser failures to load the game's ES module graph now show a useful Retry Loading action rather than an indefinitely inert title screen. A browser test deliberately aborts a module import, verifies the recovery UI, and successfully retries after restoring the request.
+
+The new High Contrast toggle in Pause changes the actual HUD, touch buttons and dialogue chrome. Unlike the earlier dormant saved preference, it now works and persists. Narrow 320px portrait and 844x390 landscape layouts were adjusted without changing the 960x540 logical game canvas or collider geometry.
+
+The batch intake reports physical generator outputs against the actual 220-image / 21-audio master, detects duplicates and incompatible bytes, and can explicitly stage valid independent files without approving them. See docs/ASSET_BATCH_INTAKE_RUNBOOK.md. Use npm run asset:batch -- --dir /ABSOLUTE/PATH/TO/FILES (dry run) or append --stage only after reviewing the dry-run findings.
+
+For asset-independent release evidence, use npm run release:preflight (deterministic static bytes, import and original sprite checks) and npm run perf:audit -- --seconds 4 (real browser frame pacing, render cost, input observation, layout checks). See docs/RELEASE_REHEARSAL.md and docs/READABILITY_AND_PERFORMANCE_AUDIT.md. On the authorized BigMac node, set SHAKEDOWN_BROWSER_PATH to the absolute installed Brave executable when running Playwright locally.
+
+Two browser tabs now reconcile earned completion/best Shake records when an older tab saves settings; checkpoint Continue stays visible across tab changes. Browser storage has no transaction/compare-and-swap facility, so simultaneous racing writes on different tabs remain an acknowledged limitation. No external LM Arena artwork was approved or activated in this pass.

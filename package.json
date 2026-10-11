@@ -1,9 +1,24 @@
 {
-  "name":"shakedown-birthday-caper",
-  "version":"1.0.0",
-  "private":true,
-  "type":"module",
-  "scripts":{"test":"node --test tests/*.test.mjs","validate":"node scripts/validate-content.mjs && npm test","serve":"python3 -m http.server 8765"},
-  "engines":{"node":">=20"},
-  "description":"Single-file static-hosted Canvas 2D birthday adventure; no production dependencies"
+  "name": "shakedown-birthday-caper",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "validate": "node scripts/validate-content.mjs && node scripts/asset-intake.mjs validate && npm test",
+    "serve": "python3 -m http.server 8765",
+    "test:browser": "playwright test --config=playwright.config.mjs",
+    "asset:validate": "node scripts/asset-intake.mjs validate",
+    "asset:batch": "node scripts/batch-intake.mjs",
+    "perf:audit": "node scripts/perf-audit.mjs",
+    "release:preflight": "node scripts/release-preflight.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "description": "Single-file static-hosted Canvas 2D birthday adventure; no production dependencies",
+  "devDependencies": {
+    "@playwright/test": "^1.64.0",
+    "pngjs": "^7.0.0"
+  }
 }

@@ -6,3 +6,14 @@ coverage/
 .env
 .env.*
 !.env.example
+
+# Unapproved generated art and local test output
+.asset-staging/
+.prep_patch.py
+.prep_config.py
+playwright-report/
+test-results/
+
+.sprite_patch.py
+
+.docs_patch.py

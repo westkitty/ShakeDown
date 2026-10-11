@@ -13,3 +13,96 @@ button.primary{display:block;width:100%;border:0;background:linear-gradient(180d
 @media(pointer:fine) and (min-width:800px){.touch-controls{display:none}}@media(max-width:630px){.game-shell{padding:10px}.mast{margin-bottom:7px}.mast h1{font-size:38px}.tag{font-size:9px}.eyebrow{font-size:8px}.game-frame{border-width:3px}.hud{left:4px;right:4px;top:3px;gap:2px;font-size:9px}.hud span{border-width:1px;padding:2px 4px}.status-row{min-height:37px;padding:5px 7px;gap:8px;font-size:10px}.status-row .quiet{font-size:9px;padding:4px}.touch-controls{margin-top:10px}.touch{min-height:60px;min-width:56px}.touch-left,.touch-right{gap:5px}.touch-dash,.touch-swish{min-width:54px}.touch-jump{min-width:68px;font-size:13px}.controls-note{font-size:10px}.controls-note .note-side{display:none}.dialog{padding:12px}.dialog p{font-size:11px}.dialog h2{font-size:clamp(17px,5vw,27px)}.dialog button.primary{padding:8px 9px}.dialog .small{display:none}.dialog.ending{width:92%;left:4%;bottom:4%;transform:none}}
 @media(max-width:360px){.touch{min-width:48px;font-size:17px}.touch-jump{min-width:60px}.touch-dash,.touch-swish{min-width:47px;font-size:10px}.mast-side .tag{display:none}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+
+/* A saved checkpoint is optional; hidden controls must stay absent when no save exists. */
+#continue-btn[hidden],#continue-note[hidden]{display:none}
+.continue-caption{display:block;margin-top:7px;font-size:12px;color:#d9eddf;font-weight:750}
+
+
+/* Small-screen controls: preserve the visible playfield without horizontal scroll. */
+@media (max-width:390px){
+ .game-shell{min-width:0;padding:8px max(6px,env(safe-area-inset-right)) 8px max(6px,env(safe-area-inset-left))}
+ .mast{gap:5px;min-width:0}
+ .mast h1{font-size:clamp(25px,8.4vw,33px);letter-spacing:-.07em}
+ .mast .eyebrow{letter-spacing:.06em;font-size:9px}
+ .mast-side{min-width:0;flex-shrink:0}
+ .mast-side .tag{display:none}
+ .touch-controls{gap:5px}
+ .touch-left,.touch-right{gap:4px;min-width:0}
+ .touch{min-width:44px}
+ .touch-jump{min-width:56px}
+ .hud{font-size:10px;gap:3px}
+ .hud span{padding:2px 3px}
+}
+
+/* Landscape phones: the start menu, game and controls remain usable without
+   scrolling. Static canvas logic remains 960x540; only CSS presentation shrinks. */
+@media (max-height:520px) and (orientation:landscape) and (pointer:coarse){
+ .game-shell{padding:3px max(7px,env(safe-area-inset-right)) 4px max(7px,env(safe-area-inset-left))}
+ .mast{align-items:center;gap:8px;margin:0 0 3px}
+ .mast h1{font-size:26px;line-height:1;letter-spacing:-.055em}
+ .mast .eyebrow,.mast-side .tag,.controls-note,footer{display:none}
+ .mast-side{flex-direction:row;align-items:center}
+ .game-frame{width:min(100%,49vw,440px);margin-inline:auto;border-width:2px}
+ .status-row{padding:2px 7px;min-height:28px;gap:6px;font-size:10px}
+ .status-row .quiet{font-size:10px}
+ .touch-controls{max-width:min(100%,720px);margin:4px auto 0}
+ .touch{min-height:44px}
+ .dialog{padding:7px;border-width:2px;max-height:94%}
+ .dialog .eyebrow,.dialog .small,.dialog .tiny,.continue-caption{display:none}
+ .dialog h2{font-size:clamp(15px,2.7vw,22px);margin:1px 0 4px}
+ .dialog p{font-size:10px;margin:3px 0 5px}
+ .dialog button.primary,.dialog button.secondary{margin:4px 0 0;padding:5px 8px;font-size:11px;min-height:34px}
+ .dialog label{margin:2px auto;font-size:10px}
+ .hud{top:2px;left:3px;right:3px;font-size:10px;gap:3px}
+ .hud span{border-width:1px;padding:1px 3px}
+}
+@media (pointer:coarse){
+ .icon-btn,.quiet{min-height:44px}
+ .dialog button.primary,.dialog button.secondary{min-height:44px}
+ .dialog label{min-height:40px;display:flex;align-items:center;justify-content:center;gap:8px}
+}
+
+
+/* Player-opted higher-contrast presentation. The underlying physics/rendered
+   hitboxes are unchanged; key hazards already use text and shape warnings. */
+body.high-contrast{
+ background:#000d18;
+ color:#fff;
+}
+body.high-contrast .hud span{
+ background:#000b17;
+ border-color:#fff;
+ text-shadow:none;
+}
+body.high-contrast .hud span:first-child{color:#ffc4c4}
+body.high-contrast .hud span:nth-child(2){color:#bbffbb}
+body.high-contrast .hud span:last-child{color:#fff2b3}
+body.high-contrast .status-row{background:#06101a}
+body.high-contrast .status-row #status-text{color:#fff}
+body.high-contrast .quiet,
+body.high-contrast .icon-btn,
+body.high-contrast .secondary{
+ background:#020c17;
+ border-color:#fff;
+ color:#fff;
+}
+body.high-contrast .overlay{background:rgba(0,0,0,.83)}
+body.high-contrast .dialog{
+ background:#071422;
+ border-color:#fff;
+ color:#fff;
+}
+body.high-contrast .touch{
+ background:#061627;
+ border-color:#fff;
+ color:#fff;
+}
+body.high-contrast .touch-jump{
+ background:#ffdf61;
+ border-color:#fff;
+ color:#111;
+}
+body.high-contrast .touch.held{background:#9dffb4;color:#08131a}
+body.high-contrast button:focus-visible,
+body.high-contrast input:focus-visible{outline:4px solid #ffed70;outline-offset:3px}

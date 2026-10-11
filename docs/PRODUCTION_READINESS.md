@@ -1,0 +1,117 @@
+# ShakeDown — Production-readiness contract
+
+Updated 2026-10-11. **Canon: one self-contained birthday adventure, not the old four-world draft.** Cinnamon Fuzzbutt is a red panda, not a cat. The Fox steals the last Shamrock Shake, *not* the birthday cake. The chase runs through South Bend / Notre Dame South Quad, climbs the Golden Dome, confronts the Fox, and celebrates Maverick with a cake and Shamrock Shakes.
+
+## Source-of-truth hierarchy
+
+1. Newest explicit user corrections and approved Cinnamon visual references.
+2. docs/IMPLEMENTATION_PLAN.md — current playable routes, mechanics, and story.
+3. docs/assets/ShakeDown_Complete_Asset_Contract.json — 220 design requirements and 21 audio requests; requests do not prove files exist.
+4. assets/runtime/manifest.json — verified and reviewer-approved final files only (initially empty).
+5. assets/sprites/cinnamon/frames.json — 26 real, source-derived Cinnamon pose cut-outs.
+6. docs/ASSET_HANDOFF.md, docs/ASSET_BATCHES.md, docs/level1/ — earlier four-world and prototype documents, retained for provenance but superseded where inconsistent.
+
+The LM Arena PDF, source Markdown, and comprehensive JSON are a versioned trio. Do not rewrite the active prompts while outside models are creating the assets they specify. This sprint does not alter any of the 220 requests.
+
+## Protected existing behavior
+
+- Static Canvas 2D + semantic DOM UI, fixed 60Hz authoritative game loop, AABB one-way platform collision, procedural fallback graphics.
+- South Quad and Golden Dome travel, the 23-step ascent, GO IRISH pulse, pickups, checkpoints, hazards and the Fox three-hit telegraph/recovery battle.
+- Birthday finale and exact HAPPY BIRTHDAY, MAVERICK! greeting; cake is a celebration, not a rescue objective.
+- All 26 Cinnamon source-cutout PNGs, including the clipped run_03 preserved for source provenance. The runtime animation intentionally skips run_03; never silently replace it.
+- Cloud Chaser is a read-only precedent, never a work target.
+
+## Incoming assets: automated validity + human approval
+
+Development-only tools: Node 20 or later, npm ci. Browser/game deployment still has no runtime package dependencies.
+
+1. Receive each independent file with its LM Arena logical asset ID, model/source provenance, and rights statement. Keep unreviewed candidates outside the repository or under ignored .asset-staging/.
+2. Inspect the master JSON contract for the exact logical ID, expected path and target_px. Never assume guessed filenames, sizes or animations.
+3. Inspect without modifying production:
+
+       node scripts/asset-intake.mjs inspect --id CO-03 --file /path/to/candidate.png
+
+4. Candidate must have exact requested PNG dimensions, actual decodable pixels and alpha matching the contract. Stage under an immutable SHA-derived candidate path:
+
+       node scripts/asset-intake.mjs stage --id CO-03 --file /path/to/candidate.png
+
+5. Inspect the returned stagedPath at actual gameplay scale. Character fidelity, spelling, visual legibility, outline style, intentional transparency, alpha-edge/crop warnings, and canon correctness require an actual reviewer. Once approved:
+
+       node scripts/asset-intake.mjs approve --id CO-03 --file .asset-staging/CO-03/HASH.png --reviewer Andrew --visual-approved
+
+6. Approval copies bytes to the exact master-contract output path (without overwriting an accepted revision) and updates assets/runtime/manifest.json with real dimensions, hash, reviewer, provenance and **integrationStatus: unverified**. Approval is not browser proof.
+7. Keep the art inactive until actual gameplay inspection. On localhost, open the normal game with ?preview-art=CO-03 after accepting the candidate; the local-only preview uses the exact approved file without activating it. Capture a real in-game screenshot under docs/assets/qa/CO-03/scene.png after inspecting geometry, readability, theme, collision alignment and boss telegraphs.
+8. Explicitly activate only a supported renderer ID using a real screenshot and human reviewer: node scripts/asset-intake.mjs activate --id CO-03 --reviewer REVIEWER_NAME --qa-evidence docs/assets/qa/CO-03/scene.png --visual-approved. The evidence checksum is bound to the exact source SHA-256. The screenshot's depicted content **cannot** be confirmed by code and still requires human inspection.
+9. Run npm run validate and npm run test:browser. Verify the integrated art in real gameplay and confirm fallback when external art is absent; then record the active state separately from source approval.
+10. Fox artwork FOX-02 onward requires reviewed FOX-01 identity source before approval; provisional procedural Fox remains in the game until then.
+11. Audio AU-01 through AU-21 accepts genuine WAV or OGG containers through the same intake command. Container validity is not proof of licensing/originality, loudness, seamless loops, or actual speaker playback. Keep the existing WebAudio synth fallback until those matters and playback integration are verified.
+
+Do not promote specs, thumbnails, prompts, art descriptions, staged candidate bytes, or successful compiler logs to verified assets.
+
+## Renderer plug-in points
+
+The normal browser loader only uses **reviewer-attested and explicitly integration-verified** supported IDs; approval alone is inert. A localhost-only preview query can load one unverified ID for human review without activating it. The renderer can replace visuals (never collisions or game-state values) for BG-01 sky, CO-03 shake cup, BD-01 birthday cake, and FOX-02/03/05/06/07/08/09/10/11/12, retaining existing telegraph and recovery warnings. Future production IDs can enter the manifest but still need deliberate in-game placements after evidence; the runtime does not pretend 194 candidate assets are already integrated.
+
+## Priority order while generation proceeds
+
+- **P0:** keep approved Cinnamon identity; approve Fox identity before FOX animations; ensure readable boss tells and recovery; daylight/campus sky, Dome backdrop with collider-safe layering; Shamrock Shakes, birthday cake and critical touch/HUD visuals.
+- **P1:** enemies, physical ground/platform skins, effect sprites, collectible effects and provenance-cleared audio.
+- **P2:** distant decoration, optional dialogue portraits, nonessential flourishes.
+- The comprehensive JSON priority field remains authoritative. The order above prioritizes integration dependencies; it does not rewrite the external job queue.
+
+## Verification and publishing gates
+
+Run, in order:
+
+    npm ci
+    npm run validate
+    npm run test:browser
+
+Browser automation tests both real localhost HTTP requests and desktop/mobile-emulated Chromium interactions: launch, sprite loading, movement, jumping, pause, mute persistence, touch visibility, boss flow via **test-only warp**, birthday overlay and replay. Run with SHAKEDOWN_BROWSER_PATH set to the full local Brave binary path if a Playwright-installed Chromium build is unavailable. Offline player tests remain a separate requirement.
+
+**A true full-journey PASS requires a no-teleport traverse from campus through Dome steps to boss recovery and replay.** Test-only QA warp proves the conclusion transitions but not a playable complete route. Physical-phone touch tests, real audio audition, long-session p95 sampling, and hosted URL player journeys remain distinct proof gates. Do not call a 60Hz simulation update rate an observed 60fps renderer.
+
+## Release and rollback policy
+
+Do not merge this preparation branch until npm run validate and all browser tests pass. The existing GitHub Pages workflow should remain unchanged; release checks compare deployed SHA, HTTP response, required asset files, and live player interaction. Keep asset approvals and source originals on separate candidate revisions. If reviewed art regresses the game, roll back only that artwork/manifest promotion to the last accepted revision; never wipe unrelated source work or force-push shared history.
+
+## Explicit remaining limits
+
+The final LM Arena artwork is still missing. Run_03 remains clipped on disk, deliberately skipped at runtime. Headless browser/device emulation does not equal real touchscreen QA. Complete unassisted route, audible sound quality and actual-phone performance are not automatically established by this preparation sprint.
+
+
+## Round 2: continuous route and client-only review bench (2026-10-11)
+
+- Asset Control Room: tools/asset-review.html. Fetches canonical JSON and actual runtime approvals, filters the 220 image/21 audio contracts, previews existing source/approved files, checks local candidate PNG alpha/dimensions/hash and WAV PCM/OGG headers. It never uploads or approves bytes. Source art and LM Arena prompt contracts are unchanged.
+- tests/full-route.test.mjs drives normal game-input updates from spawn with assist mode; all 23 Dome steps, real hazards, one checkpoint reset, 31 shakes, three Fox recovery hits and victory. No warp or direct state assignment.
+- tests/browser/route.spec.mjs sends DOM keyboard events and uses visible pause/assist/retry/replay buttons while the actual Canvas loop runs under a fast test-only virtual requestAnimationFrame schedule. No direct physics update or mutating QA helper is called.
+- tests/browser/studio.spec.mjs exercises real contract totals, image byte/pixel and audio header checks, rejected malformed candidates, ID deep links and desktop/mobile layouts. These do not prove actual art fidelity or ownership.
+- Still needed: human-paced normal difficulty, physical phone audio/touch, generated Fox/art review, live deployed-SHA playthrough and real-world performance.
+
+
+## Round 4 — retain birthday progress and keyboard-friendly play (2026-10-11)
+
+The optional save-and-continue extension uses the existing versioned localStorage key. It writes only at authored checkpoint transitions, not every frame, and stores the known checkpoint ID/index, elapsed time, real collected Shake IDs and defeated Cup Crawler IDs. Restoring validates every saved ID against the current level, derives shake/secret counts from authored collectibles, restores full health and invulnerability at the checkpoint, and reinitializes camera and hazards. Invalid or outdated records do not cause crashes or fabricated completion.
+
+The save record retains earned completion and maximum Shake count during replay, mute changes and a new round; victory clears the unfinished checkpoint. A fresh Start deliberately discards old unfinished progress. With storage disabled, gameplay continues but resume is not durable.
+
+Reduced Motion has a real renderer gate: optional decorative drifting, moving confetti, event particles and invulnerability blinking are reduced or disabled, while moving platform rendering still uses authoritative simulation elapsed time. Player input, collision and boss timings are unchanged. Stored player preference overrides OS default.
+
+Keyboard accessibility: native Enter/Space activation of focused controls, repeat-safe pause/mute keys, focus moved to dialog controls and restored to the game, Tab focus within active overlays and keyboard-operable touch controls. Browser checks are not substitutes for physical device or assistive-technology audits.
+
+No final LM Arena image or audio was fabricated or approved; the existing two-stage production art review and activation gate remains intact.
+
+
+## Round 5 — asset-independent verification extension (October 11, 2026)
+
+This round groups the seven requested opportunities into three bounded systems: (1) audio, startup and cross-tab storage resilience; (2) deterministic batch intake and release preflight; (3) measured real-browser performance, mobile readability, accessible controls and release rehearsal.
+
+A received LM Arena batch can now be assessed via scripts/batch-intake.mjs and docs/ASSET_BATCH_INTAKE_RUNBOOK.md. The report maps only exact original contract names or leading logical IDs, refuses unknown/ambiguous IDs, detects duplicate candidate IDs and reused SHA-256 across different IDs, rejects symlinks, bad geometry, corrupted PNG/WAV/OGG and oversize files, and provides missing-contract inventory. A default scan is read-only; --stage alone is an explicit file copy to ignored .asset-staging. Neither variant can approve or activate. The original master generator prompts remain unchanged.
+
+A separate release rehearsal script traces actual static HTML and module dependencies, physically present 26 Cinnamon source files and any approved external assets/evidence, computes a stable SHA-256 inventory, and fails on missing runtime bytes. The GitHub browser workflow also uploads its per-run static-preflight JSON. This is an offline byte/reference gate, not screenshot, audio, gameplay, deployment or character-fidelity proof.
+
+The AudioBox is now gesture-gated, explicit pause/mute aware, cleans up oscillators when they end, caps live voices to 24, supports reset/dispose and handles context suspension/recovery. A classic-script boot watchdog provides Retry Loading when the ESM graph fails to finish loading, without changing engine architecture. The storage writer reads newer tab records before replacing earned completion/best score; normal stale-tab writes are repaired, but localStorage has no atomic compare-and-swap under a truly simultaneous race.
+
+The High Contrast checkbox is now functional, with visibly different HUD/menu/touch styling and a persisted preference. The corrected narrow-portrait/landscape CSS keeps initial Start and touch controls on screen, with 44px minimum coarse-pointer targets, while preserving 960x540 canvas collision. The test-assisted and normal browser routes assert Fox tell, charge/volley, stagger and hit states as well as victory. Missing sprite/asset manifests degrade to procedural fallbacks, and an already-loaded session continues through a network drop; **offline cold-start is not supported and no service worker was introduced**.
+
+Normal wall-clock requestAnimationFrame measurement on a headed remote Brave instance showed roughly 205–216ms p95 frame intervals while Canvas rendering was about 0.9–1.2ms p95. The remote environment is throttled or contended and did not demonstrate 60 FPS. Do not attempt an unsolicited renderer/engine rewrite from this evidence. Genuine iPhone/Android FPS, physical touch/sound, human route, real delivered art identity and exact deployed SHA remain required.

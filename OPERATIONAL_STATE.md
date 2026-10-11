@@ -7,10 +7,10 @@
   "project_name": "ShakeDown",
   "project_root": "westkitty/ShakeDown",
   "artifact_path": "",
-  "state_revision": 2,
-  "last_updated": "2026-10-11T18:52:00Z",
+  "state_revision": 7,
+  "last_updated": "2026-10-11T21:54:52Z",
   "current_baseline": {
-    "identity": "main@8b39c32ced8f7051908b10a4d936b85e02e42a0d (runtime milestone before asset packet commit)",
+    "identity": "main@80d388828bfcad0cf454fe0b2b166e6528ac5e6d (pre-preparation production baseline)",
     "state": "current-baseline",
     "last_verified": null
   },
@@ -71,7 +71,7 @@ Modern Pixel Candidate B selected. Do not overwrite Cloud Chaser. Do not claim a
 | VER-001 | ZIP hash / normalized frame integrity | Tested local file bytes | Verify remote binaries after upload |
 | BRK-001 | run_03 source edge crop | Inspected raster alpha boundary | Regenerate/repair source |
 | PND-001 | Gameplay animation | 26 real source cutouts browser loaded | Full live-site playthrough and more complete animations |
-| PND-002 | Full birthday route | Unit tests + sampled browser scenes | Unassisted run and device tests |
+| PND-002 | Full birthday route | Complete scripted assist-mode Node route + real browser DOM-input route under virtual rAF, no warps | Human normal-difficulty, physical device remain unverified |
 | PND-003 | Production art library | 220 standalone specs, 26 source-existing | 194 missing generated visuals and Fox approval |
 
 ## 12. Current Change Scope and Impact Radius
@@ -80,3 +80,163 @@ After 8b39c32 runtime milestone: publish expanded LM Arena PDF/MD/JSON and fixed
 ## 13. Compact Revision Log
 - Revision 1: established asset-state boundary, verified local artifact hashes, protected missing animation/binary-transfer gates.
 - Revision 2: recorded tested playable 8b39c32 milestone, 26 source-derived integrated frames, bounded browser proof, comprehensive art contract and remaining Pages/live-device/LM Arena gates.
+
+
+## 14. Preparation candidate — 2026-10-11 (revision 3)
+
+<!-- operational-state:entry
+{"id":"VER-002","title":"Main-branch CI and hosted index availability","state":"partially-verified","scope":"main@80d3888 before preparation","evidence":"GitHub Actions contract run 38165872650 SUCCESS; Pages run 38165872137 SUCCESS; hosted index HTTP 200 by BigMac curl","last_verified":"2026-10-11"}
+-->
+### VER-002 — Main-branch availability
+Main baseline 80d3888 had successful GitHub Actions contract and Pages workflows, plus an independent HTTP 200 for the hosted index. This establishes availability only, not a complete unassisted live-site gameplay experience.
+
+<!-- operational-state:entry
+{"id":"VER-003","title":"Local preparation branch acceptance","state":"partially-verified","scope":"prep/asset-ready-20261011","evidence":"Original 12 Node tests passed; preparation 18/18 unit tests, 6/6 Playwright HTTP+Brave tests in desktop/mobile emulation; isolated asset acceptance test later added; boss test-assisted warp cannot prove route","last_verified":"2026-10-11"}
+-->
+### VER-003 — Local candidate
+The candidate adds image/audio acceptance, SHA256-based staging, reviewer attestation, immutable approved checkpoints, a runtime image loader with Canvas fallback, and tests. No newly generated LM Arena images were inserted. BRK-001 source run_03 remains clipped but is no longer selected or loaded for gameplay (25 usable of 26 original PNGs). Preserve all original PNG bytes.
+
+### Outstanding release evidence
+- GitHub CI for submitted preparation SHA; do not infer from local tests.
+- Ordinary player journey from campus through all Dome steps and natural boss defeat without QA warp.
+- Physical phone touch and audible speaker/mute validation; emulator screenshots do not qualify.
+- Fox FOX-01 identity review and actual LM Arena output intake; all final generated art still awaits delivery.
+- Hosted exact SHA full-journey proof and representative long-session performance measurements.
+
+### Revision log addition
+- Revision 3: reconciled current deployed baseline, documented asset intake and playable clip exclusion; tracked preparation browser evidence and remaining approvals/device/route gates.
+
+
+## 15. Preparation Round 2 — revision 4
+
+<!-- operational-state:entry
+{"id":"VER-004","title":"Continuous assist-mode route browser proof","state":"partially-verified","scope":"Round 2 on prep/asset-ready-20261011","evidence":"Node input route and browser DOM/Canvas route with virtual rAF: 23/23 Dome steps, 31 shakes, 1 checkpoint retry, 3 natural Fox hits, birthday/replay","last_verified":"2026-10-11"}
+-->
+### VER-004
+Verified continuous scripted assisted gameplay from initial spawn through full Dome to victory in Node and browser DOM/Canvas. Browser input uses test-driven keys and a virtual rAF schedule; no warp, direct physics call or authoritatively mutable QA aid. Human-paced/default-difficulty/real hardware not verified.
+
+<!-- operational-state:entry
+{"id":"VER-005","title":"Client-side asset review UI","state":"partially-verified","scope":"tools/asset-review.html","evidence":"Browser desktop/mobile emulation checks 220 visual +21 audio,26 source frames,0 approved outputs, PNG alpha/dimension/hash, WAV validity, rejected corrupt files","last_verified":"2026-10-11"}
+-->
+### VER-005
+Browser-local intake/review UI reads canonical source contracts and approval manifest and examines candidates without upload or art approval. Original generated-art truth unchanged: zero newly approved final output files.
+
+### Revision 4 release boundaries
+PR #1 SHA 553be7d passed GitHub CI; Round 2 changes need independent tests and CI. Human-paced normal-difficulty route, real mobile/audio, generated art approval and deployed live-SHA playthrough remain open. Preserve all existing Cinnamon source frames and unchanged LM Arena instructions.
+
+
+## 16. Preparation Round 3 — revised image activation and normal difficulty (revision 5)
+
+<!-- operational-state:entry
+{"id":"VER-006","title":"Approved images remain inactive until separately accepted into gameplay","state":"partially-verified","scope":"prep/asset-ready-20261011 Round 3","evidence":"Synthetic isolated full-lifecycle tests, two-stage renderer filter, localhost preview browser checks and screenshot SHA tamper rejection","last_verified":"2026-10-11"}
+-->
+### VER-006 — Source approval is not production activation
+A verified technical source and reviewer-attested image do not enter ordinary gameplay automatically. The approved manifest records unverified integration until a distinct reviewer activation with the exact source hash and physically present QA screenshot hash. Only already-mapped renderer IDs can activate. Local previews can display a reviewed image without activating it on the hosted game. No externally generated final art has been delivered, approved or activated. Hashes cannot establish character fidelity; human review remains necessary.
+
+<!-- operational-state:entry
+{"id":"VER-007","title":"Normal-difficulty scripted full route","state":"partially-verified","scope":"Round 3 on prep/asset-ready-20261011","evidence":"Node normal-mode game input and browser DOM-key virtual-rAF normal full route, hazards on, checkpoint retry, Fox victory and replay","last_verified":"2026-10-11"}
+-->
+### VER-007 — Normal difficulty has a verified scripted solution
+No-warp normal-mode Node route: 2,782 ticks, 21 Dome steps physically touched, 31 Shake pickups, a checkpoint retry and pit auto-reset, natural Fox 3-hit victory. Browser DOM route: 2,786 synthetic-rAF callbacks, 21 named steps, 32 pickups, normal Fox battle, birthday and replay. Legitimate jumps bypassed two steps. This is scripted mechanical solvability, NOT a human-paced player journey.
+
+<!-- operational-state:entry
+{"id":"VER-008","title":"Multiple physical input ownership","state":"partially-verified","scope":"Keyboard aliases and simultaneous keyboard/emulated touch","evidence":"Browser tests prove right-arrow/D ownership, keyboard+touch overlapping input, blur pause and input release","last_verified":"2026-10-11"}
+-->
+### VER-008 — Input ownership corrected
+Physical keyboard codes and touch pointer identifiers now independently own logical game actions, so releasing one alias does not cancel another. Test assertions cover simultaneous sources and focus-loss pause. Emulated touch is not physical Android or iPhone validation.
+
+### Round 3 delivery and release boundary
+- 21/21 Node checks and 29/29 executed browser checks passed locally (3 planned skips).
+- Starting PR commit 7cecff2 previously passed GitHub contract and browser CI; Round 3 exact-SHA delivery/CI remains pending.
+- BigMac ADB unavailable, MacBook Air ADB detected zero devices, so there was no physical Android test; iPhone/speaker QA also remains unverified.
+- Final generated assets, reviewed Fox identity, human-paced normal play, genuine mobile audio/touch, hosted exact-SHA game route and representative FPS remain outstanding.
+- Main remains the existing playable birthday build, not this pending candidate.
+
+### Revision log
+- Revision 5: separated artwork approval and gameplay activation, proved scripted normal difficulty, corrected simultaneous control ownership, preserved visible preview warning and clarified source/reviewed/active states.
+
+
+## 17. Preparation Round 4 — durable checkpoint, Reduced Motion, keyboard operation (revision 6)
+
+<!-- operational-state:entry
+{"id":"VER-009","title":"Monotonic birthday completion and validated checkpoint persistence","state":"partially-verified","scope":"Round 4 prep branch candidate","evidence":"Baseline browser saved-completion regression reproduced; Node versioned checkpoint validation; browser saved checkpoint Continue/new Start/reload/legacy cases; assisted and normal full routes autosaved checkpoints 1-5 before clearing at victory","last_verified":"2026-10-11"}
+-->
+### VER-009 — Saves preserve earned achievements and support local checkpoint Continue
+The stale saved-completion bug was directly reproduced: winning, replaying and toggling mute erased completed. Save updates now retain earned completion and best Shakes throughout settings changes and replays. Optional versioned checkpoint data stores authored checkpoint ID/index, elapsed time and physically collected/defeated IDs; it is validated before restore. The title offers Continue only when this record is safe. Start clears unfinished progress; victory clears unfinished progress without erasing completion. Restricted browser storage or switching devices prevents guaranteed restore. All five authored checkpoint writes were observed during BOTH real-HTTP scripted full-route tests using the normal game update path.
+
+<!-- operational-state:entry
+{"id":"VER-010","title":"Functional reduced-motion renderer preference","state":"partially-verified","scope":"Render decoration and automatic OS preference only","evidence":"Desktop and mobile browser pixel comparisons with distinct simulation times; decorative pixels static in reduced mode and animated in normal; existing moving platforms still use authoritative elapsed time","last_verified":"2026-10-11"}
+-->
+### VER-010 — Reduced Motion is functional
+User setting disables or freezes nonessential drifting, confetti animation, hit flashing and event particles, while player input and collision timing remain unchanged. The OS reduced-motion preference initializes the option for a new profile; explicit player choice persists. Browser comparison tests verify real Canvas output under reduced and normal modes.
+
+<!-- operational-state:entry
+{"id":"VER-011","title":"Keyboard dialog accessibility and shortcut handling","state":"partially-verified","scope":"Title, pause, death and victory DOM overlays plus keyboard-operated touch buttons","evidence":"Browser tests for focus containment/return, repeat-safe P, Enter on Continue, Space on focused mute and mobile touch Jump key activation","last_verified":"2026-10-11"}
+-->
+### VER-011 — Keyboard operation corrected
+Dialog overlays now provide explicit dialog semantics, focus management and Tab containment. Native Enter and Space on focused controls are preserved; holding the pause shortcut cannot toggle repeatedly. Keyboard focus on mobile touch controls can activate the intended game action. The browser tests are not a substitute for VoiceOver/TalkBack audits.
+
+### Round 4 release boundaries
+- The changes are a prep-branch candidate only until exact-SHA GitHub CI passes; do not mark main or Pages as updated.
+- Original 26 Cinnamon source cut-outs, Fox placeholder, Golden Dome platforms, 220 image/21 audio LM Arena job contracts and all previously verified art-approval protections remain unchanged.
+- Remaining: live user paced phone/desktop testing, real hardware audio and switch/screen reader QA, generated final art review and explicit in-game visual approval, public GitHub Pages release validation.
+- Earlier revisions remain append-only; correction of stale Round 3 pending-CI wording is additive rather than rewritten.
+
+### Revision log
+- Revision 6: fixed lost birthday completion, added checkpoint Continue, proved genuine checkpoint writes during full routes, made Reduced Motion effective and hardened keyboard/dialog navigation.
+
+
+### Round 4 local verification receipt — amendment
+
+Baseline checks: 21/21 Node passed. Round 4 local candidate: **24/24 Node** passed. Real served-HTTP Brave Playwright, two-worker desktop run: **23 passed, 2 skipped**; separate two-worker Pixel-7 emulated mobile run: **23 passed, 2 skipped**. Total **46 executed browser checks passed, 4 intentionally skipped, 0 failed**. The existing assisted and normal scripted browser game routes both remain successful. Full physical hardware, genuine frame pacing, audible audio and outside-generated art remain outside the claimed evidence.
+
+
+### Round 4 latest Node evidence correction (additive)
+The earlier local receipt of 24/24 preceded one additional authored-checkpoint geometry test. The latest executed full Node suite is **25/25 passed**, including safe recovery at each of the five actual checkpoints. Browser evidence stays **46 passed, 4 deliberately skipped** on desktop and mobile emulation. This additive correction does not rewrite prior run evidence.
+
+## 18. Preparation Round 5 — asset-independent production readiness (revision 7)
+
+<!-- operational-state:entry
+{"id":"VER-012","title":"Audio lifecycle and bounded scheduled voices","state":"partially-verified","scope":"Round 5 on prep/asset-ready-20261011","evidence":"Fake AudioContext unit tests plus actual served-Brave gesture, mute/pause/restart and context-state tests; no physical-speaker audition","last_verified":"2026-10-11"}
+-->
+### VER-012
+The browser no longer instantiates AudioContext on page launch. Explicit game gesture creates it; pause/mute/restart stop scheduled oscillators, close/dispose cleans context, simultaneous sound effects are capped to 24 live voices, and absent WebAudio never prevents gameplay. Synthetic unit/browser tests passed. Audible speaker quality, music-loop seams, licensing and real mobile sound remain unverified.
+
+<!-- operational-state:entry
+{"id":"VER-013","title":"Cross-tab localStorage preservation","state":"partially-verified","scope":"Round 5 user settings and birthday progress","evidence":"Stale-title-tab settings save reproduced deleting newer victory record before fix; desktop/mobile browser tests pass with pre-write merge, updated title Continue and storage-denial stress","last_verified":"2026-10-11"}
+-->
+### VER-013
+The stale tab's settings save used to erase another tab's earned birthday completion. Read-before-write reconciliation now retains monotonic completion/best values; storage events refresh a title-screen checkpoint Continue. Storage denial and rapid replay are non-crashing. Atomic simultaneous multi-tab writes remain an unresolved narrow race because localStorage has no compare-and-swap semantics.
+
+<!-- operational-state:entry
+{"id":"VER-014","title":"Batch asset intake without promotion","state":"partially-verified","scope":"scripts/batch-intake.mjs plus governing 220/21 contracts","evidence":"Isolated files test real PNG dimensions, SHA duplicates, canonical filenames/IDs, wrong WAV, symlink, ZIP ignoring, no-approval stage operation; 215 outstanding jobs","last_verified":"2026-10-11"}
+-->
+### VER-014
+An actual batch intake dry-run reports 220 visual requests, 21 audio, 26 existing Cinnamon cutouts, zero external approvals and 215 awaiting review. Explicit --stage copies only unique valid files to ignored candidate staging, without writing approval or activation. No received art has been accepted; artistic fidelity remains a human gate.
+
+<!-- operational-state:entry
+{"id":"VER-015","title":"Measured responsive fixes and high-contrast preference","state":"partially-verified","scope":"CSS-only narrow/landscape and presentation controls","evidence":"Headed Brave measured 320px width overflow 345 to 320; landscape Start bottom 448 to 236, touch bottom 682 to 380; contrast and 44px target browser tests","last_verified":"2026-10-11"}
+-->
+### VER-015
+Real browser layout probes found and corrected narrow horizontal overflow and landscape first-fold controls without changing 960x540 Canvas physics or state. High Contrast is now a visible persisted setting with actual HUD/menu/touch styling. Browser tests verify contrasts and dimensions. Real screen readers/physical devices are not yet tested.
+
+<!-- operational-state:entry
+{"id":"VER-016","title":"Static release rehearsal, runtime resilience and honest performance diagnosis","state":"partially-verified","scope":"read-only release preflight, gameplay boot fallback and headed browser performance script","evidence":"Deterministic 38-file static manifest, intentionally missing module negative control, direct ESM request failure/retry, network loss and resize checks, remote headed rAF p95 205-216ms while Canvas ~1ms","last_verified":"2026-10-11"}
+-->
+### VER-016
+The static preflight fingerprints physically present runtime files and fails when an import is absent; GitHub browser CI is configured to upload this artifact. A classic-script startup guard shows Retry Loading after a failed module import, proven by real injected network failure/recovery. Fallback art remains playable when source manifests fail, and loaded sessions continue offline without cold-start support. Remote Mac rAF was substantially throttled (~205–216ms p95); Canvas draw cost was ~0.9–1.2ms p95. This is not 60fps proof or a reason to rewrite the renderer.
+
+### Round 5 release boundaries
+- Baseline clean branch a584f03d3c6240de803ad3cc352b441d3e25de2f; existing 25/25 Node tests.
+- Preliminary local candidate validation after batch/audio/release implementation: 31/31 Node passed; 38 runtime files physically present.
+- One-worker split desktop browser suites: 14+20 executed passed, 4 deliberate skips. Mobile suites: 14+21 executed passed, 3 deliberate skips. Separate High Contrast tests desktop+mobile passed, with focused accessibility regression rechecked. No remaining failures in those controlled runs.
+- Original upstream source PNGs, game physics/engine and master generator specifications unchanged. External final art approved count still zero.
+- Remaining: true physical iPhone/Android touch/speaker tests, human-paced full route, actual generated art identity/visual approval, representative target device FPS and exact deployed production SHA check.
+- Changes remain on the preparation branch until an authorized, tested PR merge; no main merge or Pages release is claimed.
+
+### Revision log
+- Revision 7: audio lifecycle, two-tab save repair, bulk candidate intake, static release preflight, startup retry, measured phone layout, high contrast and honest browser performance boundaries.
+
+### Round 5 tested candidate receipt
+
+Final local candidate before Git delivery: npm run validate **31/31 PASS**, release-preflight 38 physical runtime files and no missing paths. Browser tests run in bounded one-worker groups: **desktop 35 executed passed, four expected skips; mobile-emulated 36 executed passed, three expected skips**. Remote headed rAF p95 stayed around 205-216ms despite roughly 1ms Canvas render cost; this is not normal target-device performance proof. The original 26 Cinnamon source frames, untouched asset generator contracts and zero-final-production-art state remain preserved. GitHub CI and delivery receipts to be appended only after actual commits and runs.

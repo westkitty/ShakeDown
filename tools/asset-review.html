@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#081b29">
+<meta name="description" content="ShakeDown Asset Review Studio — verify generated art against the canonical contract, privately in your browser.">
+<title>ShakeDown // Asset Review Studio</title>
+<link rel="stylesheet" href="asset-review.css">
+</head>
+<body>
+<a class="skip" href="#library">Skip to asset inventory</a>
+<div class="shell">
+<header class="topbar">
+ <div><span class="eyebrow">STINKY WEASEL PRODUCTIONS / SHAKEDOWN</span><h1>ASSET <em>CONTROL</em> ROOM<span class="spark" aria-hidden="true">✳</span></h1>
+ <p>One birthday adventure. One approved source of truth. No imaginary files.</p></div>
+ <div class="top-actions"><a class="back" href="../index.html">← Play ShakeDown</a><span class="tag">LOCAL FILE REVIEW</span></div>
+</header>
+<div id="load-error" role="alert" class="error" hidden></div>
+<section class="stats" aria-label="Actual production status">
+ <div class="stat"><span class="stat-label">Visual contract</span><strong id="total-visual">—</strong><small>Independent requests</small></div>
+ <div class="stat"><span class="stat-label">Source cut-outs</span><strong id="source-count">—</strong><small>Cinnamon frames that exist</small></div>
+ <div class="stat"><span class="stat-label">Artwork reviewed</span><strong id="approved-count">—</strong><small>Accepted candidate files</small></div>
+ <div class="stat"><span class="stat-label">Active in game</span><strong id="activated-count">—</strong><small>Separate integration approval</small></div>
+ <div class="stat"><span class="stat-label">Still awaiting art</span><strong id="pending-count">—</strong><small>Visual + audio requests</small></div>
+</section>
+<div class="notice"><strong>Intake policy:</strong> inspection is local to this browser. Selecting a file neither uploads nor approves it. Artistic approval stores a candidate without activating it. Activation requires a separately inspected in-game screenshot and reviewer attestation.</div>
+<main class="workspace">
+<section id="library" class="library" aria-labelledby="library-title">
+ <div class="panel-title"><h2 id="library-title">Asset inventory</h2><span id="filtered-count" aria-live="polite"></span></div>
+ <div class="filters">
+  <label>Find an asset <input id="search" type="search" placeholder="FOX-05, cake, Golden Dome…" autocomplete="off"></label>
+  <div class="three">
+   <label>Type <select id="type-filter"><option value="all">All</option><option value="image" selected>Visuals</option><option value="audio">Audio</option></select></label>
+   <label>Priority <select id="priority-filter"><option value="all">All priorities</option><option value="P0" selected>P0 first</option><option value="P1">P1</option><option value="P2">P2</option></select></label>
+   <label>Status <select id="status-filter"><option value="all">All states</option><option value="pending" selected>Awaiting review</option><option value="source">Source verified</option><option value="reviewed">Reviewed, not activated</option><option value="active">Active in game</option></select></label>
+  </div>
+ </div>
+ <div id="asset-list" class="asset-list" aria-label="Matching asset requests"></div>
+</section>
+<section class="inspector" aria-labelledby="inspector-title">
+ <div class="panel-title"><h2 id="inspector-title">Inspection bench</h2><span id="detail-state" class="state"></span></div>
+ <div class="detail-head"><div><span id="detail-id" class="asset-id">SELECT AN ASSET</span><h3 id="detail-name">Production contract</h3></div><span id="detail-priority" class="priority">—</span></div>
+ <div id="preview" class="preview" aria-label="Source or candidate preview">
+   <div class="placeholder"><span aria-hidden="true">◇</span><strong>NO FINAL ARTWORK</strong><small>Generated assets are not presumed to exist.</small></div>
+ </div>
+ <div class="readouts">
+  <div><span class="micro-label">Expected pixels</span><strong id="detail-size">—</strong></div>
+  <div><span class="micro-label">Alpha requirement</span><strong id="detail-alpha">—</strong></div>
+  <div><span class="micro-label">Group / zone</span><strong id="detail-group">—</strong></div>
+  <div><span class="micro-label">Source / approval</span><strong id="detail-origin">—</strong></div>
+ </div>
+ <div class="detail-copy"><h4>Visual / technical brief</h4><p id="detail-brief"></p><h4>Acceptance gate</h4><p id="detail-acceptance"></p></div>
+ <div class="path"><span class="micro-label">Required output path</span><code id="detail-path">—</code></div>
+ <a id="preview-in-game" class="review-link" href="../index.html" hidden>Inspect this image in the running game (localhost only) ↗</a>
+ <section class="intake" aria-labelledby="intake-title">
+  <div class="intake-heading"><h4 id="intake-title">Test a candidate</h4><span>ON DEVICE ONLY</span></div>
+  <label id="drop-zone" for="candidate" class="dropzone"><span class="upload-symbol" aria-hidden="true">↑</span><strong>Select or drop an independent file</strong><small>PNG, WAV or OGG · not transferred to a server</small></label>
+  <input id="candidate" type="file" accept=".png,.wav,.ogg,image/png,audio/wav,audio/ogg">
+  <div id="candidate-result" class="candidate-result" aria-live="polite">Choose an asset and supply a candidate to inspect file properties.</div>
+  <button id="copy-command" type="button" class="copy">Copy staging command template <span aria-hidden="true">↗</span></button>
+  <button id="copy-activation" type="button" class="copy secondary-copy" disabled>Copy integration activation template <span aria-hidden="true">↗</span></button>
+ </section>
+</section>
+</main>
+<footer><span>CANON: CINNAMON IS A RED PANDA · THE FOX STOLE THE SHAMROCK SHAKE · THE CAKE IS THE FINALE.</span><span id="status-line">Waiting for contract…</span></footer>
+</div>
+<script type="module" src="asset-review.mjs"></script>
+</body></html>

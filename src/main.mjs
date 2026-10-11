@@ -2,65 +2,253 @@ import {newGame,startGame,pauseGame,resetToCheckpoint,update,DT,snapshot} from '
 import {VIEW,WORLD} from './game/world.mjs';
 import {render} from './game/render.mjs';
 import {AudioBox} from './game/audio.mjs';
+import {loadApprovedArt} from './game/production-assets.mjs';
+import {checkpointRecord,validCheckpointRecord,restoreCheckpoint} from './game/progress.mjs';
 const $=id=>document.getElementById(id);
 const canvas=$('game'),ctx=canvas.getContext('2d',{alpha:false});
 if(!ctx){$('load-status').textContent='Canvas rendering is unavailable on this browser.';throw Error('Canvas 2D required')}
 const saveKey='shakedown:birthday:v1';
-function readSave(){try{const value=JSON.parse(localStorage.getItem(saveKey)||'null');return value?.schema===1?value:{schema:1}}catch{return {schema:1}}}
-let saved=readSave(),state=newGame(saved.settings||{}),sprites={},assetCount=0,assetErrors=[];
-const audio=new AudioBox();audio.mute(state.settings.mute);
+function readSave(){
+ try{const value=JSON.parse(localStorage.getItem(saveKey)||'null');
+  return value?.schema===1&&typeof value==='object'?value:{schema:1};
+ }catch{return {schema:1}}
+}
+let saved=readSave();
+const initialSettings={...saved.settings};
+if(typeof initialSettings.reducedMotion!=='boolean'){
+ initialSettings.reducedMotion=window.matchMedia?.('(prefers-reduced-motion: reduce)').matches||false;
+}
+let state=newGame(initialSettings),sprites={},assetCount=0,assetErrors=[];
+let lastSavedCheckpoint=0;
+function resumableRecord(){return validCheckpointRecord(saved.progress,state.level)?saved.progress:null}
+function showContinue(){
+ const record=resumableRecord(),button=$('continue-btn'),note=$('continue-note');
+ button.hidden=!record;note.hidden=!record;
+ if(record){button.textContent='CONTINUE FROM '+record.checkpointId.toUpperCase();
+  note.textContent='Saved at '+record.checkpointId+' — start fresh or continue.';}
+}
+const audio=new AudioBox();audio.mute(state.settings.mute,{resume:false});
+let productionArt={},productionLoaded=0,productionDeclared=0,productionErrors=[];
+let spriteStatus='Loading Cinnamon poses…',productionStatus='';
+function showAssetStatus(){
+ $('load-status').textContent=[spriteStatus,productionStatus].filter(Boolean).join(' · ');
+}
 let lastStatus='',lastEventSerial=0,displayedMode='';
-function save(){try{localStorage.setItem(saveKey,JSON.stringify({schema:1,settings:state.settings,completed:saved.completed||state.mode==='victory',bestShakes:Math.max(saved.bestShakes||0,state.shakeCount)}))}catch{/* Restricted storage: game still playable. */}}
-function showMode(){if(displayedMode===state.mode)return;displayedMode=state.mode;
- for(const id of ['title-overlay','pause-overlay','dead-overlay','victory-overlay'])$(id).classList.add('hidden');
- const overlay={title:'title-overlay',pause:'pause-overlay',dead:'dead-overlay',victory:'victory-overlay'}[state.mode];
+function safeScore(value){return Number.isFinite(value)?Math.max(0,value):0}
+function save(){
+ // Preserve monotonic accomplishments from a newer tab before this tab writes.
+ // Storage does not offer compare-and-swap; simultaneous writes still need
+ // manual recovery, but ordinary stale-tab settings changes cannot erase wins.
+ const current=readSave(),currentProgress=validCheckpointRecord(current.progress,state.level)?current.progress:null;
+ saved={schema:1,settings:{...state.settings},
+  completed:saved.completed===true||current.completed===true||state.mode==='victory',
+  bestShakes:Math.max(safeScore(current.bestShakes),safeScore(saved.bestShakes),state.shakeCount),
+  progress:state.mode==='victory'?null:
+   state.mode==='title'?currentProgress:(saved.progress||null)};
+ try{localStorage.setItem(saveKey,JSON.stringify(saved))}
+ catch{/* Restricted storage: gameplay still works, even if progress cannot persist. */}
+ if(state.mode==='title')showContinue();
+}
+window.addEventListener('storage',event=>{
+ if(event.key!==saveKey)return;
+ const current=readSave();
+ saved.completed=saved.completed===true||current.completed===true;
+ saved.bestShakes=Math.max(safeScore(saved.bestShakes),safeScore(current.bestShakes));
+ if(state.mode==='title'){
+  saved.progress=validCheckpointRecord(current.progress,state.level)?current.progress:null;
+  showContinue();
+ }
+});
+function saveCheckpointIfNew(){
+ if(state.mode!=='playing'||state.checkpoint<=lastSavedCheckpoint)return;
+ const candidate=checkpointRecord(state);
+ if(!candidate)return;
+ lastSavedCheckpoint=state.checkpoint;saved.progress=candidate;save();
+}
+const overlayByMode={title:'title-overlay',pause:'pause-overlay',dead:'dead-overlay',victory:'victory-overlay'};
+function showMode(){
+ if(displayedMode===state.mode)return;
+ displayedMode=state.mode;
+ for(const id of Object.values(overlayByMode))$(id).classList.add('hidden');
+ const overlay=overlayByMode[state.mode];
  if(overlay)$(overlay).classList.remove('hidden');
  $('pause-btn').disabled=state.mode!=='playing';
  if(state.mode==='dead')$('dead-reason').textContent=state.lastDamage||'The Fox got the better of Cinnamon. For now.';
  if(state.mode==='victory'){$('victory-score').textContent=`${state.shakeCount} Shamrock Shakes found • ${state.secretCount} golden secrets discovered`;save()}
+ const defaultFocus={title:'start-btn',pause:'resume-btn',dead:'retry-btn',victory:'replay-btn'}[state.mode];
+ if(defaultFocus)$(defaultFocus).focus({preventScroll:true});
+ else if(state.mode==='playing')canvas.focus({preventScroll:true});
 }
-const held=new Set(),queued=new Set(),pointerActs=new Map();
+const held=new Set(),queued=new Set(),pointerActs=new Map(),keyActs=new Map();
+function updateHeld(action){
+ const active=[...keyActs.values()].includes(action)||[...pointerActs.values()].includes(action);
+ if(active)held.add(action);else held.delete(action);
+}
+
 function actionForKey(code){return ({ArrowLeft:'left',KeyA:'left',ArrowRight:'right',KeyD:'right',Space:'jump',ArrowUp:'jump',KeyW:'jump',KeyJ:'swish',KeyX:'swish',ShiftLeft:'dash',ShiftRight:'dash',KeyK:'dash'})[code]}
-function clearInputs(){held.clear();queued.clear();pointerActs.clear();document.querySelectorAll('.touch').forEach(b=>b.classList.remove('held'))}
+function clearInputs(){held.clear();queued.clear();pointerActs.clear();keyActs.clear();document.querySelectorAll('.touch').forEach(b=>b.classList.remove('held'))}
+function isEditingFocus(){
+ const element=document.activeElement;
+ return Boolean(element?.closest?.('input,textarea,select,[contenteditable="true"]'));
+}
+function handleModalTab(e){
+ if(e.code!=='Tab')return false;
+ const overlayId=overlayByMode[state.mode];
+ if(!overlayId)return false;
+ const panel=$(overlayId);
+ const focusables=[...panel.querySelectorAll('button:not(:disabled):not([hidden]),input:not(:disabled)')]
+  .filter(element=>element.getClientRects().length>0);
+ if(!focusables.length)return false;
+ const first=focusables[0],last=focusables[focusables.length-1],active=document.activeElement;
+ if(!panel.contains(active)||e.shiftKey&&active===first||!e.shiftKey&&active===last){
+  e.preventDefault();(e.shiftKey?last:first).focus({preventScroll:true});return true;
+ }
+ return false;
+}
 window.addEventListener('keydown',e=>{
- if(e.code==='Escape'||e.code==='KeyP'){if(state.mode==='playing'||state.mode==='pause'){e.preventDefault();togglePause()}return}
- if(e.code==='KeyM'){audio.mute(!state.settings.mute);state.settings.mute=!state.settings.mute;updateMute();save();return}
- if(e.code==='KeyR'&&state.mode==='dead'){retry();return}
- if(e.code==='Enter'&&state.mode==='title'&&document.activeElement!==$('start-btn')){start();e.preventDefault();return}
- const act=actionForKey(e.code);if(!act)return;
- if(state.mode==='playing'){e.preventDefault();if(!held.has(act))queued.add(act);held.add(act)}
+ if(handleModalTab(e))return;
+ if(e.code==='Escape'||e.code==='KeyP'){
+  if(state.mode==='playing'||state.mode==='pause'){
+   e.preventDefault();if(!e.repeat&&(e.code==='Escape'||!isEditingFocus()))togglePause();
+  }
+  return;
+ }
+ if(isEditingFocus())return;
+ if(e.code==='KeyM'){
+  e.preventDefault();
+  if(e.repeat)return;
+  audio.mute(!state.settings.mute);state.settings.mute=!state.settings.mute;updateMute();save();
+  return;
+ }
+ if(e.code==='KeyR'&&state.mode==='dead'){
+  e.preventDefault();if(!e.repeat)retry();return;
+ }
+ if(e.code==='Enter'&&state.mode==='title'){
+  const focus=document.activeElement;
+  if(!focus?.closest?.('button,a,input,select,textarea')){start();e.preventDefault()}
+  // Otherwise keep native button activation (especially saved-checkpoint Continue).
+  return;
+ }
+ const focusedTouch=document.activeElement?.closest?.('.touch');
+ const touchingControl=state.mode==='playing'&&focusedTouch&&['Space','Enter'].includes(e.code);
+ if(touchingControl){
+  e.preventDefault();
+  const act=focusedTouch.dataset.action;
+  if(!keyActs.has(e.code)){
+   if(!held.has(act))queued.add(act);
+   keyActs.set(e.code,act);updateHeld(act);
+  }
+  return;
+ }
+ const act=actionForKey(e.code);
+ if(!act||state.mode!=='playing')return;
+ // Space on a real button must activate that button, not jump the character.
+ if(e.code==='Space'&&document.activeElement?.closest?.('button'))return;
+ e.preventDefault();
+ if(!keyActs.has(e.code)){
+  if(!held.has(act))queued.add(act);
+  keyActs.set(e.code,act);updateHeld(act);
+ }
 });
-window.addEventListener('keyup',e=>{const act=actionForKey(e.code);if(act){held.delete(act);e.preventDefault()}});
+window.addEventListener('keyup',e=>{
+ const act=keyActs.get(e.code);
+ if(!act)return;
+ keyActs.delete(e.code);updateHeld(act);e.preventDefault();
+});
 window.addEventListener('blur',()=>{clearInputs();if(state.mode==='playing')togglePause()});
+window.addEventListener('pagehide',()=>audio.dispose());
 document.addEventListener('visibilitychange',()=>{if(document.hidden){clearInputs();if(state.mode==='playing')togglePause()}lastStamp=0;accumulator=0});
 for(const button of document.querySelectorAll('.touch')){
  const action=button.dataset.action;
- button.addEventListener('pointerdown',e=>{if(state.mode!=='playing')return;e.preventDefault();audio.activate();pointerActs.set(e.pointerId,action);button.setPointerCapture(e.pointerId);button.classList.add('held');if(!held.has(action))queued.add(action);held.add(action)});
- function endPointer(e){const prev=pointerActs.get(e.pointerId);pointerActs.delete(e.pointerId);if(prev!==action)return;
-  if(![...pointerActs.values()].includes(action))held.delete(action);button.classList.remove('held')}
+ button.addEventListener('pointerdown',e=>{
+  if(state.mode!=='playing')return;
+  e.preventDefault();audio.activate();
+  if(!held.has(action))queued.add(action);
+  pointerActs.set(e.pointerId,action);
+  button.setPointerCapture(e.pointerId);
+  button.classList.add('held');
+  updateHeld(action);
+ });
+ function endPointer(e){
+  const prev=pointerActs.get(e.pointerId);pointerActs.delete(e.pointerId);
+  if(prev!==action)return;
+  updateHeld(action);
+  button.classList.toggle('held',[...pointerActs.values()].includes(action));
+ }
  button.addEventListener('pointerup',endPointer);button.addEventListener('pointercancel',endPointer);button.addEventListener('lostpointercapture',endPointer);
 }
-function newRound(){state=newGame(state.settings);state.assetCount=assetCount;lastEventSerial=0;displayedMode='';clearInputs();lastStamp=0;accumulator=0;audio.beat=0;audio.nextBeat=0;startGame(state);audio.activate();showMode();canvas.focus({preventScroll:true});}
+function newRound(){
+ state=newGame(state.settings);state.assetCount=assetCount;
+ lastEventSerial=0;lastSavedCheckpoint=0;displayedMode='';
+ clearInputs();lastStamp=0;accumulator=0;audio.resetSequence();audio.setPaused(false);
+ saved.progress=null;
+ startGame(state);save();audio.activate();showMode();canvas.focus({preventScroll:true});
+}
+function continueRound(){
+ const record=resumableRecord();
+ if(!record)return;
+ const resumed=newGame(state.settings);
+ if(!restoreCheckpoint(resumed,record))return;
+ state=resumed;state.assetCount=assetCount;
+ lastEventSerial=0;lastSavedCheckpoint=state.checkpoint;displayedMode='';
+ clearInputs();lastStamp=0;accumulator=0;audio.resetSequence();audio.setPaused(false);
+ audio.activate();showMode();canvas.focus({preventScroll:true});
+}
 function start(){newRound()}
 function retry(){clearInputs();if(state.mode==='victory'){newRound();return}resetToCheckpoint(state);displayedMode='';showMode();canvas.focus({preventScroll:true});}
-function togglePause(){pauseGame(state);clearInputs();displayedMode='';showMode();lastStamp=0;accumulator=0;save()}
+function togglePause(){pauseGame(state);clearInputs();audio.setPaused(state.mode!=='playing');displayedMode='';showMode();lastStamp=0;accumulator=0;save()}
 function updateMute(){$('mute-btn').textContent=state.settings.mute?'♫ MUTED':'♪ SOUND';$('mute-btn').setAttribute('aria-pressed',String(state.settings.mute));}
-$('start-btn').addEventListener('click',start);$('resume-btn').addEventListener('click',togglePause);
+$('start-btn').addEventListener('click',start);
+$('continue-btn').addEventListener('click',continueRound);
+$('resume-btn').addEventListener('click',togglePause);
 $('retry-btn').addEventListener('click',retry);$('pause-retry-btn').addEventListener('click',retry);
 $('replay-btn').addEventListener('click',newRound);$('pause-btn').addEventListener('click',togglePause);
 $('mute-btn').addEventListener('click',()=>{state.settings.mute=!state.settings.mute;audio.mute(state.settings.mute);audio.activate();updateMute();save()});
-$('assist-check').checked=state.settings.assist;$('motion-check').checked=state.settings.reducedMotion;
+$('assist-check').checked=state.settings.assist;$('motion-check').checked=state.settings.reducedMotion;$('contrast-check').checked=Boolean(state.settings.contrast);
+function updateContrast(){document.body.classList.toggle('high-contrast',Boolean(state.settings.contrast))}
+updateContrast();
 $('assist-check').addEventListener('change',e=>{state.settings.assist=e.target.checked;save()});
 $('motion-check').addEventListener('change',e=>{state.settings.reducedMotion=e.target.checked;save()});
-updateMute();
-async function loadAssets(){try{const response=await fetch('assets/sprites/cinnamon/frames.json');if(!response.ok)throw Error(`manifest ${response.status}`);
- const manifest=await response.json();if(!manifest.frames)throw Error('no frames');
- const entries=Object.entries(manifest.frames);const loaded=await Promise.all(entries.map(async([id,item])=>{
-  const url=item.file;const img=new Image();return new Promise(resolve=>{img.onload=()=>resolve([id,img]);img.onerror=()=>{assetErrors.push(id);resolve(null)};img.src=url;});
- }));sprites=Object.fromEntries(loaded.filter(Boolean));assetCount=Object.keys(sprites).length;state.assetCount=assetCount;
- if(assetErrors.length)$('load-status').textContent=`${assetErrors.length} missing sprites; fallback artwork in use.`;
- else $('load-status').textContent=`${assetCount} authentic Cinnamon poses ready.`;
- }catch(error){assetErrors.push('manifest');$('load-status').textContent='Sprite source unavailable. Temporary in-game fallback shown.'}
+$('contrast-check').addEventListener('change',e=>{state.settings.contrast=e.target.checked;updateContrast();save()});
+updateMute();showContinue();
+async function loadAssets(){
+ try{
+  const response=await fetch('assets/sprites/cinnamon/frames.json',{cache:'no-store'});
+  if(!response.ok)throw Error('manifest HTTP '+response.status);
+  const manifest=await response.json();
+  if(!manifest.frames)throw Error('Missing frames');
+  // run_03 is a preserved but clipped reference cut-out. Never load it into active playback.
+  const entries=Object.entries(manifest.frames).filter(([id])=>id!=='run_03');
+  let next=0;const loaded=new Array(entries.length);
+  async function fetchImage(src){
+   return new Promise(resolve=>{
+    const image=new Image();
+    image.onload=()=>resolve(image);
+    image.onerror=()=>resolve(null);
+    image.src=src;
+   });
+  }
+  async function worker(){
+   while(next<entries.length){
+    const index=next++, [id,item]=entries[index];
+    let image=await fetchImage(item.file);
+    if(!image)image=await fetchImage(item.file+'?retry=1');
+    if(image)loaded[index]=[id,image];
+    else assetErrors.push(id);
+   }
+  }
+  await Promise.all(Array.from({length:4},worker));
+  sprites=Object.fromEntries(loaded.filter(Boolean));assetCount=Object.keys(sprites).length;
+  state.assetCount=assetCount;
+  spriteStatus=assetErrors.length
+   ?assetErrors.length+' usable pose loads failed; procedural fallback remains active.'
+   :assetCount+' playable Cinnamon poses ready (1 clipped source archived).';
+  showAssetStatus();
+ }catch(error){
+  assetErrors.push('manifest');
+  spriteStatus='Sprite source unavailable. Temporary in-game fallback shown.';
+  showAssetStatus();
+ }
 }
 function hud(){const p=state.player;
  $('hud-health').textContent='♥ '.repeat(Math.ceil(p.hp)).trim()||'♡';
@@ -70,13 +258,22 @@ function hud(){const p=state.player;
  const next=state.status;if(next!==lastStatus){$('status-text').textContent=next;lastStatus=next}
 }
 let accumulator=0,lastStamp=0,lastHUD=0;
+const frameTimings=[];
+function percentile(values,p){
+ if(!values.length)return null;
+ const sorted=[...values].sort((a,b)=>a-b);return Number(sorted[Math.floor((sorted.length-1)*p)].toFixed(2));
+}
+function metrics(){return {frames:frameTimings.length,frameMsP95:percentile(frameTimings.map(x=>x.frame),.95),
+ renderMsP95:percentile(frameTimings.map(x=>x.render),.95),devicePixelRatio:Math.min(window.devicePixelRatio||1,2)};}
 function animate(ms){requestAnimationFrame(animate);
+ const actualFrameMs=lastStamp?Math.max(0,ms-lastStamp):0;
  if(!lastStamp)lastStamp=ms;const dt=Math.min(.10,Math.max(0,(ms-lastStamp)/1000));lastStamp=ms;
  if(state.mode==='playing'){
   accumulator=Math.min(.15,accumulator+dt);let count=0;
   while(accumulator>=DT&&count<6){const input={left:held.has('left'),right:held.has('right'),jumpHeld:held.has('jump'),
     jumpPressed:queued.has('jump'),dashPressed:queued.has('dash'),swishPressed:queued.has('swish')};
-   queued.clear();update(state,input,DT);accumulator-=DT;count++;if(state.mode!=='playing')break;
+   queued.clear();update(state,input,DT);saveCheckpointIfNew();
+   accumulator-=DT;count++;if(state.mode!=='playing')break;
   }
   audio.musicTick(ms/1000,state.boss.triggered);
   // Events have monotonic IDs because the rolling 35-event history shifts.
@@ -84,18 +281,37 @@ function animate(ms){requestAnimationFrame(animate);
   for(const ev of state.events){if(ev.serial>lastEventSerial){audio.event(ev.type);lastEventSerial=ev.serial}}
  }else{accumulator=0}
  if(state.mode==='victory')state.elapsed+=dt;
- render(ctx,state,sprites,accumulator/DT);
+ const drawStart=performance.now();
+ render(ctx,state,sprites,accumulator/DT,productionArt);
+ if(actualFrameMs>0){frameTimings.push({frame:actualFrameMs,render:performance.now()-drawStart});
+  if(frameTimings.length>240)frameTimings.shift()}
  if(ms-lastHUD>110){hud();lastHUD=ms}
  showMode();
 }
 // Fixed logical camera, capped pixel-density: CSS handles responsiveness and letterboxing.
 function onResize(){const dpr=Math.min(window.devicePixelRatio||1,2);canvas.width=Math.round(VIEW.width*dpr);canvas.height=Math.round(VIEW.height*dpr);ctx.setTransform(dpr,0,0,dpr,0,0)}
 window.addEventListener('resize',onResize,{passive:true});onResize();
-loadAssets();showMode();requestAnimationFrame(animate);
-window.__SHAKEDOWN_QA={snapshot:()=>snapshot(state),assets:()=>({loaded:assetCount,failed:[...assetErrors]}),
+loadAssets();
+const params=new URLSearchParams(location.search);
+const previewId=(location.hostname==='localhost'||location.hostname==='127.0.0.1')
+  ?params.get('preview-art'):null;
+if(previewId){productionStatus='LOCAL ART PREVIEW ONLY: '+previewId+' (NOT production activated)';showAssetStatus();}
+ loadApprovedArt({previewUnverifiedId:previewId}).then(({images,errors,approved})=>{
+  productionArt=images;productionLoaded=Object.keys(images).length;
+  productionDeclared=approved;productionErrors=errors;
+  if(previewId){
+   productionStatus='LOCAL ART PREVIEW: '+previewId+' '+(productionArt[previewId]?'candidate loaded; NOT production activated':'unavailable; NOT production activated');
+  } else if(productionLoaded>0){
+   productionStatus=productionLoaded+' verified integrated artwork elements ready.';
+  }
+  showAssetStatus();
+ }).catch(error=>{productionErrors=['loader: '+error.message];showAssetStatus()});
+ showMode();requestAnimationFrame(animate);
+window.__SHAKEDOWN_QA={snapshot:()=>snapshot(state),metrics,audio:()=>audio.diagnostics(),assets:()=>({loaded:assetCount,failed:[...assetErrors],productionLoaded,productionDeclared,productionErrors:[...productionErrors]}),
  // Developer-only deterministic test aids; excluded from normal gameplay and production paths.
  ...(new URLSearchParams(location.search).has('qa')?{
   warp:(x,y)=>{state.player.x=x;state.player.y=y;state.player.prevX=x;state.player.prevY=y;state.player.vx=0;state.player.vy=0;state.camera.x=Math.max(0,x-450);state.camera.y=Math.min(0,y-260);},
   setBossRecovery:()=>{state.boss.triggered=true;state.boss.mode='rest';state.boss.timer=999;state.boss.hurtTime=0;},
   inspectState:()=>state
  }:{})};
+window.__SHAKEDOWN_BOOT_READY?.();
