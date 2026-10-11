@@ -1,0 +1,16 @@
+{
+ "schema_version": 1,
+ "note": "Human identity/visual signoff decisions. Only a recorded decision here lets a byte-verified asset leave provisional status. Machine checks cannot approve art.",
+ "decisions": {
+  "FOX-01": {
+   "decision": "APPROVED",
+   "date": "2026-10-11",
+   "authority": "project owner signoff",
+   "revision_history": [
+    "Initial candidate: quadruped fox in a three-quarter animal posture.",
+    "Rejected direction: must be bipedal and must match Cinnamon's pixel density.",
+    "Revised candidate accepted: bipedal, style-matched chunky 16-bit pixel art, same outline weight and palette discipline as the Cinnamon source sheets, species separation preserved (no ringed tail, no eye mask, no glasses, no headband, no clothing except the purple scarf)."
+   ]
+  }
+ }
+}

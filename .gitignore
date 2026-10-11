@@ -7,13 +7,13 @@ coverage/
 .env.*
 !.env.example
 
-# Unapproved generated art and local test output
+# Preserve prep QA exclusions and Arena Python caches.
 .asset-staging/
 .prep_patch.py
 .prep_config.py
 playwright-report/
 test-results/
-
 .sprite_patch.py
-
 .docs_patch.py
+__pycache__/
+*.pyc
