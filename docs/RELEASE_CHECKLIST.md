@@ -70,3 +70,15 @@ Keep the last accepted commit and asset record immutable. On failure, repair via
 - [x] **Asset Studio:** separate Source/Reviewed (inactive)/Active states, actual status counts, local preview deep link, and explicit integration command template.
 - [ ] **Human and hardware:** a continuous player-performed run under real clock pacing, final art quality, original source provenance, real phone audio and touch controls.
 - [ ] **Release:** exact SHA deployment to GitHub Pages and live-site gameplay, after authorized merge. Keep main unchanged until release gates pass.
+
+
+## Round 4 — persistence, reduced motion, and keyboard usability
+
+- [x] Automated: earned birthday-completion flag survives replay and settings changes (reproduced failing before repair).
+- [x] Automated: checkpoint persists across reload with Continue; pickup/enemy IDs reconcile to level; fresh Start clears unfinished progress, not earned records.
+- [x] Automated: older or malformed checkpoint records do not crash, invent gameplay objects or show unusable Continue.
+- [x] Automated: both assisted and normal-difficulty continuous input routes write all five authored checkpoints and clear unfinished progress after victory.
+- [x] Automated: Reduced Motion freezes decorative pixels without changing simulation time or moving collision platforms; saved user choice overrides OS default.
+- [x] Automated: Tab-contained modal overlays, keyboard Enter on Continue, repeat-safe pause, native Space on sound button and keyboard-operated touch Jump.
+- [ ] Device/assistive tech: physical iPhone/Android, screen reader/switch control, audible sound, long-term localStorage behavior and normal-paced player run.
+- [ ] Deployment: exact merge SHA on GitHub Pages and complete hosted browser route only after explicit merge and release acceptance.

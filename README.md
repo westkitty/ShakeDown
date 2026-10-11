@@ -58,3 +58,14 @@ See docs/PRODUCTION_READINESS.md and docs/VALIDATION.md for exact evidence.
 ## Project and authority
 
 This is **westkitty/ShakeDown**. Cloud Chaser (`westkitty/c_chase`) was inspected strictly as a movement/UX reference and has not been modified. The Modern 2D Browser Game Architecture Toolkit v2.0 governs the static game architecture and evidence labels.
+
+
+## Save and resume the birthday chase
+
+ShakeDown saves **checkpoint progress locally in this browser** after each reached checkpoint. Returning to the title screen after a reload presents a **Continue from [checkpoint]** option. It restores the authored checkpoint position, previously collected Shamrock Shakes and defeated Cup Crawlers, and normal game physics. The Fox battle starts fresh from the summit checkpoint rather than preserving a half-finished attack.
+
+**Start the Shakedown** deliberately begins a new journey and clears the unfinished checkpoint. It does **not** erase an earned birthday completion, best shake record, mute preference or accessibility choices. Winning clears the no-longer-needed unfinished checkpoint while retaining the completion record. Progress is local to that browser profile; private browsing, manual site-data clearing, restricted storage and switching devices can prevent recovery. Malformed or outdated checkpoints are safely ignored.
+
+## Accessible controls
+
+Reduced Motion now changes the actual Canvas visuals: it reduces decorative animation, flashing, particle trails and invulnerability blinking without freezing gameplay physics, hazards or moving platforms. On first use it respects the operating system's reduced-motion setting; a player's explicit checkbox choice persists across reloads. Pause, loss, victory and title overlays have keyboard focus handling, Tab containment and Escape/pause-key recovery. Pressing Space on a focused button activates that button rather than unexpectedly jumping, and keyboard-accessible touch controls also trigger their labeled actions.

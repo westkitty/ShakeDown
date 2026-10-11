@@ -65,3 +65,38 @@ Operational State, the current user corrections, implementation plan and complet
 - Round 3 implementation and verification commit: 6c432d60a633143fe920c8ec61b8d9001d28b6ca.
 - Local BigMac baseline: npm run validate PASS 21/21; served-HTTP Brave Playwright PASS 29/29 executed, 3 intentional skips. The synthetic virtual-frame route, real mobile emulation and zero art approval boundaries remain intact.
 - This commit is on the existing preparation branch, not merged to main.
+
+
+## 2026-10-11 — Round 4: checkpoint-safe birthday completion, Reduced Motion and dialog controls
+
+### Authority and baseline
+- Repository: westkitty/ShakeDown, branch prep/asset-ready-20261011, starting at exact clean SHA b50d16c4d46c9ba90a49b3e2c0deb613c1993231.
+- Preserved: Canvas 2D state/render split, complete South Quad/Golden Dome 23-stage layout, existing Fox encounter, Shamrock Shake birthday finale, original 26 Cinnamon sprite sources, all 220 visual and 21 audio LM Arena generator requests, approved-art intake and activation gate.
+- Scope frozen to three cohesive groups: (1) save correctness/checkpoint Continue, (2) functional Reduced Motion, (3) keyboard/focus accessibility. No engine rewrite, dependency change, external generated art, or main-branch merge.
+
+### Reproduced defect and repair
+- Baseline browser test reproduced an earned birthday completed record flipping back to false after replay and mute change. Main saved a stale snapshot in memory and never updated it after a successful write. Fixed by maintaining current in-memory record and monotonic earned completion/best Shake fields, with no legacy schema break.
+- Reload previously discarded in-progress checkpoint progress entirely. Added optional versioned checkpoint records with authored IDs/validation, no arbitrary engine or browser DOM serialization. Continue restores collected shakes, secrets, defeated enemies, proper camera and legitimate checkpoint reset. A fresh Start clears unfinished checkpoint; victory clears it while retaining earned completion. Restricted storage still allows play without a durable guarantee.
+- Reduced Motion setting existed but did not alter the Canvas renderer. Decorative visual animation now uses a separate presentation time and disables nonessential particles/flashes while physical moving platforms, collision timing, Fox cues and player inputs stay authoritative.
+- Title Enter interception was confirmed to start fresh even when Continue was focused; fixed. Pause-key repeated keydown and globally stolen Space on focused buttons were corrected; dialogs now have focus containment and restore keyboard control to the canvas. Keyboard-operated mobile touch action buttons are supported.
+
+### Executed evidence and caveats
+- Original preparation baseline npm run validate passed 21/21.
+- New Node tests cover valid/invalid checkpoint records and re-derived collectible/secret counts.
+- Playwright desktop/mobile emulation tested completion persistence, Continue/reset, malformed saves, Reduced Motion pixel equality vs animated scene, OS preference override, Tab containment, Enter Continue, P-repeat, native Space on mute and keyboard touch Jump.
+- Both complete browser deterministic scripted assisted and normal routes observed all five authored checkpoint writes in localStorage, natural Fox victory and no pending checkpoint after completion. Scripted rAF routes are not human-paced play.
+- Final full-suite validation and exact remote GitHub PR CI outcomes must be recorded after execution.
+- No physical device or speaker tests, final LM Arena assets, human-paced completion or production Pages branch deployment were proven.
+
+
+### Round 4 local verification and handoff
+
+- Baseline before edits: npm run validate 21/21 passed, clean working tree at b50d16c4d46c9ba90a49b3e2c0deb613c1993231.
+- New completed local checks: npm run validate 24/24 passed; 23/23 executed desktop-browser checks passed with 2 skips; 23/23 executed mobile-emulated browser checks passed with 2 skips. Total 46 browser passed, 4 deliberate skips.
+- Source art hashes checked by canonical content validator; no external generated visuals/audio, production dependencies, game level rewrites, renderer migration, or main-branch updates.
+- Safe delivery scope: source/renderer/progress, 3 new browser test modules, Node checkpoint tests, existing route-checkpoint integration tests, source HTML/CSS, approved docs and append-only operational state. Temporary local patch scripts are not delivery artifacts.
+- Implementation commit SHA and exact GitHub CI will be appended only after verified delivery; main remains unchanged until separate release decision.
+
+
+### Round 4 final checkpoint-safety verification extension
+Following the initial full sweep, the authored geometry safety check was extended to every checkpoint. The final Node suite is **25 passed, zero failures** after this additional test. All five checkpoint spawn points were exercised through actual game physics without QA warps or geometry edits. Existing local Playwright desktop and mobile-emulated results remain 23 passed each, two intentionally skipped per project. Remote same-SHA CI and production release evidence remain distinct gates.

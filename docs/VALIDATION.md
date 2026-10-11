@@ -74,3 +74,33 @@ Project: westkitty/ShakeDown; branch: prep/asset-ready-20261011; baseline: main@
 ### Round 3 delivery receipt
 - GitHub implementation commit 6c432d60a633143fe920c8ec61b8d9001d28b6ca on branch prep/asset-ready-20261011.
 - Local evidence already recorded above; GitHub exact-SHA workflows were queued when this receipt was appended. Their final status must be verified separately.
+
+
+## 2026-10-11 — Round 4 candidate: durable records, visible motion preference, and keyboard access
+
+Baseline: clean clone from unmerged preparation PR #1 at b50d16c4d46c9ba90a49b3e2c0deb613c1993231. Baseline npm run validate passed 21/21. No external final art was imported. Existing Canvas 2D, game world, Fox encounter, source sprites and 220-image/21-audio contract are unchanged.
+
+**Confirmed before repair:** a real Playwright regression test won the game, replayed and changed mute; saved completed erroneously flipped from true to false. The in-memory saved.completed was stale. The targeted test failed before repair and passed after; this is a reproduced data integrity bug.
+
+**Checkpoint durability:** versioned bounded checkpoints serialize real world object IDs, not mutable engine objects. Node tests reject unknown, repeated or outdated records and re-derive collected/secret counts. Real served-HTTP browser tests cover Start/Continue, reload recovery and invalid/legacy save fallback on desktop/mobile emulation. Both complete scripted gameplay routes (assisted and normal difficulty) separately verified 5/5 checkpoint writes as the player physically crossed the authored level and that final victory clears unfinished progress.
+
+**Reduced Motion:** pixel comparison of the same rendered scene at two simulated elapsed times demonstrates decorative visuals remain unchanged in reduced mode and change in normal mode. Moving platform rendering still uses true simulation time; collision and gameplay do not pause. OS media preference initializes the setting only if no explicit user choice has been saved.
+
+**Keyboard/dialog:** browser tests exercise focus containment inside modal overlays, correct Enter activation of focused Continue, P auto-repeat suppression, native Space activation on focused sound button without jumping, keyboard-operated touch Jump, and Escape focus restoration.
+
+Evidence boundaries: these are local served-HTTP tests in Chromium-compatible Brave on BigMac. The full-route tests use virtualized requestAnimationFrame timing, not human-paced movement or verified real-time FPS. No physical phone, speaker, screen reader, final generated art or hosted preparation-branch deployment has been verified.
+
+
+### Round 4 final executed local validation receipt
+
+- Original baseline: npm run validate **21 passed** on starting SHA b50d16c4d46c9ba90a49b3e2c0deb613c1993231.
+- Final BigMac npm run validate: **24/24 passed, 0 failures** (new persistence-record tests included).
+- Final BigMac installed Brave / Playwright desktop Chromium: **23 passed, 2 deliberate skips, 0 failures**, using localhost HTTP.
+- Final BigMac installed Brave / Playwright Pixel-7 mobile emulation: **23 passed, 2 deliberate skips, 0 failures**, using localhost HTTP.
+- Total browser executed tests **46 passed, 4 deliberate skips**, zero failures. Compared with prior 29 passed and 3 skips. The desktop and mobile configurations ran separately, each with two Playwright workers; the normal and assisted full routes remained browser-executed under a synthetic rAF clock.
+- The original failing completion-reset reproduction, normal checkpoint save-from-gameplay, resumed collected/defeated state, OS reduced-motion preference, 2-timestamp Canvas pixel invariance, modal focus behavior, keyboard shortcut repeat guards and touch-keyboard activation all passed.
+- GitHub exact-SHA CI and any user-facing remote release remain pending this local receipt. No final generated art or device proof was invented.
+
+
+### Final checkpoint geometry extension — latest local status
+A fourth independent progress unit test exercised **all five** authored checkpoint positions after restoring the new versioned record. Each remained in playing mode, landed on supporting geometry, retained positive health, and preserved the correct checkpoint index over 55 real fixed-step updates. Following that addition, the **latest full npm run validate passed 25/25 Node checks**, zero failures. Desktop Brave and Pixel-7-emulated Playwright results remain 23/23 executed each (46 total), with four deliberate skips across both projects.

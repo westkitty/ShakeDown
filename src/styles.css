@@ -13,3 +13,7 @@ button.primary{display:block;width:100%;border:0;background:linear-gradient(180d
 @media(pointer:fine) and (min-width:800px){.touch-controls{display:none}}@media(max-width:630px){.game-shell{padding:10px}.mast{margin-bottom:7px}.mast h1{font-size:38px}.tag{font-size:9px}.eyebrow{font-size:8px}.game-frame{border-width:3px}.hud{left:4px;right:4px;top:3px;gap:2px;font-size:9px}.hud span{border-width:1px;padding:2px 4px}.status-row{min-height:37px;padding:5px 7px;gap:8px;font-size:10px}.status-row .quiet{font-size:9px;padding:4px}.touch-controls{margin-top:10px}.touch{min-height:60px;min-width:56px}.touch-left,.touch-right{gap:5px}.touch-dash,.touch-swish{min-width:54px}.touch-jump{min-width:68px;font-size:13px}.controls-note{font-size:10px}.controls-note .note-side{display:none}.dialog{padding:12px}.dialog p{font-size:11px}.dialog h2{font-size:clamp(17px,5vw,27px)}.dialog button.primary{padding:8px 9px}.dialog .small{display:none}.dialog.ending{width:92%;left:4%;bottom:4%;transform:none}}
 @media(max-width:360px){.touch{min-width:48px;font-size:17px}.touch-jump{min-width:60px}.touch-dash,.touch-swish{min-width:47px;font-size:10px}.mast-side .tag{display:none}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+
+/* A saved checkpoint is optional; hidden controls must stay absent when no save exists. */
+#continue-btn[hidden],#continue-note[hidden]{display:none}
+.continue-caption{display:block;margin-top:7px;font-size:12px;color:#d9eddf;font-weight:750}

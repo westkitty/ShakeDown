@@ -3,12 +3,30 @@ import {VIEW,WORLD} from './game/world.mjs';
 import {render} from './game/render.mjs';
 import {AudioBox} from './game/audio.mjs';
 import {loadApprovedArt} from './game/production-assets.mjs';
+import {checkpointRecord,validCheckpointRecord,restoreCheckpoint} from './game/progress.mjs';
 const $=id=>document.getElementById(id);
 const canvas=$('game'),ctx=canvas.getContext('2d',{alpha:false});
 if(!ctx){$('load-status').textContent='Canvas rendering is unavailable on this browser.';throw Error('Canvas 2D required')}
 const saveKey='shakedown:birthday:v1';
-function readSave(){try{const value=JSON.parse(localStorage.getItem(saveKey)||'null');return value?.schema===1?value:{schema:1}}catch{return {schema:1}}}
-let saved=readSave(),state=newGame(saved.settings||{}),sprites={},assetCount=0,assetErrors=[];
+function readSave(){
+ try{const value=JSON.parse(localStorage.getItem(saveKey)||'null');
+  return value?.schema===1&&typeof value==='object'?value:{schema:1};
+ }catch{return {schema:1}}
+}
+let saved=readSave();
+const initialSettings={...saved.settings};
+if(typeof initialSettings.reducedMotion!=='boolean'){
+ initialSettings.reducedMotion=window.matchMedia?.('(prefers-reduced-motion: reduce)').matches||false;
+}
+let state=newGame(initialSettings),sprites={},assetCount=0,assetErrors=[];
+let lastSavedCheckpoint=0;
+function resumableRecord(){return validCheckpointRecord(saved.progress,state.level)?saved.progress:null}
+function showContinue(){
+ const record=resumableRecord(),button=$('continue-btn'),note=$('continue-note');
+ button.hidden=!record;note.hidden=!record;
+ if(record){button.textContent='CONTINUE FROM '+record.checkpointId.toUpperCase();
+  note.textContent='Saved at '+record.checkpointId+' — start fresh or continue.';}
+}
 const audio=new AudioBox();audio.mute(state.settings.mute);
 let productionArt={},productionLoaded=0,productionDeclared=0,productionErrors=[];
 let spriteStatus='Loading Cinnamon poses…',productionStatus='';
@@ -16,14 +34,34 @@ function showAssetStatus(){
  $('load-status').textContent=[spriteStatus,productionStatus].filter(Boolean).join(' · ');
 }
 let lastStatus='',lastEventSerial=0,displayedMode='';
-function save(){try{localStorage.setItem(saveKey,JSON.stringify({schema:1,settings:state.settings,completed:saved.completed||state.mode==='victory',bestShakes:Math.max(saved.bestShakes||0,state.shakeCount)}))}catch{/* Restricted storage: game still playable. */}}
-function showMode(){if(displayedMode===state.mode)return;displayedMode=state.mode;
- for(const id of ['title-overlay','pause-overlay','dead-overlay','victory-overlay'])$(id).classList.add('hidden');
- const overlay={title:'title-overlay',pause:'pause-overlay',dead:'dead-overlay',victory:'victory-overlay'}[state.mode];
+function save(){
+ const previousBest=Number.isFinite(saved.bestShakes)?Math.max(0,saved.bestShakes):0;
+ saved={schema:1,settings:{...state.settings},
+  completed:saved.completed===true||state.mode==='victory',
+  bestShakes:Math.max(previousBest,state.shakeCount),
+  progress:state.mode==='victory'?null:(saved.progress||null)};
+ try{localStorage.setItem(saveKey,JSON.stringify(saved))}
+ catch{/* Restricted storage: gameplay still works, even if progress cannot persist. */}
+}
+function saveCheckpointIfNew(){
+ if(state.mode!=='playing'||state.checkpoint<=lastSavedCheckpoint)return;
+ const candidate=checkpointRecord(state);
+ if(!candidate)return;
+ lastSavedCheckpoint=state.checkpoint;saved.progress=candidate;save();
+}
+const overlayByMode={title:'title-overlay',pause:'pause-overlay',dead:'dead-overlay',victory:'victory-overlay'};
+function showMode(){
+ if(displayedMode===state.mode)return;
+ displayedMode=state.mode;
+ for(const id of Object.values(overlayByMode))$(id).classList.add('hidden');
+ const overlay=overlayByMode[state.mode];
  if(overlay)$(overlay).classList.remove('hidden');
  $('pause-btn').disabled=state.mode!=='playing';
  if(state.mode==='dead')$('dead-reason').textContent=state.lastDamage||'The Fox got the better of Cinnamon. For now.';
  if(state.mode==='victory'){$('victory-score').textContent=`${state.shakeCount} Shamrock Shakes found • ${state.secretCount} golden secrets discovered`;save()}
+ const defaultFocus={title:'start-btn',pause:'resume-btn',dead:'retry-btn',victory:'replay-btn'}[state.mode];
+ if(defaultFocus)$(defaultFocus).focus({preventScroll:true});
+ else if(state.mode==='playing')canvas.focus({preventScroll:true});
 }
 const held=new Set(),queued=new Set(),pointerActs=new Map(),keyActs=new Map();
 function updateHeld(action){
@@ -33,24 +71,73 @@ function updateHeld(action){
 
 function actionForKey(code){return ({ArrowLeft:'left',KeyA:'left',ArrowRight:'right',KeyD:'right',Space:'jump',ArrowUp:'jump',KeyW:'jump',KeyJ:'swish',KeyX:'swish',ShiftLeft:'dash',ShiftRight:'dash',KeyK:'dash'})[code]}
 function clearInputs(){held.clear();queued.clear();pointerActs.clear();keyActs.clear();document.querySelectorAll('.touch').forEach(b=>b.classList.remove('held'))}
+function isEditingFocus(){
+ const element=document.activeElement;
+ return Boolean(element?.closest?.('input,textarea,select,[contenteditable="true"]'));
+}
+function handleModalTab(e){
+ if(e.code!=='Tab')return false;
+ const overlayId=overlayByMode[state.mode];
+ if(!overlayId)return false;
+ const panel=$(overlayId);
+ const focusables=[...panel.querySelectorAll('button:not(:disabled):not([hidden]),input:not(:disabled)')]
+  .filter(element=>element.getClientRects().length>0);
+ if(!focusables.length)return false;
+ const first=focusables[0],last=focusables[focusables.length-1],active=document.activeElement;
+ if(!panel.contains(active)||e.shiftKey&&active===first||!e.shiftKey&&active===last){
+  e.preventDefault();(e.shiftKey?last:first).focus({preventScroll:true});return true;
+ }
+ return false;
+}
 window.addEventListener('keydown',e=>{
- if(e.code==='Escape'||e.code==='KeyP'){if(state.mode==='playing'||state.mode==='pause'){e.preventDefault();togglePause()}return}
- if(e.code==='KeyM'){audio.mute(!state.settings.mute);state.settings.mute=!state.settings.mute;updateMute();save();return}
- if(e.code==='KeyR'&&state.mode==='dead'){retry();return}
- if(e.code==='Enter'&&state.mode==='title'&&document.activeElement!==$('start-btn')){start();e.preventDefault();return}
- const act=actionForKey(e.code);if(!act)return;
- if(state.mode==='playing'){
+ if(handleModalTab(e))return;
+ if(e.code==='Escape'||e.code==='KeyP'){
+  if(state.mode==='playing'||state.mode==='pause'){
+   e.preventDefault();if(!e.repeat&&(e.code==='Escape'||!isEditingFocus()))togglePause();
+  }
+  return;
+ }
+ if(isEditingFocus())return;
+ if(e.code==='KeyM'){
   e.preventDefault();
+  if(e.repeat)return;
+  audio.mute(!state.settings.mute);state.settings.mute=!state.settings.mute;updateMute();save();
+  return;
+ }
+ if(e.code==='KeyR'&&state.mode==='dead'){
+  e.preventDefault();if(!e.repeat)retry();return;
+ }
+ if(e.code==='Enter'&&state.mode==='title'){
+  const focus=document.activeElement;
+  if(!focus?.closest?.('button,a,input,select,textarea')){start();e.preventDefault()}
+  // Otherwise keep native button activation (especially saved-checkpoint Continue).
+  return;
+ }
+ const focusedTouch=document.activeElement?.closest?.('.touch');
+ const touchingControl=state.mode==='playing'&&focusedTouch&&['Space','Enter'].includes(e.code);
+ if(touchingControl){
+  e.preventDefault();
+  const act=focusedTouch.dataset.action;
   if(!keyActs.has(e.code)){
    if(!held.has(act))queued.add(act);
-   keyActs.set(e.code,act);
-   updateHeld(act);
+   keyActs.set(e.code,act);updateHeld(act);
   }
+  return;
+ }
+ const act=actionForKey(e.code);
+ if(!act||state.mode!=='playing')return;
+ // Space on a real button must activate that button, not jump the character.
+ if(e.code==='Space'&&document.activeElement?.closest?.('button'))return;
+ e.preventDefault();
+ if(!keyActs.has(e.code)){
+  if(!held.has(act))queued.add(act);
+  keyActs.set(e.code,act);updateHeld(act);
  }
 });
 window.addEventListener('keyup',e=>{
- const act=actionForKey(e.code);
- if(act){keyActs.delete(e.code);updateHeld(act);e.preventDefault()}
+ const act=keyActs.get(e.code);
+ if(!act)return;
+ keyActs.delete(e.code);updateHeld(act);e.preventDefault();
 });
 window.addEventListener('blur',()=>{clearInputs();if(state.mode==='playing')togglePause()});
 document.addEventListener('visibilitychange',()=>{if(document.hidden){clearInputs();if(state.mode==='playing')togglePause()}lastStamp=0;accumulator=0});
@@ -73,19 +160,37 @@ for(const button of document.querySelectorAll('.touch')){
  }
  button.addEventListener('pointerup',endPointer);button.addEventListener('pointercancel',endPointer);button.addEventListener('lostpointercapture',endPointer);
 }
-function newRound(){state=newGame(state.settings);state.assetCount=assetCount;lastEventSerial=0;displayedMode='';clearInputs();lastStamp=0;accumulator=0;audio.beat=0;audio.nextBeat=0;startGame(state);audio.activate();showMode();canvas.focus({preventScroll:true});}
+function newRound(){
+ state=newGame(state.settings);state.assetCount=assetCount;
+ lastEventSerial=0;lastSavedCheckpoint=0;displayedMode='';
+ clearInputs();lastStamp=0;accumulator=0;audio.beat=0;audio.nextBeat=0;
+ saved.progress=null;
+ startGame(state);save();audio.activate();showMode();canvas.focus({preventScroll:true});
+}
+function continueRound(){
+ const record=resumableRecord();
+ if(!record)return;
+ const resumed=newGame(state.settings);
+ if(!restoreCheckpoint(resumed,record))return;
+ state=resumed;state.assetCount=assetCount;
+ lastEventSerial=0;lastSavedCheckpoint=state.checkpoint;displayedMode='';
+ clearInputs();lastStamp=0;accumulator=0;audio.beat=0;audio.nextBeat=0;
+ audio.activate();showMode();canvas.focus({preventScroll:true});
+}
 function start(){newRound()}
 function retry(){clearInputs();if(state.mode==='victory'){newRound();return}resetToCheckpoint(state);displayedMode='';showMode();canvas.focus({preventScroll:true});}
 function togglePause(){pauseGame(state);clearInputs();displayedMode='';showMode();lastStamp=0;accumulator=0;save()}
 function updateMute(){$('mute-btn').textContent=state.settings.mute?'♫ MUTED':'♪ SOUND';$('mute-btn').setAttribute('aria-pressed',String(state.settings.mute));}
-$('start-btn').addEventListener('click',start);$('resume-btn').addEventListener('click',togglePause);
+$('start-btn').addEventListener('click',start);
+$('continue-btn').addEventListener('click',continueRound);
+$('resume-btn').addEventListener('click',togglePause);
 $('retry-btn').addEventListener('click',retry);$('pause-retry-btn').addEventListener('click',retry);
 $('replay-btn').addEventListener('click',newRound);$('pause-btn').addEventListener('click',togglePause);
 $('mute-btn').addEventListener('click',()=>{state.settings.mute=!state.settings.mute;audio.mute(state.settings.mute);audio.activate();updateMute();save()});
 $('assist-check').checked=state.settings.assist;$('motion-check').checked=state.settings.reducedMotion;
 $('assist-check').addEventListener('change',e=>{state.settings.assist=e.target.checked;save()});
 $('motion-check').addEventListener('change',e=>{state.settings.reducedMotion=e.target.checked;save()});
-updateMute();
+updateMute();showContinue();
 async function loadAssets(){
  try{
   const response=await fetch('assets/sprites/cinnamon/frames.json',{cache:'no-store'});
@@ -147,7 +252,8 @@ function animate(ms){requestAnimationFrame(animate);
   accumulator=Math.min(.15,accumulator+dt);let count=0;
   while(accumulator>=DT&&count<6){const input={left:held.has('left'),right:held.has('right'),jumpHeld:held.has('jump'),
     jumpPressed:queued.has('jump'),dashPressed:queued.has('dash'),swishPressed:queued.has('swish')};
-   queued.clear();update(state,input,DT);accumulator-=DT;count++;if(state.mode!=='playing')break;
+   queued.clear();update(state,input,DT);saveCheckpointIfNew();
+   accumulator-=DT;count++;if(state.mode!=='playing')break;
   }
   audio.musicTick(ms/1000,state.boss.triggered);
   // Events have monotonic IDs because the rolling 35-event history shifts.

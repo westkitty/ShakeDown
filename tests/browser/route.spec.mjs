@@ -37,13 +37,15 @@ async function driveBrowserRoute(page,{assist}={}){
    else if(!want&&active.has(code))send(code,false);
   };
   const release=()=>{for(const code of [...active])send(code,false)};
-  const history=[];
+  const history=[],checkpointWrites=[];let highestCheckpoint=0;
   for(let frames=0;frames<4600;frames++){
    const game=window.__SHAKEDOWN_QA.inspectState();
    if(game.mode==='victory'){
     release();return {reached:true,frames,steps:pilot.climbed.size,stage:pilot.stage,
      retries:pilot.retries,pitResets:pilot.pitResets,shakes:game.shakeCount,bossHP:game.boss.hp,
      seconds:game.elapsed,assist:game.settings.assist,history,checkpoint:game.checkpoint,
+     checkpointWrites,
+     saved:JSON.parse(localStorage.getItem('shakedown:birthday:v1')||'{}'),
      victoryText:document.querySelector('#victory-heading').textContent};
    }
    let action;
@@ -60,6 +62,11 @@ async function driveBrowserRoute(page,{assist}={}){
     if(action.swishPressed){send('KeyJ',true);send('KeyJ',false)}
    }
    window.__QA_FRAME_TICK();
+   if(game.checkpoint>highestCheckpoint){
+    highestCheckpoint=game.checkpoint;
+    const record=JSON.parse(localStorage.getItem('shakedown:birthday:v1')||'{}');
+    checkpointWrites.push({index:highestCheckpoint,stored:record.progress?.index??null});
+   }
    if(frames%450===0)history.push({frame:frames,x:Math.round(game.player.x),
      y:Math.round(game.player.y),stage:pilot.stage,segment:pilot.segment});
   }
@@ -76,6 +83,11 @@ async function driveBrowserRoute(page,{assist}={}){
  expect(result.bossHP).toBe(0);
  expect(result.shakes).toBeGreaterThan(0);
  expect(result.victoryText).toContain('MAVERICK');
+ expect(result.checkpointWrites.length).toBeGreaterThanOrEqual(2);
+ expect(result.checkpointWrites.every(x=>x.index===x.stored)).toBe(true);
+ expect(result.checkpointWrites.some(x=>x.index===5)).toBe(true);
+ expect(result.saved.completed).toBe(true);
+ expect(result.saved.progress).toBeNull();
  await expect(page.locator('#victory-overlay')).not.toHaveClass(/hidden/);
  await page.locator('#replay-btn').click();
  expect((await page.evaluate(()=>window.__SHAKEDOWN_QA.snapshot())).mode).toBe('playing');

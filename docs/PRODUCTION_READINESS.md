@@ -87,3 +87,16 @@ The final LM Arena artwork is still missing. Run_03 remains clipped on disk, del
 - tests/browser/route.spec.mjs sends DOM keyboard events and uses visible pause/assist/retry/replay buttons while the actual Canvas loop runs under a fast test-only virtual requestAnimationFrame schedule. No direct physics update or mutating QA helper is called.
 - tests/browser/studio.spec.mjs exercises real contract totals, image byte/pixel and audio header checks, rejected malformed candidates, ID deep links and desktop/mobile layouts. These do not prove actual art fidelity or ownership.
 - Still needed: human-paced normal difficulty, physical phone audio/touch, generated Fox/art review, live deployed-SHA playthrough and real-world performance.
+
+
+## Round 4 — retain birthday progress and keyboard-friendly play (2026-10-11)
+
+The optional save-and-continue extension uses the existing versioned localStorage key. It writes only at authored checkpoint transitions, not every frame, and stores the known checkpoint ID/index, elapsed time, real collected Shake IDs and defeated Cup Crawler IDs. Restoring validates every saved ID against the current level, derives shake/secret counts from authored collectibles, restores full health and invulnerability at the checkpoint, and reinitializes camera and hazards. Invalid or outdated records do not cause crashes or fabricated completion.
+
+The save record retains earned completion and maximum Shake count during replay, mute changes and a new round; victory clears the unfinished checkpoint. A fresh Start deliberately discards old unfinished progress. With storage disabled, gameplay continues but resume is not durable.
+
+Reduced Motion has a real renderer gate: optional decorative drifting, moving confetti, event particles and invulnerability blinking are reduced or disabled, while moving platform rendering still uses authoritative simulation elapsed time. Player input, collision and boss timings are unchanged. Stored player preference overrides OS default.
+
+Keyboard accessibility: native Enter/Space activation of focused controls, repeat-safe pause/mute keys, focus moved to dialog controls and restored to the game, Tab focus within active overlays and keyboard-operable touch controls. Browser checks are not substitutes for physical device or assistive-technology audits.
+
+No final LM Arena image or audio was fabricated or approved; the existing two-stage production art review and activation gate remains intact.

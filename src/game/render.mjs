@@ -183,11 +183,11 @@ function player(ctx,s,sprites){const p=s.player;let state='idle';
  if(s.mode==='victory')state='victory';else if(p.invulnerable>0&&s.lastDamage)state='hurt';
  else if(p.attackTime>0)state='swish';else if(p.dashTime>0)state='dash';
  else if(!p.grounded)state=p.vy<0?'jump':'fall';else if(Math.abs(p.vx)>30)state='run';
- const key=frameForState(state,s.elapsed);
+ const key=frameForState(state,s.settings.reducedMotion?0:s.elapsed);
  const image=sprites[key]||sprites.idle_00;
  ctx.save();ctx.translate(Math.round(p.x+p.w/2-s.camera.x),Math.round(p.y+p.h-s.camera.y));
  if(p.facing<0)ctx.scale(-1,1);
- if(p.invulnerable>0&&Math.floor(s.elapsed*13)%2===0)ctx.globalAlpha=.5;
+ if(p.invulnerable>0)ctx.globalAlpha=s.settings.reducedMotion?.8:(Math.floor(s.elapsed*13)%2===0?.5:1);
  const scale=.87;
  if(image){ctx.drawImage(image,-145*scale,-147*scale,240*scale,160*scale)}
  else {ctx.fillStyle='#f08337';ctx.beginPath();ctx.arc(0,-39,25,0,TAU);ctx.fill();ctx.fillStyle='#253d7b';ctx.fillRect(-25,-55,50,9)}
@@ -219,33 +219,33 @@ function birthdayDecor(ctx,t,art={}){
  confettiSky(ctx,t);
 }
 export function render(ctx,s,sprites,alpha=0,art={}){
- const t=s.elapsed,cam=s.camera;
+ const t=s.elapsed,decorativeTime=s.settings.reducedMotion?0:t,cam=s.camera;
  ctx.clearRect(0,0,VIEW.width,VIEW.height);
- const isDome=cam.x>3150;sky(ctx,t,isDome,art);farCampus(ctx,cam,t);quad(ctx,cam,t,art);mainBuilding(ctx,cam,t);
+ const isDome=cam.x>3150;sky(ctx,decorativeTime,isDome,art);farCampus(ctx,cam,decorativeTime);quad(ctx,cam,decorativeTime,art);mainBuilding(ctx,cam,decorativeTime);
  ctx.save();ctx.translate(-cam.x,-cam.y);
  for(const p of visibleWorld(s.level.platforms,cam.x,cam.y)){
   const pos=movingPosition(p,t),active=!p.pulse||s.activePulse||s.player.onPlatform===p.id;
-  drawPlatform(ctx,p,pos.x,pos.y,active,t);
+  drawPlatform(ctx,p,pos.x,pos.y,active,decorativeTime);
  }
  ctx.restore();
- decoration(ctx,s,t,art);
+ decoration(ctx,s,decorativeTime,art);
  // Readable non-colliding intro glimpse: the Fox runs away with the actual independent cup.
  if(s.elapsed<2.4 && cam.x<1050 && s.mode==='playing'){
-  ctx.save();ctx.translate(-cam.x,-cam.y);const fx=490+s.elapsed*160;
-  drawFox(ctx,fx,440,'escape',t,art);drawShake(ctx,fx+84,375,.78,true,art);
+  ctx.save();ctx.translate(-cam.x,-cam.y);const fx=490+(s.settings.reducedMotion?0:s.elapsed*160);
+  drawFox(ctx,fx,440,'escape',decorativeTime,art);drawShake(ctx,fx+84,375,.78,true,art);
   ctx.restore();
  }
- player(ctx,s,sprites);events(ctx,s,t);
+ player(ctx,s,sprites);if(!s.settings.reducedMotion)events(ctx,s,t);
  const inPulse=s.activePulse;ctx.save();ctx.textAlign='center';ctx.font='900 31px system-ui';
  if(s.mode==='playing'&&!s.boss.triggered){
   ctx.globalAlpha=.90;ctx.fillStyle=inPulse?'#fff0ac':'#a9d7f6';ctx.shadowColor='#2b4d78';ctx.shadowBlur=10;
   ctx.fillText(inPulse?'GO! IRISH!':'LISTEN FOR THE CHANT',VIEW.width/2,116);ctx.shadowBlur=0;
-  if(s.pulseFlash>0){ctx.globalAlpha=s.pulseFlash*.18;ctx.fillStyle='#f6da8b';ctx.fillRect(0,0,VIEW.width,VIEW.height)}
+  if(s.pulseFlash>0&&!s.settings.reducedMotion){ctx.globalAlpha=s.pulseFlash*.18;ctx.fillStyle='#f6da8b';ctx.fillRect(0,0,VIEW.width,VIEW.height)}
   if(s.checkpointNotice>0){ctx.globalAlpha=Math.min(1,s.checkpointNotice);ctx.fillStyle='#fff1c7';ctx.font='800 24px system-ui';ctx.fillText(s.level.checkpoints[s.checkpoint].id.toUpperCase()+' CHECKPOINT',VIEW.width/2,159)}
  }
  if(s.boss.triggered&&s.boss.hp>0){ctx.textAlign='left';ctx.font='900 18px system-ui';ctx.fillStyle='#fff5dc';ctx.fillText('THE FOX',343,90);
   ctx.fillStyle='#352a37';rounded(ctx,434,73,210,23,7);ctx.fill();ctx.fillStyle='#f27e57';rounded(ctx,438,76,202*s.boss.hp/3,17,5);ctx.fill();}
  if(s.mode==='victory'){ctx.fillStyle='rgba(13,24,35,.66)';ctx.fillRect(0,0,VIEW.width,VIEW.height);
-  birthdayDecor(ctx,t,art);ctx.fillStyle='#fff6d2';ctx.font='900 55px system-ui';ctx.fillText('HAPPY BIRTHDAY,',480,155);ctx.fillStyle='#fbd57b';ctx.font='900 63px system-ui';ctx.fillText('MAVERICK!',480,215);}
+  birthdayDecor(ctx,decorativeTime,art);ctx.fillStyle='#fff6d2';ctx.font='900 55px system-ui';ctx.fillText('HAPPY BIRTHDAY,',480,155);ctx.fillStyle='#fbd57b';ctx.font='900 63px system-ui';ctx.fillText('MAVERICK!',480,215);}
  ctx.restore();
 }

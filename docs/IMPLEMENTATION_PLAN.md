@@ -36,3 +36,14 @@ This document supersedes the older four-level design (Riverwalk, Eddy Street, Fo
 - Dome route >=50% by world x length and contains actual collision geometry.
 - No broken syntax, no uncaught runtime error in executed tested paths.
 - Performance claims require measured p95; do not assert 60fps merely because design step is 60Hz.
+
+
+## Round 4 implementation addendum — persistence and accessibility (2026-10-11)
+
+This is a compatible extension of the existing single-adventure gameplay plan. It does **not** change Notre Dame, the Golden Dome, Cinnamon's character identity, the Fox, collisions, the final birthday cake or the LM Arena asset-generation contract.
+
+- A versioned localStorage record continues to preserve settings, earned completion and best Shake count. It now optionally contains the **last reached checkpoint** with verified authored checkpoint ID, elapsed simulation time, collected Shake IDs and defeated Cup Crawler IDs. The record is deliberately small, bounded, validated against actual level objects, and not a full game-state dump. An invalid/old checkpoint is ignored.
+- The title has an optional Continue button for a valid checkpoint; Start intentionally resets the current unfinished route. Completion remains monotonic through replay/settings changes. Victory removes pending progress but retains a successful completion.
+- Reduced Motion now changes decorative Canvas animation/flashing and preserves the authoritative game simulation and moving collision platforms. Respect platform preference by default without overriding a previously saved explicit player selection.
+- Keyboard-only interaction now respects active buttons, ignores repeated pause/mute actions, supports keyboard-focused touch controls, restores focus to the game after overlays and contains Tab focus within active dialog overlays.
+- All added behaviors require Node and real served-HTTP browser tests. Virtualized full-route regression timing is not evidence of human reaction time, device speaker output or real phone performance.

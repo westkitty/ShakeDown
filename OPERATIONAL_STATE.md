@@ -7,8 +7,8 @@
   "project_name": "ShakeDown",
   "project_root": "westkitty/ShakeDown",
   "artifact_path": "",
-  "state_revision": 5,
-  "last_updated": "2026-10-11T20:26:21Z",
+  "state_revision": 6,
+  "last_updated": "2026-10-11T20:55:18Z",
   "current_baseline": {
     "identity": "main@80d388828bfcad0cf454fe0b2b166e6528ac5e6d (pre-preparation production baseline)",
     "state": "current-baseline",
@@ -154,3 +154,42 @@ Physical keyboard codes and touch pointer identifiers now independently own logi
 
 ### Revision log
 - Revision 5: separated artwork approval and gameplay activation, proved scripted normal difficulty, corrected simultaneous control ownership, preserved visible preview warning and clarified source/reviewed/active states.
+
+
+## 17. Preparation Round 4 — durable checkpoint, Reduced Motion, keyboard operation (revision 6)
+
+<!-- operational-state:entry
+{"id":"VER-009","title":"Monotonic birthday completion and validated checkpoint persistence","state":"partially-verified","scope":"Round 4 prep branch candidate","evidence":"Baseline browser saved-completion regression reproduced; Node versioned checkpoint validation; browser saved checkpoint Continue/new Start/reload/legacy cases; assisted and normal full routes autosaved checkpoints 1-5 before clearing at victory","last_verified":"2026-10-11"}
+-->
+### VER-009 — Saves preserve earned achievements and support local checkpoint Continue
+The stale saved-completion bug was directly reproduced: winning, replaying and toggling mute erased completed. Save updates now retain earned completion and best Shakes throughout settings changes and replays. Optional versioned checkpoint data stores authored checkpoint ID/index, elapsed time and physically collected/defeated IDs; it is validated before restore. The title offers Continue only when this record is safe. Start clears unfinished progress; victory clears unfinished progress without erasing completion. Restricted browser storage or switching devices prevents guaranteed restore. All five authored checkpoint writes were observed during BOTH real-HTTP scripted full-route tests using the normal game update path.
+
+<!-- operational-state:entry
+{"id":"VER-010","title":"Functional reduced-motion renderer preference","state":"partially-verified","scope":"Render decoration and automatic OS preference only","evidence":"Desktop and mobile browser pixel comparisons with distinct simulation times; decorative pixels static in reduced mode and animated in normal; existing moving platforms still use authoritative elapsed time","last_verified":"2026-10-11"}
+-->
+### VER-010 — Reduced Motion is functional
+User setting disables or freezes nonessential drifting, confetti animation, hit flashing and event particles, while player input and collision timing remain unchanged. The OS reduced-motion preference initializes the option for a new profile; explicit player choice persists. Browser comparison tests verify real Canvas output under reduced and normal modes.
+
+<!-- operational-state:entry
+{"id":"VER-011","title":"Keyboard dialog accessibility and shortcut handling","state":"partially-verified","scope":"Title, pause, death and victory DOM overlays plus keyboard-operated touch buttons","evidence":"Browser tests for focus containment/return, repeat-safe P, Enter on Continue, Space on focused mute and mobile touch Jump key activation","last_verified":"2026-10-11"}
+-->
+### VER-011 — Keyboard operation corrected
+Dialog overlays now provide explicit dialog semantics, focus management and Tab containment. Native Enter and Space on focused controls are preserved; holding the pause shortcut cannot toggle repeatedly. Keyboard focus on mobile touch controls can activate the intended game action. The browser tests are not a substitute for VoiceOver/TalkBack audits.
+
+### Round 4 release boundaries
+- The changes are a prep-branch candidate only until exact-SHA GitHub CI passes; do not mark main or Pages as updated.
+- Original 26 Cinnamon source cut-outs, Fox placeholder, Golden Dome platforms, 220 image/21 audio LM Arena job contracts and all previously verified art-approval protections remain unchanged.
+- Remaining: live user paced phone/desktop testing, real hardware audio and switch/screen reader QA, generated final art review and explicit in-game visual approval, public GitHub Pages release validation.
+- Earlier revisions remain append-only; correction of stale Round 3 pending-CI wording is additive rather than rewritten.
+
+### Revision log
+- Revision 6: fixed lost birthday completion, added checkpoint Continue, proved genuine checkpoint writes during full routes, made Reduced Motion effective and hardened keyboard/dialog navigation.
+
+
+### Round 4 local verification receipt — amendment
+
+Baseline checks: 21/21 Node passed. Round 4 local candidate: **24/24 Node** passed. Real served-HTTP Brave Playwright, two-worker desktop run: **23 passed, 2 skipped**; separate two-worker Pixel-7 emulated mobile run: **23 passed, 2 skipped**. Total **46 executed browser checks passed, 4 intentionally skipped, 0 failed**. The existing assisted and normal scripted browser game routes both remain successful. Full physical hardware, genuine frame pacing, audible audio and outside-generated art remain outside the claimed evidence.
+
+
+### Round 4 latest Node evidence correction (additive)
+The earlier local receipt of 24/24 preceded one additional authored-checkpoint geometry test. The latest executed full Node suite is **25/25 passed**, including safe recovery at each of the five actual checkpoints. Browser evidence stays **46 passed, 4 deliberately skipped** on desktop and mobile emulation. This additive correction does not rewrite prior run evidence.
