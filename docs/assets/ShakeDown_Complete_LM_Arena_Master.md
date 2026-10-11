@@ -60,12 +60,12 @@ Canvas engine: 960x540 logical screen, 32px tile contacts, source game inputs vi
 | CAMPUS PULSE OBJECTS | 9 | 0 | 1 | 8 | 1 | 0 |
 | COLLECTIBLES / POWERUPS / PICKUP FRAMES | 6 | 0 | 6 | 0 | 4 | 2 |
 | CAMPUS PROPS / LANDMARKS | 14 | 0 | 8 | 6 | 8 | 0 |
-| CAMPUS TERRAIN / COLLISION TILES | 10 | 0 | 7 | 6 | 4 | 0 |
-| BASE INTERFACE | 9 | 0 | 9 | 0 | 9 | 0 |
+| CAMPUS TERRAIN / COLLISION TILES | 10 | 0 | 3 | 6 | 4 | 0 |
+| BASE INTERFACE | 9 | 0 | 5 | 0 | 9 | 0 |
 | ADDITIONAL UI / TOUCH | 14 | 0 | 13 | 1 | 10 | 3 |
 | CAMPUS VISUAL EFFECTS | 10 | 0 | 9 | 1 | 9 | 0 |
 
-TOTAL VISUAL CONTRACT: **220** individually specified logical IDs; **26** source-verified Cinnamon frames; **80** generated, byte-verified and normalized production images; **114** still missing final production images.
+TOTAL VISUAL CONTRACT: **220** individually specified logical IDs; **26** source-verified Cinnamon frames; **88** generated, byte-verified and normalized production images; **106** still missing final production images.
 
 ## LM ARENA UNIVERSAL EXECUTION ORDER
 
@@ -2325,7 +2325,7 @@ TILE EDGE REQUIREMENT: art edges must meet exactly with adjacent tile copies; pr
 **Integration:** Verify file bytes exist at assets/level1/tiles/tl_04_stone_path_fill_tile.png; measure intrinsic 32x32 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID TL-04 in runtime manifest. At runtime map ID to Modular level geometry; place in all with anchor tile-top-left; use the engine auth collider "tile fill" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### TL-05 — Stone ledge center tile
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** all · **Target:** 32×32 px · **Source:** 128×128 px · **Output:** `assets/level1/tiles/tl_05_stone_ledge_center_tile.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** all · **Target:** 32×32 px · **Source:** 128×128 px · **Output:** `assets/level1/tiles/tl_05_stone_ledge_center_tile.png`
 **Anchor:** tile-top-left · **Collision:** tile authored AABB · **Animation:** single static component
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -2362,7 +2362,7 @@ TILE EDGE REQUIREMENT: art edges must meet exactly with adjacent tile copies; pr
 **Integration:** Verify file bytes exist at assets/level1/tiles/tl_05_stone_ledge_center_tile.png; measure intrinsic 32x32 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID TL-05 in runtime manifest. At runtime map ID to Modular level geometry; place in all with anchor tile-top-left; use the engine auth collider "tile authored AABB" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### TL-08 — Stone step tile
-**State:** MISSING_GENERATION · **Priority:** P0 · **Where:** all · **Target:** 32×32 px · **Source:** 128×128 px · **Output:** `assets/level1/tiles/tl_08_stone_step_tile.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P0 · **Where:** all · **Target:** 32×32 px · **Source:** 128×128 px · **Output:** `assets/level1/tiles/tl_08_stone_step_tile.png`
 **Anchor:** tile-top-left · **Collision:** tile authored AABB · **Animation:** single static component
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -2473,7 +2473,7 @@ TILE EDGE REQUIREMENT: art edges must meet exactly with adjacent tile copies; pr
 **Integration:** Verify file bytes exist at assets/level1/tiles/tl_07_stone_ledge_right_cap.png; measure intrinsic 32x32 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID TL-07 in runtime manifest. At runtime map ID to Modular level geometry; place in all with anchor tile-top-left; use the engine auth collider "tile authored AABB" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### TL-09 — Brick fill tile
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** all · **Target:** 32×32 px · **Source:** 128×128 px · **Output:** `assets/level1/tiles/tl_09_brick_fill_tile.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** all · **Target:** 32×32 px · **Source:** 128×128 px · **Output:** `assets/level1/tiles/tl_09_brick_fill_tile.png`
 **Anchor:** tile-top-left · **Collision:** tile fill · **Animation:** single static component
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -2510,7 +2510,7 @@ TILE EDGE REQUIREMENT: art edges must meet exactly with adjacent tile copies; pr
 **Integration:** Verify file bytes exist at assets/level1/tiles/tl_09_brick_fill_tile.png; measure intrinsic 32x32 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID TL-09 in runtime manifest. At runtime map ID to Modular level geometry; place in all with anchor tile-top-left; use the engine auth collider "tile fill" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### TL-10 — Banner mount tile
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** all · **Target:** 32×32 px · **Source:** 128×128 px · **Output:** `assets/level1/tiles/tl_10_banner_mount_tile.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** all · **Target:** 32×32 px · **Source:** 128×128 px · **Output:** `assets/level1/tiles/tl_10_banner_mount_tile.png`
 **Anchor:** tile-top-left · **Collision:** tile fill · **Animation:** single static component
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -4248,7 +4248,7 @@ Do not claim generated, export, alpha, dimensions, or integration verification u
 9 individual asset contracts. Process P0 first, P1 next, P2 last. Reference sheets and complete per-asset instructions are repeated in every prompt.
 
 #### UI-01 — Filled heart icon
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** all · **Target:** 32×32 px · **Source:** 128×128 px · **Output:** `assets/level1/ui/ui_01_filled_heart_icon.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** all · **Target:** 32×32 px · **Source:** 128×128 px · **Output:** `assets/level1/ui/ui_01_filled_heart_icon.png`
 **Anchor:** center · **Collision:** none · **Animation:** single static component
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -4285,7 +4285,7 @@ DO NOT BAKE LIVE TEXT: all headings, counters, accessibility instructions, and b
 **Integration:** Verify file bytes exist at assets/level1/ui/ui_01_filled_heart_icon.png; measure intrinsic 32x32 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID UI-01 in runtime manifest. At runtime map ID to HUD health; place in all with anchor center; use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### UI-02 — Empty heart icon
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** all · **Target:** 32×32 px · **Source:** 128×128 px · **Output:** `assets/level1/ui/ui_02_empty_heart_icon.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** all · **Target:** 32×32 px · **Source:** 128×128 px · **Output:** `assets/level1/ui/ui_02_empty_heart_icon.png`
 **Anchor:** center · **Collision:** none · **Animation:** single static component
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -4322,7 +4322,7 @@ DO NOT BAKE LIVE TEXT: all headings, counters, accessibility instructions, and b
 **Integration:** Verify file bytes exist at assets/level1/ui/ui_02_empty_heart_icon.png; measure intrinsic 32x32 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID UI-02 in runtime manifest. At runtime map ID to HUD damage; place in all with anchor center; use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### UI-03 — Token HUD icon
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** all · **Target:** 32×32 px · **Source:** 128×128 px · **Output:** `assets/level1/ui/ui_03_token_hud_icon.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** all · **Target:** 32×32 px · **Source:** 128×128 px · **Output:** `assets/level1/ui/ui_03_token_hud_icon.png`
 **Anchor:** center · **Collision:** none · **Animation:** single static component
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 
@@ -4359,7 +4359,7 @@ DO NOT BAKE LIVE TEXT: all headings, counters, accessibility instructions, and b
 **Integration:** Verify file bytes exist at assets/level1/ui/ui_03_token_hud_icon.png; measure intrinsic 32x32 after normalization, alpha and crop; record SHA256 and approved visual review; register logical ID UI-03 in runtime manifest. At runtime map ID to HUD pickup counter; place in all with anchor center; use the engine auth collider "none" instead of deriving physics from pixels. Maintain functioning Canvas fallback until a browser screenshot, load trace and touch/keyboard journey show correctness. Animation states remain one file per requested state.
 
 #### UI-04 — Jump button glyph
-**State:** MISSING_GENERATION · **Priority:** P1 · **Where:** all · **Target:** 48×48 px · **Source:** 192×192 px · **Output:** `assets/level1/ui/ui_04_jump_button_glyph.png`
+**State:** NORMALIZED_VERIFIED · **Priority:** P1 · **Where:** all · **Target:** 48×48 px · **Source:** 192×192 px · **Output:** `assets/level1/ui/ui_04_jump_button_glyph.png`
 **Anchor:** center · **Collision:** none · **Animation:** single static component
 **References:** assets/references/cinnamon_master_sheet.png, assets/references/cinnamon_actions_sheet.png · **Dependency:** Legacy approved Level 1 asset design + supplied reference sheets
 

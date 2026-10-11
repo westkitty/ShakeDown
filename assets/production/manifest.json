@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "generated_utc": "2026-10-11T19:36:42Z",
+  "generated_utc": "2026-10-11T19:38:11Z",
   "note": "Byte-level truth for generated production art. Every sha256 and pixel dimension here was measured from the file actually written to disk. Human visual review is a separate, still-open gate.",
-  "count": 80,
+  "count": 88,
   "assets": {
     "BD-01": {
       "id": "BD-01",
@@ -3837,12 +3837,12 @@
       ],
       "pivot": "tile-top-left",
       "raw_source": ".artifact-cache/raw/tl_03.png",
-      "raw_sha256": "294e2f8bd0039318a69310f8227e1ebfb372c6a9a13482e5efe4f17a8ba877c9",
+      "raw_sha256": "d85365b43a3f7412dd4cc64dbda83a0b160150f14d322348db77593baed69953",
       "raw_px": [
         1024,
         1024
       ],
-      "generated_utc": "2026-10-11T19:36:42Z",
+      "generated_utc": "2026-10-11T19:38:10Z",
       "generator": "arena-agent-mode image generation",
       "alpha": {
         "required": true,
@@ -3858,7 +3858,7 @@
         32,
         32
       ],
-      "sha256": "f8d455339e0225e9cf1721e85cff7ee36d0c66242609d3ffc986165cc11a41f2",
+      "sha256": "3565faf0795189035ed260a8c51bc0f81a2152a510e2c16578917f067f21a89d",
       "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
     },
     "TL-04": {
@@ -3895,6 +3895,362 @@
         32
       ],
       "sha256": "06c1d6e3c3ca0b11371e70f137e5c290c2044ec00fe8a26a517fab2168e2f971",
+      "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+    },
+    "TL-05": {
+      "id": "TL-05",
+      "name": "Stone ledge center tile",
+      "group": "TL",
+      "priority": "P0",
+      "path": "assets/level1/tiles/tl_05_stone_ledge_center_tile.png",
+      "target_px": [
+        32,
+        32
+      ],
+      "pivot": "tile-top-left",
+      "raw_source": ".artifact-cache/raw/tl_05.png",
+      "raw_sha256": "4c077545894b479f59740b38db7b460e871d90623989c7f4fb6869ffef4c2995",
+      "raw_px": [
+        1024,
+        1024
+      ],
+      "generated_utc": "2026-10-11T19:38:10Z",
+      "generator": "arena-agent-mode image generation",
+      "alpha": {
+        "required": true,
+        "mode": "straight RGBA",
+        "transparent_px_fraction": 0.0,
+        "opaque_px_fraction": 1.0,
+        "partial_edge_px": 0,
+        "full_bleed": true,
+        "border_all_transparent": false
+      },
+      "format": "PNG RGBA",
+      "actual_px": [
+        32,
+        32
+      ],
+      "sha256": "e9e42f34da6d01ce59dab09525e8332e4267e9cf89bc62d5aef280184f06d5ee",
+      "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+    },
+    "TL-08": {
+      "id": "TL-08",
+      "name": "Stone step tile",
+      "group": "TL",
+      "priority": "P0",
+      "path": "assets/level1/tiles/tl_08_stone_step_tile.png",
+      "target_px": [
+        32,
+        32
+      ],
+      "pivot": "tile-top-left",
+      "raw_source": ".artifact-cache/raw/tl_08.png",
+      "raw_sha256": "4b91e00401ac553abebfe8c1d84fbeedf77a31faf42b9ff5546d23857020f92b",
+      "raw_px": [
+        1024,
+        1024
+      ],
+      "generated_utc": "2026-10-11T19:38:10Z",
+      "generator": "arena-agent-mode image generation",
+      "alpha": {
+        "required": true,
+        "mode": "straight RGBA",
+        "transparent_px_fraction": 0.0,
+        "opaque_px_fraction": 1.0,
+        "partial_edge_px": 0,
+        "full_bleed": true,
+        "border_all_transparent": false
+      },
+      "format": "PNG RGBA",
+      "actual_px": [
+        32,
+        32
+      ],
+      "sha256": "eb5405bf46b64d3144c35472505515d55d633139d4527222318607959ba2fed2",
+      "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+    },
+    "TL-09": {
+      "id": "TL-09",
+      "name": "Brick fill tile",
+      "group": "TL",
+      "priority": "P1",
+      "path": "assets/level1/tiles/tl_09_brick_fill_tile.png",
+      "target_px": [
+        32,
+        32
+      ],
+      "pivot": "tile-top-left",
+      "raw_source": ".artifact-cache/raw/tl_09.png",
+      "raw_sha256": "e6698e1b517d7327bbf90202f7eb8695985f91ab84d6c8a4a656a065b1092477",
+      "raw_px": [
+        1024,
+        1024
+      ],
+      "generated_utc": "2026-10-11T19:38:10Z",
+      "generator": "arena-agent-mode image generation",
+      "alpha": {
+        "required": true,
+        "mode": "straight RGBA",
+        "transparent_px_fraction": 0.0,
+        "opaque_px_fraction": 1.0,
+        "partial_edge_px": 0,
+        "full_bleed": true,
+        "border_all_transparent": false
+      },
+      "format": "PNG RGBA",
+      "actual_px": [
+        32,
+        32
+      ],
+      "sha256": "b7e6b685f832b2fb562d132f29be74b237d925914f11dc2e459760e183cac36f",
+      "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+    },
+    "TL-10": {
+      "id": "TL-10",
+      "name": "Banner mount tile",
+      "group": "TL",
+      "priority": "P1",
+      "path": "assets/level1/tiles/tl_10_banner_mount_tile.png",
+      "target_px": [
+        32,
+        32
+      ],
+      "pivot": "tile-top-left",
+      "raw_source": ".artifact-cache/raw/tl_10.png",
+      "raw_sha256": "bafbddd7c22954c1371a7eaadc2d9e40af604067c3318eadea4e3a066d6ccad0",
+      "raw_px": [
+        1024,
+        1024
+      ],
+      "generated_utc": "2026-10-11T19:38:10Z",
+      "generator": "arena-agent-mode image generation",
+      "alpha": {
+        "required": true,
+        "mode": "straight RGBA",
+        "transparent_px_fraction": 0.0,
+        "opaque_px_fraction": 1.0,
+        "partial_edge_px": 0,
+        "full_bleed": true,
+        "border_all_transparent": false
+      },
+      "format": "PNG RGBA",
+      "actual_px": [
+        32,
+        32
+      ],
+      "sha256": "3be8cf6d2f0a78d876a1abef985643f16604d7340eaf773af39565311fdeefcf",
+      "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+    },
+    "UI-01": {
+      "id": "UI-01",
+      "name": "Filled heart icon",
+      "group": "UI",
+      "priority": "P1",
+      "path": "assets/level1/ui/ui_01_filled_heart_icon.png",
+      "target_px": [
+        32,
+        32
+      ],
+      "pivot": "center",
+      "raw_source": ".artifact-cache/raw/ui_01.png",
+      "raw_sha256": "e0cb37b4f56ca2178679e4151ef9d3b30cc600fc1ee74efd4958dd9e522ebe01",
+      "raw_px": [
+        1408,
+        768
+      ],
+      "generated_utc": "2026-10-11T19:38:11Z",
+      "generator": "arena-agent-mode image generation",
+      "alpha": {
+        "required": true,
+        "mode": "straight RGBA",
+        "transparent_px_fraction": 0.3164,
+        "opaque_px_fraction": 0.5312,
+        "partial_edge_px": 156,
+        "border_all_transparent": false,
+        "matte_rgb": [
+          255,
+          0,
+          255
+        ],
+        "transparent_fraction": 0.8581,
+        "partial_fraction": 0.0,
+        "matte_residual_opaque_px": 0,
+        "source_keyed_px": [
+          1408,
+          768
+        ]
+      },
+      "format": "PNG RGBA",
+      "trim_bbox_in_keyed_source": [
+        458,
+        164,
+        950,
+        604
+      ],
+      "actual_px": [
+        32,
+        32
+      ],
+      "sha256": "8ed3b3997defb262ecf2f423f161596e796f6eb277380f4fdace9e2ba733308b",
+      "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+    },
+    "UI-02": {
+      "id": "UI-02",
+      "name": "Empty heart icon",
+      "group": "UI",
+      "priority": "P1",
+      "path": "assets/level1/ui/ui_02_empty_heart_icon.png",
+      "target_px": [
+        32,
+        32
+      ],
+      "pivot": "center",
+      "raw_source": ".artifact-cache/raw/ui_02.png",
+      "raw_sha256": "e97b946a2a7f2236a25f576e1d66e7447348572ea8e340eb8c707e3993d6cc19",
+      "raw_px": [
+        1408,
+        768
+      ],
+      "generated_utc": "2026-10-11T19:38:11Z",
+      "generator": "arena-agent-mode image generation",
+      "alpha": {
+        "required": true,
+        "mode": "straight RGBA",
+        "transparent_px_fraction": 0.3184,
+        "opaque_px_fraction": 0.5146,
+        "partial_edge_px": 171,
+        "border_all_transparent": false,
+        "matte_rgb": [
+          255,
+          0,
+          255
+        ],
+        "transparent_fraction": 0.7471,
+        "partial_fraction": 0.0,
+        "matte_residual_opaque_px": 0,
+        "source_keyed_px": [
+          1408,
+          768
+        ]
+      },
+      "format": "PNG RGBA",
+      "trim_bbox_in_keyed_source": [
+        376,
+        94,
+        1032,
+        680
+      ],
+      "actual_px": [
+        32,
+        32
+      ],
+      "sha256": "ba744633880fb5d179b467b2ddbd2022c0ba0298a6df714b6b23a0710d597efc",
+      "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+    },
+    "UI-03": {
+      "id": "UI-03",
+      "name": "Token HUD icon",
+      "group": "UI",
+      "priority": "P1",
+      "path": "assets/level1/ui/ui_03_token_hud_icon.png",
+      "target_px": [
+        32,
+        32
+      ],
+      "pivot": "center",
+      "raw_source": ".artifact-cache/raw/ui_03.png",
+      "raw_sha256": "20e6e96cce2246607c3f7d5f851a910e2039bb38e5bbdde825fdb471a5501616",
+      "raw_px": [
+        1408,
+        768
+      ],
+      "generated_utc": "2026-10-11T19:38:11Z",
+      "generator": "arena-agent-mode image generation",
+      "alpha": {
+        "required": true,
+        "mode": "straight RGBA",
+        "transparent_px_fraction": 0.1719,
+        "opaque_px_fraction": 0.6338,
+        "partial_edge_px": 199,
+        "border_all_transparent": false,
+        "matte_rgb": [
+          255,
+          0,
+          255
+        ],
+        "transparent_fraction": 0.8579,
+        "partial_fraction": 0.0,
+        "matte_residual_opaque_px": 0,
+        "source_keyed_px": [
+          1408,
+          768
+        ]
+      },
+      "format": "PNG RGBA",
+      "trim_bbox_in_keyed_source": [
+        482,
+        162,
+        926,
+        606
+      ],
+      "actual_px": [
+        32,
+        32
+      ],
+      "sha256": "6e6f22b8059777caaf67f0c0bf076195866a8505851c5b4057a9ab88465324df",
+      "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
+    },
+    "UI-04": {
+      "id": "UI-04",
+      "name": "Jump button glyph",
+      "group": "UI",
+      "priority": "P1",
+      "path": "assets/level1/ui/ui_04_jump_button_glyph.png",
+      "target_px": [
+        48,
+        48
+      ],
+      "pivot": "center",
+      "raw_source": ".artifact-cache/raw/ui_04.png",
+      "raw_sha256": "cf173aaf89051f64c20e019d5839e17e7fcd9691d3562ca2e2197412e11a23ff",
+      "raw_px": [
+        1408,
+        768
+      ],
+      "generated_utc": "2026-10-11T19:38:11Z",
+      "generator": "arena-agent-mode image generation",
+      "alpha": {
+        "required": true,
+        "mode": "straight RGBA",
+        "transparent_px_fraction": 0.2222,
+        "opaque_px_fraction": 0.6619,
+        "partial_edge_px": 267,
+        "border_all_transparent": false,
+        "matte_rgb": [
+          255,
+          0,
+          255
+        ],
+        "transparent_fraction": 0.6841,
+        "partial_fraction": 0.0,
+        "matte_residual_opaque_px": 0,
+        "source_keyed_px": [
+          1408,
+          768
+        ]
+      },
+      "format": "PNG RGBA",
+      "trim_bbox_in_keyed_source": [
+        379,
+        47,
+        1028,
+        718
+      ],
+      "actual_px": [
+        48,
+        48
+      ],
+      "sha256": "9e2f29b6652f430a28bb35c4e4aa1a01f6d30339f4f3ef7c91e87e8f05e6df1c",
       "review_status": "AWAITING_HUMAN_VISUAL_REVIEW"
     },
     "UX-05": {
