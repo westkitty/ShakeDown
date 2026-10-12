@@ -10,13 +10,14 @@ function args(argv){
  const out={seconds:4,headed:false,screenshots:false};
  for(let i=0;i<argv.length;i++){
   const arg=argv[i];
-  if(arg==='--headed'||arg==='--screenshots'){out[arg.slice(2)]=true;continue}
-  if(['--seconds','--base-url','--output','--scenario'].includes(arg)){out[arg.slice(2)]=argv[++i];continue}
+  if(arg==='--headed'||arg==='--screenshots'||arg==='--calibrate'){out[arg.slice(2)]=true;continue}
+  if(['--seconds','--base-url','--output','--scenario','--art'].includes(arg)){out[arg.slice(2)]=argv[++i];continue}
   throw Error('Usage: node scripts/perf-audit.mjs [--seconds 4] [--headed] [--scenario desktop|portrait|landscape|narrow] [--base-url URL] [--screenshots] [--output FILE]');
  }
  out.seconds=Number(out.seconds);
  if(!Number.isFinite(out.seconds)||out.seconds<2||out.seconds>20)throw Error('--seconds must be between 2 and 20');
  if(out.scenario&&!['desktop','portrait','landscape','narrow'].includes(out.scenario))throw Error('Unknown scenario');
+ if(out.art&&!['classic','curated'].includes(out.art))throw Error('--art must be classic or curated');
  return out;
 }
 function scenario(name,width,height,isMobile){
@@ -37,6 +38,30 @@ async function waitForServer(url){
  }
  throw Error('Could not reach local static server: '+url);
 }
+// A same-context empty-page sample is a scheduling control, not a GPU benchmark.
+async function sampleRaf(page,ms){
+ return page.evaluate(async duration=>{
+  const gaps=[];let last=null,frames=0;
+  const end=performance.now()+duration;
+  return new Promise(resolve=>{
+   function tick(now){
+    frames++;
+    if(last!==null)gaps.push(now-last);
+    last=now;
+    if(now>=end){
+     const sorted=gaps.sort((a,b)=>a-b);
+     const at=q=>sorted.length?Number(sorted[Math.floor((sorted.length-1)*q)].toFixed(2)):null;
+     resolve({frames,intervals:gaps.length,
+      medianFrameMs:at(.5),p95FrameMs:at(.95),p99FrameMs:at(.99),
+      maxFrameMs:at(1),approxFps:at(.5)?Number((1000/at(.5)).toFixed(1)):null,
+      longFramesOver50ms:sorted.filter(x=>x>50).length});
+    }else requestAnimationFrame(tick);
+   }
+   requestAnimationFrame(tick);
+  });
+ },ms);
+}
+
 async function run(){
  const options=args(process.argv.slice(2));
  let server=null,browser=null;
@@ -60,9 +85,17 @@ async function run(){
     deviceScaleFactor:preset.deviceScaleFactor
    });
    const page=await context.newPage(),errors=[];
+   let blankBaseline=null;
    page.on('pageerror',e=>errors.push(e.message));
    try{
-    const response=await page.goto(url,{waitUntil:'domcontentloaded',timeout:15000});
+    if(options.calibrate){
+     await page.goto('data:text/html,<title>Empty rAF control</title>');
+     blankBaseline=await sampleRaf(page,2000);
+    }
+    const gameUrl=new URL(url);
+    if(options.art)gameUrl.searchParams.set('art',options.art);
+    const response=await page.goto(gameUrl.toString(),{waitUntil:'domcontentloaded',timeout:15000});
+    await page.waitForFunction(()=>typeof window.__SHAKEDOWN_QA?.snapshot==='function');
     await page.locator('#start-btn').waitFor({state:'visible'});
     const before=await page.evaluate(()=>({
      innerWidth:window.innerWidth,scrollWidth:document.documentElement.scrollWidth,
@@ -84,31 +117,17 @@ async function run(){
      latencyMs=Date.now()-start; // Includes automation and event-loop overhead.
     }catch{}
     await page.keyboard.up('ArrowRight');
-    const samples=await page.evaluate(async ms=>{
-     const gaps=[];let last=null,frames=0;
-     const end=performance.now()+ms;
-     return new Promise(resolve=>{
-      function tick(now){
-       frames++;
-       if(last!==null)gaps.push(now-last);
-       last=now;
-       if(now>=end){
-        const sorted=gaps.sort((a,b)=>a-b);
-        const at=q=>sorted.length?Number(sorted[Math.floor((sorted.length-1)*q)].toFixed(2)):null;
-        resolve({frames,intervals:gaps.length,
-         medianFrameMs:at(.5),p95FrameMs:at(.95),maxFrameMs:at(1),
-         approxFps:at(.5)?Number((1000/at(.5)).toFixed(1)):null,
-         longFramesOver50ms:sorted.filter(x=>x>50).length});
-       }else requestAnimationFrame(tick);
-      }
-      requestAnimationFrame(tick);
-     });
-    },options.seconds*1000);
+    const samples=await sampleRaf(page,options.seconds*1000);
     const after=await page.evaluate(()=>({
      mode:window.__SHAKEDOWN_QA.snapshot().mode,
      playerX:window.__SHAKEDOWN_QA.snapshot().player.x,
      instrumentation:window.__SHAKEDOWN_QA.metrics(),
-     heapBytes:performance.memory?.usedJSHeapSize??null
+     heapBytes:performance.memory?.usedJSHeapSize??null,
+     assets:window.__SHAKEDOWN_QA.assets(),
+     network:{resourceCount:performance.getEntriesByType('resource').length,
+      encodedBodyBytes:performance.getEntriesByType('resource').reduce((sum,entry)=>sum+(entry.encodedBodySize||0),0)},
+     canvasCss:{width:document.querySelector('#game').getBoundingClientRect().width,
+      height:document.querySelector('#game').getBoundingClientRect().height}
     }));
     let screenshot=null;
     if(options.screenshots){
@@ -123,19 +142,23 @@ async function run(){
      warnings.push('Start button is outside first viewport; scrolling required');
     if(before.touchTargets.some(x=>x.width<44||x.height<44))
      warnings.push('Some touch targets are below 44 CSS pixels');
-    if(samples.p95FrameMs>80)
-     warnings.push('Browser requestAnimationFrame pacing throttled; not evidence of playable FPS');
+    if(samples.p95FrameMs>80){
+     if(blankBaseline?.p95FrameMs>80)
+      warnings.push('Empty-page control is also throttled; game-specific FPS attribution is not supported');
+     else warnings.push('Game frame pacing is slow; compare representative hardware before attributing cause');
+    }
     if(latencyMs===null)warnings.push('Input movement not observed within automation timeout');
     if(errors.length)warnings.push('Uncaught browser runtime errors');
     readings.push({name:preset.name,viewport:{width:preset.width,height:preset.height},
      httpStatus:response.status(),layout:before,movement:{initialX:x0,finalX:after.playerX,
-      automationToMotionMs:latencyMs},rAF:samples,game:after,
+      automationToMotionMs:latencyMs},rAF:samples,emptyPageControl:blankBaseline,game:after,
       pageErrors:errors,warnings,screenshot});
    }finally{await context.close()}
   }
   const report={schemaVersion:1,measuredAt:new Date().toISOString(),
    environment:'Playwright-controlled desktop Chromium or Brave; mobile layouts are emulated',
-   timing:'Real wall-clock rAF, not a virtualized clock. May be throttled on remote/headless Macs.',
+   timing:'Real wall-clock rAF. Empty-page control is same browser/context, not a physical device benchmark. Automation-to-motion includes runner overhead.',
+   art:options.art||'default-curated',emptyPageCalibration:!!options.calibrate,
    scenarios:readings,passing:readings.every(x=>!x.pageErrors.length&&x.httpStatus===200)};
   if(options.output){
    const destination=path.resolve(options.output);

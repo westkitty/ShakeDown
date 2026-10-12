@@ -382,7 +382,10 @@ function percentile(values,p){
  const sorted=[...values].sort((a,b)=>a-b);return Number(sorted[Math.floor((sorted.length-1)*p)].toFixed(2));
 }
 function metrics(){return {frames:frameTimings.length,frameMsP95:percentile(frameTimings.map(x=>x.frame),.95),
- renderMsP95:percentile(frameTimings.map(x=>x.render),.95),devicePixelRatio:Math.min(window.devicePixelRatio||1,2)};}
+ frameMsP99:percentile(frameTimings.map(x=>x.frame),.99),
+ renderMsP95:percentile(frameTimings.map(x=>x.render),.95),
+ renderMsP99:percentile(frameTimings.map(x=>x.render),.99),
+ devicePixelRatio:Math.min(window.devicePixelRatio||1,2)};}
 function animate(ms){requestAnimationFrame(animate);
  const actualFrameMs=lastStamp?Math.max(0,ms-lastStamp):0;
  if(!lastStamp)lastStamp=ms;const dt=Math.min(.10,Math.max(0,(ms-lastStamp)/1000));lastStamp=ms;

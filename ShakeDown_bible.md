@@ -244,3 +244,11 @@ The full Asset Director source registry remains 194/194, one playable-context ro
 - Change: half-heart visual states and explicit numerical accessible name; seven deterministic state regressions plus browser UI regression.
 - Preserve: Canvas engine, checkpoint schema, other four accepted proposals for later individual commits, all art/source files.
 - CI/browser run receipts and Git commit identity are recorded in external delivery summary. No Pages/main deployment authorized.
+
+## 2026-10-12 — OMNI accepted P004: responsible browser and target-device baseline instrumentation
+
+- Starting point: P003 implementation/push 49fda00bcd96351cd0140f9cf1a75dbcab90c990.
+- Scope: extend the existing real-wall-clock performance audit with same-context empty-page rAF calibration, optional classic/curated mode, p99 intervals, Canvas width, network resource bytes and asset availability; no render or collision optimization.
+- Hardware discovery: Galaxy Tab S9 Ultra SM-X910, Android 16, Chrome 154.0.8037.126 physically reachable through MacBook ADB; Chrome DevTools HTTP endpoint over ADB tunnel returned empty responses despite a socket. Android gfxinfo after a seven-second game sample yielded one Android UI frame, which is NOT a measure of Canvas frame pacing and must not be labeled FPS proof.
+- Physical phone/tablet FPS, game input latency, audio, heat, memory drift, and 30-minute play remain evidence gaps until on-device JavaScript tracing is available. Empty browser slowdown must not be misattributed to the game.
+- Browser and Node validation details and Git hash are recorded in the delivery summary. Push to feature branch only; no main deployment.
