@@ -67,13 +67,15 @@ python3 scripts/build_title_screens.py
 Fonts are vendored in `scripts/title-fonts/` (Archivo Black and Press Start 2P,
 both SIL Open Font License 1.1 — licenses included).
 
-## Status — read before wiring anything in
+## Integration status (2026-10-12)
 
-- These are **new presentation art**, not part of the 220-visual / 21-audio LM
+- These are **presentation art**, not part of the 220-visual / 21-audio LM
   Arena production master and not in the 194-image production manifest.
-- **Nothing here is wired into the runtime.** The game still renders its own
-  title overlay in `index.html` / `src/game`. Loading one of these as the live
-  title background is a separate, reviewable change.
+- **All ten runtime-size PNGs are actively wired to the title browser** in
+  `src/game/screen-art.mjs`; the independent supplied birthday Start clean
+  plate is the first/default selection. The original semantic HTML Start and
+  Continue controls remain interactive; the original procedural look is
+  retained with `?art=classic`.
 - They are **not human-approved final artwork.** Per the project's own asset
   rules, a generated image never stands in for owner visual sign-off.
 - The character identity follows the immutable canon (Cinnamon is a red panda

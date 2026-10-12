@@ -36,7 +36,7 @@ The original four-stage campaign plan is superseded by the user's October 11 com
 
 ## Reviewing LM Arena artwork
 
-The game remains playable without final outside artwork. The **default** now shows the 28 SHA-checked, structurally eligible Curator's Cut previews in actual gameplay, plus ten selectable raster title plates and themed game-over/victory presentation backgrounds. These remain **provisional, not human-approved**. Use `?art=classic` for the original lightweight procedural presentation. Source approval stores files and provenance **without activating them as final production-approved assets**. A separate, reviewer-attested gameplay integration step with a real screenshot is now required before regular gameplay loads replacement art; local previews do not activate anything.
+The game remains playable without final outside artwork. The **default** now shows the 28 SHA-checked, structurally eligible Curator's Cut previews in actual gameplay, plus ten selectable raster title plates and themed game-over/victory presentation backgrounds. These remain **provisional, not human-approved**. Use `?art=classic` for the original lightweight procedural presentation. Source approval stores files and provenance **without activating them as final production-approved assets**. Promoting a provisional candidate to **final, production-approved replacement art** still requires independent artist/reviewer evidence; turning on an explicitly provisional preview never forges that approval.
 
     npm ci
     node scripts/asset-intake.mjs inspect --id CO-03 --file /path/to/your-cup.png

@@ -32,7 +32,7 @@ The complete SHA-bound ledger `assets/production/curation.json` rates every one 
 
 ## Real runtime delivery
 
-The game now has an opt-in **Curator's Cut** from title/Pause or via `?art=curated`. It fetches exactly 28 independently chosen actual source files, validates SHA-256 against the underlying Arena source manifest, checks dimensions, and decodes with bounded concurrency. It then draws them in the matching player/gameplay contexts. Failed hashes, missing images and other transport errors preserve the functioning original Canvas fallback. The option is reversible within the session and **off by default**.
+As originally released on October 11, the game had an opt-in **Curator's Cut** from title/Pause or via `?art=curated`. It fetches exactly 28 independently chosen actual source files, validates SHA-256 against the underlying Arena source manifest, checks dimensions, and decodes with bounded concurrency. It then draws them in the matching player/gameplay contexts. Failed hashes, missing images and other transport errors preserve the functioning original Canvas fallback. The option is reversible within the session and **off by default**.
 
 The separately accessible `tools/asset-gallery.html` **Art Jury** presents all 194 files on checkerboard backgrounds with IDs, source hashes, per-asset reasons, grades, compare collections, full search, filters, and KEEP / REVISE / REJECT voting. Notes are stored in the user's own browser and can be exported as a SHA-bound review JSON. Those votes **do not modify GitHub or mark art accepted**.
 
@@ -45,3 +45,7 @@ Earlier on the combined local checkout, Node validation reached 34/34, runtime p
 The exact final GitHub branch commit must pass CI before merging. GitHub Pages deployment and actual hosted playback must be separately verified. Still missing are human art approval, reworked 24 alpha failures/11 recommended revisions, raw generator originals, 18 non-covered recorded-audio contracts and physical-device audio/FPS/human gameplay acceptance.
 
 The user's judgement overrides the curator's provisional assessment. All 194 candidate source images have been preserved for that purpose.
+
+## Current default, October 12, 2026
+
+As explicitly requested in the subsequent artwork integration, the 28 physically present, SHA-verified, alpha-safe curated preview images now render by default in their normal Canvas gameplay contexts. They **remain provisional art** (not owner-approved final artwork) and the source manifest/approval files have not been falsified. `?art=classic` restores the prior procedural presentation without altering saves, collisions, level flow or boss behavior. The other 166 generated files remain present, source-verifiable, role-mapped and usable through deliberate Art Director selection; 24 images cannot appear in the game world due to unsafe transparency. This is intentional: alternatives and rejected source candidates must not all overlap the playfield. Additionally, ten independent raster title designs and the owner's exact 12 PNG Start/Game Over/Victory screen files are committed and wired to their respective UI roles.
