@@ -90,3 +90,12 @@ Two browser tabs now reconcile earned completion/best Shake records when an olde
 **Judge all the candidates:** [Open the Art Jury](tools/asset-gallery.html). All **194** physical Arena images are available for visual comparison, category and ID search, original image/hash inspection, and KEEP/REVISE/REJECT voting. Add notes and export your hash-bound JSON review. Votes persist locally in the browser and **never automatically activate art**. The curator's current classification is **28 preview, 131 alternatives, 11 revise, 24 transparency-blocked**.
 
 The source-hash manifest is `assets/production/manifest.json`; individual reasons and owner-review fields are in `assets/production/curation.json`. Read [docs/ASSET_CURATION_REPORT.md](docs/ASSET_CURATION_REPORT.md) for visual comparisons and provenance limits. Twenty-one requested recorded audio outputs still await delivery. 
+
+
+## All generated images: Asset Director
+
+The in-game **ART DIRECTOR · ALL 194 ASSETS** opens from the title, Pause, or the game HUD. All 194 physically committed generated PNGs have a scene-specific Canvas role; source bytes are SHA-256 checked and decoded on demand. Select an artwork, inspect it in representative context, press **TRY IN THE ACTUAL GAME** to audition it, and **REMOVE THIS LAYER** to restore the classic/curated fallback. You can keep one temporary variant per role. No physics, checkpoints or owner-approval records change.
+
+The 24 source images lacking required transparency are inspectable and may appear only as labeled QA reference cards, never as real background/platform art. The other 170 sources can be tried in game roles, although source validity does not mean artistic approval.
+
+The [Art Jury](tools/asset-gallery.html) now offers a direct link for each asset to the matching in-game audition. Complete 12-role wiring and limitations: [All-asset runtime guide](docs/ALL_ASSET_RUNTIME_INTEGRATION.md). The 21 requested recorded audio assets remain missing.

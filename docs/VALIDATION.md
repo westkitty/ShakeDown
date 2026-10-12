@@ -147,3 +147,10 @@ The first oversubscribed 3-worker browser suite exposed a genuine transient loca
 - The generated 194-image gallery, 28 selected SHA/dimension-verified preview images, opt-in reversible game display and manual source-bound review export were tested locally on actual HTTP/Brave. Scripted input-driven full normal, assisted and curated gameplay routes passed, including birthday victory. The scripted rAF tests do not prove real-time FPS or real phone responsiveness.
 - npm run validate 34/34 pass on local combined checkout; static release-preflight enumerated 238 actual files and zero missing source SHA-linked PNGs. These are local candidate tests; the remote Mac connector later became inaccessible. GitHub CI must verify the exact integration commit.
 - Browser user-review votes never activate production artwork. Recorded audio files and original generator raw inputs remain unavailable. Details: docs/ASSET_CURATION_REPORT.md.
+
+
+## 2026-10-11 — 194-image runtime hook verification contract
+
+New implementation introduces twelve real Canvas draw roles covering exactly 194 physically verified generated IDs. Every candidate can be inspected in the running game's native Asset Director; 170 structurally eligible assets can be tried in-world, while 24 nontransparent contract failures are reference-card only. The game keeps the original published physics, collision, boss logic and persistent saves.
+
+New tests/full-art.test.mjs verifies exact 194-ID/12-role coverage, path and hash matching, 170/24 quality gate, real renderer hook presence, corrupt source refusal and lazy load. New tests/browser/full-art.spec.mjs validates unloaded classic startup, all 194 selector entries, per-role live-image audition/clear, 24 alpha failures remaining reference only, focus and pause, and exact-image deep links from the Art Jury. These are authored gates, pending new GitHub CI. Baseline main had 34 Node tests and working browser journeys before this feature.

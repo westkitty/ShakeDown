@@ -119,3 +119,71 @@ body.curator-active .game-frame{border-color:#a0edbc}
 body.curator-active .art-curator{border-color:#91e3b7}
 @media(max-width:630px){.art-curator{margin:7px 0 3px;padding:5px;gap:3px}.art-curator label{font-size:10px;margin:0;min-height:26px}.gallery-link{font-size:10px}.art-warning{font-size:9px}}
 @media(max-height:520px) and (orientation:landscape) and (pointer:coarse){.art-curator{padding:3px;margin:3px 0;gap:3px}.art-curator label{font-size:9px;min-height:16px}.art-warning,.art-curator .gallery-link{display:none}.dialog .gallery-link{font-size:9px}}
+
+
+/* Asset Director is a native-dialog, demand-loaded inspector inside the existing
+   game. It does not mutate player state or approve physical source images. */
+.art-director-launch{display:inline-block;margin:5px auto;min-height:42px;font-size:12px}
+.art-director{
+ width:min(1170px,97vw);max-width:1170px;max-height:94dvh;
+ padding:0;border:2px solid #d6b16c;border-radius:14px;color:#fff1d4;
+ background:#0c253b;box-shadow:0 20px 90px #000a;overflow:auto
+}
+.art-director::backdrop{background:#081522e9}
+.art-director *{box-sizing:border-box}
+.art-director-shell{padding:clamp(10px,2vw,20px)}
+.art-director-header{display:flex;align-items:start;justify-content:space-between;gap:16px}
+.art-director-eyebrow{font-size:11px;color:#eec66f;letter-spacing:.13em;font-weight:900}
+.art-director-header h2{font-size:clamp(19px,3vw,34px);margin:5px 0;letter-spacing:-.04em}
+.art-director-header h2 span{color:#9be5ba}
+.art-director-header p{font-size:12px;max-width:760px;color:#d1e4e6;line-height:1.5}
+.art-director button,.art-director a{
+ border:1px solid #8ab1b9;border-radius:6px;padding:10px;color:#fff5d4;
+ background:#224763;font-weight:850;font-size:12px;text-decoration:none;cursor:pointer
+}
+.art-director button:disabled{opacity:.5;cursor:not-allowed}
+.art-director button:focus-visible,.art-director a:focus-visible,
+.art-director select:focus-visible,.art-director input:focus-visible{
+ outline:3px solid #ffe47e;outline-offset:3px
+}
+.art-director-toolbar{display:flex;gap:8px;margin:12px 0;flex-wrap:wrap}
+.art-director-toolbar label{flex:1;min-width:165px;font-size:11px;font-weight:850;color:#bcd5e2}
+.art-director-toolbar input,.art-director-toolbar select,
+.art-director-browser select{
+ width:100%;min-height:42px;padding:8px;margin-top:5px;border-radius:6px;
+ border:1px solid #739db4;color:#fff7dd;background:#102d46;font-size:13px
+}
+.art-director-columns{display:grid;grid-template-columns:minmax(160px,260px) minmax(0,1fr);gap:12px}
+.art-director-browser{min-width:0}
+.art-director-browser>label{font-size:11px;color:#d7e5e7}
+.art-director-browser select{height:340px;max-height:46vh;min-height:160px;overflow:auto}
+.art-director-browser option{padding:7px 3px}
+.art-director-steps{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:7px}
+.art-director-stage{min-width:0}
+.art-director-stage canvas{
+ display:block;width:100%;height:auto;max-height:42dvh;object-fit:contain;
+ border:1px solid #b9a06c;border-radius:7px;background:#879399
+}
+.art-director-info h3{margin:10px 0 4px;color:#ffe0a2;font-size:17px}
+.art-director-info span{color:#9bdacf;font:12px ui-monospace,monospace;overflow-wrap:anywhere}
+.art-director-info p{font-size:12px;color:#d4e2e2;line-height:1.5}
+.art-director-buttons{display:flex;gap:7px;align-items:center;flex-wrap:wrap}
+.art-director-buttons #art-director-apply{background:#bdda8b;color:#102c32}
+.art-director-status{color:#f4dc9f;min-height:22px;line-height:1.45;font-size:12px}
+.art-director footer{
+ border-top:1px solid #4c7084;margin-top:13px;padding-top:10px;
+ color:#bccfda;font-size:11px;line-height:1.5
+}
+@media(max-width:650px){
+ .art-director{width:99vw;max-height:97dvh}
+ .art-director-columns{grid-template-columns:1fr}
+ .art-director-browser select{height:120px;min-height:80px;max-height:160px}
+ .art-director-stage canvas{max-height:32dvh}
+ .art-director-header{flex-wrap:wrap}
+ .art-director-toolbar label{min-width:135px}
+ .art-director button,.art-director a{min-height:44px}
+}
+
+/* On very narrow phones, pause opens the same asset inspector without adding
+   a fourth competing live-game status-row control. */
+@media(max-width:600px){#art-director-play-open{display:none}}

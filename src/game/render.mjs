@@ -1,6 +1,7 @@
 import {VIEW,WORLD,DOME_ARENA_Y,visibleWorld} from './world.mjs';
 import {movingPosition} from './engine.mjs';
 import {frameForState} from './animation.mjs';
+import {paintArtOverrides} from './art-scene.mjs';
 const TAU=Math.PI*2;
 const lerp=(a,b,t)=>a+(b-a)*t;
 const clamp=(n,a,b)=>Math.min(Math.max(n,a),b);
@@ -260,16 +261,19 @@ function birthdayDecor(ctx,t,art={}){
  drawShake(ctx,860,420,2.0,true,art);
  confettiSky(ctx,t);
 }
-export function render(ctx,s,sprites,alpha=0,art={}){
+export function render(ctx,s,sprites,alpha=0,art={},audition={}){
  const t=s.elapsed,decorativeTime=s.settings.reducedMotion?0:t,cam=s.camera;
  ctx.clearRect(0,0,VIEW.width,VIEW.height);
- const isDome=cam.x>3150;sky(ctx,decorativeTime,isDome,art);farCampus(ctx,cam,decorativeTime);quad(ctx,cam,decorativeTime,art);mainBuilding(ctx,cam,decorativeTime);
+ const isDome=cam.x>3150;sky(ctx,decorativeTime,isDome,art);
+ paintArtOverrides(ctx,s,audition,'backdrop');
+ farCampus(ctx,cam,decorativeTime);quad(ctx,cam,decorativeTime,art);mainBuilding(ctx,cam,decorativeTime);
  ctx.save();ctx.translate(-cam.x,-cam.y);
  for(const p of visibleWorld(s.level.platforms,cam.x,cam.y)){
   const pos=movingPosition(p,t),active=!p.pulse||s.activePulse||s.player.onPlatform===p.id;
   drawPlatform(ctx,p,pos.x,pos.y,active,decorativeTime);
  }
  ctx.restore();
+ paintArtOverrides(ctx,s,audition,'world');
  decoration(ctx,s,decorativeTime,art);
  // Readable non-colliding intro glimpse: the Fox runs away with the actual independent cup.
  if(s.elapsed<2.4 && cam.x<1050 && s.mode==='playing'){
@@ -278,6 +282,7 @@ export function render(ctx,s,sprites,alpha=0,art={}){
   ctx.restore();
  }
  player(ctx,s,sprites,art);if(!s.settings.reducedMotion)events(ctx,s,t);
+ paintArtOverrides(ctx,s,audition,'actors');
  const inPulse=s.activePulse;ctx.save();ctx.textAlign='center';ctx.font='900 31px system-ui';
  if(s.mode==='playing'&&!s.boss.triggered){
   ctx.globalAlpha=.90;ctx.fillStyle=inPulse?'#fff0ac':'#a9d7f6';ctx.shadowColor='#2b4d78';ctx.shadowBlur=10;
@@ -288,6 +293,7 @@ export function render(ctx,s,sprites,alpha=0,art={}){
  if(s.boss.triggered&&s.boss.hp>0){ctx.textAlign='left';ctx.font='900 18px system-ui';ctx.fillStyle='#fff5dc';ctx.fillText('THE FOX',343,90);
   ctx.fillStyle='#352a37';rounded(ctx,434,73,210,23,7);ctx.fill();ctx.fillStyle='#f27e57';rounded(ctx,438,76,202*s.boss.hp/3,17,5);ctx.fill();}
  if(s.mode==='victory'){ctx.fillStyle='rgba(13,24,35,.66)';ctx.fillRect(0,0,VIEW.width,VIEW.height);
-  birthdayDecor(ctx,decorativeTime,art);ctx.fillStyle='#fff6d2';ctx.font='900 55px system-ui';ctx.fillText('HAPPY BIRTHDAY,',480,155);ctx.fillStyle='#fbd57b';ctx.font='900 63px system-ui';ctx.fillText('MAVERICK!',480,215);}
+  birthdayDecor(ctx,decorativeTime,art);paintArtOverrides(ctx,s,audition,'birthday');ctx.fillStyle='#fff6d2';ctx.font='900 55px system-ui';ctx.fillText('HAPPY BIRTHDAY,',480,155);ctx.fillStyle='#fbd57b';ctx.font='900 63px system-ui';ctx.fillText('MAVERICK!',480,215);}
  ctx.restore();
+ paintArtOverrides(ctx,s,audition,'hud');
 }

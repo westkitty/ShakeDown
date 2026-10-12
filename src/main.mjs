@@ -4,6 +4,7 @@ import {render} from './game/render.mjs';
 import {AudioBox} from './game/audio.mjs';
 import {loadApprovedArt} from './game/production-assets.mjs';
 import {loadCuratedPreview} from './game/curated-assets.mjs';
+import {ArtDirector} from './game/art-director.mjs';
 import {checkpointRecord,validCheckpointRecord,restoreCheckpoint} from './game/progress.mjs';
 const $=id=>document.getElementById(id);
 const canvas=$('game'),ctx=canvas.getContext('2d',{alpha:false});
@@ -31,7 +32,10 @@ function showContinue(){
 const audio=new AudioBox();audio.mute(state.settings.mute,{resume:false});
 let productionArt={},productionLoaded=0,productionDeclared=0,productionErrors=[];
 let curatedArt={},renderArt=productionArt,curatedLoaded=0,curatedSelected=0,curatedErrors=[];
-let curatedEnabled=new URLSearchParams(location.search).get('art')==='curated';
+let curatedEnabled=['curated','all'].includes(new URLSearchParams(location.search).get('art'));
+let auditionRoles={};
+const director=new ArtDirector({onApply:roles=>{auditionRoles=roles;}});
+function showDirector(){if(state.mode==='playing')togglePause();director.open().catch(error=>console.error('Art director unavailable',error));}
 let curatorLoading=null,curatorStatus='';
 function refreshArt(){renderArt=curatedEnabled?{...curatedArt,...productionArt}:productionArt}
 function updateCuratorControls(){
@@ -123,6 +127,7 @@ function isEditingFocus(){
  return Boolean(element?.closest?.('input,textarea,select,[contenteditable="true"]'));
 }
 function handleModalTab(e){
+ if(director.dialog.open)return false;
  if(e.code!=='Tab')return false;
  const overlayId=overlayByMode[state.mode];
  if(!overlayId)return false;
@@ -137,6 +142,7 @@ function handleModalTab(e){
  return false;
 }
 window.addEventListener('keydown',e=>{
+ if(director.dialog.open)return;
  if(handleModalTab(e))return;
  if(e.code==='Escape'||e.code==='KeyP'){
   if(state.mode==='playing'||state.mode==='pause'){
@@ -187,7 +193,7 @@ window.addEventListener('keyup',e=>{
  keyActs.delete(e.code);updateHeld(act);e.preventDefault();
 });
 window.addEventListener('blur',()=>{clearInputs();if(state.mode==='playing')togglePause()});
-window.addEventListener('pagehide',()=>audio.dispose());
+window.addEventListener('pagehide',()=>{audio.dispose();director.dispose()});
 document.addEventListener('visibilitychange',()=>{if(document.hidden){clearInputs();if(state.mode==='playing')togglePause()}lastStamp=0;accumulator=0});
 for(const button of document.querySelectorAll('.touch')){
  const action=button.dataset.action;
@@ -241,6 +247,8 @@ updateContrast();
 $('assist-check').addEventListener('change',e=>{state.settings.assist=e.target.checked;save()});
 $('motion-check').addEventListener('change',e=>{state.settings.reducedMotion=e.target.checked;save()});
 $('contrast-check').addEventListener('change',e=>{state.settings.contrast=e.target.checked;updateContrast();save()});
+for(const id of ['art-director-title-open','art-director-pause-open','art-director-play-open'])
+ $(id).addEventListener('click',showDirector);
 for(const id of ['art-preview-title','art-preview-pause'])
  $(id).addEventListener('change',event=>setCuratedPreview(event.target.checked));
 if(curatedEnabled)setCuratedPreview(true);
@@ -316,7 +324,7 @@ function animate(ms){requestAnimationFrame(animate);
  }else{accumulator=0}
  if(state.mode==='victory')state.elapsed+=dt;
  const drawStart=performance.now();
- render(ctx,state,sprites,accumulator/DT,renderArt);
+ render(ctx,state,sprites,accumulator/DT,renderArt,auditionRoles);
  if(actualFrameMs>0){frameTimings.push({frame:actualFrameMs,render:performance.now()-drawStart});
   if(frameTimings.length>240)frameTimings.shift()}
  if(ms-lastHUD>110){hud();lastHUD=ms}
@@ -341,7 +349,7 @@ if(previewId){productionStatus='LOCAL ART PREVIEW ONLY: '+previewId+' (NOT produ
   showAssetStatus();
  }).catch(error=>{productionErrors=['loader: '+error.message];showAssetStatus()});
  showMode();requestAnimationFrame(animate);
-window.__SHAKEDOWN_QA={snapshot:()=>snapshot(state),metrics,audio:()=>audio.diagnostics(),assets:()=>({loaded:assetCount,failed:[...assetErrors],productionLoaded,productionDeclared,productionErrors:[...productionErrors],curatedEnabled,curatedLoaded,curatedSelected,curatedErrors:[...curatedErrors]}),
+window.__SHAKEDOWN_QA={snapshot:()=>snapshot(state),metrics,audio:()=>audio.diagnostics(),artDirector:()=>director.diagnostics(),assets:()=>({loaded:assetCount,failed:[...assetErrors],productionLoaded,productionDeclared,productionErrors:[...productionErrors],curatedEnabled,curatedLoaded,curatedSelected,curatedErrors:[...curatedErrors]}),
  // Developer-only deterministic test aids; excluded from normal gameplay and production paths.
  ...(new URLSearchParams(location.search).has('qa')?{
   warp:(x,y)=>{state.player.x=x;state.player.y=y;state.player.prevX=x;state.player.prevY=y;state.player.vx=0;state.player.vy=0;state.camera.x=Math.max(0,x-450);state.camera.y=Math.min(0,y-260);},
@@ -349,3 +357,6 @@ window.__SHAKEDOWN_QA={snapshot:()=>snapshot(state),metrics,audio:()=>audio.diag
   inspectState:()=>state
  }:{})};
 window.__SHAKEDOWN_BOOT_READY?.();
+const inspectionId=new URLSearchParams(location.search).get('inspect');
+if(inspectionId&&/^[A-Z]{2,4}-(?:[A-Z]{1,3})?\d{2,3}$/.test(inspectionId))
+ director.open(inspectionId).catch(error=>console.error('Art source inspection failed',error));
