@@ -269,3 +269,12 @@ The full Asset Director source registry remains 194/194, one playable-context ro
 - Baseline 390×844 Big Mac mobile-emulated Chromium: canvas 372×209.25 CSS pixels, empty-page/game rAF p95 both 100ms (host-constrained), Canvas draw p95 1.3ms. Measurements after change must use identical conditions and distinguish host throttling from game cost.
 - Guardrails: desktop and landscape remain 16:9; portrait player stays onscreen after motion and source Canvas ratio remains 16:9; restore CSS fallback if cropping loses boss telegraphs or fails actual-device play.
 - Real physical Android performance still requires on-device JS tracing, not Chrome gfxinfo UI frames.
+
+## 2026-10-12 — OMNI accepted P019: shipped-art acceptance evidence and gated release status
+
+- Scope: read-only project-aware audit of the 63 selected provisional production PNGs, Cinnamon canonical sheet/26 frames, Smudge/Dexter source+animation, and current title/result plates. Every selected PNG is hash/dimension verified against manifests; no artwork, review source records, or runtime approval ledger changed.
+- Critical provenance distinction: `assets/production/approvals.json` has historic FOX-01 project-owner character **design** approval, but it is NOT SHA-bound to `assets/production/fox/fox_01.png` and does not establish runtime final acceptance. Preserve that decision without elevating it to a false file-specific approval.
+- Added `npm run art:acceptance` for a deterministic JSON report, optional 63-source Markdown checklist and `--require-approved` release gate (exit 2 while final human art acceptance remains incomplete; 3 on integrity errors). This gate is opt-in and does not falsely invalidate existing gameplay or static CI.
+- Review handoff: `docs/P019_OWNER_ART_ACCEPTANCE_20261012.md`. Separates technical validity from actual visual judgment and owner signoff, calls out absent original pre-handoff Cinnamon ZIP, and requires explicit source-bound final integration later.
+- Outcome: automation and review handoff implemented, artistic signoff BLOCKED pending owner. Game engine, save schema, assets, source hashes, provenance records and default artwork unchanged. P019 source-verified is NOT P019 artistically complete.
+- Browser QA observation: one broad-suite run sampled the title Canvas before post-load source frames were painted, giving a misleading blocked-art pixel delta. The isolated test passed. Strengthened the pixel invariant to sample only after two frames following sprite readiness; rerun passed all 7 desktop Art Director/product-shell checks.

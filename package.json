@@ -11,7 +11,8 @@
     "asset:validate": "node scripts/asset-intake.mjs validate",
     "asset:batch": "node scripts/batch-intake.mjs",
     "perf:audit": "node scripts/perf-audit.mjs",
-    "release:preflight": "node scripts/release-preflight.mjs"
+    "release:preflight": "node scripts/release-preflight.mjs",
+    "art:acceptance": "node scripts/art-acceptance-audit.mjs"
   },
   "engines": {
     "node": ">=20"

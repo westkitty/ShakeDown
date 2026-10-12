@@ -70,6 +70,9 @@ test('all 24 contract-blocked images remain viewable as reference but never beco
  await page.emulateMedia({reducedMotion:'reduce'});
  await page.goto('./?art=classic');
  await expect.poll(async()=>page.evaluate(()=>window.__SHAKEDOWN_QA.assets().loaded)).toBe(25);
+ // All sprite image promises may settle before the first Canvas frame includes
+ // their pixels. Compare two genuinely painted, post-load frames, not loader UI state.
+ await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
  const sample=()=>page.evaluate(()=>{
   const ctx=document.querySelector('#game').getContext('2d'),pixels=[];
   for(let y=16;y<540;y+=32)for(let x=16;x<960;x+=32)
