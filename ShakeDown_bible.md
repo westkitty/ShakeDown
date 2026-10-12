@@ -187,3 +187,10 @@ The full Asset Director source registry remains 194/194, one playable-context ro
 - Made the existing SHA-verified, structural-review-safe 28 Curator's Cut previews the default visible in-game presentation, without granting final art approval. 194 candidate IDs remain source-verified and accessible through the native Art Director, 24 structurally blocked images remain QA-only.
 - Added Node PNG dimension and integration assertions plus actual browser title/selector/classic fallback journeys. CI proof to be recorded separately; mobile physical testing and human art acceptance still pending.
 - Git delivery: implementation SHA to be appended after CI and merge.
+
+## 2026-10-12 — imported uploaded three-screen artwork (same-day continuation)
+
+- Inspected attached `ShakeDown_Screens_2026-10-11.zip`: start/level title, Game Over/Continue, Victory/Credits, each texted and clean in 960×540 and 1920×1080, totaling 12 unique PNG files plus a review contact sheet and original generator.
+- Reproduced all 12 exact bytes inside GitHub Actions from the source SHA256 `2634be093b2a42249233962324047d68b80f81e2bb16fda1d5152d62bf7dfc64`; each output's SHA matched its original uploaded counterpart. The updated portable source remains in `scripts/build_uploaded_screens.py` and its reconstruction helper ensures font SHA integrity.
+- Wired clean original start, Game Over, and Victory plates into the semantic title/result overlays while keeping all ten alternative title scenes selectable. Provisional visual approval, no-SVG rule, gameplay mechanics, menu/button focus, and classic art opt-out remain unchanged.
+- Added PNG-byte-equality and dimension regression assertions plus real-browser checks for the title gallery, Game Over retry, and Victory replay. New final CI and live deployment pending.

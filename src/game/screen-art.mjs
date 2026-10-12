@@ -1,5 +1,9 @@
 // Presentation-only raster title and result plates. No SVG and no gameplay mutations.
+// The three owner-provided clean plates are exact SHA-verified reconstructions of
+// ShakeDown_Screens_2026-10-11.zip; alternate title art remains freely browsable.
 export const TITLE_SCENES=Object.freeze([
+ {slug:'owner-start',label:'THE ORIGINAL BIRTHDAY START',
+  path:'assets/screens/01_start_level_clean_960x540.png',kind:'owner'},
  {slug:'01_dawn-quad-hero',label:'THE SHAKE SNATCH'},
  {slug:'02_the-last-shake',label:'THE LAST SHAKE'},
  {slug:'03_golden-ascent',label:'THE GOLDEN ASCENT'},
@@ -11,11 +15,19 @@ export const TITLE_SCENES=Object.freeze([
  {slug:'09_the-long-way-up',label:'THE LONG WAY UP'},
  {slug:'10_the-prize',label:'THE PRIZE'}
 ].map(item=>Object.freeze(item)));
-export const RESULT_SCENES=Object.freeze({dead:3,victory:4});
+export const RESULT_SCENES=Object.freeze({
+ dead:'assets/screens/02_game_over_continue_clean_960x540.png',
+ victory:'assets/screens/03_victory_credits_clean_960x540.png'
+});
 export function titleScenePath(index){
  if(!Number.isInteger(index)||index<0||index>=TITLE_SCENES.length)
   throw RangeError('Unknown title art index');
- return 'assets/title/canvas/title_'+TITLE_SCENES[index].slug+'_960x540.png';
+ const scene=TITLE_SCENES[index];
+ return scene.path||'assets/title/canvas/title_'+scene.slug+'_960x540.png';
+}
+export function resultScenePath(mode){
+ if(!Object.hasOwn(RESULT_SCENES,mode))throw RangeError('Unknown result art mode');
+ return RESULT_SCENES[mode];
 }
 
 // Visuals are provisional and fail open to the existing semantic DOM menu.
@@ -35,20 +47,23 @@ export function initScreenArt({doc=document,search=location.search}={}){
   image.setAttribute('aria-hidden','true');
   image.decoding='async';
   holder.insertBefore(image,holder.firstChild);
-  plates[mode]={holder,image,loadedIndex:-1};
+  plates[mode]={holder,image,loadedSource:null};
  }
- function display(mode,index){
+ function display(mode,index=0){
   const plate=plates[mode];if(!plate)return;
-  if(plate.loadedIndex===index)return;
-  plate.loadedIndex=index;
-  const source=titleScenePath(index);
+  const source=mode==='title'?titleScenePath(index):resultScenePath(mode);
+  if(plate.loadedSource===source)return;
+  plate.loadedSource=source;
+  const owner=source.startsWith('assets/screens/');
+  plate.holder.classList.remove('screen-art-ready','owner-art-ready');
   plate.image.onload=()=>{
    if(plate.image.getAttribute('src')!==source)return;
-   if(plate.image.naturalWidth===960&&plate.image.naturalHeight===540)
+   if(plate.image.naturalWidth===960&&plate.image.naturalHeight===540){
     plate.holder.classList.add('screen-art-ready');
-   else plate.holder.classList.remove('screen-art-ready');
+    plate.holder.classList.toggle('owner-art-ready',owner);
+   }else plate.holder.classList.remove('screen-art-ready','owner-art-ready');
   };
-  plate.image.onerror=()=>plate.holder.classList.remove('screen-art-ready');
+  plate.image.onerror=()=>plate.holder.classList.remove('screen-art-ready','owner-art-ready');
   plate.image.src=source;
  }
  let chosen=0;
@@ -59,12 +74,15 @@ export function initScreenArt({doc=document,search=location.search}={}){
   controls.innerHTML='<button id="title-art-prev" type="button" aria-label="Previous title artwork">◀</button><span id="title-art-status" role="status" aria-live="polite"></span><button id="title-art-next" type="button" aria-label="Next title artwork">▶</button>';
   panel.append(controls);
   const status=controls.querySelector('#title-art-status');
-  const refresh=()=>{status.textContent=String(chosen+1).padStart(2,'0')+' / 10 · '+TITLE_SCENES[chosen].label;display('title',chosen)};
+  const refresh=()=>{
+   status.textContent=String(chosen+1).padStart(2,'0')+' / '+TITLE_SCENES.length+' · '+TITLE_SCENES[chosen].label;
+   display('title',chosen);
+  };
   controls.querySelector('#title-art-prev').addEventListener('click',()=>{chosen=(chosen+TITLE_SCENES.length-1)%TITLE_SCENES.length;refresh()});
   controls.querySelector('#title-art-next').addEventListener('click',()=>{chosen=(chosen+1)%TITLE_SCENES.length;refresh()});
   refresh();
  }
  return {setMode(mode){
-  if(Object.hasOwn(RESULT_SCENES,mode))display(mode,RESULT_SCENES[mode]);
+  if(Object.hasOwn(RESULT_SCENES,mode))display(mode);
  }};
 }

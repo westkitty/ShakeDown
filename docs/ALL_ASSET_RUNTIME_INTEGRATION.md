@@ -65,3 +65,7 @@ Blocked sources may be auditioned **as labeled QA reference cards**, never as fa
 ## 2026-10-12 — raster screen presentation
 
 The ten PNG-only title artworks from `arena/83855d4e-shakedown` were integrated as a user-selectable title gallery; the existing game-over and birthday-result modes display context-appropriate raster plates while keeping real DOM buttons, progress and focus handling. The alternate `art/shakedown-four-title-screens-20261011` branch held SVGs only; its changes were intentionally omitted from the resulting runtime tree. No SVG is loaded or introduced. Source approval boundaries, collider authority and source-hash checks remain intact.
+
+## Three provided screen deliverables (2026-10-12)
+
+In addition to the existing ten PNG-only title alternatives and 194 generated source art candidates, the user-supplied `ShakeDown_Screens_2026-10-11.zip` supplied Start/Level title, Game Over/Continue, Victory/Credits. All twelve 960×540/1920×1080 clean/texted PNGs were reproduced **byte-for-byte** on GitHub Actions, hash-verified against the uploaded originals, committed to `assets/screens/`, and wired into the real playable Start, Game Over, and Victory UI via clean plates. Real DOM controls preserve live menu interactions and screen-reader semantics. The ten generated alternate title images remain accessible through a user-facing selector; no SVG was added. See `assets/screens/README.md`.

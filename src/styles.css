@@ -225,3 +225,50 @@ body.high-contrast .scene-art-backdrop{opacity:.07!important}
  .title-art-controls button{min-height:29px}
  #dead-overlay.screen-art-ready .dialog{width:90%;padding:7px}
 }
+
+
+/* Owner-supplied three-screen pixel-art plates (exact ZIP byte hashes).
+   Clean artwork leaves real text/buttons in the DOM, not baked into the PNG. */
+.overlay.owner-art-ready>.scene-art-backdrop{image-rendering:pixelated}
+#title-overlay.owner-art-ready{
+ align-items:flex-start;justify-content:center;padding:clamp(4px,1.5vw,12px);
+}
+#title-overlay.owner-art-ready .hero-panel{
+ width:min(535px,62%);max-height:94%;padding:10px 13px;margin:0;
+ background:linear-gradient(180deg,#07142ecb,#07172bee);
+ border:2px solid #e8c573;box-shadow:0 4px 20px #020d22aa;overflow:auto;
+}
+#title-overlay.owner-art-ready .hero-panel>.eyebrow,
+#title-overlay.owner-art-ready .hero-panel>h2,
+#title-overlay.owner-art-ready .hero-panel>p{
+ position:static!important;clip-path:none!important;width:auto;height:auto;
+ padding:0;overflow:visible;white-space:normal;
+}
+#title-overlay.owner-art-ready .hero-panel>.eyebrow{font-size:10px;letter-spacing:.11em}
+#title-overlay.owner-art-ready .hero-panel>h2{
+ font-size:clamp(16px,2.6vw,27px);margin:4px 0;line-height:1.07;
+}
+#title-overlay.owner-art-ready .hero-panel>p{font-size:12px;margin:4px 0 6px}
+#title-overlay.owner-art-ready .hero-panel>p.small{font-size:11px}
+#dead-overlay.owner-art-ready{align-items:center;justify-content:center}
+#dead-overlay.owner-art-ready .dialog{
+ width:min(430px,78%);margin:0;padding:10px 14px;background:#071629dc;
+}
+#victory-overlay.owner-art-ready .ending{
+ position:absolute;left:3%;bottom:12%;width:min(36%,340px);
+ max-height:73%;overflow:auto;padding:12px;background:#071629ea;
+}
+#victory-overlay.owner-art-ready .ending h2{font-size:clamp(15px,2.7vw,29px)}
+@media(max-width:630px){
+ #title-overlay.owner-art-ready{padding:3px}
+ #title-overlay.owner-art-ready .hero-panel{
+  width:min(84%,290px);max-height:98%;padding:4px 6px;
+ }
+ #title-overlay.owner-art-ready .hero-panel>.eyebrow{display:none}
+ #title-overlay.owner-art-ready .hero-panel>h2{font-size:clamp(11px,3.1vw,18px);margin:1px 0 3px}
+ #title-overlay.owner-art-ready .hero-panel>p{font-size:10px;margin:2px 0}
+ #title-overlay.owner-art-ready .hero-panel>p.small{display:none}
+ #dead-overlay.owner-art-ready .dialog{width:87%;padding:5px}
+ #victory-overlay.owner-art-ready .ending{left:3%;bottom:6%;width:57%;max-height:87%;padding:5px}
+ #victory-overlay.owner-art-ready .ending h2{font-size:14px}
+}
