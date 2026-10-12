@@ -252,3 +252,11 @@ The full Asset Director source registry remains 194/194, one playable-context ro
 - Hardware discovery: Galaxy Tab S9 Ultra SM-X910, Android 16, Chrome 154.0.8037.126 physically reachable through MacBook ADB; Chrome DevTools HTTP endpoint over ADB tunnel returned empty responses despite a socket. Android gfxinfo after a seven-second game sample yielded one Android UI frame, which is NOT a measure of Canvas frame pacing and must not be labeled FPS proof.
 - Physical phone/tablet FPS, game input latency, audio, heat, memory drift, and 30-minute play remain evidence gaps until on-device JavaScript tracing is available. Empty browser slowdown must not be misattributed to the game.
 - Browser and Node validation details and Git hash are recorded in the delivery summary. Push to feature branch only; no main deployment.
+
+## 2026-10-12 — OMNI accepted P001: player-first shell with opt-in workshop
+
+- Starting point: P004 feature commit 2364ee78960ff09acbd59c3094cd1eef27d619cc, pushed to feature branch.
+- Problem: live title and HUD prominently exposed development Art Director, 194-image review, provisional-art status and eleven alternate-screen selectors; first-time invitation was visually crowded.
+- Change: title and pause place the existing (unmodified) art director, gallery, curated toggles, status and raster-title selector behind keyboard-operable Workshop details. Gameplay HUD no longer exposes development-only button. Reduced title copy avoids spoiling secret NPCs.
+- Safety: boot failure automatically opens Workshop so Retry Loading remains reachable. Gallery deep links, standalone Asset Control Room, Art Jury, hash-only approval gate and QA endpoints remain available.
+- Existing tests updated to explicitly open the workshop when exercising tools; a new player-first regression prevents restored HUD/title clutter. No physics, music, art images, or save schema changes.

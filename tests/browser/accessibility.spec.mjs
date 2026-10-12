@@ -13,6 +13,7 @@ test('pause is a keyboard-accessible dialog with focus containment and no auto-r
   code:'KeyP',key:'p',repeat:true,bubbles:true,cancelable:true
  })));
  await expect(page.locator('#pause-overlay')).not.toHaveClass(/hidden/);
+ await page.locator('#workshop-pause > summary').click();
  await page.locator('#art-director-pause-open').focus();
  await page.keyboard.press('Tab');
  await expect(page.locator('#resume-btn')).toBeFocused();

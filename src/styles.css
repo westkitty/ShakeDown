@@ -338,3 +338,15 @@ body.high-contrast #hud-health .health-heart--full{color:#ffc4c4}
 body.high-contrast #hud-health .health-heart--half::after{color:#ffc4c4}
 body.high-contrast #hud-health .health-heart--half{color:#786369}
 body.high-contrast #hud-health .health-heart--empty{color:#b8abab}
+
+
+/* P001: production controls live in opt-in workshop panels, not on the HUD. */
+.workshop-panel{margin:12px auto 0;max-width:480px;border:1px solid #587d91;border-radius:8px;background:#091e31dc;color:#ceddec;text-align:left}
+.workshop-panel>summary{cursor:pointer;list-style-position:inside;text-align:center;padding:9px 12px;font-size:11px;font-weight:900;letter-spacing:.10em;color:#f2d797}
+.workshop-panel>summary:hover{color:#fff8e2}
+.workshop-panel>summary:focus-visible{outline:3px solid #fcda7c;outline-offset:3px}
+.workshop-panel[open]{border-color:#e4bd69}
+.workshop-body{padding:4px 10px 13px;text-align:center}
+.workshop-body .art-curator{margin:10px 0 6px}
+.workshop-body .secondary{margin-top:8px}
+#workshop-title .tiny{overflow-wrap:anywhere}

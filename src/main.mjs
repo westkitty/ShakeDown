@@ -292,7 +292,7 @@ updateContrast();
 $('assist-check').addEventListener('change',e=>{state.settings.assist=e.target.checked;save()});
 $('motion-check').addEventListener('change',e=>{state.settings.reducedMotion=e.target.checked;save()});
 $('contrast-check').addEventListener('change',e=>{state.settings.contrast=e.target.checked;updateContrast();save()});
-for(const id of ['art-director-title-open','art-director-pause-open','art-director-play-open'])
+for(const id of ['art-director-title-open','art-director-pause-open'])
  $(id).addEventListener('click',showDirector);
 for(const id of ['art-preview-title','art-preview-pause'])
  $(id).addEventListener('change',event=>setCuratedPreview(event.target.checked));
