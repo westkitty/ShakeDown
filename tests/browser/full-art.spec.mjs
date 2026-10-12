@@ -64,6 +64,7 @@ test('all twelve art families can be applied to their live game roles and remove
 
 test('all 24 contract-blocked images remain viewable as reference but never become live scenery',async({page})=>{
  test.setTimeout(45000);
+ await page.emulateMedia({reducedMotion:'reduce'});
  await page.goto('./?art=classic');
  await expect.poll(async()=>page.evaluate(()=>window.__SHAKEDOWN_QA.assets().loaded)).toBe(25);
  const sample=()=>page.evaluate(()=>{

@@ -136,9 +136,12 @@ test('reviewed but UNVERIFIED art is not displayed outside local explicit QA pre
  await page.goto('./');
  await expect.poll(async()=>page.evaluate(()=>window.__SHAKEDOWN_QA?.assets?.().productionDeclared??null)).toBe(0);
  await page.goto('./?preview-art=CO-03');
- await expect.poll(async()=>page.evaluate(()=>window.__SHAKEDOWN_QA?.assets?.().productionLoaded??null)).toBe(1);
- await expect(page.locator('#load-status')).toContainText('LOCAL ART PREVIEW');
- await expect(page.locator('#load-status')).toContainText('NOT production activated');
+ const local=await page.evaluate(()=>['localhost','127.0.0.1'].includes(location.hostname));
+ await expect.poll(async()=>page.evaluate(()=>window.__SHAKEDOWN_QA?.assets?.().productionLoaded??null)).toBe(local?1:0);
+ if(local){
+  await expect(page.locator('#load-status')).toContainText('LOCAL ART PREVIEW');
+  await expect(page.locator('#load-status')).toContainText('NOT production activated');
+ }else await expect(page.locator('#load-status')).not.toContainText('LOCAL ART PREVIEW');
  await page.goto('./');
  await expect.poll(async()=>page.evaluate(()=>window.__SHAKEDOWN_QA?.assets?.().productionDeclared??null)).toBe(0);
 });
