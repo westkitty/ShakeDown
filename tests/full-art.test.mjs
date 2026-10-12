@@ -18,7 +18,7 @@ test('all 194 real images are routed exactly once into twelve real game contexts
  assert.deepEqual(counts,expected);
  for(const entry of entries){
   assert.equal(roleForId(entry.id),entry.role);
-  assert.ok(entry.path.startsWith('assets/production/'));
+  assert.match(entry.path,/^assets\/(?:production|level1)\//,'Both physically verified source namespaces are valid');
   assert.match(entry.sha256,/^[a-f0-9]{64}$/);
   assert.ok(entry.reason.length>=15);
   assert.equal(entry.blocked,curation.entries[entry.id].structuralIssues.length>0);
