@@ -7,7 +7,7 @@ export default defineConfig({
  fullyParallel:false,
  workers:1,
  use:{
-  baseURL:process.env.SHAKEDOWN_BASE_URL||'http://127.0.0.1:8765',
+  baseURL:(process.env.SHAKEDOWN_BASE_URL||'http://127.0.0.1:8765').replace(/\/?$/, '/'),
   trace:'retain-on-failure',
   screenshot:'only-on-failure',
   launchOptions:process.env.SHAKEDOWN_BROWSER_PATH

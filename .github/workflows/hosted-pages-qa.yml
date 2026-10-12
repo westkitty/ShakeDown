@@ -1,0 +1,35 @@
+name: Public Pages asset and browser smoke
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  hosted:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - name: Wait for exact Pages asset parity
+        run: node scripts/verify-hosted-pages.mjs
+      - name: Install Chromium for public-site smoke
+        run: npx playwright install --with-deps chromium
+      - name: Exercise actual hosted title, Game Over, Victory and classic opt-out
+        env:
+          SHAKEDOWN_BASE_URL: https://westkitty.github.io/ShakeDown/
+        run: npx playwright test tests/browser/screen-art.spec.mjs --workers=1
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: hosted-pages-qa-failures
+          path: test-results/
+          retention-days: 7

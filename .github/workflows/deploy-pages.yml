@@ -1,0 +1,35 @@
+name: Deploy ShakeDown static game to Pages
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: shakedown-pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Check out the exact main revision
+        uses: actions/checkout@v4
+      - name: Configure already-enabled GitHub Pages Actions hosting
+        uses: actions/configure-pages@v5
+      - name: Package the actual static HTML, modules and PNG/MP3 assets
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+      - name: Publish exact checkout to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
