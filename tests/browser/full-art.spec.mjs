@@ -84,7 +84,14 @@ test('all 24 contract-blocked images remain viewable as reference but never beco
 test('director captures keyboard focus, keeps pause state and dismisses with Escape',async({page})=>{
  await page.goto('./');
  await page.locator('#start-btn').click();
- await page.locator('#art-director-play-open').click();
+ if(await page.locator('#art-director-play-open').isVisible()){
+  await page.locator('#art-director-play-open').click();
+ }else{
+  // Narrow phones reach the same native inspector from Pause, leaving the
+  // live HUD uncluttered and retaining a 44px touch target.
+  await page.locator('#pause-btn').click();
+  await page.locator('#art-director-pause-open').click();
+ }
  await expect(page.locator('#art-director-dialog')).toBeVisible();
  expect((await page.evaluate(()=>window.__SHAKEDOWN_QA.snapshot())).mode).toBe('pause');
  await page.keyboard.press('Escape');
