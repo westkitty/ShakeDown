@@ -36,7 +36,7 @@ The original four-stage campaign plan is superseded by the user's October 11 com
 
 ## Reviewing LM Arena artwork
 
-The game remains playable without final outside artwork. Source approval stores files and provenance **without activating them**. A separate, reviewer-attested gameplay integration step with a real screenshot is now required before regular gameplay loads replacement art; local previews do not activate anything.
+The game remains playable without final outside artwork. The **default** now shows the 28 SHA-checked, structurally eligible Curator's Cut previews in actual gameplay, plus ten selectable raster title plates and themed game-over/victory presentation backgrounds. These remain **provisional, not human-approved**. Use `?art=classic` for the original lightweight procedural presentation. Source approval stores files and provenance **without activating them as final production-approved assets**. A separate, reviewer-attested gameplay integration step with a real screenshot is now required before regular gameplay loads replacement art; local previews do not activate anything.
 
     npm ci
     node scripts/asset-intake.mjs inspect --id CO-03 --file /path/to/your-cup.png
@@ -100,3 +100,7 @@ The in-game **ART DIRECTOR · ALL 194 ASSETS** opens from the title, Pause, or t
 The 24 source images lacking required transparency are inspectable and may appear only as labeled QA reference cards, never as real background/platform art. The other 170 sources can be tried in game roles, although source validity does not mean artistic approval.
 
 The [Art Jury](tools/asset-gallery.html) now offers a direct link for each asset to the matching in-game audition. Complete 12-role wiring and limitations: [All-asset runtime guide](docs/ALL_ASSET_RUNTIME_INTEGRATION.md). Recorded background music is documented in `assets/audio/music/manifest.json`; 18 non-covered named audio contracts remain missing.
+
+## Raster presentation branch consolidation (2026-10-12)
+
+The ten separate title PNGs are available inside the playable title screen (◀/▶), with scene-specific result art on Game Over and Victory. The masters stay in `assets/title/`; 960×540 runtime copies are in `assets/title/canvas/`. The obsolete four-SVG artwork branch was resolved without importing its SVG files. The 194 source candidates are still reviewable in the Art Director: 28 curated previews are visible in gameplay by default; the remaining candidate/revision/blocked sources require deliberate individual audition and human art review rather than undisclosed auto-approval.

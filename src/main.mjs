@@ -5,10 +5,12 @@ import {AudioBox} from './game/audio.mjs';
 import {loadApprovedArt} from './game/production-assets.mjs';
 import {loadCuratedPreview} from './game/curated-assets.mjs';
 import {ArtDirector} from './game/art-director.mjs';
+import {initScreenArt} from './game/screen-art.mjs';
 import {checkpointRecord,validCheckpointRecord,restoreCheckpoint} from './game/progress.mjs';
 const $=id=>document.getElementById(id);
 const canvas=$('game'),ctx=canvas.getContext('2d',{alpha:false});
 if(!ctx){$('load-status').textContent='Canvas rendering is unavailable on this browser.';throw Error('Canvas 2D required')}
+const screenArt=initScreenArt();
 const saveKey='shakedown:birthday:v1';
 function readSave(){
  try{const value=JSON.parse(localStorage.getItem(saveKey)||'null');
@@ -32,7 +34,9 @@ function showContinue(){
 const audio=new AudioBox();audio.mute(state.settings.mute,{resume:false});
 let productionArt={},productionLoaded=0,productionDeclared=0,productionErrors=[];
 let curatedArt={},renderArt=productionArt,curatedLoaded=0,curatedSelected=0,curatedErrors=[];
-let curatedEnabled=['curated','all'].includes(new URLSearchParams(location.search).get('art'));
+// Only source-verified, structurally eligible curated previews are used by default.
+// This is display authorization, never a final human-art approval.
+let curatedEnabled=new URLSearchParams(location.search).get('art')!=='classic';
 let auditionRoles={};
 const director=new ArtDirector({onApply:roles=>{auditionRoles=roles;}});
 function showDirector(){if(state.mode==='playing')togglePause();director.open().catch(error=>console.error('Art director unavailable',error));}
@@ -104,6 +108,7 @@ const overlayByMode={title:'title-overlay',pause:'pause-overlay',dead:'dead-over
 function showMode(){
  if(displayedMode===state.mode)return;
  displayedMode=state.mode;
+ screenArt.setMode(state.mode);
  for(const id of Object.values(overlayByMode))$(id).classList.add('hidden');
  const overlay=overlayByMode[state.mode];
  if(overlay)$(overlay).classList.remove('hidden');
