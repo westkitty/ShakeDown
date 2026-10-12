@@ -7,12 +7,12 @@
   "project_name": "ShakeDown",
   "project_root": "westkitty/ShakeDown",
   "artifact_path": "",
-  "state_revision": 11,
-  "last_updated": "2026-10-12T02:58:00Z",
+  "state_revision": 12,
+  "last_updated": "2026-10-12T04:44:00Z",
   "current_baseline": {
-    "identity": "main@9135fc8dae875e9b1dbc0afd4d08b737fa667f6f",
+    "identity": "main@528a27fc96d5962c4a0b7d90765b10c78306d970",
     "state": "current-baseline",
-    "last_verified": "2026-10-11"
+    "last_verified": "2026-10-12"
   },
   "scope_boundaries": ["ShakeDown 2D browser game", "Cinnamon Fuzzbutt sprite masters"],
   "linked_parent_state": null
@@ -286,5 +286,20 @@ Final local candidate before Git delivery: npm run validate **31/31 PASS**, rele
 
 **Remaining gates:** exact commit, GitHub CI, merge, GitHub Pages publication and hosted smoke are pending. Physical phone controls/performance, physical speaker listening, human-paced completion, owner visual acceptance, 24 alpha repairs and 11 recommended art revisions remain unverified.
 
+
+## 2026-10-12 — Raster-art screen integration and main merge (revision 12)
+
+**Verified main baseline:** `528a27fc96d5962c4a0b7d90765b10c78306d970` through PR #6; the merged commit includes both title-source branch ancestries without any SVG file in the checked-out tree. Seven earlier feature/art branches have no commits ahead of main. No force-push or previous game source removal occurred.
+
+**Physically present and activated:** 12 user-supplied Start/Game Over/Victory PNG images (each design includes clean/texted and 960×540/1920×1080 versions) recreated from source and matched byte-for-byte with the uploaded ZIP. Eleven playable title selections include the new default original screen and ten generated alternates (20 PNG files total); supplied clean loss/victory plates are visible in their actual gameplay overlays. All main actions remain live semantic buttons, not baked-image hotspots. Original 26 Cinnamon source-derived sprites, 194 inventoried candidate images, six soundtrack files, game physics, saves, input, and `?art=classic` remain preserved.
+
+**Art activation truth:** 28 curator-selected structurally safe previews now display by default after SHA-256 checks; these are explicitly provisional, not owner-approved final visuals. All 194 generated candidates have real Art Director draw paths and user-controlled auditions; 24 blocked-alpha files remain reference-only, and other unselected alternates are not automatically layered into the game.
+
+**Exact GitHub CI:** main contract job 38204739793 SUCCESS. Main desktop/mobile Playwright job 38204739823 SUCCESS: 99 passed, 8 skipped, one audio test classified flaky because it passed only on retry. Prior exact code commit Playwright run also returned 100 passes/8 skips. Neither recorded outcome establishes physical-device music playback or visual owner approval.
+
+**Open verification:** Hosted Pages content was not independently retrieved for the new SHA; real mobile device UI/performance, physical speaker/loop listening, human-paced full route, 24 transparency corrections and owner art sign-off remain unverified. Keep these gates open; never infer success from committed art alone.
+
 ### Revision log
 - Revision 11: imported and integrated the six user-selected Drive tracks, added soundtrack validation/failover/browser coverage, hardened blocked-art pixel regression sampling and completed local desktop/mobile visual and performance QA.
+
+- Revision 12: PR #6 merged into main, all supplied raster artwork reproduced from ZIP and wired, 7/7 original branches contained in main, no SVG outputs, final CI evidence recorded with one audio retry flake.
