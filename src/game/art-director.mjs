@@ -119,7 +119,7 @@ export class ArtDirector {
     const chosen=await this.library.select(this.current.id);
     this.onApply(this.library.active());
     this.message(chosen.item.id+(chosen.item.blocked?
-     ' is now a labeled reference card only; it cannot cover hazards or replace scenery.':
+     ' stays in this labeled QA inspection stage only; live gameplay remains unobstructed.':
      ' applied to its game rendering role. Disable or replace it whenever you wish.'));
    }catch(error){this.message('Application blocked: '+error.message)}
   });

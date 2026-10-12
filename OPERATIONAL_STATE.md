@@ -265,3 +265,11 @@ Final local candidate before Git delivery: npm run validate **31/31 PASS**, rele
 **Verification at implementation checkpoint:** Added complete source-role unit tests and real-browser director/focus/route tests. Exact-commit CI and deployed site interaction still need to run. No tests falsely called passed before execution.
 
 **Open:** physical device and sustained performance, owner visual signoff, 24 transparency corrections, 11 previously recommended artist revisions and 21 undelivered recorded audio outputs.
+
+## 2026-10-11 — Asset Director post-integration visual safety (revision 10)
+
+**QA finding:** The early Asset Director preview path drew a labeled blocked-source reference card over the lower-right gameplay viewport (where it could cover threats); it also drew the birthday scene test card during active gameplay rather than only at victory. These were not physics changes, but they undermined the promise that source artifacts never obscure player hazards.
+
+**Bounded repair:** Removed all blocked-source and premature-finale cards from the live Canvas. Contract-invalid images remain visually inspected in the native Asset Director itself and retain their SHA provenance and user-review deep links. In-game valid birthday variants render only during victory. Optional boss visual effects redraw code-owned ATTACK INCOMING and STUNNED cues on top of any art, preserving mechanical legibility. A bfcache pagehide preserves the inspector UI so returning from the Art Jury need not leave a detached dialog. No image files or game state were changed.
+
+**Regression tests:** Added a real browser pixel no-occlusion comparison and simulated persisted-pagehide inspection journey, plus Node source invariant checks. At this writing those additional checks are pending exact-GitHub-commit CI; original integration PR #3 already passed prior full checks and merged to main.

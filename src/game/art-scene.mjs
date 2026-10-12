@@ -19,16 +19,6 @@ function label(ctx,text,x,y){
  ctx.strokeStyle='#10293a';ctx.strokeText(text,x,y);
  ctx.fillStyle='#fff3bc';ctx.fillText(text,x,y);
 }
-function framedCandidate(ctx,entry){
- const x=VIEW.width-205,y=VIEW.height-180,w=194,h=166;
- ctx.save();
- ctx.fillStyle='#172d40dd';ctx.fillRect(x,y,w,h);
- ctx.strokeStyle='#f8a69b';ctx.lineWidth=3;ctx.strokeRect(x,y,w,h);
- place(ctx,entry.image,x+10,y+8,w-20,h-53);
- label(ctx,'BLOCKED · QA REFERENCE',x+9,y+h-27);
- label(ctx,entry.id+' (NOT GAME ART)',x+9,y+h-10);
- ctx.restore();
-}
 export function paintArtOverrides(ctx,state,roles,phase){
  if(!roles||!Object.keys(roles).length)return;
  const cam=state.camera,p=state.player;
@@ -111,6 +101,14 @@ export function paintArtOverrides(ctx,state,roles,phase){
    if(roles.bossFx&&!roles.bossFx.blocked&&state.boss.triggered){
     const x=state.boss.x-cam.x,y=state.boss.y-cam.y;
     place(ctx,roles.bossFx.image,x-70,y-115,152,152,.77);
+    // Never hide these independent gameplay warnings behind any image variant.
+    if(state.boss.mode==='tell'){
+     ctx.strokeStyle='#ff4d46';ctx.lineWidth=6;
+     ctx.beginPath();ctx.arc(x+22,y+18,90,0,Math.PI*2);ctx.stroke();
+     label(ctx,'! ATTACK INCOMING',x-46,y-63);
+    }else if(state.boss.mode==='rest'){
+     label(ctx,'STUNNED · SAFE TO HIT',x-54,y-63);
+    }
    }
   }
   return;
@@ -122,15 +120,8 @@ export function paintArtOverrides(ctx,state,roles,phase){
    label(ctx,'UI ART TEST',688,111);
    ctx.restore();
   }
-  if(roles.birthday&&!roles.birthday.blocked&&state.mode!=='victory'){
-   ctx.save();ctx.fillStyle='#132d45a6';ctx.fillRect(732,326,216,180);
-   place(ctx,roles.birthday.image,750,339,186,143,.93);
-   label(ctx,'FINALE ART TEST',745,497);ctx.restore();
-  }
-  // Any of the 24 structurally invalid PNGs can still be viewed in-game
-  // without promoting the opaque bitmap into platforms/hazards/characters.
-  const blocked=Object.values(roles).find(entry=>entry?.blocked&&entry.image);
-  if(blocked)framedCandidate(ctx,blocked);
+  // Contract-invalid images are drawn only inside the native Art Director,
+  // never as opaque reference cards over live hazards or collision cues.
   return;
  }
  if(phase==='birthday'){

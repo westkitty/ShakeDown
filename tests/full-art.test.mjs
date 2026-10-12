@@ -95,3 +95,19 @@ test('lazy source loader verifies original bytes, caches on demand, and refuses 
  }finally{runtime.dispose();globalThis.createImageBitmap=originalCreate}
  assert.ok(closed>0);
 });
+
+
+test('contract-invalid images cannot cover live hazards, and boss FX cannot hide mandatory warnings',()=>{
+ const scene=fs.readFileSync('src/game/art-scene.mjs','utf8');
+ const director=fs.readFileSync('src/game/art-director.mjs','utf8');
+ const main=fs.readFileSync('src/main.mjs','utf8');
+ assert.ok(!scene.includes('framedCandidate('),
+  'Alpha-invalid source card must never be rendered over the game playfield');
+ assert.ok(!scene.includes("roles.birthday&&!roles.birthday.blocked&&state.mode!=='victory'"),
+  'Finale preview should not cover hazards mid-game');
+ assert.ok(scene.includes('! ATTACK INCOMING'));
+ assert.ok(scene.includes('STUNNED · SAFE TO HIT'));
+ assert.ok(director.includes('QA inspection stage only'));
+ assert.ok(main.includes('if(!event.persisted)director.dispose()'),
+  'Restoring a page from bfcache must not destroy the Asset Director DOM');
+});
