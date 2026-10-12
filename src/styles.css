@@ -272,3 +272,34 @@ body.high-contrast .scene-art-backdrop{opacity:.07!important}
  #victory-overlay.owner-art-ready .ending{left:3%;bottom:6%;width:57%;max-height:87%;padding:5px}
  #victory-overlay.owner-art-ready .ending h2{font-size:14px}
 }
+
+
+/* A deliberate gameplay action: the cheer and optional rally relay counter. */
+#hud-cheer{color:#bff6c4;font-size:.78em;font-variant-numeric:tabular-nums}
+#cheer-progress{color:#e9d18c;font-weight:900;letter-spacing:.04em}
+.touch-cheer{
+ min-width:67px;font-size:12px;color:#0a2b40;
+ background:linear-gradient(160deg,#b1e5af,#6faf8d);
+ border-color:#e8eeae;border-bottom-color:#2b735e;
+}
+.touch-cheer.cooling{background:linear-gradient(160deg,#3e5d67,#2b4354);color:#cee1e7;border-color:#7b9bb1;border-bottom-color:#203849}
+body.high-contrast #hud-cheer{color:#adffbf}
+body.high-contrast .touch-cheer:not(.cooling){background:#d8ff71;color:#061522;border-color:#fff}
+@media(max-width:630px){
+ .touch-right{display:grid;grid-template-columns:repeat(2,minmax(48px,1fr));gap:5px;min-width:118px}
+ .touch-right .touch{min-width:0;min-height:48px;line-height:1.1;padding:3px 5px}
+ .touch-right .touch-jump{font-size:13px}
+ .touch-right .touch-cheer{font-size:12px}
+ .touch-left .touch{min-height:66px}
+ .controls-note{align-items:center}
+}
+@media(max-width:360px){
+ #hud-cheer{font-size:.67em}
+ .touch-right{min-width:102px}
+ .touch-right .touch{min-height:46px}
+}
+@media(max-height:520px) and (orientation:landscape) and (pointer:coarse){
+ .touch-right{display:flex;min-width:0;gap:5px}
+ .touch-right .touch{min-width:44px;min-height:44px}
+ .touch-left .touch{min-height:44px}
+}

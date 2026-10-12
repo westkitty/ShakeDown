@@ -12,7 +12,7 @@ test('checkpoint records are absent at spawn and use authored IDs once reached',
  s.level.enemies.find(e=>e.id==='cup-lawn').alive=false;
  const record=checkpointRecord(s);
  assert.deepEqual(record,{schema:1,index:2,checkpointId:'Dome Approach',
-  elapsed:22.358,collected:['quad-shake-1','quad-shake-6'],defeated:['cup-lawn']});
+  elapsed:22.358,collected:['quad-shake-1','quad-shake-6'],defeated:['cup-lawn'],rallies:[]});
  assert.equal(validCheckpointRecord(record,s.level),true);
 });
 
@@ -50,7 +50,9 @@ test('invalid or obsolete records never mutate the game',()=>{
   {...valid,elapsed:Infinity},{...valid,elapsed:-30},
   {...valid,collected:['quad-shake-1','quad-shake-1']},
   {...valid,collected:['missing-shake']},{...valid,defeated:['not-real']},
-  {...valid,collected:'not-an-array'},{...valid,defeated:null}
+  {...valid,collected:'not-an-array'},{...valid,defeated:null},
+  {...valid,rallies:['unknown-bell']},{...valid,rallies:['canopy-bell','canopy-bell']},
+  {...valid,rallies:'not-an-array'}
  ];
  for(const bad of broken){
   const next=newGame();
@@ -75,4 +77,32 @@ test('all five authored checkpoint positions resume to stable traversable geomet
   assert.ok(resumed.player.hp>0,record.checkpointId+' should start safely');
   assert.equal(resumed.checkpoint,index,record.checkpointId);
  }
+});
+
+
+test('old schema-1 checkpoint saves without relays remain valid',()=>{
+ const s=newGame();
+ const legacy={schema:1,index:2,checkpointId:'Dome Approach',elapsed:14.3,
+  collected:['quad-shake-1'],defeated:[]};
+ assert.equal(validCheckpointRecord(legacy,s.level),true);
+ assert.equal(restoreCheckpoint(s,legacy),true);
+ assert.equal(s.rallyCount,0);
+ assert.ok(s.level.rallyPosts.every(post=>!post.lit));
+ assert.ok(s.level.shakes.filter(shake=>shake.locked).length===4);
+});
+test('cheer rally reward and activation survive checkpoint resume',()=>{
+ const s=newGame();s.mode='playing';
+ const post=s.level.rallyPosts[0];s.player.x=post.x-s.player.w/2;
+ s.player.y=post.footY-s.player.h;s.player.grounded=true;
+ update(s,{cheerPressed:true},DT);
+ assert.equal(s.rallyCount,1);assert.equal(post.lit,true);
+ assert.equal(s.level.shakes.find(q=>q.id===post.reward).locked,false);
+ s.checkpoint=2;s.elapsed=18.6;
+ const save=checkpointRecord(s);
+ assert.deepEqual(save.rallies,[post.id]);
+ const restored=newGame();assert.equal(restoreCheckpoint(restored,save),true);
+ assert.equal(restored.rallyCount,1);
+ assert.equal(restored.level.rallyPosts[0].lit,true);
+ assert.equal(restored.level.shakes.find(q=>q.id===post.reward).locked,false);
+ assert.ok(restored.level.rallyPosts.slice(1).every(p=>!p.lit));
 });
