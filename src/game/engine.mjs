@@ -12,7 +12,7 @@ export function newGame(settings={}){
  const level=buildLevel();const p={x:70,y:382,prevX:70,prevY:382,w:38,h:60,vx:0,vy:0,facing:1,
  grounded:false,onPlatform:null,jumpsUsed:0,coyote:0,buffer:0,invulnerable:0,hp:3,maxHp:3,
  dashTime:0,dashCooldown:0,attackTime:0,attackCooldown:0,landTime:0};
- return {mode:'title',time:0,elapsed:0,player:p,level,shakeCount:0,secretCount:0,events:[],
+ return {mode:'title',time:0,elapsed:0,player:p,level,shakeCount:0,secretCount:0,events:[],achievements:[],discoveryToast:null,
  pulseOverride:0,activePulse:true,pulseFlash:0,cheerCooldown:0,cheerWave:0,cheerOrigin:null,rallyCount:0,camera:{x:0,y:0},checkpoint:0,
  projectiles:[],boss:{triggered:false,x:7960,y:DOME_ARENA_Y-84,w:82,h:84,hp:3,maxHp:3,mode:'sleep',attack:'charge',timer:0,cycles:0,hurtTime:0},
  settings:{assist:!!settings.assist,reducedMotion:!!settings.reducedMotion,contrast:!!settings.contrast,mute:!!settings.mute},
@@ -152,8 +152,20 @@ function projectilesStep(s,dt){const p=s.player;
 }
 function updateCamera(s,dt){const p=s.player,c=s.camera;
  const look=p.facing*105;const tx=clamp(p.x-430+look,0,WORLD.width-VIEW.width);
- const ty=clamp(p.y-270,-1625,0);
+ const inAlcove=p.y>490&&p.x<2400;
+ const ty=clamp(p.y-270,-2450,inAlcove?520:0);
  const k=1-Math.exp(-4.4*dt);c.x+=k*(tx-c.x);c.y+=k*(ty-c.y);
+}
+function updateEncounters(s){
+ const p=s.player,cx=p.x+p.w/2,cy=p.y+p.h;
+ for(const npc of s.level.secretNpcs){
+  if(Math.hypot(cx-npc.x,cy-npc.footY)>npc.radius)continue;
+  if(s.achievements.includes(npc.id))continue;
+  s.achievements.push(npc.id);
+  s.discoveryToast={id:npc.id,title:npc.title,until:s.elapsed+3.8};
+  s.status=npc.dialogue;
+  say(s,'discovery',npc.title);
+ }
 }
 export function update(s,input={},dt=DT){
  if(s.mode!=='playing')return;
@@ -220,12 +232,12 @@ export function update(s,input={},dt=DT){
    else damage(s,'A Cup Crawler caught you!',e.x);
   }
  }
- updateCannon(s,dt);projectilesStep(s,dt);updateBoss(s,dt);updateCamera(s,dt);
+ updateCannon(s,dt);projectilesStep(s,dt);updateBoss(s,dt);updateEncounters(s);updateCamera(s,dt);
 }
 export function snapshot(s){
  const p=s.player,b=s.boss;
  return {mode:s.mode,player:{x:Math.round(p.x),y:Math.round(p.y),vx:Math.round(p.vx),vy:Math.round(p.vy),grounded:p.grounded,hp:p.hp},
- shakeCount:s.shakeCount,secretCount:s.secretCount,checkpoint:s.checkpoint,activePulse:s.activePulse,
+ shakeCount:s.shakeCount,secretCount:s.secretCount,achievements:[...s.achievements],checkpoint:s.checkpoint,activePulse:s.activePulse,
  rallyCount:s.rallyCount,cheerCooldown:Number(s.cheerCooldown.toFixed(2)),cheerWave:Number(s.cheerWave.toFixed(2)),
  pulseRemaining:Number(pulseState(s.elapsed,s.pulseOverride).remaining.toFixed(2)),
  camera:{x:Math.round(s.camera.x),y:Math.round(s.camera.y)},boss:{triggered:b.triggered,mode:b.mode,hp:b.hp,x:Math.round(b.x)},

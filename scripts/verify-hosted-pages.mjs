@@ -10,7 +10,13 @@ const titleNames=[
  '07_quad-pursuit','08_blue-hour-on-the-dome','09_the-long-way-up','10_the-prize'
 ];
 const paths=[
- 'index.html','src/main.mjs','src/game/screen-art.mjs',
+ 'index.html','src/main.mjs','src/game/secret-actors.mjs','src/game/secret-assets.mjs',
+ 'src/game/world.mjs','src/game/engine.mjs','src/game/progress.mjs','src/game/render.mjs',
+ 'assets/sprites/smudge/frames.json','assets/sprites/smudge/source_sheet.png',
+ ...Array.from({length:4},(_,i)=>`assets/sprites/smudge/idle_${String(i).padStart(2,'0')}.png`),
+ 'assets/sprites/dexter/frames.json','assets/sprites/dexter/source_sheet.png',
+ ...Array.from({length:4},(_,i)=>`assets/sprites/dexter/idle_${String(i).padStart(2,'0')}.png`),
+ 'src/game/screen-art.mjs',
  'src/game/audio.mjs','src/game/curated-assets.mjs','src/styles.css',
  'assets/screens/01_start_level_clean_960x540.png',
  'assets/screens/02_game_over_continue_clean_960x540.png',
@@ -38,7 +44,8 @@ let ready=false,lastError=null;
 for(let attempt=1;attempt<=24;attempt++){
  try{
   // Pages builds are asynchronous after main merges; wait for actual publication.
-  for(const name of ['index.html','src/game/screen-art.mjs','src/game/audio.mjs'])
+  for(const name of ['index.html','src/main.mjs','src/game/secret-actors.mjs',
+    'assets/sprites/smudge/frames.json','assets/sprites/dexter/frames.json'])
    await compare(name);
   ready=true;break;
  }catch(error){
@@ -49,7 +56,8 @@ for(let attempt=1;attempt<=24;attempt++){
 }
 if(!ready)throw Error('Public Pages did not reach the repository revision: '+lastError);
 for(const path of paths){
- if(['index.html','src/game/screen-art.mjs','src/game/audio.mjs'].includes(path))continue;
+ if(['index.html','src/main.mjs','src/game/secret-actors.mjs',
+    'assets/sprites/smudge/frames.json','assets/sprites/dexter/frames.json'].includes(path))continue;
  await compare(path);
 }
 console.log('Public Pages SHA-256 parity confirmed for all '+paths.length+' authoritative files.');

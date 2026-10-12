@@ -303,3 +303,26 @@ body.high-contrast .touch-cheer:not(.cooling){background:#d8ff71;color:#061522;b
  .touch-right .touch{min-width:44px;min-height:44px}
  .touch-left .touch{min-height:44px}
 }
+
+
+/* Deterministic, accessible secret encounter overlays. */
+.discovery-toast[hidden]{display:none}
+.discovery-toast{
+ position:absolute;z-index:5;bottom:7%;left:50%;transform:translateX(-50%);
+ max-width:92%;padding:10px 22px;border:3px solid #f0cd76;border-radius:12px;
+ background:linear-gradient(140deg,#142d49f5,#342b45f5);color:#fff6c6;
+ box-shadow:0 8px 28px #081323c4;text-align:center;
+ font-size:clamp(11px,1.8vw,19px);line-height:1.28;font-weight:900;
+ pointer-events:none
+}
+.discovery-journal{margin:12px auto;text-align:left;max-width:470px;border:1px solid #c7aa67;border-radius:8px;padding:8px 10px;color:#f3d391}
+.discovery-journal summary{cursor:pointer;font-weight:850;font-size:12px}
+.discovery-journal ol,.discovery-results{padding-left:25px;margin:6px 0;color:#e5f0ef;text-align:left;font-size:12px}
+.discovery-journal li,.discovery-results li{padding:3px 0}
+.discovery-hidden{color:#819bb0}
+.discovery-found{color:#b9e6c6}
+@media(max-width:630px){
+ .discovery-toast{bottom:5%;padding:5px 10px;font-size:10px}
+ .discovery-journal{padding:4px;font-size:11px}
+ #victory-discoveries{font-size:10px}
+}

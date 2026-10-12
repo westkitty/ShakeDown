@@ -1,6 +1,7 @@
 import {newGame,startGame,pauseGame,resetToCheckpoint,update,DT,snapshot} from './game/engine.mjs';
 import {VIEW,WORLD} from './game/world.mjs';
 import {render} from './game/render.mjs';
+import {loadSecretNpcArt} from './game/secret-assets.mjs';
 import {AudioBox} from './game/audio.mjs';
 import {loadApprovedArt} from './game/production-assets.mjs';
 import {loadCuratedPreview,loadWorldSceneArt} from './game/curated-assets.mjs';
@@ -23,7 +24,12 @@ if(typeof initialSettings.reducedMotion!=='boolean'){
  initialSettings.reducedMotion=window.matchMedia?.('(prefers-reduced-motion: reduce)').matches||false;
 }
 let state=newGame(initialSettings),sprites={},assetCount=0,assetErrors=[];
-let lastSavedCheckpoint=0;
+function savedDiscoveries(values,level){
+ const valid=new Set(level.secretNpcs.map(npc=>npc.id));
+ return Array.isArray(values)?[...new Set(values.filter(id=>typeof id==='string'&&valid.has(id)))]:[];
+}
+state.achievements=savedDiscoveries(saved.discoveries,state.level);
+let lastSavedProgressKey='';
 function resumableRecord(){return validCheckpointRecord(saved.progress,state.level)?saved.progress:null}
 function showContinue(){
  const record=resumableRecord(),button=$('continue-btn'),note=$('continue-note');
@@ -35,6 +41,7 @@ const audio=new AudioBox();audio.mute(state.settings.mute,{resume:false});
 let productionArt={},productionLoaded=0,productionDeclared=0,productionErrors=[];
 let curatedArt={},worldArt={},renderArt=productionArt,curatedLoaded=0,curatedSelected=0,curatedErrors=[];
 let worldLoaded=0,worldSelected=0,worldErrors=[];
+let npcArt={},npcLoaded=0,npcErrors=[],npcStatus='';
 // Only source-verified, structurally eligible curated previews are used by default.
 // This is display authorization, never a final human-art approval.
 let curatedEnabled=new URLSearchParams(location.search).get('art')!=='classic';
@@ -42,7 +49,7 @@ let auditionRoles={};
 const director=new ArtDirector({onApply:roles=>{auditionRoles=roles;}});
 function showDirector(){if(state.mode==='playing')togglePause();director.open().catch(error=>console.error('Art director unavailable',error));}
 let curatorLoading=null,curatorStatus='';
-function refreshArt(){renderArt=curatedEnabled?{...curatedArt,...worldArt,...productionArt}:productionArt}
+function refreshArt(){renderArt=curatedEnabled?{...curatedArt,...worldArt,...productionArt,...npcArt}:{...productionArt,...npcArt}}
 function updateCuratorControls(){
  $('art-preview-title').checked=curatedEnabled;$('art-preview-pause').checked=curatedEnabled;
  document.body.classList.toggle('curator-active',curatedEnabled);
@@ -79,7 +86,7 @@ async function setCuratedPreview(enabled){
 let spriteStatus='Loading Cinnamon poses…',productionStatus='';
 updateCuratorControls();
 function showAssetStatus(){
- $('load-status').textContent=[spriteStatus,productionStatus,curatorStatus].filter(Boolean).join(' · ');
+ $('load-status').textContent=[spriteStatus,npcStatus,productionStatus,curatorStatus].filter(Boolean).join(' · ');
 }
 let lastStatus='',lastEventSerial=0,displayedMode='';
 function safeScore(value){return Number.isFinite(value)?Math.max(0,value):0}
@@ -88,7 +95,12 @@ function save(){
  // Storage does not offer compare-and-swap; simultaneous writes still need
  // manual recovery, but ordinary stale-tab settings changes cannot erase wins.
  const current=readSave(),currentProgress=validCheckpointRecord(current.progress,state.level)?current.progress:null;
- saved={schema:1,settings:{...state.settings},
+ const discoveries=[...new Set([
+  ...savedDiscoveries(current.discoveries,state.level),
+  ...savedDiscoveries(saved.discoveries,state.level),
+  ...state.achievements
+ ])];
+ saved={schema:1,settings:{...state.settings},discoveries,
   completed:saved.completed===true||current.completed===true||state.mode==='victory',
   bestShakes:Math.max(safeScore(current.bestShakes),safeScore(saved.bestShakes),state.shakeCount),
   progress:state.mode==='victory'?null:
@@ -102,16 +114,32 @@ window.addEventListener('storage',event=>{
  const current=readSave();
  saved.completed=saved.completed===true||current.completed===true;
  saved.bestShakes=Math.max(safeScore(saved.bestShakes),safeScore(current.bestShakes));
+ saved.discoveries=[...new Set([...savedDiscoveries(saved.discoveries,state.level),...savedDiscoveries(current.discoveries,state.level)])];
+ state.achievements=[...new Set([...state.achievements,...saved.discoveries])];
  if(state.mode==='title'){
   saved.progress=validCheckpointRecord(current.progress,state.level)?current.progress:null;
   showContinue();
  }
 });
 function saveCheckpointIfNew(){
- if(state.mode!=='playing'||state.checkpoint<=lastSavedCheckpoint)return;
- const candidate=checkpointRecord(state);
- if(!candidate)return;
- lastSavedCheckpoint=state.checkpoint;saved.progress=candidate;save();
+ if(state.mode!=='playing'&&state.mode!=='dead')return;
+ const deaths=state.level.enemies.reduce((n,e)=>n+Number(!e.alive),0);
+ const key=[state.checkpoint,state.shakeCount,state.rallyCount,deaths,...state.achievements].join(':');
+ if(key===lastSavedProgressKey)return;
+ const record=checkpointRecord(state);
+ if(!record)return;
+ lastSavedProgressKey=key;saved.progress=record;save();
+}
+function populateDiscoveries(id){
+ const list=$(id);if(!list)return;
+ const found=new Set(state.achievements);
+ list.replaceChildren();
+ for(const npc of state.level.secretNpcs){
+  const item=document.createElement('li');
+  item.textContent=(found.has(npc.id)?'✓ ':'○ ')+npc.title;
+  item.className=found.has(npc.id)?'discovery-found':'discovery-hidden';
+  list.appendChild(item);
+ }
 }
 const overlayByMode={title:'title-overlay',pause:'pause-overlay',dead:'dead-overlay',victory:'victory-overlay'};
 function showMode(){
@@ -122,8 +150,9 @@ function showMode(){
  const overlay=overlayByMode[state.mode];
  if(overlay)$(overlay).classList.remove('hidden');
  $('pause-btn').disabled=state.mode!=='playing';
+ if(state.mode==='pause')populateDiscoveries('pause-discoveries');
  if(state.mode==='dead')$('dead-reason').textContent=state.lastDamage||'The Fox got the better of Cinnamon. For now.';
- if(state.mode==='victory'){$('victory-score').textContent=`${state.shakeCount} Shamrock Shakes found • ${state.secretCount} golden secrets discovered`;save()}
+ if(state.mode==='victory'){$('victory-score').textContent=`${state.shakeCount} Shamrock Shakes found • ${state.secretCount} golden secrets • ${state.achievements.length}/2 NPC discoveries`;populateDiscoveries('victory-discoveries');save()}
  const defaultFocus={title:'start-btn',pause:'resume-btn',dead:'retry-btn',victory:'replay-btn'}[state.mode];
  if(defaultFocus)$(defaultFocus).focus({preventScroll:true});
  else if(state.mode==='playing')canvas.focus({preventScroll:true});
@@ -229,8 +258,8 @@ for(const button of document.querySelectorAll('.touch')){
  button.addEventListener('pointerup',endPointer);button.addEventListener('pointercancel',endPointer);button.addEventListener('lostpointercapture',endPointer);
 }
 function newRound(){
- state=newGame(state.settings);state.assetCount=assetCount;
- lastEventSerial=0;lastSavedCheckpoint=0;displayedMode='';
+ state=newGame(state.settings);state.achievements=savedDiscoveries(saved.discoveries,state.level);state.assetCount=assetCount;
+ lastEventSerial=0;lastSavedProgressKey='';displayedMode='';
  clearInputs();lastStamp=0;accumulator=0;audio.resetSequence();audio.setPaused(false);
  saved.progress=null;
  startGame(state);save();audio.activate();showMode();canvas.focus({preventScroll:true});
@@ -240,8 +269,9 @@ function continueRound(){
  if(!record)return;
  const resumed=newGame(state.settings);
  if(!restoreCheckpoint(resumed,record))return;
+ resumed.achievements=[...new Set([...resumed.achievements,...savedDiscoveries(saved.discoveries,resumed.level)])];
  state=resumed;state.assetCount=assetCount;
- lastEventSerial=0;lastSavedCheckpoint=state.checkpoint;displayedMode='';
+ lastEventSerial=0;lastSavedProgressKey='';displayedMode='';
  clearInputs();lastStamp=0;accumulator=0;audio.resetSequence();audio.setPaused(false);
  audio.activate();showMode();canvas.focus({preventScroll:true});
 }
@@ -310,7 +340,7 @@ function hud(){const p=state.player;
  $('hud-health').textContent='♥ '.repeat(Math.ceil(p.hp)).trim()||'♡';
  $('hud-shakes').textContent=`SHAKES ${state.shakeCount}`;
  const rallyHigh=p.x<WORLD.campusEnd&&p.y<280;
- const zone=state.boss.triggered?'FOX SHOWDOWN':p.x>=WORLD.campusEnd?'GOLDEN DOME':rallyHigh?'PEP RALLY':'SOUTH QUAD';
+ const zone=state.boss.triggered?'FOX SHOWDOWN':p.y<-1300&&p.x<7100?'DEXTER SUMMIT':p.y>495&&p.x<2350?'SMUDGE ALCOVE':p.x>=WORLD.campusEnd?'GOLDEN DOME':rallyHigh?'PEP RALLY':'SOUTH QUAD';
  $('hud-zone').textContent=zone;
  $('zone-readout').textContent=p.x>=WORLD.campusEnd?'02 / GOLDEN DOME':rallyHigh?'01B / PEP RALLY':'01 / CAMPUS CHASE';
  $('hud-cheer').textContent=state.cheerCooldown>0
@@ -325,6 +355,10 @@ function hud(){const p=state.player;
    :'Cheer: activate banner bridges and discover rally relays');
  }
  $('cheer-progress').textContent='RELAYS '+state.rallyCount+'/'+state.level.rallyPosts.length;
+ const toast=$('discovery-toast'),unlock=state.discoveryToast;
+ toast.hidden=!(unlock&&state.elapsed<unlock.until&&state.mode==='playing');
+ if(!toast.hidden){const title='✦ DISCOVERY UNLOCKED · '+unlock.title;
+  if(toast.textContent!==title)toast.textContent=title;}
  const next=state.status;if(next!==lastStatus){$('status-text').textContent=next;lastStatus=next}
 }
 let accumulator=0,lastStamp=0,lastHUD=0;
@@ -365,6 +399,12 @@ function animate(ms){requestAnimationFrame(animate);
 function onResize(){const dpr=Math.min(window.devicePixelRatio||1,2);canvas.width=Math.round(VIEW.width*dpr);canvas.height=Math.round(VIEW.height*dpr);ctx.setTransform(dpr,0,0,dpr,0,0)}
 window.addEventListener('resize',onResize,{passive:true});onResize();
 loadAssets();
+loadSecretNpcArt().then(({images,errors,loaded})=>{
+ npcArt=images;npcErrors=errors;npcLoaded=loaded;refreshArt();
+ npcStatus=errors.length?'Secret NPC artwork: '+loaded+'/8 SHA-256 verified frames loaded ('+errors.length+' failures)':
+  loaded+' SHA-256 verified NPC encounter frames loaded';
+ showAssetStatus();
+}).catch(error=>{npcErrors=[error.message];npcStatus='NPC art unavailable · encounters remain discoverable';showAssetStatus();});
 const params=new URLSearchParams(location.search);
 const previewId=(location.hostname==='localhost'||location.hostname==='127.0.0.1')
   ?params.get('preview-art'):null;
@@ -381,10 +421,10 @@ if(previewId){productionStatus='LOCAL ART PREVIEW ONLY: '+previewId+' (NOT produ
  }).catch(error=>{productionErrors=['loader: '+error.message];showAssetStatus()});
  showMode();requestAnimationFrame(animate);
 window.__SHAKEDOWN_QA={snapshot:()=>snapshot(state),metrics,audio:()=>audio.diagnostics(),artDirector:()=>director.diagnostics(),assets:()=>({loaded:assetCount,failed:[...assetErrors],productionLoaded,productionDeclared,productionErrors:[...productionErrors],curatedEnabled,curatedLoaded,curatedSelected,curatedErrors:[...curatedErrors],
- worldLoaded,worldSelected,worldErrors:[...worldErrors]}),
+ worldLoaded,worldSelected,worldErrors:[...worldErrors],npcLoaded,npcErrors:[...npcErrors]}),
  // Developer-only deterministic test aids; excluded from normal gameplay and production paths.
  ...(new URLSearchParams(location.search).has('qa')?{
-  warp:(x,y)=>{state.player.x=x;state.player.y=y;state.player.prevX=x;state.player.prevY=y;state.player.vx=0;state.player.vy=0;state.camera.x=Math.max(0,x-450);state.camera.y=Math.min(0,y-260);},
+  warp:(x,y)=>{state.player.x=x;state.player.y=y;state.player.prevX=x;state.player.prevY=y;state.player.vx=0;state.player.vy=0;state.camera.x=Math.max(0,x-450);state.camera.y=Math.max(-2450,Math.min(y>490&&x<2400?520:0,y-260));},
   setBossRecovery:()=>{state.boss.triggered=true;state.boss.mode='rest';state.boss.timer=999;state.boss.hurtTime=0;},
   inspectState:()=>state
  }:{})};
