@@ -79,6 +79,7 @@ test('studio rejects truncated WAV and checks real PCM chunks before manual list
 
 test('copying a staging template shell-quotes hostile filenames rather than executing them',async({page})=>{
  await page.goto('./tools/asset-review.html#asset=BG-01');
+ await expect(page.locator('#detail-id')).toHaveText('BG-01');
  const hostile="red'$(echo SHOULD_NOT_RUN).png";
  const p=new PNG({width:32,height:32});
  await page.locator('#candidate').setInputFiles({
@@ -112,7 +113,9 @@ test('studio never conflates human-reviewed art with active in-game integration'
  await expect(page.locator('#activated-count')).toHaveText('1');
  await expect(page.locator('#pending-count')).toHaveText('213');
  await expect(page.locator('#detail-state')).toHaveText('REVIEWED, NOT ACTIVE');
- await expect(page.locator('#preview-in-game')).toBeVisible();
+ const local=await page.evaluate(()=>['localhost','127.0.0.1'].includes(location.hostname));
+ if(local)await expect(page.locator('#preview-in-game')).toBeVisible();
+ else await expect(page.locator('#preview-in-game')).toBeHidden();
  await expect(page.locator('#preview-in-game')).toHaveAttribute('href','../index.html?preview-art=BG-01');
  await expect(page.locator('#copy-activation')).toBeEnabled();
  await page.goto('./tools/asset-review.html#asset=CO-03');
