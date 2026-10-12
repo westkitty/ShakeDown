@@ -17,6 +17,8 @@ const paths=[
  'assets/screens/03_victory_credits_clean_960x540.png',
  ...titleNames.map(x=>'assets/title/canvas/title_'+x+'_960x540.png'),
  'assets/sprites/cinnamon/frames.json',
+ 'assets/sprites/cinnamon/run_01.png',
+ 'assets/audio/music/campus-adventure.mp3',
  'assets/production/manifest.json','assets/production/curation.json'
 ];
 const hash=bytes=>createHash('sha256').update(bytes).digest('hex');
@@ -33,7 +35,7 @@ async function compare(path){
  console.log('MATCH',path,body.byteLength,actual);
 }
 let ready=false,lastError=null;
-for(let attempt=1;attempt<=16;attempt++){
+for(let attempt=1;attempt<=24;attempt++){
  try{
   // Pages builds are asynchronous after main merges; wait for actual publication.
   for(const name of ['index.html','src/game/screen-art.mjs','src/game/audio.mjs'])
@@ -41,8 +43,8 @@ for(let attempt=1;attempt<=16;attempt++){
   ready=true;break;
  }catch(error){
   lastError=error;
-  console.log('Pages not yet at this revision ('+attempt+'/16): '+error.message);
-  if(attempt!==16)await sleep(15000);
+  console.log('Pages not yet at this revision ('+attempt+'/24): '+error.message);
+  if(attempt!==24)await sleep(15000);
  }
 }
 if(!ready)throw Error('Public Pages did not reach the repository revision: '+lastError);
