@@ -30,10 +30,11 @@ The original four-stage campaign plan is superseded by the user's October 11 com
 
 - `assets/references/` contains two physically present user-provided Cinnamon source sheets.
 - `assets/sprites/cinnamon/*.png` and `frames.json` contain 26 reproducible cut-outs physically produced from `cinnamon_actions_sheet.png`; they are **real, physically present sprites** (25 eligible for playback; the clipped run_03 is skipped at runtime), but not a claim of individually newly hand-drawn animations. See `scripts/extract_cinnamon.py`.
-- The Fox, backgrounds, terrain, collectibles, UI and cake currently use explicit procedural Canvas illustrations. They are playable **temporary integrated drawings**, not LM Arena final artwork.
-- `docs/assets/ShakeDown_Complete_LM_Arena_Master.pdf` is the expanded 220-visual-asset / 21-audio-request LM Arena production master; its editable Markdown source, machine-readable JSON and reproducible compiler are committed alongside. 26 existing Cinnamon frames are verified; 194 final visual requests are still **not generated**. A specification never stands in for verified bytes.
+- The classic edition retains explicit procedural Canvas illustrations. The repository also contains 194 generated image candidates: 28 curator previews, 131 alternatives, 11 revision requests and 24 transparency-blocked sources. Candidate delivery is not owner approval.
+- `docs/assets/ShakeDown_Complete_LM_Arena_Master.pdf` is the expanded 220-visual-asset / 21-audio-request production master. All 194 non-Cinnamon image requests now have physical candidates, while the 26 Cinnamon source frames remain hash-locked.
+- Six user-provided MP3s are integrated as three randomized campus tracks, two randomized Golden Dome tracks and a dedicated Fox boss track. They cover three music roles; the other 18 named audio contracts remain undelivered. Synthesized effects and score fallback remain available.
 
-## Preparing for incoming LM Arena artwork
+## Reviewing LM Arena artwork
 
 The game remains playable without final outside artwork. Source approval stores files and provenance **without activating them**. A separate, reviewer-attested gameplay integration step with a real screenshot is now required before regular gameplay loads replacement art; local previews do not activate anything.
 
@@ -43,7 +44,7 @@ The game remains playable without final outside artwork. Source approval stores 
     npm run validate
     npm run test:browser
 
-See docs/PRODUCTION_READINESS.md and docs/RELEASE_CHECKLIST.md. No final LM Arena images were imported in this preparation sprint.
+See docs/PRODUCTION_READINESS.md and docs/RELEASE_CHECKLIST.md. The 194 imported images remain review candidates; none is silently promoted to owner-approved production art.
 
 ## Asset Control Room
 
@@ -89,7 +90,7 @@ Two browser tabs now reconcile earned completion/best Shake records when an olde
 
 **Judge all the candidates:** [Open the Art Jury](tools/asset-gallery.html). All **194** physical Arena images are available for visual comparison, category and ID search, original image/hash inspection, and KEEP/REVISE/REJECT voting. Add notes and export your hash-bound JSON review. Votes persist locally in the browser and **never automatically activate art**. The curator's current classification is **28 preview, 131 alternatives, 11 revise, 24 transparency-blocked**.
 
-The source-hash manifest is `assets/production/manifest.json`; individual reasons and owner-review fields are in `assets/production/curation.json`. Read [docs/ASSET_CURATION_REPORT.md](docs/ASSET_CURATION_REPORT.md) for visual comparisons and provenance limits. Twenty-one requested recorded audio outputs still await delivery. 
+The source-hash manifest is `assets/production/manifest.json`; individual reasons and owner-review fields are in `assets/production/curation.json`. Read [docs/ASSET_CURATION_REPORT.md](docs/ASSET_CURATION_REPORT.md) for visual comparisons and provenance limits. Six user-provided MP3s now cover campus, Dome and boss background music; 18 other named audio contracts remain undelivered.
 
 
 ## All generated images: Asset Director
@@ -98,4 +99,4 @@ The in-game **ART DIRECTOR · ALL 194 ASSETS** opens from the title, Pause, or t
 
 The 24 source images lacking required transparency are inspectable and may appear only as labeled QA reference cards, never as real background/platform art. The other 170 sources can be tried in game roles, although source validity does not mean artistic approval.
 
-The [Art Jury](tools/asset-gallery.html) now offers a direct link for each asset to the matching in-game audition. Complete 12-role wiring and limitations: [All-asset runtime guide](docs/ALL_ASSET_RUNTIME_INTEGRATION.md). The 21 requested recorded audio assets remain missing.
+The [Art Jury](tools/asset-gallery.html) now offers a direct link for each asset to the matching in-game audition. Complete 12-role wiring and limitations: [All-asset runtime guide](docs/ALL_ASSET_RUNTIME_INTEGRATION.md). Recorded background music is documented in `assets/audio/music/manifest.json`; 18 non-covered named audio contracts remain missing.

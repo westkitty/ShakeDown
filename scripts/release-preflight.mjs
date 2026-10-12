@@ -39,10 +39,12 @@ try{
  const pkg=JSON.parse(fs.readFileSync(rel('package.json'),'utf8'));
  const contract=JSON.parse(fs.readFileSync(rel('docs/assets/ShakeDown_Complete_Asset_Contract.json'),'utf8'));
  const runtime=JSON.parse(fs.readFileSync(rel('assets/runtime/manifest.json'),'utf8'));
+ const music=JSON.parse(fs.readFileSync(rel('assets/audio/music/manifest.json'),'utf8'));
  const cinnamon=JSON.parse(fs.readFileSync(rel('assets/sprites/cinnamon/frames.json'),'utf8'));
  if(pkg.dependencies&&Object.keys(pkg.dependencies).length)warnings.push('Runtime package dependencies require bundling review');
  include('index.html');include('src/styles.css');include('assets/runtime/manifest.json');
  include('assets/sprites/cinnamon/frames.json');
+ include('assets/audio/music/manifest.json');
  traceModule('src/main.mjs');
  // The optional curated demo must ship all physical, source-hash-verified PNGs.
  for(const f of ['tools/asset-gallery.html','tools/asset-gallery.css',
@@ -77,6 +79,14 @@ try{
  for(const record of [runtime.assets,runtime.audio]){
   for(const v of Object.values(record||{}))if(v?.path)include(v.path);
  }
+ if(music.schemaVersion!==1||music.tracks?.length!==6)
+  missing.push({path:'assets/audio/music/manifest.json',error:'Recorded soundtrack inventory invalid'});
+ for(const track of music.tracks||[]){
+  include(track.path);
+  const actual=entries.get(track.path);
+  if(actual?.sha256!==track.sha256||actual?.bytes!==track.bytes)
+   missing.push({path:track.path,error:'Recorded soundtrack byte contract drift'});
+ }
  for(const [id,record] of Object.entries(runtime.assets||{})){
   if(record?.integrationStatus==='verified'&&record.integrationEvidence?.screenshot?.path)
    include(record.integrationEvidence.screenshot.path);
@@ -93,7 +103,8 @@ try{
   scope:'static byte/reference inspection; NOT browser, audio, gameplay or deployed-release proof',
   git:{branch,sha,dirty},artifact:{fileCount:assets.length,totalBytes:assets.reduce((s,x)=>s+x.bytes,0),manifestSha256:digest},
   contract:{visual:contract.assets.length,audio:contract.audio.length,existingSources:Object.keys(cinnamon.frames).length,
-    approvedExternal:Object.keys(runtime.assets||{}).length+Object.keys(runtime.audio||{}).length},
+    approvedExternal:Object.keys(runtime.assets||{}).length+Object.keys(runtime.audio||{}).length,
+    recordedMusicFiles:music.tracks?.length||0,recordedMusicRoles:new Set((music.tracks||[]).map(t=>t.role)).size},
   missing,warnings,files:assets};
  console.log(JSON.stringify(report,null,2));
  if(missing.length)process.exitCode=2;

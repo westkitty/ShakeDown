@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "source": "User-provided Google Drive folder: macbook/Shakedown music",
+  "integrationApproval": "Explicit user direction on 2026-10-11",
+  "artistTag": "andrew.dolby",
+  "runtimePolicy": {
+    "campus": "Choose one of three tracks per new run",
+    "dome": "Choose one of two tracks when the Golden Dome begins",
+    "boss": "Use the dedicated Fox boss track",
+    "fallback": "Retain the local synthesized score if recorded playback is unavailable"
+  },
+  "contractMapping": {
+    "campus": "AU-01",
+    "dome": "AU-15",
+    "boss": "AU-16"
+  },
+  "tracks": [
+    {
+      "id": "music-campus-exploration",
+      "role": "campus",
+      "path": "assets/audio/music/campus-exploration.mp3",
+      "originalFile": "Campus Exploration.mp3",
+      "bytes": 2151802,
+      "durationSeconds": 92.8,
+      "integratedLufs": -15.2,
+      "truePeakDbfs": -3.3,
+      "sha256": "a1ace8a27b147caa3f5623f90547718c6db5970d03827548d827351f14582256"
+    },
+    {
+      "id": "music-campus-adventure",
+      "role": "campus",
+      "path": "assets/audio/music/campus-adventure.mp3",
+      "originalFile": "snes ginger.mp3",
+      "bytes": 3820595,
+      "durationSeconds": 168.04,
+      "integratedLufs": -15.7,
+      "truePeakDbfs": -4.8,
+      "sha256": "423e9ab7df77e4fd9c649f3335c90d645c3f0a72840426035b4a5e6b4bdda75c"
+    },
+    {
+      "id": "music-campus-untitled",
+      "role": "campus",
+      "path": "assets/audio/music/campus-untitled.mp3",
+      "originalFile": "Untitled.mp3",
+      "bytes": 1984512,
+      "durationSeconds": 88.36,
+      "integratedLufs": -15.0,
+      "truePeakDbfs": -4.4,
+      "sha256": "e0b22423486239fb008dec2082f0b53804b5056435766fa0c0a81161fd93a290"
+    },
+    {
+      "id": "music-dome-factory-a",
+      "role": "dome",
+      "path": "assets/audio/music/dome-factory-a.mp3",
+      "originalFile": "ginger SNES factory.mp3",
+      "bytes": 4410677,
+      "durationSeconds": 190.0,
+      "integratedLufs": -15.1,
+      "truePeakDbfs": -3.2,
+      "sha256": "eb88e985d50d3644567bdab5e624e97042d9e149769a09c13ae111a41489fe47"
+    },
+    {
+      "id": "music-dome-factory-b",
+      "role": "dome",
+      "path": "assets/audio/music/dome-factory-b.mp3",
+      "originalFile": "ginger SNES factory (1).mp3",
+      "bytes": 4320387,
+      "durationSeconds": 188.4,
+      "integratedLufs": -15.3,
+      "truePeakDbfs": -4.1,
+      "sha256": "909e3326a9d2cfe87c4ef1547dea4774ea1b69d19ad68bce62b206dec03c0930"
+    },
+    {
+      "id": "music-fox-boss",
+      "role": "boss",
+      "path": "assets/audio/music/fox-boss.mp3",
+      "originalFile": "snes ginger boss.mp3",
+      "bytes": 4385292,
+      "durationSeconds": 188.28,
+      "integratedLufs": -15.0,
+      "truePeakDbfs": -3.1,
+      "sha256": "7bf9b029a255dafdfc4c6097d3dc44f7b190afe3cabc40c02293f755ed3ca5d0"
+    }
+  ],
+  "verificationBoundary": "All six MP3 files were decoded and measured locally. Their long-form endpoints were not claimed as authored seamless loop points. The files cover three background-music roles; the other 18 named audio contracts remain undelivered."
+}

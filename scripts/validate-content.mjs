@@ -31,6 +31,21 @@ assert.equal(original.length,26,'Original source count changed');
 assert.equal(new Set(rows.map(r=>r.id)).size,220,'Duplicate logical art ID');
 assert.equal(new Set(rows.map(r=>r.path)).size,220,'Duplicate master output path');
 assert.equal(spec.audio.length,21,'21 audio requests changed');
+const music=JSON.parse(readFileSync('assets/audio/music/manifest.json','utf8'));
+assert.equal(music.schemaVersion,1,'Recorded music manifest incompatible');
+assert.equal(music.tracks.length,6,'Expected six user-provided music files');
+assert.deepEqual(Object.fromEntries(['campus','dome','boss'].map(role=>[
+ role,music.tracks.filter(track=>track.role===role).length
+])),{campus:3,dome:2,boss:1},'Recorded music role coverage changed');
+const audioSource=readFileSync('src/game/audio.mjs','utf8');
+for(const track of music.tracks){
+ assert.ok(existsSync(track.path),'Recorded music file missing '+track.id);
+ const bytes=readFileSync(track.path);
+ assert.equal(bytes.length,track.bytes,'Recorded music byte length drift '+track.id);
+ assert.equal(sha256(bytes),track.sha256,'Recorded music checksum drift '+track.id);
+ assert.ok(bytes.subarray(0,3).toString('ascii')==='ID3'||bytes[0]===0xff,'Invalid MP3 '+track.id);
+ assert.ok(audioSource.includes(`'${track.path}'`),'Recorded music has no runtime route '+track.id);
+}
 const external=JSON.parse(readFileSync('assets/production/manifest.json','utf8'));
 assert.equal(external.count,194,'Arena claimed output count changed');
 const art=external.assets;
@@ -70,3 +85,4 @@ const pdf=readFileSync('docs/assets/ShakeDown_Complete_LM_Arena_Master.pdf');
 assert.equal(pdf.subarray(0,5).toString('ascii'),'%PDF-','Generator master PDF broken');
 assert.ok(pdf.length>500000,'Generator master PDF suspiciously small');
 console.log('220 visual specs / 194 unapproved physical candidates / 21 audio specs / source SHA: PASS');
+console.log('6 user-provided MP3s / 3 runtime music roles / source SHA: PASS');

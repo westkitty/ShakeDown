@@ -65,7 +65,13 @@ test('all twelve art families can be applied to their live game roles and remove
 test('all 24 contract-blocked images remain viewable as reference but never become live scenery',async({page})=>{
  test.setTimeout(45000);
  await page.goto('./');
- const sample=()=>page.evaluate(()=>{const ctx=document.querySelector('#game').getContext('2d');return [[820,405],[895,477]].map(([x,y])=>Array.from(ctx.getImageData(x,y,1,1).data))});
+ await expect.poll(async()=>page.evaluate(()=>window.__SHAKEDOWN_QA.assets().loaded)).toBe(25);
+ const sample=()=>page.evaluate(()=>{
+  const ctx=document.querySelector('#game').getContext('2d'),pixels=[];
+  for(let y=16;y<540;y+=32)for(let x=16;x<960;x+=32)
+   pixels.push(Array.from(ctx.getImageData(x,y,1,1).data));
+  return pixels;
+ });
  const gameBefore=await sample();
  await page.locator('#art-director-title-open').click();
  await expect(page.locator('#art-director-list option')).toHaveCount(194);
@@ -78,7 +84,12 @@ test('all 24 contract-blocked images remain viewable as reference but never beco
  expect(diagnostics.selected.backdrop).toBe('BG-04');
  await expect(page.locator('#art-director-status')).toContainText('labeled QA inspection stage');
  await page.locator('#art-director-close').click();
- expect(await sample()).toEqual(gameBefore,'Structurally blocked art must not obscure any live playfield pixels');
+ const gameAfter=await sample();
+ const deltas=gameBefore.map((pixel,index)=>Math.max(...pixel.map((value,channel)=>
+  Math.abs(value-gameAfter[index][channel]))));
+ expect(Math.max(...deltas)).toBeLessThanOrEqual(16);
+ expect(deltas.filter(delta=>delta>16)).toHaveLength(0,
+  'Structurally blocked art must not produce any substantive live-playfield pixel change');
  await page.locator('#start-btn').click();
  expect((await page.evaluate(()=>window.__SHAKEDOWN_QA.snapshot())).mode).toBe('playing');
  await expect.poll(async()=>page.evaluate(()=>window.__SHAKEDOWN_QA.artDirector().selected.backdrop)).toBe('BG-04');

@@ -38,3 +38,27 @@ test('muted stored preference starts without an AudioContext and unmutes only wi
  expect(state.activeVoices).toBe(0);
  expect(state.paused).toBe(true);
 });
+
+test('recorded music loads lazily and follows campus, Dome and Fox gameplay roles',async({page})=>{
+ const musicRequests=[];
+ page.on('request',request=>{if(request.url().endsWith('.mp3'))musicRequests.push(request.url())});
+ await page.goto('./?qa');
+ expect(musicRequests).toEqual([]);
+ expect((await page.evaluate(()=>window.__SHAKEDOWN_QA.audio())).musicCreated).toBe(false);
+ await page.locator('#start-btn').click();
+ await expect.poll(async()=>page.evaluate(()=>window.__SHAKEDOWN_QA.audio().musicMode)).toBe('campus');
+ await expect.poll(()=>musicRequests.length).toBe(1);
+ expect(musicRequests[0]).toContain('/assets/audio/music/campus-');
+ await page.evaluate(()=>window.__SHAKEDOWN_QA.warp(4000,-250));
+ await expect.poll(async()=>page.evaluate(()=>window.__SHAKEDOWN_QA.audio().musicMode)).toBe('dome');
+ await expect.poll(()=>musicRequests.length).toBe(2);
+ expect(musicRequests[1]).toContain('/assets/audio/music/dome-factory-');
+ await page.evaluate(()=>window.__SHAKEDOWN_QA.setBossRecovery());
+ await expect.poll(async()=>page.evaluate(()=>window.__SHAKEDOWN_QA.audio().musicMode)).toBe('boss');
+ await expect.poll(()=>musicRequests.length).toBe(3);
+ expect(musicRequests[2]).toContain('/assets/audio/music/fox-boss.mp3');
+ await page.keyboard.press('p');
+ await expect.poll(async()=>page.evaluate(()=>window.__SHAKEDOWN_QA.audio().musicPlaying)).toBe(false);
+ await page.locator('#resume-btn').click();
+ await expect.poll(async()=>page.evaluate(()=>window.__SHAKEDOWN_QA.audio().musicPlaying)).toBe(true);
+});

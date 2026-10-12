@@ -22,6 +22,16 @@
 - `python3 -m http.server 8765` for local static hosting.
 - Normal-browser manual checklist: title, keyboard jump/double jump/swish/dash, bridge pulse, beacon activation, collectibles, Dome climb, checkpoint, boss charge telegraph, swish on rest, victory, replay, pause, mute, loss/retry, touch portrait and landscape.
 
+## 2026-10-12 — soundtrack and final local release-candidate verification
+
+- `npm run validate`: **41/41 passed**, including the six-file music manifest, SHA-256 checks, gesture gating, randomized same-role selection, campus/Dome/Fox transitions, pause/mute/restart behavior, failed-track failover and synthesized fallback.
+- Installed Google Chrome through Playwright, one worker, desktop plus mobile emulation: **94 passed, 8 intentional project-specific skips, 0 failed** across 102 collected tests. The matrix includes the assisted and normal input-driven complete routes, all 194 image candidates, the 24 blocked-source safety gate, Art Jury, Asset Director, persistence, accessibility and recorded-music network behavior.
+- `npm run perf:audit -- --seconds 4`: PASS at desktop 1280x800, portrait 390x844, landscape 844x390 and narrow 320x568. Each measured approximately 59.9 FPS with 16.7–16.8 ms p95 requestAnimationFrame timing and 0.3–0.4 ms p95 Canvas render work. Desktop observed one frame over 50 ms; the three emulated mobile layouts observed none. This is a short local headless-Chrome diagnostic, not physical-device performance proof.
+- Visual captures from the actual running Canvas and review interfaces were inspected at desktop and mobile widths. Cinnamon's red-panda identity, campus/Dome progression, boss telegraph and stagger, distinct cake and Shamrock Shakes, exact birthday text, Asset Director and Art Jury were legible without observed horizontal clipping.
+- Static release preflight before commit: PASS with 248 physical runtime files, zero missing paths, six MP3 files mapped to three music roles and deterministic manifest hash `8b08e735a52c2835ab3d505e42c28cbcb8af6b44b0531bc221cd404b69fdf353`; its dirty-worktree warning is expected until the candidate is committed.
+
+**Still unverified locally:** physical-phone controls/performance, speaker listening and loop-seam acceptance, human-paced play, owner artistic approval, the 24 transparency repairs and 11 recommended visual revisions. GitHub exact-SHA CI, merge, Pages deployment and hosted playback are separate later gates.
+
 
 ## 2026-10-11 — preparation candidate verification (not main)
 

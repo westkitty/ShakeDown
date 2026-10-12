@@ -6,7 +6,7 @@ Date: 2026-10-11
 
 The verified preparation branch was merged through PR #1 into main at `adf6a55fb468733b6db88807e8c38973f01d39a2`. The Arena branch `arena/34b09180-shakedown` at `57c45560fd389dc873a2debc05700c7eb4801e3e` produced 194 real normalized PNG assets. The consolidation branch contains an ancestry-preserving two-parent merge of both histories, with conflicts in only `.gitignore` and `scripts/validate-content.mjs` explicitly reconciled.
 
-All 194 generated source images physically matched their recorded SHA-256 and target dimensions in the initial BigMac audit. The 26 original Cinnamon cutouts remain unchanged. The original generator contracts cover 220 visuals and 21 recorded audio requests. The missing high-resolution raw source files referenced in `.artifact-cache/raw` and the 21 audio outputs have **not** been found in the checked-in asset set.
+All 194 generated source images physically matched their recorded SHA-256 and target dimensions in the initial BigMac audit. The 26 original Cinnamon cutouts remain unchanged. The original generator contracts cover 220 visuals and 21 recorded audio requests. High-resolution raw image inputs referenced in `.artifact-cache/raw` remain missing. Six later user-provided MP3s now cover campus, Dome and boss background-music roles; they do not silently satisfy the other 18 named audio contracts.
 
 **Authority conflict:** Arena's updated master document says some outputs are normalized or approved, but all 194 actual physical candidate manifest entries still say `AWAITING_HUMAN_VISUAL_REVIEW`, and the canonical runtime approval ledger has zero externally accepted production assets. This integration does not manufacture final owner signoff.
 
@@ -42,6 +42,6 @@ Runtime integration has been deliberately limited to safe scene roles: backgroun
 
 Earlier on the combined local checkout, Node validation reached 34/34, runtime preflight inventoried 238 required files with no missing files, desktop curated gallery/preview tests passed, mobile-emulated gallery tests passed, and normal/assisted/curated scripted full routes reached the birthday victory through gameplay inputs. The local build Mac then lost its connector connection. These are **local** receipts, not proof of publication or physical-phone acceptance.
 
-The exact final GitHub branch commit must pass CI before merging. GitHub Pages deployment and actual hosted playback must be separately verified. Still missing are human art approval, reworked 24 alpha failures/11 recommended revisions, raw generator originals, 21 recorded audio outputs and physical device audio/FPS/human gameplay acceptance.
+The exact final GitHub branch commit must pass CI before merging. GitHub Pages deployment and actual hosted playback must be separately verified. Still missing are human art approval, reworked 24 alpha failures/11 recommended revisions, raw generator originals, 18 non-covered recorded-audio contracts and physical-device audio/FPS/human gameplay acceptance.
 
 The user's judgement overrides the curator's provisional assessment. All 194 candidate source images have been preserved for that purpose.

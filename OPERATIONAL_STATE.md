@@ -7,12 +7,12 @@
   "project_name": "ShakeDown",
   "project_root": "westkitty/ShakeDown",
   "artifact_path": "",
-  "state_revision": 7,
-  "last_updated": "2026-10-11T21:54:52Z",
+  "state_revision": 11,
+  "last_updated": "2026-10-12T02:58:00Z",
   "current_baseline": {
-    "identity": "main@80d388828bfcad0cf454fe0b2b166e6528ac5e6d (pre-preparation production baseline)",
+    "identity": "main@9135fc8dae875e9b1dbc0afd4d08b737fa667f6f",
     "state": "current-baseline",
-    "last_verified": null
+    "last_verified": "2026-10-11"
   },
   "scope_boundaries": ["ShakeDown 2D browser game", "Cinnamon Fuzzbutt sprite masters"],
   "linked_parent_state": null
@@ -23,7 +23,7 @@
 ShakeDown: birthday platformer for Maverick, Cinnamon Fuzzbutt as playable red panda; South Bend / Notre Dame, Shamrock Shakes, Fox antagonist.
 
 ## 2. Current Baseline
-A playable static Canvas 2D runtime and 26 Cinnamon source-derived PNG frames are pushed to main. Fox, terrain, props and cake are honest procedural Canvas fallbacks pending the 220-visual/21-audio LM Arena specification packet, not final generated art. The historical separate ZIP remains an off-repo source and was not silently imported.
+Main contains the playable static Canvas 2D runtime, 26 canonical Cinnamon source-derived frames, all 194 generated image candidates, the Curator's Cut, Art Jury and in-game Asset Director. Generated images remain candidates unless individually approved; classic procedural rendering remains the fallback. The soundtrack integration described in revision 11 is feature-branch work until its exact commit is merged and deployed.
 
 ## 3. Artifact Contract
 Modern pixel art, clean independent transparent source-derived Cinnamon PNG frames, actual frames.json hashes, full 273-page asset production PDF + editable Markdown + complete JSON contract, verified browser game interaction, and Pages deployment only when confirmed.
@@ -273,3 +273,18 @@ Final local candidate before Git delivery: npm run validate **31/31 PASS**, rele
 **Bounded repair:** Removed all blocked-source and premature-finale cards from the live Canvas. Contract-invalid images remain visually inspected in the native Asset Director itself and retain their SHA provenance and user-review deep links. In-game valid birthday variants render only during victory. Optional boss visual effects redraw code-owned ATTACK INCOMING and STUNNED cues on top of any art, preserving mechanical legibility. A bfcache pagehide preserves the inspector UI so returning from the Art Jury need not leave a detached dialog. No image files or game state were changed.
 
 **Regression tests:** Added a real browser pixel no-occlusion comparison and simulated persisted-pagehide inspection journey, plus Node source invariant checks. At this writing those additional checks are pending exact-GitHub-commit CI; original integration PR #3 already passed prior full checks and merged to main.
+
+## 2026-10-12 — Drive soundtrack integration and local final QA (revision 11)
+
+**Baseline:** remote `main@9135fc8dae875e9b1dbc0afd4d08b737fa667f6f`, containing the four merged artwork and visual-safety pull requests. Work is isolated on `feat/shakedown-final-qa-20261011`; this section does not claim merge or deployment.
+
+**Recorded soundtrack:** Six user-authorized MP3 files from Google Drive `MacBook/Shakedown music` are copied into `assets/audio/music/` with public-safe provenance, measured duration/loudness/peak/SHA-256 data and a deterministic manifest. A run selects one of three campus tracks and one of two Dome tracks; the Fox track is dedicated. Recorded music is created only after player gesture, loaded one track at a time, loops, follows campus/Dome/boss state, pauses and mutes with the game, and fails over within a role before retaining the synthesized score fallback. The existing synthesized sound effects and victory fanfare remain.
+
+**Scope boundary:** Those six files satisfy three background-music roles, not the entire 21-item audio contract. The other 18 named recordings remain undelivered. File/container/decoder checks do not prove artistic fit, speaker quality or a seamless loop boundary.
+
+**Local evidence:** `npm run validate` passed 41/41. The complete installed-Chrome Playwright matrix collected 102 tests: 94 passed, eight intentional project-specific skips and zero failures across desktop and mobile emulation. A short real-wall-clock performance audit passed desktop, portrait, landscape and 320px narrow scenarios at approximately 59.9 FPS, 16.7–16.8 ms p95 rAF and 0.3–0.4 ms p95 Canvas rendering. Visual captures of gameplay, finale, Asset Director and Art Jury were inspected at desktop/mobile widths. Static preflight found 248 physical runtime files, no missing paths and six MP3s across three roles.
+
+**Remaining gates:** exact commit, GitHub CI, merge, GitHub Pages publication and hosted smoke are pending. Physical phone controls/performance, physical speaker listening, human-paced completion, owner visual acceptance, 24 alpha repairs and 11 recommended art revisions remain unverified.
+
+### Revision log
+- Revision 11: imported and integrated the six user-selected Drive tracks, added soundtrack validation/failover/browser coverage, hardened blocked-art pixel regression sampling and completed local desktop/mobile visual and performance QA.
