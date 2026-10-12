@@ -144,3 +144,42 @@ test('a broken recording advances within its role and retains synthesized fallba
  assert.ok(fallback.diagnostics().activeVoices>0,'Synth melody remains available without MP3 playback');
  fallback.dispose();
 });
+
+test('a paused pending HTMLMediaElement.play rejection cannot blacklist its track on resume',async()=>{
+ enableFake();
+ class DelayedAudio extends FakeRecordedAudio {
+  constructor(src){super(src);this.pending=[]}
+  play(){
+   this.paused=false;this.playCalls++;
+   return new Promise((resolve,reject)=>this.pending.push({resolve,reject}));
+  }
+  pause(){
+   super.pause();
+   const interrupted=this.pending.splice(0);
+   for(const attempt of interrupted){
+    const error=new Error('The play() request was interrupted by a call to pause().');
+    error.name='AbortError';attempt.reject(error);
+   }
+  }
+ }
+ globalThis.window.Audio=DelayedAudio;
+ const a=new AudioBox({random:()=>0});
+ a.activate();a.musicTick(0,'boss');
+ const original=a.musicElement;
+ assert.ok(original);
+ assert.equal(original.pending.length,1,'Simulated media play is unsettled');
+ a.setPaused(true);
+ assert.equal(original.paused,true);
+ a.setPaused(false);
+ assert.equal(original.playCalls,2,'Resume must use the existing track, not download a new one');
+ await Promise.resolve();await Promise.resolve();await Promise.resolve();
+ assert.equal(a.musicFailures.size,0,'Intentional play cancellation is not a corrupt MP3');
+ assert.equal(a.musicElement,original,'Stale async rejection cannot clear the resumed recording');
+ assert.equal(a.musicTrack,MUSIC_TRACKS.boss[0],'Only boss track must remain available');
+ assert.equal(a.musicBlocked,false);
+ assert.equal(original.pending.length,1);
+ original.pending[0].resolve();
+ await Promise.resolve();await Promise.resolve();
+ assert.equal(a.diagnostics().musicPlaying,true);
+ a.dispose();
+});
