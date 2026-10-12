@@ -66,12 +66,23 @@ test('all 24 contract-blocked images remain viewable as reference but never beco
  test.setTimeout(45000);
  await page.goto('./?art=classic');
  await expect.poll(async()=>page.evaluate(()=>window.__SHAKEDOWN_QA.assets().loaded)).toBe(25);
+ // Wait until the real title frame has finished its independent PNG/module
+ // requests. A late source image must not masquerade as a forbidden Art
+ // Director overlay appearing during the before/after comparison.
+ await page.waitForLoadState('networkidle');
  const sample=()=>page.evaluate(()=>{
   const ctx=document.querySelector('#game').getContext('2d'),pixels=[];
   for(let y=16;y<540;y+=32)for(let x=16;x<960;x+=32)
    pixels.push(Array.from(ctx.getImageData(x,y,1,1).data));
   return pixels;
  });
+ // Verify a stable title baseline, not a frame captured mid asset load.
+ await expect.poll(async()=>{
+  const previous=await sample();
+  await page.waitForTimeout(120);
+  const current=await sample();
+  return JSON.stringify(previous)===JSON.stringify(current);
+ },{timeout:8000}).toBe(true);
  const gameBefore=await sample();
  await page.locator('#art-director-title-open').click();
  await expect(page.locator('#art-director-list option')).toHaveCount(194);

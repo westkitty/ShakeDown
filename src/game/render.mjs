@@ -1,7 +1,13 @@
 import {VIEW,WORLD,DOME_ARENA_Y,visibleWorld,pulseState} from './world.mjs';
 import {movingPosition} from './engine.mjs';
 import {frameForState} from './animation.mjs';
+import {crawlerFrame,visibleDefeatAge,DEFEAT_POSE_SECONDS} from './asset-motion.mjs';
 import {paintArtOverrides} from './art-scene.mjs';
+import {
+ paintAmbientWorld,paintAmbientLife,paintPlatformFinish,paintHeroLighting,
+ paintCelebrationAccents,paintLens,paintPulseReadout,paintCollectibleAura,
+ paintBossStaging,paintBossHealth
+} from './visual-finish.mjs';
 const TAU=Math.PI*2;
 const lerp=(a,b,t)=>a+(b-a)*t;
 const clamp=(n,a,b)=>Math.min(Math.max(n,a),b);
@@ -260,11 +266,47 @@ function drawFox(ctx,x,y,phase,t,art={}){
  if(phase==='rest'){ctx.fillStyle='#f5e57a';ctx.font='900 16px system-ui';ctx.fillText('STUNNED',-22,-122)}
  ctx.restore();}
 function confetti(ctx,x,y,r=0){ctx.save();ctx.translate(x,y);ctx.rotate(r);ctx.fillStyle='#ef6371';ctx.fillRect(-8,-6,16,8);ctx.fillStyle='#ffdc64';ctx.fillRect(-2,-12,8,6);ctx.restore()}
-function cupCrawler(ctx,e,t,art={}){if(art['EN-01']){ctx.drawImage(art['EN-01'],e.x-5,e.y,64,58);return}ctx.save();ctx.translate(e.x,e.y);ctx.fillStyle='#573d41';rounded(ctx,-2,19,51,26,8);ctx.fill();
+function cupCrawler(ctx,e,t,art={},stunned=false,reducedMotion=false){
+ if(art['EN-01']){
+  const id=crawlerFrame(t,e,{stunned,reducedMotion});
+  const sprite=art[id]||art['EN-01'];
+  ctx.save();ctx.imageSmoothingEnabled=false;
+  ctx.drawImage(sprite,e.x-5,e.y,64,58);
+  ctx.restore();return;
+ }
+ ctx.save();ctx.translate(e.x,e.y);ctx.fillStyle='#573d41';rounded(ctx,-2,19,51,26,8);ctx.fill();
  ctx.fillStyle='#ceb789';for(let i=0;i<3;i++){rounded(ctx,8+i*3,7-i*11,27,17,4);ctx.fill();stroke(ctx,'#57464b',2);ctx.stroke()}
  ctx.fillStyle='#ee5c61';ctx.beginPath();ctx.arc(36,28,6,0,TAU);ctx.fill();
  ctx.fillStyle='#333742';for(const xx of [7,43]){ctx.beginPath();ctx.arc(xx,47,8,0,TAU);ctx.fill()}
  ctx.restore()}
+// The source pose persists briefly at the actual defeated enemy coordinates.
+// The puff is omitted for Reduced Motion; this draw layer owns no game state.
+function drawDefeatedCrawlers(ctx,s,art={}){
+ for(const event of s.events){
+  const age=visibleDefeatAge(event,s.elapsed);
+  if(age===null||Math.abs(event.x-s.camera.x)>1050||
+    Math.abs(event.y-s.camera.y)>690)continue;
+  const corpse=art['EN-03'];
+  if(corpse){
+   ctx.save();ctx.imageSmoothingEnabled=false;
+   ctx.globalAlpha=Math.min(1,(DEFEAT_POSE_SECONDS-age)/.14);
+   ctx.drawImage(corpse,event.x-34,event.y-33,68,68);ctx.restore();
+  }
+  if(s.settings.reducedMotion||age>.34)continue;
+  if(art['VF-05']){
+   ctx.save();ctx.imageSmoothingEnabled=false;
+   ctx.globalAlpha=Math.max(0,1-age/.34)*.78;
+   const spread=66+age*70;
+   ctx.drawImage(art['VF-05'],event.x-spread/2,event.y-30-spread/2,spread,spread);
+   ctx.restore();
+  }else{
+   ctx.save();ctx.strokeStyle='#ffedba';ctx.lineWidth=3;
+   ctx.globalAlpha=1-age/.34;ctx.beginPath();
+   ctx.ellipse(event.x,event.y+11,14+age*70,8+age*25,0,0,Math.PI*2);
+   ctx.stroke();ctx.restore();
+  }
+ }
+}
 function cannon(ctx,h,t,art={},quiet=false){
  if(art['EN-04']){
   const phase=quiet?-10:(t+h.offset)%h.period;
@@ -369,13 +411,14 @@ function cheerWave(ctx,s){
 function decoration(ctx,s,t,art={}){const cam=s.camera;ctx.save();ctx.translate(-cam.x,-cam.y);
  for(const e of s.level.enemies){
   if(!e.alive||Math.abs(e.x-cam.x)>=1100||Math.abs(e.y-cam.y)>=720)continue;
-  cupCrawler(ctx,e,t,art);
+  cupCrawler(ctx,e,t,art,e.stunnedUntil>s.elapsed,s.settings.reducedMotion);
   if(e.stunnedUntil>s.elapsed){
    ctx.fillStyle='#ffec9f';ctx.strokeStyle='#254f75';ctx.lineWidth=3;
    ctx.beginPath();ctx.arc(e.x+22,e.y-18,14,0,TAU);ctx.fill();ctx.stroke();
    ctx.fillStyle='#153b57';ctx.textAlign='center';ctx.font='900 15px system-ui';ctx.fillText('Z',e.x+22,e.y-12);
   }
  }
+ drawDefeatedCrawlers(ctx,s,art);
  for(const h of s.level.hazards){if(Math.abs(h.x-cam.x)<1100&&Math.abs(h.y-cam.y)<700)cannon(ctx,h,t,art,h.quietUntil>s.elapsed)}
  for(const b of s.level.beacons){if(Math.abs(b.x-cam.x)<1000&&Math.abs(b.footY-cam.y)<700)beacon(ctx,b,s.activePulse,t,art)}
  for(const sign of s.level.rallySigns){
@@ -396,6 +439,7 @@ function decoration(ctx,s,t,art={}){const cam=s.camera;ctx.save();ctx.translate(
  }
  for(const c of s.level.checkpoints){if(Math.abs(c.x-cam.x)<1100&&Math.abs(c.footY-cam.y)<700)checkpoint(ctx,c,s.checkpoint>=s.level.checkpoints.indexOf(c),t,art)}
  for(const q of s.level.shakes){if(q.taken||q.locked||Math.abs(q.x-cam.x)>1030||Math.abs(q.y-cam.y)>650)continue;
+  paintCollectibleAura(ctx,s,q);
   drawShake(ctx,q.x,q.y+Math.sin(t*4+q.x)*3,q.special?1.16:.9,q.special,art);
   if(q.special){ctx.strokeStyle='#edc86b';ctx.lineWidth=3;ctx.beginPath();ctx.arc(q.x,q.y,23+Math.sin(t*3)*2,0,TAU);ctx.stroke()}
  }
@@ -412,9 +456,34 @@ function player(ctx,s,sprites,art={}){const p=s.player;let state='idle';
  const image=bonusArt||(pickupPose?sprites.shake_00:null)||sprites[key]||sprites.idle_00;
  ctx.save();ctx.translate(Math.round(p.x+p.w/2-s.camera.x),Math.round(p.y+p.h-s.camera.y));
  if(p.facing<0)ctx.scale(-1,1);
+ // The source landing cloud follows actual collider contact with no latency.
+ if(p.landTime>0&&!s.settings.reducedMotion&&art['VF-10']){
+  ctx.save();ctx.imageSmoothingEnabled=false;
+  ctx.globalAlpha=Math.min(1,p.landTime/.12)*.8;
+  ctx.drawImage(art['VF-10'],-42,-18,84,29);ctx.restore();
+ }
+ if(!s.settings.reducedMotion){
+  // Secondary animation is presentation only. The collider, pose selection,
+  // invulnerability and input responsiveness remain owned by the engine.
+  if(p.landTime>0&&p.grounded){
+   const settle=Math.min(1,p.landTime/.12);
+   ctx.scale(1+settle*.035,1-settle*.035);
+  }else if(state==='idle')ctx.translate(0,Math.sin(s.elapsed*2.8)*.75);
+ }
  if(p.invulnerable>0)ctx.globalAlpha=s.settings.reducedMotion?.8:(Math.floor(s.elapsed*13)%2===0?.5:1);
  const scale=.87;
- if(image){ctx.drawImage(image,-145*scale,-147*scale,240*scale,160*scale)}
+ if(image){
+  if(p.dashTime>0&&!s.settings.reducedMotion){
+   // Two low-alpha speed echoes use the *original* source sprite.
+   // No alternate body, disconnected tail or replacement art is invented.
+   for(let i=2;i>=1;i--){
+    ctx.save();ctx.globalAlpha*=i===1?.14:.075;
+    ctx.drawImage(image,-145*scale-i*23,-147*scale,240*scale,160*scale);
+    ctx.restore();
+   }
+  }
+  ctx.drawImage(image,-145*scale,-147*scale,240*scale,160*scale);
+ }
  else {ctx.fillStyle='#f08337';ctx.beginPath();ctx.arc(0,-39,25,0,TAU);ctx.fill();ctx.fillStyle='#253d7b';ctx.fillRect(-25,-55,50,9)}
  if(p.attackTime>0&&!image){stroke(ctx,'#f7e5a7',7);ctx.beginPath();ctx.arc(16,-40,70,-.7,1.1);ctx.stroke()}
  ctx.restore();
@@ -459,10 +528,12 @@ export function render(ctx,s,sprites,alpha=0,art={},audition={}){
  paintArtOverrides(ctx,s,audition,'backdrop');
  if(!art['DM-BG01']&&!art['DM-BG03']&&!art['DM-BG07'])farCampus(ctx,cam,decorativeTime);
  quad(ctx,cam,decorativeTime,art);mainBuilding(ctx,cam,decorativeTime,art);
+ paintAmbientWorld(ctx,s);paintAmbientLife(ctx,s);
  ctx.save();ctx.translate(-cam.x,-cam.y);
  for(const p of visibleWorld(s.level.platforms,cam.x,cam.y)){
   const pos=movingPosition(p,t),active=!p.pulse||s.activePulse||s.player.onPlatform===p.id;
   drawPlatform(ctx,p,pos.x,pos.y,active,decorativeTime,art);
+  paintPlatformFinish(ctx,p,pos.x,pos.y,active);
   // The activation outline is independent of optional generated textures.
   // It uses the *same* authoritative pulse state as collision.
   if(p.pulse){
@@ -474,6 +545,7 @@ export function render(ctx,s,sprites,alpha=0,art={},audition={}){
  }
  ctx.restore();
  paintArtOverrides(ctx,s,audition,'world');
+ paintBossStaging(ctx,s);
  decoration(ctx,s,decorativeTime,art);
  // Readable non-colliding intro glimpse: the Fox runs away with the actual independent cup.
  if(s.elapsed<2.4 && cam.x<1050 && s.mode==='playing'){
@@ -481,22 +553,25 @@ export function render(ctx,s,sprites,alpha=0,art={},audition={}){
   drawFox(ctx,fx,440,'escape',decorativeTime,art);drawShake(ctx,fx+84,375,.78,true,art);
   ctx.restore();
  }
- player(ctx,s,sprites,art);cheerWave(ctx,s);if(!s.settings.reducedMotion)events(ctx,s,t,art);
+ paintHeroLighting(ctx,s);
+ player(ctx,s,sprites,art);cheerWave(ctx,s);
+ if(!s.settings.reducedMotion){events(ctx,s,t,art);paintCelebrationAccents(ctx,s)}
  paintArtOverrides(ctx,s,audition,'actors');
- const inPulse=s.activePulse,chant=pulseState(s.elapsed,s.pulseOverride);ctx.save();ctx.textAlign='center';ctx.font='900 26px system-ui';
+ paintLens(ctx,s);
+ const chant=pulseState(s.elapsed,s.pulseOverride);paintPulseReadout(ctx,s,chant);
+ ctx.save();ctx.textAlign='center';ctx.font='900 26px system-ui';
  if(s.mode==='playing'&&!s.boss.triggered){
-  ctx.globalAlpha=.90;ctx.fillStyle=inPulse?'#fff0ac':'#a9d7f6';ctx.shadowColor='#2b4d78';ctx.shadowBlur=10;
-  ctx.fillText(inPulse?'GO IRISH! · BANNERS SOLID':'CHANT RESTING · C TO CHEER',VIEW.width/2,115);
-  ctx.shadowBlur=0;ctx.globalAlpha=.94;ctx.font='800 17px system-ui';ctx.fillStyle='#fff6d5';
-  const pulseCaption=s.settings.reducedMotion
-   ?(inPulse?'BRIDGES OPEN':'BRIDGES RESTING · C TO CHEER')
-   :(inPulse?'BRIDGES OPEN ':'NEXT CHANT IN ')+chant.remaining.toFixed(1)+'s';
-  ctx.fillText(pulseCaption+'   ·   RALLY BELLS '+s.rallyCount+'/'+s.level.rallyPosts.length,VIEW.width/2,140);
-  if(s.pulseFlash>0&&!s.settings.reducedMotion){ctx.globalAlpha=s.pulseFlash*.18;ctx.fillStyle='#f6da8b';ctx.fillRect(0,0,VIEW.width,VIEW.height)}
-  if(s.checkpointNotice>0){ctx.globalAlpha=Math.min(1,s.checkpointNotice);ctx.fillStyle='#fff1c7';ctx.font='800 24px system-ui';ctx.fillText(s.level.checkpoints[s.checkpoint].id.toUpperCase()+' CHECKPOINT',VIEW.width/2,159)}
+  if(s.pulseFlash>0&&!s.settings.reducedMotion){
+   ctx.globalAlpha=Math.min(.08,s.pulseFlash*.1);ctx.fillStyle='#f6da8b';
+   ctx.fillRect(0,0,VIEW.width,VIEW.height);ctx.globalAlpha=1;
+  }
+  if(s.checkpointNotice>0){ctx.globalAlpha=Math.min(1,s.checkpointNotice);
+   ctx.fillStyle='#fff1c7';ctx.strokeStyle='#18344e';ctx.lineWidth=4;ctx.font='900 22px system-ui';
+   const name=s.level.checkpoints[s.checkpoint].id.toUpperCase()+' CHECKPOINT';
+   ctx.strokeText(name,VIEW.width/2,159);ctx.fillText(name,VIEW.width/2,159);ctx.globalAlpha=1;
+  }
  }
- if(s.boss.triggered&&s.boss.hp>0){ctx.textAlign='left';ctx.font='900 18px system-ui';ctx.fillStyle='#fff5dc';ctx.fillText('THE FOX',343,90);
-  ctx.fillStyle='#352a37';rounded(ctx,434,73,210,23,7);ctx.fill();ctx.fillStyle='#f27e57';rounded(ctx,438,76,202*s.boss.hp/3,17,5);ctx.fill();}
+ paintBossHealth(ctx,s);
  if(s.mode==='victory'){ctx.fillStyle='rgba(13,24,35,.66)';ctx.fillRect(0,0,VIEW.width,VIEW.height);
   birthdayDecor(ctx,decorativeTime,art);paintArtOverrides(ctx,s,audition,'birthday');ctx.fillStyle='#fff6d2';ctx.font='900 55px system-ui';ctx.fillText('HAPPY BIRTHDAY,',480,155);ctx.fillStyle='#fbd57b';ctx.font='900 63px system-ui';ctx.fillText('MAVERICK!',480,215);}
  ctx.restore();

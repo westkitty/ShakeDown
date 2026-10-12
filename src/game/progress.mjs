@@ -7,7 +7,7 @@ const clamp=(value,min,max)=>Math.max(min,Math.min(value,max));
 export function validCheckpointRecord(record,level){
  if(!record||typeof record!=='object'||record.schema!==1)return false;
  const index=record.index;
- if(!Number.isInteger(index)||index<=0||index>=level.checkpoints.length)return false;
+ if(!Number.isInteger(index)||index<0||index>=level.checkpoints.length)return false;
  if(record.checkpointId!==level.checkpoints[index].id)return false;
  if(!Number.isFinite(record.elapsed)||record.elapsed<0||record.elapsed>7200)return false;
  for(const [entries,items] of [[record.collected,level.shakes],[record.defeated,level.enemies]]){
@@ -21,12 +21,29 @@ export function validCheckpointRecord(record,level){
  const validRallies=new Set(level.rallyPosts.map(post=>post.id));
  if(rallies.some(id=>typeof id!=='string'||!validRallies.has(id))||
     new Set(rallies).size!==rallies.length)return false;
+ // An initial-lawn save is only justified by real progress. A blank fresh
+ // spawn must not appear as a fake Continue opportunity.
+ if(index===0&&!record.collected.length&&!record.defeated.length&&!rallies.length)return false;
+ // Unlocked relay rewards cannot exist in a save whose physical bell was
+ // never rung. Keep older schema-1 records without any relay prize valid.
+ const lit=new Set(rallies);
+ if(level.rallyPosts.some(post=>record.collected.includes(post.reward)&&!lit.has(post.id)))return false;
  return true;
+}
+
+// A stable, cheap fingerprint of meaningful progress. It changes only when
+// the checkpoint advances, a shake is collected, a bell rings or a bot falls.
+export function progressToken(s){
+ const index=s.checkpoint;
+ if(!Number.isInteger(index)||index<0||index>=s.level.checkpoints.length)return null;
+ const defeated=s.level.enemies.reduce((count,e)=>count+Number(!e.alive),0);
+ if(index===0&&s.shakeCount===0&&s.rallyCount===0&&defeated===0)return null;
+ return [index,s.shakeCount,s.rallyCount,defeated].join(':');
 }
 
 export function checkpointRecord(s){
  const index=s.checkpoint;
- if(!Number.isInteger(index)||index<=0||index>=s.level.checkpoints.length)return null;
+ if(progressToken(s)===null)return null;
  return {
   schema:1,
   index,

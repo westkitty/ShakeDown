@@ -28,7 +28,13 @@ export function resetToCheckpoint(s){
  s.cheerCooldown=0;s.cheerWave=0;s.cheerOrigin=null;
  s.lastDamage=''; s.status='Back on your paws.';
 }
-const say=(s,type,detail='')=>{s.eventSerial=(s.eventSerial||0)+1;s.events.push({serial:s.eventSerial,type,detail,t:s.elapsed,x:s.player.x+s.player.w/2,y:s.player.y+s.player.h/2});s.lastEvent=type; if(s.events.length>35)s.events.shift()};
+// Events preserve player-origin defaults; defeated enemies may declare actual
+// visual coordinates without changing physics, damage or event categories.
+const say=(s,type,detail='',at=null)=>{s.eventSerial=(s.eventSerial||0)+1;s.events.push({
+ serial:s.eventSerial,type,detail,t:s.elapsed,
+ x:Number.isFinite(at?.x)?at.x:s.player.x+s.player.w/2,
+ y:Number.isFinite(at?.y)?at.y:s.player.y+s.player.h/2
+});s.lastEvent=type;if(s.events.length>35)s.events.shift()};
 function damage(s,reason,sourceX){const p=s.player;if(p.invulnerable>0||s.mode!=='playing')return;
  const amount=s.settings.assist?0.5:1;p.hp=Math.max(0,p.hp-amount);p.invulnerable=1.25;
  p.vy=-275;p.vx=sourceX<p.x?270:-270;s.lastDamage=reason;s.status=reason;say(s,'hurt',reason);
@@ -40,7 +46,7 @@ function strike(s){const p=s.player;if(p.attackCooldown>0)return;
   if(!e.alive)continue;
   const dx=(e.x+e.w/2)-(p.x+p.w/2);const dy=(e.y+e.h/2)-(p.y+p.h/2);
   if(Math.abs(dx)<94&&Math.abs(dy)<75&&(Math.sign(dx)===p.facing||Math.abs(dx)<34)){
-   e.alive=false;say(s,'enemy','Cup Crawler defeated');s.status='CONCESSION BOT: CANCELLED';
+   e.alive=false;say(s,'enemy','Cup Crawler defeated',{x:e.x+e.w/2,y:e.y+e.h/2});s.status='CONCESSION BOT: CANCELLED';
   }
  }
  for(const b of s.level.beacons){
@@ -226,7 +232,7 @@ export function update(s,input={},dt=DT){
   if(e.stunnedUntil>s.elapsed)continue;
   e.x=e.baseX+Math.sin(s.elapsed*e.rate)*e.range;
   if(overlap(e,p)){
-   if(p.vy>85&&p.prevY+p.h<=e.y+15){e.alive=false;p.vy=-360;say(s,'stomp',e.id)}
+   if(p.vy>85&&p.prevY+p.h<=e.y+15){e.alive=false;p.vy=-360;say(s,'stomp',e.id,{x:e.x+e.w/2,y:e.y+e.h/2})}
    else damage(s,'A Cup Crawler caught you!',e.x);
   }
  }

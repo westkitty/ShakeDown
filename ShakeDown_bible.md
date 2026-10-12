@@ -253,3 +253,51 @@ The full Asset Director source registry remains 194/194, one playable-context ro
 ### OMNI final local QA note
 - 61/61 Node PASS; release preflight PASS. Full local Brave browser matrix 111 PASS/10 deliberate SKIP/1 FAIL (mobile focus at initial Start); that focus test then passed 5 of 5 targeted repeated reruns, no speculative fix. Pending exact commit CI.
 - Matched four-viewport render p95 ms before [1.7,1.5,1.6,1.1] and after [1.4,1.9,1.3,1.4]. Headless remote rAF ~200ms: cannot infer physical-device FPS or measurable performance uplift. No browser JS errors.
+
+## 2026-10-12 — OMNI II meaningful autosave and startup resilience (local continuation)
+
+### Intake and fixed scope
+- Continuation branch `feat/omni-rally-followthrough-20261012`, starting commit `6608537c6f397a0a6555267f4ef808b14846d3b4`. Public main at intake: `e1f98f35c092159018e05604141d818ba5a356a6`. Tracked work clean; MacBook separately retains three untracked LM Arena asset production files.
+- Three bounded groups: meaningful earned-progress durability, native accessible optional-objective journal, and startup/title-focus readiness. No new dependencies, SVGs, sprite bytes, renderer, physics, checkpoint location, Fox damage semantics, or asset approvals.
+- Baseline `npm run validate` **61/61 pass**, release preflight pass.
+
+### Reproduced defects
+- Checkpoint persistence wrote only after a new checkpoint index. Two new desktop browser tests reproduced absent index-0 Welcome Lawn save after a meaningful item and absent rally-bell persistence after checkpoint 1 until the next checkpoint was reached (red tests 2/2).
+- Mobile browser load exhibited the Start control visible while its module handler was not yet initialized. A tap during that window could be inert; a deliberately delayed import now has an automated guard.
+- Optional objectives could be viewed in dynamic on-field guidance and the end screen but lacked an on-demand four-item status ledger at Pause.
+
+### Corrections
+- New `progressToken` over checkpoint, collected Shakes, lit bell count, defeated Cup Crawlers; write a minimal schema-1 checkpoint record only on meaningful changes (not each simulation frame). Early actual earned progress permits an index-0 Welcome Lawn Continue; blank spawn cannot. Reject saved locked relay prize without the actual lit bell. Storage denial is surfaced as warning while gameplay remains playable.
+- Add native `<details>` Rally Journal within Pause, four canonical label/status/region rows, collected-vs-unclaimed reward status, a title best-rallies tally, and nonplaying native disabled touch buttons. Pause Tab focus containment includes native summary.
+- Gate visible Start, title Art Director and curator toggle until actual handlers are installed; one-shot initial focus recovery avoids hijacking a separately focused control. Deliberately delayed-module test verifies no inert early-click path.
+- Retain every asset, 23 Dome steps, six checkpoints, current level geography and Fox fight.
+
+### Local evidence and gaps
+- New Node progress tests and existing suites **64/64 pass**; release preflight pass.
+- Targeted desktop/mobile browser tests covering persistence, journal and delayed startup **10/10 pass**, with earlier red reproduction retained in the separate report.
+- One separate concurrent Playwright invocation collided with an active runner's shared test-results directory (missing trace ENOENT), a QA-environment mistake, not an application defect; subsequent browser runs must serialize or isolate output.
+- Full matrix, exact-commit GitHub CI and live Pages release are separate final gates, not claimed before their receipts.
+- See `docs/OMNI_PROGRESS_RELIABILITY_20261012.md`; remaining external GitHub verified-email requirement and physical-device/human art approval limits unchanged.
+
+
+## 2026-10-12 — AAA Canvas visual finishing, source-preserving candidate
+
+- User-approved purpose: improve Shakedown's actual existing Canvas game visuals, not create images/mockups or rewrite the engine. Starting tree feature branch `feat/omni-rally-followthrough-20261012` at `6608537` already contained uncommitted OMNI II autosave and Rally Journal work; all prior changes and source visual-identity locks retained.
+- Three cohesive improvements: (A) material-specific platform grounds, low-cost campus/Dome light grading and depth; (B) visually subordinate chant timing UI, real-state boss segmented HP, original-Cinnamon-sprite dash/landing accents and bounded event particles; (C) cohesive blue/brass UI, focus/pressed/touch states and readable native mobile timing. `src/game/visual-finish.mjs` caches procedural visual surfaces once per Canvas context; no new production dependencies and no physical PNG source modification.
+- Actual 8-scene screenshots before and after: `/Users/bigmac/shakedown-visual-qa-20261012/{before,final}`; in-game source and fixture report `docs/AAA_VISUAL_FINISH_20261012.md`.
+- Node and asset: 64/64 pass. Focused browser: 13 passes/3 skips. Full browser: 126 passes/12 skips/2 intermittent fails (initial title focus during delayed loading and forbidden-art pixel comparison). Both cases passed twice independently, 4/4 reruns; cause not fully determined. Do not claim full matrix PASS.
+- Render p95 matched audit before -> after (ms): desktop 1.1->1.2, portrait 1.1->1.5, landscape 1.4->1.8, narrow 1.2->1.7; 0 browser page errors. Remote headless rAF ~200ms cannot prove real phone FPS; this is measured visual expense, not an FPS uplift.
+- No commits, remote pushes or live Pages deployment requested or done by this pass. Previous `run_03` clipped source, provisional Fox/art approvals, and physical Android validation remain unresolved. Existing UI/save/gameplay/test contracts preserved.
+
+### 2026-10-12 — AAA finishing final QA supersession
+
+- Final **140-case** desktop/mobile Playwright browser run **128 passed / 12 intentionally skipped / 0 failed**, exit 0. Underlying log `/tmp/shakedown-aaa-full-final.log` on Big Mac.
+- Explicit previous 126/12/2 run is retained as a valid earlier exploratory failure record. Two intermittent cases subsequently passed repeated focused tests, and the full final matrix has now passed without weakened asset approval assertions.
+- 64/64 Node/asset and preflight PASS; measured Canvas p95 render changes before/after are documented in `docs/AAA_VISUAL_FINISH_20261012.md`.
+- No automatic Git commit/push/deploy; the verified candidate is a local tree with cumulative preserved OMNI II reliability changes.
+
+### Final device receipt — AAA visual candidate
+
+- The full 16-file local source candidate now exists on Big Mac and MacBook at `/Users/andrew/shakedown` (case-insensitive canonical `/Users/andrew/Shakedown`). Verified transfer tar `84bfbed9...`, per-file SHA manifest and three protected asset-planning document hashes match.
+- Big Mac entire desktop/mobile browser suite: **128 pass, 12 expected skip, 0 fail**. MacBook: **64/64 Node/asset PASS**, preflight PASS and **3/3 focused Brave browser smoke PASS**.
+- Locally served at `http://127.0.0.1:8765/`, HTTP 200 with verified renderer source hash. No Git commit, push, deploy or claim of physical-device FPS.

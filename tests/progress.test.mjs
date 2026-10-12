@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {newGame,DT,update} from '../src/game/engine.mjs';
-import {checkpointRecord,validCheckpointRecord,restoreCheckpoint} from '../src/game/progress.mjs';
+import {checkpointRecord,validCheckpointRecord,restoreCheckpoint,progressToken} from '../src/game/progress.mjs';
 
 test('checkpoint records are absent at spawn and use authored IDs once reached',()=>{
  const s=newGame({assist:true});
@@ -105,4 +105,49 @@ test('cheer rally reward and activation survive checkpoint resume',()=>{
  assert.equal(restored.level.rallyPosts[0].lit,true);
  assert.equal(restored.level.shakes.find(q=>q.id===post.reward).locked,false);
  assert.ok(restored.level.rallyPosts.slice(1).every(p=>!p.lit));
+});
+
+test('first meaningful pickup creates a legitimate Welcome Lawn continue without a false initial save',()=>{
+ const source=newGame(),target=newGame();
+ assert.equal(progressToken(source),null);
+ assert.equal(checkpointRecord(source),null);
+ const q=source.level.shakes.find(q=>q.id==='quad-shake-1');
+ q.taken=true;source.shakeCount=1;source.elapsed=8.4;
+ assert.equal(progressToken(source),'0:1:0:0');
+ const record=checkpointRecord(source);
+ assert.equal(record.index,0);
+ assert.equal(record.checkpointId,'Welcome Lawn');
+ assert.equal(validCheckpointRecord(record,target.level),true);
+ assert.equal(restoreCheckpoint(target,record),true);
+ assert.equal(target.mode,'playing');
+ assert.equal(target.checkpoint,0);
+ assert.equal(target.shakeCount,1);
+ assert.equal(target.level.shakes.find(p=>p.id==='quad-shake-1').taken,true);
+ assert.equal(validCheckpointRecord({...record,collected:[]},source.level),false);
+});
+
+test('progress fingerprint changes for earned bells, shakes, enemy defeats and checkpoints only',()=>{
+ const s=newGame();
+ assert.equal(progressToken(s),null);
+ s.level.enemies[0].alive=false;assert.equal(progressToken(s),'0:0:0:1');
+ const record=checkpointRecord(s);assert.equal(validCheckpointRecord(record,s.level),true);
+ const repeat=progressToken(s);
+ s.elapsed+=50;s.camera.x=999;s.player.x=600;
+ assert.equal(progressToken(s),repeat,'movement, elapsed time and camera do not repeatedly autosave');
+ s.level.rallyPosts[0].lit=true;s.rallyCount=1;
+ assert.equal(progressToken(s),'0:0:1:1');
+ s.checkpoint=2;assert.equal(progressToken(s),'2:0:1:1');
+});
+
+test('tampered records cannot claim a relay Shake without lighting that bell',()=>{
+ const s=newGame();s.checkpoint=1;s.elapsed=11.3;
+ const q=s.level.shakes.find(q=>q.id==='rally-shake-canopy');
+ q.taken=true;s.shakeCount=1;
+ const invalid=checkpointRecord(s);
+ assert.equal(validCheckpointRecord(invalid,s.level),false);
+ assert.equal(restoreCheckpoint(newGame(),invalid),false);
+ s.level.rallyPosts[0].lit=true;s.rallyCount=1;
+ const correct=checkpointRecord(s);
+ assert.equal(validCheckpointRecord(correct,s.level),true);
+ assert.equal(restoreCheckpoint(newGame(),correct),true);
 });

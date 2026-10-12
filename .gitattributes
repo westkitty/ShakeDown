@@ -1,0 +1,2 @@
+# Treat PDF deliverables as binary to avoid diffing encoded PDF internals.
+*.pdf binary

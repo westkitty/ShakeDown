@@ -8,12 +8,13 @@ import {WORLD_SCENE_IDS,worldSceneEntries} from '../src/game/curated-assets.mjs'
 const manifest=JSON.parse(fs.readFileSync('assets/production/manifest.json','utf8'));
 const review=JSON.parse(fs.readFileSync('assets/production/curation.json','utf8'));
 
-test('additional scene art has 35 verified source PNGs and no blocked/revise candidate',()=>{
+test('additional scene art has 41 verified source PNGs with animation partners and no blocked/revise candidate',()=>{
  const rows=worldSceneEntries(review,manifest);
  const ids=rows.map(([id])=>id);
- assert.equal(WORLD_SCENE_IDS.length,35);
+ assert.equal(WORLD_SCENE_IDS.length,41);
+ for(const id of ['EN-02','EN-03','VF-05','VF-10','UI-01','UI-02'])assert.ok(ids.includes(id),'Source sprite missing: '+id);
  assert.deepEqual(ids,WORLD_SCENE_IDS);
- assert.equal(new Set(ids).size,35);
+ assert.equal(new Set(ids).size,41);
  for(const [id,asset] of rows){
   assert.equal(review.entries[id].verdict,'alternate');
   assert.equal(review.entries[id].finalHumanApproval,false);
@@ -42,4 +43,13 @@ test('altered provenance, sizes or status remove scene entries rather than promo
  fake.assets['DM-PR04'].sha256=manifest.assets['DM-PR04'].sha256;
  fake.assets['DM-PR04'].actual_px=[-1,192];
  assert.ok(!worldSceneEntries(review,fake).some(([id])=>id==='DM-PR04'));
+});
+
+test('new alternative art cannot load after veto or source hash corruption',()=>{
+ for(const id of ['EN-02','EN-03','VF-05','VF-10','UI-01','UI-02']){
+  const rejected=structuredClone(review);rejected.entries[id].verdict='blocked';
+  assert.ok(!worldSceneEntries(rejected,manifest).some(([name])=>name===id),id);
+  const altered=structuredClone(manifest);altered.assets[id].sha256='0'.repeat(64);
+  assert.ok(!worldSceneEntries(review,altered).some(([name])=>name===id),id);
+ }
 });

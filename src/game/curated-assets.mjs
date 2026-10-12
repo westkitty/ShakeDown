@@ -41,6 +41,8 @@ export const WORLD_SCENE_IDS=Object.freeze([
  'PR-02','PR-04','PR-05','PR-07','PR-11','PR-13','PR-14',
  'BD-06','BD-07','BD-08','BD-14',
  'VF-03','VF-04','VF-08',
+ // Source-verified animation partners and real gameplay VFX, still provisional.
+ 'EN-02','EN-03','VF-05','VF-10','UI-01','UI-02',
  'DM-TL16'
 ]);
 export function worldSceneEntries(curation,manifest){

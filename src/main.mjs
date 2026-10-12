@@ -1,5 +1,5 @@
 import {newGame,startGame,pauseGame,resetToCheckpoint,update,DT,snapshot} from './game/engine.mjs';
-import {VIEW,WORLD} from './game/world.mjs';
+import {VIEW,WORLD,pulseState} from './game/world.mjs';
 import {rallyGuidance} from './game/rally-guidance.mjs';
 import {render} from './game/render.mjs';
 import {AudioBox} from './game/audio.mjs';
@@ -7,7 +7,7 @@ import {loadApprovedArt} from './game/production-assets.mjs';
 import {loadCuratedPreview,loadWorldSceneArt} from './game/curated-assets.mjs';
 import {ArtDirector} from './game/art-director.mjs';
 import {initScreenArt} from './game/screen-art.mjs';
-import {checkpointRecord,validCheckpointRecord,restoreCheckpoint} from './game/progress.mjs';
+import {checkpointRecord,validCheckpointRecord,restoreCheckpoint,progressToken} from './game/progress.mjs';
 const $=id=>document.getElementById(id);
 const canvas=$('game'),ctx=canvas.getContext('2d',{alpha:false});
 if(!ctx){$('load-status').textContent='Canvas rendering is unavailable on this browser.';throw Error('Canvas 2D required')}
@@ -24,13 +24,36 @@ if(typeof initialSettings.reducedMotion!=='boolean'){
  initialSettings.reducedMotion=window.matchMedia?.('(prefers-reduced-motion: reduce)').matches||false;
 }
 let state=newGame(initialSettings),sprites={},assetCount=0,assetErrors=[];
-let lastSavedCheckpoint=0;
+let lastSavedProgressToken=null;
+let saveNotice='',saveNoticeUntil=0;
 function resumableRecord(){return validCheckpointRecord(saved.progress,state.level)?saved.progress:null}
+function updateRallyJournal(){
+ const best=Math.min(state.level.rallyPosts.length,Math.floor(safeScore(saved.bestRallies)));
+ const trophy=$('rally-personal-best');
+ trophy.hidden=best===0;
+ if(!trophy.hidden)trophy.textContent='PERSONAL BEST · '+best+'/'+state.level.rallyPosts.length+' RALLY BELLS';
+ $('pause-rally-count').textContent=state.rallyCount+'/'+state.level.rallyPosts.length+' BELLS';
+ const list=$('rally-journal-list'),items=document.createDocumentFragment();
+ for(const post of state.level.rallyPosts){
+  const prize=state.level.shakes.find(shake=>shake.id===post.reward);
+  const region=post.x<WORLD.campusEnd?'South Quad':'Golden Dome';
+  const status=post.lit?(prize?.taken?'RUNG · SHAKE COLLECTED':'RUNG · SHAKE READY'):'NOT YET RUNG';
+  const item=document.createElement('li');
+  item.textContent=post.label+' · '+region+' · '+status;
+  item.className=post.lit?'rally-done':'rally-pending';
+  items.appendChild(item);
+ }
+ list.replaceChildren(items);
+ $('rally-journal-note').textContent=state.rallyCount===state.level.rallyPosts.length
+  ?'Every rally bell is ringing. Rally Legend!'
+  :'Press C or CHEER when you reach a bell. Best run: '+best+'/'+state.level.rallyPosts.length+'.';
+}
 function showContinue(){
  const record=resumableRecord(),button=$('continue-btn'),note=$('continue-note');
+ updateRallyJournal();
  button.hidden=!record;note.hidden=!record;
  if(record){button.textContent='CONTINUE FROM '+record.checkpointId.toUpperCase();
-  note.textContent='Saved at '+record.checkpointId+' — start fresh or continue.';}
+  note.textContent='Saved at '+record.checkpointId+' · '+record.collected.length+' shakes · '+(record.rallies??[]).length+' rally bells. Start fresh or continue.';}
 }
 const audio=new AudioBox();audio.mute(state.settings.mute,{resume:false});
 let productionArt={},productionLoaded=0,productionDeclared=0,productionErrors=[];
@@ -95,9 +118,11 @@ function save(){
   bestRallies:Math.max(safeScore(current.bestRallies),safeScore(saved.bestRallies),state.rallyCount),
   progress:state.mode==='victory'?null:
    state.mode==='title'?currentProgress:(saved.progress||null)};
- try{localStorage.setItem(saveKey,JSON.stringify(saved))}
- catch{/* Restricted storage: gameplay still works, even if progress cannot persist. */}
+ let written=false;
+ try{localStorage.setItem(saveKey,JSON.stringify(saved));written=true;}
+ catch{/* Restricted storage: gameplay still works without a durability guarantee. */}
  if(state.mode==='title')showContinue();
+ return written;
 }
 window.addEventListener('storage',event=>{
  if(event.key!==saveKey)return;
@@ -110,11 +135,20 @@ window.addEventListener('storage',event=>{
   showContinue();
  }
 });
-function saveCheckpointIfNew(){
- if(state.mode!=='playing'||state.checkpoint<=lastSavedCheckpoint)return;
- const candidate=checkpointRecord(state);
- if(!candidate)return;
- lastSavedCheckpoint=state.checkpoint;saved.progress=candidate;save();
+function saveProgressWhenEarned(){
+ // Fatal contact can occur later in the very frame that awards an item.
+ // Preserve that earned progress before presenting Retry; winning clears
+ // the pending checkpoint separately in showMode().
+ if(state.mode!=='playing'&&state.mode!=='dead')return;
+ const token=progressToken(state);
+ if(token===null||token===lastSavedProgressToken)return;
+ const record=checkpointRecord(state);
+ if(!record)return;
+ saved.progress=record;
+ lastSavedProgressToken=token;
+ const written=save();
+ saveNotice=written?'PROGRESS SAVED':'SAVE UNAVAILABLE · PLAY CONTINUES';
+ saveNoticeUntil=performance.now()+1900;
 }
 const overlayByMode={title:'title-overlay',pause:'pause-overlay',dead:'dead-overlay',victory:'victory-overlay'};
 function showMode(){
@@ -125,6 +159,8 @@ function showMode(){
  const overlay=overlayByMode[state.mode];
  if(overlay)$(overlay).classList.remove('hidden');
  $('pause-btn').disabled=state.mode!=='playing';
+ for(const button of document.querySelectorAll('.touch'))button.disabled=state.mode!=='playing';
+ if(state.mode==='title'||state.mode==='pause')updateRallyJournal();
  if(state.mode==='dead')$('dead-reason').textContent=state.lastDamage||'The Fox got the better of Cinnamon. For now.';
  if(state.mode==='victory'){
   $('victory-score').textContent=`${state.shakeCount} Shamrock Shakes found · ${state.secretCount} golden secrets · ${state.rallyCount}/${state.level.rallyPosts.length} rally bells`;
@@ -153,7 +189,7 @@ function handleModalTab(e){
  const overlayId=overlayByMode[state.mode];
  if(!overlayId)return false;
  const panel=$(overlayId);
- const focusables=[...panel.querySelectorAll('button:not(:disabled):not([hidden]),input:not(:disabled),a[href]')]
+ const focusables=[...panel.querySelectorAll('button:not(:disabled):not([hidden]),input:not(:disabled),summary,a[href]')]
   .filter(element=>element.getClientRects().length>0);
  if(!focusables.length)return false;
  const first=focusables[0],last=focusables[focusables.length-1],active=document.activeElement;
@@ -237,7 +273,7 @@ for(const button of document.querySelectorAll('.touch')){
 }
 function newRound(){
  state=newGame(state.settings);state.assetCount=assetCount;
- lastEventSerial=0;lastSavedCheckpoint=0;displayedMode='';
+ lastEventSerial=0;lastSavedProgressToken=null;displayedMode='';
  clearInputs();lastStamp=0;accumulator=0;audio.resetSequence();audio.setPaused(false);
  saved.progress=null;
  startGame(state);save();audio.activate();showMode();canvas.focus({preventScroll:true});
@@ -248,7 +284,7 @@ function continueRound(){
  const resumed=newGame(state.settings);
  if(!restoreCheckpoint(resumed,record))return;
  state=resumed;state.assetCount=assetCount;
- lastEventSerial=0;lastSavedCheckpoint=state.checkpoint;displayedMode='';
+ lastEventSerial=0;lastSavedProgressToken=progressToken(state);displayedMode='';
  clearInputs();lastStamp=0;accumulator=0;audio.resetSequence();audio.setPaused(false);
  audio.activate();showMode();canvas.focus({preventScroll:true});
 }
@@ -313,8 +349,35 @@ async function loadAssets(){
   showAssetStatus();
  }
 }
+let lastHeartCount=-1,lastHeartFilled=null,lastHeartEmpty=null;
+function healthHUD(p){
+ const holder=$('hud-health'),count=Math.ceil(Math.max(0,p.hp));
+ holder.setAttribute('role','img');
+ holder.setAttribute('aria-label','Health '+count+' of '+p.maxHp+' hearts');
+ const filled=curatedEnabled?renderArt['UI-01']:null;
+ const empty=curatedEnabled?renderArt['UI-02']:null;
+ if(!filled||!empty){
+  holder.classList.remove('pixel-heart-hud');
+  const fallback='♥ '.repeat(count).trim()||'♡';
+  if(holder.textContent!==fallback)holder.textContent=fallback;
+  lastHeartCount=-1;lastHeartFilled=null;lastHeartEmpty=null;return;
+ }
+ let surface=holder.querySelector('canvas');
+ if(!surface){
+  surface=document.createElement('canvas');
+  surface.width=p.maxHp*24;surface.height=24;
+  surface.className='hud-heart-pixels';surface.setAttribute('aria-hidden','true');
+  holder.replaceChildren(surface);
+ }
+ holder.classList.add('pixel-heart-hud');
+ if(lastHeartCount===count&&lastHeartFilled===filled&&lastHeartEmpty===empty)return;
+ const paint=surface.getContext('2d');if(!paint)return;
+ paint.imageSmoothingEnabled=false;paint.clearRect(0,0,surface.width,surface.height);
+ for(let i=0;i<p.maxHp;i++)paint.drawImage(i<count?filled:empty,i*24,0,24,24);
+ lastHeartCount=count;lastHeartFilled=filled;lastHeartEmpty=empty;
+}
 function hud(){const p=state.player;
- $('hud-health').textContent='♥ '.repeat(Math.ceil(p.hp)).trim()||'♡';
+ healthHUD(p);
  $('hud-shakes').textContent=`SHAKES ${state.shakeCount}`;
  const rallyHigh=p.x<WORLD.campusEnd&&p.y<280;
  const zone=state.boss.triggered?'FOX SHOWDOWN':p.x>=WORLD.campusEnd?'GOLDEN DOME':rallyHigh?'PEP RALLY':'SOUTH QUAD';
@@ -332,9 +395,15 @@ function hud(){const p=state.player;
    :'Cheer: activate banner bridges and discover rally relays');
  }
  $('cheer-progress').textContent='RELAYS '+state.rallyCount+'/'+state.level.rallyPosts.length;
+ const chant=pulseState(state.elapsed,state.pulseOverride);
+ $('chant-status').textContent=state.boss.triggered?'FOX SHOWDOWN'
+  :(chant.active?'BRIDGES OPEN':'NEXT CHANT')+' · '+chant.remaining.toFixed(1)+'s';
  const hint=rallyGuidance(state),guide=$('rally-guide');
  guide.hidden=!hint;guide.textContent=hint?.text||'';
  guide.dataset.kind=hint?.kind||'';
+ const note=$('autosave-feedback');
+ note.hidden=performance.now()>=saveNoticeUntil;
+ if(!note.hidden&&note.textContent!==saveNotice)note.textContent=saveNotice;
  const next=state.status;if(next!==lastStatus){$('status-text').textContent=next;lastStatus=next}
 }
 let accumulator=0,lastStamp=0,lastHUD=0;
@@ -353,7 +422,7 @@ function animate(ms){requestAnimationFrame(animate);
   while(accumulator>=DT&&count<6){const input={left:held.has('left'),right:held.has('right'),jumpHeld:held.has('jump'),
     jumpPressed:queued.has('jump'),dashPressed:queued.has('dash'),swishPressed:queued.has('swish'),
     cheerPressed:queued.has('cheer')};
-   queued.clear();update(state,input,DT);saveCheckpointIfNew();
+   queued.clear();update(state,input,DT);saveProgressWhenEarned();
    accumulator-=DT;count++;if(state.mode!=='playing')break;
   }
   const musicMode=state.mode==='victory'?'silent':state.boss.triggered?'boss':
@@ -389,7 +458,21 @@ if(previewId){productionStatus='LOCAL ART PREVIEW ONLY: '+previewId+' (NOT produ
   }
   showAssetStatus();
  }).catch(error=>{productionErrors=['loader: '+error.message];showAssetStatus()});
- showMode();requestAnimationFrame(animate);
+ // These title controls are deliberately disabled in the initial HTML.
+ // Do not expose inert actions before this module has registered its handlers.
+ $('start-btn').disabled=false;
+ $('art-director-title-open').disabled=false;
+ $('art-preview-title').disabled=false;
+ showMode();
+ requestAnimationFrame(ms=>{
+  // Some mobile browsers briefly lose programmatic focus during initial load.
+  // Recover it once, only if no other interactive element has claimed focus.
+  if(state.mode==='title'&&!director.dialog.open&&
+     (document.activeElement===document.body||
+      document.activeElement===document.documentElement))
+   $('start-btn').focus({preventScroll:true});
+  animate(ms);
+ });
 window.__SHAKEDOWN_QA={snapshot:()=>snapshot(state),metrics,audio:()=>audio.diagnostics(),artDirector:()=>director.diagnostics(),assets:()=>({loaded:assetCount,failed:[...assetErrors],productionLoaded,productionDeclared,productionErrors:[...productionErrors],curatedEnabled,curatedLoaded,curatedSelected,curatedErrors:[...curatedErrors],
  worldLoaded,worldSelected,worldErrors:[...worldErrors]}),
  // Developer-only deterministic test aids; excluded from normal gameplay and production paths.

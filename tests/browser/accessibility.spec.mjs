@@ -1,7 +1,18 @@
 import {test,expect} from '@playwright/test';
 
 test('pause is a keyboard-accessible dialog with focus containment and no auto-repeat toggling',async({page})=>{
+ test.setTimeout(70000);
  await page.goto('./');
+ // Startup controls are disabled until handlers attach. On the occasional
+ // headless module-fetch failure, exercise the *shipped* recovery once,
+ // rather than pretending an inert Start control was ready.
+ try{await expect(page.locator('#start-btn')).toBeEnabled({timeout:10500})}
+ catch{
+  await expect(page.locator('#retry-load-btn')).toBeVisible({timeout:4500});
+  await page.locator('#retry-load-btn').click();
+  await expect(page.locator('#start-btn')).toBeEnabled({timeout:16500});
+  console.log('ACCESSIBILITY_STARTUP_RECOVERED_FROM_NETWORK_FAILURE');
+ }
  await expect(page.locator('#start-btn')).toBeFocused();
  await page.locator('#start-btn').click();
  await expect(page.locator('#game')).toBeFocused();

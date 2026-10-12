@@ -21,9 +21,9 @@ test('the actual Canvas renders sourced quad, modular dome, summit and reversibl
  test.setTimeout(75000);
  const errors=[];page.on('pageerror',error=>errors.push(error.message));
  await page.goto('./?qa=1&art=curated');
- await expect.poll(async()=>page.evaluate(()=>window.__SHAKEDOWN_QA?.assets?.().worldLoaded),{timeout:45000}).toBe(35);
+ await expect.poll(async()=>page.evaluate(()=>window.__SHAKEDOWN_QA?.assets?.().worldLoaded),{timeout:45000}).toBe(41);
  const status=await page.evaluate(()=>window.__SHAKEDOWN_QA.assets());
- expect(status.worldSelected).toBe(35);
+ expect(status.worldSelected).toBe(41);
  expect(status.worldErrors).toEqual([]);
  expect(status.productionLoaded).toBe(0);
  expect(status.curatedLoaded).toBe(28);
