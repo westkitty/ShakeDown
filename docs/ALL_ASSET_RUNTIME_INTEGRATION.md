@@ -8,7 +8,7 @@ All 194 IDs are registered and selectable in the running game; all can be previe
 
 "Wire" does not mean all 194 decoded full-size bitmaps are simultaneously displayed on a 390 px phone. That would be a bad asset architecture. The Asset Director loads **only the selected image on demand**, source-SHA-checks before decode, caches a bounded pixel budget, retains pinned audition choices, and releases unpinned decoded images. Multiple game-layer auditions (one per role) may be active together, and the currently selected candidate for each role can be swapped or cleared without changing saved game state.
 
-None of this acts as a hidden artistic approval. The source production candidate records continue to read AWAITING_HUMAN_VISUAL_REVIEW. The accepted-runtime manifest assets/runtime/manifest.json is not overwritten. The default game remains playable with its original art. The optional Curator's Cut retains its separate 28 approved-direction *preview* selections.
+None of this acts as a hidden artistic approval. The source production candidate records continue to read AWAITING_HUMAN_VISUAL_REVIEW. The accepted-runtime manifest assets/runtime/manifest.json is not overwritten. The default game now uses the separately curated 28 approved-direction *preview* selections, hash-checked and drawn by the existing Canvas renderer, with `?art=classic` retaining the original procedural look. Preview is not owner sign-off. The other 166 candidates are retained for user-controlled selection, review or revision, and 24 structurally blocked images remain non-playfield references.
 
 ## Complete role coverage and presentation hooks
 
@@ -61,3 +61,11 @@ Blocked sources may be auditioned **as labeled QA reference cards**, never as fa
 - Browser: classic startup does not fetch the 194 assets; opening Asset Director displays all 194; all twelve roles can be applied and cleared without changing gameplay state; 24 invalid alpha sources remain safely reference-only; Escape, pause and input survive; Art Jury exact-image deep-link opens the game audition.
 - Existing game regression: Node validation, original normal/assist/curated 23-stage player-input routes, mobile-emulated responsive controls, local data storage, and release preflight physical hash inventory.
 - Independent proof boundary: GitHub exact-SHA CI and Pages deployment are separate tests; source inspection is not a browser pass, and browser emulation is not physical iPhone/Android performance proof.
+
+## 2026-10-12 — raster screen presentation
+
+The ten PNG-only title artworks from `arena/83855d4e-shakedown` were integrated as a user-selectable title gallery; the existing game-over and birthday-result modes display context-appropriate raster plates while keeping real DOM buttons, progress and focus handling. The alternate `art/shakedown-four-title-screens-20261011` branch held SVGs only; its changes were intentionally omitted from the resulting runtime tree. No SVG is loaded or introduced. Source approval boundaries, collider authority and source-hash checks remain intact.
+
+## Three provided screen deliverables (2026-10-12)
+
+In addition to the existing ten PNG-only title alternatives and 194 generated source art candidates, the user-supplied `ShakeDown_Screens_2026-10-11.zip` supplied Start/Level title, Game Over/Continue, Victory/Credits. All twelve 960×540/1920×1080 clean/texted PNGs were reproduced **byte-for-byte** on GitHub Actions, hash-verified against the uploaded originals, committed to `assets/screens/`, and wired into the real playable Start, Game Over, and Victory UI via clean plates. Real DOM controls preserve live menu interactions and screen-reader semantics. The ten generated alternate title images remain accessible through a user-facing selector; no SVG was added. See `assets/screens/README.md`.

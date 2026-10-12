@@ -179,3 +179,18 @@ The Asset Director is opened from title, Pause, game HUD or an exact source ID f
 ## 2026-10-11 — Alpha-invalid art is for review, never live visual obstruction
 
 The full Asset Director source registry remains 194/194, one playable-context route per physically committed PNG and 12 scene categories. A postmerge adversarial pass clarified an invariant: a contract-invalid alpha source may only be inspected inside the Art Director's labeled QA Canvas, never painted as a popup inside the live game viewport. Likewise birthday finale illustrations should appear in the actual birthday state, not cover active play before victory. Boss attack telegraphs and STUNNED labels remain on top of all optional effects. Keep native inspector reachable after a persisted browser pagehide. Physical SHA manifests, user visual judgments, 26 Cinnamon reference frames, gameplay/physics and checkpoint saves are unchanged.
+
+## 2026-10-12 — raster branch consolidation and real gameplay art visibility
+
+- Baseline GitHub main `323dc75c89f82f3a08cf08cdec30ba98e22e7e0b`; five stale branches already contained in main. `arena/83855d4e-shakedown` provided ten separate PNG title sources (both 960x540 and 1920x1080). `art/shakedown-four-title-screens-20261011` contained SVG files only; its artwork changes were deliberately rejected under the user's explicit no-SVG production constraint while retaining ancestry in the merge commit.
+- Added lazy title-image browser plus PNG-backed Game Over and Victory, keeping real Start/Continue/Retry/Replay buttons, HUD, focus and Canvas collision separate. `?art=classic` keeps the original lightweight fallback.
+- Made the existing SHA-verified, structural-review-safe 28 Curator's Cut previews the default visible in-game presentation, without granting final art approval. 194 candidate IDs remain source-verified and accessible through the native Art Director, 24 structurally blocked images remain QA-only.
+- Added Node PNG dimension and integration assertions plus actual browser title/selector/classic fallback journeys. CI proof to be recorded separately; mobile physical testing and human art acceptance still pending.
+- Git delivery: implementation SHA to be appended after CI and merge.
+
+## 2026-10-12 — imported uploaded three-screen artwork (same-day continuation)
+
+- Inspected attached `ShakeDown_Screens_2026-10-11.zip`: start/level title, Game Over/Continue, Victory/Credits, each texted and clean in 960×540 and 1920×1080, totaling 12 unique PNG files plus a review contact sheet and original generator.
+- Reproduced all 12 exact bytes inside GitHub Actions from the source SHA256 `2634be093b2a42249233962324047d68b80f81e2bb16fda1d5152d62bf7dfc64`; each output's SHA matched its original uploaded counterpart. The updated portable source remains in `scripts/build_uploaded_screens.py` and its reconstruction helper ensures font SHA integrity.
+- Wired clean original start, Game Over, and Victory plates into the semantic title/result overlays while keeping all ten alternative title scenes selectable. Provisional visual approval, no-SVG rule, gameplay mechanics, menu/button focus, and classic art opt-out remain unchanged.
+- Added PNG-byte-equality and dimension regression assertions plus real-browser checks for the title gallery, Game Over retry, and Victory replay. New final CI and live deployment pending.

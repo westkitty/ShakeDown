@@ -187,3 +187,88 @@ body.curator-active .art-curator{border-color:#91e3b7}
 /* On very narrow phones, pause opens the same asset inspector without adding
    a fourth competing live-game status-row control. */
 @media(max-width:600px){#art-director-play-open{display:none}}
+
+
+/* Raster-only presentation art, sourced from the actual ShakeDown PNG branch.
+   Text and buttons remain semantic DOM; an image failure restores the old menu. */
+.scene-art-backdrop{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;opacity:0;z-index:0}
+.screen-art-ready>.scene-art-backdrop{opacity:1}
+.overlay.screen-art-ready{background:rgba(7,20,35,.05);backdrop-filter:none}
+.overlay.screen-art-ready .dialog{position:relative;z-index:1}
+#title-overlay.screen-art-ready{align-items:flex-end;justify-content:flex-end;padding:clamp(6px,1.4vw,12px)}
+#title-overlay.screen-art-ready .hero-panel{width:min(335px,46%);max-height:98%;margin:0;padding:10px 12px;background:#071c32ed;overflow:auto;border-width:2px}
+#title-overlay.screen-art-ready .hero-panel>.eyebrow,
+#title-overlay.screen-art-ready .hero-panel>h2,
+#title-overlay.screen-art-ready .hero-panel>p{
+ position:absolute!important;clip-path:inset(50%);width:1px;height:1px;
+ margin:0;padding:0;overflow:hidden;white-space:nowrap;
+}
+#title-overlay.screen-art-ready .hero-panel button.primary,
+#title-overlay.screen-art-ready .hero-panel button.secondary{margin-top:5px;padding:7px;font-size:12px}
+#title-overlay.screen-art-ready .hero-panel .art-curator{margin:5px 0 0;padding:5px}
+#title-overlay.screen-art-ready .hero-panel .art-warning{font-size:9px}
+.title-art-controls{display:flex;align-items:center;justify-content:center;gap:6px;margin:7px 0 0;font-size:10px;color:#ffdf9f;font-weight:850}
+.title-art-controls button{flex:0 0 34px;min-width:34px;min-height:32px;padding:4px;border:1px solid #ecce85;border-radius:5px;background:#173c59;color:#ffe1a4}
+.title-art-controls span{min-width:0;text-align:center}
+#dead-overlay.screen-art-ready{align-items:flex-end}
+#dead-overlay.screen-art-ready .dialog{max-width:390px;padding:12px;margin:0 auto 10px;background:#071b31e8}
+#victory-overlay.screen-art-ready .ending{background:#071b31e9}
+body.high-contrast .scene-art-backdrop{opacity:.07!important}
+@media(max-width:630px){
+ #title-overlay.screen-art-ready .hero-panel{width:min(100%,270px);max-height:97%;padding:5px}
+ #title-overlay.screen-art-ready .hero-panel button.primary,
+ #title-overlay.screen-art-ready .hero-panel button.secondary{margin-top:3px;padding:4px;font-size:10px}
+ #title-overlay.screen-art-ready .hero-panel .art-curator{padding:3px;margin:3px 0}
+ #title-overlay.screen-art-ready .hero-panel .art-warning{display:none}
+ #title-overlay.screen-art-ready .hero-panel .tiny{font-size:9px;margin-top:2px}
+ .title-art-controls{font-size:9px;margin-top:3px}
+ .title-art-controls button{min-height:29px}
+ #dead-overlay.screen-art-ready .dialog{width:90%;padding:7px}
+}
+
+
+/* Owner-supplied three-screen pixel-art plates (exact ZIP byte hashes).
+   Clean artwork leaves real text/buttons in the DOM, not baked into the PNG. */
+.overlay.owner-art-ready>.scene-art-backdrop{image-rendering:pixelated}
+#title-overlay.owner-art-ready{
+ align-items:flex-start;justify-content:center;padding:clamp(4px,1.5vw,12px);
+}
+#title-overlay.owner-art-ready .hero-panel{
+ width:min(535px,62%);max-height:94%;padding:10px 13px;margin:0;
+ background:linear-gradient(180deg,#07142ecb,#07172bee);
+ border:2px solid #e8c573;box-shadow:0 4px 20px #020d22aa;overflow:auto;
+}
+#title-overlay.owner-art-ready .hero-panel>.eyebrow,
+#title-overlay.owner-art-ready .hero-panel>h2,
+#title-overlay.owner-art-ready .hero-panel>p{
+ position:static!important;clip-path:none!important;width:auto;height:auto;
+ padding:0;overflow:visible;white-space:normal;
+}
+#title-overlay.owner-art-ready .hero-panel>.eyebrow{font-size:10px;letter-spacing:.11em}
+#title-overlay.owner-art-ready .hero-panel>h2{
+ font-size:clamp(16px,2.6vw,27px);margin:4px 0;line-height:1.07;
+}
+#title-overlay.owner-art-ready .hero-panel>p{font-size:12px;margin:4px 0 6px}
+#title-overlay.owner-art-ready .hero-panel>p.small{font-size:11px}
+#dead-overlay.owner-art-ready{align-items:center;justify-content:center}
+#dead-overlay.owner-art-ready .dialog{
+ width:min(430px,78%);margin:0;padding:10px 14px;background:#071629dc;
+}
+#victory-overlay.owner-art-ready .ending{
+ position:absolute;left:3%;bottom:12%;width:min(36%,340px);
+ max-height:73%;overflow:auto;padding:12px;background:#071629ea;
+}
+#victory-overlay.owner-art-ready .ending h2{font-size:clamp(15px,2.7vw,29px)}
+@media(max-width:630px){
+ #title-overlay.owner-art-ready{padding:3px}
+ #title-overlay.owner-art-ready .hero-panel{
+  width:min(84%,290px);max-height:98%;padding:4px 6px;
+ }
+ #title-overlay.owner-art-ready .hero-panel>.eyebrow{display:none}
+ #title-overlay.owner-art-ready .hero-panel>h2{font-size:clamp(11px,3.1vw,18px);margin:1px 0 3px}
+ #title-overlay.owner-art-ready .hero-panel>p{font-size:10px;margin:2px 0}
+ #title-overlay.owner-art-ready .hero-panel>p.small{display:none}
+ #dead-overlay.owner-art-ready .dialog{width:87%;padding:5px}
+ #victory-overlay.owner-art-ready .ending{left:3%;bottom:6%;width:57%;max-height:87%;padding:5px}
+ #victory-overlay.owner-art-ready .ending h2{font-size:14px}
+}

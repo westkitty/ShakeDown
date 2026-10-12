@@ -36,7 +36,7 @@ The original four-stage campaign plan is superseded by the user's October 11 com
 
 ## Reviewing LM Arena artwork
 
-The game remains playable without final outside artwork. Source approval stores files and provenance **without activating them**. A separate, reviewer-attested gameplay integration step with a real screenshot is now required before regular gameplay loads replacement art; local previews do not activate anything.
+The game remains playable without final outside artwork. The **default** now shows the 28 SHA-checked, structurally eligible Curator's Cut previews in actual gameplay, plus ten selectable raster title plates and themed game-over/victory presentation backgrounds. These remain **provisional, not human-approved**. Use `?art=classic` for the original lightweight procedural presentation. Source approval stores files and provenance **without activating them as final production-approved assets**. Promoting a provisional candidate to **final, production-approved replacement art** still requires independent artist/reviewer evidence; turning on an explicitly provisional preview never forges that approval.
 
     npm ci
     node scripts/asset-intake.mjs inspect --id CO-03 --file /path/to/your-cup.png
@@ -86,7 +86,7 @@ Two browser tabs now reconcile earned completion/best Shake records when an olde
 
 ## SHAKE DOWN: Art Jury and Curator's Cut
 
-**Play with the curated generated art:** launch `?art=curated` or toggle **Curator's Cut** in the game title/Pause menu. The original functioning presentation is the default and the mode is reversible without changing saves, physics or boss timing. Previewing is not final art acceptance.
+**Play with the curated generated art:** the 28 SHA-verified, structurally eligible curated previews are now the default. You can also launch `?art=curated` or toggle **Curator's Cut** in the title/Pause menu. The original fully functioning procedural presentation remains available with `?art=classic`, without changing saves, physics or boss timing. Previewing is not final art acceptance.
 
 **Judge all the candidates:** [Open the Art Jury](tools/asset-gallery.html). All **194** physical Arena images are available for visual comparison, category and ID search, original image/hash inspection, and KEEP/REVISE/REJECT voting. Add notes and export your hash-bound JSON review. Votes persist locally in the browser and **never automatically activate art**. The curator's current classification is **28 preview, 131 alternatives, 11 revise, 24 transparency-blocked**.
 
@@ -100,3 +100,13 @@ The in-game **ART DIRECTOR · ALL 194 ASSETS** opens from the title, Pause, or t
 The 24 source images lacking required transparency are inspectable and may appear only as labeled QA reference cards, never as real background/platform art. The other 170 sources can be tried in game roles, although source validity does not mean artistic approval.
 
 The [Art Jury](tools/asset-gallery.html) now offers a direct link for each asset to the matching in-game audition. Complete 12-role wiring and limitations: [All-asset runtime guide](docs/ALL_ASSET_RUNTIME_INTEGRATION.md). Recorded background music is documented in `assets/audio/music/manifest.json`; 18 non-covered named audio contracts remain missing.
+
+## Raster presentation branch consolidation (2026-10-12)
+
+The ten separate title PNGs are available inside the playable title screen (◀/▶), with scene-specific result art on Game Over and Victory. The masters stay in `assets/title/`; 960×540 runtime copies are in `assets/title/canvas/`. The obsolete four-SVG artwork branch was resolved without importing its SVG files. The 194 source candidates are still reviewable in the Art Director: 28 curated previews are visible in gameplay by default; the remaining candidate/revision/blocked sources require deliberate individual audition and human art review rather than undisclosed auto-approval.
+
+## Owner-supplied title, game-over, and victory artwork
+
+The uploaded `ShakeDown_Screens_2026-10-11.zip` supplied **three original screen compositions**, each as texted and clean PNG plates at 960×540 and 1920×1080: **12 byte-for-byte SHA-verified image files** now in `assets/screens/`. The playable default Start screen uses the original **clean start plate**, Game Over uses the **clean continuation plate**, and Victory uses the **clean birthday/credits plate**. The words and action buttons remain real HTML, not noninteractive pixels. The title-image arrows browse the original plate and all ten additional title-screen PNG alternatives. The corresponding texted masters remain in the repository for independent standalone presentation.
+
+The original `build/build_screens.py` is retained as a readable, path-corrected `scripts/build_uploaded_screens.py`, with a SHA-checked reproduction helper (`scripts/reconstruct_uploaded_screens.py`); actual rendered PNG SHA-256 values are enforced in `tests/screen-art.test.mjs`. The SVG-only branch remains excluded, including any runtime references to SVG. The old preview/fallback, input, checkpoint, and art-review boundaries remain in force.
