@@ -1,0 +1,23 @@
+name: Request GitHub Pages rebuild
+on:
+  push:
+    branches:
+      - main
+      - audit/shakedown-pages-artifact-parity-20261012
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Request latest main-branch Pages build using the existing hosting mode
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api "repos/${GITHUB_REPOSITORY}/pages" --jq '{status:.status,build_type:.build_type,source:.source}'
+          gh api --method POST "repos/${GITHUB_REPOSITORY}/pages/builds" --include
