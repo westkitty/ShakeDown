@@ -78,7 +78,7 @@ async function decode(bytes,ImageConstructor){
  });
 }
 export class ArtRuntime {
- constructor({request=globalThis.fetch,ImageConstructor=globalThis.Image,maxCachedPixels=6000000}={}){
+ constructor({request=(...args)=>globalThis.fetch(...args),ImageConstructor=globalThis.Image,maxCachedPixels=6000000}={}){
   this.request=request;this.ImageConstructor=ImageConstructor;
   this.maxCachedPixels=maxCachedPixels;this.inventory=[];
   this.byId=new Map();this.cache=new Map();this.pending=new Map();
