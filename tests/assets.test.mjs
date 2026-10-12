@@ -51,3 +51,8 @@ test('malformed audio is rejected before human review',()=>{
  assert.match(examineAudio(Buffer.from('fake'),'.wav').issues.join(' '),/short|Invalid/);
  assert.match(examineAudio(Buffer.alloc(50),'.mp3').issues.join(' '),/Expected/);
 });
+
+test('Cinnamon shake pose from the supplied transparent sheet is retained as a real playable state',()=>{
+ assert.equal(frameForState('shake',0),'shake_00');
+ assert.equal(frameForState('shake',2),'shake_00');
+});
