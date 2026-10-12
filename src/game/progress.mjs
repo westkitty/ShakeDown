@@ -16,6 +16,11 @@ export function validCheckpointRecord(record,level){
   if(entries.some(id=>typeof id!=='string'||!allowed.has(id)))return false;
   if(new Set(entries).size!==entries.length)return false;
  }
+ const rallies=record.rallies??[];
+ if(!Array.isArray(rallies)||rallies.length>level.rallyPosts.length)return false;
+ const validRallies=new Set(level.rallyPosts.map(post=>post.id));
+ if(rallies.some(id=>typeof id!=='string'||!validRallies.has(id))||
+    new Set(rallies).size!==rallies.length)return false;
  return true;
 }
 
@@ -28,14 +33,21 @@ export function checkpointRecord(s){
   checkpointId:s.level.checkpoints[index].id,
   elapsed:Number(s.elapsed.toFixed(3)),
   collected:s.level.shakes.filter(item=>item.taken).map(item=>item.id),
-  defeated:s.level.enemies.filter(item=>!item.alive).map(item=>item.id)
+  defeated:s.level.enemies.filter(item=>!item.alive).map(item=>item.id),
+  rallies:s.level.rallyPosts.filter(post=>post.lit).map(post=>post.id)
  };
 }
 
 export function restoreCheckpoint(s,record){
  if(!validCheckpointRecord(record,s.level))return false;
- const collected=new Set(record.collected),defeated=new Set(record.defeated);
- for(const shake of s.level.shakes)shake.taken=collected.has(shake.id);
+ const collected=new Set(record.collected),defeated=new Set(record.defeated),rallies=new Set(record.rallies??[]);
+ for(const post of s.level.rallyPosts)post.lit=rallies.has(post.id);
+ for(const shake of s.level.shakes){
+  shake.taken=collected.has(shake.id);
+  const post=s.level.rallyPosts.find(item=>item.reward===shake.id);
+  if(post)shake.locked=!post.lit;
+ }
+ s.rallyCount=rallies.size;
  for(const enemy of s.level.enemies)enemy.alive=!defeated.has(enemy.id);
  s.shakeCount=collected.size;
  s.secretCount=s.level.shakes.filter(shake=>shake.taken&&shake.special).length;

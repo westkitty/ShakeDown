@@ -1,6 +1,8 @@
-import {buildLevel,WORLD,DOME_ARENA_Y,pulseActive,VIEW} from './world.mjs';
+import {buildLevel,WORLD,DOME_ARENA_Y,pulseActive,pulseState,VIEW} from './world.mjs';
 export const DT=1/60;
 const GRAVITY=1470, SPEED=284, JUMP=-560, DOUBLE=-510, DASH_SPEED=596;
+export const CHEER_COOLDOWN=6.4;
+const CHEER_RADIUS_X=235,CHEER_RADIUS_Y=140;
 const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
 const overlap=(a,b)=>a.x<b.x+b.w&&a.x+a.w>b.x&&a.y<b.y+b.h&&a.y+a.h>b.y;
 export const movingPosition=(p,t)=>({x:p.x+(p.movement==='horizontal'?Math.sin(t*Math.PI*2/p.period)*p.amplitude:0),
@@ -11,7 +13,7 @@ export function newGame(settings={}){
  grounded:false,onPlatform:null,jumpsUsed:0,coyote:0,buffer:0,invulnerable:0,hp:3,maxHp:3,
  dashTime:0,dashCooldown:0,attackTime:0,attackCooldown:0,landTime:0};
  return {mode:'title',time:0,elapsed:0,player:p,level,shakeCount:0,secretCount:0,events:[],
- pulseOverride:0,activePulse:true,pulseFlash:0,camera:{x:0,y:0},checkpoint:0,
+ pulseOverride:0,activePulse:true,pulseFlash:0,cheerCooldown:0,cheerWave:0,cheerOrigin:null,rallyCount:0,camera:{x:0,y:0},checkpoint:0,
  projectiles:[],boss:{triggered:false,x:7960,y:DOME_ARENA_Y-84,w:82,h:84,hp:3,maxHp:3,mode:'sleep',attack:'charge',timer:0,cycles:0,hurtTime:0},
  settings:{assist:!!settings.assist,reducedMotion:!!settings.reducedMotion,contrast:!!settings.contrast,mute:!!settings.mute},
  status:'Chase the Fox!',lastDamage:'',lastEvent:'',checkpointNotice:0,shakePickup:0,birthdayReady:false};
@@ -23,6 +25,7 @@ export function resetToCheckpoint(s){
  p.x=cp.x+8;p.y=cp.footY-p.h;p.prevX=p.x;p.prevY=p.y;p.vx=0;p.vy=0;p.invulnerable=1.75;
  p.hp=p.maxHp;p.dashTime=0;p.attackTime=0;p.dashCooldown=0;p.attackCooldown=0;p.jumpsUsed=0;p.grounded=false;p.onPlatform=null;
  s.mode='playing';s.projectiles=[];s.boss.mode=s.boss.triggered?'tell':'sleep';s.boss.timer=1;
+ s.cheerCooldown=0;s.cheerWave=0;s.cheerOrigin=null;
  s.lastDamage=''; s.status='Back on your paws.';
 }
 const say=(s,type,detail='')=>{s.eventSerial=(s.eventSerial||0)+1;s.events.push({serial:s.eventSerial,type,detail,t:s.elapsed,x:s.player.x+s.player.w/2,y:s.player.y+s.player.h/2});s.lastEvent=type; if(s.events.length>35)s.events.shift()};
@@ -53,6 +56,48 @@ function strike(s){const p=s.player;if(p.attackCooldown>0)return;
    }else{s.status='Wait for the Fox to stagger!';say(s,'blockedHit');}
   }
  }
+}
+
+// Player-authored cheer: opens pulse bridges briefly from anywhere, or extends
+// their window when performed near a physical Drum Beacon. Rally bells reward
+// actual exploration. No cheer action can hit the Fox or fabricate a shake.
+function triggerCheer(s){
+ if(s.cheerCooldown>0||s.mode!=='playing')return false;
+ const p=s.player,cx=p.x+p.w/2,cy=p.y+p.h/2;
+ const nearBeacon=s.level.beacons.some(b=>
+  Math.abs(b.x-cx)<170&&Math.abs(b.footY-36-cy)<125);
+ s.cheerCooldown=CHEER_COOLDOWN;
+ s.cheerWave=.74;s.cheerOrigin={x:cx,y:cy};
+ s.pulseOverride=Math.max(s.pulseOverride,nearBeacon?3.7:2.2);
+ s.activePulse=true;
+ s.pulseFlash=Math.max(s.pulseFlash,.38);
+ let stunned=0;
+ for(const e of s.level.enemies){
+  if(!e.alive||Math.abs(e.x+e.w/2-cx)>CHEER_RADIUS_X||
+      Math.abs(e.y+e.h/2-cy)>CHEER_RADIUS_Y)continue;
+  e.stunnedUntil=s.elapsed+1.45;stunned++;
+ }
+ for(const h of s.level.hazards){
+  if(Math.abs(h.x+h.w/2-cx)<CHEER_RADIUS_X&&
+     Math.abs(h.y+h.h/2-cy)<CHEER_RADIUS_Y)
+   h.quietUntil=s.elapsed+2.1;
+ }
+ say(s,'cheer',nearBeacon?'beacon-amplified':'free-cheer');
+ const newlyLit=[];
+ for(const post of s.level.rallyPosts){
+  if(post.lit||Math.abs(post.x-cx)>145||
+      Math.abs(post.footY-35-cy)>115)continue;
+  post.lit=true;s.rallyCount++;newlyLit.push(post.id);
+  const prize=s.level.shakes.find(q=>q.id===post.reward);
+  if(prize)prize.locked=false;
+  say(s,'rally',post.id);
+ }
+ s.status=newlyLit.length
+  ?'CHEER RELAY '+s.rallyCount+'/'+s.level.rallyPosts.length+' · BONUS SHAKE UNLOCKED'
+  :nearBeacon?'GO IRISH! DRUM-AMPLIFIED CHEER!'
+  :stunned?'GO IRISH! CROWD CHEER STUNNED THE BOTS!'
+  :'GO IRISH! BANNER BRIDGES OPEN!';
+ return true;
 }
 function updateBoss(s,dt){const b=s.boss,p=s.player;
  if(!b.triggered&&p.x>=WORLD.bossStart){b.triggered=true;b.mode='tell';b.attack='charge';b.timer=1.1;s.status='THE FOX: FINAL SHAKEDOWN';say(s,'bossStart');}
@@ -93,7 +138,8 @@ function collide(s,oldBottom){const p=s.player;let best=null;let bestTop=Infinit
 function updateCannon(s,dt){
  for(const h of s.level.hazards){
   const cycle=(s.elapsed+h.offset)%h.period;
-  if(cycle<dt&&Math.abs(h.x-s.player.x)<760){s.projectiles.push({x:h.x,y:h.y-6,w:17,h:17,vx:-205,vy:-95,from:'cannon',age:0});say(s,'cannon');}
+  if(cycle<dt&&(!h.quietUntil||h.quietUntil<=s.elapsed)&&
+     Math.abs(h.x-s.player.x)<760&&Math.abs(h.y-s.player.y)<380){s.projectiles.push({x:h.x,y:h.y-6,w:17,h:17,vx:-205,vy:-95,from:'cannon',age:0});say(s,'cannon');}
   // Cone warning and flash are visual; damage comes only from actual projectiles.
  }
 }
@@ -115,9 +161,16 @@ export function update(s,input={},dt=DT){
  const p=s.player; p.prevX=p.x;p.prevY=p.y;
  for(const k of ['invulnerable','buffer','coyote','dashTime','dashCooldown','attackTime','attackCooldown','landTime'])p[k]=Math.max(0,p[k]-dt);
  s.pulseOverride=Math.max(0,s.pulseOverride-dt);s.pulseFlash=Math.max(0,s.pulseFlash-dt);
+ s.cheerCooldown=Math.max(0,s.cheerCooldown-dt);s.cheerWave=Math.max(0,s.cheerWave-dt);
  s.shakePickup=Math.max(0,s.shakePickup-dt);s.checkpointNotice=Math.max(0,s.checkpointNotice-dt);
+ const previousPulse=s.activePulse;
  s.activePulse=pulseActive(s.elapsed,s.pulseOverride);
  if(input.swishPressed)strike(s);
+ if(input.cheerPressed)triggerCheer(s);
+ if(!previousPulse&&s.activePulse){
+  s.pulseFlash=Math.max(s.pulseFlash,.24);
+  say(s,'chantRise');
+ }else if(previousPulse&&!s.activePulse)say(s,'chantRest');
  if(input.jumpPressed)p.buffer=0.135;
  const dir=(input.right?1:0)-(input.left?1:0);
  if(dir)p.facing=dir;
@@ -153,13 +206,14 @@ export function update(s,input={},dt=DT){
    s.checkpoint=idx;s.checkpointNotice=2.25;s.status=`CHECKPOINT: ${cp.id}`;say(s,'checkpoint',cp.id);
   }
  }
- for(const q of s.level.shakes){if(q.taken)continue;
+ for(const q of s.level.shakes){if(q.taken||q.locked)continue;
   if(Math.abs((p.x+p.w/2)-q.x)<31&&Math.abs((p.y+p.h/2)-q.y)<45){
    q.taken=true;s.shakeCount++;if(q.special)s.secretCount++;s.shakePickup=0.34;
    s.status=q.special?'GOLDEN SHAMROCK!':'SHAMROCK SHAKE +1';say(s,'collect',q.id);
   }
  }
  for(const e of s.level.enemies){if(!e.alive)continue;
+  if(e.stunnedUntil>s.elapsed)continue;
   e.x=e.baseX+Math.sin(s.elapsed*e.rate)*e.range;
   if(overlap(e,p)){
    if(p.vy>85&&p.prevY+p.h<=e.y+15){e.alive=false;p.vy=-360;say(s,'stomp',e.id)}
@@ -172,6 +226,8 @@ export function snapshot(s){
  const p=s.player,b=s.boss;
  return {mode:s.mode,player:{x:Math.round(p.x),y:Math.round(p.y),vx:Math.round(p.vx),vy:Math.round(p.vy),grounded:p.grounded,hp:p.hp},
  shakeCount:s.shakeCount,secretCount:s.secretCount,checkpoint:s.checkpoint,activePulse:s.activePulse,
+ rallyCount:s.rallyCount,cheerCooldown:Number(s.cheerCooldown.toFixed(2)),cheerWave:Number(s.cheerWave.toFixed(2)),
+ pulseRemaining:Number(pulseState(s.elapsed,s.pulseOverride).remaining.toFixed(2)),
  camera:{x:Math.round(s.camera.x),y:Math.round(s.camera.y)},boss:{triggered:b.triggered,mode:b.mode,hp:b.hp,x:Math.round(b.x)},
  time:s.elapsed,status:s.status,assetCount:s.assetCount||0};
 }

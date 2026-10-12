@@ -16,11 +16,12 @@ test('missing image manifests keep the procedural birthday game playable',async(
  expect(errors).toEqual([]);
 });
 
-test('already-loaded session can continue on network loss without remote resources',async({page})=>{
+test('already-loaded session can continue on network loss without remote resources',async({page},testInfo)=>{
  const errors=[];const remote=[];
+ const localOrigin=new URL(testInfo.project.use.baseURL).origin;
  page.on('pageerror',e=>errors.push(e.message));
- page.on('request',r=>{if(!r.url().startsWith('http://127.0.0.1:8765/')&&
-  !r.url().startsWith('http://localhost:8765/'))remote.push(r.url())});
+ // A local dev server is not an external request, regardless of its test port.
+ page.on('request',r=>{if(new URL(r.url()).origin!==localOrigin)remote.push(r.url())});
  await page.goto('./');
  await expect.poll(async()=>page.evaluate(()=>window.__SHAKEDOWN_QA.assets().loaded),
   {timeout:12000}).toBe(25);

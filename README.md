@@ -13,14 +13,15 @@ Run locally from the repository root with `npm run serve` and open `http://local
 - Move: A/D or left/right arrows.
 - Jump: Space, W or up arrow. Tap twice for double jump; variable height, coyote time and input buffering.
 - Tail-swish: J or X. Stun the Fox during recovery; hit Drum Beacons to activate the GO IRISH pulse.
+- **Cheer / GO IRISH!: C.** Immediately energize timed banner bridges, stun nearby Cup Crawlers, briefly hush close confetti cannons, and ring four optional rally bells for hidden shakes. Near a Drum Beacon the cheer is stronger. Cooldown: 6.4 seconds.
 - Dash: Shift or K.
 - Pause: P or Esc. M toggles audio.
-- On touch screens: five large accessible move, dash, tail-swish and jump controls.
+- On touch screens: accessible move, dash, swish, **cheer**, and jump buttons; narrow portrait layouts use a compact two-row action pad.
 
 ## Gameplay
 
-- **Campus (0–3770 world px):** shake stand theft, banner bridges, safe pulse tutorial, concession robots, confetti cannons, moving platform, secrets and checkpoints.
-- **Golden Dome (3770–8350 px):** 23-stage architectural ascent, moving lifts, pulse platforms, safety ledges, Notre Dame-inspired building and dome, boss arena and checkpoint.
+- **Campus (0–3770 world px):** shake stand theft, banner bridges, safe pulse tutorial, concession robots, confetti cannons, moving platform, secrets and checkpoints. A new **14-platform elevated Pep Rally** offers an optional timed bridge route, two bell relays, new enemies, and bonus Shamrock Shakes, with the ground route preserved.
+- **Golden Dome (3770–8350 px):** intact 23-stage architectural ascent plus **11 new optional platforms** forming Bell Gallery and upper-cornice detours. Two additional cheer relays unlock secret shakes, and both side routes reconnect to the original ascent, checkpoints and boss arena.
 - **The Fox:** an explicitly *provisional* illustrated runtime stand-in pending an approved antagonist sheet. Three-hit fight with charge and projectile patterns, visible telegraphs and recovery windows.
 - **Finale:** cake, shakes, confetti, exact HAPPY BIRTHDAY, MAVERICK! text and replay.
 
@@ -28,7 +29,7 @@ The original four-stage campaign plan is superseded by the user's October 11 com
 
 ## Asset truth
 
-- `assets/references/` contains two physically present user-provided Cinnamon source sheets.
+- `assets/references/` preserves all three user-provided Cinnamon sheets (two image files have JPEG-encoded source bytes, including the legacy `.png` filename; provenance documented in `docs/CINNAMON_REFERENCE_INTEGRATION_20261012.md`).
 - `assets/sprites/cinnamon/*.png` and `frames.json` contain 26 reproducible cut-outs physically produced from `cinnamon_actions_sheet.png`; they are **real, physically present sprites** (25 eligible for playback; the clipped run_03 is skipped at runtime), but not a claim of individually newly hand-drawn animations. See `scripts/extract_cinnamon.py`.
 - The classic edition retains explicit procedural Canvas illustrations. The repository also contains 194 generated image candidates: 28 curator previews, 131 alternatives, 11 revision requests and 24 transparency-blocked sources. Candidate delivery is not owner approval.
 - `docs/assets/ShakeDown_Complete_LM_Arena_Master.pdf` is the expanded 220-visual-asset / 21-audio-request production master. All 194 non-Cinnamon image requests now have physical candidates, while the 26 Cinnamon source frames remain hash-locked.
@@ -114,3 +115,7 @@ The original `build/build_screens.py` is retained as a readable, path-corrected 
 ### October 12 — scene art repair
 
 The source-grounded scene-art replacement and its limited approval boundaries are recorded in [the visual runtime repair report](docs/ART_RUNTIME_REPAIR_20261012.md), with desktop screenshot evidence in `docs/qa/`. The separate previously selected `ShakeDown_Cinnamon_Art_PreHandoff.zip` is **not present as a usable binary in the repository**; none of the 35 additional scene candidates substitutes for that missing canonical source. Do not mark character fidelity or the 194-image production manifest approved without recovering it and obtaining the user's visual review.
+
+### Playable rally expansion (2026-10-12)
+
+The timed GO IRISH chant still opens every original banner on its 5.6s cycle (2.9s active). Press **C** or touch **CHEER** to deliberately activate a short, 2.2s pulse (3.7s near a Drum Beacon), with a visible cooldown, local ring/tune, readable countdown and reduced-motion static feedback. Four physically traversable optional rally bells unlock genuine SHA-verified source-art Shamrock Shake gameplay rewards. Schema-1 checkpoint saves remain compatible and now preserve lit rally relays. See [Cheer rally expansion report](docs/CHEER_RALLY_EXPANSION_20261012.md). These routes expand **playable elevation/content**, not the existing world-width or the original 23 Dome steps.

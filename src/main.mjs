@@ -134,7 +134,7 @@ function updateHeld(action){
  if(active)held.add(action);else held.delete(action);
 }
 
-function actionForKey(code){return ({ArrowLeft:'left',KeyA:'left',ArrowRight:'right',KeyD:'right',Space:'jump',ArrowUp:'jump',KeyW:'jump',KeyJ:'swish',KeyX:'swish',ShiftLeft:'dash',ShiftRight:'dash',KeyK:'dash'})[code]}
+function actionForKey(code){return ({ArrowLeft:'left',KeyA:'left',ArrowRight:'right',KeyD:'right',Space:'jump',ArrowUp:'jump',KeyW:'jump',KeyJ:'swish',KeyX:'swish',KeyC:'cheer',ShiftLeft:'dash',ShiftRight:'dash',KeyK:'dash'})[code]}
 function clearInputs(){held.clear();queued.clear();pointerActs.clear();keyActs.clear();document.querySelectorAll('.touch').forEach(b=>b.classList.remove('held'))}
 function isEditingFocus(){
  const element=document.activeElement;
@@ -309,8 +309,22 @@ async function loadAssets(){
 function hud(){const p=state.player;
  $('hud-health').textContent='♥ '.repeat(Math.ceil(p.hp)).trim()||'♡';
  $('hud-shakes').textContent=`SHAKES ${state.shakeCount}`;
- const zone=state.boss.triggered?'FOX SHOWDOWN':p.x>=WORLD.campusEnd?'GOLDEN DOME':'SOUTH QUAD';
- $('hud-zone').textContent=zone;$('zone-readout').textContent=p.x>=WORLD.campusEnd?'02 / GOLDEN DOME':'01 / CAMPUS CHASE';
+ const rallyHigh=p.x<WORLD.campusEnd&&p.y<280;
+ const zone=state.boss.triggered?'FOX SHOWDOWN':p.x>=WORLD.campusEnd?'GOLDEN DOME':rallyHigh?'PEP RALLY':'SOUTH QUAD';
+ $('hud-zone').textContent=zone;
+ $('zone-readout').textContent=p.x>=WORLD.campusEnd?'02 / GOLDEN DOME':rallyHigh?'01B / PEP RALLY':'01 / CAMPUS CHASE';
+ $('hud-cheer').textContent=state.cheerCooldown>0
+  ?'CHEER '+state.cheerCooldown.toFixed(1)+'s'
+  :'CHEER READY · C';
+ const button=$('cheer-touch');
+ if(button){
+  button.textContent=state.cheerCooldown>0?Math.ceil(state.cheerCooldown)+'s':'CHEER';
+  button.classList.toggle('cooling',state.cheerCooldown>0);
+  button.setAttribute('aria-label',state.cheerCooldown>0
+   ?'Cheer recharging, '+state.cheerCooldown.toFixed(1)+' seconds'
+   :'Cheer: activate banner bridges and discover rally relays');
+ }
+ $('cheer-progress').textContent='RELAYS '+state.rallyCount+'/'+state.level.rallyPosts.length;
  const next=state.status;if(next!==lastStatus){$('status-text').textContent=next;lastStatus=next}
 }
 let accumulator=0,lastStamp=0,lastHUD=0;
@@ -327,7 +341,8 @@ function animate(ms){requestAnimationFrame(animate);
  if(state.mode==='playing'){
   accumulator=Math.min(.15,accumulator+dt);let count=0;
   while(accumulator>=DT&&count<6){const input={left:held.has('left'),right:held.has('right'),jumpHeld:held.has('jump'),
-    jumpPressed:queued.has('jump'),dashPressed:queued.has('dash'),swishPressed:queued.has('swish')};
+    jumpPressed:queued.has('jump'),dashPressed:queued.has('dash'),swishPressed:queued.has('swish'),
+    cheerPressed:queued.has('cheer')};
    queued.clear();update(state,input,DT);saveCheckpointIfNew();
    accumulator-=DT;count++;if(state.mode!=='playing')break;
   }
