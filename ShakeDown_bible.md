@@ -195,6 +195,14 @@ The full Asset Director source registry remains 194/194, one playable-context ro
 - Wired clean original start, Game Over, and Victory plates into the semantic title/result overlays while keeping all ten alternative title scenes selectable. Provisional visual approval, no-SVG rule, gameplay mechanics, menu/button focus, and classic art opt-out remain unchanged.
 - Added PNG-byte-equality and dimension regression assertions plus real-browser checks for the title gallery, Game Over retry, and Victory replay. New final CI and live deployment pending.
 
+## 2026-10-12 — verified main merge and post-merge CI receipt
+
+- **PR #6 merged successfully** into main as `528a27fc96d5962c4a0b7d90765b10c78306d970`. Implementation/screens/tests are in branch ancestor `d2d9356c86bd967c6a6c3bf6851e33df8d8ee9ba`; feature head `67115fa151fd296fb730fe0a82188763519e6227`. No rebases, force-pushes or source-image deletions.
+- **All seven pre-existing non-main feature/art branches** compare against main with 0 ahead commits. The SVG-only branch was absorbed as history/ancestry, not as deployed files; recursive main tree contains exactly zero SVG files.
+- **Source integrity:** 12 delivered PNG Start/Game Over/Victory plates match all twelve corresponding uploaded-ZIP SHA-256 hashes. The main tree also retains 20 raster alternate-title PNG files, 26 source-derived Cinnamon PNG frames, 194 inventory-backed Arena images, six recorded MP3s and the 194-entry Art Director. The 28 physically verified preview-safe images render by default; 24 failed-alpha candidates remain QA-only; `?art=classic` remains functional.
+- **GitHub main CI:** Game and asset contract SUCCESS, run 38204739793. Browser desktop/mobile SUCCESS, run 38204739823: 99 passed, 8 intentional skips, and one retry-passing flaky audio test (`tests/browser/audio.spec.mjs`). Do not interpret the retry as an audio defect fix.
+- **Delivery scope:** exact GitHub main commit and automated browser/input/gameplay flows verified. Pages live-site content, unassisted human play, physical Android/iPhone and speaker output, and final visual sign-off remain not independently verified.
+
 ## 2026-10-12 — recorded-audio pause/resume race repair
 
 - GitHub `main` artwork merge `528a27fc96d5962c4a0b7d90765b10c78306d970` passed the browser workflow with 99 direct passes, 8 intentional skips and one retry-only audio flake. The intermittent assertion was `musicPlaying` false following Pause/Resume on the boss track.
