@@ -7,11 +7,11 @@
   "project_name": "ShakeDown",
   "project_root": "westkitty/ShakeDown",
   "artifact_path": "",
-  "state_revision": 12,
-  "last_updated": "2026-10-12T04:44:00Z",
+  "state_revision": 13,
+  "last_updated": "2026-10-12T05:28:00Z",
   "current_baseline": {
-    "identity": "main@528a27fc96d5962c4a0b7d90765b10c78306d970",
-    "state": "current-baseline",
+    "identity": "main@a71dc2408c90967fcddf5dc9905273be82542a17",
+    "state": "deployed-verified",
     "last_verified": "2026-10-12"
   },
   "scope_boundaries": ["ShakeDown 2D browser game", "Cinnamon Fuzzbutt sprite masters"],
@@ -303,3 +303,26 @@ Final local candidate before Git delivery: npm run validate **31/31 PASS**, rele
 - Revision 11: imported and integrated the six user-selected Drive tracks, added soundtrack validation/failover/browser coverage, hardened blocked-art pixel regression sampling and completed local desktop/mobile visual and performance QA.
 
 - Revision 12: PR #6 merged into main, all supplied raster artwork reproduced from ZIP and wired, 7/7 original branches contained in main, no SVG outputs, final CI evidence recorded with one audio retry flake.
+
+## 2026-10-12 — GitHub Pages deployment recovery and live-site release certification (revision 13)
+
+**Verified main baseline:** `a71dc2408c90967fcddf5dc9905273be82542a17` through merged PR #8.
+
+**Deployment recovery:** PR #8 introduced official GitHub Pages workflow packaging (`actions/configure-pages@v5`, `actions/upload-pages-artifact@v3`, `actions/deploy-pages@v4`) and automated post-deployment parity checks. Normalized Playwright `baseURL` to ensure trailing slash preservation for hosted subpath execution (`/ShakeDown/`).
+
+**GitHub Pages publication:** Workflow run `38207685003` completed successfully in 19 seconds. GitHub Pages is published live at `https://westkitty.github.io/ShakeDown/`.
+
+**Hosted byte-for-byte SHA-256 parity:** Public CDN verified by `scripts/verify-hosted-pages.mjs` across all 24 authoritative files (HTML, JS modules, CSS, clean screen plates, 10 canvas titles, Cinnamon sprite manifest and run_01 frame, soundtrack MP3, production manifests).
+
+**Live-site adversarial QA evidence:**
+- Title screen visibly loads owner start plate (`01_start_level_clean_960x540.png`) with live interactive buttons.
+- Alternate title gallery correctly cycles through all 10 alternate raster options.
+- Starting game hides overlay, transitions to `playing`, loads Cinnamon player sprites and South Quad campus backdrop.
+- Full player movement (ArrowRight, Space jump) verified in live runtime.
+- Pause overlay opens, suspends audio, and resumes cleanly.
+- Game Over overlay visibly renders `02_game_over_continue_clean_960x540.png`, retry works cleanly.
+- Victory overlay visibly renders `03_victory_credits_clean_960x540.png`, replay works cleanly.
+- Mobile viewport (iPhone 14 emulation 390x844) verified with no horizontal overflow and functioning touch controls.
+- Zero 404 network errors, zero SVG assets or references, zero uncaught JavaScript errors.
+- Eight live visual captures archived under brain screenshots directory.
+
