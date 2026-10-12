@@ -163,7 +163,7 @@ function updateEncounters(s){
   if(s.achievements.includes(npc.id))continue;
   s.achievements.push(npc.id);
   s.discoveryToast={id:npc.id,title:npc.title,until:s.elapsed+3.8};
-  s.status=npc.title;
+  s.status=npc.dialogue;
   say(s,'discovery',npc.title);
  }
 }

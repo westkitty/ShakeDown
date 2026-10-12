@@ -51,19 +51,15 @@ export function paintSecretScenery(ctx,s,t){
  if(nearby(s,4750,-2450,500,315)){
   ctx.save();ctx.translate(-cam.x,-cam.y);
   // The solitary crest has no cheering crowd. Just stars and indignation.
-  const sky=ctx.createLinearGradient(0,-2450,0,-2140);
+  const sky=ctx.createLinearGradient(0,-2600,0,-1750);
   sky.addColorStop(0,'#0d1a36');sky.addColorStop(1,'#263f61');
-  const night=ctx.createLinearGradient(4650,-2300,5230,-2300);
-  night.addColorStop(0,'rgba(13,26,54,0)');
-  night.addColorStop(.15,'rgba(13,26,54,.93)');
-  night.addColorStop(.86,'rgba(13,26,54,.93)');
-  night.addColorStop(1,'rgba(13,26,54,0)');
-  ctx.fillStyle=night;ctx.fillRect(4650,-2480,580,335);
-  for(let i=0;i<38;i++){
-   const x=4720+(i*173)%470,y=-2430+(i*97)%220;
+  ctx.fillStyle=sky;ctx.fillRect(4200,-2600,1600,850);
+  for(let i=0;i<70;i++){
+   const x=4250+(i*173)%1500,y=-2530+(i*97)%690;
    ctx.fillStyle=i%5===0?'#e8ce91':'#a2bcda';
    ctx.fillRect(x,y,i%7===0?3:1,i%7===0?3:1);
   }
+  ctx.fillStyle='rgba(240,224,169,.72)';ctx.beginPath();ctx.arc(5350,-2420,66,0,TAU);ctx.fill();
   ctx.fillStyle='#b69b8b';ctx.fillRect(4740,-2194,345,15);
   ctx.fillStyle='#e5bb73';ctx.fillRect(4770,-2194,281,5);
   ctx.restore();
@@ -92,6 +88,11 @@ function drawCrowd(ctx,t,reduce){
   }
  }
 }
+export function secretNpcFrame(art,npc,index){
+ const id=String(index).padStart(2,'0');
+ return art[`NPC-${npc}-idle_${id}`]||
+  Array.from({length:4},(_,i)=>art[`NPC-${npc}-idle_${String(i).padStart(2,'0')}`]).find(Boolean)||null;
+}
 function paintSmudge(ctx,s,t,art){
  const npc=s.level.secretNpcs.find(n=>n.id==='smudge');if(!npc)return;
  const reduce=s.settings.reducedMotion;
@@ -100,7 +101,7 @@ function paintSmudge(ctx,s,t,art){
  ctx.fillStyle='#4f253c';round(ctx,npc.x-123,680,246,31,11);ctx.fill();
  ctx.fillStyle='#bc7c9f';round(ctx,npc.x-117,676,234,13,7);ctx.fill();
  ctx.fillStyle='#f1cf75';ctx.fillRect(npc.x-125,705,250,8);
- const image=art['NPC-smudge-idle_'+String(reduce?0:Math.floor(t*4)%4).padStart(2,'0')];
+ const image=secretNpcFrame(art,'smudge',reduce?0:Math.floor(t*4)%4);
  if(image){
   ctx.imageSmoothingEnabled=true;
   ctx.drawImage(image,npc.x-140,npc.footY-181,280,200);
@@ -116,7 +117,7 @@ function paintSmudge(ctx,s,t,art){
 function paintDexter(ctx,s,t,art){
  const npc=s.level.secretNpcs.find(n=>n.id==='dexter');if(!npc)return;
  const frame=String(s.settings.reducedMotion?0:Math.floor(t*2)%4).padStart(2,'0');
- const image=art['NPC-dexter-idle_'+frame];
+ const image=secretNpcFrame(art,'dexter',frame);
  if(image)ctx.drawImage(image,npc.x-140,npc.footY-174,280,200);
 }
 export function paintSecretActors(ctx,s,t,art){

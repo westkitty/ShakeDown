@@ -6,6 +6,11 @@ import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
 const ROOT=process.cwd();
 const missing=[],warnings=[],entries=new Map();
+const PNG_SIGNATURE=Buffer.from([137,80,78,71,13,10,26,10]);
+function pngMeta(data){
+ if(data.length<26||!data.subarray(0,8).equals(PNG_SIGNATURE))throw Error('not a PNG');
+ return {width:data.readUInt32BE(16),height:data.readUInt32BE(20),bitDepth:data[24],colorType:data[25]};
+}
 function rel(p){const x=path.resolve(ROOT,p);if(!x.startsWith(ROOT+path.sep))throw Error('Unsafe runtime path '+p);return x}
 function include(file){
  try{
@@ -45,6 +50,26 @@ try{
  include('index.html');include('src/styles.css');include('assets/runtime/manifest.json');
  include('assets/sprites/cinnamon/frames.json');
  include('assets/audio/music/manifest.json');
+ for(const npc of ['smudge','dexter']){
+  const manifestPath=`assets/sprites/${npc}/frames.json`;include(manifestPath);
+  try{
+   const manifest=JSON.parse(fs.readFileSync(rel(manifestPath),'utf8'));
+   const expected=Array.from({length:4},(_,i)=>'idle_'+String(i).padStart(2,'0'));
+   if(manifest.schema!==1||manifest.subject!==npc||
+      !manifest.source||Object.keys(manifest.frames||{}).length!==4||
+      expected.some(id=>!manifest.frames[id]))
+    throw Error('manifest shape invalid');
+   const records=[['source',{...manifest.source,file:manifest.source.path},960,640],
+    ...expected.map(id=>[id,manifest.frames[id],280,200])];
+   for(const [id,item,width,height] of records){
+    include(item.file);const actual=entries.get(item.file);
+    if(!actual||actual.sha256!==item.sha256)throw Error(id+' SHA-256 mismatch');
+    const meta=pngMeta(fs.readFileSync(rel(item.file)));
+    if(meta.width!==width||meta.height!==height||meta.bitDepth!==8||meta.colorType!==6)
+     throw Error(id+' must be '+width+'x'+height+' 8-bit RGBA');
+   }
+  }catch(error){missing.push({path:manifestPath,error:error.message})}
+ }
  traceModule('src/main.mjs');
  // The optional curated demo must ship all physical, source-hash-verified PNGs.
  for(const f of ['tools/asset-gallery.html','tools/asset-gallery.css',

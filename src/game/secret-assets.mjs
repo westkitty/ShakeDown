@@ -14,7 +14,9 @@ export function npcFrameEntries(manifest,npc){
    item.width===280&&item.height===200&&SHA.test(item.sha256))?
    frames.map(([id,item])=>[`NPC-${npc}-${id}`,item]):[];
 }
-export async function loadSecretNpcArt({request=fetch,ImageCtor=Image}={}){
+const hex=bytes=>[...new Uint8Array(bytes)].map(value=>value.toString(16).padStart(2,'0')).join('');
+export async function loadSecretNpcArt({request=fetch,ImageCtor=Image,
+ cryptoImpl=globalThis.crypto,urlApi=globalThis.URL,BlobCtor=globalThis.Blob}={}){
  const images={},errors=[];
  for(const npc of NPCS){
   try{
@@ -22,16 +24,28 @@ export async function loadSecretNpcArt({request=fetch,ImageCtor=Image}={}){
    if(!response.ok)throw Error('manifest HTTP '+response.status);
    const entries=npcFrameEntries(await response.json(),npc);
    if(entries.length!==4)throw Error('manifest rejected');
-   await Promise.all(entries.map(([key,item])=>new Promise(resolve=>{
-    const image=new ImageCtor();
-    image.onload=()=>{
-      if(image.naturalWidth===item.width&&image.naturalHeight===item.height)images[key]=image;
-      else errors.push(key+': dimensions');
-      resolve();
-    };
-    image.onerror=()=>{errors.push(key+': missing');resolve();};
-    image.src=item.file;
-   })));
+   await Promise.all(entries.map(async([key,item])=>{
+    try{
+     if(!cryptoImpl?.subtle||!urlApi?.createObjectURL||!BlobCtor)throw Error('verification unavailable');
+     const frameResponse=await request(item.file,{cache:'no-store'});
+     if(!frameResponse.ok)throw Error('HTTP '+frameResponse.status);
+     const bytes=await frameResponse.arrayBuffer();
+     const actual=hex(await cryptoImpl.subtle.digest('SHA-256',bytes));
+     if(actual!==item.sha256)throw Error('SHA-256 mismatch');
+     const objectUrl=urlApi.createObjectURL(new BlobCtor([bytes],{type:'image/png'}));
+     await new Promise(resolve=>{
+      const image=new ImageCtor();
+      const finish=()=>{urlApi.revokeObjectURL(objectUrl);resolve()};
+      image.onload=()=>{
+       if(image.naturalWidth===item.width&&image.naturalHeight===item.height)images[key]=image;
+       else errors.push(key+': dimensions');
+       finish();
+      };
+      image.onerror=()=>{errors.push(key+': decode');finish();};
+      image.src=objectUrl;
+     });
+    }catch(error){errors.push(key+': '+error.message)}
+   }));
   }catch(error){errors.push(npc+': '+error.message)}
  }
  return {images,errors,loaded:Object.keys(images).length};

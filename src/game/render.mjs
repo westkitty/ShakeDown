@@ -454,8 +454,10 @@ export function render(ctx,s,sprites,alpha=0,art={},audition={}){
  paintSecretActors(ctx,s,decorativeTime,art);
  player(ctx,s,sprites,art);cheerWave(ctx,s);paintSecretDialogue(ctx,s,decorativeTime);if(!s.settings.reducedMotion)events(ctx,s,t,art);
  paintArtOverrides(ctx,s,audition,'actors');
- const inPulse=s.activePulse,chant=pulseState(s.elapsed,s.pulseOverride);ctx.save();ctx.textAlign='center';ctx.font='900 26px system-ui';
- if(s.mode==='playing'&&!s.boss.triggered){
+ const inPulse=s.activePulse,chant=pulseState(s.elapsed,s.pulseOverride);
+ const inSecretEncounter=(s.player.y>490&&s.player.x<2400)||(s.player.y<-1300&&s.player.x<7100);
+ ctx.save();ctx.textAlign='center';ctx.font='900 26px system-ui';
+ if(s.mode==='playing'&&!s.boss.triggered&&!inSecretEncounter){
   ctx.globalAlpha=.90;ctx.fillStyle=inPulse?'#fff0ac':'#a9d7f6';ctx.shadowColor='#2b4d78';ctx.shadowBlur=10;
   ctx.fillText(inPulse?'GO IRISH! · BANNERS SOLID':'CHANT RESTING · C TO CHEER',VIEW.width/2,115);
   ctx.shadowBlur=0;ctx.globalAlpha=.94;ctx.font='800 17px system-ui';ctx.fillStyle='#fff6d5';

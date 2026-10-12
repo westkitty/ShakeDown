@@ -401,8 +401,8 @@ window.addEventListener('resize',onResize,{passive:true});onResize();
 loadAssets();
 loadSecretNpcArt().then(({images,errors,loaded})=>{
  npcArt=images;npcErrors=errors;npcLoaded=loaded;refreshArt();
- npcStatus=errors.length?'Secret NPC artwork: '+loaded+'/8 frames loaded ('+errors.length+' failures)':
-  loaded+' verified NPC encounter frames loaded';
+ npcStatus=errors.length?'Secret NPC artwork: '+loaded+'/8 SHA-256 verified frames loaded ('+errors.length+' failures)':
+  loaded+' SHA-256 verified NPC encounter frames loaded';
  showAssetStatus();
 }).catch(error=>{npcErrors=[error.message];npcStatus='NPC art unavailable · encounters remain discoverable';showAssetStatus();});
 const params=new URLSearchParams(location.search);

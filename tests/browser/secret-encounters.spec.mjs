@@ -1,4 +1,5 @@
 import {test,expect} from '@playwright/test';
+import fs from 'node:fs/promises';
 
 test('Smudge and Dexter scenes render real sprites, discover once, and restore from saved state',async({page},testInfo)=>{
  test.setTimeout(65000);
@@ -95,4 +96,22 @@ test('global discoveries remain earned through victory, replay and full reload',
  await page.locator('#start-btn').click();
  expect(await page.evaluate(()=>window.__SHAKEDOWN_QA.snapshot().achievements)).toEqual(['smudge','dexter']);
  expect(errors).toEqual([]);
+});
+
+test('same-size tampered NPC art is rejected by SHA-256 while other frames remain usable',async({page})=>{
+ const replacement=await fs.readFile('assets/sprites/smudge/idle_00.png');
+ await page.route('**/assets/sprites/smudge/idle_01.png',route=>route.fulfill({
+  status:200,contentType:'image/png',body:replacement
+ }));
+ await page.goto('./?qa=1&art=classic');
+ await expect.poll(()=>page.evaluate(()=>window.__SHAKEDOWN_QA?.assets?.().npcLoaded),{timeout:15000}).toBe(7);
+ const errors=await page.evaluate(()=>window.__SHAKEDOWN_QA.assets().npcErrors);
+ expect(errors).toContain('NPC-smudge-idle_01: SHA-256 mismatch');
+ await page.locator('#start-btn').click();
+ await page.evaluate(()=>{
+  const qa=window.__SHAKEDOWN_QA,s=qa.inspectState(),npc=s.level.secretNpcs[0];
+  qa.warp(npc.x-150-s.player.w/2,npc.footY-s.player.h);
+  s.player.grounded=true;s.player.onPlatform='secret-smudge-alcove';s.elapsed=.3;
+ });
+ await expect.poll(()=>page.evaluate(()=>window.__SHAKEDOWN_QA.snapshot().achievements)).toContain('smudge');
 });

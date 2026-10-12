@@ -6,6 +6,7 @@ import {buildLevel,DOME_ARENA_Y} from '../src/game/world.mjs';
 import {newGame,startGame,update,DT,resetToCheckpoint} from '../src/game/engine.mjs';
 import {validCheckpointRecord,checkpointRecord,restoreCheckpoint} from '../src/game/progress.mjs';
 import {npcFrameEntries} from '../src/game/secret-assets.mjs';
+import {secretNpcFrame} from '../src/game/secret-actors.mjs';
 
 const level=buildLevel();
 const byId=id=>{
@@ -92,6 +93,7 @@ test('NPC discoveries are approach gated, idempotent, and emit named events',()=
  assert.deepEqual(s.achievements,['smudge']);
  assert.equal(s.events.filter(e=>e.type==='discovery').length,1);
  assert.equal(s.discoveryToast.title,sm.title);
+ assert.equal(s.status,sm.dialogue);
  s.player.x=dex.x-s.player.w/2;s.player.y=dex.footY-s.player.h;
  update(s,{},DT);
  assert.deepEqual(s.achievements,['smudge','dexter']);
@@ -101,6 +103,14 @@ test('NPC discoveries are approach gated, idempotent, and emit named events',()=
  s.player.x=dex.x-s.player.w/2;s.player.y=dex.footY-s.player.h;
  update(s,{},DT);
  assert.equal(s.events.filter(e=>e.type==='discovery').length,before);
+});
+
+test('a failed animation frame falls back within the same NPC without inventing art',()=>{
+ const smudge={approved:'smudge-00'};
+ const art={'NPC-smudge-idle_00':smudge.approved,'NPC-dexter-idle_00':'dexter-00'};
+ assert.equal(secretNpcFrame(art,'smudge',1),smudge.approved);
+ assert.equal(secretNpcFrame(art,'smudge','03'),smudge.approved);
+ assert.equal(secretNpcFrame({},'smudge',0),null);
 });
 
 test('schema-1 saves extend to discoveries without invalidating old records',()=>{
