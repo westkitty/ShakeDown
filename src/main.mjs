@@ -1,4 +1,5 @@
 import {newGame,startGame,pauseGame,resetToCheckpoint,update,DT,snapshot} from './game/engine.mjs';
+import {healthSegments,healthAnnouncement} from './game/health.mjs';
 import {VIEW,WORLD} from './game/world.mjs';
 import {render} from './game/render.mjs';
 import {loadSecretNpcArt} from './game/secret-assets.mjs';
@@ -336,8 +337,21 @@ async function loadAssets(){
   showAssetStatus();
  }
 }
+let lastHealthDisplay='';
 function hud(){const p=state.player;
- $('hud-health').textContent='♥ '.repeat(Math.ceil(p.hp)).trim()||'♡';
+ const healthText=healthAnnouncement(p.hp,p.maxHp);
+ if(healthText!==lastHealthDisplay){
+  const health=$('hud-health');
+  health.setAttribute('aria-label',healthText);
+  health.replaceChildren(...healthSegments(p.hp,p.maxHp).map(kind=>{
+   const heart=document.createElement('span');
+   heart.className='health-heart health-heart--'+kind;
+   heart.textContent=kind==='empty'?'♡':'♥';
+   heart.setAttribute('aria-hidden','true');
+   return heart;
+  }));
+  lastHealthDisplay=healthText;
+ }
  $('hud-shakes').textContent=`SHAKES ${state.shakeCount}`;
  const rallyHigh=p.x<WORLD.campusEnd&&p.y<280;
  const zone=state.boss.triggered?'FOX SHOWDOWN':p.y<-1300&&p.x<7100?'DEXTER SUMMIT':p.y>495&&p.x<2350?'SMUDGE ALCOVE':p.x>=WORLD.campusEnd?'GOLDEN DOME':rallyHigh?'PEP RALLY':'SOUTH QUAD';

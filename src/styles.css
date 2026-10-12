@@ -326,3 +326,15 @@ body.high-contrast .touch-cheer:not(.cooling){background:#d8ff71;color:#061522;b
  .discovery-journal{padding:4px;font-size:11px}
  #victory-discoveries{font-size:10px}
 }
+
+
+/* P003: half-hearted assist damage must remain visible and accessible. */
+#hud-health .health-heart{display:inline-block;position:relative;background:none;border:0;border-radius:0;padding:0;margin-right:.16em;color:#fa8b98;line-height:1}
+#hud-health .health-heart:last-child{margin-right:0}
+#hud-health .health-heart--empty{color:#b3a7a8}
+#hud-health .health-heart--half{color:#714b58}
+#hud-health .health-heart--half::after{content:'♥';position:absolute;top:0;left:0;width:50%;overflow:hidden;white-space:nowrap;color:#fa8b98}
+body.high-contrast #hud-health .health-heart--full{color:#ffc4c4}
+body.high-contrast #hud-health .health-heart--half::after{color:#ffc4c4}
+body.high-contrast #hud-health .health-heart--half{color:#786369}
+body.high-contrast #hud-health .health-heart--empty{color:#b8abab}

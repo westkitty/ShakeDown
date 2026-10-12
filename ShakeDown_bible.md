@@ -235,3 +235,12 @@ The full Asset Director source registry remains 194/194, one playable-context ro
 - Exact merge-SHA Actions passed: content `38314483899`; desktop/mobile browser `38314483870` with 112 passes and 10 deliberate project skips; Pages deployment `38314483861`; public Pages byte/browser smoke `38314483915` with 13 passes and one deliberate project skip. The public verifier independently matched SHA-256 for 42 authoritative files and observed correct HTML, JavaScript, JSON and PNG response content types at `https://westkitty.github.io/ShakeDown/`.
 - A wider 122-case Pages run exposed seven test portability assumptions rather than deployed encounter defects: localhost-only unverified-art preview was correctly unavailable on the public origin, two studio cases raced their asynchronous hosted contract load, and one static-pixel comparison left decorative motion active. The test-only follow-up waits for the contract, asserts the public-origin preview prohibition and freezes decoration for that invariant. Its focused matrix passed 8/8 on localhost and 8/8 on Pages; the complete public desktop/mobile matrix then passed 112 with 10 deliberate project skips.
 - Asset fidelity limitation: each 960×640 supplied character sheet produced four retained 280×200 RGBA timing frames, but only two unique frame hashes per character. Smudge alternates `0df75f…` / `db8fb6…`; Dexter alternates `b258c2…` / `de9079…`. No additional poses were fabricated. Owner artistic approval and unassisted physical-device play remain open human gates, not release proof.
+
+## 2026-10-12 — OMNI accepted P003: fractional assist health visibility
+
+- Scope: exactly P003; fixes existing fractional damage HUD discrepancy without changing actual health, physics, saves, or difficulty.
+- Baseline: isolated clone at main e3dfeac8; fresh Big Mac working tree clean; `npm run validate` 65/65 before edits.
+- Source proof: assist damage uses 0.5 health; old HUD rounded upward with Math.ceil, concealing the first hit.
+- Change: half-heart visual states and explicit numerical accessible name; seven deterministic state regressions plus browser UI regression.
+- Preserve: Canvas engine, checkpoint schema, other four accepted proposals for later individual commits, all art/source files.
+- CI/browser run receipts and Git commit identity are recorded in external delivery summary. No Pages/main deployment authorized.
