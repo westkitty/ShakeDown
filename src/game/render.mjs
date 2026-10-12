@@ -18,7 +18,24 @@ function brickWindow(ctx,x,y,w,h,lit=false){
  ctx.fillStyle=lit?'#ffd991':'#b2cdd1';ctx.fillRect(x+w/2-2,y+6,4,h-12);ctx.fillRect(x+5,y+h/2,w-10,3);
  ctx.fillStyle='#f1d5ab';ctx.fillRect(x-6,y+h-3,w+12,7);
 }
-function sky(ctx,t,domeBlend,art={}){
+function sky(ctx,t,domeBlend,art={},camX=0){
+ // Real source art, chosen by world region, rather than generic sky + duplicated
+ // procedurally drawn scenery. Source files remain provisional until owner review.
+ const campus=art['DM-BG01'],ascent=art['DM-BG03'],summit=art['DM-BG07'];
+ if(campus&&ascent&&summit){
+  ctx.drawImage(campus,0,0,VIEW.width,VIEW.height);
+  // Two gradual crossfades prevent an abrupt 960px-wide background pop
+  // while preserving the same authoritative camera and world coordinates.
+  const ontoDome=clamp((camX-(WORLD.campusEnd-220))/440,0,1);
+  if(ontoDome>0){ctx.save();ctx.globalAlpha=ontoDome;
+   ctx.drawImage(ascent,0,0,VIEW.width,VIEW.height);ctx.restore();}
+  const ontoSummit=clamp((camX-6620)/480,0,1);
+  if(ontoSummit>0){ctx.save();ctx.globalAlpha=ontoSummit;
+   ctx.drawImage(summit,0,0,VIEW.width,VIEW.height);ctx.restore();}
+  return;
+ }
+ const plate=camX<WORLD.campusEnd?campus:camX<6860?ascent:summit;
+ if(plate){ctx.drawImage(plate,0,0,VIEW.width,VIEW.height);return;}
  if(art['BG-01']){ctx.drawImage(art['BG-01'],0,0,VIEW.width,VIEW.height);return;}
  const grad=ctx.createLinearGradient(0,0,0,VIEW.height);grad.addColorStop(0,domeBlend?'#6c8cae':'#7ab9d8');grad.addColorStop(.58,domeBlend?'#dfc49c':'#c0dce0');grad.addColorStop(1,'#fff0ca');ctx.fillStyle=grad;ctx.fillRect(0,0,VIEW.width,VIEW.height);
  ctx.save();ctx.globalAlpha=.5;ctx.fillStyle='#fff3bb';ctx.beginPath();ctx.arc(domeBlend?760:820,100,52,0,TAU);ctx.fill();ctx.restore();
@@ -36,15 +53,21 @@ function farCampus(ctx,cam,t){
 }
 function quad(ctx,cam,t,art={}){
  const cx=cam.x,cy=cam.y;ctx.save();ctx.translate(-cx,-cy);
- ctx.fillStyle='#c8d0af';ctx.fillRect(Math.max(0,cx-80),330,Math.min(3850,cx+1100)-Math.max(0,cx-80),130);
+ // Keep the original matte lawn only as fallback. It previously painted a
+ // flat gray band *over* the actual illustrated Notre Dame campus.
+ if(!art['DM-BG01']){ctx.fillStyle='#c8d0af';
+  ctx.fillRect(Math.max(0,cx-80),330,Math.min(3850,cx+1100)-Math.max(0,cx-80),130);}
  for(let i=0;i<22;i++){const x=i*182+90;if(x<cx-130||x>cx+1100||x>3770)continue;
-  if(i%4===0){tree(ctx,x,425,1.03);continue}
-  if(i%4===1){ctx.fillStyle='#506b64';ctx.fillRect(x,362,6,70);ctx.fillStyle='#efe0ae';ctx.beginPath();ctx.arc(x+3,350,11,0,TAU);ctx.fill()}
-  if(i%4===2){ctx.fillStyle='#806f5d';ctx.fillRect(x,421,92,11);ctx.fillRect(x+9,431,7,11);ctx.fillRect(x+75,431,7,11);}
-  if(i%4===3){ctx.fillStyle='#ceb47a';ctx.fillRect(x,414,44,24);ctx.fillStyle='#4e9167';ctx.beginPath();ctx.ellipse(x+22,410,28,11,0,0,TAU);ctx.fill()}
+  if(i%4===0){if(art['PR-05'])ctx.drawImage(art['PR-05'],x-86,167,172,260);else tree(ctx,x,425,1.03);continue}
+  if(i%4===1){if(art['PR-04'])ctx.drawImage(art['PR-04'],x-34,201,76,239);
+   else{ctx.fillStyle='#506b64';ctx.fillRect(x,362,6,70);ctx.fillStyle='#efe0ae';ctx.beginPath();ctx.arc(x+3,350,11,0,TAU);ctx.fill()}}
+  if(i%4===2){if(art['PR-03'])ctx.drawImage(art['PR-03'],x-8,389,103,58);
+   else{ctx.fillStyle='#806f5d';ctx.fillRect(x,421,92,11);ctx.fillRect(x+9,431,7,11);ctx.fillRect(x+75,431,7,11);}}
+  if(i%4===3){if(art['PR-06'])ctx.drawImage(art['PR-06'],x-7,404,89,46);
+   else{ctx.fillStyle='#ceb47a';ctx.fillRect(x,414,44,24);ctx.fillStyle='#4e9167';ctx.beginPath();ctx.ellipse(x+22,410,28,11,0,0,TAU);ctx.fill()}}
  }
  // Landmark hints: campus masonry and blue/gold bunting, secondary to gameplay.
- for(let x=520;x<3740;x+=780){
+ for(let x=520;!art['DM-BG01']&&x<3740;x+=780){
   if(x+600<cx||x>cx+1300)continue;
   ctx.fillStyle='#dac6ad';ctx.fillRect(x,205,505,165);ctx.fillStyle='#bd9c85';ctx.fillRect(x,192,505,14);
   for(let i=0;i<7;i++)brickWindow(ctx,x+22+i*68,237,34,61,i%4===0);
@@ -55,7 +78,10 @@ function quad(ctx,cam,t,art={}){
   ['PR-03',850,384,100,60],['PR-03',2900,384,96,60],
   ['PR-06',1420,397,172,54],['PR-06',3260,396,172,54],
   ['PR-09',2100,365,170,100],['PR-12',670,175,252,72],
-  ['PR-12',3050,172,252,72]
+  ['PR-12',3050,172,252,72],
+  ['PR-07',970,301,75,134],['PR-11',173,367,96,78],
+  ['PR-13',2200,353,108,96],['PR-14',2289,401,132,49],
+  ['PR-02',296,307,75,133]
  ];
  for(const [id,x,y,w,h] of scenery){
   const image=art[id];if(image&&x+w>cx-90&&x<cx+VIEW.width+140)ctx.drawImage(image,x,y,w,h);
@@ -69,7 +95,7 @@ function quad(ctx,cam,t,art={}){
  }
  ctx.restore();
 }
-function mainBuilding(ctx,cam,t){
+function legacyMainBuilding(ctx,cam,t){
  const cx=cam.x,cy=cam.y;
  if(cx>8350||cx+VIEW.width<3340)return;
  ctx.save();ctx.translate(-cx,-cy);
@@ -101,8 +127,76 @@ function mainBuilding(ctx,cam,t){
  }
  ctx.restore();
 }
-function drawPlatform(ctx,p,x,y,active,t){
+
+// Modular, cullable 2D facade. The generated production window, pilaster,
+// dome, statue and railing assets replace the old featureless 4,500px wall.
+// The authored ascent/collision coordinates never change.
+function mainBuilding(ctx,cam,t,art={}){
+ if(!art['DM-PR01']||!art['DM-PR02'])return legacyMainBuilding(ctx,cam,t);
+ const cx=cam.x,cy=cam.y;
+ if(cx>8350||cx+VIEW.width<3340)return;
+ const left=3700,right=8210,top=-1530,bottom=470;
+ ctx.save();ctx.translate(-cx,-cy);
+ const masonry=ctx.createLinearGradient(left,top,right,bottom);
+ masonry.addColorStop(0,'#ae896c');masonry.addColorStop(.45,'#ddbe98');
+ masonry.addColorStop(1,'#bb9474');
+ ctx.fillStyle=masonry;ctx.fillRect(left,top,right-left,bottom-top);
+ // Rows and columns are computed from the visible camera; distant content is
+ // not submitted to Canvas merely because the building is unusually long.
+ const rowStep=238,colStep=216;
+ const row0=top+24+Math.max(0,Math.floor((cy-top-24)/rowStep))*rowStep;
+ const col0=left+48+Math.max(0,Math.floor((cx-left-48)/colStep))*colStep;
+ for(let y=row0;y<Math.min(bottom,cy+VIEW.height+rowStep);y+=rowStep){
+  ctx.fillStyle='#7b5e50';ctx.fillRect(left,y+217,right-left,7);
+  ctx.fillStyle='#f6dfb5';ctx.fillRect(left,y+224,right-left,8);
+  for(let x=col0;x<Math.min(right,cx+VIEW.width+colStep);x+=colStep){
+   ctx.drawImage(art['DM-PR01'],x,y,157,212);
+  }
+ }
+ const columnStep=432;
+ const firstColumn=left+205+Math.max(0,Math.floor((cx-left-205)/columnStep))*columnStep;
+ for(let x=firstColumn;x<Math.min(right,cx+VIEW.width+columnStep);x+=columnStep){
+  for(let y=row0;y<Math.min(bottom,cy+VIEW.height+rowStep);y+=rowStep)
+   ctx.drawImage(art['DM-PR02'],x,y-7,82,238);
+ }
+ // The Golden Dome and Mary are actual authored sprites, not the previously
+ // sketched ovals and lines.
+ if(art['DM-PR03'])ctx.drawImage(art['DM-PR03'],7060,-1500,638,420);
+ if(art['DM-PR04'])ctx.drawImage(art['DM-PR04'],7318,-1640,115,184);
+ if(art['DM-PR05']){
+  for(let x=7320;x<8350;x+=252)
+   if(x<cx+VIEW.width+260&&x+252>cx-260)
+    ctx.drawImage(art['DM-PR05'],x,DOME_ARENA_Y-76,255,83);
+ }
+ if(art['DM-PR06']){
+  for(let i=3;i<=23;i+=4){
+   const x=3760+i*156,y=390-i*68-65;
+   if(x<cx-110||x>cx+VIEW.width+110||y<cy-200||y>cy+VIEW.height+160)continue;
+   ctx.drawImage(art['DM-PR06'],x,y-95,83,103);
+  }
+ }
+ if(art['DM-PR10']&&cx>6900)
+  ctx.drawImage(art['DM-PR10'],7980,DOME_ARENA_Y-205,116,191);
+ ctx.restore();
+}
+function drawPlatform(ctx,p,x,y,active,t,art={}){
  const k=p.kind;const h=p.h,w=p.w;
+ const dome=p.x>=WORLD.campusEnd;
+ if(k==='banner'){
+  const image=art[dome?(active?'DM-MC04':'DM-MC03'):(active?'MC-02':'MC-01')];
+  if(image){ctx.save();ctx.globalAlpha=active?1:.55;ctx.imageSmoothingEnabled=false;
+   ctx.drawImage(image,x-4,y-22,w+8,Math.max(51,h+30));ctx.restore();return;}
+ }
+ if(p.movement){const image=art[dome?'DM-MC01':'MC-04'];
+  if(image){ctx.save();ctx.imageSmoothingEnabled=false;
+   ctx.drawImage(image,x-6,y-19,w+12,h+37);ctx.restore();return;}
+ }
+ if(p.id==='summit-arena'&&art['DM-TL16']){
+  ctx.save();ctx.fillStyle='#94724d';ctx.fillRect(x,y,w,h);
+  ctx.beginPath();ctx.rect(x,y,w,h);ctx.clip();
+  for(let xx=x;xx<x+w;xx+=64)ctx.drawImage(art['DM-TL16'],xx,y,64,64);
+  ctx.restore();return;
+ }
  if(k==='banner'){
   ctx.save();ctx.globalAlpha=active?1:.34;
   ctx.fillStyle=active?'#214b9a':'#677d96';rounded(ctx,x,y,w,h,4);ctx.fill();
@@ -186,7 +280,7 @@ function cannon(ctx,h,t,art={}){
  ctx.fillStyle='#fa7390';ctx.beginPath();ctx.arc(43,28,5,0,TAU);ctx.fill();
  const phase=(t+h.offset)%h.period;if(phase>h.period-.8){ctx.fillStyle='#fcdb73';ctx.font='900 19px system-ui';ctx.fillText('!',23,-16)}ctx.restore()}
 function beacon(ctx,b,active,t,art={}){
- const image=art[active?'MC-06':'MC-05'];
+ const image=art[b.x>=WORLD.campusEnd?(active?'DM-MC06':'DM-MC05'):(active?'MC-06':'MC-05')];
  if(image){
   ctx.drawImage(image,b.x-47,b.footY-112,94,110);
   if(active){ctx.strokeStyle='#d7fff2';ctx.lineWidth=2;ctx.beginPath();ctx.arc(b.x,b.footY-59,32+Math.sin(t*6)*6,0,TAU);ctx.stroke()}
@@ -198,7 +292,7 @@ function beacon(ctx,b,active,t,art={}){
  if(active){ctx.strokeStyle='#d7fff2';ctx.lineWidth=3;ctx.beginPath();ctx.arc(1,-59,35+Math.sin(t*8)*9,0,TAU);ctx.stroke()}
  ctx.restore()}
 function checkpoint(ctx,c,on,t,art={}){
- const image=art[on?'MC-08':'MC-07'];
+ const image=art[c.x>=WORLD.campusEnd?(on?'DM-MC08':'DM-MC07'):(on?'MC-08':'MC-07')];
  if(image){ctx.drawImage(image,c.x-17,c.footY-116,86,116);
   if(on){ctx.fillStyle='#fff7b3';ctx.beginPath();ctx.arc(c.x+2,c.footY-88,5+Math.sin(t*7)*2,0,TAU);ctx.fill()}
   return;
@@ -235,12 +329,15 @@ function player(ctx,s,sprites,art={}){const p=s.player;let state='idle';
  if(p.attackTime>0&&!image){stroke(ctx,'#f7e5a7',7);ctx.beginPath();ctx.arc(16,-40,70,-.7,1.1);ctx.stroke()}
  ctx.restore();
 }
-function events(ctx,s,t){ctx.save();ctx.translate(-s.camera.x,-s.camera.y);
+function events(ctx,s,t,art={}){ctx.save();ctx.translate(-s.camera.x,-s.camera.y);
  for(const e of s.events){const age=t-e.t;if(age<0||age>1.15)continue;
   const alpha=1-age/1.15;ctx.globalAlpha=alpha;
   const n=e.type==='collect'?9:e.type==='bossHit'?17:4;
   if(!['collect','checkpoint','bossHit','swish','jump','doubleJump','hurt','victory','beacon'].includes(e.type))continue;
   const colors=e.type==='bossHit'?['#e7d767','#ffecc0','#f07b72']:e.type==='hurt'?['#f06672','#fbbb7f']:['#f7dd7d','#8aeeae','#f5fbec'];
+  const fx=({collect:'VF-04',beacon:'VF-03',checkpoint:'VF-08'})[e.type];
+  if(fx&&art[fx]){ctx.save();ctx.globalAlpha=alpha;
+   ctx.drawImage(art[fx],e.x-32,e.y-38-age*16,64,64);ctx.restore();}
   for(let i=0;i<n;i++){const a=i*TAU/n+t%2,r=(e.type==='checkpoint'?90:52)*Math.min(1,age*2);const x=e.x+Math.cos(a)*r;const y=e.y+Math.sin(a)*r-age*29;
    ctx.fillStyle=colors[i%colors.length];ctx.fillRect(x,y,4+i%2*2,4+i%2*2)}
  }ctx.restore();ctx.globalAlpha=1;
@@ -248,6 +345,9 @@ function events(ctx,s,t){ctx.save();ctx.translate(-s.camera.x,-s.camera.y);
 function confettiSky(ctx,t){for(let i=0;i<45;i++){const x=(i*83+Math.sin(i*67)*32)%990;const y=((t*85+i*49)%690)-85;
  ctx.save();ctx.translate(x,y);ctx.rotate(t+i);ctx.fillStyle=['#ffdf6e','#80e9bb','#f06f78','#7ea8e8'][i%4];ctx.fillRect(0,0,8,12);ctx.restore()}}
 function birthdayDecor(ctx,t,art={}){
+ if(art['BD-07'])ctx.drawImage(art['BD-07'],0,0,VIEW.width,160);
+ if(art['BD-14'])ctx.drawImage(art['BD-14'],431,260,95,95);
+ if(art['BD-08']){ctx.save();ctx.globalAlpha=.46;ctx.drawImage(art['BD-08'],180,170,540,280);ctx.restore();}
  ctx.save();ctx.translate(735,330);ctx.shadowColor='#f7d15b';ctx.shadowBlur=25;
  // A deliberately visible birthday cake, not a quest objective.
  if(art['BD-01']){ctx.shadowBlur=0;ctx.drawImage(art['BD-01'],-153,-126,306,204)}else{
@@ -256,6 +356,7 @@ function birthdayDecor(ctx,t,art={}){
  for(let i=0;i<8;i++){const x=-100+i*27;ctx.fillStyle='#3573a0';ctx.fillRect(x,-117,7,32);ctx.fillStyle='#fbe56e';ctx.beginPath();ctx.ellipse(x+3,-124,5,9,0,0,TAU);ctx.fill()}
  }
  ctx.shadowBlur=0;ctx.restore();
+ if(art['BD-06'])ctx.drawImage(art['BD-06'],455,330,170,104);
  if(art['BD-05'])ctx.drawImage(art['BD-05'],492,298,104,140);
  else drawShake(ctx,550,420,2.0,true,art);
  drawShake(ctx,860,420,2.0,true,art);
@@ -264,13 +365,14 @@ function birthdayDecor(ctx,t,art={}){
 export function render(ctx,s,sprites,alpha=0,art={},audition={}){
  const t=s.elapsed,decorativeTime=s.settings.reducedMotion?0:t,cam=s.camera;
  ctx.clearRect(0,0,VIEW.width,VIEW.height);
- const isDome=cam.x>3150;sky(ctx,decorativeTime,isDome,art);
+ const isDome=cam.x>3150;sky(ctx,decorativeTime,isDome,art,cam.x);
  paintArtOverrides(ctx,s,audition,'backdrop');
- farCampus(ctx,cam,decorativeTime);quad(ctx,cam,decorativeTime,art);mainBuilding(ctx,cam,decorativeTime);
+ if(!art['DM-BG01']&&!art['DM-BG03']&&!art['DM-BG07'])farCampus(ctx,cam,decorativeTime);
+ quad(ctx,cam,decorativeTime,art);mainBuilding(ctx,cam,decorativeTime,art);
  ctx.save();ctx.translate(-cam.x,-cam.y);
  for(const p of visibleWorld(s.level.platforms,cam.x,cam.y)){
   const pos=movingPosition(p,t),active=!p.pulse||s.activePulse||s.player.onPlatform===p.id;
-  drawPlatform(ctx,p,pos.x,pos.y,active,decorativeTime);
+  drawPlatform(ctx,p,pos.x,pos.y,active,decorativeTime,art);
  }
  ctx.restore();
  paintArtOverrides(ctx,s,audition,'world');
@@ -281,7 +383,7 @@ export function render(ctx,s,sprites,alpha=0,art={},audition={}){
   drawFox(ctx,fx,440,'escape',decorativeTime,art);drawShake(ctx,fx+84,375,.78,true,art);
   ctx.restore();
  }
- player(ctx,s,sprites,art);if(!s.settings.reducedMotion)events(ctx,s,t);
+ player(ctx,s,sprites,art);if(!s.settings.reducedMotion)events(ctx,s,t,art);
  paintArtOverrides(ctx,s,audition,'actors');
  const inPulse=s.activePulse;ctx.save();ctx.textAlign='center';ctx.font='900 31px system-ui';
  if(s.mode==='playing'&&!s.boss.triggered){
