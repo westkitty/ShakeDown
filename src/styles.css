@@ -350,3 +350,16 @@ body.high-contrast #hud-health .health-heart--empty{color:#b8abab}
 .workshop-body .art-curator{margin:10px 0 6px}
 .workshop-body .secondary{margin-top:8px}
 #workshop-title .tiny{overflow-wrap:anywhere}
+
+
+/* P002 experimental portrait composition: preserve the game's 16:9 artwork,
+   crop horizontally rather than squashing it into a tiny letterboxed strip.
+   The player-follow pan is presentation-only; no world coordinate changes. */
+@media (max-width:630px) and (orientation:portrait){
+ .viewport{height:clamp(248px,44dvh,380px);aspect-ratio:auto}
+ .viewport>canvas{
+  position:absolute;top:0;left:0;width:auto;height:100%;max-width:none;
+  aspect-ratio:16 / 9;
+  transform:translate3d(var(--mobile-canvas-pan,0px),0,0);
+ }
+}

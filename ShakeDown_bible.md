@@ -260,3 +260,12 @@ The full Asset Director source registry remains 194/194, one playable-context ro
 - Change: title and pause place the existing (unmodified) art director, gallery, curated toggles, status and raster-title selector behind keyboard-operable Workshop details. Gameplay HUD no longer exposes development-only button. Reduced title copy avoids spoiling secret NPCs.
 - Safety: boot failure automatically opens Workshop so Retry Loading remains reachable. Gallery deep links, standalone Asset Control Room, Art Jury, hash-only approval gate and QA endpoints remain available.
 - Existing tests updated to explicitly open the workshop when exercising tools; a new player-first regression prevents restored HUD/title clutter. No physics, music, art images, or save schema changes.
+
+## 2026-10-12 — OMNI accepted P002: bounded portrait viewport experiment
+
+- Starting point: P001 feature commit 1f69ff7e2b167b9d2aff59e1399a3b574a055483.
+- Hypothesis: a portrait playfield around 44dvh high, aspect-preserved and horizontally panned to the player, is more readable than a 200px 16:9 strip without rewriting the 960×540 authoritative game.
+- Approach: CSS-only enlarged display height, clipped canvas composition; compositor translate3d based on existing authoritative player/camera coordinates. No physics, camera position, checkpoint, boss timing, asset or engine modification.
+- Baseline 390×844 Big Mac mobile-emulated Chromium: canvas 372×209.25 CSS pixels, empty-page/game rAF p95 both 100ms (host-constrained), Canvas draw p95 1.3ms. Measurements after change must use identical conditions and distinguish host throttling from game cost.
+- Guardrails: desktop and landscape remain 16:9; portrait player stays onscreen after motion and source Canvas ratio remains 16:9; restore CSS fallback if cropping loses boss telegraphs or fails actual-device play.
+- Real physical Android performance still requires on-device JS tracing, not Chrome gfxinfo UI frames.
