@@ -52,7 +52,7 @@ Blocked sources may be auditioned **as labeled QA reference cards**, never as fa
 - Browser context: safe fallback when image, manifest, Web Crypto or decode fails; a bad candidate cannot erase the saved game or rewrite the original source sprite manifest.
 - Modal: native HTML dialog with Escape dismissal, keyboard focus and coarse-pointer controls. The game pauses when opened from gameplay, preserving existing input/focus behavior.
 - Reduced Motion: hides live extra particle/effect auditions, while role selection and source comparison still work.
-- Source scope: generated PNGs only. The **21 recorded audio requests remain undelivered**, so these cannot truthfully be installed or auditioned as recorded music/SFX.
+- Art Director source scope remains generated PNGs only. Separately, six user-provided MP3s now provide three campus variants, two Dome variants and the Fox boss track. Their byte/duration/loudness evidence is in `assets/audio/music/manifest.json`; 18 other named audio contracts remain undelivered and are not fabricated.
 - All 194 image candidates and the earlier 26 source-derived Cinnamon frames remain present. No source re-generation, deletion, force-push, or art-style rewrite is required.
 
 ## Verification contract

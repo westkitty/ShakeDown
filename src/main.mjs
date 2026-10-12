@@ -317,7 +317,9 @@ function animate(ms){requestAnimationFrame(animate);
    queued.clear();update(state,input,DT);saveCheckpointIfNew();
    accumulator-=DT;count++;if(state.mode!=='playing')break;
   }
-  audio.musicTick(ms/1000,state.boss.triggered);
+  const musicMode=state.mode==='victory'?'silent':state.boss.triggered?'boss':
+   state.player.x>=WORLD.campusEnd?'dome':'campus';
+  audio.musicTick(ms/1000,musicMode);
   // Events have monotonic IDs because the rolling 35-event history shifts.
   // An array cursor would silently stop all audio after event 35.
   for(const ev of state.events){if(ev.serial>lastEventSerial){audio.event(ev.type);lastEventSerial=ev.serial}}

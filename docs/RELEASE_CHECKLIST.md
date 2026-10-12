@@ -88,6 +88,8 @@ Keep the last accepted commit and asset record immutable. On failure, repair via
 
 - [x] Real wall-clock browser audit tool measured original and corrected mobile geometry, requestAnimationFrame pacing, Canvas cost and input-to-motion observation. The output explicitly labels remote scheduling uncertainty; it is not phone FPS proof.
 - [x] Audio lifecycle unit/browser tests cover no autoplay context creation, pause/mute/restart stop, bounded 24 live voices, context recovery and graceful device failure.
+- [x] Six user-provided MP3 source hashes, byte sizes and three runtime roles are validated; campus and Dome pools load lazily and Fox music replaces them only at the fight.
+- [ ] Physical-speaker listening, long-form loop seams and real-phone media playback remain human/hardware acceptance gates.
 - [x] Bulk incoming-art dry-run and stage-only tool verifies unique exact contract IDs, dimensions, alpha and hashes; rejects ambiguous/duplicate/symlink/corrupted files; never writes approval manifest.
 - [x] Visual/gameplay legibility: first-viewport Start and touch controls fit 320px portrait and 844x390 landscape; critical solid-button contrast >=4.5:1; both complete scripted routes exercise Fox tell, charge, volley, recovery, hit and birthday.
 - [x] Save stress: cross-tab completion and checkpoint retention, storage restriction behavior, repeated restart/mute/pause without corruption.

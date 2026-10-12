@@ -19,18 +19,22 @@ test('offline static rehearsal fingerprints only real reachable runtime bytes',(
  assert.equal(a.missing.length,0);
  assert.equal(a.contract.visual,220);
  assert.equal(a.contract.audio,21);
+ assert.equal(a.contract.recordedMusicFiles,6);
+ assert.equal(a.contract.recordedMusicRoles,3);
  assert.equal(a.contract.existingSources,26);
  assert.ok(a.artifact.fileCount>=35);
  assert.equal(a.artifact.manifestSha256,b.artifact.manifestSha256,'Identical runtime files must produce identical hash');
  assert.ok(a.files.some(f=>f.path==='index.html'));
  assert.ok(a.files.some(f=>f.path==='src/game/engine.mjs'));
  assert.ok(a.files.some(f=>f.path==='src/game/audio.mjs'));
+ assert.ok(a.files.some(f=>f.path==='assets/audio/music/manifest.json'));
+ assert.equal(a.files.filter(f=>f.path.endsWith('.mp3')).length,6);
  assert.ok(a.files.every(f=>/^[0-9a-f]{64}$/.test(f.sha256)));
 });
 test('release rehearsal refuses deployment when an imported module is missing',()=>{
  const temp=fs.mkdtempSync(path.join(os.tmpdir(),'shakedown-release-fixture-'));
  try{
-  for(const rel of ['src','tools','assets/sprites/cinnamon','assets/production','assets/level1']){
+  for(const rel of ['src','tools','assets/sprites/cinnamon','assets/production','assets/level1','assets/audio']){
    fs.cpSync(path.join(root,rel),path.join(temp,rel),{recursive:true});
   }
   fs.mkdirSync(path.join(temp,'assets/runtime'),{recursive:true});

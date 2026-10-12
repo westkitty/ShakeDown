@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {AudioBox} from '../src/game/audio.mjs';
+import {AudioBox,MUSIC_TRACKS} from '../src/game/audio.mjs';
 
 class FakeParam {
  setValueAtTime(){return this}
@@ -27,7 +27,24 @@ class FakeContext {
  suspend(){this.state='suspended';return Promise.resolve()}
  close(){this.state='closed';return Promise.resolve()}
 }
-const enableFake=()=>{FakeContext.created=0;globalThis.window={AudioContext:FakeContext}};
+class FakeRecordedAudio {
+ static created=[];
+ constructor(src){
+  this.src=src;this.currentTime=0;this.paused=true;this.loop=false;this.volume=1;
+  this.listeners={};this.playCalls=0;this.pauseCalls=0;
+  FakeRecordedAudio.created.push(this);
+ }
+ addEventListener(type,listener){this.listeners[type]=listener}
+ play(){this.paused=false;this.playCalls++;return Promise.resolve()}
+ pause(){this.paused=true;this.pauseCalls++}
+ removeAttribute(name){if(name==='src')this.src=''}
+ load(){}
+ emit(type){this.listeners[type]?.()}
+}
+const enableFake=()=>{
+ FakeContext.created=0;FakeRecordedAudio.created=[];
+ globalThis.window={AudioContext:FakeContext,Audio:FakeRecordedAudio};
+};
 
 test('audio never constructs an AudioContext before explicit activation gesture',()=>{
  enableFake();
@@ -79,4 +96,51 @@ test('audio recovers after a context close and missing WebAudio degrades silentl
  assert.equal(fallback.activate(),false);
  assert.equal(fallback.audioUnavailable,true);
  assert.doesNotThrow(()=>{fallback.event('victory');fallback.musicTick(100)});
+});
+
+test('recorded level music is gesture-gated, role-switched, paused and reset safely',async()=>{
+ enableFake();
+ const a=new AudioBox({random:()=>0});
+ assert.equal(FakeRecordedAudio.created.length,0,'No media element before player gesture');
+ a.musicTick(0,'campus');
+ assert.equal(FakeRecordedAudio.created.length,0,'Gameplay ticks cannot bypass the browser gesture gate');
+ a.activate();a.musicTick(0,'campus');await Promise.resolve();
+ assert.equal(FakeRecordedAudio.created[0].src,MUSIC_TRACKS.campus[0]);
+ assert.equal(FakeRecordedAudio.created[0].paused,false);
+ assert.equal(FakeRecordedAudio.created[0].loop,true);
+ assert.equal(FakeRecordedAudio.created[0].volume,.28);
+ a.musicTick(1,'campus');
+ assert.equal(FakeRecordedAudio.created.length,1,'Stable zone does not recreate or redownload music');
+ const campus=FakeRecordedAudio.created[0];
+ a.musicTick(2,'dome');await Promise.resolve();
+ assert.equal(campus.paused,true);assert.equal(campus.currentTime,0);
+ assert.equal(FakeRecordedAudio.created[1].src,MUSIC_TRACKS.dome[0]);
+ a.musicTick(3,'boss');await Promise.resolve();
+ assert.equal(FakeRecordedAudio.created[2].src,MUSIC_TRACKS.boss[0]);
+ a.setPaused(true);assert.equal(FakeRecordedAudio.created[2].paused,true);
+ a.setPaused(false);await Promise.resolve();
+ assert.equal(FakeRecordedAudio.created[2].paused,false);
+ a.mute(true);assert.equal(FakeRecordedAudio.created[2].paused,true);
+ a.mute(false);await Promise.resolve();assert.equal(FakeRecordedAudio.created[2].paused,false);
+ a.musicTick(4,'silent');
+ assert.equal(a.diagnostics().musicCreated,false,'Victory leaves room for the synthesized fanfare');
+ a.resetSequence();assert.equal(a.diagnostics().musicCreated,false);
+ a.dispose();
+});
+
+test('a broken recording advances within its role and retains synthesized fallback',async()=>{
+ enableFake();
+ const a=new AudioBox({random:()=>0});
+ a.activate();a.musicTick(0,'campus');await Promise.resolve();
+ const first=FakeRecordedAudio.created[0];first.emit('error');
+ assert.deepEqual(a.diagnostics().musicFailures,[MUSIC_TRACKS.campus[0]]);
+ a.musicTick(1,'campus');await Promise.resolve();
+ assert.equal(FakeRecordedAudio.created[1].src,MUSIC_TRACKS.campus[1]);
+ a.dispose();
+
+ enableFake();delete globalThis.window.Audio;
+ const fallback=new AudioBox();fallback.activate();fallback.musicTick(0,'campus');
+ assert.equal(fallback.diagnostics().musicUnavailable,true);
+ assert.ok(fallback.diagnostics().activeVoices>0,'Synth melody remains available without MP3 playback');
+ fallback.dispose();
 });

@@ -1,5 +1,7 @@
 # ShakeDown — Project status — October 11, 2026
 
+> **Current main and soundtrack update (2026-10-11):** Main is `9135fc8`, with all four artwork/visual-safety pull requests merged. The working release branch adds six explicit user-provided MP3s: three campus variants, two Golden Dome variants and one Fox boss track. Playback is gesture-gated, lazy, pause/mute safe and retains synthesized fallback. This covers three music roles; 18 other named audio contracts remain undelivered. Physical-speaker and real-phone listening remain unverified.
+
 > **Preparation branch update (2026-10-11):** Canonical scope is the single birthday adventure. The branch prep/asset-ready-20261011 adds asset intake and manifests, excludes clipped run_03 from runtime, and adds real local desktop/mobile-emulated browser smoke tests. Main SHA 80d3888 had successful CI and Pages deployment, and hosted index HTTP 200. Full live-site traversal and physical-device audio/touch are still unverified; LM Arena final art remains pending. See docs/PRODUCTION_READINESS.md.
 
 **Target:** westkitty/ShakeDown / branch main.
@@ -14,7 +16,7 @@ The initial repository was Phase 0 with only documentation and a prior 73-reques
 - Fox charge/volley/rest battle, three-hit victory, birthday finale/replay: **implemented**, selected Node and local injected-Chromium tests executed.
 - 26 Cinnamon source-cutout images from `assets/references/cinnamon_actions_sheet.png`: **generated and physically verified**; sprite URLs loaded in injected browser execution.
 - Fox/landscape/UI/cake external final artwork: **not generated**, runtime uses honest authored vector/Canvas placeholders.
-- Sound: synthesized via WebAudio after user gesture, code implemented; audible sound on user device **unverified**.
+- Sound: six recorded level/boss MP3s plus synthesized effects/fallback, all gated behind user interaction; audible quality on physical speakers **unverified**.
 - Runtime Browser URL HTTP navigation: **not tested in container** (Chromium policy blocks all `goto`, including localhost), alternate bundle-injected Chromium smoke passes; full live-site player journey **unverified**.
 - Pages deployment: **not yet verified**. Never claim launch without a real hosted URL check.
 
