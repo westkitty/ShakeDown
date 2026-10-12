@@ -99,6 +99,7 @@ export class AudioBox {
    case 'beacon':this.note(392,.18,'triangle',.054);this.note(587,.22,'triangle',.043,.11);break;
    case 'cheer':[392,523,659,784].forEach((freq,i)=>this.note(freq,.20,'triangle',.053,i*.075));break;
    case 'rally':[784,1047,1175].forEach((freq,i)=>this.note(freq,.28,'sine',.055,i*.09));break;
+   case 'bossCheer':this.note(523,.24,'triangle',.060);this.note(880,.30,'sine',.044,.09);break;
    case 'chantRise':this.note(494,.11,'sine',.026);this.note(659,.17,'sine',.025,.09);break;
    case 'chantRest':this.note(277,.11,'triangle',.017);break;
    case 'hurt':this.note(166,.35,'sawtooth',.049);break;

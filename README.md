@@ -13,7 +13,7 @@ Run locally from the repository root with `npm run serve` and open `http://local
 - Move: A/D or left/right arrows.
 - Jump: Space, W or up arrow. Tap twice for double jump; variable height, coyote time and input buffering.
 - Tail-swish: J or X. Stun the Fox during recovery; hit Drum Beacons to activate the GO IRISH pulse.
-- **Cheer / GO IRISH!: C.** Immediately energize timed banner bridges, stun nearby Cup Crawlers, briefly hush close confetti cannons, and ring four optional rally bells for hidden shakes. Near a Drum Beacon the cheer is stronger. Cooldown: 6.4 seconds.
+- **Cheer / GO IRISH!: C.** Immediately energize timed banner bridges, stun nearby Cup Crawlers, briefly hush close confetti cannons, and ring four optional rally bells for hidden shakes. Near a Drum Beacon the cheer is stronger. During the Fox's recovery, a nearby cheer extends the tail-swish opening by up to 0.48 seconds but does not deal damage. Cooldown: 6.4 seconds.
 - Dash: Shift or K.
 - Pause: P or Esc. M toggles audio.
 - On touch screens: accessible move, dash, swish, **cheer**, and jump buttons; narrow portrait layouts use a compact two-row action pad.
@@ -23,7 +23,7 @@ Run locally from the repository root with `npm run serve` and open `http://local
 - **Campus (0–3770 world px):** shake stand theft, banner bridges, safe pulse tutorial, concession robots, confetti cannons, moving platform, secrets and checkpoints. A new **14-platform elevated Pep Rally** offers an optional timed bridge route, two bell relays, new enemies, and bonus Shamrock Shakes, with the ground route preserved.
 - **Golden Dome (3770–8350 px):** intact 23-stage architectural ascent plus **11 new optional platforms** forming Bell Gallery and upper-cornice detours. Two additional cheer relays unlock secret shakes, and both side routes reconnect to the original ascent, checkpoints and boss arena.
 - **The Fox:** an explicitly *provisional* illustrated runtime stand-in pending an approved antagonist sheet. Three-hit fight with charge and projectile patterns, visible telegraphs and recovery windows.
-- **Finale:** cake, shakes, confetti, exact HAPPY BIRTHDAY, MAVERICK! text and replay.
+- **Finale:** cake, shakes, confetti, exact HAPPY BIRTHDAY, MAVERICK! text and replay. The ending recognizes all four earned cheer bells as RALLY LEGEND; best-bell progress persists alongside the existing best Shake count.
 
 The original four-stage campaign plan is superseded by the user's October 11 complete-birthday-game directive. Prior documents are retained in `docs/level1/` as historical design artifacts.
 
@@ -119,3 +119,7 @@ The source-grounded scene-art replacement and its limited approval boundaries ar
 ### Playable rally expansion (2026-10-12)
 
 The timed GO IRISH chant still opens every original banner on its 5.6s cycle (2.9s active). Press **C** or touch **CHEER** to deliberately activate a short, 2.2s pulse (3.7s near a Drum Beacon), with a visible cooldown, local ring/tune, readable countdown and reduced-motion static feedback. Four physically traversable optional rally bells unlock genuine SHA-verified source-art Shamrock Shake gameplay rewards. Schema-1 checkpoint saves remain compatible and now preserve lit rally relays. See [Cheer rally expansion report](docs/CHEER_RALLY_EXPANSION_20261012.md). These routes expand **playable elevation/content**, not the existing world-width or the original 23 Dome steps.
+
+### OMNI rally and cheer follow-through (2026-10-12)
+
+Four readable, non-colliding signs introduce the optional high road before the timed bridges. Context-aware directions identify nearby unlit Canopy, Parade, Gallery and Cornice bells, and when to cheer; a reduced-motion-safe, keyboard-readable objective is displayed outside the canvas. An organically controlled default-difficulty regression now proves the path from the real spawn to the first elevated bell, the cheer action, and physical Shake collection with hazards active and without QA warps. A nearby cheer during the Fox's recovery adds a bounded 0.48-second tactical opening, but cannot damage the boss or cancel his windup. Victory displays earned bell progress, with monotonic persisted `bestRallies` compatible with old saves. The original Canvas runtime, 23 Dome steps, controls and user-supplied art are unchanged. See [OMNI development report](docs/OMNI_FOLLOWTHROUGH_20261012.md).

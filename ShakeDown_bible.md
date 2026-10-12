@@ -218,3 +218,38 @@ The full Asset Director source registry remains 194/194, one playable-context ro
 - Verified: `npm run validate` 47/47; `tests/browser/world-scenes.spec.mjs` 2/2 desktop/mobile; `curated.spec.mjs` 8/8; `route.spec.mjs` 3 desktop completions and 3 intentional mobile skips; `screen-art/accessibility/boot` 12 passes and 2 intentional skips. Test runtime = locally served BigMac Brave/Playwright, not physical phone/hosted site. Diagnostic gameplay screenshots: `docs/qa/art-repair-{quad,ascent,summit}.png`. Exact GitHub CI and Pages are **pending** in this checkpoint.
 - Not resolved: full original `ShakeDown_Cinnamon_Art_PreHandoff.zip` binary (SHA-256 `e6830e8544c0060dad92750a354832ec781d613b8a0be19a062170e4ebebe9eb`) is not in this checkout or available as a raw restored package. Preserve the original source requirement; no visual-fidelity signoff until it can be compared and approved.
 - See `docs/ART_RUNTIME_REPAIR_20261012.md` for the evidence and limitations.
+
+## 2026-10-12 — OMNI guided rally, cheer-counterplay and recognition
+
+### Repository state
+- Starting source: `westkitty/ShakeDown` `main@e1f98f35c092159018e05604141d818ba5a356a6`, clean BigMac clone; MacBook has independent synchronized checkout and three untouched untracked asset-planning files.
+- The user said OMNI as a continuation of Shakedown improvement. Original Canvas/physics/animation/audio/persistence/art authority stays intact; no rewrite, SVG import or new package.
+
+### Goals, bounded design and comparative precedents
+- Accepted three groups: (1) legible wayfinding for 25 previously built optional rally platforms, (2) one narrowly timed Fox-cheer interaction without health change, (3) real in-game end-screen/high-score reward for four optional rally bells.
+- External scout favored clear mechanic teaching and nonmandatory timed bonuses: Yacht Club's authored checkpoint lessons, Celeste's checkpoint-icon visibility, and Microsoft XAG 116 timing alternatives. These are advisory; gameplay facts come from Shakedown source.
+- Rejected speculative renderer replacement, extra uncited art generation, new level-width expansion, migrating localStorage and new audio dependencies. Performance changes require a measured bottleneck.
+
+### Baseline and implementation
+- Baseline `npm ci` and `npm run validate` 56/56 PASS, `npm run release:preflight` PASS.
+- Four distinct non-colliding rally signs in South Quad/Gallery/Cornice areas, a read-only dynamic rally guidance module, responsive textual cue and recovery-window prompt.
+- At Fox recovery, nearby cheer adds at most 0.48s (2.1s cap), using the original 6.4s cooldown, no boss damage/cancel, with WebAudio and VFX event cues.
+- Victory now reads actual relay count and sets RALLY LEGEND only on 4/4. Existing schema-1 saves gain optional monotonic bestRallies; earlier settings/records still work.
+
+### Validation and evidence
+- Local focused Node proof for signs, guidance, cooldown, Fox-state restrictions passed.
+- Continuous no-warp default-difficulty simulation traversed from normal spawn through quad-training-1 and rally-quad-01/02/03, rung the actual Canopy Bell and physically collected its SHA-backed Shake with enemies/cannons active.
+- Desktop/mobile browser direct tests: 7 PASS, 1 intentional touch-only desktop skip; includes real keyboard/touch interaction, mobile layout and QA-positioned four-bell ending.
+- Further full browser suite and remote exact-commit GitHub checks must be evaluated separately before delivery claims.
+
+### Important limitations
+- No physical device/speaker test or human-paced complete playthrough; fixture-assisted four-bell setup is not a natural four-bell route proof.
+- Earlier Cinnamon run_03 crop defect persists. Provisional generated art is not automatically approved. No existing checkpoint IDs, 23 Dome steps or Fox three-hit win are deleted.
+- Implementation notes: `docs/OMNI_FOLLOWTHROUGH_20261012.md`; screenshots `docs/qa/omni-rally-*.jpg`.
+
+### Git delivery
+- This is an append-only source-bible checkpoint before final release; actual commit, GitHub CI, main merge, MacBook sync and Pages publication require independent receipts.
+
+### OMNI final local QA note
+- 61/61 Node PASS; release preflight PASS. Full local Brave browser matrix 111 PASS/10 deliberate SKIP/1 FAIL (mobile focus at initial Start); that focus test then passed 5 of 5 targeted repeated reruns, no speculative fix. Pending exact commit CI.
+- Matched four-viewport render p95 ms before [1.7,1.5,1.6,1.1] and after [1.4,1.9,1.3,1.4]. Headless remote rAF ~200ms: cannot infer physical-device FPS or measurable performance uplift. No browser JS errors.

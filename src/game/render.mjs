@@ -304,6 +304,26 @@ function checkpoint(ctx,c,on,t,art={}){
  if(on){ctx.fillStyle='#f2ffa5';ctx.beginPath();ctx.arc(2,-80,5+Math.sin(t*6)*2,0,TAU);ctx.fill()}
  ctx.restore()}
 
+
+function rallyTrailSign(ctx,sign,t,reducedMotion){
+ ctx.save();ctx.translate(sign.x,sign.footY);
+ // A physical-looking signpost that never changes collision state.
+ ctx.fillStyle='#362d34';ctx.fillRect(-5,-86,10,87);
+ ctx.fillStyle='#e2bc68';rounded(ctx,-83,-144,166,62,8);ctx.fill();
+ ctx.fillStyle='#152d49';rounded(ctx,-78,-139,156,51,5);ctx.fill();
+ ctx.lineWidth=3;ctx.strokeStyle='#fff0b9';ctx.stroke();
+ ctx.textAlign='center';ctx.fillStyle='#fff3ca';
+ ctx.font='900 16px system-ui';ctx.fillText(sign.label,0,-117);
+ ctx.fillStyle='#96e9bc';ctx.font='900 12px system-ui';
+ ctx.fillText(sign.detail,0,-97);
+ if(!reducedMotion){
+  const bob=Math.sin(t*2+sign.x)*2;
+  ctx.fillStyle='#e6d277';ctx.beginPath();
+  ctx.moveTo(0,-154+bob);ctx.lineTo(-8,-161+bob);
+  ctx.lineTo(8,-161+bob);ctx.closePath();ctx.fill();
+ }
+ ctx.restore();
+}
 function rallyBell(ctx,post,t,reducedMotion){
  const x=post.x,y=post.footY,bright=post.lit;
  ctx.save();ctx.translate(x,y);ctx.lineJoin='round';
@@ -358,9 +378,21 @@ function decoration(ctx,s,t,art={}){const cam=s.camera;ctx.save();ctx.translate(
  }
  for(const h of s.level.hazards){if(Math.abs(h.x-cam.x)<1100&&Math.abs(h.y-cam.y)<700)cannon(ctx,h,t,art,h.quietUntil>s.elapsed)}
  for(const b of s.level.beacons){if(Math.abs(b.x-cam.x)<1000&&Math.abs(b.footY-cam.y)<700)beacon(ctx,b,s.activePulse,t,art)}
+ for(const sign of s.level.rallySigns){
+  if(Math.abs(sign.x-cam.x)>1080||Math.abs(sign.footY-cam.y)>750)continue;
+  rallyTrailSign(ctx,sign,t,s.settings.reducedMotion);
+ }
  for(const post of s.level.rallyPosts){
   if(Math.abs(post.x-cam.x)>1070||Math.abs(post.footY-cam.y)>700)continue;
   rallyBell(ctx,post,t,s.settings.reducedMotion);
+  if(post.lit)continue;
+  const p=s.player,cx=p.x+p.w/2,cy=p.y+p.h/2;
+  if(Math.abs(post.x-cx)<145&&Math.abs(post.footY-35-cy)<115){
+   ctx.font='900 17px system-ui';ctx.textAlign='center';
+   const message=s.cheerCooldown<=.15?'C / CHEER!':'CHEER RECHARGING';
+   ctx.strokeStyle='#12324c';ctx.lineWidth=5;ctx.strokeText(message,post.x,post.footY-119);
+   ctx.fillStyle='#fff1b0';ctx.fillText(message,post.x,post.footY-119);
+  }
  }
  for(const c of s.level.checkpoints){if(Math.abs(c.x-cam.x)<1100&&Math.abs(c.footY-cam.y)<700)checkpoint(ctx,c,s.checkpoint>=s.level.checkpoints.indexOf(c),t,art)}
  for(const q of s.level.shakes){if(q.taken||q.locked||Math.abs(q.x-cam.x)>1030||Math.abs(q.y-cam.y)>650)continue;
@@ -390,8 +422,8 @@ function player(ctx,s,sprites,art={}){const p=s.player;let state='idle';
 function events(ctx,s,t,art={}){ctx.save();ctx.translate(-s.camera.x,-s.camera.y);
  for(const e of s.events){const age=t-e.t;if(age<0||age>1.15)continue;
   const alpha=1-age/1.15;ctx.globalAlpha=alpha;
-  const n=e.type==='collect'?9:e.type==='bossHit'||e.type==='rally'?17:4;
-  if(!['collect','checkpoint','bossHit','swish','jump','doubleJump','hurt','victory','beacon','cheer','rally'].includes(e.type))continue;
+  const n=e.type==='collect'?9:['bossHit','bossCheer','rally'].includes(e.type)?17:4;
+  if(!['collect','checkpoint','bossHit','bossCheer','swish','jump','doubleJump','hurt','victory','beacon','cheer','rally'].includes(e.type))continue;
   const colors=e.type==='bossHit'?['#e7d767','#ffecc0','#f07b72']:e.type==='hurt'?['#f06672','#fbbb7f']:['#f7dd7d','#8aeeae','#f5fbec'];
   const fx=({collect:'VF-04',beacon:'VF-03',checkpoint:'VF-08'})[e.type];
   if(fx&&art[fx]){ctx.save();ctx.globalAlpha=alpha;

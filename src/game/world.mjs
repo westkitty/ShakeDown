@@ -76,10 +76,18 @@ export function buildLevel(){
  const beacons=[{id:'beacon-south',x:1870,footY:442},{id:'beacon-parade',x:3145,footY:442},
   {id:'beacon-dome',x:5040,footY:390-8*68},{id:'beacon-gallery',x:6210,footY:390-15*68}];
  const rallyPosts=[
-  {id:'canopy-bell',x:1080,footY:247,reward:'rally-shake-canopy',lit:false},
-  {id:'parade-bell',x:3030,footY:255,reward:'rally-shake-parade',lit:false},
-  {id:'gallery-bell',x:5080,footY:-502,reward:'rally-shake-gallery',lit:false},
-  {id:'cornice-bell',x:6165,footY:-968,reward:'rally-shake-cornice',lit:false}
+  {id:'canopy-bell',label:'Canopy Bell',x:1080,footY:247,reward:'rally-shake-canopy',lit:false},
+  {id:'parade-bell',label:'Parade Bell',x:3030,footY:255,reward:'rally-shake-parade',lit:false},
+  {id:'gallery-bell',label:'Gallery Bell',x:5080,footY:-502,reward:'rally-shake-gallery',lit:false},
+  {id:'cornice-bell',label:'Cornice Bell',x:6165,footY:-968,reward:'rally-shake-cornice',lit:false}
+ ];
+ // Signposts teach the optional high road in safe places before its timed
+ // bridges and do not participate in collision or checkpoint authority.
+ const rallySigns=[
+  {id:'rally-entry',x:474,footY:365,label:'PEP RALLY',detail:'HIGH ROAD  ↑'},
+  {id:'rally-parade',x:2864,footY:442,label:'PARADE BELL',detail:'UP & CHEER  ↑'},
+  {id:'rally-gallery',x:5465,footY:-358,label:'BELL GALLERY',detail:'SECRET  ↖'},
+  {id:'rally-cornice',x:6560,footY:-834,label:'SKYLINE CORNICE',detail:'SECRET  ↖'}
  ];
  const shakes=[];
  function shake(id,x,y,special=false){shakes.push({id,x,y,special,taken:false});}
@@ -114,7 +122,7 @@ export function buildLevel(){
   {id:'confetti-dome',kind:'cannon',x:5775,y:390-13*68-44,w:46,h:44,period:4.2,offset:0.9},
   {id:'confetti-rally',kind:'cannon',x:2440,y:220,w:46,h:43,period:4.0,offset:1.2},
  ];
- return {platforms,checkpoints,beacons,rallyPosts,shakes,enemies,hazards};
+ return {platforms,checkpoints,beacons,rallyPosts,rallySigns,shakes,enemies,hazards};
 }
 
 export const CHANT_CYCLE=5.6;

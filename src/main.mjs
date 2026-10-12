@@ -1,5 +1,6 @@
 import {newGame,startGame,pauseGame,resetToCheckpoint,update,DT,snapshot} from './game/engine.mjs';
 import {VIEW,WORLD} from './game/world.mjs';
+import {rallyGuidance} from './game/rally-guidance.mjs';
 import {render} from './game/render.mjs';
 import {AudioBox} from './game/audio.mjs';
 import {loadApprovedArt} from './game/production-assets.mjs';
@@ -91,6 +92,7 @@ function save(){
  saved={schema:1,settings:{...state.settings},
   completed:saved.completed===true||current.completed===true||state.mode==='victory',
   bestShakes:Math.max(safeScore(current.bestShakes),safeScore(saved.bestShakes),state.shakeCount),
+  bestRallies:Math.max(safeScore(current.bestRallies),safeScore(saved.bestRallies),state.rallyCount),
   progress:state.mode==='victory'?null:
    state.mode==='title'?currentProgress:(saved.progress||null)};
  try{localStorage.setItem(saveKey,JSON.stringify(saved))}
@@ -102,6 +104,7 @@ window.addEventListener('storage',event=>{
  const current=readSave();
  saved.completed=saved.completed===true||current.completed===true;
  saved.bestShakes=Math.max(safeScore(saved.bestShakes),safeScore(current.bestShakes));
+ saved.bestRallies=Math.max(safeScore(saved.bestRallies),safeScore(current.bestRallies));
  if(state.mode==='title'){
   saved.progress=validCheckpointRecord(current.progress,state.level)?current.progress:null;
   showContinue();
@@ -123,7 +126,11 @@ function showMode(){
  if(overlay)$(overlay).classList.remove('hidden');
  $('pause-btn').disabled=state.mode!=='playing';
  if(state.mode==='dead')$('dead-reason').textContent=state.lastDamage||'The Fox got the better of Cinnamon. For now.';
- if(state.mode==='victory'){$('victory-score').textContent=`${state.shakeCount} Shamrock Shakes found • ${state.secretCount} golden secrets discovered`;save()}
+ if(state.mode==='victory'){
+  $('victory-score').textContent=`${state.shakeCount} Shamrock Shakes found · ${state.secretCount} golden secrets · ${state.rallyCount}/${state.level.rallyPosts.length} rally bells`;
+  $('victory-rally').textContent=state.rallyCount===state.level.rallyPosts.length?'RALLY LEGEND · THE WHOLE CAMPUS CHEERED!':'BONUS CHALLENGE · Ring every bell on your next run.';
+  save();
+ }
  const defaultFocus={title:'start-btn',pause:'resume-btn',dead:'retry-btn',victory:'replay-btn'}[state.mode];
  if(defaultFocus)$(defaultFocus).focus({preventScroll:true});
  else if(state.mode==='playing')canvas.focus({preventScroll:true});
@@ -325,6 +332,9 @@ function hud(){const p=state.player;
    :'Cheer: activate banner bridges and discover rally relays');
  }
  $('cheer-progress').textContent='RELAYS '+state.rallyCount+'/'+state.level.rallyPosts.length;
+ const hint=rallyGuidance(state),guide=$('rally-guide');
+ guide.hidden=!hint;guide.textContent=hint?.text||'';
+ guide.dataset.kind=hint?.kind||'';
  const next=state.status;if(next!==lastStatus){$('status-text').textContent=next;lastStatus=next}
 }
 let accumulator=0,lastStamp=0,lastHUD=0;

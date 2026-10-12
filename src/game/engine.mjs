@@ -58,9 +58,9 @@ function strike(s){const p=s.player;if(p.attackCooldown>0)return;
  }
 }
 
-// Player-authored cheer: opens pulse bridges briefly from anywhere, or extends
-// their window when performed near a physical Drum Beacon. Rally bells reward
-// actual exploration. No cheer action can hit the Fox or fabricate a shake.
+// Player-authored cheer opens pulse bridges and rewards real exploration.
+// During the Fox's recovery it can briefly extend vulnerability, but never
+// deals direct damage or replaces the required three tail-swish hits.
 function triggerCheer(s){
  if(s.cheerCooldown>0||s.mode!=='playing')return false;
  const p=s.player,cx=p.x+p.w/2,cy=p.y+p.h/2;
@@ -92,7 +92,17 @@ function triggerCheer(s){
   if(prize)prize.locked=false;
   say(s,'rally',post.id);
  }
- s.status=newlyLit.length
+ const boss=s.boss;
+ const foxClose=boss.triggered&&boss.hp>0&&boss.mode==='rest'&&
+  Math.abs(boss.x+boss.w/2-cx)<205&&Math.abs(boss.y+boss.h/2-cy)<145;
+ if(foxClose){
+  // One non-stacking tactical reward per actual cheer; a 6.4s cooldown
+  // prevents chaining a permanent Fox stun. No health is altered here.
+  boss.timer=Math.min(2.1,boss.timer+.48);
+  say(s,'bossCheer','recovery-extended');
+ }
+ s.status=foxClose?'FOX DISTRACTED! TAIL SWISH WHILE OPEN!'
+  :newlyLit.length
   ?'CHEER RELAY '+s.rallyCount+'/'+s.level.rallyPosts.length+' · BONUS SHAKE UNLOCKED'
   :nearBeacon?'GO IRISH! DRUM-AMPLIFIED CHEER!'
   :stunned?'GO IRISH! CROWD CHEER STUNNED THE BOTS!'
