@@ -68,6 +68,36 @@ export function buildLevel(){
    x,y,175,20,kind,kind==='banner'?{pulse:true}:{}
   )));
  }
+ // Authored optional encounter routes: never replace the 23-step main ascent.
+ // The Smudge route descends from the first bridge and rejoins the South Quad.
+ const smudgePlatforms=[
+  ['secret-smudge-01',795,510,192,19,'stone'],
+  ['secret-smudge-02',935,572,160,19,'wood'],
+  ['secret-smudge-03',1080,637,140,19,'stone'],
+  ['secret-smudge-sign',1196,705,185,20,'wood'],
+  ['secret-smudge-alcove',1365,705,580,35,'stone'],
+  ['secret-smudge-return-01',1890,646,170,19,'wood'],
+  ['secret-smudge-return-02',2080,574,145,19,'stone'],
+  ['secret-smudge-return-03',2200,504,70,19,'wood']
+ ];
+ smudgePlatforms.forEach(([id,x,y,w,h,kind])=>platforms.push(platform(id,x,y,w,h,kind)));
+ // Ten rising, leftward steps lead from dome step 21 to Dexter's isolated crest.
+ // Safety ledges are solid even while adjacent moving/pulse steps change state.
+ const dexterSteps=[
+  [6920,-1152,'stone'],[6779,-1266,'wood'],[6568,-1379,'stone'],
+  [6357,-1492,'moving'],[6146,-1605,'stone'],[5935,-1718,'wood'],
+  [5724,-1831,'stone'],[5513,-1944,'banner'],[5302,-2057,'stone'],
+  [5091,-2170,'wood']
+ ];
+ dexterSteps.forEach(([x,y,kind],i)=>platforms.push(platform(
+  'secret-dexter-'+String(i+1).padStart(2,'0'),
+  x,y,198,20,kind,
+  kind==='moving'?{movement:'horizontal',amplitude:12,period:4.1}:
+   kind==='banner'?{pulse:true}:{}
+ )));
+ platforms.push(platform('secret-dexter-safety-04',6340,-1432,150,17,'wood'));
+ platforms.push(platform('secret-dexter-safety-08',5500,-1884,150,17,'wood'));
+ platforms.push(platform('secret-dexter-summit',4750,-2185,330,40,'stone'));
  platforms.push(platform('summit-arena',7335,DOME_ARENA_Y,1000,55,'gold'));
  const checkpoint=(id,x,footY)=>({id,x,footY,active:false});
  const checkpoints=[checkpoint('Welcome Lawn',60,442),checkpoint('South Quad',1690,442),
@@ -114,7 +144,13 @@ export function buildLevel(){
   {id:'confetti-dome',kind:'cannon',x:5775,y:390-13*68-44,w:46,h:44,period:4.2,offset:0.9},
   {id:'confetti-rally',kind:'cannon',x:2440,y:220,w:46,h:43,period:4.0,offset:1.2},
  ];
- return {platforms,checkpoints,beacons,rallyPosts,shakes,enemies,hazards};
+ const secretNpcs=[
+  {id:'smudge',title:'Oh my God, I got to see Smudge',x:1655,footY:705,radius:260,
+   dialogue:'Oh my God, it\'s Smudge.'},
+  {id:'dexter',title:'Unimpressed Stinkweasel',x:4910,footY:-2185,radius:240,
+   dialogue:'Oh, so you found me. Big deal. I\'m not impressed.'}
+ ];
+ return {platforms,checkpoints,beacons,rallyPosts,shakes,enemies,hazards,secretNpcs};
 }
 
 export const CHANT_CYCLE=5.6;

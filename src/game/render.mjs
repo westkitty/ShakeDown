@@ -1,5 +1,6 @@
 import {VIEW,WORLD,DOME_ARENA_Y,visibleWorld,pulseState} from './world.mjs';
 import {movingPosition} from './engine.mjs';
+import {paintSecretScenery,paintSecretActors,paintSecretDialogue} from './secret-actors.mjs';
 import {frameForState} from './animation.mjs';
 import {paintArtOverrides} from './art-scene.mjs';
 const TAU=Math.PI*2;
@@ -427,6 +428,7 @@ export function render(ctx,s,sprites,alpha=0,art={},audition={}){
  paintArtOverrides(ctx,s,audition,'backdrop');
  if(!art['DM-BG01']&&!art['DM-BG03']&&!art['DM-BG07'])farCampus(ctx,cam,decorativeTime);
  quad(ctx,cam,decorativeTime,art);mainBuilding(ctx,cam,decorativeTime,art);
+ paintSecretScenery(ctx,s,decorativeTime);
  ctx.save();ctx.translate(-cam.x,-cam.y);
  for(const p of visibleWorld(s.level.platforms,cam.x,cam.y)){
   const pos=movingPosition(p,t),active=!p.pulse||s.activePulse||s.player.onPlatform===p.id;
@@ -449,7 +451,8 @@ export function render(ctx,s,sprites,alpha=0,art={},audition={}){
   drawFox(ctx,fx,440,'escape',decorativeTime,art);drawShake(ctx,fx+84,375,.78,true,art);
   ctx.restore();
  }
- player(ctx,s,sprites,art);cheerWave(ctx,s);if(!s.settings.reducedMotion)events(ctx,s,t,art);
+ paintSecretActors(ctx,s,decorativeTime,art);
+ player(ctx,s,sprites,art);cheerWave(ctx,s);paintSecretDialogue(ctx,s,decorativeTime);if(!s.settings.reducedMotion)events(ctx,s,t,art);
  paintArtOverrides(ctx,s,audition,'actors');
  const inPulse=s.activePulse,chant=pulseState(s.elapsed,s.pulseOverride);ctx.save();ctx.textAlign='center';ctx.font='900 26px system-ui';
  if(s.mode==='playing'&&!s.boss.triggered){

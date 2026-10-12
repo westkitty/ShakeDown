@@ -1,0 +1,40 @@
+{
+  "schema": 1,
+  "subject": "dexter",
+  "source": {
+    "path": "assets/sprites/dexter/source_sheet.png",
+    "width": 960,
+    "height": 640,
+    "sha256": "d99197ced4582a99890c09c0fc8ab68d7da96e2a1bdd2a8098dbea349673e236"
+  },
+  "frames": {
+    "idle_00": {
+      "file": "assets/sprites/dexter/idle_00.png",
+      "width": 280,
+      "height": 200,
+      "sha256": "b258c23574f115b26ada58cc0c4de8b452aa9fa7b06307631f4fce59efa8966b",
+      "duration_ms": 200
+    },
+    "idle_01": {
+      "file": "assets/sprites/dexter/idle_01.png",
+      "width": 280,
+      "height": 200,
+      "sha256": "de907929b8469263b926e091668c8b367af035f351187223cdc498615a230521",
+      "duration_ms": 200
+    },
+    "idle_02": {
+      "file": "assets/sprites/dexter/idle_02.png",
+      "width": 280,
+      "height": 200,
+      "sha256": "b258c23574f115b26ada58cc0c4de8b452aa9fa7b06307631f4fce59efa8966b",
+      "duration_ms": 200
+    },
+    "idle_03": {
+      "file": "assets/sprites/dexter/idle_03.png",
+      "width": 280,
+      "height": 200,
+      "sha256": "de907929b8469263b926e091668c8b367af035f351187223cdc498615a230521",
+      "duration_ms": 200
+    }
+  }
+}
