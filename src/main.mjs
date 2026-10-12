@@ -193,7 +193,7 @@ window.addEventListener('keyup',e=>{
  keyActs.delete(e.code);updateHeld(act);e.preventDefault();
 });
 window.addEventListener('blur',()=>{clearInputs();if(state.mode==='playing')togglePause()});
-window.addEventListener('pagehide',()=>{audio.dispose();director.dispose()});
+window.addEventListener('pagehide',event=>{audio.dispose();if(!event.persisted)director.dispose()});
 document.addEventListener('visibilitychange',()=>{if(document.hidden){clearInputs();if(state.mode==='playing')togglePause()}lastStamp=0;accumulator=0});
 for(const button of document.querySelectorAll('.touch')){
  const action=button.dataset.action;
