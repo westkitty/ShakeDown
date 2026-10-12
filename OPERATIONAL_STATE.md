@@ -326,3 +326,12 @@ Final local candidate before Git delivery: npm run validate **31/31 PASS**, rele
 - Zero 404 network errors, zero SVG assets or references, zero uncaught JavaScript errors.
 - Eight live visual captures archived under brain screenshots directory.
 
+
+## 2026-10-12 — Provisional world-art runtime repair (branch: fix/production-art-world-20261012)
+
+- Baseline `7103b7e987678d0c376ce04b5a6d5a9a2a03b4f2`; retained Canvas 2D engine, all level coordinates, checkpoint/physics/boss timing, sound, original 26 physically extracted Cinnamon frames and 12 supplied screen PNGs.
+- Explicit 35-ID alternate shortlist added **only to the provisional curated scene path**, alongside the unchanged 28 preview images. Each image is source/path/SHA-256/dimension checked before decoding. All blocked/revise entries stay excluded; `assets/runtime/manifest.json` stays empty, with zero final owner approvals claimed.
+- Live Canvas game now draws Notre Dame campus/dome/summit backgrounds, real masonry windows, columns, dome/statue/railings, outdoor furniture, banner bridges, moving decks, drums/checkpoints, event effects and birthday scene decorations. Original `?art=classic` is unaffected.
+- Verified: `npm run validate` 47/47; `tests/browser/world-scenes.spec.mjs` 2/2 desktop/mobile; `curated.spec.mjs` 8/8; `route.spec.mjs` 3 desktop completions and 3 intentional mobile skips; `screen-art/accessibility/boot` 12 passes and 2 intentional skips. Test runtime = locally served BigMac Brave/Playwright, not physical phone/hosted site. Diagnostic gameplay screenshots: `docs/qa/art-repair-{quad,ascent,summit}.png`. Exact GitHub CI and Pages are **pending** in this checkpoint.
+- Not resolved: full original `ShakeDown_Cinnamon_Art_PreHandoff.zip` binary (SHA-256 `e6830e8544c0060dad92750a354832ec781d613b8a0be19a062170e4ebebe9eb`) is not in this checkout or available as a raw restored package. Preserve the original source requirement; no visual-fidelity signoff until it can be compared and approved.
+- See `docs/ART_RUNTIME_REPAIR_20261012.md` for the evidence and limitations.

@@ -3,7 +3,7 @@ import {VIEW,WORLD} from './game/world.mjs';
 import {render} from './game/render.mjs';
 import {AudioBox} from './game/audio.mjs';
 import {loadApprovedArt} from './game/production-assets.mjs';
-import {loadCuratedPreview} from './game/curated-assets.mjs';
+import {loadCuratedPreview,loadWorldSceneArt} from './game/curated-assets.mjs';
 import {ArtDirector} from './game/art-director.mjs';
 import {initScreenArt} from './game/screen-art.mjs';
 import {checkpointRecord,validCheckpointRecord,restoreCheckpoint} from './game/progress.mjs';
@@ -33,7 +33,8 @@ function showContinue(){
 }
 const audio=new AudioBox();audio.mute(state.settings.mute,{resume:false});
 let productionArt={},productionLoaded=0,productionDeclared=0,productionErrors=[];
-let curatedArt={},renderArt=productionArt,curatedLoaded=0,curatedSelected=0,curatedErrors=[];
+let curatedArt={},worldArt={},renderArt=productionArt,curatedLoaded=0,curatedSelected=0,curatedErrors=[];
+let worldLoaded=0,worldSelected=0,worldErrors=[];
 // Only source-verified, structurally eligible curated previews are used by default.
 // This is display authorization, never a final human-art approval.
 let curatedEnabled=new URLSearchParams(location.search).get('art')!=='classic';
@@ -41,7 +42,7 @@ let auditionRoles={};
 const director=new ArtDirector({onApply:roles=>{auditionRoles=roles;}});
 function showDirector(){if(state.mode==='playing')togglePause();director.open().catch(error=>console.error('Art director unavailable',error));}
 let curatorLoading=null,curatorStatus='';
-function refreshArt(){renderArt=curatedEnabled?{...curatedArt,...productionArt}:productionArt}
+function refreshArt(){renderArt=curatedEnabled?{...curatedArt,...worldArt,...productionArt}:productionArt}
 function updateCuratorControls(){
  $('art-preview-title').checked=curatedEnabled;$('art-preview-pause').checked=curatedEnabled;
  document.body.classList.toggle('curator-active',curatedEnabled);
@@ -50,15 +51,23 @@ async function setCuratedPreview(enabled){
  curatedEnabled=Boolean(enabled);
  updateCuratorControls();refreshArt();
  curatorStatus=curatedEnabled
-  ?(curatedLoaded?curatedLoaded+' provisional art pieces previewing (not activated)':'Loading provisional curator artwork…')
+  ?(curatedLoaded?curatedLoaded+' provisional art pieces previewing (not approved)':'Loading provisional curator artwork…')
   :'';
  showAssetStatus();
  if(!curatedEnabled||curatorLoading||curatedLoaded)return;
- curatorLoading=loadCuratedPreview().then(({images,errors,selected})=>{
+ curatorLoading=loadCuratedPreview().then(async ({images,errors,selected})=>{
   curatedArt=images;curatedLoaded=Object.keys(images).length;
   curatedSelected=selected;curatedErrors=errors;
   refreshArt();
-  curatorStatus=curatedEnabled?curatedLoaded+' of '+selected+' curated preview pieces loaded (not approved)':'';
+  curatorStatus=curatedEnabled?curatedLoaded+' of '+selected+' scene previews loaded (not approved) · preparing architecture…':'';
+  showAssetStatus();
+  const environment=await loadWorldSceneArt();
+  worldArt=environment.images;worldLoaded=Object.keys(worldArt).length;
+  worldSelected=environment.selected;worldErrors=environment.errors;
+  refreshArt();
+  curatorStatus=curatedEnabled
+   ?curatedLoaded+' character/game previews + '+worldLoaded+' extra scene assets (not approved; '+(curatedErrors.length+worldErrors.length)+' errors; all provisional)'
+   :'';
   showAssetStatus();
  }).catch(error=>{
   curatedErrors.push('preview: '+error.message);
@@ -356,7 +365,8 @@ if(previewId){productionStatus='LOCAL ART PREVIEW ONLY: '+previewId+' (NOT produ
   showAssetStatus();
  }).catch(error=>{productionErrors=['loader: '+error.message];showAssetStatus()});
  showMode();requestAnimationFrame(animate);
-window.__SHAKEDOWN_QA={snapshot:()=>snapshot(state),metrics,audio:()=>audio.diagnostics(),artDirector:()=>director.diagnostics(),assets:()=>({loaded:assetCount,failed:[...assetErrors],productionLoaded,productionDeclared,productionErrors:[...productionErrors],curatedEnabled,curatedLoaded,curatedSelected,curatedErrors:[...curatedErrors]}),
+window.__SHAKEDOWN_QA={snapshot:()=>snapshot(state),metrics,audio:()=>audio.diagnostics(),artDirector:()=>director.diagnostics(),assets:()=>({loaded:assetCount,failed:[...assetErrors],productionLoaded,productionDeclared,productionErrors:[...productionErrors],curatedEnabled,curatedLoaded,curatedSelected,curatedErrors:[...curatedErrors],
+ worldLoaded,worldSelected,worldErrors:[...worldErrors]}),
  // Developer-only deterministic test aids; excluded from normal gameplay and production paths.
  ...(new URLSearchParams(location.search).has('qa')?{
   warp:(x,y)=>{state.player.x=x;state.player.y=y;state.player.prevX=x;state.player.prevY=y;state.player.vx=0;state.player.vy=0;state.camera.x=Math.max(0,x-450);state.camera.y=Math.min(0,y-260);},
