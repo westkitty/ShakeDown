@@ -133,11 +133,17 @@ export class AudioBox {
   try{
    const attempt=music.play();
    if(attempt?.then){
-    this.musicPlayPending=music;
+    // play() may still be pending when Pause, mute or a level transition
+    // deliberately interrupts it. Only the current attempt may mark the
+    // currently selected recording as genuinely failed.
+    const pending={music,track:this.musicTrack};
+    this.musicPlayPending=pending;
     attempt.catch(error=>{
+     if(this.musicPlayPending!==pending||this.musicElement!==music)return;
+     if(error?.name==='AbortError')return;
      if(error?.name==='NotAllowedError')this.musicBlocked=true;
-     else this.failRecorded(this.musicTrack,music);
-    }).finally(()=>{if(this.musicPlayPending===music)this.musicPlayPending=null});
+     else this.failRecorded(pending.track,music);
+    }).finally(()=>{if(this.musicPlayPending===pending)this.musicPlayPending=null});
    }
    return true;
   }catch(error){

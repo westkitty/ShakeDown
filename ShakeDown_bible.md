@@ -194,3 +194,10 @@ The full Asset Director source registry remains 194/194, one playable-context ro
 - Reproduced all 12 exact bytes inside GitHub Actions from the source SHA256 `2634be093b2a42249233962324047d68b80f81e2bb16fda1d5152d62bf7dfc64`; each output's SHA matched its original uploaded counterpart. The updated portable source remains in `scripts/build_uploaded_screens.py` and its reconstruction helper ensures font SHA integrity.
 - Wired clean original start, Game Over, and Victory plates into the semantic title/result overlays while keeping all ten alternative title scenes selectable. Provisional visual approval, no-SVG rule, gameplay mechanics, menu/button focus, and classic art opt-out remain unchanged.
 - Added PNG-byte-equality and dimension regression assertions plus real-browser checks for the title gallery, Game Over retry, and Victory replay. New final CI and live deployment pending.
+
+## 2026-10-12 — recorded-audio pause/resume race repair
+
+- GitHub `main` artwork merge `528a27fc96d5962c4a0b7d90765b10c78306d970` passed the browser workflow with 99 direct passes, 8 intentional skips and one retry-only audio flake. The intermittent assertion was `musicPlaying` false following Pause/Resume on the boss track.
+- Root cause: `HTMLMediaElement.play()` may reject asynchronously with `AbortError` after an intentional `pause()`; the old catch unconditionally marked any rejection except `NotAllowedError` as a broken MP3. A stale rejected promise could thereby blacklist the sole boss track while a new play had already resumed.
+- Change: scope errors to the exact active play attempt and current media element, ignore expected `AbortError` cancellation, retain `NotAllowedError` handling and genuine hard failure quarantine. No MP3 bytes, sound mix, game physics or event semantics change.
+- Deterministic delayed-play unit test simulates pause/rejection/resume before the prior promise settles and verifies no track blacklist, no fresh Audio element and successful replay. Latest CI after merge to be recorded separately.
