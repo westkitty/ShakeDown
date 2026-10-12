@@ -252,3 +252,16 @@ Final local candidate before Git delivery: npm run validate **31/31 PASS**, rele
 **Evidence:** In the local combined BigMac checkout, npm validate **34/34 PASS**, static preflight **238/238 physical runtime files**, classic and curated scripted full routes completed, and desktop/mobile-emulated gallery tests passed. The BigMac connector then went offline; GitHub exact-commit CI and hosted Pages proof are separate. Missing actual mobile device, user artistic acceptance, audio and raw source evidence are not falsely claimed.
 
 **Architecture decision:** Preserve Canvas 2D and original running game, do not convert to a new engine. Two-parent git history is preserved, with only validator and ignore conflicts resolved explicitly. All final art remains candidate-only until individual user approvals.
+
+
+## 2026-10-11 — All 194-image in-game Asset Director (revision 9)
+
+**Explicit user mandate:** Wire in all assets. Authoritative available output: 194 physically generated PNGs (not 194 human-accepted game sprites), original 26 Cinnamon source-derived frames, 21 outstanding audio specifications with no recordings physically delivered. Preserve 220-image contract and authoritative accepted-runtime ledger.
+
+**Implementation:** Added src/game/art-runtime.mjs with twelve role mappings covering all 194 unique source IDs, source SHA and pixel checks, bounded lazy decoded-image cache and corruption fallback. Added src/game/art-director.mjs, a semantic native dialog that exposes all 194 by role, quality verdict and search, renders the exact selected image in an in-game Canvas context, and gives a reversible TRY IN GAME control. Added src/game/art-scene.mjs and five real render phases to project a selected image into its corresponding role without mutating saved gameplay or collision. 170 structurally eligible assets can be applied; 24 alpha-failing sources are always reference-card only. Each Art Jury image has an exact-source link into the runtime audition. The classic and 28-choice curated editions remain intact.
+
+**Governance:** source or alternate does not equal owner approval. No originals, game rules, generated output contracts, runtime approved-image entries or recorded-audio files are deleted/replaced/fabricated. Source artifacts remain physically SHA-bound.
+
+**Verification at implementation checkpoint:** Added complete source-role unit tests and real-browser director/focus/route tests. Exact-commit CI and deployed site interaction still need to run. No tests falsely called passed before execution.
+
+**Open:** physical device and sustained performance, owner visual signoff, 24 transparency corrections, 11 previously recommended artist revisions and 21 undelivered recorded audio outputs.

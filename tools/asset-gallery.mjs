@@ -45,7 +45,8 @@ function card(entry){
   el('p',null,'Original filename: '+entry.sourcePath),
   evidence,
   el('p',null,entry.cropRisk?'Possible edge-touch: inspect for clipping at game scale.':'No crop-edge concern reported by source metadata.'),
-  link('../'+entry.sourcePath,'Open original candidate image ↗'));
+  link('../'+entry.sourcePath,'Open original candidate image ↗'),
+  link('../?art=all&inspect='+encodeURIComponent(entry.id),'AUDITION IN THE ACTUAL GAME ↗'));
  content.append(details);
  const review=el('div','review'),vote=validVote(entry);
  review.append(el('strong',null,'YOUR VERDICT · independent from my pick'));

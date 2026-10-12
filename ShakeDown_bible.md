@@ -166,3 +166,12 @@ The new `?art=curated` switch provides an opt-in Canvas rendering layer using 28
 A 194-entry gallery at `tools/asset-gallery.html` presents independent per-image reasons (28 selected, 131 alternatives, 11 revisions, 24 blocked), source bytes/hashes, compare sets and KEEP/REVISE/REJECT owner judgement with export. This is an art-direction aid rather than a synthetic approval. Original audio generation has not delivered the 21 requested recordings; procedural WebAudio remains the honest working fallback. See docs/ASSET_CURATION_REPORT.md.
 
 Earlier true BigMac localhost candidate tests: Node 34/34 pass, static package inspection 238 files, actual browser UI/gallery/play checks pass, 23-stage assisted/normal/curated scripted gameplay reached victory. Remote builder became temporarily disconnected before final GitHub publication; exact GitHub CI must be rechecked independently.
+
+
+## 2026-10-11 — Full image collection wired, original world preserved
+
+The user requested that all assets be wired, not merely the initial curator picks. Every one of the 194 source-backed generated PNG candidates now has an explicit and testable game Canvas role (12 scene categories) and a source-verified on-demand Asset Director audition pathway. Safe candidates may be applied into the actual running scene context one per role; unsafe nontransparent candidates can only appear as labeled QA references, never as misleading collidable scenery. All 194 originals remain intact for independent review.
+
+The Asset Director is opened from title, Pause, game HUD or an exact source ID from Art Jury. Source SHA/pixel validation, limited decoded cache, role-specific scene drawing, native dialog focus and reversible audition are deliberate architecture requirements. The old 26 source Cinnamon frames, 23-stage physics, Fox timing, checkpoint/saved state, original Canvas game and 28-image curated preview remain unchanged.
+
+21 requested recorded audio files remain undelivered. None of the 194 generated PNGs is automatically promoted to human-approved final artwork. New Node/browser acceptance gates must prove full coverage and no regressions before merge; these claims are pending exact-GitHub-commit verification.
