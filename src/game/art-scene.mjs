@@ -2,6 +2,7 @@
 // These are reversible art-only projections. Hitboxes, saves and boss timing
 // remain exclusively owned by engine/world, never by PNG outlines.
 import {VIEW,visibleWorld} from './world.mjs';
+import {movingPosition} from './engine.mjs';
 const SIZE={scenery:[160,128],mechanism:[120,106],enemy:[65,64],
  pickup:[42,60],cinnamon:[209,139],fox:[130,130],
  bossFx:[170,160],effect:[125,96],interface:[116,90],birthday:[190,165]};
@@ -44,8 +45,11 @@ export function paintArtOverrides(ctx,state,roles,phase){
    const image=roles.terrain.image;
    for(const platform of visible){
     if(platform.h<18)continue;
-    // The source texture cannot create a new collidable ledge.
-    const x=platform.x,y=platform.y,w=platform.w,h=platform.h;
+    // Inactive pulse bridges are not solid, and moving lifts must use the exact
+    // visible geometry computed by the same state-owned motion function.
+    if(platform.pulse&&!state.activePulse&&state.player.onPlatform!==platform.id)continue;
+    const position=movingPosition(platform,state.elapsed);
+    const x=position.x,y=position.y,w=platform.w,h=platform.h;
     ctx.save();ctx.beginPath();ctx.rect(x+2,y+2,w-4,Math.min(h-4,44));ctx.clip();
     for(let tx=x+2;tx<x+w;tx+=32)
      ctx.drawImage(image,tx,y+2,32,32);
