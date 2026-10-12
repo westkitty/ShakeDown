@@ -1,0 +1,43 @@
+name: Reconstruct uploaded screen plates
+on:
+  push:
+    branches:
+      - integrate/raster-art-activation-20261012
+    paths:
+      - scripts/uploaded_screens_source.xz.b64
+      - scripts/reconstruct_uploaded_screens.py
+      - .github/workflows/reconstruct-uploaded-screens.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  screens:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install image renderer
+        run: python -m pip install 'Pillow==11.3.0'
+      - name: Reconstruct all three screen pairs in both sizes
+        run: python scripts/reconstruct_uploaded_screens.py
+      - name: Confirm complete raster-only inventory
+        run: |
+          test "$(find assets/screens -maxdepth 1 -name '*.png' | wc -l)" -eq 12
+          ! find assets/screens -iname '*.svg' | grep -q .
+          git status --short
+      - name: Commit the actual rendered artwork
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/screens scripts/build_uploaded_screens.py
+          if ! git diff --cached --quiet; then
+            git commit -m "Add 12 reproducible PNG screen plates from uploaded artwork"
+            git push origin "HEAD:integrate/raster-art-activation-20261012"
+          fi
