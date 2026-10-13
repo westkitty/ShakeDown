@@ -49,7 +49,7 @@ test('Skip story transitions exactly once into gameplay',async({page})=>{
 });
 
 test('the normal public-facing Start action does not skip narrative cards',async({page})=>{
- await page.goto('./');
+ await page.goto('./?skip-brand=1');
  await page.locator('#start-btn').click();
  await expect(page.locator('#intro-overlay')).toBeVisible();
  await expect(page.locator('#intro-caption')).toContainText('Shamrock Shake in October');

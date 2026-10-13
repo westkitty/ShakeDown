@@ -99,6 +99,36 @@ try{
     missing.push({path:asset.path,error:'Invalid MP4 header'});
   }
  }catch(error){missing.push({path:'assets/intro/manifest.json',error:error.message})}
+ // The user-supplied pretitle ident has a separate byte and container-format
+ // gate; this does not change any gameplay sprite approvals or music contracts.
+ include('assets/branding/manifest.json');
+ try{
+  const brand=JSON.parse(fs.readFileSync(rel('assets/branding/manifest.json'),'utf8'));
+  if(brand.schema!==1||brand.kind!=='pretitle-branding'||
+    brand.runtime?.order!=='pretitle > animated game title > three October Shamrock Shake panels > gameplay')
+   throw Error('branding manifest contract invalid');
+  for(const asset of [brand.video,brand.poster]){
+   if(!asset||!asset.path?.startsWith('assets/branding/')||
+     !/^[a-z0-9_-]+[.](mp4|webp)$/.test(asset.path.slice('assets/branding/'.length))||
+     !/^[0-9a-f]{64}$/.test(asset.sha256))
+    throw Error('unsafe branding asset path or digest');
+   include(asset.path);
+   const actual=entries.get(asset.path);
+   if(!actual||actual.sha256!==asset.sha256||actual.bytes!==asset.bytes)
+    missing.push({path:asset.path,error:'Branding byte count or SHA-256 mismatch'});
+   if(!actual)continue;
+   const data=fs.readFileSync(rel(asset.path));
+   if(asset.path.endsWith('.mp4')&&data.toString('ascii',4,8)!=='ftyp')
+    missing.push({path:asset.path,error:'Invalid branding MP4 header'});
+   if(asset.path.endsWith('.webp')&&
+     !(data.toString('ascii',0,4)==='RIFF'&&data.toString('ascii',8,12)==='WEBP'))
+    missing.push({path:asset.path,error:'Invalid branding WebP header'});
+  }
+  if(brand.video?.width!==1280||brand.video?.height!==720||
+     !(brand.video?.durationSeconds>=7.9&&brand.video?.durationSeconds<=8.2)||
+     brand.runtime?.autoplayMuted!==true||brand.runtime?.soundRequiresGesture!==true)
+   missing.push({path:'assets/branding/manifest.json',error:'Branding timing or autoplay contract invalid'});
+ }catch(error){missing.push({path:'assets/branding/manifest.json',error:error.message})}
  traceModule('src/main.mjs');
  // The optional curated demo must ship all physical, source-hash-verified PNGs.
  for(const f of ['tools/asset-gallery.html','tools/asset-gallery.css',
