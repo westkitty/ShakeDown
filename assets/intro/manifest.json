@@ -33,6 +33,12 @@
       "path": "assets/intro/cinnamon-title.mp4",
       "sha256": "875906e78193a3a9c4ffa7f4e5ca5a9cb0a1b8a712e4058193591d897df9e86e",
       "alpha": false
+    },
+    {
+      "path": "assets/intro/cinnamon-title-poster.webp",
+      "sha256": "5af3ecd52ebccf640365bf3b15f0400ce4d119b3e0fccc4ad719efc24f867b40",
+      "alpha": true,
+      "still": true
     }
   ],
   "provenance": "Approved narrative correction: Shamrock Shake is rare because it is October; art remains distinct from the P019 approval ledger."
