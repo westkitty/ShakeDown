@@ -546,3 +546,100 @@ body.brand-playing{overflow:hidden}
 @media(prefers-reduced-motion:reduce){
  .dialog button.primary,.dialog button.secondary,.touch{transition:none}
 }
+
+/* 2026-10-13: real full-bleed world projection + thumb-first controller.
+   No striped matte, fake enlarged screenshot, or stretched character sprites. */
+.touch-left-cluster{display:flex;flex-direction:column;gap:7px;align-items:flex-start;min-width:0}
+.auto-run-toggle{
+ display:flex;align-items:center;justify-content:space-between;gap:7px;
+ min-height:44px;width:150px;padding:6px 9px;
+ background:linear-gradient(150deg,#203b56ef,#10273eea);
+ border:1px solid #d0b679;border-radius:12px;color:#fff0be;
+ box-shadow:inset 0 1px #ffffff29,0 3px 0 #081c2b;
+ font-size:11px;font-weight:900;letter-spacing:.02em;
+ touch-action:manipulation;user-select:none;-webkit-tap-highlight-color:transparent;
+}
+.auto-run-symbol{font-size:17px;color:#e5bd6d}
+.auto-run-label{white-space:nowrap}
+.auto-run-switch{
+ flex:0 0 34px;height:19px;border-radius:15px;position:relative;
+ background:#344d60;box-shadow:inset 0 1px 3px #06131f;
+ border:1px solid #9da7ad;
+}
+.auto-run-switch::after{
+ content:"";position:absolute;top:2px;left:2px;width:13px;height:13px;
+ border-radius:50%;background:#d7e4e8;box-shadow:0 1px 2px #08131f;
+ transition:transform .12s ease;
+}
+.auto-run-toggle[aria-pressed="true"]{
+ background:linear-gradient(150deg,#405b58f2,#183b4aee);
+ border-color:#f0d080;color:#fff3cc;
+}
+.auto-run-toggle[aria-pressed="true"] .auto-run-switch{background:#e5b95c;border-color:#f8dfa0}
+.auto-run-toggle[aria-pressed="true"] .auto-run-switch::after{background:#fff9e7;transform:translateX(15px)}
+.auto-run-toggle:focus-visible,.title-music-btn:focus-visible{
+ outline:3px solid #fff3af;outline-offset:3px;
+}
+.title-music-btn{
+ display:block;width:100%;min-height:40px;margin:9px 0 0;
+ padding:7px 10px;border-radius:9px;
+ border:1px solid #f0ca77;background:#163f5dec;
+ color:#ffdf91;font-size:12px;font-weight:900;letter-spacing:.035em;
+}
+.title-music-btn[aria-pressed="true"]{background:#274d46;color:#f4eabe;border-color:#9dcfa4}
+.title-music-btn:active{transform:translateY(1px)}
+@media(max-width:630px) and (orientation:portrait){
+ .auto-run-toggle{min-height:44px;width:118px;font-size:9px;gap:3px;padding-inline:6px}
+ .auto-run-switch{flex-basis:27px;height:18px}
+ .auto-run-switch::after{width:12px;height:12px}
+ .auto-run-toggle[aria-pressed="true"] .auto-run-switch::after{transform:translateX(9px)}
+ .touch-left-cluster{gap:5px}
+}
+@media (pointer:coarse) and (orientation:landscape) and (max-height:520px){
+ .game-frame{background:#152a40;border:0;box-shadow:none}
+ .viewport{background:#152a40}
+ /* Canvas bitmap itself now matches the device aspect and renders more world. */
+ .viewport>canvas{width:100%;height:100%;object-fit:fill;aspect-ratio:auto;background:transparent}
+ .touch-left-cluster{pointer-events:auto;align-self:flex-end;gap:6px}
+ .auto-run-toggle{
+  width:min(34dvh,31vw);min-width:100px;
+  min-height:44px;padding:4px 7px;font-size:10px;
+  background:#102c46ad;border-color:#e2d2a283;box-shadow:none;
+ }
+ .gesture-pad{align-self:flex-start}
+ .touch-right{
+  pointer-events:auto;display:grid;
+  grid-template-columns:minmax(56px,1fr) minmax(67px,1.08fr);
+  grid-template-rows:minmax(54px,auto) minmax(68px,auto);
+  width:min(43vw,200px);min-width:132px;max-width:none;
+  gap:7px;align-self:flex-end;
+ }
+ .touch-right .touch{min-width:0;min-height:54px;opacity:.90}
+ .touch-right .touch-dash{grid-column:1;grid-row:1}
+ .touch-right .touch-swish{grid-column:2;grid-row:1}
+ .touch-right .touch-cheer{grid-column:1;grid-row:2;min-height:68px}
+ .touch-right .touch-jump{
+  display:flex;align-items:center;justify-content:center;
+  grid-column:2;grid-row:2;
+  min-height:68px;width:100%;font-size:13px;
+  color:#ffe6a0;background:#243951d9;
+  border:2px solid #f2cc7a;border-radius:21px;
+  box-shadow:inset 0 1px #fff5ce45,0 2px #13263daa;
+  text-shadow:0 1px 2px #081722;
+ }
+ .touch-right .touch-jump.held{background:#edcd7f;color:#17263a;transform:scale(.98)}
+ #title-overlay.title-cinematic .title-music-btn{min-height:40px;margin-top:5px;font-size:10px}
+ body.high-contrast .touch-right .touch-jump{
+  background:#f9dc69!important;color:#111c29!important;border-color:#fff!important
+ }
+ body.high-contrast .auto-run-toggle{background:#071321;color:#fff;border-color:#fff}
+}
+@media(prefers-reduced-motion:reduce){
+ .auto-run-switch::after{transition:none}
+}
+
+/* Fullscreen inputs never cover the cinematic, story, pause or ending dialog. */
+@media(pointer:coarse) and (orientation:landscape) and (max-height:520px){
+ body:not([data-game-mode="playing"]) .touch-controls,
+ body:not([data-game-mode="playing"]) .status-row{visibility:hidden;pointer-events:none}
+}

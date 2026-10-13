@@ -54,10 +54,11 @@ function getLightLayers(){
 }
 export function visualZone(cameraX){return cameraX<WORLD.campusEnd?'campus':cameraX<7120?'ascent':'summit'}
 export function paintAtmosphere(ctx,state){
+ const screenWidth=state.renderWidth||VIEW.width;
  const g=getLightLayers(),zone=visualZone(state.camera.x);
  ctx.save();ctx.imageSmoothingEnabled=true;
  const base=zone==='campus'?g.warm:g.stone;
- if(base)ctx.drawImage(base,0,0,VIEW.width,VIEW.height);
+ if(base)ctx.drawImage(base,0,0,screenWidth,VIEW.height);
  // Fine art-directed shafts live BEHIND gameplay objects; never obscure hazards.
  if(zone==='campus'){
   const origin=712-state.camera.x*.035;
@@ -73,18 +74,20 @@ export function paintAtmosphere(ctx,state){
  ctx.restore();
 }
 export function paintArenaWash(ctx,state){
+ const screenWidth=state.renderWidth||VIEW.width;
  if(!state.boss.triggered)return;
  const layer=getLightLayers().arena;
  if(!layer)return;
  ctx.save();ctx.imageSmoothingEnabled=true;
- ctx.drawImage(layer,0,0,VIEW.width,VIEW.height);
+ ctx.drawImage(layer,0,0,screenWidth,VIEW.height);
  ctx.restore();
 }
 export function paintArchitecturalDepth(ctx,state){
+ const screenWidth=state.renderWidth||VIEW.width;
  const cam=state.camera;
- if(cam.x+VIEW.width<3700||cam.x>8210)return;
+ if(cam.x+screenWidth<3700||cam.x>8210)return;
  // Culling in *world space* avoids painting thousands of off-screen stones.
- const minX=Math.max(3700,Math.floor(cam.x)-8),maxX=Math.min(8210,Math.ceil(cam.x+VIEW.width)+8);
+ const minX=Math.max(3700,Math.floor(cam.x)-8),maxX=Math.min(8210,Math.ceil(cam.x+screenWidth)+8);
  const first=Math.floor((cam.y+1540)/476)*476-1540;
  ctx.save();ctx.translate(-cam.x,-cam.y);
  for(let y=first;y<cam.y+VIEW.height+80;y+=476){
@@ -102,13 +105,14 @@ export function paintArchitecturalDepth(ctx,state){
  ctx.restore();
 }
 export function paintSeasonalAir(ctx,state){
+ const screenWidth=state.renderWidth||VIEW.width;
  if(state.settings.reducedMotion)return;
  const t=state.elapsed,cam=state.camera,zone=visualZone(cam.x);
  const campus=zone==='campus',count=campus?14:10;
  ctx.save();
  for(let i=0;i<count;i++){
   const speed=campus?9+(i%4)*3:4+(i%3)*2;
-  const w=VIEW.width+110,h=VIEW.height+90;
+  const w=screenWidth+110,h=VIEW.height+90;
   const x=((i*173-cam.x*.115+Math.sin(t*.45+i*2.3)*8)%w+w)%w-38;
   const y=((i*117+t*speed)%h+h)%h-28;
   if(campus){
@@ -131,10 +135,11 @@ export function paintSeasonalAir(ctx,state){
  ctx.restore();
 }
 export function paintForegroundFinish(ctx,state){
+ const screenWidth=state.renderWidth||VIEW.width;
  const layer=getLightLayers().foreground;
  if(!layer)return;
  ctx.save();ctx.imageSmoothingEnabled=true;
- ctx.drawImage(layer,0,0,VIEW.width,VIEW.height);
+ ctx.drawImage(layer,0,0,screenWidth,VIEW.height);
  ctx.restore();
 }
 export function paintContactShadow(ctx,state){
@@ -156,8 +161,9 @@ function panel(ctx,x,y,w,h,border){
  ctx.fillRect(x+10,y+4,w-20,1);
 }
 export function paintPulseReadout(ctx,state,chant){
+ const screenWidth=state.renderWidth||VIEW.width;
  const active=state.activePulse,notice=state.checkpointNotice;
- const x=VIEW.width/2,y=59,w=370;
+ const x=screenWidth/2,y=59,w=370;
  ctx.save();panel(ctx,x-w/2,y,w,53,active?'#e7c870':'#829cba');
  ctx.textAlign='center';ctx.textBaseline='middle';
  ctx.font='900 15px system-ui';ctx.fillStyle=active?'#ffe49a':'#d5e9f5';
@@ -175,7 +181,8 @@ export function paintPulseReadout(ctx,state,chant){
  ctx.restore();
 }
 export function paintFoxReadout(ctx,state){
- const x=VIEW.width/2,y=65,w=366,h=54;
+ const screenWidth=state.renderWidth||VIEW.width;
+ const x=screenWidth/2,y=65,w=366,h=54;
  ctx.save();panel(ctx,x-w/2,y,w,h,'#eeb371');
  ctx.textAlign='center';ctx.textBaseline='middle';
  ctx.font='900 15px system-ui';ctx.fillStyle='#ffddad';
@@ -201,11 +208,11 @@ const materials={
 };
 // Draw on the original collider's footprint. Texture is camera-culled and
 // entirely visual; no collision, save, or platform dimensions are changed.
-export function paintPlatformFinish(ctx,kind,x,y,w,h,cameraX=0){
+export function paintPlatformFinish(ctx,kind,x,y,w,h,cameraX=0,viewWidth=VIEW.width){
  if(w<14||h<10)return;
  const mat=materials[kind]||materials.stone;
  const left=Math.max(x+3,Math.floor(cameraX)-8);
- const right=Math.min(x+w-3,Math.ceil(cameraX+VIEW.width)+8);
+ const right=Math.min(x+w-3,Math.ceil(cameraX+viewWidth)+8);
  if(right<=left)return;
  ctx.save();
  ctx.globalAlpha=.86;ctx.fillStyle=mat.edge;

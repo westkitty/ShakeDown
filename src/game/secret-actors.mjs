@@ -9,7 +9,7 @@ function text(ctx,str,x,y,font='900 16px system-ui',color='#fff3c9'){
  ctx.font=font;ctx.fillStyle=color;ctx.textAlign='center';ctx.fillText(str,x,y);
 }
 function nearby(s,x,y,w,h){
- const cam=s.camera;return x+w>cam.x-120&&x<cam.x+960+120&&
+ const cam=s.camera;return x+w>cam.x-120&&x<cam.x+(s.renderWidth||960)+120&&
    y+h>cam.y-130&&y<cam.y+540+130;
 }
 function bunting(ctx,x,y,spacing,n){
