@@ -24,10 +24,15 @@ test('landscape phone keeps launch and accessible controls above the physical bo
  test.skip(testInfo.project.name!=='mobile-chromium','Landscape audit needs coarse pointer');
  await page.setViewportSize({width:844,height:390});
  await page.goto('./?skip-intro=1');
+ const launch=await page.locator('#start-btn').boundingBox();
+ expect(launch.y+launch.height).toBeLessThanOrEqual(390);
+ await expect(page.locator('#touch-controls')).toBeHidden();
+ await page.locator('#start-btn').tap();
+ await expect(page.locator('#touch-controls')).toBeVisible();
  const layout=await page.evaluate(()=>{
   const rect=e=>{const r=e.getBoundingClientRect();return{bottom:r.bottom,top:r.top,width:r.width,height:r.height}};
   return{viewport:innerHeight,scrollWidth:document.documentElement.scrollWidth,
-   launch:rect(document.querySelector('#start-btn')),
+   autoRun:rect(document.querySelector('#auto-run-toggle')),
    gesture:rect(document.querySelector('#gesture-pad')),
    // A zero-size legacy button is not a touch target in landscape.
    touch:[...document.querySelectorAll('.touch')].filter(el=>{
@@ -35,14 +40,14 @@ test('landscape phone keeps launch and accessible controls above the physical bo
     return r.width>0&&r.height>0&&getComputedStyle(el).visibility!=='hidden';
    }).map(rect)};
  });
- expect(layout.launch.bottom).toBeLessThanOrEqual(390);
  expect(layout.touch.length).toBeGreaterThanOrEqual(3);
  expect(layout.touch.every(x=>x.bottom<=390&&x.width>=44&&x.height>=44)).toBe(true);
  expect(layout.gesture.width).toBeGreaterThanOrEqual(100);
  expect(layout.gesture.height).toBeGreaterThanOrEqual(100);
  expect(layout.gesture.bottom).toBeLessThanOrEqual(390);
+ expect(layout.autoRun.height).toBeGreaterThanOrEqual(44);
+ expect(layout.autoRun.bottom).toBeLessThan(layout.gesture.top);
  expect(layout.scrollWidth).toBeLessThanOrEqual(844);
- await page.locator('#start-btn').tap();
  await page.locator('#pause-btn').tap();
  await expect(page.locator('#pause-overlay')).not.toHaveClass(/hidden/);
  await page.locator('#motion-check').scrollIntoViewIfNeeded();

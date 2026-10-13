@@ -64,9 +64,11 @@ const bypassIntro=introQuery.get('skip-intro')==='1'||
  (introQuery.has('qa')&&introQuery.get('intro')!=='1');
 // Title audio unlocks on the first user gesture; Start crossfades into campus.
 function unlockTitleMusic(){
- if(state.mode!=='title'||intro.active||branding.active||state.settings.mute)return;
+ if(state.mode!=='title'||intro.active||state.settings.mute)return;
  audio.activate();
- audio.musicTick(performance.now()/1000,'title');
+ // Skip-brand pointerdown unlocks the Web Audio/HTMLMedia user gesture.
+ // The brand owns playback until it finishes; never overlap its soundtrack.
+ if(!branding.active)audio.musicTick(performance.now()/1000,'title');
 }
 window.addEventListener('pointerdown',unlockTitleMusic,{capture:true});
 window.addEventListener('keydown',unlockTitleMusic,{capture:true});
@@ -175,6 +177,7 @@ function populateDiscoveries(id){
 }
 const overlayByMode={title:'title-overlay',pause:'pause-overlay',dead:'dead-overlay',victory:'victory-overlay'};
 function showMode(){
+ if(document.body.dataset.gameMode!==state.mode)document.body.dataset.gameMode=state.mode;
  if(displayedMode===state.mode)return;
  displayedMode=state.mode;
  screenArt.setMode(state.mode);
@@ -191,21 +194,39 @@ function showMode(){
  else if(state.mode==='playing')canvas.focus({preventScroll:true});
 }
 const held=new Set(),queued=new Set(),pointerActs=new Map(),keyActs=new Map();
-let gestureDirection=null;
-const gesturePad=$('gesture-pad');
-function setGestureDirection(direction){
- gestureDirection=direction;
- // Reconcile all input owners; a swipe must never drop held keyboard input.
- updateHeld('left');updateHeld('right');
- gesturePad?.setAttribute('data-direction',direction||'');
-}
+let gestureDirection=null,autoRun=false,autoRunDirection='right';
+const gesturePad=$('gesture-pad'),autoRunButton=$('auto-run-toggle');
 function updateHeld(action){
  const active=[...keyActs.values()].includes(action)||[...pointerActs.values()].includes(action);
- if(active||gestureDirection===action)held.add(action);else held.delete(action);
+ if(active||gestureDirection===action||(autoRun&&autoRunDirection===action))held.add(action);
+ else held.delete(action);
 }
+function updateAutoRunUI(){
+ autoRunButton?.setAttribute('aria-pressed',String(autoRun));
+ autoRunButton?.setAttribute('aria-label','Auto-run: '+(autoRun?'on':'off'));
+}
+function setAutoRun(enabled){
+ autoRun=Boolean(enabled);
+ if(autoRun){autoRunDirection=gestureDirection||'right';gestureDirection=null}
+ else gestureDirection=null; // An explicit OFF means stop, not another hidden latch.
+ updateHeld('left');updateHeld('right');updateAutoRunUI();
+ gesturePad?.setAttribute('data-direction',autoRun?autoRunDirection:'');
+}
+function setGestureDirection(direction){
+ if(autoRun)autoRunDirection=direction||autoRunDirection;
+ else gestureDirection=direction;
+ updateHeld('left');updateHeld('right');
+ gesturePad?.setAttribute('data-direction',autoRun?autoRunDirection:direction||'');
+}
+autoRunButton?.addEventListener('click',()=>{
+ if(state.mode!=='playing')return;
+ audio.activate();
+ setAutoRun(!autoRun);
+});
+updateAutoRunUI();
 
 function actionForKey(code){return ({ArrowLeft:'left',KeyA:'left',ArrowRight:'right',KeyD:'right',Space:'jump',ArrowUp:'jump',KeyW:'jump',KeyJ:'swish',KeyX:'swish',KeyC:'cheer',ShiftLeft:'dash',ShiftRight:'dash',KeyK:'dash'})[code]}
-function clearInputs(){held.clear();queued.clear();pointerActs.clear();keyActs.clear();gestureDirection=null;gesturePad?.removeAttribute('data-direction');document.querySelectorAll('.touch').forEach(b=>b.classList.remove('held'))}
+function clearInputs(){held.clear();queued.clear();pointerActs.clear();keyActs.clear();autoRun=false;autoRunDirection='right';gestureDirection=null;updateAutoRunUI();gesturePad?.removeAttribute('data-direction');document.querySelectorAll('.touch').forEach(b=>b.classList.remove('held'))}
 function isEditingFocus(){
  const element=document.activeElement;
  return Boolean(element?.closest?.('input,textarea,select,[contenteditable="true"]'));
@@ -385,6 +406,20 @@ $('resume-btn').addEventListener('click',togglePause);
 $('retry-btn').addEventListener('click',retry);$('pause-retry-btn').addEventListener('click',retry);
 $('replay-btn').addEventListener('click',()=>newRound());$('pause-btn').addEventListener('click',togglePause);
 $('mute-btn').addEventListener('click',()=>{state.settings.mute=!state.settings.mute;audio.mute(state.settings.mute);audio.activate();updateMute();save()});
+const titleMusicButton=$('title-music-btn');
+titleMusicButton?.addEventListener('click',()=>{
+ if(state.mode!=='title'||intro.active||branding.active)return;
+ if(state.settings.mute){state.settings.mute=false;audio.mute(false);updateMute();save()}
+ audio.activate();
+ audio.musicTick(performance.now()/1000,'title');
+ updateTitleMusicUI();
+});
+function updateTitleMusicUI(){
+ if(!titleMusicButton)return;
+ const playing=audio.diagnostics().musicPlaying&&state.mode==='title'&&!branding.active;
+ titleMusicButton.textContent=playing?'♫ TITLE MUSIC PLAYING':'♫ PLAY TITLE MUSIC';
+ titleMusicButton.setAttribute('aria-pressed',String(playing));
+}
 $('assist-check').checked=state.settings.assist;$('motion-check').checked=state.settings.reducedMotion;$('contrast-check').checked=Boolean(state.settings.contrast);
 function updateContrast(){document.body.classList.toggle('high-contrast',Boolean(state.settings.contrast))}
 updateContrast();
@@ -508,16 +543,16 @@ function animate(ms){requestAnimationFrame(animate);
  if(state.mode==='victory')state.elapsed+=dt;
  updateMobileFraming();
  const drawStart=performance.now();
- render(ctx,state,sprites,accumulator/DT,renderArt,auditionRoles);
+ render(ctx,state,sprites,accumulator/DT,renderArt,auditionRoles,logicalViewportWidth);
  if(actualFrameMs>0){frameTimings.push({frame:actualFrameMs,render:performance.now()-drawStart});
   if(frameTimings.length>240)frameTimings.shift()}
- if(ms-lastHUD>110){hud();lastHUD=ms}
+ if(ms-lastHUD>110){hud();updateTitleMusicUI();lastHUD=ms}
  showMode();
 }
 // The underlying 960x540 frame is unchanged. On portrait phones the CSS
 // displays an aspect-preserved, cropped canvas and this compositor-only pan
 // keeps the authoritative player visible without touching world/camera logic.
-let mobileFrame=null,lastMobilePan=null;
+let mobileFrame=null,lastMobilePan=null,logicalViewportWidth=VIEW.width;
 function updateMobileFraming(){
  if(!mobileFrame)return;
  const playerCssX=(state.player.x+state.player.w/2-state.camera.x)*mobileFrame.scale;
@@ -529,10 +564,16 @@ function updateMobileFraming(){
 }
 function onResize(){
  const dpr=Math.min(window.devicePixelRatio||1,2);
- canvas.width=Math.round(VIEW.width*dpr);canvas.height=Math.round(VIEW.height*dpr);
+ const viewport=$('viewport');
+ const isFullLandscape=window.matchMedia('(pointer:coarse) and (orientation:landscape) and (max-height:520px)').matches;
+ // Widen what we actually DRAW, not CSS-stretch a 960-pixel screenshot.
+ // Retain the 540-unit vertical field and all authoritative game physics.
+ logicalViewportWidth=isFullLandscape&&viewport.clientWidth&&viewport.clientHeight
+  ?Math.max(VIEW.width,Math.round(VIEW.height*viewport.clientWidth/viewport.clientHeight))
+  :VIEW.width;
+ canvas.width=Math.round(logicalViewportWidth*dpr);canvas.height=Math.round(VIEW.height*dpr);
  ctx.setTransform(dpr,0,0,dpr,0,0);
  const portrait=window.matchMedia('(max-width: 630px) and (orientation: portrait)').matches;
- const viewport=$('viewport');
  if(portrait){
   const viewportWidth=viewport.clientWidth;
   const scale=viewport.clientHeight/VIEW.height;
@@ -543,7 +584,7 @@ function onResize(){
   canvas.style.removeProperty('--mobile-canvas-pan');
  }
 }
-window.addEventListener('resize',onResize,{passive:true});onResize();
+window.addEventListener('resize',onResize,{passive:true});window.visualViewport?.addEventListener('resize',onResize,{passive:true});onResize();
 loadAssets();
 loadSecretNpcArt().then(({images,errors,loaded})=>{
  npcArt=images;npcErrors=errors;npcLoaded=loaded;refreshArt();
@@ -566,7 +607,7 @@ if(previewId){productionStatus='LOCAL ART PREVIEW ONLY: '+previewId+' (NOT produ
   showAssetStatus();
  }).catch(error=>{productionErrors=['loader: '+error.message];showAssetStatus()});
  showMode();requestAnimationFrame(animate);
-window.__SHAKEDOWN_QA={snapshot:()=>snapshot(state),metrics,audio:()=>audio.diagnostics(),brand:()=>branding.inspect(),intro:()=>intro.inspect(),titleCinematic:()=>({visible:titleCinematic.visible}),artDirector:()=>director.diagnostics(),assets:()=>({loaded:assetCount,failed:[...assetErrors],productionLoaded,productionDeclared,productionErrors:[...productionErrors],curatedEnabled,curatedLoaded,curatedSelected,curatedErrors:[...curatedErrors],
+window.__SHAKEDOWN_QA={snapshot:()=>snapshot(state),metrics,controls:()=>({autoRun,autoRunDirection,gestureDirection,renderWidth:logicalViewportWidth}),audio:()=>audio.diagnostics(),brand:()=>branding.inspect(),intro:()=>intro.inspect(),titleCinematic:()=>({visible:titleCinematic.visible}),artDirector:()=>director.diagnostics(),assets:()=>({loaded:assetCount,failed:[...assetErrors],productionLoaded,productionDeclared,productionErrors:[...productionErrors],curatedEnabled,curatedLoaded,curatedSelected,curatedErrors:[...curatedErrors],
  worldLoaded,worldSelected,worldErrors:[...worldErrors],npcLoaded,npcErrors:[...npcErrors]}),
  // Developer-only deterministic test aids; excluded from normal gameplay and production paths.
  ...(new URLSearchParams(location.search).has('qa')?{

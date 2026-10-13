@@ -21,16 +21,16 @@ function label(ctx,text,x,y){
 }
 export function paintArtOverrides(ctx,state,roles,phase){
  if(!roles||!Object.keys(roles).length)return;
- const cam=state.camera,p=state.player;
+ const cam=state.camera,p=state.player,viewWidth=state.renderWidth||VIEW.width;
  const safe=Object.entries(roles).filter(([,entry])=>entry?.image&&!entry.blocked);
  if(phase==='backdrop'){
   const asset=roles.backdrop;
-  if(asset&&!asset.blocked)place(ctx,asset.image,0,0,VIEW.width,VIEW.height);
+  if(asset&&!asset.blocked)place(ctx,asset.image,0,0,viewWidth,VIEW.height);
   return;
  }
  if(phase==='world'){
   ctx.save();ctx.translate(-cam.x,-cam.y);
-  const visible=visibleWorld(state.level.platforms,cam.x,cam.y);
+  const visible=visibleWorld(state.level.platforms,cam.x,cam.y,viewWidth);
   if(roles.terrain&&!roles.terrain.blocked){
    const image=roles.terrain.image;
    for(const platform of visible){
@@ -67,12 +67,12 @@ export function paintArtOverrides(ctx,state,roles,phase){
   ctx.save();ctx.translate(-cam.x,-cam.y);
   if(roles.pickup&&!roles.pickup.blocked){
    const candidate=state.level.shakes.find(sh=>!sh.taken&&
-     sh.x>cam.x&&sh.x<cam.x+VIEW.width&&sh.y>cam.y&&sh.y<cam.y+VIEW.height);
+     sh.x>cam.x&&sh.x<cam.x+viewWidth&&sh.y>cam.y&&sh.y<cam.y+VIEW.height);
    if(candidate)place(ctx,roles.pickup.image,candidate.x-22,candidate.y-54,44,61);
   }
   if(roles.enemy&&!roles.enemy.blocked){
    const enemy=state.level.enemies.find(e=>e.alive&&e.x>=cam.x&&
-    e.x<cam.x+VIEW.width&&e.y>cam.y&&e.y<cam.y+VIEW.height);
+    e.x<cam.x+viewWidth&&e.y>cam.y&&e.y<cam.y+VIEW.height);
    if(enemy)place(ctx,roles.enemy.image,enemy.x-5,enemy.y-15,76,77);
   }
   if(roles.fox&&!roles.fox.blocked&&(state.boss.triggered||cam.x>7100)){

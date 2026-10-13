@@ -5,6 +5,16 @@ import {frameForState} from './animation.mjs';
 import {paintArtOverrides} from './art-scene.mjs';
 import {paintAtmosphere,paintArchitecturalDepth,paintSeasonalAir,paintForegroundFinish,
  paintContactShadow,paintPulseReadout,paintFoxReadout,paintArenaWash,paintPlatformFinish} from './visual-finish.mjs';
+// Physical phone aspect is presentation only: fixed 540-world-unit height,
+ // wider world visibility, unchanged authoritative 960x540 physics.
+let frameWidth=VIEW.width;
+function drawBackdrop(ctx,image){
+ const iw=image.naturalWidth||image.width,ih=image.naturalHeight||image.height;
+ if(!iw||!ih)return;
+ const target=frameWidth/VIEW.height,source=iw/ih;
+ if(source>=target){const width=ih*target;ctx.drawImage(image,(iw-width)/2,0,width,ih,0,0,frameWidth,VIEW.height)}
+ else{const height=iw/target;ctx.drawImage(image,0,(ih-height)/2,iw,height,0,0,frameWidth,VIEW.height)}
+}
 const TAU=Math.PI*2;
 const lerp=(a,b,t)=>a+(b-a)*t;
 const clamp=(n,a,b)=>Math.min(Math.max(n,a),b);
@@ -26,27 +36,27 @@ function sky(ctx,t,domeBlend,art={},camX=0){
  // procedurally drawn scenery. Source files remain provisional until owner review.
  const campus=art['DM-BG01'],ascent=art['DM-BG03'],summit=art['DM-BG07'];
  if(campus&&ascent&&summit){
-  ctx.drawImage(campus,0,0,VIEW.width,VIEW.height);
+  drawBackdrop(ctx,campus);
   // Two gradual crossfades prevent an abrupt 960px-wide background pop
   // while preserving the same authoritative camera and world coordinates.
   const ontoDome=clamp((camX-(WORLD.campusEnd-220))/440,0,1);
   if(ontoDome>0){ctx.save();ctx.globalAlpha=ontoDome;
-   ctx.drawImage(ascent,0,0,VIEW.width,VIEW.height);ctx.restore();}
+   drawBackdrop(ctx,ascent);ctx.restore();}
   const ontoSummit=clamp((camX-6620)/480,0,1);
   if(ontoSummit>0){ctx.save();ctx.globalAlpha=ontoSummit;
-   ctx.drawImage(summit,0,0,VIEW.width,VIEW.height);ctx.restore();}
+   drawBackdrop(ctx,summit);ctx.restore();}
   return;
  }
  const plate=camX<WORLD.campusEnd?campus:camX<6860?ascent:summit;
- if(plate){ctx.drawImage(plate,0,0,VIEW.width,VIEW.height);return;}
- if(art['BG-01']){ctx.drawImage(art['BG-01'],0,0,VIEW.width,VIEW.height);return;}
- const grad=ctx.createLinearGradient(0,0,0,VIEW.height);grad.addColorStop(0,domeBlend?'#6c8cae':'#7ab9d8');grad.addColorStop(.58,domeBlend?'#dfc49c':'#c0dce0');grad.addColorStop(1,'#fff0ca');ctx.fillStyle=grad;ctx.fillRect(0,0,VIEW.width,VIEW.height);
+ if(plate){drawBackdrop(ctx,plate);return;}
+ if(art['BG-01']){drawBackdrop(ctx,art['BG-01']);return;}
+ const grad=ctx.createLinearGradient(0,0,0,VIEW.height);grad.addColorStop(0,domeBlend?'#6c8cae':'#7ab9d8');grad.addColorStop(.58,domeBlend?'#dfc49c':'#c0dce0');grad.addColorStop(1,'#fff0ca');ctx.fillStyle=grad;ctx.fillRect(0,0,frameWidth,VIEW.height);
  ctx.save();ctx.globalAlpha=.5;ctx.fillStyle='#fff3bb';ctx.beginPath();ctx.arc(domeBlend?760:820,100,52,0,TAU);ctx.fill();ctx.restore();
- for(let i=0;i<7;i++) {const cx=((i*274+t*4)%(VIEW.width+350))-140;cloud(ctx,cx,85+(i%3)*65,.6+i%2*.26,.25+(i%2)*.13)}
+ for(let i=0;i<7;i++) {const cx=((i*274+t*4)%(frameWidth+350))-140;cloud(ctx,cx,85+(i%3)*65,.6+i%2*.26,.25+(i%2)*.13)}
 }
 function farCampus(ctx,cam,t){
  const px=cam.x*.16;ctx.save();ctx.translate(-px,0);const left=Math.floor(px/460)*460-460;
- for(let x=left;x<px+VIEW.width+460;x+=460){
+ for(let x=left;x<px+frameWidth+460;x+=460){
   const seed=Math.round(x/460),w=390,h=150+(Math.abs(seed*5)%3)*28;
   ctx.fillStyle='#aeb9b3';ctx.fillRect(x,340-h,w,h+250);ctx.fillStyle='#8a9b97';ctx.fillRect(x,340-h,w,14);
   ctx.fillStyle='#839c9d';for(let i=0;i<7;i++)for(let j=0;j<3;j++){ctx.fillRect(x+24+i*53,355-h+j*38,26,18)}
@@ -87,7 +97,7 @@ function quad(ctx,cam,t,art={}){
   ['PR-02',296,307,75,133]
  ];
  for(const [id,x,y,w,h] of scenery){
-  const image=art[id];if(image&&x+w>cx-90&&x<cx+VIEW.width+140)ctx.drawImage(image,x,y,w,h);
+  const image=art[id];if(image&&x+w>cx-90&&x<cx+frameWidth+140)ctx.drawImage(image,x,y,w,h);
  }
  // First scene vendor - simple but unmistakable stolen drink tableau.
  if(cx<900){
@@ -123,7 +133,7 @@ function quad(ctx,cam,t,art={}){
 }
 function legacyMainBuilding(ctx,cam,t){
  const cx=cam.x,cy=cam.y;
- if(cx>8350||cx+VIEW.width<3340)return;
+ if(cx>8350||cx+frameWidth<3340)return;
  ctx.save();ctx.translate(-cx,-cy);
  // Tower runs behind the entire authored ascent; richly drawn but no painted collision.
  const left=3700,right=8210,top=-1530,bottom=470;
@@ -160,7 +170,7 @@ function legacyMainBuilding(ctx,cam,t){
 function mainBuilding(ctx,cam,t,art={}){
  if(!art['DM-PR01']||!art['DM-PR02'])return legacyMainBuilding(ctx,cam,t);
  const cx=cam.x,cy=cam.y;
- if(cx>8350||cx+VIEW.width<3340)return;
+ if(cx>8350||cx+frameWidth<3340)return;
  const left=3700,right=8210,top=-1530,bottom=470;
  ctx.save();ctx.translate(-cx,-cy);
  const masonry=ctx.createLinearGradient(left,top,right,bottom);
@@ -175,13 +185,13 @@ function mainBuilding(ctx,cam,t,art={}){
  for(let y=row0;y<Math.min(bottom,cy+VIEW.height+rowStep);y+=rowStep){
   ctx.fillStyle='#7b5e50';ctx.fillRect(left,y+217,right-left,7);
   ctx.fillStyle='#f6dfb5';ctx.fillRect(left,y+224,right-left,8);
-  for(let x=col0;x<Math.min(right,cx+VIEW.width+colStep);x+=colStep){
+  for(let x=col0;x<Math.min(right,cx+frameWidth+colStep);x+=colStep){
    ctx.drawImage(art['DM-PR01'],x,y,157,212);
   }
  }
  const columnStep=432;
  const firstColumn=left+205+Math.max(0,Math.floor((cx-left-205)/columnStep))*columnStep;
- for(let x=firstColumn;x<Math.min(right,cx+VIEW.width+columnStep);x+=columnStep){
+ for(let x=firstColumn;x<Math.min(right,cx+frameWidth+columnStep);x+=columnStep){
   for(let y=row0;y<Math.min(bottom,cy+VIEW.height+rowStep);y+=rowStep)
    ctx.drawImage(art['DM-PR02'],x,y-7,82,238);
  }
@@ -191,13 +201,13 @@ function mainBuilding(ctx,cam,t,art={}){
  if(art['DM-PR04'])ctx.drawImage(art['DM-PR04'],7318,-1640,115,184);
  if(art['DM-PR05']){
   for(let x=7320;x<8350;x+=252)
-   if(x<cx+VIEW.width+260&&x+252>cx-260)
+   if(x<cx+frameWidth+260&&x+252>cx-260)
     ctx.drawImage(art['DM-PR05'],x,DOME_ARENA_Y-76,255,83);
  }
  if(art['DM-PR06']){
   for(let i=3;i<=23;i+=4){
    const x=3760+i*156,y=390-i*68-65;
-   if(x<cx-110||x>cx+VIEW.width+110||y<cy-200||y>cy+VIEW.height+160)continue;
+   if(x<cx-110||x>cx+frameWidth+110||y<cy-200||y>cy+VIEW.height+160)continue;
    ctx.drawImage(art['DM-PR06'],x,y-95,83,103);
   }
  }
@@ -205,7 +215,7 @@ function mainBuilding(ctx,cam,t,art={}){
   ctx.drawImage(art['DM-PR10'],7980,DOME_ARENA_Y-205,116,191);
  ctx.restore();
 }
-function drawPlatform(ctx,p,x,y,active,t,art={},cameraX=0){
+function drawPlatform(ctx,p,x,y,active,t,art={},cameraX=0,viewWidth=VIEW.width){
  const k=p.kind;const h=p.h,w=p.w;
  const dome=p.x>=WORLD.campusEnd;
  if(k==='banner'){
@@ -234,7 +244,7 @@ function drawPlatform(ctx,p,x,y,active,t,art={},cameraX=0){
  rounded(ctx,x,y,w,h,3);ctx.fill();stroke(ctx,k==='gold'?'#69512b':'#463737',3);ctx.stroke();
  ctx.fillStyle=k==='grass'?'#65a167':k==='gold'?'#f3cf70':k==='wood'?'#dfb17b':'#efcfad';
  ctx.fillRect(x+2,y+1,w-4,7);
- ctx.globalAlpha=1;paintPlatformFinish(ctx,k,x,y,w,h,cameraX);
+ ctx.globalAlpha=1;paintPlatformFinish(ctx,k,x,y,w,h,cameraX,viewWidth);
  if(p.movement){ctx.strokeStyle='#f8d26f';ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(x+8,y-9);ctx.lineTo(x+w-8,y-9);ctx.stroke()}
 }
 function drawShake(ctx,x,y,s=1,big=false,art={}){const image=art['CO-03'];
@@ -430,7 +440,7 @@ function events(ctx,s,t,art={}){
  for(const e of s.events){
   const age=t-e.t;
   if(age<0||age>1.05||!eventKinds.has(e.type)||
-     Math.abs(e.x-cam.x)>VIEW.width+90||Math.abs(e.y-cam.y)>VIEW.height+80)continue;
+     Math.abs(e.x-cam.x)>frameWidth+90||Math.abs(e.y-cam.y)>VIEW.height+80)continue;
   const strong=e.type==='collect'||e.type==='checkpoint'||e.type==='bossHit'||e.type==='rally';
   const count=strong?12:6,alpha=1-age/1.05;
   const palette=e.type==='hurt'||e.type==='bossHit'?redFx:
@@ -462,7 +472,7 @@ function events(ctx,s,t,art={}){
 function confettiSky(ctx,t){for(let i=0;i<45;i++){const x=(i*83+Math.sin(i*67)*32)%990;const y=((t*85+i*49)%690)-85;
  ctx.save();ctx.translate(x,y);ctx.rotate(t+i);ctx.fillStyle=['#ffdf6e','#80e9bb','#f06f78','#7ea8e8'][i%4];ctx.fillRect(0,0,8,12);ctx.restore()}}
 function birthdayDecor(ctx,t,art={}){
- if(art['BD-07'])ctx.drawImage(art['BD-07'],0,0,VIEW.width,160);
+ if(art['BD-07'])ctx.drawImage(art['BD-07'],0,0,frameWidth,160);
  if(art['BD-14'])ctx.drawImage(art['BD-14'],431,260,95,95);
  if(art['BD-08']){ctx.save();ctx.globalAlpha=.46;ctx.drawImage(art['BD-08'],180,170,540,280);ctx.restore();}
  ctx.save();ctx.translate(735,330);ctx.shadowColor='#f7d15b';ctx.shadowBlur=25;
@@ -479,9 +489,12 @@ function birthdayDecor(ctx,t,art={}){
  drawShake(ctx,860,420,2.0,true,art);
  confettiSky(ctx,t);
 }
-export function render(ctx,s,sprites,alpha=0,art={},audition={}){
+export function render(ctx,s,sprites,alpha=0,art={},audition={},logicalWidth=VIEW.width){
+ frameWidth=Math.max(VIEW.width,Math.round(logicalWidth));
+ const overscan=(frameWidth-VIEW.width)/2;
+ if(overscan)s={...s,camera:{...s.camera,x:s.camera.x-overscan},renderWidth:frameWidth};
  const t=s.elapsed,decorativeTime=s.settings.reducedMotion?0:t,cam=s.camera;
- ctx.clearRect(0,0,VIEW.width,VIEW.height);
+ ctx.clearRect(0,0,frameWidth,VIEW.height);
  const isDome=cam.x>3150;sky(ctx,decorativeTime,isDome,art,cam.x);
  paintAtmosphere(ctx,s);
  paintArtOverrides(ctx,s,audition,'backdrop');
@@ -490,9 +503,9 @@ export function render(ctx,s,sprites,alpha=0,art={},audition={}){
  paintArchitecturalDepth(ctx,s);paintArenaWash(ctx,s);paintSeasonalAir(ctx,s);
  paintSecretScenery(ctx,s,decorativeTime);
  ctx.save();ctx.translate(-cam.x,-cam.y);
- for(const p of visibleWorld(s.level.platforms,cam.x,cam.y)){
+ for(const p of visibleWorld(s.level.platforms,cam.x,cam.y,frameWidth)){
   const pos=movingPosition(p,t),active=!p.pulse||s.activePulse||s.player.onPlatform===p.id;
-  drawPlatform(ctx,p,pos.x,pos.y,active,decorativeTime,art,cam.x);
+  drawPlatform(ctx,p,pos.x,pos.y,active,decorativeTime,art,cam.x,frameWidth);
   // The activation outline is independent of optional generated textures.
   // It uses the *same* authoritative pulse state as collision.
   if(p.pulse){
@@ -521,8 +534,8 @@ export function render(ctx,s,sprites,alpha=0,art={},audition={}){
  ctx.save();ctx.textAlign='center';
  if(s.mode==='playing'&&!s.boss.triggered&&!inSecretEncounter)paintPulseReadout(ctx,s,chant);
  if(s.boss.triggered&&s.boss.hp>0)paintFoxReadout(ctx,s);
- if(s.mode==='victory'){ctx.fillStyle='rgba(13,24,35,.66)';ctx.fillRect(0,0,VIEW.width,VIEW.height);
-  birthdayDecor(ctx,decorativeTime,art);paintArtOverrides(ctx,s,audition,'birthday');ctx.fillStyle='#fff6d2';ctx.font='900 55px system-ui';ctx.fillText('HAPPY BIRTHDAY,',480,155);ctx.fillStyle='#fbd57b';ctx.font='900 63px system-ui';ctx.fillText('MAVERICK!',480,215);}
+ if(s.mode==='victory'){ctx.fillStyle='rgba(13,24,35,.66)';ctx.fillRect(0,0,frameWidth,VIEW.height);
+  ctx.save();ctx.translate(overscan,0);birthdayDecor(ctx,decorativeTime,art);paintArtOverrides(ctx,s,audition,'birthday');ctx.fillStyle='#fff6d2';ctx.font='900 55px system-ui';ctx.fillText('HAPPY BIRTHDAY,',480,155);ctx.fillStyle='#fbd57b';ctx.font='900 63px system-ui';ctx.fillText('MAVERICK!',480,215);ctx.restore();}
  ctx.restore();
  paintArtOverrides(ctx,s,audition,'hud');
 }

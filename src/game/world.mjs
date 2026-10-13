@@ -171,6 +171,6 @@ export function pulseState(time,manualOverride=0){
 export function pulseActive(time,manualOverride=0){
  return pulseState(time,manualOverride).active;
 }
-export function visibleWorld(platforms,cameraX,cameraY){
- return platforms.filter(p=>p.x+p.w>=cameraX-170&&p.x<=cameraX+VIEW.width+170&&p.y+p.h>=cameraY-160&&p.y<=cameraY+VIEW.height+170);
+export function visibleWorld(platforms,cameraX,cameraY,viewWidth=VIEW.width){
+ return platforms.filter(p=>p.x+p.w>=cameraX-170&&p.x<=cameraX+viewWidth+170&&p.y+p.h>=cameraY-160&&p.y<=cameraY+VIEW.height+170);
 }

@@ -26,7 +26,7 @@ test('phone portrait view enlarges the scene without distorting canvas or losing
  expect(after.x+after.width).toBeGreaterThanOrEqual(view.x+view.width-1);
  expect(await page.evaluate(()=>document.documentElement.scrollWidth)).toBeLessThanOrEqual(390);
 });
-test('landscape mobile uses a full-bleed touch frame without distorting the 16:9 scene',async({page},testInfo)=>{
+test('landscape mobile fills the complete screen with an undistorted wide world',async({page},testInfo)=>{
  await page.setViewportSize({width:844,height:390});
  await page.goto('./?skip-intro=1');
  const result=await page.evaluate(()=>{
@@ -39,19 +39,21 @@ test('landscape mobile uses a full-bleed touch frame without distorting the 16:9
    documentWidth:document.documentElement.scrollWidth
   };
  });
- expect(result.canvas.intrinsicWidth/result.canvas.intrinsicHeight).toBeCloseTo(16/9,2);
  expect(result.canvas.width).toBeCloseTo(result.frame.width,0);
  expect(result.canvas.height).toBeCloseTo(result.frame.height,0);
  if(testInfo.project.name==='mobile-chromium'){
-  // The swipe-pad layout intentionally fills the phone, letterboxing the game
-  // *within* its CSS canvas via object-fit rather than changing world coordinates.
+  // The renderer draws more WORLD to match the phone aspect ratio. It does
+  // NOT letterbox 16:9 into the striped margins or stretch 960px-wide actors.
+  expect(result.canvas.intrinsicWidth/result.canvas.intrinsicHeight)
+   .toBeCloseTo(result.frame.width/result.frame.height,2);
   expect(result.frame.left).toBeCloseTo(0,0);
   expect(result.frame.top).toBeCloseTo(0,0);
   expect(result.frame.width).toBeCloseTo(844,0);
   expect(result.frame.height).toBeCloseTo(390,0);
-  expect(result.imageFit).toBe('contain');
+  expect(result.imageFit).toBe('fill');
   expect(result.documentWidth).toBeLessThanOrEqual(844);
  }else{
+  expect(result.canvas.intrinsicWidth/result.canvas.intrinsicHeight).toBeCloseTo(16/9,2);
   expect(result.frame.width/result.frame.height).toBeCloseTo(16/9,1);
  }
 });
