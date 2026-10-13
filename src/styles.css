@@ -456,3 +456,28 @@ body.brand-playing{overflow:hidden}
 }
 
 .brand-footer [hidden]{display:none!important}
+
+/* Landscape phone control surface: the world stays visible beneath every input. */
+.gesture-pad{display:none}
+@media (pointer:coarse) and (orientation:landscape) and (max-height:520px){
+ html,body{overscroll-behavior:none}
+ .game-shell{padding:0;max-width:none}
+ .mast,.controls-note,footer{display:none}
+ .game-frame{width:100vw;height:100dvh;margin:0;border:0;border-radius:0;box-shadow:none;position:relative}
+ .viewport{width:100%;height:100%;aspect-ratio:auto}
+ .viewport>canvas{width:100%;height:100%;object-fit:contain;background:#132638}
+ .status-row{position:absolute;z-index:9;top:env(safe-area-inset-top);right:env(safe-area-inset-right);width:auto;min-height:0;background:transparent;padding:3px;pointer-events:none}
+ .status-row>span{display:none}
+ .status-row .quiet{pointer-events:auto;background:#10283f77;border:1px solid #ffffff35}
+ .touch-controls{position:absolute;inset:0;z-index:8;margin:0;max-width:none;width:100%;pointer-events:none;display:flex;align-items:flex-end;justify-content:space-between;padding:0 max(12px,env(safe-area-inset-right)) max(10px,env(safe-area-inset-bottom)) max(12px,env(safe-area-inset-left))}
+ .touch-left,.touch-right .touch-jump{display:none}
+ .gesture-pad{pointer-events:auto;display:flex;align-items:center;justify-content:center;touch-action:none;user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color:transparent;width:min(34dvh,31vw);height:min(34dvh,31vw);min-width:100px;min-height:100px;background:#e7e8fb13;border:1px solid #e7e8fb30;border-radius:17px;color:#e7e8fb55}
+ .gesture-mark{font-size:15px;opacity:.36;transform:rotate(15deg)}
+ .gesture-pad.gesture-active{background:#e7e8fb25;border-color:#e7e8fb55}
+ .touch-right{pointer-events:auto;display:grid;grid-template-columns:repeat(2,minmax(46px,1fr));max-width:190px;gap:7px}
+ .touch-right .touch{min-width:46px;min-height:52px;border:1px solid #ffffff45;border-radius:13px;background:#152f4960;color:#fff9;box-shadow:none;font-size:11px;opacity:.8}
+ .touch-right .touch.held{background:#dae9ff60;color:#fff}
+ .touch-right .touch-cheer{grid-column:1}.touch-right .touch-swish{grid-column:2}
+ .touch-right .touch-dash{grid-column:1}.touch-right .touch-jump{display:none}
+ .hud{left:max(8px,env(safe-area-inset-left));right:max(8px,env(safe-area-inset-right));top:max(6px,env(safe-area-inset-top));font-size:10px}
+}
