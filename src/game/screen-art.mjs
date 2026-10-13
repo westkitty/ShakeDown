@@ -33,7 +33,7 @@ export function resultScenePath(mode){
 // Visuals are provisional and fail open to the existing semantic DOM menu.
 // The game's Canvas renderer, player state, input and collision remain authoritative.
 export function initScreenArt({doc=document,search=location.search}={}){
- if(new URLSearchParams(search).get('art')==='classic')return {setMode(){}};
+ if(new URLSearchParams(search).get('art')==='classic')return {setMode(){},getTitleIndex(){return -1}};
  const holders={title:doc.getElementById('title-overlay'),
   dead:doc.getElementById('dead-overlay'),
   victory:doc.getElementById('victory-overlay')};
@@ -82,7 +82,7 @@ export function initScreenArt({doc=document,search=location.search}={}){
   controls.querySelector('#title-art-next').addEventListener('click',()=>{chosen=(chosen+1)%TITLE_SCENES.length;refresh()});
   refresh();
  }
- return {setMode(mode){
+ return {getTitleIndex:()=>chosen,setMode(mode){
   if(Object.hasOwn(RESULT_SCENES,mode))display(mode);
  }};
 }

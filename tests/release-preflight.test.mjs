@@ -35,7 +35,7 @@ test('release rehearsal refuses deployment when an imported module is missing',(
  const temp=fs.mkdtempSync(path.join(os.tmpdir(),'shakedown-release-fixture-'));
  try{
   for(const rel of ['src','tools','assets/sprites/cinnamon','assets/sprites/smudge',
-   'assets/sprites/dexter','assets/production','assets/level1','assets/audio']){
+   'assets/sprites/dexter','assets/production','assets/level1','assets/audio','assets/intro']){
    fs.cpSync(path.join(root,rel),path.join(temp,rel),{recursive:true});
   }
   fs.mkdirSync(path.join(temp,'assets/runtime'),{recursive:true});

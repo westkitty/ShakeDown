@@ -39,7 +39,7 @@ test('Reduced Motion freezes decorative pixels, not the authoritative gameplay c
 
 test('system reduced-motion preference initializes the setting but explicit player choice wins',async({page})=>{
  await page.emulateMedia({reducedMotion:'reduce'});
- await page.goto('./');
+ await page.goto('./?skip-intro=1');
  await page.locator('#start-btn').click();
  await page.locator('#pause-btn').click();
  await expect(page.locator('#motion-check')).toBeChecked();

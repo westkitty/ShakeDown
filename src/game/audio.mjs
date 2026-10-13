@@ -3,6 +3,7 @@
 const MAX_ACTIVE_VOICES=24;
 const MUSIC_VOLUME=.28;
 export const MUSIC_TRACKS=Object.freeze({
+ title:Object.freeze(['assets/audio/music/campus-untitled.mp3']),
  campus:Object.freeze([
   'assets/audio/music/campus-exploration.mp3',
   'assets/audio/music/campus-adventure.mp3',
@@ -109,7 +110,11 @@ export class AudioBox {
   }
  }
  chooseTrack(mode){
-  const choices=(MUSIC_TRACKS[mode]||[]).filter(track=>!this.musicFailures.has(track));
+  let choices=(MUSIC_TRACKS[mode]||[]).filter(track=>!this.musicFailures.has(track));
+  // Switching from title to play must audibly change tracks, without
+  // deleting the third campus song from later random gameplay selection.
+  if(mode==='campus'&&this.musicMode==='title'&&choices.length>1)
+   choices=choices.filter(track=>track!==this.musicTrack);
   if(!choices.length)return '';
   const sampled=this.random();
   const value=Number.isFinite(sampled)?Math.max(0,Math.min(.999999,sampled)):0;

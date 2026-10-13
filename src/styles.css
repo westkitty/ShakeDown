@@ -363,3 +363,58 @@ body.high-contrast #hud-health .health-heart--empty{color:#b8abab}
   transform:translate3d(var(--mobile-canvas-pan,0px),0,0);
  }
 }
+
+
+/* October Shamrock Shake cinematic. The title clip has a keyed-alpha WebM;
+   the MP4 fallback screen-blends away its black matte on this unused plate. */
+.sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+.title-intro-stage{display:none;position:absolute;inset:0;z-index:1;overflow:hidden;pointer-events:none;
+ background:#071a32 url('../assets/level1/backgrounds/bg_05_golden_dome_hero_backdrop.png') center / cover no-repeat}
+.title-intro-stage::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(2,10,22,.47),rgba(2,12,24,.38));z-index:0}
+.title-intro-video,.title-intro-poster{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;z-index:1;mix-blend-mode:screen}
+.title-intro-video{opacity:0}
+.title-intro-stage.playing .title-intro-video{opacity:1}
+.title-intro-stage.playing .title-intro-poster{opacity:0}
+#title-overlay.title-cinematic{align-items:flex-end;justify-content:flex-end;padding:clamp(6px,1.4vw,12px);background:none;backdrop-filter:none}
+#title-overlay.title-cinematic>.title-intro-stage{display:block}
+#title-overlay.title-cinematic>.scene-art-backdrop{opacity:0!important}
+#title-overlay.title-cinematic .hero-panel{position:relative;z-index:3;width:min(330px,41%);padding:8px 11px;margin:0;max-height:96%;
+ background:#061a30e8;border:2px solid #eed087;box-shadow:0 5px 24px #0009}
+#title-overlay.title-cinematic .hero-panel>.eyebrow,
+#title-overlay.title-cinematic .hero-panel>h2,
+#title-overlay.title-cinematic .hero-panel>p{position:absolute!important;clip-path:inset(50%)!important;width:1px!important;height:1px!important;overflow:hidden!important;white-space:nowrap!important;padding:0!important;margin:0!important}
+#title-overlay.title-cinematic .hero-panel button.primary,
+#title-overlay.title-cinematic .hero-panel button.secondary{padding:7px;margin-top:5px;font-size:12px}
+#title-overlay.title-cinematic .hero-panel .art-warning{display:none}
+
+body.intro-playing #title-overlay{display:none!important}
+body.intro-playing #hud,body.intro-playing #touch-controls{visibility:hidden}
+#intro-overlay.intro-overlay{z-index:8;padding:0;backdrop-filter:none;background:#0d2135;isolation:isolate}
+#intro-overlay.intro-overlay .intro-backdrop{position:absolute;inset:-8%;width:116%;height:116%;object-fit:cover;
+ filter:blur(14px) brightness(.43) saturate(1.2);pointer-events:none}
+#intro-overlay.intro-overlay .intro-image{position:relative;z-index:1;display:block;max-width:100%;max-height:100%;height:100%;width:auto;
+ object-fit:contain;filter:drop-shadow(0 2px 16px #06111b99)}
+#intro-overlay.intro-overlay .intro-image[hidden]{display:none}
+#intro-overlay.intro-overlay .intro-fallback{position:relative;z-index:1;max-width:90%;padding:22px;
+ background:#102e4beb;border:2px solid #f2ce7b;border-radius:12px;font-size:clamp(16px,2.6vw,27px);font-weight:900;text-align:center}
+#intro-overlay.intro-overlay .intro-fallback[hidden]{display:none}
+#intro-overlay.intro-overlay .intro-toolbar{position:absolute;z-index:3;top:8px;left:8px;right:8px;display:flex;align-items:center;justify-content:flex-end;gap:7px;
+ background:linear-gradient(90deg,transparent,rgba(8,23,43,.78));padding:4px 6px;border-radius:7px}
+#intro-counter{margin-right:auto;background:#09233cd9;border:1px solid #e1c77d;border-radius:5px;padding:5px 8px;color:#f1d991;font-size:clamp(9px,1.5vw,13px);font-weight:950}
+#intro-overlay .intro-toolbar button{padding:6px 9px;min-height:34px;width:auto;min-width:78px;margin:0;font-size:clamp(10px,1.35vw,13px)}
+@media(max-width:630px){
+ #title-overlay.title-cinematic{padding:4px}
+ #title-overlay.title-cinematic .hero-panel{width:min(255px,71%);padding:5px 6px}
+ #title-overlay.title-cinematic .hero-panel button.primary,
+ #title-overlay.title-cinematic .hero-panel button.secondary{padding:5px;font-size:10px}
+ #intro-overlay.intro-overlay .intro-toolbar{gap:5px;top:5px;left:5px;right:5px}
+ #intro-overlay .intro-toolbar button{padding:5px 7px;min-width:66px;font-size:10px}
+}
+@media(max-width:630px) and (orientation:portrait){
+ body.intro-playing .viewport{height:min(72dvh,480px);aspect-ratio:auto}
+ #intro-overlay.intro-overlay .intro-image{width:100%;height:auto;max-height:100%}
+}
+@media(prefers-reduced-motion:reduce){
+ #title-overlay.title-cinematic .title-intro-video{display:none!important}
+ #title-overlay.title-cinematic .title-intro-poster{opacity:1!important}
+}

@@ -10,7 +10,7 @@ test('a failed module dependency shows an actionable retry instead of an inert S
   return route.continue();
  });
  await page.clock.install();
- await page.goto('./');
+ await page.goto('./?skip-intro=1');
  await page.clock.fastForward(9000);
  await expect(page.locator('#retry-load-btn')).toBeVisible();
  await expect(page.locator('#load-status')).toContainText('game files did not finish loading');

@@ -3,7 +3,7 @@ import {test,expect} from '@playwright/test';
 test('320 px narrow phone has no horizontal scrolling or clipped launch and touch controls',async({page},testInfo)=>{
  test.skip(testInfo.project.name!=='mobile-chromium','Phone layout audit uses mobile emulation');
  await page.setViewportSize({width:320,height:568});
- await page.goto('./');
+ await page.goto('./?skip-intro=1');
  const audit=await page.evaluate(()=>{
   const box=selector=>{const r=document.querySelector(selector).getBoundingClientRect();
    return{left:r.left,right:r.right,top:r.top,bottom:r.bottom,width:r.width,height:r.height}};
@@ -23,7 +23,7 @@ test('320 px narrow phone has no horizontal scrolling or clipped launch and touc
 test('landscape phone keeps launch and accessible controls above the physical bottom edge',async({page},testInfo)=>{
  test.skip(testInfo.project.name!=='mobile-chromium','Landscape audit needs coarse pointer');
  await page.setViewportSize({width:844,height:390});
- await page.goto('./');
+ await page.goto('./?skip-intro=1');
  const layout=await page.evaluate(()=>{
   const rect=e=>{const r=e.getBoundingClientRect();return{bottom:r.bottom,top:r.top,width:r.width,height:r.height}};
   return{viewport:innerHeight,scrollWidth:document.documentElement.scrollWidth,
@@ -43,7 +43,7 @@ test('landscape phone keeps launch and accessible controls above the physical bo
 });
 
 test('critical solid-background status buttons meet standard contrast, not just color cues',async({page})=>{
- await page.goto('./');
+ await page.goto('./?skip-intro=1');
  const ratios=await page.evaluate(()=>{
   function channels(text){const a=text.match(/[\d.]+/g)?.map(Number)||[];return a.slice(0,3).map(v=>v/255)}
   function brightness(rgb){

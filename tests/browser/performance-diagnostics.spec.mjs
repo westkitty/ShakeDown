@@ -1,7 +1,7 @@
 import {test,expect} from '@playwright/test';
 
 test('performance diagnostics report real sampled frame and render percentiles',async({page})=>{
- await page.goto('./');
+ await page.goto('./?skip-intro=1');
  await page.waitForFunction(()=>typeof window.__SHAKEDOWN_QA?.metrics==='function');
  await page.locator('#start-btn').click();
  await expect.poll(()=>page.evaluate(()=>window.__SHAKEDOWN_QA.metrics().frames),{timeout:4500}).toBeGreaterThan(2);

@@ -1,7 +1,7 @@
 import {test,expect} from '@playwright/test';
 
 test('pause is a keyboard-accessible dialog with focus containment and no auto-repeat toggling',async({page})=>{
- await page.goto('./');
+ await page.goto('./?skip-intro=1');
  await expect(page.locator('#start-btn')).toBeFocused();
  await page.locator('#start-btn').click();
  await expect(page.locator('#game')).toBeFocused();
@@ -25,7 +25,7 @@ test('pause is a keyboard-accessible dialog with focus containment and no auto-r
 });
 
 test('focused sound button handles Space natively instead of forcing a jump',async({page})=>{
- await page.goto('./');
+ await page.goto('./?skip-intro=1');
  await page.locator('#start-btn').click();
  await page.waitForTimeout(150);
  await page.locator('#mute-btn').focus();
@@ -37,7 +37,7 @@ test('focused sound button handles Space natively instead of forcing a jump',asy
 
 test('keyboard activation of focused touch Jump performs a bounded in-game jump',async({page},testInfo)=>{
  test.skip(testInfo.project.name!=='mobile-chromium','Physical button shape is mobile-specific');
- await page.goto('./');
+ await page.goto('./?skip-intro=1');
  await page.locator('#start-btn').tap();
  await page.locator('[data-action=jump]').focus();
  await page.keyboard.down('Space');

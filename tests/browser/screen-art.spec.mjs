@@ -2,7 +2,7 @@ import {test,expect} from '@playwright/test';
 
 test('owner start plate and ten alternate raster titles load in-game; Start works',async({page})=>{
  test.setTimeout(90000);
- await page.goto('./');
+ await page.goto('./?skip-intro=1');
  const art=page.locator('#title-scene-art');
  await page.locator('#workshop-title > summary').click();
  await expect(art).toHaveAttribute('src',/assets\/screens\/01_start_level_clean_960x540\.png/);
@@ -46,7 +46,7 @@ test('real game-over and victory overlays use the shipped clean raster plates',a
 test('classic opt-out keeps old menu and avoids ALL title and screen image downloads',async({page})=>{
  const titleRequests=[];
  page.on('request',request=>{if(/\/assets\/(title|screens)\//.test(request.url()))titleRequests.push(request.url())});
- await page.goto('./?art=classic');
+ await page.goto('./?art=classic&skip-intro=1');
  await expect(page.locator('#title-scene-art')).toHaveCount(0);
  await expect(page.locator('#title-art-next')).toHaveCount(0);
  expect(titleRequests).toHaveLength(0);

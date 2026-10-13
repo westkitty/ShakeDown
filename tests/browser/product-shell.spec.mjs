@@ -1,7 +1,7 @@
 import {test,expect} from '@playwright/test';
 
 test('first-run player UI contains an obvious Start and keeps workshop tools optional',async({page})=>{
- await page.goto('./');
+ await page.goto('./?skip-intro=1');
  await expect(page.locator('#start-btn')).toBeVisible();
  await expect(page.locator('#workshop-title')).not.toHaveAttribute('open','');
  await expect(page.locator('#art-director-title-open')).toBeHidden();

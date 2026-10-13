@@ -9,6 +9,8 @@ import {loadApprovedArt} from './game/production-assets.mjs';
 import {loadCuratedPreview,loadWorldSceneArt} from './game/curated-assets.mjs';
 import {ArtDirector} from './game/art-director.mjs';
 import {initScreenArt} from './game/screen-art.mjs';
+import {initIntroFlow} from './game/intro-flow.mjs';
+import {initTitleCinematic} from './game/title-cinematic.mjs';
 import {checkpointRecord,validCheckpointRecord,restoreCheckpoint} from './game/progress.mjs';
 const $=id=>document.getElementById(id);
 const canvas=$('game'),ctx=canvas.getContext('2d',{alpha:false});
@@ -40,6 +42,19 @@ function showContinue(){
   note.textContent='Saved at '+record.checkpointId+' — start fresh or continue.';}
 }
 const audio=new AudioBox();audio.mute(state.settings.mute,{resume:false});
+const intro=initIntroFlow();
+const titleCinematic=initTitleCinematic({reduced:()=>state.settings.reducedMotion});
+const introQuery=new URLSearchParams(location.search);
+const bypassIntro=introQuery.get('skip-intro')==='1'||
+ (introQuery.has('qa')&&introQuery.get('intro')!=='1');
+// Title audio unlocks on the first user gesture; Start crossfades into campus.
+function unlockTitleMusic(){
+ if(state.mode!=='title'||intro.active||state.settings.mute)return;
+ audio.activate();
+ audio.musicTick(performance.now()/1000,'title');
+}
+window.addEventListener('pointerdown',unlockTitleMusic,{capture:true});
+window.addEventListener('keydown',unlockTitleMusic,{capture:true});
 let productionArt={},productionLoaded=0,productionDeclared=0,productionErrors=[];
 let curatedArt={},worldArt={},renderArt=productionArt,curatedLoaded=0,curatedSelected=0,curatedErrors=[];
 let worldLoaded=0,worldSelected=0,worldErrors=[];
@@ -148,6 +163,7 @@ function showMode(){
  if(displayedMode===state.mode)return;
  displayedMode=state.mode;
  screenArt.setMode(state.mode);
+ titleCinematic.setTitleVisible(state.mode==='title'&&!intro.active);
  for(const id of Object.values(overlayByMode))$(id).classList.add('hidden');
  const overlay=overlayByMode[state.mode];
  if(overlay)$(overlay).classList.remove('hidden');
@@ -174,7 +190,7 @@ function isEditingFocus(){
 function handleModalTab(e){
  if(director.dialog.open)return false;
  if(e.code!=='Tab')return false;
- const overlayId=overlayByMode[state.mode];
+ const overlayId=intro.active?'intro-overlay':overlayByMode[state.mode];
  if(!overlayId)return false;
  const panel=$(overlayId);
  const focusables=[...panel.querySelectorAll('button:not(:disabled):not([hidden]),input:not(:disabled),a[href]')]
@@ -188,6 +204,12 @@ function handleModalTab(e){
 }
 window.addEventListener('keydown',e=>{
  if(director.dialog.open)return;
+ if(intro.active){
+  if(e.code==='Escape'){e.preventDefault();if(!e.repeat)intro.skip();return}
+  if(e.code==='ArrowRight'){e.preventDefault();if(!e.repeat)intro.advance();return}
+  if(handleModalTab(e))return;
+  return; // story cards cannot send input to gameplay
+ }
  if(handleModalTab(e))return;
  if(e.code==='Escape'||e.code==='KeyP'){
   if(state.mode==='playing'||state.mode==='pause'){
@@ -237,9 +259,20 @@ window.addEventListener('keyup',e=>{
  if(!act)return;
  keyActs.delete(e.code);updateHeld(act);e.preventDefault();
 });
-window.addEventListener('blur',()=>{clearInputs();if(state.mode==='playing')togglePause()});
-window.addEventListener('pagehide',event=>{audio.dispose();if(!event.persisted)director.dispose()});
-document.addEventListener('visibilitychange',()=>{if(document.hidden){clearInputs();if(state.mode==='playing')togglePause()}lastStamp=0;accumulator=0});
+window.addEventListener('blur',()=>{clearInputs();intro.pause();if(state.mode==='playing')togglePause()});
+window.addEventListener('focus',()=>{if(!document.hidden)intro.resume()});
+window.addEventListener('pagehide',event=>{intro.cancel();titleCinematic.dispose();audio.dispose();if(!event.persisted)director.dispose()});
+document.addEventListener('visibilitychange',()=>{
+ if(document.hidden){
+  clearInputs();intro.pause();titleCinematic.setTitleVisible(false);
+  if(intro.active)audio.setPaused(true);
+  if(state.mode==='playing')togglePause();
+ }else{
+  intro.resume();titleCinematic.setTitleVisible(state.mode==='title'&&!intro.active);
+  if(intro.active)audio.setPaused(false);
+ }
+ lastStamp=0;accumulator=0;
+});
 for(const button of document.querySelectorAll('.touch')){
  const action=button.dataset.action;
  button.addEventListener('pointerdown',e=>{
@@ -259,10 +292,10 @@ for(const button of document.querySelectorAll('.touch')){
  }
  button.addEventListener('pointerup',endPointer);button.addEventListener('pointercancel',endPointer);button.addEventListener('lostpointercapture',endPointer);
 }
-function newRound(){
+function newRound(keepIntroMusic=false){
  state=newGame(state.settings);state.achievements=savedDiscoveries(saved.discoveries,state.level);state.assetCount=assetCount;
  lastEventSerial=0;lastSavedProgressKey='';displayedMode='';
- clearInputs();lastStamp=0;accumulator=0;audio.resetSequence();audio.setPaused(false);
+ clearInputs();lastStamp=0;accumulator=0;if(!keepIntroMusic)audio.resetSequence();audio.setPaused(false);
  saved.progress=null;
  startGame(state);save();audio.activate();showMode();canvas.focus({preventScroll:true});
 }
@@ -277,7 +310,15 @@ function continueRound(){
  clearInputs();lastStamp=0;accumulator=0;audio.resetSequence();audio.setPaused(false);
  audio.activate();showMode();canvas.focus({preventScroll:true});
 }
-function start(){newRound()}
+function start(){
+ if(intro.active)return;
+ if(bypassIntro){newRound();return}
+ audio.activate();
+ if(intro.start(()=>newRound(true))){
+  titleCinematic.setTitleVisible(false);
+  audio.musicTick(performance.now()/1000,'campus');
+ }
+}
 function retry(){clearInputs();if(state.mode==='victory'){newRound();return}resetToCheckpoint(state);displayedMode='';showMode();canvas.focus({preventScroll:true});}
 function togglePause(){pauseGame(state);clearInputs();audio.setPaused(state.mode!=='playing');displayedMode='';showMode();lastStamp=0;accumulator=0;save()}
 function updateMute(){$('mute-btn').textContent=state.settings.mute?'♫ MUTED':'♪ SOUND';$('mute-btn').setAttribute('aria-pressed',String(state.settings.mute));}
@@ -285,7 +326,7 @@ $('start-btn').addEventListener('click',start);
 $('continue-btn').addEventListener('click',continueRound);
 $('resume-btn').addEventListener('click',togglePause);
 $('retry-btn').addEventListener('click',retry);$('pause-retry-btn').addEventListener('click',retry);
-$('replay-btn').addEventListener('click',newRound);$('pause-btn').addEventListener('click',togglePause);
+$('replay-btn').addEventListener('click',()=>newRound());$('pause-btn').addEventListener('click',togglePause);
 $('mute-btn').addEventListener('click',()=>{state.settings.mute=!state.settings.mute;audio.mute(state.settings.mute);audio.activate();updateMute();save()});
 $('assist-check').checked=state.settings.assist;$('motion-check').checked=state.settings.reducedMotion;$('contrast-check').checked=Boolean(state.settings.contrast);
 function updateContrast(){document.body.classList.toggle('high-contrast',Boolean(state.settings.contrast))}
@@ -298,6 +339,8 @@ for(const id of ['art-director-title-open','art-director-pause-open'])
 for(const id of ['art-preview-title','art-preview-pause'])
  $(id).addEventListener('change',event=>setCuratedPreview(event.target.checked));
 if(curatedEnabled)setCuratedPreview(true);
+for(const id of ['title-art-prev','title-art-next'])
+ $(id)?.addEventListener('click',()=>titleCinematic.setSelected(screenArt.getTitleIndex()===0));
 updateMute();showContinue();
 async function loadAssets(){
  try{
@@ -404,7 +447,7 @@ function animate(ms){requestAnimationFrame(animate);
   // Events have monotonic IDs because the rolling 35-event history shifts.
   // An array cursor would silently stop all audio after event 35.
   for(const ev of state.events){if(ev.serial>lastEventSerial){audio.event(ev.type);lastEventSerial=ev.serial}}
- }else{accumulator=0}
+ }else{accumulator=0;if(state.mode==='title')audio.musicTick(ms/1000,intro.active?'campus':'title')}
  if(state.mode==='victory')state.elapsed+=dt;
  updateMobileFraming();
  const drawStart=performance.now();
@@ -466,7 +509,7 @@ if(previewId){productionStatus='LOCAL ART PREVIEW ONLY: '+previewId+' (NOT produ
   showAssetStatus();
  }).catch(error=>{productionErrors=['loader: '+error.message];showAssetStatus()});
  showMode();requestAnimationFrame(animate);
-window.__SHAKEDOWN_QA={snapshot:()=>snapshot(state),metrics,audio:()=>audio.diagnostics(),artDirector:()=>director.diagnostics(),assets:()=>({loaded:assetCount,failed:[...assetErrors],productionLoaded,productionDeclared,productionErrors:[...productionErrors],curatedEnabled,curatedLoaded,curatedSelected,curatedErrors:[...curatedErrors],
+window.__SHAKEDOWN_QA={snapshot:()=>snapshot(state),metrics,audio:()=>audio.diagnostics(),intro:()=>intro.inspect(),titleCinematic:()=>({visible:titleCinematic.visible}),artDirector:()=>director.diagnostics(),assets:()=>({loaded:assetCount,failed:[...assetErrors],productionLoaded,productionDeclared,productionErrors:[...productionErrors],curatedEnabled,curatedLoaded,curatedSelected,curatedErrors:[...curatedErrors],
  worldLoaded,worldSelected,worldErrors:[...worldErrors],npcLoaded,npcErrors:[...npcErrors]}),
  // Developer-only deterministic test aids; excluded from normal gameplay and production paths.
  ...(new URLSearchParams(location.search).has('qa')?{

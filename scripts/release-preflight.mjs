@@ -70,6 +70,35 @@ try{
    }
   }catch(error){missing.push({path:manifestPath,error:error.message})}
  }
+ // Intro source-image and keyed-title byte contract. This is technical
+ // integrity, not an extension or fabrication of the P019 art-approval ledger.
+ include('assets/intro/manifest.json');
+ try{
+  const intro=JSON.parse(fs.readFileSync(rel('assets/intro/manifest.json'),'utf8'));
+  if(intro.schema!==1||intro.panels?.length!==3||intro.video?.length!==3)
+   throw Error('expected exactly three story cards and three title video assets');
+  if(intro.background!=='assets/level1/backgrounds/bg_05_golden_dome_hero_backdrop.png')
+   throw Error('unreviewed title background mapping');
+  include(intro.background);
+  for(const asset of [...intro.panels,...intro.video]){
+   if(!(asset.path.startsWith('assets/intro/')&&/^[a-z0-9_-]+[.](webp|webm|mp4)$/.test(asset.path.slice('assets/intro/'.length)))||
+      !/^[0-9a-f]{64}$/.test(asset.sha256))
+    throw Error('unsafe intro manifest asset');
+   include(asset.path);
+   const actual=entries.get(asset.path);
+   if(!actual||actual.sha256!==asset.sha256)
+    missing.push({path:asset.path,error:'Intro SHA-256 mismatch'});
+   if(!actual)continue;
+   const data=fs.readFileSync(rel(asset.path));
+   if(asset.path.endsWith('.webp')&&
+     !(data.toString('ascii',0,4)==='RIFF'&&data.toString('ascii',8,12)==='WEBP'))
+    missing.push({path:asset.path,error:'Invalid WebP header'});
+   if(asset.path.endsWith('.webm')&&data.subarray(0,4).toString('hex')!=='1a45dfa3')
+    missing.push({path:asset.path,error:'Invalid WebM header'});
+   if(asset.path.endsWith('.mp4')&&data.toString('ascii',4,8)!=='ftyp')
+    missing.push({path:asset.path,error:'Invalid MP4 header'});
+  }
+ }catch(error){missing.push({path:'assets/intro/manifest.json',error:error.message})}
  traceModule('src/main.mjs');
  // The optional curated demo must ship all physical, source-hash-verified PNGs.
  for(const f of ['tools/asset-gallery.html','tools/asset-gallery.css',
