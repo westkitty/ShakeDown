@@ -2,7 +2,20 @@
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#132c48"><meta name="description" content="ShakeDown - Cinnamon Fuzzbutt's Shamrock Shake birthday chase for Maverick.">
 <title>ShakeDown · A Birthday Caper</title><link rel="stylesheet" href="src/styles.css"></head>
-<body><div class="game-shell">
+<body class="brand-playing">
+<section id="brand-splash" class="brand-splash" role="dialog" aria-modal="true" aria-labelledby="brand-heading">
+<h2 id="brand-heading" class="sr-only">Stinky Weasel Entertainment presents</h2>
+<div class="brand-media">
+<img id="brand-poster" src="assets/branding/stinky-weasel-brand-poster.webp" alt="" aria-hidden="true" width="960" height="540">
+<video id="brand-video" muted playsinline preload="none" aria-hidden="true"></video>
+</div>
+<div class="brand-footer">
+<span id="brand-status" role="status" aria-live="polite">STINKY WEASEL ENTERTAINMENT</span>
+<button id="brand-sound" type="button" aria-pressed="false">PLAY WITH SOUND</button>
+<a id="brand-skip" class="secondary" href="index.html?skip-brand=1">SKIP INTRO →</a>
+</div>
+</section>
+<div class="game-shell" id="game-shell">
 <header class="mast"><div><span class="eyebrow">STINKY WEASEL PRODUCTIONS · BIRTHDAY EDITION</span><h1>SHAKEDOWN<span class="gold">!</span></h1></div><div class="mast-side"><span class="tag">SOUTH BEND · NOTRE DAME</span><button id="mute-btn" class="icon-btn" aria-label="Mute or unmute music and effects" aria-pressed="false" type="button">♪ SOUND</button></div></header>
 <div class="game-frame" id="game-frame"><div class="viewport" id="viewport">
 <canvas id="game" width="960" height="540" role="img" aria-label="Side-scrolling platformer starring Cinnamon Fuzzbutt, chasing a fox around Notre Dame and the Golden Dome." tabindex="0"></canvas>

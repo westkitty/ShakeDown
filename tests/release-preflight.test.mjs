@@ -28,6 +28,8 @@ test('offline static rehearsal fingerprints only real reachable runtime bytes',(
  assert.ok(a.files.some(f=>f.path==='src/game/engine.mjs'));
  assert.ok(a.files.some(f=>f.path==='src/game/audio.mjs'));
  assert.ok(a.files.some(f=>f.path==='assets/audio/music/manifest.json'));
+ assert.ok(a.files.some(f=>f.path==='assets/branding/stinky-weasel-brand.mp4'));
+ assert.ok(a.files.some(f=>f.path==='assets/branding/stinky-weasel-brand-poster.webp'));
  assert.equal(a.files.filter(f=>f.path.endsWith('.mp3')).length,6);
  assert.ok(a.files.every(f=>/^[0-9a-f]{64}$/.test(f.sha256)));
 });
@@ -35,7 +37,7 @@ test('release rehearsal refuses deployment when an imported module is missing',(
  const temp=fs.mkdtempSync(path.join(os.tmpdir(),'shakedown-release-fixture-'));
  try{
   for(const rel of ['src','tools','assets/sprites/cinnamon','assets/sprites/smudge',
-   'assets/sprites/dexter','assets/production','assets/level1','assets/audio','assets/intro']){
+   'assets/sprites/dexter','assets/production','assets/level1','assets/audio','assets/intro','assets/branding']){
    fs.cpSync(path.join(root,rel),path.join(temp,rel),{recursive:true});
   }
   fs.mkdirSync(path.join(temp,'assets/runtime'),{recursive:true});

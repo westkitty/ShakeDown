@@ -11,6 +11,7 @@ import {ArtDirector} from './game/art-director.mjs';
 import {initScreenArt} from './game/screen-art.mjs';
 import {initIntroFlow} from './game/intro-flow.mjs';
 import {initTitleCinematic} from './game/title-cinematic.mjs';
+import {initBrandIntro} from './game/brand-intro.mjs';
 import {checkpointRecord,validCheckpointRecord,restoreCheckpoint} from './game/progress.mjs';
 const $=id=>document.getElementById(id);
 const canvas=$('game'),ctx=canvas.getContext('2d',{alpha:false});
@@ -44,12 +45,26 @@ function showContinue(){
 const audio=new AudioBox();audio.mute(state.settings.mute,{resume:false});
 const intro=initIntroFlow();
 const titleCinematic=initTitleCinematic({reduced:()=>state.settings.reducedMotion});
+const branding=initBrandIntro({
+ reduced:()=>state.settings.reducedMotion,
+ onGesture:()=>{if(!state.settings.mute)audio.activate()},
+ onFinish:()=>{
+  titleCinematic.setTitleVisible(state.mode==='title'&&!intro.active);
+  if(state.mode==='title'){
+   $('start-btn').focus({preventScroll:true});
+   audio.musicTick(performance.now()/1000,'title');
+  }
+ }
+});
+branding.start();
+titleCinematic.setTitleVisible(state.mode==='title'&&!branding.active);
+
 const introQuery=new URLSearchParams(location.search);
 const bypassIntro=introQuery.get('skip-intro')==='1'||
  (introQuery.has('qa')&&introQuery.get('intro')!=='1');
 // Title audio unlocks on the first user gesture; Start crossfades into campus.
 function unlockTitleMusic(){
- if(state.mode!=='title'||intro.active||state.settings.mute)return;
+ if(state.mode!=='title'||intro.active||branding.active||state.settings.mute)return;
  audio.activate();
  audio.musicTick(performance.now()/1000,'title');
 }
@@ -163,7 +178,7 @@ function showMode(){
  if(displayedMode===state.mode)return;
  displayedMode=state.mode;
  screenArt.setMode(state.mode);
- titleCinematic.setTitleVisible(state.mode==='title'&&!intro.active);
+ titleCinematic.setTitleVisible(state.mode==='title'&&!intro.active&&!branding.active);
  for(const id of Object.values(overlayByMode))$(id).classList.add('hidden');
  const overlay=overlayByMode[state.mode];
  if(overlay)$(overlay).classList.remove('hidden');
@@ -172,7 +187,7 @@ function showMode(){
  if(state.mode==='dead')$('dead-reason').textContent=state.lastDamage||'The Fox got the better of Cinnamon. For now.';
  if(state.mode==='victory'){$('victory-score').textContent=`${state.shakeCount} Shamrock Shakes found • ${state.secretCount} golden secrets • ${state.achievements.length}/2 NPC discoveries`;populateDiscoveries('victory-discoveries');save()}
  const defaultFocus={title:'start-btn',pause:'resume-btn',dead:'retry-btn',victory:'replay-btn'}[state.mode];
- if(defaultFocus)$(defaultFocus).focus({preventScroll:true});
+ if(defaultFocus&&!branding.active)$(defaultFocus).focus({preventScroll:true});
  else if(state.mode==='playing')canvas.focus({preventScroll:true});
 }
 const held=new Set(),queued=new Set(),pointerActs=new Map(),keyActs=new Map();
@@ -190,7 +205,7 @@ function isEditingFocus(){
 function handleModalTab(e){
  if(director.dialog.open)return false;
  if(e.code!=='Tab')return false;
- const overlayId=intro.active?'intro-overlay':overlayByMode[state.mode];
+ const overlayId=branding.active?'brand-splash':intro.active?'intro-overlay':overlayByMode[state.mode];
  if(!overlayId)return false;
  const panel=$(overlayId);
  const focusables=[...panel.querySelectorAll('button:not(:disabled):not([hidden]),input:not(:disabled),a[href]')]
@@ -203,6 +218,11 @@ function handleModalTab(e){
  return false;
 }
 window.addEventListener('keydown',e=>{
+ if(branding.active){
+  if(e.code==='Escape'){e.preventDefault();if(!e.repeat)branding.skip();return}
+  if(handleModalTab(e))return;
+  return;
+ }
  if(director.dialog.open)return;
  if(intro.active){
   if(e.code==='Escape'){e.preventDefault();if(!e.repeat)intro.skip();return}
@@ -259,16 +279,16 @@ window.addEventListener('keyup',e=>{
  if(!act)return;
  keyActs.delete(e.code);updateHeld(act);e.preventDefault();
 });
-window.addEventListener('blur',()=>{clearInputs();intro.pause();if(state.mode==='playing')togglePause()});
-window.addEventListener('focus',()=>{if(!document.hidden)intro.resume()});
-window.addEventListener('pagehide',event=>{intro.cancel();titleCinematic.dispose();audio.dispose();if(!event.persisted)director.dispose()});
+window.addEventListener('blur',()=>{clearInputs();branding.pause();intro.pause();if(state.mode==='playing')togglePause()});
+window.addEventListener('focus',()=>{if(!document.hidden){branding.resume();intro.resume()}});
+window.addEventListener('pagehide',event=>{branding.dispose();intro.cancel();titleCinematic.dispose();audio.dispose();if(!event.persisted)director.dispose()});
 document.addEventListener('visibilitychange',()=>{
  if(document.hidden){
-  clearInputs();intro.pause();titleCinematic.setTitleVisible(false);
+  clearInputs();branding.pause();intro.pause();titleCinematic.setTitleVisible(false);
   if(intro.active)audio.setPaused(true);
   if(state.mode==='playing')togglePause();
  }else{
-  intro.resume();titleCinematic.setTitleVisible(state.mode==='title'&&!intro.active);
+  branding.resume();intro.resume();titleCinematic.setTitleVisible(state.mode==='title'&&!intro.active&&!branding.active);
   if(intro.active)audio.setPaused(false);
  }
  lastStamp=0;accumulator=0;
@@ -447,7 +467,7 @@ function animate(ms){requestAnimationFrame(animate);
   // Events have monotonic IDs because the rolling 35-event history shifts.
   // An array cursor would silently stop all audio after event 35.
   for(const ev of state.events){if(ev.serial>lastEventSerial){audio.event(ev.type);lastEventSerial=ev.serial}}
- }else{accumulator=0;if(state.mode==='title')audio.musicTick(ms/1000,intro.active?'campus':'title')}
+ }else{accumulator=0;if(state.mode==='title'&&!branding.active)audio.musicTick(ms/1000,intro.active?'campus':'title')}
  if(state.mode==='victory')state.elapsed+=dt;
  updateMobileFraming();
  const drawStart=performance.now();
@@ -509,7 +529,7 @@ if(previewId){productionStatus='LOCAL ART PREVIEW ONLY: '+previewId+' (NOT produ
   showAssetStatus();
  }).catch(error=>{productionErrors=['loader: '+error.message];showAssetStatus()});
  showMode();requestAnimationFrame(animate);
-window.__SHAKEDOWN_QA={snapshot:()=>snapshot(state),metrics,audio:()=>audio.diagnostics(),intro:()=>intro.inspect(),titleCinematic:()=>({visible:titleCinematic.visible}),artDirector:()=>director.diagnostics(),assets:()=>({loaded:assetCount,failed:[...assetErrors],productionLoaded,productionDeclared,productionErrors:[...productionErrors],curatedEnabled,curatedLoaded,curatedSelected,curatedErrors:[...curatedErrors],
+window.__SHAKEDOWN_QA={snapshot:()=>snapshot(state),metrics,audio:()=>audio.diagnostics(),brand:()=>branding.inspect(),intro:()=>intro.inspect(),titleCinematic:()=>({visible:titleCinematic.visible}),artDirector:()=>director.diagnostics(),assets:()=>({loaded:assetCount,failed:[...assetErrors],productionLoaded,productionDeclared,productionErrors:[...productionErrors],curatedEnabled,curatedLoaded,curatedSelected,curatedErrors:[...curatedErrors],
  worldLoaded,worldSelected,worldErrors:[...worldErrors],npcLoaded,npcErrors:[...npcErrors]}),
  // Developer-only deterministic test aids; excluded from normal gameplay and production paths.
  ...(new URLSearchParams(location.search).has('qa')?{
