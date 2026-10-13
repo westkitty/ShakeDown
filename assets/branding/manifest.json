@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "kind": "pretitle-branding",
+  "source": {
+    "originalFilename": "1000223481.mp4",
+    "originalSha256": "9a1850ddbc60e5f72df377a3130c25b20584db98d9a3c3e64f0a23f1b95b268f",
+    "sourceDurationSeconds": 8.010998,
+    "originalSizeBytes": 7650158
+  },
+  "video": {
+    "path": "assets/branding/stinky-weasel-brand.mp4",
+    "sha256": "2508268e0f785a7e3a781565281d25cbc22585b0ffa1e329152b08125e729782",
+    "bytes": 1169865,
+    "videoCodec": "h264",
+    "audioCodec": "aac",
+    "width": 1280,
+    "height": 720,
+    "durationSeconds": 8.010998
+  },
+  "poster": {
+    "path": "assets/branding/stinky-weasel-brand-poster.webp",
+    "sha256": "de2d667724a9fc3b02530b7432177153815aca3a8548ce0afacfa134d209cd03",
+    "bytes": 21012
+  },
+  "runtime": {
+    "order": "pretitle > animated game title > three October Shamrock Shake panels > gameplay",
+    "autoplayMuted": true,
+    "soundRequiresGesture": true,
+    "skipAvailable": true
+  },
+  "provenance": "User-supplied Stinky Weasel branding video; optimized without redesigning content, recorded source bytes and platform delivery digest; not a P019 game-art approval."
+}
