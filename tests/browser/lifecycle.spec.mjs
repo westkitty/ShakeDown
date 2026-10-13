@@ -4,7 +4,7 @@ test('missing image manifests keep the procedural birthday game playable',async(
  const errors=[];page.on('pageerror',e=>errors.push(e.message));
  await page.route('**/assets/sprites/cinnamon/frames.json',route=>route.abort('failed'));
  await page.route('**/assets/runtime/manifest.json',route=>route.abort('failed'));
- await page.goto('./');
+ await page.goto('./?skip-intro=1');
  await expect(page.locator('#load-status')).toContainText('Sprite source unavailable');
  await page.locator('#start-btn').click();
  await page.keyboard.down('ArrowRight');
@@ -22,7 +22,7 @@ test('already-loaded session can continue on network loss without remote resourc
  page.on('pageerror',e=>errors.push(e.message));
  // A local dev server is not an external request, regardless of its test port.
  page.on('request',r=>{if(new URL(r.url()).origin!==localOrigin)remote.push(r.url())});
- await page.goto('./');
+ await page.goto('./?skip-intro=1');
  await expect.poll(async()=>page.evaluate(()=>window.__SHAKEDOWN_QA.assets().loaded),
   {timeout:12000}).toBe(25);
  await page.context().setOffline(true);
@@ -41,7 +41,7 @@ test('already-loaded session can continue on network loss without remote resourc
 
 test('repeated resize, pause and focus-loss cycles do not crash or leak active sound voices',async({page})=>{
  const errors=[];page.on('pageerror',e=>errors.push(e.message));
- await page.goto('./');
+ await page.goto('./?skip-intro=1');
  await page.locator('#start-btn').click();
  const viewports=[[1280,800],[320,568],[844,390],[390,844],[800,600],[375,667]];
  for(const [width,height] of viewports){

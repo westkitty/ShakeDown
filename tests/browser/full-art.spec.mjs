@@ -6,7 +6,7 @@ test('the game exposes all 194 physical candidates without eagerly downloading 1
   if(request.url().includes('/assets/production/')&&request.url().endsWith('.png'))
    imageRequests.push(request.url());
  });
- await page.goto('./?art=classic');
+ await page.goto('./?art=classic&skip-intro=1');
  expect((await page.evaluate(()=>window.__SHAKEDOWN_QA.artDirector())).available).toBe(0);
  expect(imageRequests.length).toBe(0,'Classic mode must retain lightweight startup');
  await page.locator('#workshop-title > summary').click();
@@ -29,7 +29,7 @@ test('the game exposes all 194 physical candidates without eagerly downloading 1
 
 test('all twelve art families can be applied to their live game roles and removed',async({page})=>{
  test.setTimeout(75000);
- await page.goto('./?art=all');
+ await page.goto('./?art=all&skip-intro=1');
  await page.locator('#workshop-title > summary').click();
  await page.locator('#art-director-title-open').click();
  await expect(page.locator('#art-director-list option')).toHaveCount(194);
@@ -68,7 +68,7 @@ test('all twelve art families can be applied to their live game roles and remove
 test('all 24 contract-blocked images remain viewable as reference but never become live scenery',async({page})=>{
  test.setTimeout(45000);
  await page.emulateMedia({reducedMotion:'reduce'});
- await page.goto('./?art=classic');
+ await page.goto('./?art=classic&skip-intro=1');
  await expect.poll(async()=>page.evaluate(()=>window.__SHAKEDOWN_QA.assets().loaded)).toBe(25);
  // All sprite image promises may settle before the first Canvas frame includes
  // their pixels. Compare two genuinely painted, post-load frames, not loader UI state.
@@ -104,7 +104,7 @@ test('all 24 contract-blocked images remain viewable as reference but never beco
 });
 
 test('director captures keyboard focus, keeps pause state and dismisses with Escape',async({page})=>{
- await page.goto('./');
+ await page.goto('./?skip-intro=1');
  await page.locator('#start-btn').click();
  if(await page.locator('#art-director-play-open').isVisible()){
   await page.locator('#art-director-play-open').click();
@@ -130,7 +130,7 @@ test('Art Jury links each specific original to its matching in-game runtime audi
  await expect(page.locator('article[data-id="FOX-07"]')).toHaveCount(1);
  const target=page.locator('article[data-id="FOX-07"] a').filter({hasText:'AUDITION IN THE ACTUAL GAME'});
  await expect(target).toHaveAttribute('href','../?art=all&inspect=FOX-07');
- await page.goto('./?art=all&inspect=FOX-07');
+ await page.goto('./?art=all&inspect=FOX-07&skip-intro=1');
  await expect(page.locator('#art-director-dialog')).toBeVisible();
  await expect.poll(async()=>page.evaluate(()=>window.__SHAKEDOWN_QA.artDirector().current)).toBe('FOX-07');
  await expect.poll(async()=>page.locator('#art-director-apply').isEnabled(),{timeout:15000}).toBe(true);
@@ -140,7 +140,7 @@ test('Art Jury links each specific original to its matching in-game runtime audi
 
 
 test('a browser back-forward cache pagehide preserves the native art inspector',async({page})=>{
- await page.goto('./');
+ await page.goto('./?skip-intro=1');
  await page.evaluate(()=>{
   const event=new Event('pagehide');
   Object.defineProperty(event,'persisted',{value:true});

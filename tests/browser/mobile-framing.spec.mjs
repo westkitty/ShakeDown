@@ -3,7 +3,7 @@ import {test,expect} from '@playwright/test';
 test('phone portrait view enlarges the scene without distorting canvas or losing player',async({page},info)=>{
  test.skip(info.project.name!=='mobile-chromium','Portrait touch-viewport experiment');
  await page.setViewportSize({width:390,height:844});
- await page.goto('./');
+ await page.goto('./?skip-intro=1');
  await page.waitForFunction(()=>window.__SHAKEDOWN_QA?.snapshot);
  const frame=page.locator('#viewport'),canvas=page.locator('#game');
  const initialFrame=await frame.boundingBox(),initialCanvas=await canvas.boundingBox();
@@ -28,7 +28,7 @@ test('phone portrait view enlarges the scene without distorting canvas or losing
 });
 test('landscape and desktop preserve uncropped 16:9 stage',async({page})=>{
  await page.setViewportSize({width:844,height:390});
- await page.goto('./');
+ await page.goto('./?skip-intro=1');
  const frame=await page.locator('#viewport').boundingBox();
  const canvas=await page.locator('#game').boundingBox();
  expect(frame.width/frame.height).toBeCloseTo(16/9,1);

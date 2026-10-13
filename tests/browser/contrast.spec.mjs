@@ -1,7 +1,7 @@
 import {test,expect} from '@playwright/test';
 
 test('High Contrast changes real HUD/touch presentation and is preserved on reload',async({page},testInfo)=>{
- await page.goto('./');
+ await page.goto('./?skip-intro=1');
  await page.locator('#start-btn').click();
  await page.locator('#pause-btn').click();
  await expect(page.locator('#contrast-check')).not.toBeChecked();

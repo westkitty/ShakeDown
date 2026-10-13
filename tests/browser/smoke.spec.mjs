@@ -4,7 +4,7 @@ import {PNG} from 'pngjs';
 test('title, authentic sprites, movement, double jump, pause and persisted mute',async({page},testInfo)=>{
  const errors=[];
  page.on('pageerror',e=>errors.push(e.message));
- await page.goto('./');
+ await page.goto('./?skip-intro=1');
  await expect(page.locator('#title-heading')).toContainText('SHAMROCK SHAKE');
  try{
  await expect.poll(async()=>page.evaluate(()=>window.__SHAKEDOWN_QA.assets().loaded),{timeout:12000}).toBe(25);
@@ -41,7 +41,7 @@ test('title, authentic sprites, movement, double jump, pause and persisted mute'
 });
 
 test('visual/canvas frame stays responsive and touch controls fit',async({page},testInfo)=>{
- await page.goto('./');
+ await page.goto('./?skip-intro=1');
  await expect(page.locator('canvas#game')).toBeVisible();
  const dimensions=await page.evaluate(()=>({doc:document.documentElement.scrollWidth,width:window.innerWidth,
   canvasWidth:document.querySelector('canvas').width}));
@@ -106,7 +106,7 @@ test('synthetic accepted-cup fixture loads by logical ID and actually replaces v
  await page.route('**/assets/runtime/manifest.json',route=>route.fulfill({json:manifest}));
  await page.route('**/assets/level1/collectibles/co_03_shamrock_shake_cup.png',
   route=>route.fulfill({body:PNG.sync.write(png),contentType:'image/png'}));
- await page.goto('./');
+ await page.goto('./?skip-intro=1');
  await expect.poll(async()=>page.evaluate(()=>window.__SHAKEDOWN_QA?.assets?.().productionLoaded??null)).toBe(1);
  await page.locator('#start-btn').click();
  await page.waitForTimeout(300);
@@ -133,20 +133,20 @@ test('reviewed but UNVERIFIED art is not displayed outside local explicit QA pre
  await page.route('**/assets/runtime/manifest.json',route=>route.fulfill({json:ledger}));
  await page.route('**/assets/level1/collectibles/co_03_shamrock_shake_cup.png',
   route=>route.fulfill({body:PNG.sync.write(png),contentType:'image/png'}));
- await page.goto('./');
+ await page.goto('./?skip-intro=1');
  await expect.poll(async()=>page.evaluate(()=>window.__SHAKEDOWN_QA?.assets?.().productionDeclared??null)).toBe(0);
- await page.goto('./?preview-art=CO-03');
+ await page.goto('./?preview-art=CO-03&skip-intro=1');
  const local=await page.evaluate(()=>['localhost','127.0.0.1'].includes(location.hostname));
  await expect.poll(async()=>page.evaluate(()=>window.__SHAKEDOWN_QA?.assets?.().productionLoaded??null)).toBe(local?1:0);
  if(local){
   await expect(page.locator('#load-status')).toContainText('LOCAL ART PREVIEW');
   await expect(page.locator('#load-status')).toContainText('NOT production activated');
  }else await expect(page.locator('#load-status')).not.toContainText('LOCAL ART PREVIEW');
- await page.goto('./');
+ await page.goto('./?skip-intro=1');
  await expect.poll(async()=>page.evaluate(()=>window.__SHAKEDOWN_QA?.assets?.().productionDeclared??null)).toBe(0);
 });
 test('real frame and render timing collected over a named idle/title scenario',async({page},testInfo)=>{
- await page.goto('./');
+ await page.goto('./?skip-intro=1');
  await page.waitForTimeout(4200);
  const perf=await page.evaluate(()=>window.__SHAKEDOWN_QA.metrics());
  expect(perf.frames).toBeGreaterThan(20);
@@ -157,7 +157,7 @@ test('real frame and render timing collected over a named idle/title scenario',a
 
 
 test('holding two keyboard aliases does not release movement when one key comes up',async({page})=>{
- await page.goto('./');
+ await page.goto('./?skip-intro=1');
  await page.locator('#start-btn').click();
  await page.keyboard.down('ArrowRight');
  await page.keyboard.down('d');
@@ -171,7 +171,7 @@ test('holding two keyboard aliases does not release movement when one key comes 
 
 test('touch and physical keyboard can own movement independently, with clean blur release',async({page},testInfo)=>{
  test.skip(testInfo.project.name!=='mobile-chromium','Multi-source touch input requires touch-capable context');
- await page.goto('./');
+ await page.goto('./?skip-intro=1');
  await page.locator('#start-btn').tap();
  await page.keyboard.down('ArrowRight');
  const button=page.locator('[data-action=right]');

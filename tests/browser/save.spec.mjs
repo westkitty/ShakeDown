@@ -51,7 +51,7 @@ test('checkpoint progress survives reload and resume, while Start deliberately b
 });
 
 test('malformed saved progress is ignored while legacy settings and records survive',async({page})=>{
- await page.goto('./');
+ await page.goto('./?skip-intro=1');
  await page.evaluate(()=>localStorage.setItem('shakedown:birthday:v1',
   JSON.stringify({schema:1,settings:{mute:true,assist:true},completed:true,bestShakes:14,
    progress:{schema:1,index:999,checkpointId:'nonexistent',elapsed:0,collected:[],defeated:[]}})));
@@ -69,7 +69,7 @@ test('malformed saved progress is ignored while legacy settings and records surv
 });
 
 test('keyboard Enter activates the focused Continue option instead of starting fresh',async({page})=>{
- await page.goto('./');
+ await page.goto('./?skip-intro=1');
  await page.evaluate(()=>localStorage.setItem('shakedown:birthday:v1',JSON.stringify({
   schema:1,settings:{assist:true},completed:false,bestShakes:2,
   progress:{schema:1,index:2,checkpointId:'Dome Approach',elapsed:21,

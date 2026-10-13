@@ -2,7 +2,7 @@ import {test,expect} from '@playwright/test';
 
 test('WebAudio context is deferred until the first play gesture and silenced on pause/restart',async({page})=>{
  const faults=[];page.on('pageerror',e=>faults.push(e.message));
- await page.goto('./');
+ await page.goto('./?skip-intro=1');
  expect(await page.evaluate(()=>window.__SHAKEDOWN_QA.audio().created)).toBe(false);
  await page.locator('#start-btn').click();
  await expect.poll(async()=>page.evaluate(()=>window.__SHAKEDOWN_QA.audio().created)).toBe(true);
@@ -23,7 +23,7 @@ test('WebAudio context is deferred until the first play gesture and silenced on 
 });
 
 test('muted stored preference starts without an AudioContext and unmutes only with interaction',async({page})=>{
- await page.goto('./');
+ await page.goto('./?skip-intro=1');
  await page.evaluate(()=>localStorage.setItem('shakedown:birthday:v1',JSON.stringify({
   schema:1,settings:{mute:true,reducedMotion:true},bestShakes:0,completed:false,progress:null
  })));

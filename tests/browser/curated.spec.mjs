@@ -4,7 +4,7 @@ import fs from 'node:fs';
 test('classic stays default; selected artwork differs only after an explicit preview toggle',async({page})=>{
  test.setTimeout(60000);
  const errors=[];page.on('pageerror',e=>errors.push(e.message));
- await page.goto('./?art=classic');
+ await page.goto('./?art=classic&skip-intro=1');
  await expect.poll(async()=>page.evaluate(()=>window.__SHAKEDOWN_QA?.assets?.().loaded),{timeout:15000}).toBe(25);
  let a=await page.evaluate(()=>window.__SHAKEDOWN_QA.assets());
  expect(a.curatedEnabled).toBe(false);expect(a.curatedLoaded).toBe(0);expect(a.productionLoaded).toBe(0);
@@ -68,13 +68,13 @@ test('owner judgment persists, exports SHA-bound votes without approving product
  expect(content.schemaVersion).toBe(1);expect(content.recordCount).toBe(1);
  expect(content.votes[0]).toMatchObject({id:'FOX-05',decision:'keep',notes:'Great red warning shape. Keep the purple scarf.'});
  expect(content.votes[0].sha256).toMatch(/^[0-9a-f]{64}$/);
- await page.goto('./?art=classic');
+ await page.goto('./?art=classic&skip-intro=1');
  expect((await page.evaluate(()=>window.__SHAKEDOWN_QA?.assets?.())).productionLoaded).toBe(0);
 });
 test('tampered image is SHA-rejected and does not block the game or invent art approval',async({page})=>{
  test.setTimeout(50000);
  await page.route('**/assets/production/birthday/bd_01.png',route=>route.fulfill({contentType:'image/png',body:'not the original hash'}));
- await page.goto('./?art=curated');
+ await page.goto('./?art=curated&skip-intro=1');
  await expect.poll(async()=>page.evaluate(()=>window.__SHAKEDOWN_QA?.assets?.().curatedSelected),{timeout:23000}).toBe(28);
  const art=await page.evaluate(()=>window.__SHAKEDOWN_QA.assets());
  expect(art.curatedLoaded).toBe(27);

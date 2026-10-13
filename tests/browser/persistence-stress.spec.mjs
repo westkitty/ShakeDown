@@ -17,7 +17,7 @@ async function earnBirthday(page){
 }
 
 test('two tabs cannot erase an earned birthday completion through an older settings save',async({context,page})=>{
- await page.goto('./');
+ await page.goto('./?skip-intro=1');
  const other=await context.newPage();await other.goto('./');
  await earnBirthday(page);
  await other.locator('#mute-btn').click();
@@ -55,7 +55,7 @@ test('private/restricted storage fails gracefully through start, pause, mute and
   };
  });
  const errors=[];page.on('pageerror',e=>errors.push(e.message));
- await page.goto('./');
+ await page.goto('./?skip-intro=1');
  await page.locator('#start-btn').click();
  await page.keyboard.press('p');
  await page.locator('#mute-btn').click();
@@ -65,7 +65,7 @@ test('private/restricted storage fails gracefully through start, pause, mute and
 });
 
 test('rapid restart and mute/pause toggles retain a valid bounded settings record',async({page})=>{
- await page.goto('./');
+ await page.goto('./?skip-intro=1');
  for(let round=0;round<9;round++){
   await page.locator('#start-btn').click();
   await page.keyboard.press('p');
