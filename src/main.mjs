@@ -191,13 +191,21 @@ function showMode(){
  else if(state.mode==='playing')canvas.focus({preventScroll:true});
 }
 const held=new Set(),queued=new Set(),pointerActs=new Map(),keyActs=new Map();
+let gestureDirection=null;
+const gesturePad=$('gesture-pad');
+function setGestureDirection(direction){
+ gestureDirection=direction;
+ // Reconcile all input owners; a swipe must never drop held keyboard input.
+ updateHeld('left');updateHeld('right');
+ gesturePad?.setAttribute('data-direction',direction||'');
+}
 function updateHeld(action){
  const active=[...keyActs.values()].includes(action)||[...pointerActs.values()].includes(action);
- if(active)held.add(action);else held.delete(action);
+ if(active||gestureDirection===action)held.add(action);else held.delete(action);
 }
 
 function actionForKey(code){return ({ArrowLeft:'left',KeyA:'left',ArrowRight:'right',KeyD:'right',Space:'jump',ArrowUp:'jump',KeyW:'jump',KeyJ:'swish',KeyX:'swish',KeyC:'cheer',ShiftLeft:'dash',ShiftRight:'dash',KeyK:'dash'})[code]}
-function clearInputs(){held.clear();queued.clear();pointerActs.clear();keyActs.clear();document.querySelectorAll('.touch').forEach(b=>b.classList.remove('held'))}
+function clearInputs(){held.clear();queued.clear();pointerActs.clear();keyActs.clear();gestureDirection=null;gesturePad?.removeAttribute('data-direction');document.querySelectorAll('.touch').forEach(b=>b.classList.remove('held'))}
 function isEditingFocus(){
  const element=document.activeElement;
  return Boolean(element?.closest?.('input,textarea,select,[contenteditable="true"]'));
@@ -293,6 +301,35 @@ document.addEventListener('visibilitychange',()=>{
  }
  lastStamp=0;accumulator=0;
 });
+// One square, gesture-driven D-pad. Horizontal travel latches until the next turn;
+// vertical swipes emit one-shot actions without clearing that direction.
+if(gesturePad){
+ const starts=new Map();
+ const interpret=(dx,dy)=>{
+  if(Math.max(Math.abs(dx),Math.abs(dy))<19)return;
+  if(Math.abs(dx)>=Math.abs(dy))setGestureDirection(dx>0?'right':'left');
+  else if(dy<0)queued.add('jump');
+  else queued.add('dash'); // low-profile slide gesture mapped to existing dash, not a new physics state
+  gesturePad.classList.add('gesture-active');
+ };
+ gesturePad.addEventListener('pointerdown',e=>{
+  if(state.mode!=='playing')return;
+  e.preventDefault();audio.activate();starts.set(e.pointerId,{x:e.clientX,y:e.clientY});gesturePad.setPointerCapture(e.pointerId);
+ });
+ gesturePad.addEventListener('pointermove',e=>{
+  const start=starts.get(e.pointerId);if(!start||state.mode!=='playing')return;
+  const dx=e.clientX-start.x,dy=e.clientY-start.y;
+  if(Math.max(Math.abs(dx),Math.abs(dy))<25)return;
+  interpret(dx,dy);start.x=e.clientX;start.y=e.clientY;
+ });
+ const finish=e=>{
+  const start=starts.get(e.pointerId);if(!start)return;
+  starts.delete(e.pointerId);
+  if(e.type==='pointerup')interpret(e.clientX-start.x,e.clientY-start.y);
+  if(!starts.size)gesturePad.classList.remove('gesture-active');
+ };
+ for(const type of ['pointerup','pointercancel','lostpointercapture'])gesturePad.addEventListener(type,finish);
+}
 for(const button of document.querySelectorAll('.touch')){
  const action=button.dataset.action;
  button.addEventListener('pointerdown',e=>{

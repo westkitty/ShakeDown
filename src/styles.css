@@ -456,3 +456,93 @@ body.brand-playing{overflow:hidden}
 }
 
 .brand-footer [hidden]{display:none!important}
+
+/* Landscape phone control surface: the world stays visible beneath every input. */
+.gesture-pad{display:none}
+@media (pointer:coarse) and (orientation:landscape) and (max-height:520px){
+ html,body{overscroll-behavior:none}
+ .game-shell{padding:0;max-width:none}
+ .mast,.controls-note,footer{display:none}
+ .game-frame{width:100vw;height:100dvh;margin:0;border:0;border-radius:0;box-shadow:none;position:relative}
+ .viewport{width:100%;height:100%;aspect-ratio:auto}
+ .viewport>canvas{width:100%;height:100%;object-fit:contain;background:#132638}
+ .status-row{position:absolute;z-index:9;top:env(safe-area-inset-top);right:env(safe-area-inset-right);width:auto;min-height:0;background:transparent;padding:3px;pointer-events:none}
+ .status-row>span{display:none}
+ .status-row .quiet{pointer-events:auto;background:#10283f77;border:1px solid #ffffff35}
+ .touch-controls{position:absolute;inset:0;z-index:8;margin:0;max-width:none;width:100%;pointer-events:none;display:flex;align-items:flex-end;justify-content:space-between;padding:0 max(12px,env(safe-area-inset-right)) max(10px,env(safe-area-inset-bottom)) max(12px,env(safe-area-inset-left))}
+ .touch-left,.touch-right .touch-jump{display:none}
+ .gesture-pad{pointer-events:auto;display:flex;align-items:center;justify-content:center;touch-action:none;user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color:transparent;width:min(34dvh,31vw);height:min(34dvh,31vw);min-width:100px;min-height:100px;background:#e7e8fb13;border:1px solid #e7e8fb30;border-radius:17px;color:#e7e8fb55}
+ .gesture-mark{font-size:15px;opacity:.36;transform:rotate(15deg)}
+ .gesture-pad.gesture-active{background:#e7e8fb25;border-color:#e7e8fb55}
+ .touch-right{pointer-events:auto;display:grid;grid-template-columns:repeat(2,minmax(46px,1fr));max-width:190px;gap:7px}
+ .touch-right .touch{min-width:46px;min-height:52px;border:1px solid #ffffff45;border-radius:13px;background:#152f4960;color:#fff9;box-shadow:none;font-size:11px;opacity:.8}
+ .touch-right .touch.held{background:#dae9ff60;color:#fff}
+ .touch-right .touch-cheer{grid-column:1}.touch-right .touch-swish{grid-column:2}
+ .touch-right .touch-dash{grid-column:1}.touch-right .touch-jump{display:none}
+ .hud{left:max(8px,env(safe-area-inset-left));right:max(8px,env(safe-area-inset-right));top:max(6px,env(safe-area-inset-top));font-size:10px}
+}
+
+/* Premium finishing system: navy enamel, campus gold, crisp readable game UI. */
+.game-frame{border-color:#f0cf87;box-shadow:0 5px 0 #081828,0 16px 38px #030d18a6}
+.hud{font-variant-numeric:tabular-nums;letter-spacing:.035em}
+.hud span{
+ background:linear-gradient(180deg,#29465ae9,#132b42f2);
+ border:1px solid #e7c27b;
+ border-bottom:2px solid #aa8754;
+ border-radius:7px;padding:4px 9px;
+ box-shadow:0 2px 0 #081b2b9e,0 2px 10px #1020335e;
+ text-shadow:0 1px 2px #071c2a;
+}
+#hud-health{letter-spacing:.10em}
+.status-row{background:linear-gradient(180deg,#163651,#0d2438);border-top:1px solid #f5d9934d}
+.quiet,.icon-btn{
+ background:linear-gradient(180deg,#365678,#1c3854);
+ border-color:#c9ac78;
+ box-shadow:inset 0 1px #ffffff24;
+}
+.quiet:active,.icon-btn:active{transform:translateY(1px);box-shadow:none}
+.dialog{border-color:#f1d18c;box-shadow:0 9px 0 #132330db,0 18px 50px #050b15e6}
+.dialog button.primary,.dialog button.secondary{transition:background-color .13s ease,border-color .13s ease,filter .13s ease}
+/* Focus/high-contrast foregrounds must flip immediately; do not tween critical touch colors. */
+.touch{transition:filter .13s ease}
+.dialog button:focus-visible,.touch:focus-visible,.quiet:focus-visible,.icon-btn:focus-visible{
+ outline:3px solid #fff4b6;outline-offset:3px;
+}
+@media (pointer:coarse) and (orientation:landscape) and (max-height:520px){
+ .game-frame{box-shadow:none}
+ .viewport{background:repeating-linear-gradient(135deg,#152d44 0px,#152d44 9px,#1c3b53 10px,#1c3b53 15px)}
+ .viewport>canvas{background:transparent}
+ .hud span{padding:3px 6px;border-radius:6px;font-size:10px}
+ .status-row{
+  top:max(40px,calc(env(safe-area-inset-top) + 38px));
+  right:max(6px,env(safe-area-inset-right));
+  background:transparent;border:0;
+ }
+ .status-row .quiet{
+  min-width:68px;min-height:44px;font-size:10px;
+  background:#0b2943b8;border-color:#e7c27b88;
+  border-radius:7px;box-shadow:none;
+ }
+ .gesture-pad{
+  background:#e7ecff10;border-color:#e7ecff28;
+  box-shadow:inset 0 0 0 1px #dce5ff0b;
+ }
+ .gesture-mark{font-size:15px;color:#e3e4f1;opacity:.28;transform:none;font-weight:700}
+ .gesture-pad.gesture-active{
+  background:#e7ecff24;border-color:#f3e9d777;
+ }
+ .touch-right .touch{
+  background:#112b4670;border-color:#d4e8ff55;
+  color:#f6f2e4d9;letter-spacing:.035em;
+  opacity:.86;box-shadow:inset 0 1px #ffffff14;
+ }
+ .touch-right .touch.held{
+  background:#486e8ab8;color:#fffbea;border-color:#fff0bc;
+ }
+ .touch-right .touch-cheer{border-color:#e7cd83ad;color:#fff0bd}
+ .touch-right .touch-swish{border-color:#b6d6e6a3;color:#e3f6ff}
+ .touch-right .touch-dash{border-color:#dab0a89c;color:#ffe0d1}
+}
+@media(prefers-reduced-motion:reduce){
+ .dialog button.primary,.dialog button.secondary,.touch{transition:none}
+}

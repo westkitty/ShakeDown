@@ -107,6 +107,9 @@ async function run(){
      }).filter(x=>x.width>0)
     }));
     await page.locator('#start-btn').click();
+    // Measure gameplay, never an unskipped three-panel story overlay.
+    if(await page.locator('#intro-skip').isVisible())await page.locator('#intro-skip').click();
+    await page.waitForFunction(()=>document.getElementById('intro-overlay').classList.contains('hidden'),{timeout:8000});
     await page.locator('#game').focus();
     const x0=await page.evaluate(()=>window.__SHAKEDOWN_QA.snapshot().player.x);
     const start=Date.now();
