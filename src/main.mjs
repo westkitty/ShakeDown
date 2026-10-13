@@ -195,8 +195,8 @@ let gestureDirection=null;
 const gesturePad=$('gesture-pad');
 function setGestureDirection(direction){
  gestureDirection=direction;
- held.delete('left');held.delete('right');
- if(direction)held.add(direction);
+ // Reconcile all input owners; a swipe must never drop held keyboard input.
+ updateHeld('left');updateHeld('right');
  gesturePad?.setAttribute('data-direction',direction||'');
 }
 function updateHeld(action){
