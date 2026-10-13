@@ -1,0 +1,39 @@
+{
+  "schema": 1,
+  "source": {
+    "title": "User-provided 1000223350.mp4",
+    "sha256": "fd6e9a2aaac7ff8f0247ad3c09099bbe559d08dd0f594b9c3614ddcbdd1d6d80",
+    "runtime": "Green-screened title over unused existing Golden Dome backdrop"
+  },
+  "background": "assets/level1/backgrounds/bg_05_golden_dome_hero_backdrop.png",
+  "panels": [
+    {
+      "path": "assets/intro/panel_01.webp",
+      "sha256": "7c6805fef1e9640113747da0440e5c25139eb96176a2bd40981e71520f343c26",
+      "text": "At last... a Shamrock Shake in October!"
+    },
+    {
+      "path": "assets/intro/panel_02.webp",
+      "sha256": "6f7dc910398a3f2355307635d7d9b9a6484bf0f8ab0b00dd59f3655ec709259d",
+      "text": "Hey! That fox stole my Shamrock Shake!"
+    },
+    {
+      "path": "assets/intro/panel_03.webp",
+      "sha256": "59de9ef3b9ff0af9e8d74ae30d0284ef0c7498802e0f24c56c8242638ab1eb10",
+      "text": "I’m getting my Shamrock Shake back!"
+    }
+  ],
+  "video": [
+    {
+      "path": "assets/intro/cinnamon-title-alpha.webm",
+      "sha256": "6820ac67069c9ad37214ac94cfc7dfe267d15d4994e6790c9ebebd821ece919c",
+      "alpha": true
+    },
+    {
+      "path": "assets/intro/cinnamon-title.mp4",
+      "sha256": "875906e78193a3a9c4ffa7f4e5ca5a9cb0a1b8a712e4058193591d897df9e86e",
+      "alpha": false
+    }
+  ],
+  "provenance": "Approved narrative correction: Shamrock Shake is rare because it is October; art remains distinct from the P019 approval ledger."
+}
