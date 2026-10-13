@@ -105,13 +105,8 @@ function paintSmudge(ctx,s,t,art){
  if(image){
   ctx.imageSmoothingEnabled=true;
   ctx.drawImage(image,npc.x-140,npc.footY-181,280,200);
-  // Non-destructive sunglasses: the original blue eyes remain in the asset.
-  ctx.fillStyle='rgba(18,26,40,.84)';ctx.strokeStyle='#dfbf71';ctx.lineWidth=3;
-  round(ctx,npc.x-43,npc.footY-104,39,22,5);ctx.fill();ctx.stroke();
-  round(ctx,npc.x+4,npc.footY-104,39,22,5);ctx.fill();ctx.stroke();
-  ctx.fillStyle='rgba(255,255,255,.36)';
-  ctx.fillRect(npc.x-34,npc.footY-100,12,3);
-  ctx.fillRect(npc.x+13,npc.footY-100,12,3);
+  // The manifest-verified sprite already has blue eyes and a complete muzzle.
+  // Leave Smudge's face unobstructed; do not composite facial accessories.
  }
 }
 function paintDexter(ctx,s,t,art){
