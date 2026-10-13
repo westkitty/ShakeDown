@@ -72,7 +72,7 @@ export function initScreenArt({doc=document,search=location.search}={}){
   const controls=doc.createElement('div');
   controls.className='title-art-controls';
   controls.innerHTML='<button id="title-art-prev" type="button" aria-label="Previous title artwork">◀</button><span id="title-art-status" role="status" aria-live="polite"></span><button id="title-art-next" type="button" aria-label="Next title artwork">▶</button>';
-  panel.append(controls);
+  (panel.querySelector('#workshop-title')||panel).append(controls);
   const status=controls.querySelector('#title-art-status');
   const refresh=()=>{
    status.textContent=String(chosen+1).padStart(2,'0')+' / '+TITLE_SCENES.length+' · '+TITLE_SCENES[chosen].label;

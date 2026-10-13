@@ -235,3 +235,46 @@ The full Asset Director source registry remains 194/194, one playable-context ro
 - Exact merge-SHA Actions passed: content `38314483899`; desktop/mobile browser `38314483870` with 112 passes and 10 deliberate project skips; Pages deployment `38314483861`; public Pages byte/browser smoke `38314483915` with 13 passes and one deliberate project skip. The public verifier independently matched SHA-256 for 42 authoritative files and observed correct HTML, JavaScript, JSON and PNG response content types at `https://westkitty.github.io/ShakeDown/`.
 - A wider 122-case Pages run exposed seven test portability assumptions rather than deployed encounter defects: localhost-only unverified-art preview was correctly unavailable on the public origin, two studio cases raced their asynchronous hosted contract load, and one static-pixel comparison left decorative motion active. The test-only follow-up waits for the contract, asserts the public-origin preview prohibition and freezes decoration for that invariant. Its focused matrix passed 8/8 on localhost and 8/8 on Pages; the complete public desktop/mobile matrix then passed 112 with 10 deliberate project skips.
 - Asset fidelity limitation: each 960×640 supplied character sheet produced four retained 280×200 RGBA timing frames, but only two unique frame hashes per character. Smudge alternates `0df75f…` / `db8fb6…`; Dexter alternates `b258c2…` / `de9079…`. No additional poses were fabricated. Owner artistic approval and unassisted physical-device play remain open human gates, not release proof.
+
+## 2026-10-12 — OMNI accepted P003: fractional assist health visibility
+
+- Scope: exactly P003; fixes existing fractional damage HUD discrepancy without changing actual health, physics, saves, or difficulty.
+- Baseline: isolated clone at main e3dfeac8; fresh Big Mac working tree clean; `npm run validate` 65/65 before edits.
+- Source proof: assist damage uses 0.5 health; old HUD rounded upward with Math.ceil, concealing the first hit.
+- Change: half-heart visual states and explicit numerical accessible name; seven deterministic state regressions plus browser UI regression.
+- Preserve: Canvas engine, checkpoint schema, other four accepted proposals for later individual commits, all art/source files.
+- CI/browser run receipts and Git commit identity are recorded in external delivery summary. No Pages/main deployment authorized.
+
+## 2026-10-12 — OMNI accepted P004: responsible browser and target-device baseline instrumentation
+
+- Starting point: P003 implementation/push 49fda00bcd96351cd0140f9cf1a75dbcab90c990.
+- Scope: extend the existing real-wall-clock performance audit with same-context empty-page rAF calibration, optional classic/curated mode, p99 intervals, Canvas width, network resource bytes and asset availability; no render or collision optimization.
+- Hardware discovery: Galaxy Tab S9 Ultra SM-X910, Android 16, Chrome 154.0.8037.126 physically reachable through MacBook ADB; Chrome DevTools HTTP endpoint over ADB tunnel returned empty responses despite a socket. Android gfxinfo after a seven-second game sample yielded one Android UI frame, which is NOT a measure of Canvas frame pacing and must not be labeled FPS proof.
+- Physical phone/tablet FPS, game input latency, audio, heat, memory drift, and 30-minute play remain evidence gaps until on-device JavaScript tracing is available. Empty browser slowdown must not be misattributed to the game.
+- Browser and Node validation details and Git hash are recorded in the delivery summary. Push to feature branch only; no main deployment.
+
+## 2026-10-12 — OMNI accepted P001: player-first shell with opt-in workshop
+
+- Starting point: P004 feature commit 2364ee78960ff09acbd59c3094cd1eef27d619cc, pushed to feature branch.
+- Problem: live title and HUD prominently exposed development Art Director, 194-image review, provisional-art status and eleven alternate-screen selectors; first-time invitation was visually crowded.
+- Change: title and pause place the existing (unmodified) art director, gallery, curated toggles, status and raster-title selector behind keyboard-operable Workshop details. Gameplay HUD no longer exposes development-only button. Reduced title copy avoids spoiling secret NPCs.
+- Safety: boot failure automatically opens Workshop so Retry Loading remains reachable. Gallery deep links, standalone Asset Control Room, Art Jury, hash-only approval gate and QA endpoints remain available.
+- Existing tests updated to explicitly open the workshop when exercising tools; a new player-first regression prevents restored HUD/title clutter. No physics, music, art images, or save schema changes.
+
+## 2026-10-12 — OMNI accepted P002: bounded portrait viewport experiment
+
+- Starting point: P001 feature commit 1f69ff7e2b167b9d2aff59e1399a3b574a055483.
+- Hypothesis: a portrait playfield around 44dvh high, aspect-preserved and horizontally panned to the player, is more readable than a 200px 16:9 strip without rewriting the 960×540 authoritative game.
+- Approach: CSS-only enlarged display height, clipped canvas composition; compositor translate3d based on existing authoritative player/camera coordinates. No physics, camera position, checkpoint, boss timing, asset or engine modification.
+- Baseline 390×844 Big Mac mobile-emulated Chromium: canvas 372×209.25 CSS pixels, empty-page/game rAF p95 both 100ms (host-constrained), Canvas draw p95 1.3ms. Measurements after change must use identical conditions and distinguish host throttling from game cost.
+- Guardrails: desktop and landscape remain 16:9; portrait player stays onscreen after motion and source Canvas ratio remains 16:9; restore CSS fallback if cropping loses boss telegraphs or fails actual-device play.
+- Real physical Android performance still requires on-device JS tracing, not Chrome gfxinfo UI frames.
+
+## 2026-10-12 — OMNI accepted P019: shipped-art acceptance evidence and gated release status
+
+- Scope: read-only project-aware audit of the 63 selected provisional production PNGs, Cinnamon canonical sheet/26 frames, Smudge/Dexter source+animation, and current title/result plates. Every selected PNG is hash/dimension verified against manifests; no artwork, review source records, or runtime approval ledger changed.
+- Critical provenance distinction: `assets/production/approvals.json` has historic FOX-01 project-owner character **design** approval, but it is NOT SHA-bound to `assets/production/fox/fox_01.png` and does not establish runtime final acceptance. Preserve that decision without elevating it to a false file-specific approval.
+- Added `npm run art:acceptance` for a deterministic JSON report, optional 63-source Markdown checklist and `--require-approved` release gate (exit 2 while final human art acceptance remains incomplete; 3 on integrity errors). This gate is opt-in and does not falsely invalidate existing gameplay or static CI.
+- Review handoff: `docs/P019_OWNER_ART_ACCEPTANCE_20261012.md`. Separates technical validity from actual visual judgment and owner signoff, calls out absent original pre-handoff Cinnamon ZIP, and requires explicit source-bound final integration later.
+- Outcome: automation and review handoff implemented, artistic signoff BLOCKED pending owner. Game engine, save schema, assets, source hashes, provenance records and default artwork unchanged. P019 source-verified is NOT P019 artistically complete.
+- Browser QA observation: one broad-suite run sampled the title Canvas before post-load source frames were painted, giving a misleading blocked-art pixel delta. The isolated test passed. Strengthened the pixel invariant to sample only after two frames following sprite readiness; rerun passed all 7 desktop Art Director/product-shell checks.

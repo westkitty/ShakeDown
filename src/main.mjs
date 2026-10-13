@@ -1,4 +1,6 @@
 import {newGame,startGame,pauseGame,resetToCheckpoint,update,DT,snapshot} from './game/engine.mjs';
+import {healthSegments,healthAnnouncement} from './game/health.mjs';
+import {mobileCanvasPan} from './game/mobile-framing.mjs';
 import {VIEW,WORLD} from './game/world.mjs';
 import {render} from './game/render.mjs';
 import {loadSecretNpcArt} from './game/secret-assets.mjs';
@@ -291,7 +293,7 @@ updateContrast();
 $('assist-check').addEventListener('change',e=>{state.settings.assist=e.target.checked;save()});
 $('motion-check').addEventListener('change',e=>{state.settings.reducedMotion=e.target.checked;save()});
 $('contrast-check').addEventListener('change',e=>{state.settings.contrast=e.target.checked;updateContrast();save()});
-for(const id of ['art-director-title-open','art-director-pause-open','art-director-play-open'])
+for(const id of ['art-director-title-open','art-director-pause-open'])
  $(id).addEventListener('click',showDirector);
 for(const id of ['art-preview-title','art-preview-pause'])
  $(id).addEventListener('change',event=>setCuratedPreview(event.target.checked));
@@ -336,8 +338,21 @@ async function loadAssets(){
   showAssetStatus();
  }
 }
+let lastHealthDisplay='';
 function hud(){const p=state.player;
- $('hud-health').textContent='♥ '.repeat(Math.ceil(p.hp)).trim()||'♡';
+ const healthText=healthAnnouncement(p.hp,p.maxHp);
+ if(healthText!==lastHealthDisplay){
+  const health=$('hud-health');
+  health.setAttribute('aria-label',healthText);
+  health.replaceChildren(...healthSegments(p.hp,p.maxHp).map(kind=>{
+   const heart=document.createElement('span');
+   heart.className='health-heart health-heart--'+kind;
+   heart.textContent=kind==='empty'?'♡':'♥';
+   heart.setAttribute('aria-hidden','true');
+   return heart;
+  }));
+  lastHealthDisplay=healthText;
+ }
  $('hud-shakes').textContent=`SHAKES ${state.shakeCount}`;
  const rallyHigh=p.x<WORLD.campusEnd&&p.y<280;
  const zone=state.boss.triggered?'FOX SHOWDOWN':p.y<-1300&&p.x<7100?'DEXTER SUMMIT':p.y>495&&p.x<2350?'SMUDGE ALCOVE':p.x>=WORLD.campusEnd?'GOLDEN DOME':rallyHigh?'PEP RALLY':'SOUTH QUAD';
@@ -368,7 +383,10 @@ function percentile(values,p){
  const sorted=[...values].sort((a,b)=>a-b);return Number(sorted[Math.floor((sorted.length-1)*p)].toFixed(2));
 }
 function metrics(){return {frames:frameTimings.length,frameMsP95:percentile(frameTimings.map(x=>x.frame),.95),
- renderMsP95:percentile(frameTimings.map(x=>x.render),.95),devicePixelRatio:Math.min(window.devicePixelRatio||1,2)};}
+ frameMsP99:percentile(frameTimings.map(x=>x.frame),.99),
+ renderMsP95:percentile(frameTimings.map(x=>x.render),.95),
+ renderMsP99:percentile(frameTimings.map(x=>x.render),.99),
+ devicePixelRatio:Math.min(window.devicePixelRatio||1,2)};}
 function animate(ms){requestAnimationFrame(animate);
  const actualFrameMs=lastStamp?Math.max(0,ms-lastStamp):0;
  if(!lastStamp)lastStamp=ms;const dt=Math.min(.10,Math.max(0,(ms-lastStamp)/1000));lastStamp=ms;
@@ -388,6 +406,7 @@ function animate(ms){requestAnimationFrame(animate);
   for(const ev of state.events){if(ev.serial>lastEventSerial){audio.event(ev.type);lastEventSerial=ev.serial}}
  }else{accumulator=0}
  if(state.mode==='victory')state.elapsed+=dt;
+ updateMobileFraming();
  const drawStart=performance.now();
  render(ctx,state,sprites,accumulator/DT,renderArt,auditionRoles);
  if(actualFrameMs>0){frameTimings.push({frame:actualFrameMs,render:performance.now()-drawStart});
@@ -395,8 +414,35 @@ function animate(ms){requestAnimationFrame(animate);
  if(ms-lastHUD>110){hud();lastHUD=ms}
  showMode();
 }
-// Fixed logical camera, capped pixel-density: CSS handles responsiveness and letterboxing.
-function onResize(){const dpr=Math.min(window.devicePixelRatio||1,2);canvas.width=Math.round(VIEW.width*dpr);canvas.height=Math.round(VIEW.height*dpr);ctx.setTransform(dpr,0,0,dpr,0,0)}
+// The underlying 960x540 frame is unchanged. On portrait phones the CSS
+// displays an aspect-preserved, cropped canvas and this compositor-only pan
+// keeps the authoritative player visible without touching world/camera logic.
+let mobileFrame=null,lastMobilePan=null;
+function updateMobileFraming(){
+ if(!mobileFrame)return;
+ const playerCssX=(state.player.x+state.player.w/2-state.camera.x)*mobileFrame.scale;
+ const pan=mobileCanvasPan({...mobileFrame,playerCssX});
+ if(pan!==lastMobilePan){
+  canvas.style.setProperty('--mobile-canvas-pan',pan+'px');
+  lastMobilePan=pan;
+ }
+}
+function onResize(){
+ const dpr=Math.min(window.devicePixelRatio||1,2);
+ canvas.width=Math.round(VIEW.width*dpr);canvas.height=Math.round(VIEW.height*dpr);
+ ctx.setTransform(dpr,0,0,dpr,0,0);
+ const portrait=window.matchMedia('(max-width: 630px) and (orientation: portrait)').matches;
+ const viewport=$('viewport');
+ if(portrait){
+  const viewportWidth=viewport.clientWidth;
+  const scale=viewport.clientHeight/VIEW.height;
+  mobileFrame={viewportWidth,scale,canvasWidth:VIEW.width*scale};
+  lastMobilePan=null;updateMobileFraming();
+ }else{
+  mobileFrame=null;lastMobilePan=null;
+  canvas.style.removeProperty('--mobile-canvas-pan');
+ }
+}
 window.addEventListener('resize',onResize,{passive:true});onResize();
 loadAssets();
 loadSecretNpcArt().then(({images,errors,loaded})=>{

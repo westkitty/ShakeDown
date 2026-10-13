@@ -9,6 +9,7 @@ test('the game exposes all 194 physical candidates without eagerly downloading 1
  await page.goto('./?art=classic');
  expect((await page.evaluate(()=>window.__SHAKEDOWN_QA.artDirector())).available).toBe(0);
  expect(imageRequests.length).toBe(0,'Classic mode must retain lightweight startup');
+ await page.locator('#workshop-title > summary').click();
  await page.locator('#art-director-title-open').click();
  await expect(page.locator('#art-director-dialog')).toBeVisible();
  await expect(page.locator('#art-director-list option')).toHaveCount(194,{timeout:13000});
@@ -29,6 +30,7 @@ test('the game exposes all 194 physical candidates without eagerly downloading 1
 test('all twelve art families can be applied to their live game roles and removed',async({page})=>{
  test.setTimeout(75000);
  await page.goto('./?art=all');
+ await page.locator('#workshop-title > summary').click();
  await page.locator('#art-director-title-open').click();
  await expect(page.locator('#art-director-list option')).toHaveCount(194);
  const cases=[
@@ -58,6 +60,7 @@ test('all twelve art families can be applied to their live game roles and remove
  await expect.poll(async()=>page.evaluate(()=>window.__SHAKEDOWN_QA.snapshot().player.x),{timeout:3000}).toBeGreaterThan(74);
  await page.keyboard.up('ArrowRight');
  await page.locator('#pause-btn').click();
+ await page.locator('#workshop-pause > summary').click();
  await page.locator('#art-director-pause-open').click();
  await expect(page.locator('#art-director-dialog')).toBeVisible();
 });
@@ -67,6 +70,9 @@ test('all 24 contract-blocked images remain viewable as reference but never beco
  await page.emulateMedia({reducedMotion:'reduce'});
  await page.goto('./?art=classic');
  await expect.poll(async()=>page.evaluate(()=>window.__SHAKEDOWN_QA.assets().loaded)).toBe(25);
+ // All sprite image promises may settle before the first Canvas frame includes
+ // their pixels. Compare two genuinely painted, post-load frames, not loader UI state.
+ await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
  const sample=()=>page.evaluate(()=>{
   const ctx=document.querySelector('#game').getContext('2d'),pixels=[];
   for(let y=16;y<540;y+=32)for(let x=16;x<960;x+=32)
@@ -74,6 +80,7 @@ test('all 24 contract-blocked images remain viewable as reference but never beco
   return pixels;
  });
  const gameBefore=await sample();
+ await page.locator('#workshop-title > summary').click();
  await page.locator('#art-director-title-open').click();
  await expect(page.locator('#art-director-list option')).toHaveCount(194);
  await page.locator('#art-director-role').selectOption('backdrop');
@@ -105,7 +112,8 @@ test('director captures keyboard focus, keeps pause state and dismisses with Esc
   // Narrow phones reach the same native inspector from Pause, leaving the
   // live HUD uncluttered and retaining a 44px touch target.
   await page.locator('#pause-btn').click();
-  await page.locator('#art-director-pause-open').click();
+  await page.locator('#workshop-pause > summary').click();
+ await page.locator('#art-director-pause-open').click();
  }
  await expect(page.locator('#art-director-dialog')).toBeVisible();
  expect((await page.evaluate(()=>window.__SHAKEDOWN_QA.snapshot())).mode).toBe('pause');
@@ -138,6 +146,7 @@ test('a browser back-forward cache pagehide preserves the native art inspector',
   Object.defineProperty(event,'persisted',{value:true});
   window.dispatchEvent(event);
  });
+ await page.locator('#workshop-title > summary').click();
  await page.locator('#art-director-title-open').click();
  await expect(page.locator('#art-director-dialog')).toBeVisible();
  await expect(page.locator('#art-director-list option')).toHaveCount(194,{timeout:15000});

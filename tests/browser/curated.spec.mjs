@@ -9,6 +9,7 @@ test('classic stays default; selected artwork differs only after an explicit pre
  let a=await page.evaluate(()=>window.__SHAKEDOWN_QA.assets());
  expect(a.curatedEnabled).toBe(false);expect(a.curatedLoaded).toBe(0);expect(a.productionLoaded).toBe(0);
  const baseline=await page.evaluate(()=>[...document.querySelector('#game').getContext('2d').getImageData(470,21,1,1).data]);
+ await page.locator('#workshop-title > summary').click();
  await page.locator('#art-preview-title').check();
  await expect.poll(async()=>page.evaluate(()=>window.__SHAKEDOWN_QA.assets().curatedLoaded),{timeout:30000}).toBe(28);
  a=await page.evaluate(()=>window.__SHAKEDOWN_QA.assets());
@@ -25,6 +26,7 @@ test('classic stays default; selected artwork differs only after an explicit pre
  await page.locator('#pause-btn').click();
  await expect(page.locator('#art-preview-pause')).toBeChecked();
  const originalX=await page.evaluate(()=>window.__SHAKEDOWN_QA.snapshot().player.x);
+ await page.locator('#workshop-pause > summary').click();
  await page.locator('#art-preview-pause').uncheck();
  expect((await page.evaluate(()=>window.__SHAKEDOWN_QA.assets())).curatedEnabled).toBe(false);
  expect(await page.evaluate(()=>window.__SHAKEDOWN_QA.snapshot().player.x)).toBe(originalX);

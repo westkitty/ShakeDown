@@ -4,6 +4,7 @@ test('owner start plate and ten alternate raster titles load in-game; Start work
  test.setTimeout(90000);
  await page.goto('./');
  const art=page.locator('#title-scene-art');
+ await page.locator('#workshop-title > summary').click();
  await expect(art).toHaveAttribute('src',/assets\/screens\/01_start_level_clean_960x540\.png/);
  await expect.poll(()=>art.evaluate(img=>img.complete?img.naturalWidth:0),{timeout:15000}).toBe(960);
  await expect(page.locator('#title-overlay')).toHaveClass(/owner-art-ready/);
