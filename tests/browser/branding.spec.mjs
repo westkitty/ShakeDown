@@ -114,3 +114,21 @@ test('the complete owner ident reaches its authentic media end before revealing 
  await expect(page.locator('#title-overlay')).toBeVisible();
  expect(await page.evaluate(()=>window.__SHAKEDOWN_QA.snapshot().mode)).toBe('title');
 });
+
+test('a failed ES module reveals Retry Loading instead of trapping the player behind branding',async({page},testInfo)=>{
+ test.skip(testInfo.project.name!=='desktop-chromium','One representative browser covers pre-boot failure recovery');
+ let fail=true;
+ await page.route('**/src/game/progress.mjs',route=>fail?route.abort('failed'):route.continue());
+ await page.clock.install();
+ await page.goto('./');
+ await page.clock.fastForward(9000);
+ await expect(page.locator('#brand-splash')).toBeHidden();
+ await expect(page.locator('#retry-load-btn')).toBeVisible();
+ await expect(page.locator('#game-shell')).not.toHaveAttribute('inert','');
+ fail=false;
+ await page.locator('#retry-load-btn').click();
+ await expect.poll(()=>page.evaluate(()=>Boolean(window.__SHAKEDOWN_QA)),{timeout:13000}).toBe(true);
+ await expect(page.locator('#brand-splash')).toBeVisible();
+ await page.locator('#brand-skip').click();
+ await expect(page.locator('#title-overlay')).toBeVisible();
+});

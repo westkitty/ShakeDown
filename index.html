@@ -48,8 +48,20 @@
 <script>
 // Classic-script safety net: an ES module import failure otherwise leaves a dead Start screen.
 (()=>{
+ // Bypass must work even if the ES module never executes.
+ const unblockSplash=()=>{
+  document.getElementById('brand-splash')?.classList.add('hidden');
+  document.body.classList.remove('brand-playing');
+  const game=document.getElementById('game-shell');
+  if(game)game.inert=false;
+ };
+ const launchQuery=new URLSearchParams(location.search);
+ if(launchQuery.get('skip-brand')==='1'||launchQuery.get('skip-intro')==='1'||
+    (launchQuery.has('qa')&&launchQuery.get('brand')!=='1'))unblockSplash();
  const watchdog=setTimeout(()=>{
   if(window.__SHAKEDOWN_QA)return;
+  // A failed module import must never leave a full-screen ident obstructing Retry.
+  unblockSplash();
   const message=document.getElementById('load-status');
   if(!message)return;
   message.textContent='The game files did not finish loading. Check your connection, then retry.';
