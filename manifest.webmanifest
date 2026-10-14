@@ -1,0 +1,25 @@
+{
+  "id": "./",
+  "name": "ShakeDown! — A Birthday Caper",
+  "short_name": "ShakeDown!",
+  "description": "Cinnamon Fuzzbutt's Shamrock Shake caper — playable birthday platformer",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#10273f",
+  "theme_color": "#132c48",
+  "icons": [
+    {
+      "src": "assets/app/shakedown-icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/app/shakedown-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

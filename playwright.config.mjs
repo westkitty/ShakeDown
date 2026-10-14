@@ -10,6 +10,10 @@ export default defineConfig({
   baseURL:(process.env.SHAKEDOWN_BASE_URL||'http://127.0.0.1:8765').replace(/\/?$/, '/'),
   trace:'retain-on-failure',
   screenshot:'only-on-failure',
+  // Mocked gameplay routes must see raw network requests. Service workers
+  // otherwise hide these requests from Playwright's route interception.
+  // Dedicated complete-PWA tests explicitly opt in to workers.
+  serviceWorkers:'block',
   launchOptions:process.env.SHAKEDOWN_BROWSER_PATH
    ?{executablePath:process.env.SHAKEDOWN_BROWSER_PATH}:undefined
  },

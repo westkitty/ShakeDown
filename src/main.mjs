@@ -13,6 +13,10 @@ import {initIntroFlow} from './game/intro-flow.mjs';
 import {initTitleCinematic} from './game/title-cinematic.mjs';
 import {initBrandIntro} from './game/brand-intro.mjs';
 import {checkpointRecord,validCheckpointRecord,restoreCheckpoint} from './game/progress.mjs';
+import {TouchSteering} from './game/touch-steering.mjs';
+import {COMFORT_KEY,COMFORT_DEFAULTS,sanitizeComfortSettings,readComfortSettings,writeComfortSettings} from './game/mobile-comfort.mjs';
+import {createImmersiveMode} from './game/immersive-mode.mjs';
+import {initPwaInstall} from './game/pwa-install.mjs';
 const $=id=>document.getElementById(id);
 const canvas=$('game'),ctx=canvas.getContext('2d',{alpha:false});
 if(!ctx){$('load-status').textContent='Canvas rendering is unavailable on this browser.';throw Error('Canvas 2D required')}
@@ -177,6 +181,7 @@ function populateDiscoveries(id){
 }
 const overlayByMode={title:'title-overlay',pause:'pause-overlay',dead:'dead-overlay',victory:'victory-overlay'};
 function showMode(){
+ if(displayedMode==='playing'&&state.mode!=='playing')clearInputs();
  if(document.body.dataset.gameMode!==state.mode)document.body.dataset.gameMode=state.mode;
  if(displayedMode===state.mode)return;
  displayedMode=state.mode;
@@ -193,40 +198,71 @@ function showMode(){
  if(defaultFocus&&!branding.active)$(defaultFocus).focus({preventScroll:true});
  else if(state.mode==='playing')canvas.focus({preventScroll:true});
 }
+// Every input source has its own owner. Auto-Run is the ONLY persistent
+// direction; a swipe is held solely while that pointer is physically down.
 const held=new Set(),queued=new Set(),pointerActs=new Map(),keyActs=new Map();
-let gestureDirection=null,autoRun=false,autoRunDirection='right';
 const gesturePad=$('gesture-pad'),autoRunButton=$('auto-run-toggle');
+let comfortStorage=null;
+try{comfortStorage=window.localStorage}catch{}
+let comfortPrefs=readComfortSettings(comfortStorage);
+let immersiveMode=null,gamepadDirection=null,gamepadConnected=false;
+const gamepadHeld=new Set(),gamepadPrevious=new Set();
+let lastHaptic=0;
+function haptic(type){
+ if(!comfortPrefs.haptics||typeof navigator.vibrate!=='function')return;
+ const now=performance.now();
+ if(now-lastHaptic<75)return;
+ lastHaptic=now;
+ try{navigator.vibrate(type==='hurt'?24:type==='cheer'?18:9)}catch{}
+}
+let touchSteering;
 function updateHeld(action){
- const active=[...keyActs.values()].includes(action)||[...pointerActs.values()].includes(action);
- if(active||gestureDirection===action||(autoRun&&autoRunDirection===action))held.add(action);
- else held.delete(action);
+ if(action==='left'||action==='right'){
+  const physical=[...keyActs.values(),...pointerActs.values()];
+  const left=physical.includes('left'),right=physical.includes('right');
+  const physicalDirection=left===right?null:left?'left':'right';
+  // Held pad > hardware touch/keyboard > gamepad > deliberately enabled auto.
+  const direction=touchSteering?.manualDirection||physicalDirection||gamepadDirection||
+   (touchSteering?.autoRun?touchSteering.autoDirection:null);
+  held.delete('left');held.delete('right');
+  if(direction)held.add(direction);
+  return;
+ }
+ const active=[...keyActs.values(),...pointerActs.values()].includes(action)||gamepadHeld.has(action);
+ if(active)held.add(action);else held.delete(action);
 }
 function updateAutoRunUI(){
- autoRunButton?.setAttribute('aria-pressed',String(autoRun));
- autoRunButton?.setAttribute('aria-label','Auto-run: '+(autoRun?'on':'off'));
+ const enabled=touchSteering.autoRun,manual=touchSteering.manualDirection;
+ autoRunButton?.setAttribute('aria-pressed',String(enabled));
+ autoRunButton?.setAttribute('aria-label','Auto-run: '+(enabled?'on, running '+touchSteering.autoDirection:'off, hold to move'));
+ gesturePad?.setAttribute('data-direction',manual||(enabled?touchSteering.autoDirection:''));
+ gesturePad?.classList.toggle('gesture-active',touchSteering.activeCount>0);
+ document.body.classList.toggle('auto-running',enabled);
 }
+touchSteering=new TouchSteering({
+ sensitivity:comfortPrefs.sensitivity,
+ onChange:()=>{updateHeld('left');updateAutoRunUI()},
+ onAction:action=>{
+  if(state.mode!=='playing')return;
+  queued.add(action);haptic(action);
+ }
+});
 function setAutoRun(enabled){
- autoRun=Boolean(enabled);
- if(autoRun){autoRunDirection=gestureDirection||'right';gestureDirection=null}
- else gestureDirection=null; // An explicit OFF means stop, not another hidden latch.
- updateHeld('left');updateHeld('right');updateAutoRunUI();
- gesturePad?.setAttribute('data-direction',autoRun?autoRunDirection:'');
-}
-function setGestureDirection(direction){
- if(autoRun)autoRunDirection=direction||autoRunDirection;
- else gestureDirection=direction;
- updateHeld('left');updateHeld('right');
- gesturePad?.setAttribute('data-direction',autoRun?autoRunDirection:direction||'');
+ touchSteering.setAutoRun(enabled);
+ haptic('toggle');
 }
 autoRunButton?.addEventListener('click',()=>{
  if(state.mode!=='playing')return;
- audio.activate();
- setAutoRun(!autoRun);
+ audio.activate();setAutoRun(!touchSteering.autoRun);
 });
 updateAutoRunUI();
 
 function actionForKey(code){return ({ArrowLeft:'left',KeyA:'left',ArrowRight:'right',KeyD:'right',Space:'jump',ArrowUp:'jump',KeyW:'jump',KeyJ:'swish',KeyX:'swish',KeyC:'cheer',ShiftLeft:'dash',ShiftRight:'dash',KeyK:'dash'})[code]}
-function clearInputs(){held.clear();queued.clear();pointerActs.clear();keyActs.clear();autoRun=false;autoRunDirection='right';gestureDirection=null;updateAutoRunUI();gesturePad?.removeAttribute('data-direction');document.querySelectorAll('.touch').forEach(b=>b.classList.remove('held'))}
+function clearInputs(){
+ held.clear();queued.clear();pointerActs.clear();keyActs.clear();gamepadDirection=null;gamepadHeld.clear();
+ touchSteering.cancel({disableAuto:true});updateAutoRunUI();
+ document.querySelectorAll('.touch').forEach(b=>b.classList.remove('held'));
+}
 function isEditingFocus(){
  const element=document.activeElement;
  return Boolean(element?.closest?.('input,textarea,select,[contenteditable="true"]'));
@@ -253,6 +289,9 @@ window.addEventListener('keydown',e=>{
   return;
  }
  if(director.dialog.open)return;
+ // The settings dialog traps focus: gameplay keys and global shortcuts
+ // cannot fire behind an active preferences modal.
+ if(comfortDialog?.open)return;
  if(intro.active){
   if(e.code==='Escape'){e.preventDefault();if(!e.repeat)intro.skip();return}
   if(e.code==='ArrowRight'){e.preventDefault();if(!e.repeat)intro.advance();return}
@@ -267,6 +306,16 @@ window.addEventListener('keydown',e=>{
   return;
  }
  if(isEditingFocus())return;
+ if(e.code==='KeyF'&&state.mode!=='dead'&&state.mode!=='victory'){
+  e.preventDefault();
+  if(!e.repeat)void immersiveMode?.toggle();
+  return;
+ }
+ if(e.code==='KeyH'&&(state.mode==='playing'||state.mode==='pause')){
+  e.preventDefault();
+  if(!e.repeat)setComfortPreference('hud',comfortPrefs.hud==='full'?'compact':'full');
+  return;
+ }
  if(e.code==='KeyM'){
   e.preventDefault();
   if(e.repeat)return;
@@ -300,7 +349,9 @@ window.addEventListener('keydown',e=>{
  e.preventDefault();
  if(!keyActs.has(e.code)){
   if(!held.has(act))queued.add(act);
-  keyActs.set(e.code,act);updateHeld(act);
+  keyActs.set(e.code,act);
+  if((act==='left'||act==='right')&&touchSteering.autoRun)touchSteering.setAutoDirection(act);
+  updateHeld(act);
  }
 });
 window.addEventListener('keyup',e=>{
@@ -322,34 +373,30 @@ document.addEventListener('visibilitychange',()=>{
  }
  lastStamp=0;accumulator=0;
 });
-// One square, gesture-driven D-pad. Horizontal travel latches until the next turn;
-// vertical swipes emit one-shot actions without clearing that direction.
+// Manual control lives only for the lifetime of actual pad pointers. Quick
+// flicks are actions, not an invisible persistent run latch.
 if(gesturePad){
- const starts=new Map();
- const interpret=(dx,dy)=>{
-  if(Math.max(Math.abs(dx),Math.abs(dy))<19)return;
-  if(Math.abs(dx)>=Math.abs(dy))setGestureDirection(dx>0?'right':'left');
-  else if(dy<0)queued.add('jump');
-  else queued.add('dash'); // low-profile slide gesture mapped to existing dash, not a new physics state
-  gesturePad.classList.add('gesture-active');
- };
- gesturePad.addEventListener('pointerdown',e=>{
+ const onPointerDown=e=>{
   if(state.mode!=='playing')return;
-  e.preventDefault();audio.activate();starts.set(e.pointerId,{x:e.clientX,y:e.clientY});gesturePad.setPointerCapture(e.pointerId);
- });
- gesturePad.addEventListener('pointermove',e=>{
-  const start=starts.get(e.pointerId);if(!start||state.mode!=='playing')return;
-  const dx=e.clientX-start.x,dy=e.clientY-start.y;
-  if(Math.max(Math.abs(dx),Math.abs(dy))<25)return;
-  interpret(dx,dy);start.x=e.clientX;start.y=e.clientY;
- });
- const finish=e=>{
-  const start=starts.get(e.pointerId);if(!start)return;
-  starts.delete(e.pointerId);
-  if(e.type==='pointerup')interpret(e.clientX-start.x,e.clientY-start.y);
-  if(!starts.size)gesturePad.classList.remove('gesture-active');
+  e.preventDefault();audio.activate();
+  touchSteering.begin(e.pointerId,e.clientX,e.clientY,gesturePad.getBoundingClientRect());
+  try{gesturePad.setPointerCapture(e.pointerId)}catch{}
  };
- for(const type of ['pointerup','pointercancel','lostpointercapture'])gesturePad.addEventListener(type,finish);
+ const onPointerMove=e=>{
+  if(state.mode!=='playing'||!touchSteering.pointers.has(e.pointerId))return;
+  e.preventDefault();touchSteering.move(e.pointerId,e.clientX,e.clientY);
+ };
+ const onPointerEnd=e=>{
+  if(!touchSteering.pointers.has(e.pointerId))return;
+  touchSteering.end(e.pointerId,e.clientX,e.clientY,{commit:e.type==='pointerup'});
+ };
+ gesturePad.addEventListener('pointerdown',onPointerDown);
+ gesturePad.addEventListener('pointermove',onPointerMove);
+ for(const type of ['pointerup','pointercancel','lostpointercapture'])
+  gesturePad.addEventListener(type,onPointerEnd);
+ // Safari can revoke pointer capture when an overlay or orientation changes.
+ for(const type of ['pointerup','pointercancel'])
+  window.addEventListener(type,onPointerEnd);
 }
 for(const button of document.querySelectorAll('.touch')){
  const action=button.dataset.action;
@@ -358,7 +405,10 @@ for(const button of document.querySelectorAll('.touch')){
   e.preventDefault();audio.activate();
   if(!held.has(action))queued.add(action);
   pointerActs.set(e.pointerId,action);
-  button.setPointerCapture(e.pointerId);
+  if((action==='left'||action==='right')&&touchSteering.autoRun)
+   touchSteering.setAutoDirection(action);
+  try{button.setPointerCapture(e.pointerId)}catch{}
+  haptic(action);
   button.classList.add('held');
   updateHeld(action);
  });
@@ -433,6 +483,62 @@ for(const id of ['art-preview-title','art-preview-pause'])
 if(curatedEnabled)setCuratedPreview(true);
 for(const id of ['title-art-prev','title-art-next'])
  $(id)?.addEventListener('click',()=>titleCinematic.setSelected(screenArt.getTitleIndex()===0));
+// Nine independent, local-only control preferences. They never touch
+// checkpoint progress, achievements or the core game save schema.
+const comfortDialog=$('touch-settings-dialog');
+const comfortFields={
+ movement:'comfort-movement',size:'comfort-size',opacity:'comfort-opacity',
+ hand:'comfort-hand',height:'comfort-height',sensitivity:'comfort-sensitivity',hud:'comfort-hud',
+ haptics:'comfort-haptics',hideForGamepad:'comfort-hideForGamepad'
+};
+function applyComfort(){
+ document.body.dataset.controlSize=comfortPrefs.size;
+ document.body.dataset.controlOpacity=comfortPrefs.opacity;
+ document.body.dataset.controlHand=comfortPrefs.hand;
+ document.body.dataset.controlHeight=comfortPrefs.height;
+ document.body.dataset.controlMovement=comfortPrefs.movement;
+ document.body.dataset.controlHud=comfortPrefs.hud;
+ document.body.classList.toggle('hide-touch-gamepad',comfortPrefs.hideForGamepad&&gamepadConnected);
+ touchSteering.setSensitivity(comfortPrefs.sensitivity);
+ for(const [key,id] of Object.entries(comfortFields)){
+  const field=$(id);if(!field)continue;
+  if(field.type==='checkbox')field.checked=Boolean(comfortPrefs[key]);
+  else field.value=comfortPrefs[key];
+ }
+}
+function setComfortPreference(key,value){
+ if(!Object.hasOwn(comfortFields,key))return;
+ comfortPrefs=sanitizeComfortSettings({...comfortPrefs,[key]:value});
+ applyComfort();
+ writeComfortSettings(comfortStorage,comfortPrefs);
+}
+for(const [key,id] of Object.entries(comfortFields)){
+ const field=$(id);
+ field?.addEventListener('change',()=>{
+  setComfortPreference(key,field.type==='checkbox'?field.checked:field.value);
+ });
+}
+$('comfort-reset').addEventListener('click',()=>{
+ comfortPrefs={...COMFORT_DEFAULTS};
+ applyComfort();writeComfortSettings(comfortStorage,comfortPrefs);
+});
+for(const id of ['controls-title-btn','controls-pause-btn','controls-game-btn']){
+ $(id)?.addEventListener('click',()=>{
+  if(branding.active||intro.active||director.dialog.open)return;
+  if(state.mode==='playing')togglePause();
+  if(!comfortDialog.open)comfortDialog.showModal();
+ });
+}
+comfortDialog.addEventListener('close',()=>{
+ const target=state.mode==='pause'?'resume-btn':state.mode==='title'?'start-btn':null;
+ if(target)$(target).focus({preventScroll:true});
+});
+window.addEventListener('storage',event=>{
+ if(event.key!==COMFORT_KEY)return;
+ comfortPrefs=readComfortSettings(comfortStorage);
+ applyComfort();
+});
+applyComfort();
 updateMute();showContinue();
 async function loadAssets(){
  try{
@@ -522,7 +628,43 @@ function metrics(){return {frames:frameTimings.length,frameMsP95:percentile(fram
  renderMsP95:percentile(frameTimings.map(x=>x.render),.95),
  renderMsP99:percentile(frameTimings.map(x=>x.render),.99),
  devicePixelRatio:Math.min(window.devicePixelRatio||1,2)};}
+const gamepadMapping=[['jump',0],['dash',1],['swish',2],['cheer',3]];
+function pollGamepad(){
+ let pad=null;
+ try{pad=[...(navigator.getGamepads?.()||[])].find(candidate=>candidate&&candidate.connected!==false)||null}catch{}
+ const connected=Boolean(pad);
+ if(connected!==gamepadConnected){
+  gamepadConnected=connected;
+  document.body.classList.toggle('gamepad-connected',connected);
+  document.body.classList.toggle('hide-touch-gamepad',connected&&comfortPrefs.hideForGamepad);
+ }
+ const pressed=i=>Boolean(pad?.buttons?.[i]?.pressed);
+ const axis=Number(pad?.axes?.[0])||0;
+ const nextDirection=pressed(14)||axis<-.39?'left':pressed(15)||axis>.39?'right':null;
+ if(nextDirection!==gamepadDirection){
+  gamepadDirection=nextDirection;
+  if(nextDirection&&touchSteering.autoRun)touchSteering.setAutoDirection(nextDirection);
+  updateHeld('left');
+ }
+ const next=new Set();
+ for(const [action,index] of gamepadMapping){
+  if(pressed(index)){next.add(action);
+   if(state.mode==='playing'&&!gamepadPrevious.has(action)){
+    queued.add(action);haptic(action);
+   }
+  }
+  if(state.mode==='playing'&&pressed(index))gamepadHeld.add(action);
+  else gamepadHeld.delete(action);
+  updateHeld(action);
+ }
+ if(pressed(9))next.add('pause');
+ if(pressed(9)&&!gamepadPrevious.has('pause')&&!director.dialog.open&&!comfortDialog?.open){
+  if(state.mode==='playing'||state.mode==='pause')togglePause();
+ }
+ gamepadPrevious.clear();for(const action of next)gamepadPrevious.add(action);
+}
 function animate(ms){requestAnimationFrame(animate);
+ pollGamepad();
  const actualFrameMs=lastStamp?Math.max(0,ms-lastStamp):0;
  if(!lastStamp)lastStamp=ms;const dt=Math.min(.10,Math.max(0,(ms-lastStamp)/1000));lastStamp=ms;
  if(state.mode==='playing'){
@@ -565,14 +707,18 @@ function updateMobileFraming(){
 function onResize(){
  const dpr=Math.min(window.devicePixelRatio||1,2);
  const viewport=$('viewport');
- const isFullLandscape=window.matchMedia('(pointer:coarse) and (orientation:landscape) and (max-height:520px)').matches;
+ const isFullLandscape=window.matchMedia('(pointer:coarse) and (orientation:landscape) and (max-height:520px)').matches||
+  (document.body.classList.contains('immersive-mode')&&innerWidth>innerHeight);
  // Widen what we actually DRAW, not CSS-stretch a 960-pixel screenshot.
  // Retain the 540-unit vertical field and all authoritative game physics.
  logicalViewportWidth=isFullLandscape&&viewport.clientWidth&&viewport.clientHeight
   ?Math.max(VIEW.width,Math.round(VIEW.height*viewport.clientWidth/viewport.clientHeight))
   :VIEW.width;
- canvas.width=Math.round(logicalViewportWidth*dpr);canvas.height=Math.round(VIEW.height*dpr);
- ctx.setTransform(dpr,0,0,dpr,0,0);
+ const bitmapWidth=Math.round(logicalViewportWidth*dpr),bitmapHeight=Math.round(VIEW.height*dpr);
+ if(canvas.width!==bitmapWidth||canvas.height!==bitmapHeight){
+  canvas.width=bitmapWidth;canvas.height=bitmapHeight;
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+ }
  const portrait=window.matchMedia('(max-width: 630px) and (orientation: portrait)').matches;
  if(portrait){
   const viewportWidth=viewport.clientWidth;
@@ -584,7 +730,27 @@ function onResize(){
   canvas.style.removeProperty('--mobile-canvas-pan');
  }
 }
-window.addEventListener('resize',onResize,{passive:true});window.visualViewport?.addEventListener('resize',onResize,{passive:true});onResize();
+window.addEventListener('resize',onResize,{passive:true});
+window.visualViewport?.addEventListener('resize',onResize,{passive:true});
+onResize();
+immersiveMode=createImmersiveMode({
+ root:$('game-shell'),
+ buttons:[$('fullscreen-title-btn'),$('fullscreen-pause-btn'),$('fullscreen-game-btn')].filter(Boolean),
+ status:$('immersive-status'),
+ onLayoutChange:()=>requestAnimationFrame(onResize)
+});
+window.addEventListener('orientationchange',()=>{
+ touchSteering.cancel({disableAuto:true});
+ // Let the layout settle before reallocating the wide Canvas bitmap.
+ requestAnimationFrame(onResize);
+},{passive:true});
+// Never allow offline worker caching to pollute deterministic gameplay QA:
+// only dedicated PWA browser tests opt in with ?qa=1&qa-pwa=1.
+const pwaParams=new URLSearchParams(location.search);
+const pwa=initPwaInstall({
+ enabled:!pwaParams.has('qa')||pwaParams.get('qa-pwa')==='1',
+ gameMode:()=>state.mode
+});
 loadAssets();
 loadSecretNpcArt().then(({images,errors,loaded})=>{
  npcArt=images;npcErrors=errors;npcLoaded=loaded;refreshArt();
@@ -607,7 +773,7 @@ if(previewId){productionStatus='LOCAL ART PREVIEW ONLY: '+previewId+' (NOT produ
   showAssetStatus();
  }).catch(error=>{productionErrors=['loader: '+error.message];showAssetStatus()});
  showMode();requestAnimationFrame(animate);
-window.__SHAKEDOWN_QA={snapshot:()=>snapshot(state),metrics,controls:()=>({autoRun,autoRunDirection,gestureDirection,renderWidth:logicalViewportWidth}),audio:()=>audio.diagnostics(),brand:()=>branding.inspect(),intro:()=>intro.inspect(),titleCinematic:()=>({visible:titleCinematic.visible}),artDirector:()=>director.diagnostics(),assets:()=>({loaded:assetCount,failed:[...assetErrors],productionLoaded,productionDeclared,productionErrors:[...productionErrors],curatedEnabled,curatedLoaded,curatedSelected,curatedErrors:[...curatedErrors],
+window.__SHAKEDOWN_QA={snapshot:()=>snapshot(state),metrics,controls:()=>({...touchSteering.snapshot(),autoRun:touchSteering.autoRun,autoRunDirection:touchSteering.autoDirection,gestureDirection:touchSteering.manualDirection,renderWidth:logicalViewportWidth,comfort:{...comfortPrefs},gamepadConnected,fullscreen:immersiveMode?.state()}),pwa:()=>pwa.snapshot(),audio:()=>audio.diagnostics(),brand:()=>branding.inspect(),intro:()=>intro.inspect(),titleCinematic:()=>({visible:titleCinematic.visible}),artDirector:()=>director.diagnostics(),assets:()=>({loaded:assetCount,failed:[...assetErrors],productionLoaded,productionDeclared,productionErrors:[...productionErrors],curatedEnabled,curatedLoaded,curatedSelected,curatedErrors:[...curatedErrors],
  worldLoaded,worldSelected,worldErrors:[...worldErrors],npcLoaded,npcErrors:[...npcErrors]}),
  // Developer-only deterministic test aids; excluded from normal gameplay and production paths.
  ...(new URLSearchParams(location.search).has('qa')?{

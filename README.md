@@ -4,9 +4,36 @@ A playable, static-hosted Canvas 2D birthday platformer for **Maverick**. Cinnam
 
 ## Play
 
-**[Open the birthday game](https://westkitty.github.io/ShakeDown/)**. The October 11 main-branch Pages workflow passed and the hosted index returned HTTP 200; a full hosted playthrough remains unverified.
+**[Play the current public release](https://westkitty.github.io/ShakeDown/)**. This repository's complete-game offline PWA is being validated on a separate feature worktree. The installed-PWA changes are **not yet merged or deployed**; the public link continues to serve the existing main-branch game until an authorized release.
 
 Run locally from the repository root with `npm run serve` and open `http://localhost:8765` in a normal browser. No production packages or build step. The app is `index.html` with JavaScript modules in `src/`.
+
+## Complete installable PWA — no APK
+
+After this feature branch is released to GitHub Pages, ShakeDown remains **one website** and becomes a full, standalone-display PWA for supported modern browsers. On the title screen:
+
+1. Press **DOWNLOAD COMPLETE GAME** and confirm the approximately **80 MiB** download. Simply opening the game does not fetch 80 MiB in the background.
+2. Wait for **Full game offline ready**. The verified package contains the original cinematics, all six recorded music tracks, every level and character, title artwork, art workshop, and all physical game assets. It is not a poster-only demo. Cancel/resume reuses already hash-checked files.
+3. Press **INSTALL FULL SHAKEDOWN** or choose **Install app** in the supported browser menu. The PWA uses standalone display, with an in-game Fullscreen control where supported.
+4. For future updates choose **FULL GAME DOWNLOAD & UPDATES → CHECK FOR UPDATE**, then install the update from the title screen, not during active gameplay. Saved progress and personal touch-control settings stay separate.
+
+There is **no APK, Android packaging pipeline, app store process, or iPhone-specific release requirement**. If the browser evicts site storage, repeat the complete download.
+
+The deterministic inventory has **330 SHA-verified files (83,833,678 bytes; approximately 80 MiB)**. The first 33 files form the small initial shell; the other 297 contain everything else, including actual MP4/WebM films supported by offline HTTP range/seek responses. The website remains playable online without installation.
+
+Developer and release checks (no added production dependencies):
+
+~~~sh
+npm run pwa:inventory
+npm run pwa:check
+npm run validate
+npm run release:preflight
+npm run pwa:audit
+npm run test:browser
+~~~
+
+Complete asset scope, storage and update behavior: [Complete Game PWA Report](docs/FULL_GAME_PWA_20261014.md).
+
 
 ## Controls
 
@@ -16,7 +43,7 @@ Run locally from the repository root with `npm run serve` and open `http://local
 - **Cheer / GO IRISH!: C.** Immediately energize timed banner bridges, stun nearby Cup Crawlers, briefly hush close confetti cannons, and ring four optional rally bells for hidden shakes. Near a Drum Beacon the cheer is stronger. Cooldown: 6.4 seconds.
 - Dash: Shift or K.
 - Pause: P or Esc. M toggles audio.
-- On touch screens: accessible move, dash, swish, **cheer**, and jump buttons; narrow portrait layouts use a compact two-row action pad.
+- On touch screens: **hold left/right to move and release to stop**; turn on Auto-Run only when you want continuous movement. Separate Jump, Dash, Swish and Cheer remain. Touch Settings offer left-handed layout, large buttons, opacity, raised controls and external gamepad support.
 
 ## Gameplay
 
