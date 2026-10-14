@@ -643,3 +643,271 @@ body.brand-playing{overflow:hidden}
  body:not([data-game-mode="playing"]) .touch-controls,
  body:not([data-game-mode="playing"]) .status-row{visibility:hidden;pointer-events:none}
 }
+
+/* Touch Comfort 2026-10-13 — all controls remain part of playable ShakeDown. */
+.in-game-tools{display:flex;align-items:center;gap:5px;flex-shrink:0}
+.in-game-tools .quiet{min-height:44px;min-width:44px;padding:5px 7px}
+.title-quick-controls,.pause-quick-controls{
+ display:flex;align-items:stretch;justify-content:center;gap:7px;margin:8px 0 1px;
+}
+.title-quick-controls button,.pause-quick-controls button{
+ flex:1;min-height:44px;min-width:0;
+ padding:6px 8px;background:#163b57ea;color:#ffe7a4;
+ border:1px solid #d8bd7b;border-radius:9px;
+ font:900 clamp(10px,1.5vw,13px) system-ui;letter-spacing:.01em;
+}
+.title-quick-controls button:hover,.pause-quick-controls button:hover{background:#2d516b}
+.title-quick-controls button:focus-visible,.pause-quick-controls button:focus-visible{
+ outline:3px solid #fff1ae;outline-offset:2px
+}
+.turn-device-hint{display:none;color:#d7e5e8;font-size:11px}
+@media(pointer:coarse) and (orientation:portrait) and (max-width:630px){
+ .turn-device-hint{display:block}
+}
+
+/* Native dialog has focus trapping, Escape support, accessible selection and
+   a persistent local-only state owner. It is not part of Canvas gameplay. */
+.touch-settings-dialog{
+ box-sizing:border-box;width:min(94vw,690px);max-width:690px;max-height:92dvh;
+ margin:auto;padding:0;border:2px solid #e5bf76;border-radius:17px;
+ background:linear-gradient(150deg,#15344cef,#091e33fa);
+ color:#fff0cc;overflow:auto;
+ box-shadow:0 20px 80px #010713dd;
+}
+.touch-settings-dialog::backdrop{background:#061422dc;backdrop-filter:blur(3px)}
+.touch-settings-dialog form{margin:0;padding:clamp(12px,2vw,20px)}
+.touch-settings-header{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.touch-settings-header h2{margin:4px 0 0;font-size:clamp(18px,3vw,26px)}
+.touch-settings-close{flex-shrink:0;min-height:44px}
+.comfort-description{margin:7px 0 15px;color:#d5e4e9;font-size:12px}
+.comfort-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 12px}
+.comfort-grid label{display:flex;flex-direction:column;gap:5px;align-items:stretch;
+ font-size:12px;line-height:1.4;color:#f5dfab;font-weight:800;text-align:left}
+.comfort-grid select{
+ display:block;box-sizing:border-box;width:100%;min-width:0;min-height:44px;
+ background:#173d59;color:#fff4e2;border:1px solid #9dbbc7;
+ border-radius:9px;padding:8px 10px;font-size:14px;font-weight:700;
+}
+.comfort-grid .comfort-checkbox{
+ display:flex;flex-direction:row;align-items:center;justify-content:flex-start;
+ gap:10px;min-height:44px;border:1px solid #536a77;border-radius:9px;
+ padding:8px;background:#0a263c;grid-column:auto;
+}
+.comfort-checkbox input{width:20px;height:20px;accent-color:#f2d080;flex:0 0 20px}
+.comfort-dialog-actions{display:flex;gap:10px;align-items:stretch;margin-top:14px}
+.comfort-dialog-actions button{flex:1;min-height:44px;margin:0}
+.comfort-help{
+ margin-top:12px;padding:10px;border:1px solid #69889c;border-radius:9px;
+ background:#0d293e;color:#e4eaf0;font-size:12px;line-height:1.5
+}
+.comfort-help summary{cursor:pointer;color:#f5d38a;font-weight:900;min-height:25px}
+.comfort-help p{margin:7px 0}
+.touch-settings-dialog :is(button,select,input):focus-visible{outline:3px solid #fff29c;outline-offset:2px}
+@media(max-width:620px),(max-height:450px){
+ .touch-settings-dialog{width:min(96vw,700px);max-height:95dvh}
+ .touch-settings-dialog form{padding:9px 12px}
+ .comfort-grid{gap:7px}
+ .comfort-grid label{font-size:11px}
+ .comfort-grid select{min-height:43px;font-size:12px;padding:7px}
+ .comfort-description{display:none}
+ .touch-settings-header h2{font-size:17px}
+ .comfort-dialog-actions{margin-top:9px}
+}
+@media(max-width:390px){
+ .comfort-grid{grid-template-columns:1fr}
+}
+
+/* An honest notice: CSS immersive on iPhone does not hide the Safari address bar. */
+.immersive-status{
+ position:fixed;top:max(58px,calc(env(safe-area-inset-top) + 56px));left:50%;
+ transform:translateX(-50%);max-width:min(90vw,540px);margin:0;
+ padding:7px 12px;border:1px solid #f0ce85;border-radius:12px;
+ background:#09253de8;color:#fff0b9;text-align:center;
+ font-size:11px;font-weight:750;z-index:2000;pointer-events:none;
+ box-shadow:0 7px 26px #06121db8;
+}
+.immersive-status:empty{display:none}
+
+/* Native fullscreen where available; fixed immersive layout elsewhere. */
+body.immersive-mode{overflow:hidden;overscroll-behavior:none}
+body.immersive-mode .game-shell{
+ position:fixed;inset:0;z-index:1100;box-sizing:border-box;
+ width:100vw;height:100dvh;max-width:none;overflow:hidden;padding:0;
+}
+body.immersive-mode .mast,body.immersive-mode .controls-note,
+body.immersive-mode footer{display:none}
+body.immersive-mode .game-frame{
+ position:relative;box-sizing:border-box;width:100vw;height:100dvh;
+ margin:0;border:0;border-radius:0;box-shadow:none;
+}
+body.immersive-mode .viewport{width:100%;height:100%;aspect-ratio:auto;background:#122b42}
+body.immersive-mode .viewport>canvas{
+ position:absolute;inset:0;width:100%;height:100%;max-width:none;
+ aspect-ratio:auto;object-fit:fill;background:transparent;transform:none
+}
+body.immersive-mode .touch-controls{
+ display:flex;position:absolute;inset:0;z-index:8;width:100%;max-width:none;
+ margin:0;box-sizing:border-box;pointer-events:none;
+ align-items:flex-end;justify-content:space-between;
+ padding:0 max(10px,env(safe-area-inset-right)) max(9px,env(safe-area-inset-bottom)) max(10px,env(safe-area-inset-left))
+}
+body.immersive-mode .touch-left-cluster,body.immersive-mode .touch-right{pointer-events:auto}
+body.immersive-mode .status-row{
+ position:absolute;z-index:9;top:max(36px,calc(env(safe-area-inset-top) + 36px));
+ right:max(6px,env(safe-area-inset-right));width:auto;min-height:0;
+ background:transparent;border:0;padding:2px;pointer-events:none
+}
+body.immersive-mode .status-row>span{display:none}
+body.immersive-mode .in-game-tools,body.immersive-mode .status-row .quiet{pointer-events:auto}
+body.immersive-mode .gesture-pad{display:flex}
+body.immersive-mode .touch-left{display:none}
+body.immersive-mode .hud{left:max(8px,env(safe-area-inset-left));right:max(8px,env(safe-area-inset-right))}
+@media(pointer:coarse) and (orientation:landscape) and (max-height:520px){
+ body:not([data-game-mode="playing"]) .touch-controls,
+ body:not([data-game-mode="playing"]) .status-row{visibility:hidden;pointer-events:none}
+}
+body.immersive-mode:not([data-game-mode="playing"]) .touch-controls,
+body.immersive-mode:not([data-game-mode="playing"]) .status-row{visibility:hidden;pointer-events:none}
+@media(pointer:fine){
+ body.immersive-mode .touch-controls{display:none}
+}
+@media(orientation:portrait){
+ body.immersive-mode .viewport>canvas{
+  width:auto;min-width:100%;height:100%;aspect-ratio:16/9;
+  transform:translate3d(var(--mobile-canvas-pan,0px),0,0)
+ }
+}
+
+/* Defaults adapt to orientation: swipe square in landscape, buttons in
+   portrait. A player can explicitly choose either input layout. */
+body[data-control-movement="buttons"] .gesture-pad{display:none!important}
+body[data-control-movement="buttons"] .touch-left{display:flex!important;pointer-events:auto;gap:6px}
+body[data-control-movement="buttons"] .touch-left .touch{min-width:64px;min-height:76px}
+@media(pointer:coarse) and (orientation:landscape) and (max-height:520px){
+ body[data-control-movement="auto"] .gesture-pad,
+ body[data-control-movement="pad"] .gesture-pad{display:flex}
+ body[data-control-movement="auto"] .touch-left,
+ body[data-control-movement="pad"] .touch-left{display:none}
+ body[data-control-movement="buttons"] .touch-left .touch{
+  min-height:100px;min-width:max(50px,min(15dvh,8vw));
+  font-size:22px;border-radius:17px;background:#173d60bc
+ }
+}
+@media(pointer:coarse) and (orientation:portrait) and (max-width:630px){
+ body[data-control-movement="pad"] .gesture-pad{
+  display:flex;width:105px;height:105px;min-width:105px;min-height:105px;
+  background:#cedefa20;border:1px solid #f3e8cc66;border-radius:17px
+ }
+ body[data-control-movement="pad"] .touch-left{display:none}
+ body[data-control-movement="auto"] .gesture-pad{display:none}
+ body[data-control-movement="auto"] .touch-left{display:flex}
+}
+
+/* Actual hit areas scale with thumb preference; not merely visual icons. */
+@media(pointer:coarse) and (orientation:landscape) and (max-height:520px){
+ body[data-control-size="compact"] .gesture-pad{width:min(29dvh,27vw);height:min(29dvh,27vw);min-width:100px;min-height:100px}
+ body[data-control-size="large"] .gesture-pad{width:min(42dvh,37vw);height:min(42dvh,37vw);min-width:120px;min-height:120px}
+ body[data-control-size="compact"] .touch-right{width:min(39vw,174px);min-width:130px}
+ body[data-control-size="large"] .touch-right{width:min(47vw,242px);min-width:155px}
+ body[data-control-size="large"] .touch-right .touch{min-height:65px;font-size:12px}
+ body[data-control-size="large"] .touch-right .touch-jump{min-height:81px;font-size:15px}
+ body[data-control-size="large"] .touch-right .touch-cheer{min-height:81px}
+ body[data-control-size="compact"] .touch-right .touch-jump{min-height:64px}
+ body[data-control-size="compact"] .touch-right .touch-cheer{min-height:64px}
+ body[data-control-size="large"] .auto-run-toggle{width:min(42dvh,37vw)}
+ body[data-control-size="compact"] .auto-run-toggle{width:min(29dvh,27vw)}
+}
+
+/* All presets retain readable labels; opacity affects the panels, not game art. */
+body[data-control-opacity="subtle"] .gesture-pad{background:#d9eaff0d;border-color:#e5e5f72b}
+body[data-control-opacity="subtle"] .touch-right .touch{opacity:.64;background:#142f4d88}
+body[data-control-opacity="subtle"] .auto-run-toggle{opacity:.75}
+body[data-control-opacity="strong"] .gesture-pad{background:#d8e9ff4f;border-color:#fff0cdad}
+body[data-control-opacity="strong"] .touch-right .touch{opacity:1;background:#173a5be9}
+body[data-control-opacity="strong"] .auto-run-toggle{opacity:1;background:#112f4bef}
+
+/* The control clusters really switch sides, including their tap rectangles. */
+body[data-control-hand="left"] .touch-controls{flex-direction:row-reverse}
+body[data-control-hand="left"] .touch-left-cluster{align-items:flex-end}
+body[data-control-height="raised"] .touch-controls{
+ padding-bottom:calc(max(12px,env(safe-area-inset-bottom)) + 24px)
+}
+body[data-control-hud="compact"] #hud-cheer,
+body[data-control-hud="compact"] #hud-zone{display:none}
+
+/* Optional gamepad-only presentation; physical controls stay functional. */
+body.hide-touch-gamepad .touch-controls{visibility:hidden;pointer-events:none}
+body.hide-touch-gamepad .touch-controls :is(button,.gesture-pad){pointer-events:none}
+.auto-running .auto-run-toggle{border-color:#fff2a2;box-shadow:0 0 0 2px #e8c47055,inset 0 1px #ffffff26}
+@media(hover:hover){
+ .gesture-pad:hover{border-color:#fff1b88f}
+}
+@media(prefers-reduced-motion:reduce){
+ .touch-settings-dialog *, .auto-run-toggle{transition:none!important}
+}
+/* The always-visible mobile toolbar stays out of Smudge dialogue. */
+.in-game-tools #fullscreen-game-btn{width:44px;min-width:44px;font-size:23px;line-height:1}
+@media(pointer:coarse) and (orientation:landscape) and (max-height:520px){
+ .status-row .in-game-tools .quiet{min-width:44px}
+ .status-row #fullscreen-game-btn,.status-row #controls-game-btn{width:44px;padding:3px}
+ .status-row #pause-btn{min-width:68px}
+}
+/* Accessibility presentation always defeats transparency presets. */
+body.high-contrast[data-control-opacity] .touch-right .touch{opacity:1}
+body.high-contrast[data-control-opacity] .touch-jump{
+ background:#ffdf61!important;color:#111!important;border-color:#fff!important
+}
+/* ShakeDown PWA installation: lightweight title options, not a second app shell. */
+.pwa-install-btn{
+ display:block;box-sizing:border-box;width:100%;min-height:44px;
+ margin:6px 0 2px;padding:7px 10px;
+ color:#112b42;background:#f3d58c;
+ border:2px solid #fff2c3;border-radius:10px;
+ font:900 12px/1.25 system-ui;letter-spacing:.035em;
+ box-shadow:0 2px 0 #695733,inset 0 1px #fff7d3;
+ touch-action:manipulation;cursor:pointer;
+}
+.pwa-install-btn:disabled{opacity:.82;cursor:default;background:#c7dfc6;border-color:#f4f8e9}
+.pwa-install-btn:focus-visible,.pwa-options button:focus-visible,.pwa-options summary:focus-visible{
+ outline:3px solid #fff8d3;outline-offset:3px
+}
+.pwa-options{
+ margin:5px 0 7px;border:1px solid #c3ad7f;border-radius:9px;
+ background:#071c31dd;color:#f4e5c3;font:700 11px/1.5 system-ui;
+ overflow:visible
+}
+.pwa-options>summary{
+ display:list-item;list-style-position:inside;cursor:pointer;
+ padding:9px 7px;text-align:center;
+ color:#e9d18e;letter-spacing:.03em;font-weight:950;min-height:22px
+}
+.pwa-options[open]{border-color:#fae2a2}
+.pwa-options-inner{padding:5px 9px 10px;text-align:left}
+.pwa-options-inner p{font-size:11px;line-height:1.45;margin:5px 0;color:#f5e9d6}
+.pwa-options-inner #pwa-status{color:#e3f3e5;min-height:18px;font-weight:850}
+.pwa-options-inner #pwa-install-help{color:#eed9a8}
+.pwa-options-inner .pwa-note{font-size:10px;color:#bfcfd4}
+.pwa-options-inner progress{display:block;width:100%;height:13px;margin:7px 0;
+ accent-color:#e1bb74;border:1px solid #7f98a1;border-radius:9px}
+.pwa-options-inner progress[hidden]{display:none}
+.pwa-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;margin-top:7px}
+.pwa-actions button{
+ display:block;box-sizing:border-box;min-width:0;min-height:44px;width:100%;
+ padding:6px 7px;margin:0;
+ font:850 10px/1.25 system-ui;letter-spacing:0;
+ color:#ffecbb;background:#143e5cea;border:1px solid #cbb47d;
+ border-radius:8px;cursor:pointer
+}
+.pwa-actions button.primary{background:#d1ae62;color:#102a42}
+.pwa-actions button[disabled]{opacity:.55;cursor:default}
+.pwa-actions button[hidden]{display:none}
+@media(max-width:630px), (max-height:490px){
+ .pwa-install-btn{min-height:40px;font-size:10px;padding:5px 7px;margin-top:3px}
+ .pwa-options{margin:3px 0}
+ .pwa-options>summary{font-size:10px;padding:6px 5px}
+ .pwa-options-inner{padding:4px 6px 8px}
+ .pwa-actions button{min-height:42px;font-size:9px;padding:5px}
+}
+@media(prefers-reduced-motion:reduce){
+ .pwa-install-btn,.pwa-options button{transition:none}
+}

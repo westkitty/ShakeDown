@@ -24,9 +24,17 @@ jobs:
     steps:
       - name: Check out the exact main revision
         uses: actions/checkout@v4
+      - name: Set up Node for deterministic full-PWA release checks
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Block deployment if any full-game media, worker, or hash inventory is stale
+        run: |
+          npm run pwa:check
+          npm run release:preflight
       - name: Configure already-enabled GitHub Pages Actions hosting
         uses: actions/configure-pages@v5
-      - name: Package the actual static HTML, modules and PNG/MP3 assets
+      - name: Package all complete-game PWA assets, including original movies and soundtrack
         uses: actions/upload-pages-artifact@v3
         with:
           path: .

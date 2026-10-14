@@ -61,7 +61,7 @@ test('classic fallback and reduced motion retain playable runtime without render
  expect(errors).toEqual([]);
 });
 
-test('landscape gesture pad preserves directional latch, action buttons and HUD separation',async({page},testInfo)=>{
+test('landscape gestures stop on release unless Auto-Run is enabled, without losing Jump, Dash or Cheer',async({page},testInfo)=>{
  test.skip(testInfo.project.name!=='mobile-chromium');
  test.setTimeout(70000);
  await page.setViewportSize({width:844,height:390});
@@ -78,28 +78,33 @@ test('landscape gesture pad preserves directional latch, action buttons and HUD 
  expect(initial.viewport.h).toBeGreaterThanOrEqual(388);
  expect(initial.pause.y).toBeGreaterThan(initial.zone.bottom);
  const center={x:initial.pad.x+initial.pad.w/2,y:initial.pad.y+initial.pad.h/2};
- async function swipe(dx,dy){
+ async function press(dx,dy,hold=150){
   await page.mouse.move(center.x,center.y);
   await page.mouse.down();
   await page.mouse.move(center.x+dx,center.y+dy,{steps:3});
-  await page.mouse.up();
+  await page.waitForTimeout(hold);
  }
- await swipe(48,0);
+ await press(48,0);
  await expect(page.locator('#gesture-pad')).toHaveAttribute('data-direction','right');
  const before=await page.evaluate(()=>window.__SHAKEDOWN_QA.snapshot().player.x);
- await page.waitForTimeout(240);
+ await page.waitForTimeout(190);
  const after=await page.evaluate(()=>window.__SHAKEDOWN_QA.snapshot().player.x);
  expect(after).toBeGreaterThan(before+5);
- await swipe(-48,0);
+ await page.mouse.up();
+ await expect(page.locator('#gesture-pad')).toHaveAttribute('data-direction','');
+ await page.waitForTimeout(400);
+ const stopped=await page.evaluate(()=>window.__SHAKEDOWN_QA.snapshot().player.x);
+ await page.waitForTimeout(220);
+ expect((await page.evaluate(()=>window.__SHAKEDOWN_QA.snapshot().player.x))-stopped).toBeLessThan(5);
+ await press(-48,0);
  await expect(page.locator('#gesture-pad')).toHaveAttribute('data-direction','left');
- await page.waitForTimeout(120);
  const leftStart=await page.evaluate(()=>window.__SHAKEDOWN_QA.snapshot().player.x);
- await page.waitForTimeout(190);
- const leftEnd=await page.evaluate(()=>window.__SHAKEDOWN_QA.snapshot().player.x);
- expect(leftEnd).toBeLessThan(leftStart-2);
- await swipe(0,-46);
+ await page.waitForTimeout(180);
+ expect(await page.evaluate(()=>window.__SHAKEDOWN_QA.snapshot().player.x)).toBeLessThan(leftStart-2);
+ await page.mouse.up();
+ await press(0,-46,10);await page.mouse.up();
  await expect.poll(()=>page.evaluate(()=>window.__SHAKEDOWN_QA.inspectState().player.jumpsUsed),{timeout:1500}).toBeGreaterThan(0);
- await swipe(0,48);
+ await press(0,48,10);await page.mouse.up();
  await expect.poll(()=>page.evaluate(()=>window.__SHAKEDOWN_QA.inspectState().player.dashCooldown),{timeout:1500}).toBeGreaterThan(0);
  await page.locator('#cheer-touch').tap();
  await expect.poll(()=>page.evaluate(()=>window.__SHAKEDOWN_QA.inspectState().cheerCooldown),{timeout:1500}).toBeGreaterThan(0);

@@ -48,6 +48,97 @@ try{
  const cinnamon=JSON.parse(fs.readFileSync(rel('assets/sprites/cinnamon/frames.json'),'utf8'));
  if(pkg.dependencies&&Object.keys(pkg.dependencies).length)warnings.push('Runtime package dependencies require bundling review');
  include('index.html');include('src/styles.css');include('assets/runtime/manifest.json');
+ // Installed iPhone/Android home-screen entrypoint is a real static dependency,
+ // not an optional screenshot: fingerprint and validate every required icon.
+ include('manifest.webmanifest');
+ try{
+  const appManifest=JSON.parse(fs.readFileSync(rel('manifest.webmanifest'),'utf8'));
+  const expected=[
+   ['assets/app/shakedown-icon-192.png',192],
+   ['assets/app/shakedown-icon-512.png',512]
+  ];
+  if(appManifest.id!=='./'||appManifest.scope!=='./'||
+     appManifest.start_url!=='./'||appManifest.display!=='standalone'||
+     !Array.isArray(appManifest.icons)||appManifest.icons.length!==expected.length)
+   throw Error('Standalone app manifest shape/launch scope invalid');
+  for(let i=0;i<expected.length;i++){
+   const [expectedPath,size]=expected[i],entry=appManifest.icons[i];
+   if(entry?.src!==expectedPath||entry.sizes!==size+'x'+size||
+      entry.type!=='image/png'||entry.purpose!=='any')
+    throw Error('Unexpected home-screen icon record '+i);
+   include(expectedPath);
+   const content=fs.readFileSync(rel(expectedPath));
+   const meta=pngMeta(content);
+   if(meta.width!==size||meta.height!==size||meta.bitDepth!==8||meta.colorType!==2)
+    throw Error('Invalid home-screen icon '+expectedPath);
+  }
+  const html=fs.readFileSync(rel('index.html'),'utf8');
+  if(!html.includes('<link rel="manifest" href="manifest.webmanifest">')||
+     !html.includes('<meta name="apple-mobile-web-app-capable" content="yes">'))
+   throw Error('Installed app metadata is missing from the root HTML');
+ }catch(error){
+  missing.push({path:'manifest.webmanifest',error:'Home-screen bundle: '+error.message});
+ }
+
+ // Complete-game PWA: this SHA inventory must account for *every* game
+ // asset, intro/brand video, recorded track, workshop asset and code module.
+ // Deploy cannot pass with a missing or stale offline manifest/media byte.
+ include('service-worker.js');
+ include('offline-assets.json');
+ try{
+  const pack=JSON.parse(fs.readFileSync(rel('offline-assets.json'),'utf8'));
+  const worker=fs.readFileSync(rel('service-worker.js'),'utf8');
+  if(pack.schema!==2||!/^\d{4}\.\d{2}\.\d{2}\.\d+$/.test(pack.version)||
+     !worker.includes("const REV='"+pack.version+"'")||
+     !Array.isArray(pack.core)||!Array.isArray(pack.game)||
+     pack.core.length<25||pack.game.length<290)
+   throw Error('Offline worker version, schema or complete-game file count invalid');
+  const seen=new Set();
+  let totalBytes=0;
+  for(const file of [...pack.core,...pack.game]){
+   const name=file?.path;
+   if(typeof name!=='string'||!name.length||name.startsWith('/')||
+      name.split('/').some(x=>!x||x==='.'||x==='..')||
+      !/^[a-zA-Z0-9_./-]+$/.test(name)||seen.has(name)||
+      !Number.isSafeInteger(file.bytes)||file.bytes<=0||
+      !/^[0-9a-f]{64}$/.test(file.sha256))
+    throw Error('Invalid or duplicate full-game inventory path: '+String(name));
+   seen.add(name);totalBytes+=file.bytes;
+   include(name);
+   const actual=entries.get(name);
+   if(!actual||actual.bytes!==file.bytes||actual.sha256!==file.sha256)
+    missing.push({path:name,error:'Complete-game offline byte count or SHA-256 drift'});
+  }
+  const counts=pack.totals;
+  if(counts?.coreFiles!==pack.core.length||counts?.gameFiles!==pack.game.length||
+     counts?.allFiles!==seen.size||counts?.allBytes!==totalBytes||
+     counts?.gameBytes!==pack.game.reduce((sum,f)=>sum+f.bytes,0))
+   throw Error('Full offline inventory totals do not match physical bytes');
+  for(const required of [
+   'src/main.mjs','assets/branding/stinky-weasel-brand.mp4',
+   'assets/intro/cinnamon-title-alpha.webm','assets/intro/cinnamon-title.mp4',
+   'assets/audio/music/campus-untitled.mp3',
+   'assets/audio/music/fox-boss.mp3','tools/asset-review.html',
+   'tools/asset-gallery.html','assets/title/title_01_dawn-quad-hero.png',
+   'assets/screens/03_victory_credits_1920x1080.png'
+  ])if(!seen.has(required))throw Error('Offline inventory omitted '+required);
+  const visit=directory=>{
+   const discovered=[];
+   for(const item of fs.readdirSync(rel(directory),{withFileTypes:true})){
+    const key=path.posix.join(directory,item.name);
+    if(item.isDirectory())discovered.push(...visit(key));
+    else if(item.isFile())discovered.push(key);
+   }
+   return discovered;
+  };
+  for(const directory of ['assets','tools']){
+   for(const item of visit(directory))
+    if(!seen.has(item))missing.push({path:item,error:'Full-game PWA forgot a physical '+directory+' file'});
+  }
+ }catch(error){
+  missing.push({path:'offline-assets.json',error:'Complete game PWA contract: '+error.message});
+ }
+
  include('assets/sprites/cinnamon/frames.json');
  include('assets/audio/music/manifest.json');
  for(const npc of ['smudge','dexter']){
